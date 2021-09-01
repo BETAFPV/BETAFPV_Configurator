@@ -200,6 +200,9 @@ window.onload=function(){
                     case 'motors':
                         motors.initialize(content_ready);
                         break;     
+                    case 'pid_tuning':
+                        pid_tuning.initialize(content_ready);
+                        break;   
                     default:
                         console.log(`Tab not found: ${tab}`);
                 }
