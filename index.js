@@ -193,7 +193,10 @@ window.onload=function(){
                         break;
                     case 'setup':
                         setup.initialize(content_ready);
-                        break;   
+                        break; 
+                    case 'receiver':
+                            receiver.initialize(content_ready);
+                            break;
                     default:
                         console.log(`Tab not found: ${tab}`);
                 }
