@@ -114,20 +114,20 @@ mavlinkParser.on('COMMAND_ACK', function(msg) {
         
     }
     if(cmdAck.command == mavlink10.MAVLINK_MSG_ID_RATE){
-        if(cmdAck.result == 1){
-            pid_tuning.rate_saving_ack = 1;
+        if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_OK){
+            pid_tuning.rate_saving_ack = true;
         }
         else {
-            pid_tuning.rate_saving_ack = 0;
+            pid_tuning.rate_saving_ack = false;
         }
     }
 
     if(cmdAck.command == mavlink10.MAVLINK_MSG_ID_PID){
-        if(cmdAck.result == 1){
-            pid_tuning.pid_saving_ack = 1;
+        if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_OK){
+            pid_tuning.pid_saving_ack = true;
         }
         else {
-            pid_tuning.pid_saving_ack = 0;
+            pid_tuning.pid_saving_ack = false;
         }
     }
     
