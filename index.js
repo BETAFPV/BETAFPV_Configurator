@@ -202,7 +202,10 @@ window.onload=function(){
                         break;     
                     case 'pid_tuning':
                         pid_tuning.initialize(content_ready);
-                        break;   
+                        break; 
+                    case 'sensors':
+                        sensors.initialize(content_ready);
+                        break;         
                     default:
                         console.log(`Tab not found: ${tab}`);
                 }
