@@ -1,0 +1,37 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "package": "electron-packager . LiteRadio --platform=win64 --arch=x64  --out=./out --app-version=0.0.1 --overwrite"
+  },
+  "window": {
+    "icon": "images/bf_icon_128.png",
+    "id": "main-window",
+    "min_width": 1024,
+    "min_height": 550,
+    "title": "BETAFPV Configurator"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^13.1.7",
+    "jquery": "^3.6.0",
+    "node-hid": "^2.1.1",
+    "usb": "^1.7.1",
+    "serialport": "^9.2.0",
+    "jspack": "^0.0.4",
+    "underscore": "^1.13.1",
+    "three": "~0.97.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BETAFPV/LiteRadio-Configurator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BETAFPV/LiteRadio-Configurator/issues"
+  },
+  "homepage": "https://github.com/BETAFPV/LiteRadio-Configurator#readme"
+}

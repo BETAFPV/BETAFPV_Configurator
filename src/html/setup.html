@@ -1,0 +1,159 @@
+<div class="tab-setup">
+    <div class="content_wrapper">
+        <!-- should be the first DIV on each tab -->
+        <div class="tab_title" i18n="tabSetup">Setup</div>
+        <div class="cf_doc_version_bt">
+            <a id="button-documentation" href="" target="_blank"></a>
+        </div>
+        <div class="grid-row">
+            <div class="grid-col col3">
+                <div class="default_btn">
+                    <div id="accel_calib_rest">
+                        <a class="calibrateAccel" id="default_btn green" href="#" i18n="initialSetupButtonCalibrateAccel">Calibrate Accelerometer</a>
+                    </div>
+                    <div id="accel_calib_running">
+                        <div class="data-loading-setup">
+                            <p i18n="initialSetupButtonCalibratingText">calibrating...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-col col9">
+                <div class="cell_setup">
+                    <span i18n="initialSetupCalibrateAccelText">Place board or frame on leveled surface, proceed with calibration, ensure platform is not moving during calibration period</span>
+                </div>
+            </div>
+        </div>
+        <div class="grid-row">
+            <div class="grid-col col3">
+                <div class="default_btn">
+                    <div id="mag_calib_rest">
+                        <a class="calibrateMag" href="#" i18n="initialSetupButtonCalibrateMag">Calibrate Magnetometer</a>
+                    </div>
+                    <div id="mag_calib_running">
+                        <div class="data-loading-setup">
+                            <p i18n="initialSetupButtonCalibratingText">Calibrating...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-col col9">
+                <div class="cell_setup">
+                    <span i18n="initialSetupCalibrateMagText">Move multirotor at least 360 degrees on all axis of rotation, you have 30 seconds to perform this task</span>
+                </div>
+            </div>
+        </div>
+        <div class="grid-row">
+            <div class="grid-col col3">
+                <div class="default_btn">
+                    <a class="resetSettings" href="#" i18n="initialSetupButtonReset">Reset Settings</a>
+                </div>
+            </div>
+            <div class="grid-col col9">
+                <div class="cell_setup">
+                    <span i18n="initialSetupResetText">Restore settings to <strong>default</strong></span>
+                </div>
+            </div>
+        </div>
+       
+        <div class="modelwrapper"></div>
+        <div class="grid-row">
+            <div class="grid-col col9 model-and-info">
+                <div id="interactive_block">
+                    <div id="canvas_wrapper" class="background_paper">
+                        <canvas id="canvas"></canvas>
+                        <div class="attitude_info">
+                            <dl>
+                                <dt>Heading:</dt>
+                                <dd class="heading">&nbsp;</dd>
+                                <dt>Pitch:</dt>
+                                <dd class="pitch">&nbsp;</dd>
+                                <dt>Roll:</dt>
+                                <dd class="roll">&nbsp;</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <a class="reset sm-min" href="#" i18n="initialSetupButtonResetZaxis">Reset Z axis, offset: 0 deg</a>
+                </div>
+            </div>
+            <div class="grid-col col3">
+                <!-- <div class="gui_box grey">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="initialSetupInfoHead">Info</div>
+                    </div>
+                    <div class="spacer_box">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cf_table">
+                            <tbody>
+                            <tr>
+                                <td id="arming-disable-flag" i18n="initialSetupArmingDisableFlags" class="cf_tip">Arming Disable Flags:</td>
+                                <td class="arming-disable-flags"></td>
+                            </tr>
+                            <tr>
+                                <td i18n="initialSetupBattery">Battery voltage:</td>
+                                <td class="bat-voltage">0 V</td>
+                            </tr>
+                            <tr>
+                                <td i18n="initialSetupDrawn">Capacity drawn:</td>
+                                <td class="bat-mah-drawn">0 mAh</td>
+                            </tr>
+                            <tr>
+                                <td i18n="initialSetupDrawing">Current draw:</td>
+                                <td class="bat-mah-drawing">0.00 A</td>
+                            </tr>
+                            <tr class="noboarder">
+                                <td i18n="initialSetupRSSI">RSSI:</td>
+                                <td class="rssi">0 %</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> -->
+                <div class="gui_box grey">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="initialSetupInfoHead">Info</div>
+                    </div>
+                    <div class="spacer_box">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cf_table">
+                            <tbody>
+                            <tr>
+                                <td class="cf_tip">Flight control:</td>
+                                <td class="target"></td>
+                            </tr>
+                            <tr>
+                                <td >Version:</td>
+                                <td  class="firmwareVersion"></td>
+                            </tr>
+                            <tr>
+                                <td >Buil time:</td>
+                                <td class="buil-time"></td>
+                            </tr>
+                            <tr>
+                                <td i18n="initialSetupBattery">Battery voltage:</td>
+                                <td class="bat-voltage">0 V</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="gui_box grey setting" align="center">
+                    <div class="gui_box_titlebar" align="left">
+                        <div class="spacer_box_title" i18n="initialSetupInstrumentsHead">Setting</div>
+                    </div>
+                    <span id="attitude"></span> <span id="heading"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <dialog class="dialogConfirmReset">
+        <h3 i18n="dialogConfirmResetTitle">Confirm</h3>
+        <div class="content">
+            <div i18n="dialogConfirmResetNote" style="margin-top: 10px">WARNING: Are you sure you want to reset ALL settings to default?</div>
+        </div>
+        <div class="buttons">
+            <a href="#" class="dialogConfirmReset-confirmbtn regular-button" i18n="dialogConfirmResetConfirm">Reset</a>
+            <a href="#" class="dialogConfirmReset-cancelbtn regular-button" i18n="dialogConfirmResetClose">Cancel</a>
+        </div>
+    </dialog>
+
+</div>
