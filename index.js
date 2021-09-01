@@ -197,6 +197,9 @@ window.onload=function(){
                     case 'receiver':
                             receiver.initialize(content_ready);
                             break;
+                    case 'motors':
+                        motors.initialize(content_ready);
+                        break;     
                     default:
                         console.log(`Tab not found: ${tab}`);
                 }
