@@ -422,11 +422,10 @@ pid_tuning.initialize = function (callback) {
         const yaw_d_cutfreq = parseInt(yaw_d_cutfreq_e.val());
         console.log("roll_p:"+roll_p);
 
-        //console.log("send motor data:"+motorData);
         let msg = new mavlink10.messages.pid(roll_p, roll_i, roll_d, roll_i_max, roll_d_cutfreq,
             pitch_p, pitch_i, pitch_d, pitch_i_max, pitch_d_cutfreq,
             yaw_p, yaw_i, yaw_d, yaw_i_max, yaw_d_cutfreq);
-        //console.log(msg);
+        console.log(msg);
         let buffer = msg.pack(msg);
         console.log(buffer);
         mavlinkSend(buffer);
