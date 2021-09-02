@@ -6,14 +6,14 @@
                     <tr>
                         <td class="board-select">
                             <select name="board"  id="boardTarget">
-                                <option value="loading" >Loading ...</option>
+                                <option value="loading" >Choose a Board</option>
                             </select>
                         </td>
                         <td><span class="description">Select your board to see available online firmware releases - Select the correct firmware appropriate for your board.</span></td>
                     </tr>
                     <tr>
                         <td><select name="firmware_version" id="boardVersion">
-                                <option value="loading">Loading ...</option>
+                                <option value="loading">Choose a Firmware version</option>
                         </select></td>
                         <td><span class="description">Select firmware version for your board.</span></td>
                     </tr>
@@ -26,18 +26,26 @@
                 </div>
             </div>
             <div class="spacer" style="margin-bottom: 10px;">
-                <p>Please do <span class=\"message-negative\">not</span> try to flash <strong>non-LiteSilver</strong> hardware with this firmware flasher.<br />Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>The bootloader is stored in ROM, it cannot be bricked.<br /></p>
+                <p>Please do <span class=\"message-negative\">not</span> try to flash <strong>non-Cetus/LiteSilver</strong> hardware with this firmware flasher.<br />Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>The bootloader is stored in ROM, it cannot be bricked.<br /></p>
                 <br />
                 <p><span class=\"message-negative\">IMPORTANT</span>: Ensure you flash a file appropriate for your target.  Flashing a binary for the wrong target can cause <span class=\"message-negative\">bad</span> things to happen.</p>
             </div>
         </div>
         <div class="gui_box gui_note" style="margin-top: 30px;">
             <div class="gui_box_titlebar">
-                <div class="spacer_box_title" style="text-align: center;"><strong>Recovery / Lost communication</strong>
+                <div class="spacer_box_title" style="text-align: center;"><strong>Steps of how to update the firmware</strong>
                 </div>
             </div>
             <div class="spacer" style="margin-bottom: 10px;" id='content_load_html'>
-                <p>If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>first</li><li>second</li><li>third</li><li>...</li></ul></p>
+                <p>Follow these steps to update the firmware for your flight control: 
+                    <ul>
+                        <li>Power off</li>
+                        <li>Hold button on the FC</li>
+                        <li>Power on(activity LED will NOT flash if done correctly)</li>
+                        <li>Connect flight control to computer</li>
+                        <li>Load Firmware and then Flash firmware</li>
+                    </ul>
+                </p>
             </div>
         </div>   
     </div>
