@@ -1,7 +1,7 @@
 :root {
-    --accent: #ffbb00;
+    --accent: #00A0DE;
     --subtleAccent: #9c9c9c;
-    --quietHeader: #bf8606;
+    --quietHeader: #00B0FF;
     --defaultText: #ffffff;
     --subtleText: #c0c0c0;
     --mutedText: #d6d6d6;
@@ -16,7 +16,7 @@
     --switcherysecond: #858585;
     --pushedButton-background:  #616161;
     --pushedButton-fontColor:  #ffffff;
-    --hoverButton-background: #ffcc3e;
+    --hoverButton-background: #00C0FF;
     --superSubtleAccent: #595959;
 }
 

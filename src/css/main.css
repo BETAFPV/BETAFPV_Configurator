@@ -355,7 +355,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .firmware_b a.flash:hover, .connect_b a.connect:hover {
-    background-color: #ffcc3f;
+    background-color: #00C0FF;
 }
 
 .firmware_b a.flash.active, .connect_b a.connect.active {
@@ -1582,7 +1582,7 @@ dialog .dialog_toolbar .btn a.disabled {
 /* Note */
 .note {
     background-color: #fff7cd;
-    border: 1px solid #ffe55f;
+    border: 1px solid #00A0DE;
     margin-bottom: 10px;
     margin-top: 0;
     border-radius: 3px;
@@ -2052,8 +2052,8 @@ dialog .dialog_toolbar .btn a.disabled {
 }
 
 .green a:hover {
-    background-color: #ffcc3f;
-    border: 1px solid #dba718;
+    background-color: #00C0FF;
+    border: 1px solid #00C0EE;
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     color: #000;
     transition: all ease 0.2s;

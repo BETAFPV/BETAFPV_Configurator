@@ -68,11 +68,11 @@
     text-align: center;
     font-weight: bold;
     border: 1px solid var(--subtleAccent);
-    background-color: #ececec;
+    background-color: #00A0DE;
     z-index: 100;
 }
 .tab-setup #interactive_block a.reset:hover {
-    background-color: #dedcdc;
+    background-color: #00DAFF;
 }
 .tab-setup #canvas_wrapper {
     position: absolute;
