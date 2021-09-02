@@ -1,7 +1,7 @@
 const serialport = require('serialport')
 
 let isFlasherTab=0;
-
+var lastPortCount = 0;
 
 
 function isExistOption(id,value) {  
@@ -24,11 +24,18 @@ function addOptionValue(id,value,text) {
 } 
 
 async function listSerialPorts() {
+
     await serialport.list().then((ports, err) => {
+        if(ports.length!==lastPortCount){
+            $('#port option').each(function(){ 
+                $(this).remove(); 
+            } );
+        }
 
         for (let i = 0; i < ports.length; i++) {
             addOptionValue('port',i,ports[i].path);
         }
+        lastPortCount = ports.length;
     })
 }
 

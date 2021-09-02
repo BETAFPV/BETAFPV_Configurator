@@ -39,9 +39,11 @@ setup.initialize = function (callback) {
         const target_id_e = $('.target'),
         version_e = $('.firmwareVersion');
         build_time_e = $('.buil-time');
+        voltage_e = $('.bat-voltage');
         target_id_e.text((setup.targetID==0? 'Unknow' : (setup.targetID==1)? 'Cetus' : 'Cetus pro'));
         version_e.text(setup.major_version+'.'+setup.minor_version+'.'+setup.patch_version);
         build_time_e.text(setup.year+'-'+setup.month+'-'+setup.day);
+        voltage_e.text(setup.battery_voltage.toFixed(2));
     }
     GUI.interval_add('display_Info', display_Info, 1000, true); // 1 fps
 

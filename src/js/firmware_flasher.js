@@ -1,3 +1,9 @@
+const os = require('os')
+const path = require('path')
+
+var jsonFile = require('jsonfile')
+
+var jsonfileName = 'board.json'
 
 
 const firmware_flasher ={
@@ -198,10 +204,67 @@ firmware_flasher.parseData = function(data)
             port.write(buf, (err) =>{
                 if (err) return console.log('write Error: ', err.message);
             });
-            firmware_flasher.flashingMessage("Verifying ...",firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
+            firmware_flasher.flashingMessage("update finished",firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
+            firmware_flasher.flashProgress(packNum/packLen*100);
         }
     }
 };
+
+function isExistOption2(id,value) {  
+    var isExist = false;  
+    var count = $('#'+id).find('option').length;  
+
+      for(var i=0;i<count;i++)     
+      {     
+         if($('#'+id).get(0).options[i].value == value)     
+        {     
+            isExist = true;     
+            break;     
+        }     
+    }     
+    return isExist;  
+} 
+
+function addOptionValue2(id,value,text) {  
+    if(!isExistOption2(id,value)){$('#'+id).append("<option value="+value+">"+text+"</option>");}      
+} 
+
+function readJsonFile(fileName){
+    jsonFile.readFile(fileName, function(err, jsonData) {
+        if (err) throw err;
+    
+        for (var i = 0; i < jsonData.length; ++i) {
+          console.log("name: "+jsonData[i].name);
+          console.log("version: "+jsonData[i].version);
+
+          addOptionValue2('boardTarget',i,jsonData[i].name);
+          addOptionValue2('boardVersion',i,jsonData[i].version);
+
+          console.log("----------------------------------"); 
+        }
+    });
+}
+
+function loadRemoteJsonFile(){
+    //https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/board.json
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/board.json", true);
+    xhr.responseType = 'arraybuffer';
+    xhr.onload = function(e) {
+        var array = new Uint8Array(xhr.response);
+
+        fs.writeFile(path.join(__dirname, "./board.json"), array, "utf8",(err)=>{
+            if(err){
+                console.log("error");
+            }else {
+                console.log("ok");
+                readJsonFile(jsonfileName);
+            }
+        })
+    };
+    xhr.send();
+
+}
 
 firmware_flasher.initialize = function (callback) {
     const self = this;
@@ -241,11 +304,10 @@ firmware_flasher.initialize = function (callback) {
             })
 
         });
-
-        
+     
         $('a.flash_firmware').click(function () {
             if (!$(this).hasClass('disabled')) {
-
+                packNum = 0;
                 var buf = Buffer(1);
                 buf[0] = 0x01;
 
@@ -263,11 +325,53 @@ firmware_flasher.initialize = function (callback) {
         
         $('a.load_remote_file').click(function () {
             if (!$(this).hasClass('disabled')) {
+                console.log("click");
 
+                let targetBoardSelected = ($('#boardTarget option:selected').text());
+                let targetVersionSelected = ($('#boardVersion option:selected').text());
+                console.log(targetBoardSelected);
+                console.log(targetVersionSelected);
 
+                var str = targetBoardSelected + "_" + targetVersionSelected + ".bin";
+                console.log(str);
+                 
+                var urlValue = "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/" + str;
+                console.log(urlValue);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', urlValue, true);
+                xhr.responseType = 'arraybuffer';
+                xhr.onload = function(e) {
+                    var array = new Uint8Array(xhr.response);
+
+                    fs.writeFile(path.join(__dirname, str), array, "utf8",(err)=>{
+                        if(err){
+                            console.log("error");
+                        }else {
+                            console.log("ok");
+                            binFilePath = path.join(__dirname, str);
+                            fs.readFile(binFilePath, (err, binFile) => {
+                                if (err) {
+                                    alert(err)
+                                } else {
+                                    self.enableFlashing(true);
+                                    binSize = binFile.length;
+            
+                                    packLen = Math.round(binSize / 1024);
+            
+                                    firmware_flasher.flashingMessage("Loaded Local Firmware : ( "+ binFile.length +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                                }
+                            });
+
+                        }
+                    })
+                };
+                xhr.send();
             }
         });
 
+        loadRemoteJsonFile();
+        
         callback();
     });
 };
