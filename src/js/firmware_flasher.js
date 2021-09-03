@@ -250,15 +250,15 @@ function loadRemoteJsonFile(){
     var xhr = new XMLHttpRequest();
     xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/board.json", true);
     xhr.responseType = 'arraybuffer';
-    xhr.onload = function(e) {
+    xhr.onload = function(e) { 
         var array = new Uint8Array(xhr.response);
-
-        fs.writeFile(path.join(__dirname, "./board.json"), array, "utf8",(err)=>{
+        var file_path = path.join(__dirname, "./board.json");
+        fs.writeFile(file_path, array, "utf8",(err)=>{
             if(err){
                 console.log("error");
             }else {
                 console.log("ok");
-                readJsonFile(jsonfileName);
+                readJsonFile(file_path);
             }
         })
     };

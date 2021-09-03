@@ -4,10 +4,10 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "package": "electron-packager . LiteRadio --platform=win64 --arch=x64  --out=./out --app-version=0.0.1 --overwrite"
+    "package": "electron-packager . 'BETAFPV_Configurator' --platform=win64 --arch=x64  --out=./out --app-version=0.0.1 --overwrite"
   },
   "window": {
-    "icon": "images/bf_icon_128.png",
+    "icon": "images/logo/BETAFPV_logo_blue.png",
     "id": "main-window",
     "min_width": 1024,
     "min_height": 550,
