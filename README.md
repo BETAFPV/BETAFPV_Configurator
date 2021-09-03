@@ -13,7 +13,7 @@
 
 nvm install 14.17.0
 
-nvm use 14.14.0
+nvm use 14.17.0
 
 npm -i -g electron
 
