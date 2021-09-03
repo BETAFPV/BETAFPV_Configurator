@@ -23,7 +23,7 @@ cnpm install serialport --save-dev
 
 cnpm install --save-dev electron-rebuild
 
-.\node_modules\.bin\electron-rebuild.cmd
+.\node_modules\\.bin\electron-rebuild.cmd
 
 如果到这一步出现报错，则输入
 npm install -g node-gyp，并重新执行.\node_modules\.bin\electron-rebuild.cmd
