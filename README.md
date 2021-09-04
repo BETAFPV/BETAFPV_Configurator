@@ -3,7 +3,7 @@
 
 ### Developers
 1.安装 **vistual studio Code** : [https://code.visualstudio.com/](https://code.visualstudio.com/ "here")
-
+2.安装node.js :https://nodejs.org/en/download/
 2.安装 **nvm**:[https://github.com/coreybutler/nvm-windows/releases](https://github.com/coreybutler/nvm-windows/releases "here")(nvm-setup.zip)
 
 3.克隆项目到本地:git clone git@github.com:BETAFPV/BETAFPV_Configurator.git
