@@ -3,13 +3,15 @@
 
 ### Developers
 1.安装 **vistual studio Code** : [https://code.visualstudio.com/](https://code.visualstudio.com/ "here")
+
 2.安装node.js :https://nodejs.org/en/download/
-2.安装 **nvm**:[https://github.com/coreybutler/nvm-windows/releases](https://github.com/coreybutler/nvm-windows/releases "here")(nvm-setup.zip)
 
-3.克隆项目到本地:git clone git@github.com:BETAFPV/BETAFPV_Configurator.git
+3.安装 **nvm**:[https://github.com/coreybutler/nvm-windows/releases](https://github.com/coreybutler/nvm-windows/releases "here")(nvm-setup.zip)
+
+4.克隆项目到本地:git clone git@github.com:BETAFPV/BETAFPV_Configurator.git
 
 
-4.通过vs Code打开项目文件夹,在vs Code的菜单栏的Termital新建终端并输入以下命令：
+5.通过vs Code打开项目文件夹,在vs Code的菜单栏的Termital新建终端并输入以下命令：
 
 nvm install 14.17.0
 
