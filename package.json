@@ -4,6 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
+    "start": "electron .",
     "package": "electron-packager . 'BETAFPV_Configurator' --platform=win64 --arch=x64  --out=./out --app-version=0.0.1 --overwrite"
   },
   "window": {
