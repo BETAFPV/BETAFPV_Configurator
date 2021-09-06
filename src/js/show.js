@@ -67,12 +67,6 @@ show.initialize = function (callback) {
 
         $(window).on('resize', tabresize).resize(); // trigger so labels get correctly aligned on creation
 
-
-
-        $('a.refresh').click(function () {
-            console.log(HidConfig.rollInputUpdate,HidConfig.rollWeight,HidConfig.rollOffset,HidConfig.rollReverse);
-        });
-
         function update_ui() {
             // update bars with latest data
             for (let i = 0; i < 8; i++) {
@@ -277,6 +271,92 @@ show.initialize = function (callback) {
         const inputexELRSTLMRadio = $('select[name="exELRSTLMRadio"]');
         inputexELRSTLMRadio.change(function () {
             HidConfig.exELRSTLMRadio = parseInt($(this).val(), 10);
+        });
+
+        function content_ready() {
+            GUI.tab_switch_in_progress = false;
+        }
+        
+        $('a.refresh').click(function () {
+            //inputRoll.val(0);
+            var bufName = new Buffer(64);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x11;
+            bufName[2] = 0x02;
+
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x11;
+            bufName[2] = 0x02;
+            bufName[3] = 0x01;
+
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x11;
+            bufName[2] = 0x01;
+            bufName[3] = 0x01;
+
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x11;
+            bufName[2] = 0x01;
+            bufName[3] = 0x02;
+
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x11;
+            bufName[2] = 0x01;
+            bufName[3] = 0x03;
+
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x11;
+            bufName[2] = 0x01;
+            bufName[3] = 0x04;
+
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x11;
+            bufName[2] = 0x01;
+            bufName[3] = 0x05;
+
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x11;
+            bufName[2] = 0x01;
+            bufName[3] = 0x06;
+
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x11;
+            bufName[2] = 0x01;
+            bufName[3] = 0x07;
+
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x11;
+            bufName[2] = 0x01;
+            bufName[3] = 0x08;
+
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x11;
+            bufName[2] = 0x00;
+            bufName[3] = 0x01;
+
+            hidDevice.write(bufName);
+
         });
 
 

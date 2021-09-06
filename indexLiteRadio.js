@@ -6,17 +6,18 @@ var PRODUCT_ID = 22352;
 let channels = new Array(8);
 let hidDevice = null;
 
- const HidConfig = {
+HidConfig = {
     channel_data :[],
+
     rollInputUpdate:0,
     pitchInputUpdate:1,
     yawInputUpdate:2,
     throInputUpdate:3,
 
-    aux1InputUpdate:0,
-    aux2InputUpdate:1,
-    aux3InputUpdate:2,
-    aux4InputUpdate:3,
+    aux1InputUpdate:4,
+    aux2InputUpdate:5,
+    aux3InputUpdate:6,
+    aux4InputUpdate:7,
 
     rollReverse:0,
     pitchReverse:0,
@@ -47,8 +48,8 @@ let hidDevice = null;
     exELRSSystemPower:0,
     exELRSPktRate:0,
     exELRSTLMRadio:0,
-    
 };
+
 
 function isExistOption(id,value) {  
     var isExist = false;  
@@ -105,16 +106,74 @@ window.onload=function(){
 
             hidDevice.on('data', function(data) {
                
-                HidConfig.channel_data[0]= (data[HidConfig.rollInputUpdate*2+1]<<8 | data[HidConfig.rollInputUpdate*2]);
-                HidConfig.channel_data[1]= (data[HidConfig.pitchInputUpdate*2+1]<<8 | data[HidConfig.pitchInputUpdate*2]);
-                HidConfig.channel_data[2]= (data[HidConfig.yawInputUpdate*2+1]<<8 | data[HidConfig.yawInputUpdate*2]);
-                HidConfig.channel_data[3]= (data[HidConfig.throInputUpdate*2+1]<<8 | data[HidConfig.throInputUpdate*2]);
+                if(data[0] == 0x01)
+                {
+                    switch(data[1])
+                    {
+                        case 0:
+                            HidConfig.rollInputUpdate = data[2];
+                            HidConfig.rollReverse = data[3];
+                            HidConfig.rollWeight = data[4];
+                            HidConfig.rollOffset = data[5];
+                            break;
 
-                HidConfig.channel_data[4]= (data[HidConfig.aux1InputUpdate*2+9]<<8 | data[HidConfig.aux1InputUpdate*2+8]);
-                HidConfig.channel_data[5]= (data[HidConfig.aux2InputUpdate*2+9]<<8 | data[HidConfig.aux2InputUpdate*2+8]);
-                HidConfig.channel_data[6]= (data[HidConfig.aux3InputUpdate*2+9]<<8 | data[HidConfig.aux3InputUpdate*2+8]);
-                HidConfig.channel_data[7]= (data[HidConfig.aux4InputUpdate*2+9]<<8 | data[HidConfig.aux4InputUpdate*2+8]);
-            } )
+                        case 1:
+                            HidConfig.pitchInputUpdate = data[2];
+                            HidConfig.pitchReverse = data[3];
+                            HidConfig.pitchWeight = data[4];
+                            HidConfig.pitchOffset = data[5];
+                            break;
+
+                        case 2:
+                            HidConfig.yawInputUpdate = data[2];
+                            HidConfig.yawReverse = data[3];
+                            HidConfig.yawWeight = data[4];
+                            HidConfig.yawOffset = data[5];
+                            break;
+
+                        case 3:
+                            HidConfig.throInputUpdate = data[2];
+                            HidConfig.throReverse = data[3];
+                            HidConfig.throWeight = data[4];
+                            HidConfig.throOffset = data[5];
+                            break;
+
+                        case 4:
+                            HidConfig.aux1InputUpdate = data[2];
+                            break;
+
+                        case 5:
+                            HidConfig.aux2InputUpdate = data[2];
+                            break;
+
+                        case 6:
+                            HidConfig.aux3InputUpdate = data[2];
+                            break;
+
+                        case 7:
+                            HidConfig.aux4InputUpdate = data[2];
+                            break;
+                    }
+
+                    console.log(HidConfig);
+                }
+                else if(data[0] == 0x05)
+                {
+                    console.log(data);
+                }
+                else
+                {
+                    HidConfig.channel_data[0]= (data[HidConfig.rollInputUpdate*2+1]<<8 | data[HidConfig.rollInputUpdate*2]);
+                    HidConfig.channel_data[1]= (data[HidConfig.pitchInputUpdate*2+1]<<8 | data[HidConfig.pitchInputUpdate*2]);
+                    HidConfig.channel_data[2]= (data[HidConfig.yawInputUpdate*2+1]<<8 | data[HidConfig.yawInputUpdate*2]);
+                    HidConfig.channel_data[3]= (data[HidConfig.throInputUpdate*2+1]<<8 | data[HidConfig.throInputUpdate*2]);
+
+                    HidConfig.channel_data[4]= (data[HidConfig.aux1InputUpdate*2+1]<<8 | data[HidConfig.aux1InputUpdate*2]);
+                    HidConfig.channel_data[5]= (data[HidConfig.aux2InputUpdate*2+1]<<8 | data[HidConfig.aux2InputUpdate*2]);
+                    HidConfig.channel_data[6]= (data[HidConfig.aux3InputUpdate*2+1]<<8 | data[HidConfig.aux3InputUpdate*2]);
+                    HidConfig.channel_data[7]= (data[HidConfig.aux4InputUpdate*2+1]<<8 | data[HidConfig.aux4InputUpdate*2]);
+                }               
+            } );
         }
         else
         {
@@ -179,9 +238,6 @@ window.onload=function(){
                 switch (tab) {
                     case 'landing':
                         landing.initialize(content_ready);
-                        break;
-                    case 'help':
-                        help.initialize(content_ready);
                         break;
                     case 'firmware_flasher_LiteRadio':
                         $('div#connectbutton a.connect').removeClass('disabled');
