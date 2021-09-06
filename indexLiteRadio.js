@@ -2,24 +2,12 @@ const serialport = require('serialport')
 var HID=require('node-hid')
 
 var VENDOR_ID = 1155;
-var PRODUCT_ID = 17185;
+var PRODUCT_ID = 22352;
 let channels = new Array(8);
 let hidDevice = null;
-
-// const { mavlink10: mavlink, MAVLink10Processor: MAVLink } = require('./libraries/common.js');
-// const mavlinkParser = new MAVLink(null, 0, 0);
-
-// mavlinkParser.on('VALUE', function(msg) {
-//     // the parsed message is here
-//     HidConfig.channel_data[0] = msg.ch1;
-//     HidConfig.channel_data[1] = msg.ch2;
-//     HidConfig.channel_data[2] = msg.ch3;
-//     HidConfig.channel_data[3] = msg.ch4;
-//     HidConfig.channel_data[4] = msg.ch5;
-//     HidConfig.channel_data[5] = msg.ch6;
-//     HidConfig.channel_data[6] = msg.ch7;
-//     HidConfig.channel_data[7] = msg.ch8;
-// });
+const HidConfig = {
+    channel_data :[],
+};
 
 function isExistOption(id,value) {  
     var isExist = false;  
@@ -75,8 +63,16 @@ window.onload=function(){
             hidDevice = new HID.HID(VENDOR_ID,PRODUCT_ID);
 
             hidDevice.on('data', function(data) {
-                mavlinkParser.parseBuffer(data);
-                //console.log(data);
+                console.log(data);
+                
+                HidConfig.channel_data[0]= (data[1]<<8 | data[0]);
+                HidConfig.channel_data[1]= (data[3]<<8 | data[2]);
+                HidConfig.channel_data[2]= (data[5]<<8 | data[4]);
+                HidConfig.channel_data[3]= (data[7]<<8 | data[6]);
+                HidConfig.channel_data[4]= (data[9]<<8 | data[8]);
+                HidConfig.channel_data[5]= (data[11]<<8 | data[10]);
+                HidConfig.channel_data[6]= (data[13]<<8 | data[12]);
+                HidConfig.channel_data[7]= (data[15]<<8 | data[14]);
             } )
         }
         else
@@ -138,8 +134,7 @@ window.onload=function(){
                 function content_ready() {
                     GUI.tab_switch_in_progress = false;
                 }
-                console.log(tab);
-                
+           
                 switch (tab) {
                     case 'landing':
                         landing.initialize(content_ready);

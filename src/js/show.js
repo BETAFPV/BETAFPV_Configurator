@@ -77,8 +77,8 @@ show.initialize = function (callback) {
         function update_ui() {
             // update bars with latest data
             for (let i = 0; i < 8; i++) {
-                // meterFillArray[i].css('width', (HidConfig.channel_data[i] - meterScale.min) / (meterScale.max - meterScale.min)*100+'%');
-                // meterLabelArray[i].text(HidConfig.channel_data[i]);
+                meterFillArray[i].css('width', (HidConfig.channel_data[i] - meterScale.min) / (meterScale.max - meterScale.min)*100+'%');
+                meterLabelArray[i].text(HidConfig.channel_data[i]);
             }
         }
         let plotUpdateRate;
