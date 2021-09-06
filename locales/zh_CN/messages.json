@@ -782,6 +782,15 @@
     "initialSetupInfoHead": {
         "message": "信息"
     },
+    "FlightControl":{
+        "message": "飞控型号"
+    },
+    "FirmwareVersion":{
+        "message": "固件版本"
+    },
+    "FirmwareBuildTime":{
+        "message":"发布时间"
+    },
     "initialSetupBattery": {
         "message": "电池电压："
     },
@@ -2752,6 +2761,12 @@
     },
     "firmwareFlasherNoReboot": {
         "message": "无重启序列"
+    },
+    "firmwareFlasherWarning": {
+        "message": "警告"
+    },    
+    "firmwareFlasherSteps": {
+        "message": "固件刷写步骤"
     },
     "firmwareFlasherOnlineSelectBuildType": {
         "message": "选择 \"生成类型\" 以查看可用的飞控板。"

@@ -9,6 +9,7 @@ motors.initialize = function (callback) {
     const motorData = [];
 
     $('#content').load("./src/html/motors.html", function () {
+      i18n.localizePage();
 
       const motorsEnableTestModeElement = $('#motorsEnableTestMode');
       motorsEnableTestModeElement.prop('checked', false);

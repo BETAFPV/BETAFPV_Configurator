@@ -34,6 +34,7 @@ pid_tuning.initialize = function (callback) {
     };
     
     $('#content').load("./src/html/pid_tuning.html", function () {
+    i18n.localizePage();
     
     $('.tab-pid_tuning .tab-container .pid').on('click', () => activateSubtab('pid'));
 

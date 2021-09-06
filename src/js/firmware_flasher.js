@@ -271,6 +271,7 @@ firmware_flasher.initialize = function (callback) {
     self.enableFlashing(false);
 
     $('#content').load("./src/html/firmware_flasher.html", function () {
+        i18n.localizePage();
 
         $('a.load_file').click(function () {
   

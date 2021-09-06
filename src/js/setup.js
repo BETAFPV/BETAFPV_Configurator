@@ -13,7 +13,7 @@ const setup = {
 setup.initialize = function (callback) {
     const self = this;
   $('#content').load("./src/html/setup.html", function () {
-      
+    i18n.localizePage();
       const backupButton = $('#content .backup');
       self.initModel();
 

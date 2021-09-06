@@ -55,7 +55,6 @@ setTimeout(function listPorts() {
 
 
 window.onload=function(){
-
     
     $('div.connect_controls a.connect').click(function () {
         if (GUI.connect_lock != true) { 

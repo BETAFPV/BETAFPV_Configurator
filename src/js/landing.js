@@ -2,6 +2,7 @@ const landing = {};
 landing.initialize = function (callback) {
 
   $('#content').load("./src/html/landing.html", function () {
+    i18n.localizePage();
     function showLang(newLang) {
       bottomSection = $('.languageSwitcher');
       bottomSection.find('a').each(function(index) {
@@ -34,10 +35,13 @@ landing.initialize = function (callback) {
         }
       });
     });
+
     showLang(i18n.selectedLanguage);
     // translate to user-selected language
     i18n.localizePage();  
+    
 
+    
     callback();
   });
 

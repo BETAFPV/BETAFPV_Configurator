@@ -6,23 +6,23 @@
                     <tr>
                         <td class="board-select">
                             <select name="board"  id="boardTarget">
-                                <option value="loading" >Choose a Board</option>
+                                <option value="loading" i18n="firmwareFlasherOptionLoading" >Choose a Board</option>
                             </select>
                         </td>
-                        <td><span class="description">Select your board to see available online firmware releases - Select the correct firmware appropriate for your board.</span></td>
+                        <td><span class="description" i18n="firmwareFlasherOnlineSelectBoardDescription">Select your board to see available online firmware releases - Select the correct firmware appropriate for your board.</span></td>
                     </tr>
                     <tr>
                         <td><select name="firmware_version" id="boardVersion">
-                                <option value="loading">Choose a Firmware version</option>
+                                <option value="loading"i18n="firmwareFlasherOptionLoading">Choose a Firmware version</option>
                         </select></td>
-                        <td><span class="description">Select firmware version for your board.</span></td>
+                        <td><span class="description"i18n="firmwareFlasherOnlineSelectFirmwareVersionDescription">Select firmware version for your board.</span></td>
                     </tr>
                 </table>
             </div>
         </div>
         <div class="gui_box gui_warning">
             <div class="gui_box_titlebar">
-                <div class="spacer_box_title" style="text-align: center;">Warning
+                <div class="spacer_box_title" style="text-align: center;" i18n = "firmwareFlasherWarning">Warning
                 </div>
             </div>
             <div class="spacer" style="margin-bottom: 10px;">
@@ -33,7 +33,7 @@
         </div>
         <div class="gui_box gui_note" style="margin-top: 30px;">
             <div class="gui_box_titlebar">
-                <div class="spacer_box_title" style="text-align: center;"><strong>Steps of how to update the firmware</strong>
+                <div class="spacer_box_title" style="text-align: center;"i18n="firmwareFlasherSteps"><strong>Steps of how to update the firmware</strong>
                 </div>
             </div>
             <div class="spacer" style="margin-bottom: 10px;" id='content_load_html'>
@@ -55,16 +55,16 @@
             <span class="progressLabel">Please load firmware file</span>
         </div>
         <div class="btn">
-            <a class="exit_dfu disabled" href="#">Exit</a>
+            <a class="exit_dfu disabled" href="#" i18n="firmwareFlasherExitDfu">Exit</a>
         </div>
         <div class="btn">
-            <a class="flash_firmware disabled" href="#progressbar">Flash Firmware</a>
+            <a class="flash_firmware disabled" href="#progressbar" i18n="firmwareFlasherFlashFirmware">Flash Firmware</a>
         </div>
         <div class="btn">
-            <a class="load_remote_file" href="#">Load Firmware [Online]</a>
+            <a class="load_remote_file" href="#" i18n="firmwareFlasherButtonLoadOnline">Load Firmware [Online]</a>
         </div>
         <div class="btn">
-            <a class="load_file" href="#">Load Firmware [Local]</a>
+            <a class="load_file" href="#" i18n="firmwareFlasherButtonLoadLocal">Load Firmware [Local]</a>
         </div>
     </div>
 </div>

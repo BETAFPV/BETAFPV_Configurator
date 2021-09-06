@@ -201,6 +201,7 @@ sensors.initialize = function (callback) {
   
     
     $('#content').load("./src/html/sensors.html", function () {
+        i18n.localizePage();
         //disable graphs for sensors that are missing
         let checkboxes = $('.tab-sensors .info .checkboxes input');
         checkboxes.parent().show();

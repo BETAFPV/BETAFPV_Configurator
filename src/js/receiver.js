@@ -11,6 +11,7 @@ var rcData = new channelData();
 receiver.initialize = function (callback) {
 
     $('#content').load("./src/html/receiver.html", function () {
+        i18n.localizePage();
         const bar_names = [
             "Roll [A]",
             "Pitch [E]",

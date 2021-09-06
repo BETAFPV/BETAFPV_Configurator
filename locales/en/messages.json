@@ -854,6 +854,15 @@
     "initialSetupInfoHead": {
         "message": "Info"
     },
+    "FlightControl":{
+        "message": "Flight Control"
+    },
+    "FirmwareVersion":{
+        "message": "Firmware version"
+    },
+    "FirmwareBuildTime":{
+        "message":"Build time"
+    },
     "initialSetupBattery": {
         "message": "Battery voltage:"
     },
@@ -2984,6 +2993,12 @@
     },
     "firmwareFlasherNoReboot": {
         "message": "No reboot sequence"
+    },
+    "firmwareFlasherWarning": {
+        "message": "Warning"
+    }, 
+    "firmwareFlasherSteps": {
+        "message": "Stpes of how to flasher"
     },
     "firmwareFlasherOnlineSelectBuildType": {
         "message": "Select build type to see available boards."
