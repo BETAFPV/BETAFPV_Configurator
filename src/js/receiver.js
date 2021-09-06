@@ -50,8 +50,8 @@ receiver.initialize = function (callback) {
         }
     
         const meterScale = {
-            'min': 800,
-            'max': 2200
+            'min': 000,
+            'max': 2100
         };
     
         const meterFillArray = [];

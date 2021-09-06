@@ -42,7 +42,7 @@
                         </td>
                         <td>
                             <div class="input-helpicon-flex">
-                                <input type="number" name='roll_offset' step="1" min="0" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
+                                <input type="number" name='roll_offset' step="1" min="0" max="200" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
                             </div>
                         </td>
                         <td>
@@ -61,8 +61,8 @@
                         <td>
                             <div class="input-helpicon-flex">
                                 <select name="pitch_input" style="width:100%;">
-                                    <option value="0" selected="selected">CH1</option>
-                                    <option value="1">CH2</option>
+                                    <option value="0">CH1</option>
+                                    <option value="1"  selected="selected">CH2</option>
                                     <option value="2">CH3</option>
                                     <option value="3">CH4</option>
                                 </select>
@@ -75,7 +75,7 @@
                         </td>
                         <td>
                             <div class="input-helpicon-flex">
-                                <input type="number" name='pitch_offset' step="1" min="0" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
+                                <input type="number" name='pitch_offset' step="1" min="0" max="200" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
                             </div>
                         </td>
                         <td>
@@ -94,9 +94,9 @@
                         <td>
                             <div class="input-helpicon-flex">
                                 <select name="yaw_input" style="width:100%;">
-                                    <option value="0" selected="selected">CH1</option>
+                                    <option value="0">CH1</option>
                                     <option value="1">CH2</option>
-                                    <option value="2">CH3</option>
+                                    <option value="2"  selected="selected">CH3</option>
                                     <option value="3">CH4</option>
                                 </select>
                             </div>
@@ -108,7 +108,7 @@
                         </td>
                         <td>
                             <div class="input-helpicon-flex">
-                                <input type="number" name='yaw_offset' step="1" min="0" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
+                                <input type="number" name='yaw_offset' step="1" min="0" max="200" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
                             </div>
                         </td>
                         <td>
@@ -127,10 +127,10 @@
                         <td>
                             <div class="input-helpicon-flex">
                                 <select name="throttle_input" style="width:100%;">
-                                    <option value="0" selected="selected">CH1</option>
+                                    <option value="0">CH1</option>
                                     <option value="1">CH2</option>
                                     <option value="2">CH3</option>
-                                    <option value="3">CH4</option>
+                                    <option value="3"  selected="selected">CH4</option>
                                 </select>
                             </div>
                         </td>
@@ -141,7 +141,7 @@
                         </td>
                         <td>
                             <div class="input-helpicon-flex">
-                                <input type="number" name='throttle_offset' step="1" min="0" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
+                                <input type="number" name='throttle_offset' step="1" min="0" max="200" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
                             </div>
                         </td>
                         <td>
@@ -181,8 +181,8 @@
                         <td>
                             <div class="input-helpicon-flex">
                                 <select name="aux2_input" style="width:100%;">
-                                    <option value="0" selected="selected">SA</option>
-                                    <option value="1">SB</option>
+                                    <option value="0">SA</option>
+                                    <option value="1"  selected="selected">SB</option>
                                     <option value="2">SC</option>
                                     <option value="3">SD</option>
                                 </select>
@@ -202,9 +202,9 @@
                         <td>
                             <div class="input-helpicon-flex">
                                 <select name="aux3_input" style="width:100%;">
-                                    <option value="0" selected="selected">SA</option>
+                                    <option value="0">SA</option>
                                     <option value="1">SB</option>
-                                    <option value="2">SC</option>
+                                    <option value="2"  selected="selected">SC</option>
                                     <option value="3">SD</option>
                                 </select>
                             </div>
@@ -223,10 +223,10 @@
                         <td>
                             <div class="input-helpicon-flex">
                                 <select name="aux4_input" style="width:100%;">
-                                    <option value="0" selected="selected">SA</option>
+                                    <option value="0">SA</option>
                                     <option value="1">SB</option>
                                     <option value="2">SC</option>
-                                    <option value="3">SD</option>
+                                    <option value="3"  selected="selected">SD</option>
                                 </select>
                             </div>
                         </td>
@@ -283,18 +283,17 @@
             <div class="gui_box tunings grey" style="margin-top: 10px;">
                 <table class="inprotocol">
                     <tr>
-                        <th>Internal Radio System Protocol</th>
-                        <th>Internal Radio System Power</th>
+                        <th>IR System Protocol</th>
+                        <th>IR System Power</th>
+                        <th>IR Pkt Rate</th>
+                        <th>IR TLM Radio</th>
                     </tr>
                     <tr>
                         <td>
                             <div class="input-helpicon-flex">
                                 <select name="internalradiosystem" style="width:100%;">
                                     <option value="0">OFF</option>
-                                    <option value="1">D16 FCC</option>
-                                    <option value="2">D16 EU</option>
-                                    <option value="3" selected="selected" >D8</option>
-                                    <option value="4">SFHSS</option>
+                                    <option value="3" selected="selected" >2.4GHz</option>
                                 </select>
                             </div>
                         </td>
@@ -307,14 +306,39 @@
                                 </select>
                             </div>
                         </td>
+                        <td>
+                            <div class="input-helpicon-flex">
+                                <select name="inpktRate" style="width:100%;">
+                                    <option value="0" selected="selected">500Hz</option>
+                                    <option value="1">250Hz</option>
+                                    <option value="2">150Hz</option>
+                                    <option value="2">50Hz</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-helpicon-flex">
+                                <select name="inTLMRadio" style="width:100%;">
+                                    <option value="0" selected="selected">OFF</option>
+                                    <option value="1">1:128</option>
+                                    <option value="2">1:64</option>
+                                    <option value="3">1:32</option>
+                                    <option value="4">1:16</option>
+                                    <option value="5">1:8</option>
+                                    <option value="6">1:4</option>
+                                    <option value="7">1:2</option>
+                                </select>
+                            </div>
+                        </td>
                     </tr>
                 </table>
             </div> 
+
             <div class="gui_box tunings grey" style="margin-top: 10px;">
                 <table class="exprotocol">
                     <tr>
-                        <th>External Radio System Protocol</th>
-                        <th>External Radio System Power</th>
+                        <th>ER System Protocol</th>
+                        <th>ER System Power</th>
                     </tr>
                     <tr>
                         <td>
@@ -322,7 +346,6 @@
                                 <select name="externalradiosystem" style="width:100%;">
                                     <option value="0" selected="selected">OFF</option>
                                     <option value="1">CRSF</option>
-                                    <option value="2">SBUS</option>
                                 </select>
                             </div>
                         </td>
@@ -338,9 +361,61 @@
                     </tr>
                 </table>
             </div> 
+
+            <div class="gui_box tunings grey" style="margin-top: 10px;">
+                <table class="exELRS">
+                    <tr>
+                        <th>exELRS System Power</th>
+                        <th>exELRS Pkt Rate</th>
+                        <th>exELRS TLM Radio</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="input-helpicon-flex">
+                                <select name="exELRSpower" style="width:100%;">
+                                    <option value="0" selected="selected">25mw</option>
+                                    <option value="1">50mw</option>
+                                    <option value="2">100mw</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-helpicon-flex">
+                                <select name="exELRSpktRate" style="width:100%;">
+                                    <option value="0" selected="selected">500Hz</option>
+                                    <option value="1">250Hz</option>
+                                    <option value="2">150Hz</option>
+                                    <option value="2">50Hz</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-helpicon-flex">
+                                <select name="exELRSTLMRadio" style="width:100%;">
+                                    <option value="0" selected="selected">OFF</option>
+                                    <option value="1">1:128</option>
+                                    <option value="2">1:64</option>
+                                    <option value="3">1:32</option>
+                                    <option value="4">1:16</option>
+                                    <option value="5">1:8</option>
+                                    <option value="6">1:4</option>
+                                    <option value="7">1:2</option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
     <div class="content_toolbar">
+        <div class="btn bind_btn">
+            <a class="bind disabled" href="#">Bind</a>
+        </div>
+        <div class="btn wifiUpdate_btn">
+            <a class="wifiUpdate disabled" href="#">WIFI Update</a>
+        </div>
+
         <div class="btn refresh_btn">
             <a class="refresh" href="#">Refresh </a>
         </div>            

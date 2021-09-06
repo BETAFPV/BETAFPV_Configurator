@@ -5,8 +5,49 @@ var VENDOR_ID = 1155;
 var PRODUCT_ID = 22352;
 let channels = new Array(8);
 let hidDevice = null;
-const HidConfig = {
+
+ const HidConfig = {
     channel_data :[],
+    rollInputUpdate:0,
+    pitchInputUpdate:1,
+    yawInputUpdate:2,
+    throInputUpdate:3,
+
+    aux1InputUpdate:0,
+    aux2InputUpdate:1,
+    aux3InputUpdate:2,
+    aux4InputUpdate:3,
+
+    rollReverse:0,
+    pitchReverse:0,
+    yawReverse:0,
+    throReverse:0,
+
+    rollOffset:0,
+    pitchOffset:0,
+    yawOffset:0,
+    throOffset:0,
+
+    rollWeight:0,
+    pitchWeight:0,
+    yawWeight:0,
+    throWeight:0,
+
+    mode:0,
+    trainerPort:0,
+
+    irSystemProtocol:0,
+    irSystemPower:0,
+    irPktRate:0,
+    irTLMRadio:0,
+
+    erSystemProtocol:0,
+    erSystemPower:0,
+
+    exELRSSystemPower:0,
+    exELRSPktRate:0,
+    exELRSTLMRadio:0,
+    
 };
 
 function isExistOption(id,value) {  
@@ -63,16 +104,16 @@ window.onload=function(){
             hidDevice = new HID.HID(VENDOR_ID,PRODUCT_ID);
 
             hidDevice.on('data', function(data) {
-                console.log(data);
-                
-                HidConfig.channel_data[0]= (data[1]<<8 | data[0]);
-                HidConfig.channel_data[1]= (data[3]<<8 | data[2]);
-                HidConfig.channel_data[2]= (data[5]<<8 | data[4]);
-                HidConfig.channel_data[3]= (data[7]<<8 | data[6]);
-                HidConfig.channel_data[4]= (data[9]<<8 | data[8]);
-                HidConfig.channel_data[5]= (data[11]<<8 | data[10]);
-                HidConfig.channel_data[6]= (data[13]<<8 | data[12]);
-                HidConfig.channel_data[7]= (data[15]<<8 | data[14]);
+               
+                HidConfig.channel_data[0]= (data[HidConfig.rollInputUpdate*2+1]<<8 | data[HidConfig.rollInputUpdate*2]);
+                HidConfig.channel_data[1]= (data[HidConfig.pitchInputUpdate*2+1]<<8 | data[HidConfig.pitchInputUpdate*2]);
+                HidConfig.channel_data[2]= (data[HidConfig.yawInputUpdate*2+1]<<8 | data[HidConfig.yawInputUpdate*2]);
+                HidConfig.channel_data[3]= (data[HidConfig.throInputUpdate*2+1]<<8 | data[HidConfig.throInputUpdate*2]);
+
+                HidConfig.channel_data[4]= (data[HidConfig.aux1InputUpdate*2+9]<<8 | data[HidConfig.aux1InputUpdate*2+8]);
+                HidConfig.channel_data[5]= (data[HidConfig.aux2InputUpdate*2+9]<<8 | data[HidConfig.aux2InputUpdate*2+8]);
+                HidConfig.channel_data[6]= (data[HidConfig.aux3InputUpdate*2+9]<<8 | data[HidConfig.aux3InputUpdate*2+8]);
+                HidConfig.channel_data[7]= (data[HidConfig.aux4InputUpdate*2+9]<<8 | data[HidConfig.aux4InputUpdate*2+8]);
             } )
         }
         else
