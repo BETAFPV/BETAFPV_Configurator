@@ -31,23 +31,6 @@ const menuTemplate = [
         ]
     },
     {
-        label:'Language',
-        submenu:[
-            {
-                label:'English',
-                click(){
-                    
-                }
-            },
-            {
-                label:'Chinese',
-                click(){
-                    
-                }
-            }
-        ]
-    },
-    {
         label:'Options',
         submenu:[
             {
