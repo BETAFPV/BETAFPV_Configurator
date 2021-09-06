@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="connect-src https://github.com https://github-releases.githubusercontent.com 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval'">
+        <title>main</title>
+        <link type="text/css" rel="stylesheet" href="./src/css/main.css"/>
+        <link type="text/css" rel="stylesheet" href="./src/css/dark-theme.css"/>
+        <link type="text/css" rel="stylesheet" href="./src/css/firmware_flasher_LiteRadio.css"/>
+        <link type="text/css" rel="stylesheet" href="./src/css/show.css"/>
+
+        <script src="./src/mavlink/mavlink.js"></script>
+        <script src="./src/mavlink/mavlink_decode.js"></script>
+        <script src="./node_modules/jquery/dist/jquery.js"></script>
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="libraries/d3.min.js"></script>
+        <script src="./src/js/firmware_flasher_LiteRadio.js"></script>
+        <script src="./src/js/gui.js"></script>
+        <script src="./src/js/landing.js"></script>
+        <script src="./src/js/show.js"></script>
+        <script src="./src/js/calibrate.js"></script>
+
+        <script type="text/javascript" src="./node_modules/three/build/three.min.js"></script>
+        <script type="text/javascript" src="./node_modules/three/examples/js/renderers/CanvasRenderer.js"></script>
+        <script type="text/javascript" src="./node_modules/three/examples/js/renderers/Projector.js"></script>
+
+    </head>
+    <body>
+        <div id="main-wrapper">
+            <div class="headerbar">
+                <div>
+                    <img src="./src/images/logo/logo.png" height="100px" />
+                </div>
+                <div>
+                    <label for="logo" style="font-style: italic; color:white; font-size:48px;">LiteRadio</label>
+                </div>
+                <div id="port-picker">
+                    <div id="portsinput">
+                        <div class="dropdown dropdown-dark">
+                            <select class="dropdown-select" id="port">FlasherManualPort
+                                <option value="loading">Loading</option>
+                                <!-- port list gets generated here -->
+                            </select>
+                            <div id="baudselect">
+                                <div class="dropdown dropdown-dark">
+                                    <select class="dropdown-select" id="baud">FlasherBaudRate
+                                        <option value="1000000">1000000</option>
+                                        <option value="500000">500000</option>
+                                        <option value="250000">250000</option>
+                                        <option value="115200" selected="selected">115200</option>
+                                        <option value="57600">57600</option>
+                                        <option value="38400">38400</option>
+                                        <option value="28800">28800</option>
+                                        <option value="19200">19200</option>
+                                        <option value="14400">14400</option>
+                                        <option value="9600">9600</option>
+                                        <option value="4800">4800</option>
+                                        <option value="2400">2400</option>
+                                        <option value="1200">1200</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="header_btns">
+                    <div class="connect_controls" id="connectbutton">
+                        <div class="connect_b">
+                            <a class="connect disabled" href="#"></a>
+                        </div>
+                        <div class="connect_state">Connect Serial</div>
+                    </div>
+                    <div class="open_firmware_flasher" id="flashbutton">
+                        <div class="firmware_b">
+                            <a class="flash" href="#"></a>
+                        </div>
+                        <div class="flash_state">Connect HID</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="tab-content-container">
+                <div class="tab_container">
+                    <div id="tabs">
+                        <ul class="mode-disconnected">
+                            <li class="tab_landing" id="tab_landing"><a href="#"class="tabicon ic_welcome">Welcom</a>
+                            </li>
+                            <li class="tab_firmware_flasher_LiteRadio" id="tabFirmware"><a href="#" class="tabicon ic_flasher">Firmware Flasher</a></li>
+                        </ul>
+                        <ul class="mode-connected">
+                            <li class="tab_show"><a href="#"  class="tabicon ic_setup">Setup</a></li>
+                            <li class="tab_calibrate"><a href="#"  class="tabicon ic_config">Calibration</a></li>
+                        </ul>
+                    </div>  
+                </div>
+                <div id='content'>                   
+                </div>              
+            </div>
+        </div>
+        <script src="./indexLiteRadio.js"></script>        
+    </body>
+</html>

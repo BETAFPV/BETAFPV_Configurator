@@ -25,7 +25,10 @@
     "underscore": "^1.13.1",
     "three": "~0.97.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "electron-rebuild": "^3.2.3",
+    "serialport": "^9.2.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BETAFPV/LiteRadio-Configurator.git"

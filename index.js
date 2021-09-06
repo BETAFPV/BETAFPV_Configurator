@@ -202,8 +202,8 @@ window.onload=function(){
                         setup.initialize(content_ready);
                         break; 
                     case 'receiver':
-                            receiver.initialize(content_ready);
-                            break;
+                        receiver.initialize(content_ready);
+                        break;
                     case 'motors':
                         motors.initialize(content_ready);
                         break;     
@@ -212,7 +212,13 @@ window.onload=function(){
                         break; 
                     case 'sensors':
                         sensors.initialize(content_ready);
-                        break;         
+                        break;  
+                    case 'show':
+                        show.initialize(content_ready);
+                        break;
+                    case 'calibrate':
+                        calibrate.initialize(content_ready);
+                        break;        
                     default:
                         console.log(`Tab not found: ${tab}`);
                 }
