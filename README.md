@@ -27,7 +27,21 @@ electron .
 ```
 如果到这一步出现报错，则输入`npm install -g node-gyp`，并重新执行`.\node_modules\.bin\electron-rebuild.cmd`。若没有报错则跳过此步骤。
 
+若在执行electron .命令后，出现“was compiled against a different Node.js version using”的错误提示，则需要用electron-rebuild包重建模块以适配Electron：
+```
+npm install --save-dev electron-rebuild
+
+# Every time you run "npm install", run this:
+./node_modules/.bin/electron-rebuild
+
+# If you have trouble on Windows, try:
+.\node_modules\.bin\electron-rebuild.cmd
+
+```
+
 若在VS Code输入命令时出现以下错误：无法加载文件xxx.ps1，因为在此系统中禁止脚本。 解决方案如下：
 - 按下Window+R，输入**powershell**，回车或确定。
 - 输入**Set-Executionpolicy remotesigned**,回车。
 - 输入**y**回车。
+
+
