@@ -219,6 +219,7 @@ window.onload=function(){
             }
         }
     });
+    i18n.init();
     
     $('#tabs ul.mode-disconnected li a:first').click();
 }
