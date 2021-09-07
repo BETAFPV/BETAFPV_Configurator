@@ -24,17 +24,17 @@ HidConfig = {
     yawReverse:0,
     throReverse:0,
 
-    rollOffset:0,
-    pitchOffset:0,
-    yawOffset:0,
-    throOffset:0,
+    rollOffset:100,
+    pitchOffset:100,
+    yawOffset:100,
+    throOffset:100,
 
-    rollWeight:0,
-    pitchWeight:0,
-    yawWeight:0,
-    throWeight:0,
+    rollWeight:100,
+    pitchWeight:100,
+    yawWeight:100,
+    throWeight:100,
 
-    mode:0,
+    mode:1,
     trainerPort:0,
 
     irSystemProtocol:0,
@@ -48,6 +48,9 @@ HidConfig = {
     exELRSSystemPower:0,
     exELRSPktRate:0,
     exELRSTLMRadio:0,
+
+    version:0,
+    protocol:0,
 };
 
 
@@ -119,10 +122,6 @@ window.onload=function(){
    
                     if(checkSum == checkSum2)
                     {
-                        console.log(data);
-                        console.log(checkSum);
-                        console.log(checkSum2);
-
                         switch(data[1])
                         {
                             case 0:
@@ -175,14 +174,56 @@ window.onload=function(){
                 }
                 else if(data[0] == 0x05)
                 {
-                    var checkSum5=0;
+                    var checkSum=0;
+                    var checkSum2=0;
 
                     for(i=0;i<7;i++)
                     {
-                        checkSum5 +=data[i] & 0x00ff;
+                        checkSum +=data[2*i] & 0x00ff;
+                    }                   
+                    checkSum2 = data[15]<<8 | data[14] ;
+   
+                    if(checkSum == checkSum2)
+                    {
+                        console.log(data);
+
+                        HidConfig.version = data[1];
+                        HidConfig.protocol = data[2];
+                        HidConfig.mode = data[3];
+
+                        HidConfig.irSystemPower = data[4];
+
+
                     }
-                    
-                    if(checkSum5 == data[7])
+                }
+                else if(data[0] == 0x6)
+                {
+                    var checkSum=0;
+                    var checkSum2=0;
+
+                    for(i=0;i<7;i++)
+                    {
+                        checkSum +=data[2*i] & 0x00ff;
+                    }                   
+                    checkSum2 = data[15]<<8 | data[14] ;
+   
+                    if(checkSum == checkSum2)
+                    {
+                        console.log(data);
+                    }
+                }
+                else if(data[0] == 0x07)
+                {
+                    var checkSum=0;
+                    var checkSum2=0;
+
+                    for(i=0;i<7;i++)
+                    {
+                        checkSum +=data[2*i] & 0x00ff;
+                    }                   
+                    checkSum2 = data[15]<<8 | data[14] ;
+   
+                    if(checkSum == checkSum2)
                     {
                         console.log(data);
                     }
@@ -200,6 +241,11 @@ window.onload=function(){
                     HidConfig.channel_data[7]= (data[HidConfig.aux4InputUpdate*2+1]<<8 | data[HidConfig.aux4InputUpdate*2]);
                 }               
             } );
+
+            hidDevice.on("error", function(err) {
+                hidDevice.close();
+                alert("HID Device Disconnected!");
+            });
         }
         else
         {

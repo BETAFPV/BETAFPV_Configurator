@@ -44,7 +44,7 @@ show.refreshUI = function()
     show.inputaux3.val(HidConfig.aux3InputUpdate);
     show.inputaux4.val(HidConfig.aux4InputUpdate);
 
-    show.inputRollreverse.attr("checked",false);
+    show.inputRollreverse.checked =  HidConfig.rollReverse;
     show.inputPitchreverse.checked = HidConfig.pitchReverse;
     show.inputYawreverse.checked =   HidConfig.yawReverse;
     show.inputThroreverse.checked =  HidConfig.throReverse;
@@ -53,6 +53,7 @@ show.refreshUI = function()
     show.inputPitchweight.val(HidConfig.pitchWeight);
     show.inputYawweight.val(HidConfig.yawWeight);
     show.inputThroweight.val(HidConfig.throWeight);
+
     show.inputRolloffset.val(HidConfig.rollOffset);
     show.inputPitchoffset.val(HidConfig.pitchOffset);
     show.inputYawoffset.val(HidConfig.yawOffset);
@@ -426,6 +427,58 @@ show.initialize = function (callback) {
 
         });
 
+        $('a.save').click(function () {
+            var bufName = new Buffer.alloc(64);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x00;
+            bufName[3] = HidConfig.rollInputUpdate;
+            bufName[4] = HidConfig.rollReverse;
+            bufName[5] = HidConfig.rollWeight
+            bufName[6] = HidConfig.rollOffset
+
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x03;
+            bufName[3] = HidConfig.pitchInputUpdate;
+            bufName[4] = HidConfig.pitchReverse;
+            bufName[5] = HidConfig.pitchWeight
+            bufName[6] = HidConfig.pitchOffset
+
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x01;
+            bufName[3] = HidConfig.yawInputUpdate;
+            bufName[4] = HidConfig.yawReverse;
+            bufName[5] = HidConfig.yawWeight
+            bufName[6] = HidConfig.yawOffset
+
+            hidDevice.write(bufName);
+
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x02;
+            bufName[3] = HidConfig.throInputUpdate;
+            bufName[4] = HidConfig.throReverse;
+            bufName[5] = HidConfig.throWeight
+            bufName[6] = HidConfig.throOffset
+
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x05;
+            bufName[2] = 0x00;
+            bufName[3] = 0x01;
+            bufName[4] = 0x02;
+
+            hidDevice.write(bufName);
+        });
 
         rxRefreshRate.change(); 
         
