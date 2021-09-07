@@ -44,11 +44,12 @@ show.refreshUI = function()
     show.inputaux3.val(HidConfig.aux3InputUpdate);
     show.inputaux4.val(HidConfig.aux4InputUpdate);
 
-    show.inputRollreverse.checked =  HidConfig.rollReverse;
-    show.inputPitchreverse.checked = HidConfig.pitchReverse;
-    show.inputYawreverse.checked =   HidConfig.yawReverse;
-    show.inputThroreverse.checked =  HidConfig.throReverse;
 
+    document.getElementById('roll_check').checked = HidConfig.rollReverse;
+    document.getElementById('pitch_check').checked = HidConfig.pitchReverse;
+    document.getElementById('yaw_check').checked =HidConfig.yawReverse;
+    document.getElementById('throttle_check').checked = HidConfig.throReverse;
+    
     show.inputRollweight.val(HidConfig.rollWeight);
     show.inputPitchweight.val(HidConfig.pitchWeight);
     show.inputYawweight.val(HidConfig.yawWeight);
@@ -197,7 +198,7 @@ show.initialize = function (callback) {
             HidConfig.aux4InputUpdate = parseInt($(this).val(), 10);
         });
 
-        show.inputRollreverse=$('input[name="roll_check"]');
+        show.inputRollreverse=$('input[id="roll_check"]');
         show.inputRollreverse.change(function () {
             var flag = $(this).is(':checked');
             if(flag)
@@ -211,7 +212,7 @@ show.initialize = function (callback) {
             
         });
 
-        show.inputPitchreverse=$('input[name="pitch_check"]');
+        show.inputPitchreverse=$('input[id="pitch_check"]');
         show.inputPitchreverse.change(function () {
             var flag = $(this).is(':checked');
             if(flag)
@@ -224,7 +225,7 @@ show.initialize = function (callback) {
             }
         });
 
-        show.inputYawreverse=$('input[name="yaw_check"]');
+        show.inputYawreverse=$('input[id="yaw_check"]');
         show.inputYawreverse.change(function () {
             var flag = $(this).is(':checked');
             if(flag)
@@ -237,7 +238,7 @@ show.initialize = function (callback) {
             }
         });
 
-        show.inputThroreverse=$('input[name="throttle_check"]');
+        show.inputThroreverse=$('input[id="throttle_check"]');
         show.inputThroreverse.change(function () {
             var flag = $(this).is(':checked');
             if(flag)
@@ -479,6 +480,7 @@ show.initialize = function (callback) {
 
             hidDevice.write(bufName);
         });
+
 
         rxRefreshRate.change(); 
         
