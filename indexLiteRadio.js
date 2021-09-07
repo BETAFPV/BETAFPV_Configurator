@@ -93,184 +93,194 @@ window.onload=function(){
     $('div.open_firmware_flasher a.flash').click(function () {
         if (GUI.connect_hid != true) {
             console.log('connect hid');
-            GUI.connect_hid = true;
-
-            $('#tabs ul.mode-disconnected').hide();
-
-            $('#tabs ul.mode-connected').show();
-
-            $('#tabs ul.mode-connected li a:first').click();
-
-            $('div#flashbutton a.flash').addClass('active');
-
-            console.log('click',HID.devices());
+            
 
             hidDevice = new HID.HID(VENDOR_ID,PRODUCT_ID);
 
-            hidDevice.on('data', function(data) {
+            if(hidDevice)
+            {
+                GUI.connect_hid = true;
+
+                $('#tabs ul.mode-disconnected').hide();
+
+                $('#tabs ul.mode-connected').show();
+
+                $('#tabs ul.mode-connected li a:first').click();
+
+                $('div#flashbutton a.flash').addClass('active');
+
+                console.log('click',HID.devices());
+
+                hidDevice.on('data', function(data) {
                
-                if(data[0] == 0x01)
-                {
-                    var checkSum=0;
-                    var checkSum2=0;
+                    if(data[0] == 0x01)
+                    {
+                        var checkSum=0;
+                        var checkSum2=0;
 
-                    for(i=0;i<7;i++)
-                    {
-                        checkSum +=data[2*i] & 0x00ff;
-                    }                   
-                    checkSum2 = data[15]<<8 | data[14] ;
-   
-                    if(checkSum == checkSum2)
-                    {
-                        switch(data[1])
+                        for(i=0;i<7;i++)
                         {
-                            case 0:
-                                HidConfig.rollInputUpdate = data[2];
-                                HidConfig.rollReverse = data[3];
-                                HidConfig.rollWeight = data[4];
-                                HidConfig.rollOffset = data[5];
-                                break;
+                            checkSum +=data[2*i] & 0x00ff;
+                        }                   
+                        checkSum2 = data[15]<<8 | data[14] ;
+    
+                        if(checkSum == checkSum2)
+                        {
+                            switch(data[1])
+                            {
+                                case 0:
+                                    HidConfig.rollInputUpdate = data[2];
+                                    HidConfig.rollReverse = data[3];
+                                    HidConfig.rollWeight = data[4];
+                                    HidConfig.rollOffset = data[5];
+                                    break;
 
-                            case 3:
-                                HidConfig.pitchInputUpdate = data[2];
-                                HidConfig.pitchReverse = data[3];
-                                HidConfig.pitchWeight = data[4];
-                                HidConfig.pitchOffset = data[5];
-                                break;
+                                case 3:
+                                    HidConfig.pitchInputUpdate = data[2];
+                                    HidConfig.pitchReverse = data[3];
+                                    HidConfig.pitchWeight = data[4];
+                                    HidConfig.pitchOffset = data[5];
+                                    break;
 
-                            case 1:
-                                HidConfig.yawInputUpdate = data[2];
-                                HidConfig.yawReverse = data[3];
-                                HidConfig.yawWeight = data[4];
-                                HidConfig.yawOffset = data[5];
-                                break;
+                                case 1:
+                                    HidConfig.yawInputUpdate = data[2];
+                                    HidConfig.yawReverse = data[3];
+                                    HidConfig.yawWeight = data[4];
+                                    HidConfig.yawOffset = data[5];
+                                    break;
 
-                            case 2:
-                                HidConfig.throInputUpdate = data[2];
-                                HidConfig.throReverse = data[3];
-                                HidConfig.throWeight = data[4];
-                                HidConfig.throOffset = data[5];
-                                break;
+                                case 2:
+                                    HidConfig.throInputUpdate = data[2];
+                                    HidConfig.throReverse = data[3];
+                                    HidConfig.throWeight = data[4];
+                                    HidConfig.throOffset = data[5];
+                                    break;
 
-                            case 4:
-                                HidConfig.aux1InputUpdate = data[2];
-                                break;
+                                case 4:
+                                    HidConfig.aux1InputUpdate = data[2];
+                                    break;
 
-                            case 5:
-                                HidConfig.aux2InputUpdate = data[2];
-                                break;
+                                case 5:
+                                    HidConfig.aux2InputUpdate = data[2];
+                                    break;
 
-                            case 6:
-                                HidConfig.aux3InputUpdate = data[2];
-                                break;
+                                case 6:
+                                    HidConfig.aux3InputUpdate = data[2];
+                                    break;
 
-                            case 7:
-                                HidConfig.aux4InputUpdate = data[2];
-                                break;
+                                case 7:
+                                    HidConfig.aux4InputUpdate = data[2];
+                                    break;
+                            }
+                            show.refreshUI();
                         }
-                        show.refreshUI();
+                        
                     }
-                    
-                }
-                else if(data[0] == 0x05)
-                {
-                    var checkSum=0;
-                    var checkSum2=0;
-
-                    for(i=0;i<7;i++)
+                    else if(data[0] == 0x05)
                     {
-                        checkSum +=data[2*i] & 0x00ff;
-                    }                   
-                    checkSum2 = data[15]<<8 | data[14] ;
-   
-                    if(checkSum == checkSum2)
-                    {
-                        console.log(data);
+                        var checkSum=0;
+                        var checkSum2=0;
 
-                        HidConfig.version = data[1];
-                        HidConfig.protocol = data[2];
-
-                        if(data[2]==0)
+                        for(i=0;i<7;i++)
                         {
-                            HidConfig.irSystemProtocol = 1;
-                        }
-                        else if(data[2]==1)
+                            checkSum +=data[2*i] & 0x00ff;
+                        }                   
+                        checkSum2 = data[15]<<8 | data[14] ;
+    
+                        if(checkSum == checkSum2)
                         {
-                            HidConfig.erSystemProtocol = 1;
-                        }
-                        else if(data[2]==2)
-                        {
-                            HidConfig.irSystemProtocol = 0;
-                        }
-                        HidConfig.mode = data[3];
+                            console.log(data);
 
-                        HidConfig.irSystemPower = data[4];
+                            HidConfig.version = data[1];
+                            HidConfig.protocol = data[2];
 
-                        show.refreshUI();
-                    }                 
-                }
-                else if(data[0] == 0x6)
-                {
-                    var checkSum=0;
-                    var checkSum2=0;
+                            if(data[2]==0)
+                            {
+                                HidConfig.irSystemProtocol = 1;
+                            }
+                            else if(data[2]==1)
+                            {
+                                HidConfig.erSystemProtocol = 1;
+                            }
+                            else if(data[2]==2)
+                            {
+                                HidConfig.irSystemProtocol = 0;
+                            }
+                            HidConfig.mode = data[3];
 
-                    for(i=0;i<7;i++)
-                    {
-                        checkSum +=data[2*i] & 0x00ff;
-                    }                   
-                    checkSum2 = data[15]<<8 | data[14] ;
-   
-                    if(checkSum == checkSum2)
-                    {
-                        console.log(data);
+                            HidConfig.irSystemPower = data[4];
 
-                        HidConfig.irSystemPower = data[2]; 
-                        HidConfig.irPktRate = data[3];
-                        HidConfig.irTLMRadio = data[4];
-
-                        show.refreshUI();
-                    }                
-                }
-                else if(data[0] == 0x07)
-                {
-                    var checkSum=0;
-                    var checkSum2=0;
-
-                    for(i=0;i<7;i++)
-                    {
-                        checkSum +=data[2*i] & 0x00ff;
-                    }                   
-                    checkSum2 = data[15]<<8 | data[14] ;
-   
-                    if(checkSum == checkSum2)
-                    {
-                        console.log(data);
-
-                        HidConfig.exELRSSystemPower = data[2]; 
-                        HidConfig.exELRSPktRate = data[3];
-                        HidConfig.exELRSTLMRadio = data[4];
-
-                        show.refreshUI();
+                            show.refreshUI();
+                        }                 
                     }
-                }
-                else
-                {
-                    HidConfig.channel_data[0]= (data[HidConfig.rollInputUpdate*2+1]<<8 | data[HidConfig.rollInputUpdate*2]);
-                    HidConfig.channel_data[1]= (data[HidConfig.pitchInputUpdate*2+1]<<8 | data[HidConfig.pitchInputUpdate*2]);
-                    HidConfig.channel_data[2]= (data[HidConfig.yawInputUpdate*2+1]<<8 | data[HidConfig.yawInputUpdate*2]);
-                    HidConfig.channel_data[3]= (data[HidConfig.throInputUpdate*2+1]<<8 | data[HidConfig.throInputUpdate*2]);
+                    else if(data[0] == 0x6)
+                    {
+                        var checkSum=0;
+                        var checkSum2=0;
 
-                    HidConfig.channel_data[4]= (data[HidConfig.aux1InputUpdate*2+1]<<8 | data[HidConfig.aux1InputUpdate*2]);
-                    HidConfig.channel_data[5]= (data[HidConfig.aux2InputUpdate*2+1]<<8 | data[HidConfig.aux2InputUpdate*2]);
-                    HidConfig.channel_data[6]= (data[HidConfig.aux3InputUpdate*2+1]<<8 | data[HidConfig.aux3InputUpdate*2]);
-                    HidConfig.channel_data[7]= (data[HidConfig.aux4InputUpdate*2+1]<<8 | data[HidConfig.aux4InputUpdate*2]);
-                }               
-            } );
+                        for(i=0;i<7;i++)
+                        {
+                            checkSum +=data[2*i] & 0x00ff;
+                        }                   
+                        checkSum2 = data[15]<<8 | data[14] ;
+    
+                        if(checkSum == checkSum2)
+                        {
+                            console.log(data);
 
-            hidDevice.on("error", function(err) {
-                hidDevice.close();
-                alert("HID Device Disconnected!");
-            });
+                            HidConfig.irSystemPower = data[2]; 
+                            HidConfig.irPktRate = data[3];
+                            HidConfig.irTLMRadio = data[4];
+
+                            show.refreshUI();
+                        }                
+                    }
+                    else if(data[0] == 0x07)
+                    {
+                        var checkSum=0;
+                        var checkSum2=0;
+
+                        for(i=0;i<7;i++)
+                        {
+                            checkSum +=data[2*i] & 0x00ff;
+                        }                   
+                        checkSum2 = data[15]<<8 | data[14] ;
+    
+                        if(checkSum == checkSum2)
+                        {
+                            console.log(data);
+
+                            HidConfig.exELRSSystemPower = data[2]; 
+                            HidConfig.exELRSPktRate = data[3];
+                            HidConfig.exELRSTLMRadio = data[4];
+
+                            show.refreshUI();
+                        }
+                    }
+                    else
+                    {
+                        HidConfig.channel_data[0]= (data[HidConfig.rollInputUpdate*2+1]<<8 | data[HidConfig.rollInputUpdate*2]);
+                        HidConfig.channel_data[1]= (data[HidConfig.pitchInputUpdate*2+1]<<8 | data[HidConfig.pitchInputUpdate*2]);
+                        HidConfig.channel_data[2]= (data[HidConfig.yawInputUpdate*2+1]<<8 | data[HidConfig.yawInputUpdate*2]);
+                        HidConfig.channel_data[3]= (data[HidConfig.throInputUpdate*2+1]<<8 | data[HidConfig.throInputUpdate*2]);
+
+                        HidConfig.channel_data[4]= (data[HidConfig.aux1InputUpdate*2+1]<<8 | data[HidConfig.aux1InputUpdate*2]);
+                        HidConfig.channel_data[5]= (data[HidConfig.aux2InputUpdate*2+1]<<8 | data[HidConfig.aux2InputUpdate*2]);
+                        HidConfig.channel_data[6]= (data[HidConfig.aux3InputUpdate*2+1]<<8 | data[HidConfig.aux3InputUpdate*2]);
+                        HidConfig.channel_data[7]= (data[HidConfig.aux4InputUpdate*2+1]<<8 | data[HidConfig.aux4InputUpdate*2]);
+                    }               
+                } );
+
+                hidDevice.on("error", function(err) {
+                    hidDevice.close();
+                    alert("HID Device Disconnected!");
+                });
+            }
+            else
+            {
+                alert("Not Found HID Device!");
+            }
+             
         }
         else
         {
