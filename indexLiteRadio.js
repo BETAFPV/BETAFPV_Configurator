@@ -189,12 +189,25 @@ window.onload=function(){
 
                         HidConfig.version = data[1];
                         HidConfig.protocol = data[2];
+
+                        if(data[2]==0)
+                        {
+                            HidConfig.irSystemProtocol = 1;
+                        }
+                        else if(data[2]==1)
+                        {
+                            HidConfig.irSystemProtocol = 0;
+                        }
+                        else if(data[2]==2)
+                        {
+                            HidConfig.irSystemProtocol = 0;
+                        }
                         HidConfig.mode = data[3];
 
                         HidConfig.irSystemPower = data[4];
 
-
-                    }
+                        show.refreshUI();
+                    }                 
                 }
                 else if(data[0] == 0x6)
                 {
@@ -210,7 +223,13 @@ window.onload=function(){
                     if(checkSum == checkSum2)
                     {
                         console.log(data);
-                    }
+
+                        HidConfig.irSystemPower = data[2]; 
+                        HidConfig.irPktRate = data[3];
+                        HidConfig.irTLMRadio = data[4];
+
+                        show.refreshUI();
+                    }                
                 }
                 else if(data[0] == 0x07)
                 {
@@ -226,6 +245,12 @@ window.onload=function(){
                     if(checkSum == checkSum2)
                     {
                         console.log(data);
+
+                        HidConfig.exELRSSystemPower = data[2]; 
+                        HidConfig.exELRSPktRate = data[3];
+                        HidConfig.exELRSTLMRadio = data[4];
+
+                        show.refreshUI();
                     }
                 }
                 else

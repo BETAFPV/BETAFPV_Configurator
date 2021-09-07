@@ -430,6 +430,7 @@ show.initialize = function (callback) {
         $('a.save').click(function () {
             var bufName = new Buffer.alloc(64);
 
+            //发送 遥控通道参数
             bufName[0] = 0x0;
             bufName[1] = 0x01;
             bufName[2] = 0x00;
@@ -437,7 +438,6 @@ show.initialize = function (callback) {
             bufName[4] = HidConfig.rollReverse;
             bufName[5] = HidConfig.rollWeight
             bufName[6] = HidConfig.rollOffset
-
             hidDevice.write(bufName);
 
             bufName[0] = 0x0;
@@ -447,7 +447,6 @@ show.initialize = function (callback) {
             bufName[4] = HidConfig.pitchReverse;
             bufName[5] = HidConfig.pitchWeight
             bufName[6] = HidConfig.pitchOffset
-
             hidDevice.write(bufName);
 
             bufName[0] = 0x0;
@@ -457,9 +456,7 @@ show.initialize = function (callback) {
             bufName[4] = HidConfig.yawReverse;
             bufName[5] = HidConfig.yawWeight
             bufName[6] = HidConfig.yawOffset
-
             hidDevice.write(bufName);
-
 
             bufName[0] = 0x0;
             bufName[1] = 0x01;
@@ -468,9 +465,45 @@ show.initialize = function (callback) {
             bufName[4] = HidConfig.throReverse;
             bufName[5] = HidConfig.throWeight
             bufName[6] = HidConfig.throOffset
+            hidDevice.write(bufName);
+
+            //通道 5-8
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x04;
+            bufName[3] = HidConfig.aux1InputUpdate;
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x05;
+            bufName[3] = HidConfig.aux2InputUpdate;
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x06;
+            bufName[3] = HidConfig.aux3InputUpdate;
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x07;
+            bufName[3] = HidConfig.aux4InputUpdate;
+            hidDevice.write(bufName);
+
+            //发送 内部遥控协议参数
+            bufName[0] = 0x0;
+            bufName[1] = 0x06;
+            bufName[2] = 0x02;
+            bufName[3] = HidConfig.irSystemPower;
+            bufName[4] = HidConfig.irPktRate;
+            bufName[5] = HidConfig.irTLMRadio;
 
             hidDevice.write(bufName);
 
+
+            //保存
             bufName[0] = 0x0;
             bufName[1] = 0x05;
             bufName[2] = 0x00;
