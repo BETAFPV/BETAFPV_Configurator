@@ -1,0 +1,63 @@
+<div class="tab-firmware_flasher toolbar_fixed_bottom">
+    <div class="content_wrapper">
+        <div class="options gui_box">
+            <div class="spacer">
+                <table class="cf_table" style="margin-top: 10px;">
+                    <tr>
+                        <td class="board-select">
+                            <select name="board"  id="boardTarget">
+                                <option value="loading" >Choose a Board</option>
+                            </select>
+                        </td>
+                        <td><span class="description">Select your board to see available online firmware releases - Select the correct firmware appropriate for your board.</span></td>
+                    </tr>
+                    <tr>
+                        <td><select name="firmware_version" id="boardVersion">
+                                <option value="loading">Choose a Firmware version</option>
+                        </select></td>
+                        <td><span class="description">Select firmware version for your board.</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="gui_box gui_warning">
+            <div class="gui_box_titlebar">
+                <div class="spacer_box_title" style="text-align: center;">Warning
+                </div>
+            </div>
+            <div class="spacer" style="margin-bottom: 10px;">
+                <p>Please do <span class=\"message-negative\">not</span> try to flash <strong>non-LiteRadio</strong> hardware with this firmware flasher.<br />Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>The bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /></p>
+                <br />
+                <p><span class=\"message-negative\">IMPORTANT</span>: Ensure you flash a file appropriate for your target.  Flashing a binary for the wrong target can cause <span class=\"message-negative\">bad</span> things to happen.</p>
+            </div>
+        </div>
+        <div class="gui_box gui_note" style="margin-top: 30px;">
+            <div class="gui_box_titlebar">
+                <div class="spacer_box_title" style="text-align: center;"><strong>Recovery / Lost communication</strong>
+                </div>
+            </div>
+            <div class="spacer" style="margin-bottom: 10px;">
+                <p>If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>first</li><li>second</li><li>third</li><li>...</li></ul></p>
+            </div>
+        </div>
+            
+    </div>
+    <div class="content_toolbar">
+        <div class="info"><a name="progressbar"></a>
+            <progress class="progress" value="0" min="0" max="100"></progress>
+            <span class="progressLabel">Please load firmware file</span>
+        </div>
+        <div class="btn">
+            <a class="exit_dfu disabled" href="#">Exit</a>
+        </div>
+        <div class="btn">
+            <a class="flash_firmware disabled" href="#progressbar">Flash Firmware</a>
+        </div>
+        <div class="btn">
+            <a class="load_remote_file " href="#">Load Firmware [Online]</a>
+        </div>
+        <div class="btn">
+            <a class="load_file" href="#">Load Firmware [Local]</a>
+        </div>
+    </div>
+</div>

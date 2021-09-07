@@ -3,9 +3,64 @@ var electron = require('electron')
 
 var app = electron.app;
 var BrowserWindow = electron.BrowserWindow
-
+var Menu = electron.Menu
 
 var mainWindow = null
+
+const menuTemplate = [
+    {
+        label:'LiteRadio',
+        submenu:[
+            {
+                label:'Enter to',
+                click(){
+                    mainWindow.loadURL(`file://${__dirname}/liteRadio.html`);
+                }
+            }
+        ]
+    },
+    {
+        label:'FC',
+        submenu:[
+            {
+                label:'Enter to',
+                click(){
+                    mainWindow.loadURL(`file://${__dirname}/index.html`);
+                }
+            }
+        ]
+    },
+    {
+        label:'Options',
+        submenu:[
+            {
+                label:'Update',
+                click(){
+
+                }
+            },
+            {
+                label:'About',
+                click(){
+                    newWin =new BrowserWindow({
+                        width:500,
+                        height:200,
+                        frame:true,//是否显示边缘框
+                        fullscreen:false //是否全屏显示
+                    });
+                    //打开一个新的窗口
+                    // newWin.loadURL(`file://${__dirname}/otherWin.html`);
+                    //新建窗口
+                    newWin.loadURL(`file://${__dirname}/src/html/about.html`);
+                    newWin.on('close',()=>{
+                        newWin=null
+                    });
+                }
+            }
+        ]
+    }
+];
+
 
 app.allowRendererProcessReuse = false
 
@@ -23,6 +78,8 @@ app.on('ready',()=>{
     });
     mainWindow.loadURL(`file://${__dirname}/index.html`);
 
+    const mainMenu = Menu.buildFromTemplate(menuTemplate);
+    Menu.setApplicationMenu(mainMenu);
     
     mainWindow.on('closed',()=>{
         mainWindow = null;

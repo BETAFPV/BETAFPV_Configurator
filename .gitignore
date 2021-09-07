@@ -30,3 +30,7 @@ nbproject/
 # Eclipse
 .project
 .settings/
+
+LiteRadio.json
+board.json
+*.bin

@@ -29,7 +29,8 @@
     "three": "~0.97.0"
   },
   "devDependencies": {
-    "electron-rebuild": "^3.2.3"
+    "electron-rebuild": "^3.2.3",
+    "serialport": "^9.2.1"
   },
   "repository": {
     "type": "git",
