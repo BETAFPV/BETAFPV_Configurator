@@ -108,58 +108,84 @@ window.onload=function(){
                
                 if(data[0] == 0x01)
                 {
-                    switch(data[1])
+                    var checkSum=0;
+                    var checkSum2=0;
+
+                    for(i=0;i<7;i++)
                     {
-                        case 0:
-                            HidConfig.rollInputUpdate = data[2];
-                            HidConfig.rollReverse = data[3];
-                            HidConfig.rollWeight = data[4];
-                            HidConfig.rollOffset = data[5];
-                            break;
+                        checkSum +=data[2*i] & 0x00ff;
+                    }                   
+                    checkSum2 = data[15]<<8 | data[14] ;
+   
+                    if(checkSum == checkSum2)
+                    {
+                        console.log(data);
+                        console.log(checkSum);
+                        console.log(checkSum2);
 
-                        case 1:
-                            HidConfig.pitchInputUpdate = data[2];
-                            HidConfig.pitchReverse = data[3];
-                            HidConfig.pitchWeight = data[4];
-                            HidConfig.pitchOffset = data[5];
-                            break;
+                        switch(data[1])
+                        {
+                            case 0:
+                                HidConfig.rollInputUpdate = data[2];
+                                HidConfig.rollReverse = data[3];
+                                HidConfig.rollWeight = data[4];
+                                HidConfig.rollOffset = data[5];
+                                break;
 
-                        case 2:
-                            HidConfig.yawInputUpdate = data[2];
-                            HidConfig.yawReverse = data[3];
-                            HidConfig.yawWeight = data[4];
-                            HidConfig.yawOffset = data[5];
-                            break;
+                            case 3:
+                                HidConfig.pitchInputUpdate = data[2];
+                                HidConfig.pitchReverse = data[3];
+                                HidConfig.pitchWeight = data[4];
+                                HidConfig.pitchOffset = data[5];
+                                break;
 
-                        case 3:
-                            HidConfig.throInputUpdate = data[2];
-                            HidConfig.throReverse = data[3];
-                            HidConfig.throWeight = data[4];
-                            HidConfig.throOffset = data[5];
-                            break;
+                            case 1:
+                                HidConfig.yawInputUpdate = data[2];
+                                HidConfig.yawReverse = data[3];
+                                HidConfig.yawWeight = data[4];
+                                HidConfig.yawOffset = data[5];
+                                break;
 
-                        case 4:
-                            HidConfig.aux1InputUpdate = data[2];
-                            break;
+                            case 2:
+                                HidConfig.throInputUpdate = data[2];
+                                HidConfig.throReverse = data[3];
+                                HidConfig.throWeight = data[4];
+                                HidConfig.throOffset = data[5];
+                                break;
 
-                        case 5:
-                            HidConfig.aux2InputUpdate = data[2];
-                            break;
+                            case 4:
+                                HidConfig.aux1InputUpdate = data[2];
+                                break;
 
-                        case 6:
-                            HidConfig.aux3InputUpdate = data[2];
-                            break;
+                            case 5:
+                                HidConfig.aux2InputUpdate = data[2];
+                                break;
 
-                        case 7:
-                            HidConfig.aux4InputUpdate = data[2];
-                            break;
+                            case 6:
+                                HidConfig.aux3InputUpdate = data[2];
+                                break;
+
+                            case 7:
+                                HidConfig.aux4InputUpdate = data[2];
+                                break;
+                        }
+                        show.refreshUI();
                     }
-
-                    console.log(HidConfig);
+                    
                 }
                 else if(data[0] == 0x05)
                 {
-                    console.log(data);
+                    var checkSum5=0;
+
+                    for(i=0;i<7;i++)
+                    {
+                        checkSum5 +=data[i] & 0x00ff;
+                    }
+                    
+                    if(checkSum5 == data[7])
+                    {
+                        console.log(data);
+                    }
                 }
                 else
                 {

@@ -1,4 +1,75 @@
-const show = {};
+const show = {
+    inputRoll:null,
+    inputPitch:null,
+    inputYaw:null,
+    inputThro:null,
+    inputaux1:null,
+    inputaux2:null,
+    inputaux3:null,
+    inputaux4:null,
+    inputRollreverse:null,
+    inputPitchreverse:null,
+    inputYawreverse:null,
+    inputThroreverse:null,
+    inputRollweight:null,
+    inputPitchweight:null,
+    inputYawweight:null,
+    inputThroweight:null,
+    inputRolloffset:null,
+    inputPitchoffset:null,
+    inputYawoffset:null,
+    inputThrooffset:null,
+    inputmode:null,
+    inputtrainerport:null,
+    inputinternalradiosystem:null,
+    inputinpower:null,
+    inputinpktRate:null,
+    inputinTLMRadio:null,
+    inputexternalradiosystem:null,
+    inputexpower:null,
+    inputexELRSpower:null,
+    inputexELRSpktRate:null,
+    inputexELRSTLMRadio:null,
+};
+
+
+show.refreshUI = function()
+{
+    show.inputRoll.val(HidConfig.rollInputUpdate);
+    show.inputPitch.val(HidConfig.pitchInputUpdate);
+    show.inputYaw.val(HidConfig.yawInputUpdate);
+    show.inputThro.val(HidConfig.throInputUpdate);
+    show.inputaux1.val(HidConfig.aux1InputUpdate);
+    show.inputaux2.val(HidConfig.aux2InputUpdate);
+    show.inputaux3.val(HidConfig.aux3InputUpdate);
+    show.inputaux4.val(HidConfig.aux4InputUpdate);
+
+    show.inputRollreverse.attr("checked",false);
+    show.inputPitchreverse.checked = HidConfig.pitchReverse;
+    show.inputYawreverse.checked =   HidConfig.yawReverse;
+    show.inputThroreverse.checked =  HidConfig.throReverse;
+
+    show.inputRollweight.val(HidConfig.rollWeight);
+    show.inputPitchweight.val(HidConfig.pitchWeight);
+    show.inputYawweight.val(HidConfig.yawWeight);
+    show.inputThroweight.val(HidConfig.throWeight);
+    show.inputRolloffset.val(HidConfig.rollOffset);
+    show.inputPitchoffset.val(HidConfig.pitchOffset);
+    show.inputYawoffset.val(HidConfig.yawOffset);
+    show.inputThrooffset.val(HidConfig.throOffset);
+    show.inputmode.val(HidConfig.mode);
+    show.inputtrainerport.val(HidConfig.trainerPort);
+    show.inputinternalradiosystem.val(HidConfig.irSystemProtocol);
+    show.inputinpower.val(HidConfig.irSystemPower);
+    show.inputinpktRate.val(HidConfig.irPktRate);
+    show.inputinTLMRadio.val(HidConfig.irTLMRadio);
+    show.inputexternalradiosystem.val(HidConfig.erSystemProtocol);
+    show.inputexpower.val(HidConfig.erSystemPower);
+    show.inputexELRSpower.val(HidConfig.exELRSSystemPower);
+    show.inputexELRSpktRate.val(HidConfig.exELRSPktRate);
+    show.inputexELRSTLMRadio.val(HidConfig.exELRSTLMRadio);
+};
+
 
 show.initialize = function (callback) {
 
@@ -85,48 +156,48 @@ show.initialize = function (callback) {
             GUI.interval_add('receiver_pull', update_ui, plotUpdateRate, true);
         });
         
-        const inputRoll = $('select[name="roll_input"]');
-        inputRoll.change(function () {
+        show.inputRoll = $('select[name="roll_input"]');
+        show.inputRoll.change(function () {
             HidConfig.rollInputUpdate = parseInt($(this).val(), 10);
         });
 
-        const inputPitch = $('select[name="pitch_input"]');
-        inputPitch.change(function () {
+        show.inputPitch = $('select[name="pitch_input"]');
+        show.inputPitch.change(function () {
             HidConfig.pitchInputUpdate = parseInt($(this).val(), 10);
         });
 
-        const inputYaw = $('select[name="yaw_input"]');
-        inputYaw.change(function () {
+        show.inputYaw = $('select[name="yaw_input"]');
+        show.inputYaw.change(function () {
             HidConfig.yawInputUpdate = parseInt($(this).val(), 10);
         });
       
-        const inputThro = $('select[name="throttle_input"]');
-        inputThro.change(function () {
+        show.inputThro = $('select[name="throttle_input"]');
+        show.inputThro.change(function () {
             HidConfig.throInputUpdate = parseInt($(this).val(), 10);
         });
 
-        const inputaux1 = $('select[name="aux1_input"]');
-        inputaux1.change(function () {
+        show.inputaux1 = $('select[name="aux1_input"]');
+        show.inputaux1.change(function () {
             HidConfig.aux1InputUpdate = parseInt($(this).val(), 10);
         });
 
-        const inputaux2 = $('select[name="aux2_input"]');
-        inputaux2.change(function () {
+        show.inputaux2 = $('select[name="aux2_input"]');
+        show.inputaux2.change(function () {
             HidConfig.aux2InputUpdate = parseInt($(this).val(), 10);
         });
 
-        const inputaux3 = $('select[name="aux3_input"]');
-        inputaux3.change(function () {
+        show.inputaux3 = $('select[name="aux3_input"]');
+        show.inputaux3.change(function () {
             HidConfig.aux3InputUpdate = parseInt($(this).val(), 10);
         });
 
-        const inputaux4 = $('select[name="aux4_input"]');
-        inputaux4.change(function () {
+        show.inputaux4 = $('select[name="aux4_input"]');
+        show.inputaux4.change(function () {
             HidConfig.aux4InputUpdate = parseInt($(this).val(), 10);
         });
 
-        const inputRollreverse=$('input[id="roll_check"]');
-        inputRollreverse.change(function () {
+        show.inputRollreverse=$('input[name="roll_check"]');
+        show.inputRollreverse.change(function () {
             var flag = $(this).is(':checked');
             if(flag)
             {
@@ -139,8 +210,8 @@ show.initialize = function (callback) {
             
         });
 
-        const inputPitchreverse=$('input[id="pitch_check"]');
-        inputPitchreverse.change(function () {
+        show.inputPitchreverse=$('input[name="pitch_check"]');
+        show.inputPitchreverse.change(function () {
             var flag = $(this).is(':checked');
             if(flag)
             {
@@ -152,8 +223,8 @@ show.initialize = function (callback) {
             }
         });
 
-        const inputYawreverse=$('input[id="yaw_check"]');
-        inputYawreverse.change(function () {
+        show.inputYawreverse=$('input[name="yaw_check"]');
+        show.inputYawreverse.change(function () {
             var flag = $(this).is(':checked');
             if(flag)
             {
@@ -165,8 +236,8 @@ show.initialize = function (callback) {
             }
         });
 
-        const inputThroreverse=$('input[id="throttle_check"]');
-        inputThroreverse.change(function () {
+        show.inputThroreverse=$('input[name="throttle_check"]');
+        show.inputThroreverse.change(function () {
             var flag = $(this).is(':checked');
             if(flag)
             {
@@ -178,108 +249,104 @@ show.initialize = function (callback) {
             }
         });
 
-        const inputRollweight=$('input[name="roll_weight"]');
-        inputRollweight.change(function () {
+        show.inputRollweight=$('input[name="roll_weight"]');
+        show.inputRollweight.change(function () {
             HidConfig.rollWeight = parseInt($(this).val(), 10);
         });
 
-        const inputPitchweight=$('input[name="pitch_weight"]');
-        inputPitchweight.change(function () {
+        show.inputPitchweight=$('input[name="pitch_weight"]');
+        show.inputPitchweight.change(function () {
             HidConfig.pitchWeight = parseInt($(this).val(), 10);
         });
 
-        const inputYawweight=$('input[name="yaw_weight"]');
-        inputYawweight.change(function () {
+        show.inputYawweight=$('input[name="yaw_weight"]');
+        show.inputYawweight.change(function () {
             HidConfig.yawWeight = parseInt($(this).val(), 10);
         });
 
-        const inputThroweight=$('input[name="throttle_weight"]');
-        inputThroweight.change(function () {
+        show.inputThroweight=$('input[name="throttle_weight"]');
+        show.inputThroweight.change(function () {
             HidConfig.throWeight = parseInt($(this).val(), 10);
         });
 
-        const inputRolloffset=$('input[name="roll_offset"]');
-        inputRolloffset.change(function () {
+        show.inputRolloffset=$('input[name="roll_offset"]');
+        show.inputRolloffset.change(function () {
             HidConfig.rollOffset = parseInt($(this).val(), 10);
         });
 
-        const inputPitchoffset=$('input[name="pitch_offset"]');
-        inputPitchoffset.change(function () {
+        show.inputPitchoffset=$('input[name="pitch_offset"]');
+        show.inputPitchoffset.change(function () {
             HidConfig.pitchOffset = parseInt($(this).val(), 10);
         });
 
-        const inputYawoffset=$('input[name="yaw_offset"]');
-        inputYawoffset.change(function () {
+        show.inputYawoffset=$('input[name="yaw_offset"]');
+        show.inputYawoffset.change(function () {
             HidConfig.yawOffset = parseInt($(this).val(), 10);
         });
 
-        const inputThrooffset=$('input[name="throttle_offset"]');
-        inputThrooffset.change(function () {
+        show.inputThrooffset=$('input[name="throttle_offset"]');
+        show.inputThrooffset.change(function () {
             HidConfig.throOffset = parseInt($(this).val(), 10);
         });
 
-        const inputmode = $('select[name="radiomode"]');
-        inputmode.change(function () {
+        show.inputmode = $('select[name="radiomode"]');
+        show.inputmode.change(function () {
             HidConfig.mode = parseInt($(this).val(), 10);
         });
 
-        const inputtrainerport = $('select[name="trainer_port"]');
-        inputtrainerport.change(function () {
+        show.inputtrainerport = $('select[name="trainer_port"]');
+        show.inputtrainerport.change(function () {
             HidConfig.trainerPort = parseInt($(this).val(), 10);
         });
 
-        const inputinternalradiosystem = $('select[name="internalradiosystem"]');
-        inputinternalradiosystem.change(function () {
+        show.inputinternalradiosystem = $('select[name="internalradiosystem"]');
+        show.inputinternalradiosystem.change(function () {
             HidConfig.irSystemProtocol = parseInt($(this).val(), 10);
         });
 
-        const inputinpower = $('select[name="inpower"]');
-        inputinpower.change(function () {
+        show.inputinpower = $('select[name="inpower"]');
+        show.inputinpower.change(function () {
             HidConfig.irSystemPower = parseInt($(this).val(), 10);
         });
 
-        const inputinpktRate = $('select[name="inpktRate"]');
-        inputinpktRate.change(function () {
+        show.inputinpktRate = $('select[name="inpktRate"]');
+        show.inputinpktRate.change(function () {
             HidConfig.irPktRate = parseInt($(this).val(), 10);
         });
 
-        const inputinTLMRadio = $('select[name="inTLMRadio"]');
-        inputinTLMRadio.change(function () {
+        show.inputinTLMRadio = $('select[name="inTLMRadio"]');
+        show.inputinTLMRadio.change(function () {
             HidConfig.irTLMRadio = parseInt($(this).val(), 10);
         });
 
-        const inputexternalradiosystem = $('select[name="externalradiosystem"]');
-        inputexternalradiosystem.change(function () {
+        show.inputexternalradiosystem = $('select[name="externalradiosystem"]');
+        show.inputexternalradiosystem.change(function () {
             HidConfig.erSystemProtocol = parseInt($(this).val(), 10);
         });
 
-        const inputexpower = $('select[name="expower"]');
-        inputexpower.change(function () {
+        show.inputexpower = $('select[name="expower"]');
+        show.inputexpower.change(function () {
             HidConfig.erSystemPower = parseInt($(this).val(), 10);
         });
 
-        const inputexELRSpower = $('select[name="exELRSpower"]');
-        inputexELRSpower.change(function () {
+        show.inputexELRSpower = $('select[name="exELRSpower"]');
+        show.inputexELRSpower.change(function () {
             HidConfig.exELRSSystemPower = parseInt($(this).val(), 10);
         });
 
-        const inputexELRSpktRate = $('select[name="exELRSpktRate"]');
-        inputexELRSpktRate.change(function () {
+        show.inputexELRSpktRate = $('select[name="exELRSpktRate"]');
+        show.inputexELRSpktRate.change(function () {
             HidConfig.exELRSPktRate = parseInt($(this).val(), 10);
         });
 
-        const inputexELRSTLMRadio = $('select[name="exELRSTLMRadio"]');
-        inputexELRSTLMRadio.change(function () {
+        show.inputexELRSTLMRadio = $('select[name="exELRSTLMRadio"]');
+        show.inputexELRSTLMRadio.change(function () {
             HidConfig.exELRSTLMRadio = parseInt($(this).val(), 10);
         });
 
-        function content_ready() {
-            GUI.tab_switch_in_progress = false;
-        }
-        
+  
         $('a.refresh').click(function () {
-            //inputRoll.val(0);
-            var bufName = new Buffer(64);
+            var bufName = new Buffer.alloc(64);
 
             bufName[0] = 0x0;
             bufName[1] = 0x11;
