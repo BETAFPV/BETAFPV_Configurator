@@ -291,7 +291,7 @@
                     <tr>
                         <td>
                             <div class="input-helpicon-flex">
-                                <select name="internalradiosystem" style="width:100%;">
+                                <select id="internalradiosystem" style="width:100%;" disabled="disabled">
                                     <option value="0">OFF</option>
                                     <option value="1" selected="selected" >2.4GHz</option>
                                 </select>
@@ -299,7 +299,7 @@
                         </td>
                         <td>
                             <div class="input-helpicon-flex">
-                                <select name="inpower" style="width:100%;">
+                                <select id="inpower" style="width:100%;" disabled="disabled">
                                     <option value="0" selected="selected">25mw</option>
                                     <option value="1">50mw</option>
                                     <option value="2">100mw</option>
@@ -308,7 +308,7 @@
                         </td>
                         <td>
                             <div class="input-helpicon-flex">
-                                <select name="inpktRate" style="width:100%;">
+                                <select id="inpktRate" style="width:100%;" disabled="disabled">
                                     <option value="0" selected="selected">500Hz</option>
                                     <option value="1">250Hz</option>
                                     <option value="2">150Hz</option>
@@ -318,7 +318,7 @@
                         </td>
                         <td>
                             <div class="input-helpicon-flex">
-                                <select name="inTLMRadio" style="width:100%;">
+                                <select id="inTLMRadio" style="width:100%;" disabled="disabled">
                                     <option value="0" selected="selected">OFF</option>
                                     <option value="1">1:128</option>
                                     <option value="2">1:64</option>
@@ -343,7 +343,7 @@
                     <tr>
                         <td>
                             <div class="input-helpicon-flex">
-                                <select name="externalradiosystem" style="width:100%;">
+                                <select id="externalradiosystem" style="width:100%;" disabled="disabled">
                                     <option value="0" selected="selected">OFF</option>
                                     <option value="1">CRSF</option>
                                 </select>
@@ -351,10 +351,9 @@
                         </td>
                         <td>
                             <div class="input-helpicon-flex">
-                                <select name="expower" style="width:100%;">
-                                    <option value="0" selected="selected">25mw</option>
-                                    <option value="1">50mw</option>
-                                    <option value="2">100mw</option>
+                                <select id="expower" style="width:100%;" disabled="disabled">
+                                    <option value="0" selected="selected">OFF</option>
+                                    <option value="1">ON</option>
                                 </select>
                             </div>
                         </td>
@@ -372,7 +371,7 @@
                     <tr>
                         <td>
                             <div class="input-helpicon-flex">
-                                <select name="exELRSpower" style="width:100%;">
+                                <select id="exELRSpower" style="width:100%;" disabled="disabled">
                                     <option value="0" selected="selected">25mw</option>
                                     <option value="1">50mw</option>
                                     <option value="2">100mw</option>
@@ -381,7 +380,7 @@
                         </td>
                         <td>
                             <div class="input-helpicon-flex">
-                                <select name="exELRSpktRate" style="width:100%;">
+                                <select id="exELRSpktRate" style="width:100%;" disabled="disabled">
                                     <option value="0" selected="selected">500Hz</option>
                                     <option value="1">250Hz</option>
                                     <option value="2">150Hz</option>
@@ -391,7 +390,7 @@
                         </td>
                         <td>
                             <div class="input-helpicon-flex">
-                                <select name="exELRSTLMRadio" style="width:100%;">
+                                <select id="exELRSTLMRadio" style="width:100%;" disabled="disabled">
                                     <option value="0" selected="selected">OFF</option>
                                     <option value="1">1:128</option>
                                     <option value="2">1:64</option>
@@ -410,7 +409,7 @@
     </div>
     <div class="content_toolbar">
         <div class="btn bind_btn">
-            <a class="bind " href="#">Bind</a>
+            <a class="bind disabled" href="#">Bind</a>
         </div>
         <div class="btn wifiUpdate_btn">
             <a class="wifiUpdate disabled" href="#">WIFI Update</a>

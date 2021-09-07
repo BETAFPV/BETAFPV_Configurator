@@ -76,10 +76,10 @@ app.on('ready',()=>{
             enableRemoteModule: true,
           },
     });
-    mainWindow.loadURL(`file://${__dirname}/liteRadio.html`);
+    mainWindow.loadURL(`file://${__dirname}/index.html`);
 
-    // const mainMenu = Menu.buildFromTemplate(menuTemplate);
-    // Menu.setApplicationMenu(mainMenu);
+    const mainMenu = Menu.buildFromTemplate(menuTemplate);
+    Menu.setApplicationMenu(mainMenu);
     
     mainWindow.on('closed',()=>{
         mainWindow = null;

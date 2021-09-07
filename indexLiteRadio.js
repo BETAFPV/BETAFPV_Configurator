@@ -196,7 +196,7 @@ window.onload=function(){
                         }
                         else if(data[2]==1)
                         {
-                            HidConfig.irSystemProtocol = 0;
+                            HidConfig.erSystemProtocol = 1;
                         }
                         else if(data[2]==2)
                         {
