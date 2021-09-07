@@ -1,7 +1,9 @@
 
 var i18next = require('i18next')
 var i18nextXHRBackend = require('i18next-xhr-backend')
-var i18n = {};
+var i18n = {
+    Storage_language:0,
+};
 /*
  * Wrapper around the i18n system
  */
@@ -202,11 +204,15 @@ function getStoredUserLocale(cb) {
             userLanguage = getValidLocale(userLanguage);
 
             cb(userLanguage);
+            i18n.Storage_language = userLanguage;
         });
+        
     } else {
         const userLanguage = getValidLocale('DEFAULT');
         cb(userLanguage);
+        i18n.Storage_language = userLanguage;
     }
+    
 }
 
 function getValidLocale(userLocale) {
