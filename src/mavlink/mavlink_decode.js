@@ -10,6 +10,8 @@ var cmdAck = new commandAck();
 
 var mav_cmd = {
     MAV_CMD_RESTORE_FACTORY_SETTING:1,
+    MAV_CMD_READ_PID_FROM_FC:2,
+    MAV_CMD_READ_RATE_FROM_FC:3,
     MAV_CMD_PREFLIGHT_CALIBRATION:241,
 };
 
@@ -33,7 +35,6 @@ mavlinkParser.on('FIRMWARE_INFO', function(msg) {
     setup.year = msg.year;
     setup.month = msg.month;
     setup.day = msg.day;
-    console.log(msg);
 });
 
 
@@ -89,9 +90,45 @@ mavlinkParser.on('IMU', function(msg) {
 
 mavlinkParser.on('SYS_STATUS', function(msg) {
     setup.battery_voltage = msg.voltageBattery;
-    console.log("battery_voltage:"+setup.battery_voltage);
 });
 
+mavlinkParser.on('PID', function(msg) { 
+    document.getElementById('roll_p').value = msg.PID_ROLL_P.toFixed(2);
+    document.getElementById('roll_i').value = msg.PID_ROLL_I.toFixed(2);
+    document.getElementById('roll_d').value = msg.PID_ROLL_D.toFixed(2);
+    document.getElementById('roll_imax').value = msg.PID_ROLL_I_MAX;
+    document.getElementById('roll_cutfre').value = msg.PID_ROLL_D_CUTFREQ;
+
+    document.getElementById('pitch_p').value = msg.PID_PITCH_P.toFixed(2);
+    document.getElementById('pitch_i').value = msg.PID_PITCH_I.toFixed(2);
+    document.getElementById('pitch_d').value = msg.PID_PITCH_D.toFixed(2);
+    document.getElementById('pitch_imax').value = msg.PID_PITCH_I_MAX;
+    document.getElementById('pitch_cutfre').value = msg.PID_PITCH_D_CUTFREQ;
+
+    document.getElementById('yaw_p').value = msg.PID_YAW_P.toFixed(2);
+    document.getElementById('yaw_i').value = msg.PID_YAW_I.toFixed(2);
+    document.getElementById('yaw_d').value = msg.PID_YAW_D.toFixed(2);
+    document.getElementById('yaw_imax').value = msg.PID_YAW_I_MAX;
+    document.getElementById('yaw_cutfre').value = msg.PID_YAW_D_CUTFREQ;
+});
+
+mavlinkParser.on('RATE', function(msg) {
+
+    document.getElementById('rc_rate_roll').value = msg.rcRateRoll.toFixed(2);
+    document.getElementById('roll_rate').value = msg.rateRoll.toFixed(2);
+    document.getElementById('rc_roll_expo').value = msg.rcExpoRoll.toFixed(2);
+
+    document.getElementById('rc_rate_pitch').value = msg.rcRatePitch.toFixed(2);
+    document.getElementById('pitch_rate').value = msg.ratePitch.toFixed(2);
+    document.getElementById('rc_pitch_expo').value = msg.rcExpoPitch.toFixed(2);
+
+    document.getElementById('rc_rate_yaw').value = msg.rcRateYaw.toFixed(2);
+    document.getElementById('yaw_rate').value = msg.rateYaw.toFixed(2);
+    document.getElementById('rc_yaw_expo').value = msg.rcExpoYaw.toFixed(2);
+
+    document.getElementById('throttle_mid').value = msg.throttleMid.toFixed(2);
+    document.getElementById('throttle_expo').value = msg.throttleExpo.toFixed(2);
+});
 
 mavlinkParser.on('COMMAND_ACK', function(msg) {
     // the parsed message is here

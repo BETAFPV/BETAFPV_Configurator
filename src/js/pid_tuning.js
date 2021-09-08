@@ -40,12 +40,19 @@ pid_tuning.initialize = function (callback) {
 
     $('.tab-pid_tuning .tab-container .rates').on('click', () => activateSubtab('rates'));
 
-  
+    $('a.refresh').click(function () {   
+        if(self.activeSubtab == 'pid'){
+            readPidFromFC();
+            
+        }else if(self.activeSubtab == 'rates'){
+            readRateFromFC();
+        }else {
+
+        }
+    });
 
     //update == save
-    $('a.update').click(function () {
-
-            
+    $('a.update').click(function () {   
             if(self.activeSubtab == 'pid'){
                 mavlink_send_pid();
 
@@ -54,8 +61,6 @@ pid_tuning.initialize = function (callback) {
             }else {
 
             }
-
-        
     });
     function checkInput(element) {
         let value = parseFloat(element.val());
@@ -432,7 +437,19 @@ pid_tuning.initialize = function (callback) {
         mavlinkSend(buffer);
     }
 
-    
+    function readPidFromFC(){
+        let msg = new mavlink10.messages.command(1,mav_cmd.MAV_CMD_READ_PID_FROM_FC,0,0);
+        let buffer = msg.pack(msg);
+        console.log(buffer);
+        mavlinkSend(buffer);
+    }
+
+    function readRateFromFC(){
+        let msg = new mavlink10.messages.command(1,mav_cmd.MAV_CMD_READ_RATE_FROM_FC,0,0);
+        let buffer = msg.pack(msg);
+        console.log(buffer);
+        mavlinkSend(buffer);
+    }
 
 
     
