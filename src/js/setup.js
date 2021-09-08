@@ -8,7 +8,8 @@ const setup = {
     year:          0,
     month:         0,
     day:           0,
-    battery_voltage:0
+    battery_voltage:0,
+    factory_reset_ack:false
 };
 setup.initialize = function (callback) {
     const self = this;
@@ -32,6 +33,21 @@ setup.initialize = function (callback) {
             console.log(buffer);
             mavlinkSend(buffer);
         }
+    });
+
+    $('a.resetSettings').click(function () {
+        let msg = new mavlink10.messages.command(1,mav_cmd.MAV_CMD_RESTORE_FACTORY_SETTING,0,0);
+        let buffer = msg.pack(msg);
+        console.log(buffer);
+        mavlinkSend(buffer);
+
+        setTimeout(function listPorts() {
+            if(setup.factory_reset_ack==true){
+                alert("factory reset OK,please repower on");
+            }else{
+                alert("factory reset failed,please check the connetion");
+            }
+          }, 1000);
     });
 
 

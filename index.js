@@ -44,9 +44,8 @@ setTimeout(function listPorts() {
     setTimeout(listPorts, 2000);
   }, 2000);
 
-setTimeout(function listPorts() {
+setTimeout(function loadLanguage() {
     i18next.changeLanguage(i18n.Storage_language);
-    
 }, 200);
 
   mavlinkSend = function(writedata){

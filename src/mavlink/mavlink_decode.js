@@ -1,13 +1,15 @@
 const { mavlink10: mavlink, MAVLink10Processor: MAVLink } = require('./libraries/mavlink.js');
 const mavlinkParser = new MAVLink(null, 0, 0);
-const commandAck = function(){
 
+
+const commandAck = function(){
     this.command;
     this.result;
 };
 var cmdAck = new commandAck();
 
 var mav_cmd = {
+    MAV_CMD_RESTORE_FACTORY_SETTING:1,
     MAV_CMD_PREFLIGHT_CALIBRATION:241,
 };
 
@@ -95,6 +97,37 @@ mavlinkParser.on('COMMAND_ACK', function(msg) {
     // the parsed message is here
     cmdAck.command = msg.command;
     cmdAck.result = msg.result;
+    switch(cmdAck.command){
+        case mav_cmd.MAV_CMD_PREFLIGHT_CALIBRATION:
+            if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_LEVEL_CALI_START){
+                $('#accel_calib_running').show();
+                $('a.calibrateAccel').hide();
+                
+            }else if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_LEVEL_CALI_OK){
+                $('#accel_calib_running').hide();
+                $('a.calibrateAccel').show();
+                alert("Calibrate Acclerometer ok!");
+            }else if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_ERR_FAIL){
+                $('#accel_calib_running').hide();
+                $('a.calibrateAccel').show();
+                alert("Calibrate Acclerometer failed!");
+            }
+            break;
+        case mav_cmd.MAV_CMD_RESTORE_FACTORY_SETTING:
+            setup.factory_reset_ack = (cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_OK)? true: false;
+            break;
+        case mavlink10.MAVLINK_MSG_ID_RATE:
+            pid_tuning.rate_saving_ack = (cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_OK)? true: false;
+            break;
+        case mavlink10.MAVLINK_MSG_ID_PID:
+            pid_tuning.pid_saving_ack = (cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_OK)? true: false;
+            break;
+        default:
+            console.log("unknow command ack");
+            break;
+    }
+
+
     if(cmdAck.command == mav_cmd.MAV_CMD_PREFLIGHT_CALIBRATION){
         if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_LEVEL_CALI_START){
             $('#accel_calib_running').show();
