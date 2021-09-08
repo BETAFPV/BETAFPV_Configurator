@@ -385,7 +385,8 @@ progress[value]::-webkit-progress-bar {
 }
 
 .tab-landing .logowrapper img {
-    content:url(../images/cf_logo_black.svg);
+    height: 60px;
+    content:url(../images/bt_logo.png);
 }
 
 .tab-landing .content_mid .text3 .wrap2 {
