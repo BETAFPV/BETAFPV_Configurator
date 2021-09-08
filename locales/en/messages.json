@@ -312,6 +312,9 @@
     "tabOptions": {
         "message": "Options"
     },
+    "tabCalibration":{
+        "message": "Calibrate"
+    },
 
     "tabSetup": {
         "message": "Setup"
@@ -6152,5 +6155,68 @@
     },
     "cordovaExitAppMessage": {
         "message": "Do you really want to close the configurator?"
+    },
+    "RadioSetupChannel": {
+        "message": "Channel"
+    },
+    "RadioSetupInput": {
+        "message": "Input"
+    },
+    "RadioSetupWeight": {
+        "message": "Weight"
+    },
+    "RadioSetupOffset": {
+        "message": "Offset"
+    },
+    "RadioSetupReverse": {
+        "message": "Reverse"
+    },
+    "RadioSetupMode": {
+        "message": "Mode"
+    },
+    "RadioSetupRefreshRate": {
+        "message": "Refresh Rate"
+    },
+    "RadioSetupTrainerPort": {
+        "message": "Trainer Port"
+    },
+    "RadioSetupIRSystemProtocol": {
+        "message": "Internal Radio System"
+    },
+    "RadioSetupIRSystemPower": {
+        "message": "Power"
+    },
+    "RadioSetupIRPktRate": {
+        "message": "Pkt Rate"
+    },
+    "RadioSetupIRTLMRadio": {
+        "message": "TLM Radio"
+    },
+    "RadioSetupERSystemProtocol": {
+        "message": "External Radio Module"
+    },
+    "RadioSetupERSystemPower": {
+        "message": "Power"
+    },
+    "RadioSetupExELRSSystemPower": {
+        "message": "External ELRS System Power"
+    },
+    "RadioSetupexELRSPktRate": {
+        "message": "Pkt Rate"
+    },
+    "RadioSetupexELRSTLMRadio": {
+        "message": "TLM Radio"
+    },
+    "RadioSetupBind": {
+        "message": "Bind"
+    },
+    "RadioSetupWIFIUpdate": {
+        "message": "WIFI Update"
+    },
+    "RadioSetupRefresh": {
+        "message": "Refresh"
+    },
+    "RadioSetupSave": {
+        "message": "Save"
     }
 }

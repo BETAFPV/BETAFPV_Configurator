@@ -87,7 +87,9 @@ setTimeout(function listPorts() {
     setTimeout(listPorts, 2000);
   }, 2000);
 
-
+setTimeout(function loadLanguage() {
+    i18next.changeLanguage(i18n.Storage_language);
+}, 200);
 window.onload=function(){
 
     $('div.open_firmware_flasher a.flash').click(function () {
@@ -135,21 +137,21 @@ window.onload=function(){
                                     HidConfig.rollOffset = data[5];
                                     break;
 
-                                case 3:
+                                case 1:
                                     HidConfig.pitchInputUpdate = data[2];
                                     HidConfig.pitchReverse = data[3];
                                     HidConfig.pitchWeight = data[4];
                                     HidConfig.pitchOffset = data[5];
                                     break;
 
-                                case 1:
+                                case 2:
                                     HidConfig.yawInputUpdate = data[2];
                                     HidConfig.yawReverse = data[3];
                                     HidConfig.yawWeight = data[4];
                                     HidConfig.yawOffset = data[5];
                                     break;
 
-                                case 2:
+                                case 3:
                                     HidConfig.throInputUpdate = data[2];
                                     HidConfig.throReverse = data[3];
                                     HidConfig.throWeight = data[4];
@@ -363,6 +365,6 @@ window.onload=function(){
             }
         }
     });
-    
+    i18n.init();
     $('#tabs ul.mode-disconnected li a:first').click();
 }

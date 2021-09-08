@@ -95,7 +95,7 @@ show.refreshUI = function()
 show.initialize = function (callback) {
 
     $('#content').load("./src/html/show.html", function () {
-
+        i18n.localizePage();
         const bar_names = [
             "Roll [A]",
             "Pitch [E]",
@@ -506,7 +506,7 @@ show.initialize = function (callback) {
 
             bufName[0] = 0x0;
             bufName[1] = 0x01;
-            bufName[2] = 0x03;
+            bufName[2] = 0x01;
             bufName[3] = HidConfig.pitchInputUpdate;
             bufName[4] = HidConfig.pitchReverse;
             bufName[5] = HidConfig.pitchWeight
@@ -515,7 +515,7 @@ show.initialize = function (callback) {
 
             bufName[0] = 0x0;
             bufName[1] = 0x01;
-            bufName[2] = 0x01;
+            bufName[2] = 0x02;
             bufName[3] = HidConfig.yawInputUpdate;
             bufName[4] = HidConfig.yawReverse;
             bufName[5] = HidConfig.yawWeight
@@ -524,7 +524,7 @@ show.initialize = function (callback) {
 
             bufName[0] = 0x0;
             bufName[1] = 0x01;
-            bufName[2] = 0x02;
+            bufName[2] = 0x03;
             bufName[3] = HidConfig.throInputUpdate;
             bufName[4] = HidConfig.throReverse;
             bufName[5] = HidConfig.throWeight

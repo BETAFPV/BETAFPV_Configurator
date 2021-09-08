@@ -8,6 +8,7 @@
         <link type="text/css" rel="stylesheet" href="./src/css/firmware_flasher_LiteRadio.css"/>
         <link type="text/css" rel="stylesheet" href="./src/css/show.css"/>
 
+        <script src="./src/js/ConfigStorage.js"></script>
         <script src="./src/js/localization.js"></script>
         <script src="./node_modules/jquery/dist/jquery.js"></script>
         <script src="./node_modules/jquery/dist/jquery.min.js"></script>
@@ -66,7 +67,7 @@
                         <div class="connect_b">
                             <a class="connect disabled" href="#"></a>
                         </div>
-                        <div class="connect_state">Connect Serial</div>
+                        <div class="connect_state" i18n="connect">Connect Serial</div>
                     </div>
                     <div class="open_firmware_flasher" id="flashbutton">
                         <div class="firmware_b">
@@ -81,13 +82,13 @@
                 <div class="tab_container">
                     <div id="tabs">
                         <ul class="mode-disconnected">
-                            <li class="tab_landing" id="tab_landing"><a href="#"class="tabicon ic_welcome">Welcom</a>
+                            <li class="tab_landing" id="tab_landing"><a href="#"class="tabicon ic_welcome" i18n="tabLanding">Welcom</a>
                             </li>
-                            <li class="tab_firmware_flasher_LiteRadio" id="tabFirmware"><a href="#" class="tabicon ic_flasher">Firmware Flasher</a></li>
+                            <li class="tab_firmware_flasher_LiteRadio" id="tabFirmware"><a href="#" class="tabicon ic_flasher" i18n="tabFirmwareFlasher">Firmware Flasher</a></li>
                         </ul>
                         <ul class="mode-connected">
-                            <li class="tab_show"><a href="#"  class="tabicon ic_setup">Setup</a></li>
-                            <li class="tab_calibrate"><a href="#"  class="tabicon ic_config">Calibration</a></li>
+                            <li class="tab_show"><a href="#"  class="tabicon ic_setup" i18n="tabSetup">Setup</a></li>
+                            <li class="tab_calibrate"><a href="#"  class="tabicon ic_config" i18n="tabCalibration">Calibration</a></li>
                         </ul>
                     </div>  
                 </div>

@@ -202,7 +202,6 @@ function getStoredUserLocale(cb) {
             i18n.selectedLanguage = userLanguage;
 
             userLanguage = getValidLocale(userLanguage);
-
             cb(userLanguage);
             i18n.Storage_language = userLanguage;
         });

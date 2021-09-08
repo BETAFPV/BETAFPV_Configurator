@@ -402,9 +402,9 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
     });
 
     $('#content').load("./src/html/firmware_flasher_LiteRadio.html", function () {
-
+        i18n.localizePage();
         $('a.load_file').click(function () {
-  
+            
             const { dialog } = require('electron').remote;
             dialog.showOpenDialog({
                 title: "openFile",
