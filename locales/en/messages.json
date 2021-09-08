@@ -675,23 +675,23 @@
     },
 
     "defaultWelcomeIntro": {
-        "message": "Welcome to <strong>Betaflight - Configurator</strong>, a utility designed to simplify updating, configuring and tuning of your flight controller."
+        "message": "Welcome to <strong>BETAFPV - Configurator</strong>, a utility designed to simplify updating, configuring and tuning of your flight controller or radio transmitter."
     },
 
     "defaultWelcomeHead": {
-        "message": "Hardware"
+        "message": "Flight Controller"
     },
     "defaultWelcomeText": {
-        "message": "The application supports all hardware that can run Betaflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/betaflight/blackbox-log-viewer/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Betaflight Blackbox Log Viewer</a><br /><br /><a href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Betaflight TX Lua Scripts</a><br /><br />The firmware source code can be downloaded from <a href=\"https://github.com/betaflight/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />For legacy hardware using a CP210x USB to serial chip:<br />The latest <b>CP210x Drivers</b> can be downloaded from <a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />The latest <b>Zadig</b> for Windows USB driver installation can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />"
+        "message": "The application supports flight controller that can run LiteSilver firmeware. Check flash tab for full list of hardware.<br /><br /><a href=\"https://betafpv.com/collections/brushed-flight-controller/products/betafpv-lite-brushed-flight-controller\" target=\"_blank\" rel=\"noopener noreferrer\">Lite Brushed FC V3</a><br /><a href=\"https://betafpv.com/products/cetus-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus FPV Kit</a><br /><a href=\"https://betafpv.com/products/cetus-pro-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus Pro FPV Kit</a>"
     },
     "defaultContributingHead": {
-        "message": "Contributing"
+        "message": "Radio Transmitter"
     },
     "defaultContributingText": {
-        "message": "If you would like to help make Betaflight even better you can help in many ways, including:<br /><ul><li>using your knowledge of Betaflight to create or update content on <a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">our Wiki</a>, or answering other users' questions in online forums;</li><li><a href=\"https://github.com/betaflight/betaflight/blob/master/docs/development/Development.md\" target=\"_blank\" rel=\"noopener noreferrer\">contributing code</a> to the firmware and Configurator - new features, fixes, improvements;</li><li>testing <a href=\"https://github.com/Betaflight/betaflight/pulls\" target=\"_blank\" rel=\"noopener noreferrer\">new features and fixes</a> and providing feedback;</li><li>helping other users solve the problems they report in <a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">our issue tracker</a>, and participating in discussions on feature requests;</li><li><a href=\"https://github.com/betaflight/betaflight/tree/master/README.md#Translators\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Betaflight Configurator into a new language, or helping to maintain the existing translations.</li></ul>"
+        "message": "Support the radio transmitters come with BETAFPV LiteRadio Firmware 2.0 Version. <br /><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE (2021 Version)</a><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3</a><br /><br />The LiteRadio 2 SE original version is not supported. LiteRadio 2 and LiteRadio 3 Pro is powered by OpenTX system, please use the OpenTX Companion."
     },
     "defaultFacebookText": {
-        "message": "We also have a <a href=\"https://www.facebook.com/groups/betaflightgroup/\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a>.<br />Join us to get a place to talk about Betaflight, ask configuration questions, or just hang out with fellow pilots."
+        "message": "We also have a <a href=\"https://www.facebook.com/groups/betafpv/\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a>.<br />Join us to get a place to talk about FPV items, ask configuration questions, or just hang out with fellow pilots."
     },
     "defaultChangelogHead": {
         "message": "Configurator - Changelog"
