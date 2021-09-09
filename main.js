@@ -76,8 +76,8 @@ app.on('ready',()=>{
             enableRemoteModule: true,
           },
     });
-    mainWindow.loadURL(`file://${__dirname}/index.html`);
-
+    // mainWindow.loadURL(`file://${__dirname}/index.html`);
+    mainWindow.loadURL(`file://${__dirname}/liteRadio.html`);
 
     // const mainMenu = Menu.buildFromTemplate(menuTemplate);
     // Menu.setApplicationMenu(mainMenu);

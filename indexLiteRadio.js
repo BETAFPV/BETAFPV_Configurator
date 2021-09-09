@@ -1,5 +1,13 @@
 const serialport = require('serialport')
 var HID=require('node-hid')
+var cmd_type = {
+    CHANNELS_INFO_ID:0x01,
+    Lite_CONFIGER_INFO_ID:0x05,
+    INTERNAL_CONFIGER_INFO_ID:0x06,
+    EXTERNAL_CONFIGER_INFO_ID:0x07,
+    REQUEST_INFO_ID:0x11,
+    REQUESET_SAVE_ID:0x12
+};
 
 var VENDOR_ID = 1155;
 var PRODUCT_ID = 22352;
@@ -7,34 +15,42 @@ let channels = new Array(8);
 let hidDevice = null;
 
 HidConfig = {
-    channel_data :[],
+    channel_data :[],//经过offset scale reverse运算后的实际数据
+    channel_data_raw :[],//经过offset scale reverse运算之前的原始数据
 
-    rollInputUpdate:0,
-    pitchInputUpdate:1,
-    yawInputUpdate:2,
-    throInputUpdate:3,
+    //通道数据来源
+    ch1_input_source:0,
+    ch2_input_source:1,
+    ch3_input_source:2,
+    ch4_input_source:3,
+    ch5_input_source:4,
+    ch6_input_source:5,
+    ch7_input_source:6,
+    ch8_input_source:7,
 
-    aux1InputUpdate:4,
-    aux2InputUpdate:5,
-    aux3InputUpdate:6,
-    aux4InputUpdate:7,
 
-    rollReverse:0,
-    pitchReverse:0,
-    yawReverse:0,
-    throReverse:0,
+     //通道缩放比例（0-200对应-100-100）
+     ch1_scale:100,
+     ch2_scale:100,
+     ch3_scale:100,
+     ch4_scale:100,
+ 
+     //通道偏移补偿（0-200对应-100-100）
+     ch1_offset:100,
+     ch2_offset:100,
+     ch3_offset:100,
+     ch4_offset:100,
+ 
+     //通道值反转
+     ch1_reverse:0,
+     ch2_reverse:0,
+     ch3_reverse:0,
+     ch4_reverse:0,
 
-    rollOffset:100,
-    pitchOffset:100,
-    yawOffset:100,
-    throOffset:100,
+     //美国手、日本手模式
+     rocker_mode:0,
 
-    rollWeight:100,
-    pitchWeight:100,
-    yawWeight:100,
-    throWeight:100,
 
-    mode:1,
     trainerPort:0,
 
     irSystemProtocol:0,
@@ -95,7 +111,6 @@ window.onload=function(){
     $('div.open_firmware_flasher a.flash').click(function () {
         if (GUI.connect_hid != true) {
             console.log('connect hid');
-            
 
             hidDevice = new HID.HID(VENDOR_ID,PRODUCT_ID);
 
@@ -115,7 +130,7 @@ window.onload=function(){
 
                 hidDevice.on('data', function(data) {
                
-                    if(data[0] == 0x01)
+                    if(data[0] == cmd_type.CHANNELS_INFO_ID)//命令类型为通道配置信息
                     {
                         var checkSum=0;
                         var checkSum2=0;
@@ -128,57 +143,57 @@ window.onload=function(){
     
                         if(checkSum == checkSum2)
                         {
-                            switch(data[1])
+                            switch(data[1])//判断是哪个通道
                             {
                                 case 0:
-                                    HidConfig.rollInputUpdate = data[2];
-                                    HidConfig.rollReverse = data[3];
-                                    HidConfig.rollWeight = data[4];
-                                    HidConfig.rollOffset = data[5];
+                                    HidConfig.ch1_input_source = data[2];
+                                    HidConfig.ch1_reverse = data[3];
+                                    HidConfig.ch1_scale = data[4];
+                                    HidConfig.ch1_offset = data[5];
                                     break;
 
                                 case 1:
-                                    HidConfig.pitchInputUpdate = data[2];
-                                    HidConfig.pitchReverse = data[3];
-                                    HidConfig.pitchWeight = data[4];
-                                    HidConfig.pitchOffset = data[5];
+                                    HidConfig.ch2_input_source = data[2];
+                                    HidConfig.ch2_reverse = data[3];
+                                    HidConfig.ch2_scale = data[4];
+                                    HidConfig.ch2_offset = data[5];
                                     break;
 
                                 case 2:
-                                    HidConfig.yawInputUpdate = data[2];
-                                    HidConfig.yawReverse = data[3];
-                                    HidConfig.yawWeight = data[4];
-                                    HidConfig.yawOffset = data[5];
+                                    HidConfig.ch3_input_source = data[2];
+                                    HidConfig.ch3_reverse = data[3];
+                                    HidConfig.ch3_scale = data[4];
+                                    HidConfig.ch3_offset = data[5];
                                     break;
 
                                 case 3:
-                                    HidConfig.throInputUpdate = data[2];
-                                    HidConfig.throReverse = data[3];
-                                    HidConfig.throWeight = data[4];
-                                    HidConfig.throOffset = data[5];
+                                    HidConfig.ch4_input_source = data[2];
+                                    HidConfig.ch4_reverse = data[3];
+                                    HidConfig.ch4_scale = data[4];
+                                    HidConfig.ch4_offset = data[5];
                                     break;
 
                                 case 4:
-                                    HidConfig.aux1InputUpdate = data[2];
+                                    HidConfig.ch5_input_source = data[2];
                                     break;
 
                                 case 5:
-                                    HidConfig.aux2InputUpdate = data[2];
+                                    HidConfig.ch6_input_source = data[2];
                                     break;
 
                                 case 6:
-                                    HidConfig.aux3InputUpdate = data[2];
+                                    HidConfig.ch7_input_source = data[2];
                                     break;
 
                                 case 7:
-                                    HidConfig.aux4InputUpdate = data[2];
+                                    HidConfig.ch8_input_source = data[2];
                                     break;
                             }
                             show.refreshUI();
                         }
                         
                     }
-                    else if(data[0] == 0x05)
+                    else if(data[0] == cmd_type.Lite_CONFIGER_INFO_ID)
                     {
                         var checkSum=0;
                         var checkSum2=0;
@@ -208,14 +223,14 @@ window.onload=function(){
                             {
                                 HidConfig.irSystemProtocol = 0;
                             }
-                            HidConfig.mode = data[3];
+                            HidConfig.rocker_mode = data[3];
 
                             HidConfig.irSystemPower = data[4];
 
                             show.refreshUI();
                         }                 
                     }
-                    else if(data[0] == 0x6)
+                    else if(data[0] == cmd_type.INTERNAL_CONFIGER_INFO_ID)
                     {
                         var checkSum=0;
                         var checkSum2=0;
@@ -237,7 +252,7 @@ window.onload=function(){
                             show.refreshUI();
                         }                
                     }
-                    else if(data[0] == 0x07)
+                    else if(data[0] == cmd_type.EXTERNAL_CONFIGER_INFO_ID)
                     {
                         var checkSum=0;
                         var checkSum2=0;
@@ -261,15 +276,26 @@ window.onload=function(){
                     }
                     else
                     {
-                        HidConfig.channel_data[0]= (data[HidConfig.rollInputUpdate*2+1]<<8 | data[HidConfig.rollInputUpdate*2]);
-                        HidConfig.channel_data[1]= (data[HidConfig.pitchInputUpdate*2+1]<<8 | data[HidConfig.pitchInputUpdate*2]);
-                        HidConfig.channel_data[2]= (data[HidConfig.yawInputUpdate*2+1]<<8 | data[HidConfig.yawInputUpdate*2]);
-                        HidConfig.channel_data[3]= (data[HidConfig.throInputUpdate*2+1]<<8 | data[HidConfig.throInputUpdate*2]);
+                        
+                        HidConfig.channel_data[0] = (data[1]<<8 | data[0]);
+                        HidConfig.channel_data[1] = (data[3]<<8 | data[2]);
+                        HidConfig.channel_data[2] = (data[5]<<8 | data[4]);
+                        HidConfig.channel_data[3] = (data[7]<<8 | data[6]);
+                        HidConfig.channel_data[4] = (data[9]<<8 | data[8]);
+                        HidConfig.channel_data[5] = (data[11]<<8 | data[10]);
+                        HidConfig.channel_data[6] = (data[13]<<8 | data[12]);
+                        HidConfig.channel_data[7] = (data[15]<<8 | data[14]);
 
-                        HidConfig.channel_data[4]= (data[HidConfig.aux1InputUpdate*2+1]<<8 | data[HidConfig.aux1InputUpdate*2]);
-                        HidConfig.channel_data[5]= (data[HidConfig.aux2InputUpdate*2+1]<<8 | data[HidConfig.aux2InputUpdate*2]);
-                        HidConfig.channel_data[6]= (data[HidConfig.aux3InputUpdate*2+1]<<8 | data[HidConfig.aux3InputUpdate*2]);
-                        HidConfig.channel_data[7]= (data[HidConfig.aux4InputUpdate*2+1]<<8 | data[HidConfig.aux4InputUpdate*2]);
+                        
+                        HidConfig.channel_data_raw[0] = HidConfig.channel_data[0];
+                        HidConfig.channel_data_raw[1] = HidConfig.channel_data[0];
+                        HidConfig.channel_data_raw[2] = HidConfig.channel_data[0];
+                        HidConfig.channel_data_raw[3] = HidConfig.channel_data[0];
+                        HidConfig.channel_data_raw[4] = HidConfig.channel_data[0];
+                        HidConfig.channel_data_raw[5] = HidConfig.channel_data[0];
+                        HidConfig.channel_data_raw[6] = HidConfig.channel_data[0];
+                        HidConfig.channel_data_raw[7] = HidConfig.channel_data[0];
+                        
                     }               
                 } );
 

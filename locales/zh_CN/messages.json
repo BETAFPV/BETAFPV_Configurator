@@ -5767,10 +5767,10 @@
         "message": "输入"
     },
     "RadioSetupWeight": {
-        "message": "权重"
+        "message": "比例"
     },
     "RadioSetupOffset": {
-        "message": "补偿"
+        "message": "偏移补偿"
     },
     "RadioSetupReverse": {
         "message": "反向"
@@ -5791,10 +5791,10 @@
         "message": "功率"
     },
     "RadioSetupIRPktRate": {
-        "message": "包发送速率"
+        "message": "数据包率"
     },
     "RadioSetupIRTLMRadio": {
-        "message": "TLM Radio"
+        "message": "遥测率"
     },
     "RadioSetupERSystemProtocol": {
         "message": "外部高频头"
@@ -5806,10 +5806,10 @@
         "message": "外部ELRS系统"
     },
     "RadioSetupexELRSPktRate": {
-        "message": "包发送速率"
+        "message": "数据包率"
     },
     "RadioSetupexELRSTLMRadio": {
-        "message": "TLM Radio"
+        "message": "遥测率"
     },
     "RadioSetupBind": {
         "message": "绑定"

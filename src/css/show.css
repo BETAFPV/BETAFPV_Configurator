@@ -862,7 +862,7 @@
 
 @media only screen and (max-width: 1055px) , only screen and (max-device-width: 1055px) {
     .tab-show .gui_box span {
-        line-height: 17px;
+        line-height: 18px;
     }
     .tab-show .rssi .gui_box {
         float: left;

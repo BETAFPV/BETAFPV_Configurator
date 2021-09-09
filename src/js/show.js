@@ -1,25 +1,39 @@
 const show = {
-    inputRoll:null,
-    inputPitch:null,
-    inputYaw:null,
-    inputThro:null,
-    inputaux1:null,
-    inputaux2:null,
-    inputaux3:null,
-    inputaux4:null,
-    inputRollreverse:null,
-    inputPitchreverse:null,
-    inputYawreverse:null,
-    inputThroreverse:null,
-    inputRollweight:null,
-    inputPitchweight:null,
-    inputYawweight:null,
-    inputThroweight:null,
-    inputRolloffset:null,
-    inputPitchoffset:null,
-    inputYawoffset:null,
-    inputThrooffset:null,
-    inputmode:null,
+    
+    //通道对应数据来源
+    ch1_data_source:null,
+    ch2_data_source:null,
+    ch3_data_source:null,
+    ch4_data_source:null,
+    ch5_data_source:null,
+    ch6_data_source:null,
+    ch7_data_source:null,
+    ch8_data_source:null,
+
+    //通道缩放比例
+    ch1_scale:null,
+    ch2_scale:null,
+    ch3_scale:null,
+    ch4_scale:null,
+
+    //通道偏移补偿
+    ch1_offset:null,
+    ch2_offset:null,
+    ch3_offset:null,
+    ch4_offset:null,
+
+    //通道值反转
+    ch1_reverse:null,
+    ch2_reverse:null,
+    ch3_reverse:null,
+    ch4_reverse:null,
+
+    //日本手、美国手模式
+    rocker_mode:null,
+
+
+
+    // inputmode:null,
     inputtrainerport:null,
     inputinternalradiosystem:null,
     inputinpower:null,
@@ -35,31 +49,32 @@ const show = {
 
 show.refreshUI = function()
 {
-    show.inputRoll.val(HidConfig.rollInputUpdate);
-    show.inputPitch.val(HidConfig.pitchInputUpdate);
-    show.inputYaw.val(HidConfig.yawInputUpdate);
-    show.inputThro.val(HidConfig.throInputUpdate);
-    show.inputaux1.val(HidConfig.aux1InputUpdate);
-    show.inputaux2.val(HidConfig.aux2InputUpdate);
-    show.inputaux3.val(HidConfig.aux3InputUpdate);
-    show.inputaux4.val(HidConfig.aux4InputUpdate);
+    show.ch1_data_source.val(HidConfig.ch1_input_source);
+    show.ch2_data_source.val(HidConfig.ch2_input_source);
+    show.ch3_data_source.val(HidConfig.ch3_input_source);
+    show.ch4_data_source.val(HidConfig.ch4_input_source);
+    show.ch5_data_source.val(HidConfig.ch5_input_source);
+    show.ch6_data_source.val(HidConfig.ch6_input_source);
+    show.ch7_data_source.val(HidConfig.ch7_input_source);
+    show.ch8_data_source.val(HidConfig.ch8_input_source);
 
 
-    document.getElementById('roll_check').checked = HidConfig.rollReverse;
-    document.getElementById('pitch_check').checked = HidConfig.pitchReverse;
-    document.getElementById('yaw_check').checked =HidConfig.yawReverse;
-    document.getElementById('throttle_check').checked = HidConfig.throReverse;
+    document.getElementById('ch1_check').checked = HidConfig.ch1_reverse;
+    document.getElementById('ch2_check').checked = HidConfig.ch2_reverse;
+    document.getElementById('ch3_check').checked =HidConfig.ch3_reverse;
+    document.getElementById('ch4_check').checked = HidConfig.ch4_reverse;
     
-    show.inputRollweight.val(HidConfig.rollWeight);
-    show.inputPitchweight.val(HidConfig.pitchWeight);
-    show.inputYawweight.val(HidConfig.yawWeight);
-    show.inputThroweight.val(HidConfig.throWeight);
+    show.ch1_scale.val(HidConfig.ch1_scale);
+    show.ch2_scale.val(HidConfig.ch2_scale);
+    show.ch3_scale.val(HidConfig.ch3_scale);
+    show.ch4_scale.val(HidConfig.ch4_scale);
 
-    show.inputRolloffset.val(HidConfig.rollOffset);
-    show.inputPitchoffset.val(HidConfig.pitchOffset);
-    show.inputYawoffset.val(HidConfig.yawOffset);
-    show.inputThrooffset.val(HidConfig.throOffset);
-    show.inputmode.val(HidConfig.mode);
+    show.ch1_offset.val(HidConfig.ch1_offset);
+    show.ch2_offset.val(HidConfig.ch2_offset);
+    show.ch3_offset.val(HidConfig.ch3_offset);
+    show.ch4_offset.val(HidConfig.ch4_offset);
+
+    show.rocker_mode.val(HidConfig.rocker_mode);
     show.inputtrainerport.val(HidConfig.trainerPort);
 
     if(HidConfig.irSystemProtocol)
@@ -95,16 +110,18 @@ show.refreshUI = function()
 show.initialize = function (callback) {
 
     $('#content').load("./src/html/show.html", function () {
+
+        sync_config();
         i18n.localizePage();
         const bar_names = [
-            "Roll [A]",
-            "Pitch [E]",
-            "Yaw [R]",
-            "Throttle [T]",
-            "AUX 1",
-            "AUX 2",
-            "AUX 3",
-            "AUX 4"
+            "CH1",
+            "CH2",
+            "CH3",
+            "CH4",
+            "CH5",
+            "CH6",
+            "CH7",
+            "CH8"
         ];
         const numBars = 8;
         const barContainer = $('.tab-show .bars');
@@ -162,6 +179,7 @@ show.initialize = function (callback) {
         function update_ui() {
             // update bars with latest data
             for (let i = 0; i < 8; i++) {
+                
                 meterFillArray[i].css('width', (HidConfig.channel_data[i] - meterScale.min) / (meterScale.max - meterScale.min)*100+'%');
                 meterLabelArray[i].text(HidConfig.channel_data[i]);
             }
@@ -177,142 +195,142 @@ show.initialize = function (callback) {
             GUI.interval_add('receiver_pull', update_ui, plotUpdateRate, true);
         });
         
-        show.inputRoll = $('select[name="roll_input"]');
-        show.inputRoll.change(function () {
-            HidConfig.rollInputUpdate = parseInt($(this).val(), 10);
+        show.ch1_data_source = $('select[name="ch1_data_source"]');
+        show.ch1_data_source.change(function () {
+            HidConfig.ch1_input_source = parseInt($(this).val(), 10);
         });
 
-        show.inputPitch = $('select[name="pitch_input"]');
-        show.inputPitch.change(function () {
-            HidConfig.pitchInputUpdate = parseInt($(this).val(), 10);
+        show.ch2_data_source = $('select[name="ch2_data_source"]');
+        show.ch2_data_source.change(function () {
+            HidConfig.ch2_input_source = parseInt($(this).val(), 10);
         });
 
-        show.inputYaw = $('select[name="yaw_input"]');
-        show.inputYaw.change(function () {
-            HidConfig.yawInputUpdate = parseInt($(this).val(), 10);
+        show.ch3_data_source = $('select[name="ch3_data_source"]');
+        show.ch3_data_source.change(function () {
+            HidConfig.ch3_input_source = parseInt($(this).val(), 10);
         });
       
-        show.inputThro = $('select[name="throttle_input"]');
-        show.inputThro.change(function () {
-            HidConfig.throInputUpdate = parseInt($(this).val(), 10);
+        show.ch4_data_source = $('select[name="ch4_data_source"]');
+        show.ch4_data_source.change(function () {
+            HidConfig.ch3_input_source = parseInt($(this).val(), 10);
         });
 
-        show.inputaux1 = $('select[name="aux1_input"]');
-        show.inputaux1.change(function () {
-            HidConfig.aux1InputUpdate = parseInt($(this).val(), 10);
+        show.ch5_data_source = $('select[name="ch5_data_source"]');
+        show.ch5_data_source.change(function () {
+            HidConfig.ch5_input_source = parseInt($(this).val(), 10);
         });
 
-        show.inputaux2 = $('select[name="aux2_input"]');
-        show.inputaux2.change(function () {
-            HidConfig.aux2InputUpdate = parseInt($(this).val(), 10);
+        show.ch6_data_source = $('select[name="ch6_data_source"]');
+        show.ch6_data_source.change(function () {
+            HidConfig.ch6_input_source = parseInt($(this).val(), 10);
         });
 
-        show.inputaux3 = $('select[name="aux3_input"]');
-        show.inputaux3.change(function () {
-            HidConfig.aux3InputUpdate = parseInt($(this).val(), 10);
+        show.ch7_data_source = $('select[name="ch7_data_source"]');
+        show.ch7_data_source.change(function () {
+            HidConfig.ch7_input_source = parseInt($(this).val(), 10);
         });
 
-        show.inputaux4 = $('select[name="aux4_input"]');
-        show.inputaux4.change(function () {
-            HidConfig.aux4InputUpdate = parseInt($(this).val(), 10);
+        show.ch8_data_source = $('select[name="ch8_data_source"]');
+        show.ch8_data_source.change(function () {
+            HidConfig.ch8_input_source = parseInt($(this).val(), 10);
         });
 
-        show.inputRollreverse=$('input[id="roll_check"]');
-        show.inputRollreverse.change(function () {
+        show.ch1_reverse=$('input[id="ch1_check"]');
+        show.ch1_reverse.change(function () {
             var flag = $(this).is(':checked');
             if(flag)
             {
-                HidConfig.rollReverse = 1;
+                HidConfig.ch1_reverse = 1;
             }
             else
             {
-                HidConfig.rollReverse = 0;
+                HidConfig.ch1_reverse = 0;
             }
             
         });
 
-        show.inputPitchreverse=$('input[id="pitch_check"]');
-        show.inputPitchreverse.change(function () {
+        show.ch2_reverse=$('input[id="ch2_check"]');
+        show.ch2_reverse.change(function () {
             var flag = $(this).is(':checked');
             if(flag)
             {
-                HidConfig.pitchReverse = 1;
+                HidConfig.ch2_reverse = 1;
             }
             else
             {
-                HidConfig.pitchReverse = 0;
+                HidConfig.ch2_reverse = 0;
             }
         });
 
-        show.inputYawreverse=$('input[id="yaw_check"]');
-        show.inputYawreverse.change(function () {
+        show.ch3_reverse=$('input[id="ch3_check"]');
+        show.ch3_reverse.change(function () {
             var flag = $(this).is(':checked');
             if(flag)
             {
-                HidConfig.yawReverse = 1;
+                HidConfig.ch3_reverse = 1;
             }
             else
             {
-                HidConfig.yawReverse = 0;
+                HidConfig.ch3_reverse = 0;
             }
         });
 
-        show.inputThroreverse=$('input[id="throttle_check"]');
-        show.inputThroreverse.change(function () {
+        show.ch4_reverse=$('input[id="ch4_check"]');
+        show.ch4_reverse.change(function () {
             var flag = $(this).is(':checked');
             if(flag)
             {
-                HidConfig.throReverse = 1;
+                HidConfig.ch4_reverse = 1;
             }
             else
             {
-                HidConfig.throReverse = 0;
+                HidConfig.ch_reverse = 0;
             }
         });
 
-        show.inputRollweight=$('input[name="roll_weight"]');
-        show.inputRollweight.change(function () {
-            HidConfig.rollWeight = parseInt($(this).val(), 10);
+        show.ch1_scale=$('input[name="ch1_scale"]');
+        show.ch1_scale.change(function () {
+            HidConfig.ch1_scale = parseInt($(this).val(), 10);
         });
 
-        show.inputPitchweight=$('input[name="pitch_weight"]');
-        show.inputPitchweight.change(function () {
-            HidConfig.pitchWeight = parseInt($(this).val(), 10);
+        show.ch2_scale=$('input[name="ch2_scale"]');
+        show.ch2_scale.change(function () {
+            HidConfig.ch2_scale = parseInt($(this).val(), 10);
         });
 
-        show.inputYawweight=$('input[name="yaw_weight"]');
-        show.inputYawweight.change(function () {
-            HidConfig.yawWeight = parseInt($(this).val(), 10);
+        show.ch3_scale=$('input[name="ch3_scale"]');
+        show.ch3_scale.change(function () {
+            HidConfig.ch3_scale = parseInt($(this).val(), 10);
         });
 
-        show.inputThroweight=$('input[name="throttle_weight"]');
-        show.inputThroweight.change(function () {
-            HidConfig.throWeight = parseInt($(this).val(), 10);
+        show.ch4_scale=$('input[name="ch4_scale"]');
+        show.ch4_scale.change(function () {
+            HidConfig.ch4_scale = parseInt($(this).val(), 10);
         });
 
-        show.inputRolloffset=$('input[name="roll_offset"]');
-        show.inputRolloffset.change(function () {
-            HidConfig.rollOffset = parseInt($(this).val(), 10);
+        show.ch1_offset=$('input[name="ch1_offset"]');
+        show.ch1_offset.change(function () {
+            HidConfig.ch1_offset = parseInt($(this).val(), 10);
         });
 
-        show.inputPitchoffset=$('input[name="pitch_offset"]');
-        show.inputPitchoffset.change(function () {
-            HidConfig.pitchOffset = parseInt($(this).val(), 10);
+        show.ch2_offset=$('input[name="ch2_offset"]');
+        show.ch2_offset.change(function () {
+            HidConfig.ch2_offset = parseInt($(this).val(), 10);
         });
 
-        show.inputYawoffset=$('input[name="yaw_offset"]');
-        show.inputYawoffset.change(function () {
-            HidConfig.yawOffset = parseInt($(this).val(), 10);
+        show.ch3_offset=$('input[name="ch3_offset"]');
+        show.ch3_offset.change(function () {
+            HidConfig.ch3_offset = parseInt($(this).val(), 10);
         });
 
-        show.inputThrooffset=$('input[name="throttle_offset"]');
-        show.inputThrooffset.change(function () {
-            HidConfig.throOffset = parseInt($(this).val(), 10);
+        show.ch4_offset=$('input[name="ch4_offset"]');
+        show.ch4_offset.change(function () {
+            HidConfig.ch4_offset = parseInt($(this).val(), 10);
         });
 
-        show.inputmode = $('select[name="radiomode"]');
-        show.inputmode.change(function () {
-            HidConfig.mode = parseInt($(this).val(), 10);
+        show.rocker_mode = $('select[name="radiomode"]');
+        show.rocker_mode.change(function () {
+            HidConfig.rocker_mode = parseInt($(this).val(), 10);
         });
 
         show.inputtrainerport = $('select[name="trainer_port"]');
@@ -411,8 +429,131 @@ show.initialize = function (callback) {
 
   
         $('a.refresh').click(function () {
+            sync_config();
+
+
+        });
+
+        $('a.save').click(function () {
             var bufName = new Buffer.alloc(64);
 
+            //发送 遥控通道参数
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x00;
+            bufName[3] = HidConfig.ch1_input_source;
+            bufName[4] = HidConfig.ch1_reverse;
+            bufName[5] = HidConfig.ch1_scale
+            bufName[6] = HidConfig.ch1_offset
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x01;
+            bufName[3] = HidConfig.ch2_input_source;
+            bufName[4] = HidConfig.ch2_reverse;
+            bufName[5] = HidConfig.ch2_scale
+            bufName[6] = HidConfig.ch2_offset
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x02;
+            bufName[3] = HidConfig.ch3_input_source;
+            bufName[4] = HidConfig.ch3_reverse;
+            bufName[5] = HidConfig.ch3_scale
+            bufName[6] = HidConfig.ch3_offset
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x03;
+            bufName[3] = HidConfig.ch4_input_source;
+            bufName[4] = HidConfig.ch4_reverse;
+            bufName[5] = HidConfig.ch4_scale
+            bufName[6] = HidConfig.ch4_offset
+            hidDevice.write(bufName);
+
+            //通道 5-8
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x04;
+            bufName[3] = HidConfig.ch5_input_source;
+            bufName[4] = 0x00;
+            bufName[5] = 0x64;
+            bufName[6] = 0x64;
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x05;
+            bufName[3] = HidConfig.ch6_input_source;
+            bufName[4] = 0x00;
+            bufName[5] = 0x64;
+            bufName[6] = 0x64;
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x06;
+            bufName[3] = HidConfig.ch7_input_source;
+            bufName[4] = 0x00;
+            bufName[5] = 0x64;
+            bufName[6] = 0x64;
+            hidDevice.write(bufName);
+
+            bufName[0] = 0x0;
+            bufName[1] = 0x01;
+            bufName[2] = 0x07;
+            bufName[3] = HidConfig.ch8_input_source;
+            bufName[4] = 0x00;
+            bufName[5] = 0x64;
+            bufName[6] = 0x64;
+            hidDevice.write(bufName);
+
+            //发送 内部遥控协议参数
+            bufName[0] = 0x0;
+            bufName[1] = 0x06;
+            bufName[2] = 0x02;
+            bufName[3] = HidConfig.irSystemPower;
+            bufName[4] = HidConfig.irPktRate;
+            bufName[5] = HidConfig.irTLMRadio;
+
+            hidDevice.write(bufName);
+
+
+            //保存
+            bufName[0] = 0x0;
+            bufName[1] = 0x05;
+
+            if(HidConfig.irSystemProtocol)
+            {
+                bufName[2] = 0x00;
+                bufName[3] = HidConfig.rocker_mode;
+                bufName[4] = 0x02;
+                hidDevice.write(bufName);
+            }
+            else if( HidConfig.erSystemProtocol)
+            {
+                bufName[2] = 0x01;
+                bufName[3] = HidConfig.rocker_mode;
+                bufName[4] = 0x02;
+                hidDevice.write(bufName);
+            }
+            else
+            {
+                alert("Please Select Correct Protocol!");
+                bufName[2] = 0x00;
+            }
+            
+        });
+
+
+        rxRefreshRate.change(); 
+
+        //请求遥控器参数，使上位机显示的配置与其同步
+        function sync_config(){
+            let bufName = new Buffer.alloc(64);
             bufName[0] = 0x0;
             bufName[1] = 0x11;
             bufName[2] = 0x02;
@@ -488,113 +629,7 @@ show.initialize = function (callback) {
             bufName[3] = 0x01;
 
             hidDevice.write(bufName);
-
-        });
-
-        $('a.save').click(function () {
-            var bufName = new Buffer.alloc(64);
-
-            //发送 遥控通道参数
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x00;
-            bufName[3] = HidConfig.rollInputUpdate;
-            bufName[4] = HidConfig.rollReverse;
-            bufName[5] = HidConfig.rollWeight
-            bufName[6] = HidConfig.rollOffset
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x01;
-            bufName[3] = HidConfig.pitchInputUpdate;
-            bufName[4] = HidConfig.pitchReverse;
-            bufName[5] = HidConfig.pitchWeight
-            bufName[6] = HidConfig.pitchOffset
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x02;
-            bufName[3] = HidConfig.yawInputUpdate;
-            bufName[4] = HidConfig.yawReverse;
-            bufName[5] = HidConfig.yawWeight
-            bufName[6] = HidConfig.yawOffset
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x03;
-            bufName[3] = HidConfig.throInputUpdate;
-            bufName[4] = HidConfig.throReverse;
-            bufName[5] = HidConfig.throWeight
-            bufName[6] = HidConfig.throOffset
-            hidDevice.write(bufName);
-
-            //通道 5-8
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x04;
-            bufName[3] = HidConfig.aux1InputUpdate;
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x05;
-            bufName[3] = HidConfig.aux2InputUpdate;
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x06;
-            bufName[3] = HidConfig.aux3InputUpdate;
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x07;
-            bufName[3] = HidConfig.aux4InputUpdate;
-            hidDevice.write(bufName);
-
-            //发送 内部遥控协议参数
-            bufName[0] = 0x0;
-            bufName[1] = 0x06;
-            bufName[2] = 0x02;
-            bufName[3] = HidConfig.irSystemPower;
-            bufName[4] = HidConfig.irPktRate;
-            bufName[5] = HidConfig.irTLMRadio;
-
-            hidDevice.write(bufName);
-
-
-            //保存
-            bufName[0] = 0x0;
-            bufName[1] = 0x05;
-
-            if(HidConfig.irSystemProtocol)
-            {
-                bufName[2] = 0x00;
-                bufName[3] = HidConfig.mode;
-                bufName[4] = 0x02;
-                hidDevice.write(bufName);
-            }
-            else if( HidConfig.erSystemProtocol)
-            {
-                bufName[2] = 0x01;
-                bufName[3] = HidConfig.mode;
-                bufName[4] = 0x02;
-                hidDevice.write(bufName);
-            }
-            else
-            {
-                alert("Please Select Correct Protocol!");
-                bufName[2] = 0x00;
-            }
-            
-        });
-
-
-        rxRefreshRate.change(); 
+        }
         
         callback();
     });
