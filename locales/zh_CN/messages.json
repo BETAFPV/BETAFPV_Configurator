@@ -269,6 +269,9 @@
     "tabOptions": {
         "message": "选项"
     },
+    "tabCalibration":{
+        "message": "校准"
+    },
     "tabSetup": {
         "message": "设置"
     },
@@ -5754,5 +5757,70 @@
     },
     "cordovaExitAppMessage": {
         "message": "你确定要关闭配置程序吗？"
+    },
+
+    
+    "RadioSetupChannel": {
+        "message": "通道"
+    },
+    "RadioSetupInput": {
+        "message": "输入"
+    },
+    "RadioSetupWeight": {
+        "message": "权重"
+    },
+    "RadioSetupOffset": {
+        "message": "补偿"
+    },
+    "RadioSetupReverse": {
+        "message": "反向"
+    },
+    "RadioSetupMode": {
+        "message": "模式"
+    },
+    "RadioSetupRefreshRate": {
+        "message": "刷新速率"
+    },
+    "RadioSetupTrainerPort": {
+        "message": "教练端口输出"
+    },
+    "RadioSetupIRSystemProtocol": {
+        "message": "内部高频头"
+    },
+    "RadioSetupIRSystemPower": {
+        "message": "功率"
+    },
+    "RadioSetupIRPktRate": {
+        "message": "包发送速率"
+    },
+    "RadioSetupIRTLMRadio": {
+        "message": "TLM Radio"
+    },
+    "RadioSetupERSystemProtocol": {
+        "message": "外部高频头"
+    },
+    "RadioSetupERSystemPower": {
+        "message": "功率"
+    },
+    "RadioSetupExELRSSystemPower": {
+        "message": "外部ELRS系统"
+    },
+    "RadioSetupexELRSPktRate": {
+        "message": "包发送速率"
+    },
+    "RadioSetupexELRSTLMRadio": {
+        "message": "TLM Radio"
+    },
+    "RadioSetupBind": {
+        "message": "绑定"
+    },
+    "RadioSetupWIFIUpdate": {
+        "message": "WIFI 更新"
+    },
+    "RadioSetupRefresh": {
+        "message": "刷新"
+    },
+    "RadioSetupSave": {
+        "message": "保存"
     }
 }
