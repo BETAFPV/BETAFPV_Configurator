@@ -183,7 +183,6 @@ show.initialize = function (callback) {
                 meterFillArray[i].css('width', (HidConfig.channel_data[i] - meterScale.min) / (meterScale.max - meterScale.min)*100+'%');
                 meterLabelArray[i].text(HidConfig.channel_data[i]);
             }
-            //console.log(HidConfig.channel_data[0],HidConfig.channel_data[1],HidConfig.channel_data[2],HidConfig.channel_data[3]);
         }
         let plotUpdateRate;
         const rxRefreshRate = $('select[name="tx_refresh_rate"]');
@@ -197,42 +196,42 @@ show.initialize = function (callback) {
         
         show.ch1_data_source = $('select[name="ch1_data_source"]');
         show.ch1_data_source.change(function () {
-            HidConfig.ch1_input_source = parseInt($(this).val(), 10);
+            HidConfig.ch1_input_source_display = parseInt($(this).val(), 10);
         });
 
         show.ch2_data_source = $('select[name="ch2_data_source"]');
         show.ch2_data_source.change(function () {
-            HidConfig.ch2_input_source = parseInt($(this).val(), 10);
+            HidConfig.ch2_input_source_display = parseInt($(this).val(), 10);
         });
 
         show.ch3_data_source = $('select[name="ch3_data_source"]');
         show.ch3_data_source.change(function () {
-            HidConfig.ch3_input_source = parseInt($(this).val(), 10);
+            HidConfig.ch3_input_source_display = parseInt($(this).val(), 10);
         });
       
         show.ch4_data_source = $('select[name="ch4_data_source"]');
         show.ch4_data_source.change(function () {
-            HidConfig.ch3_input_source = parseInt($(this).val(), 10);
+            HidConfig.ch4_input_source_display = parseInt($(this).val(), 10);
         });
 
         show.ch5_data_source = $('select[name="ch5_data_source"]');
         show.ch5_data_source.change(function () {
-            HidConfig.ch5_input_source = parseInt($(this).val(), 10);
+            HidConfig.ch5_input_source_display = parseInt($(this).val(), 10);
         });
 
         show.ch6_data_source = $('select[name="ch6_data_source"]');
         show.ch6_data_source.change(function () {
-            HidConfig.ch6_input_source = parseInt($(this).val(), 10);
+            HidConfig.ch6_input_source_display = parseInt($(this).val(), 10);
         });
 
         show.ch7_data_source = $('select[name="ch7_data_source"]');
         show.ch7_data_source.change(function () {
-            HidConfig.ch7_input_source = parseInt($(this).val(), 10);
+            HidConfig.ch7_input_source_display = parseInt($(this).val(), 10);
         });
 
         show.ch8_data_source = $('select[name="ch8_data_source"]');
         show.ch8_data_source.change(function () {
-            HidConfig.ch8_input_source = parseInt($(this).val(), 10);
+            HidConfig.ch8_input_source_display = parseInt($(this).val(), 10);
         });
 
         show.ch1_reverse=$('input[id="ch1_check"]');
@@ -240,11 +239,11 @@ show.initialize = function (callback) {
             var flag = $(this).is(':checked');
             if(flag)
             {
-                HidConfig.ch1_reverse = 1;
+                HidConfig.ch1_reverse_display = 1;
             }
             else
             {
-                HidConfig.ch1_reverse = 0;
+                HidConfig.ch1_reverse_display = 0;
             }
             
         });
@@ -254,11 +253,11 @@ show.initialize = function (callback) {
             var flag = $(this).is(':checked');
             if(flag)
             {
-                HidConfig.ch2_reverse = 1;
+                HidConfig.ch2_reverse_display = 1;
             }
             else
             {
-                HidConfig.ch2_reverse = 0;
+                HidConfig.ch2_reverse_display = 0;
             }
         });
 
@@ -267,11 +266,11 @@ show.initialize = function (callback) {
             var flag = $(this).is(':checked');
             if(flag)
             {
-                HidConfig.ch3_reverse = 1;
+                HidConfig.ch3_reverse_display = 1;
             }
             else
             {
-                HidConfig.ch3_reverse = 0;
+                HidConfig.ch3_reverse_display = 0;
             }
         });
 
@@ -280,52 +279,52 @@ show.initialize = function (callback) {
             var flag = $(this).is(':checked');
             if(flag)
             {
-                HidConfig.ch4_reverse = 1;
+                HidConfig.ch4_reverse_display = 1;
             }
             else
             {
-                HidConfig.ch_reverse = 0;
+                HidConfig.ch4_reverse_display = 0;
             }
         });
 
         show.ch1_scale=$('input[name="ch1_scale"]');
         show.ch1_scale.change(function () {
-            HidConfig.ch1_scale = parseInt($(this).val(), 10);
+            HidConfig.ch1_scale_display = parseInt($(this).val(), 10);
         });
 
         show.ch2_scale=$('input[name="ch2_scale"]');
         show.ch2_scale.change(function () {
-            HidConfig.ch2_scale = parseInt($(this).val(), 10);
+            HidConfig.ch2_scale_display = parseInt($(this).val(), 10);
         });
 
         show.ch3_scale=$('input[name="ch3_scale"]');
         show.ch3_scale.change(function () {
-            HidConfig.ch3_scale = parseInt($(this).val(), 10);
+            HidConfig.ch3_scale_display = parseInt($(this).val(), 10);
         });
 
         show.ch4_scale=$('input[name="ch4_scale"]');
         show.ch4_scale.change(function () {
-            HidConfig.ch4_scale = parseInt($(this).val(), 10);
+            HidConfig.ch4_scale_display = parseInt($(this).val(), 10);
         });
 
         show.ch1_offset=$('input[name="ch1_offset"]');
         show.ch1_offset.change(function () {
-            HidConfig.ch1_offset = parseInt($(this).val(), 10);
+            HidConfig.ch1_offset_display = parseInt($(this).val(), 10);
         });
 
         show.ch2_offset=$('input[name="ch2_offset"]');
         show.ch2_offset.change(function () {
-            HidConfig.ch2_offset = parseInt($(this).val(), 10);
+            HidConfig.ch2_offset_display = parseInt($(this).val(), 10);
         });
 
         show.ch3_offset=$('input[name="ch3_offset"]');
         show.ch3_offset.change(function () {
-            HidConfig.ch3_offset = parseInt($(this).val(), 10);
+            HidConfig.ch3_offset_display = parseInt($(this).val(), 10);
         });
 
         show.ch4_offset=$('input[name="ch4_offset"]');
         show.ch4_offset.change(function () {
-            HidConfig.ch4_offset = parseInt($(this).val(), 10);
+            HidConfig.ch4_offset_display = parseInt($(this).val(), 10);
         });
 
         show.rocker_mode = $('select[name="radiomode"]');
@@ -377,7 +376,6 @@ show.initialize = function (callback) {
         show.inputexternalradiosystem.change(function () {
             HidConfig.erSystemProtocol = parseInt($(this).val(), 10);
 
-            console.log(HidConfig.erSystemProtocol);
 
             if(HidConfig.erSystemProtocol)
             {
@@ -436,49 +434,52 @@ show.initialize = function (callback) {
 
         $('a.save').click(function () {
             var bufName = new Buffer.alloc(64);
-
+            if(HidConfig.irSystemProtocol==0&&HidConfig.erSystemProtocol==0){
+                alert("save failed!  you need to select at least one protocol");
+                return 0;
+            }
             //发送 遥控通道参数
             bufName[0] = 0x0;
             bufName[1] = 0x01;
             bufName[2] = 0x00;
-            bufName[3] = HidConfig.ch1_input_source;
-            bufName[4] = HidConfig.ch1_reverse;
-            bufName[5] = HidConfig.ch1_scale
-            bufName[6] = HidConfig.ch1_offset
+            bufName[3] = HidConfig.ch1_input_source_display;
+            bufName[4] = HidConfig.ch1_reverse_display;
+            bufName[5] = HidConfig.ch1_scale_display;
+            bufName[6] = HidConfig.ch1_offset_display+100;
             hidDevice.write(bufName);
 
             bufName[0] = 0x0;
             bufName[1] = 0x01;
             bufName[2] = 0x01;
-            bufName[3] = HidConfig.ch2_input_source;
-            bufName[4] = HidConfig.ch2_reverse;
-            bufName[5] = HidConfig.ch2_scale
-            bufName[6] = HidConfig.ch2_offset
+            bufName[3] = HidConfig.ch2_input_source_display;
+            bufName[4] = HidConfig.ch2_reverse_display;
+            bufName[5] = HidConfig.ch2_scale_display;
+            bufName[6] = HidConfig.ch2_offset_display+100;
             hidDevice.write(bufName);
 
             bufName[0] = 0x0;
             bufName[1] = 0x01;
             bufName[2] = 0x02;
-            bufName[3] = HidConfig.ch3_input_source;
-            bufName[4] = HidConfig.ch3_reverse;
-            bufName[5] = HidConfig.ch3_scale
-            bufName[6] = HidConfig.ch3_offset
+            bufName[3] = HidConfig.ch3_input_source_display;
+            bufName[4] = HidConfig.ch3_reverse_display;
+            bufName[5] = HidConfig.ch3_scale_display;
+            bufName[6] = HidConfig.ch3_offset_display+100;
             hidDevice.write(bufName);
 
             bufName[0] = 0x0;
             bufName[1] = 0x01;
             bufName[2] = 0x03;
-            bufName[3] = HidConfig.ch4_input_source;
-            bufName[4] = HidConfig.ch4_reverse;
-            bufName[5] = HidConfig.ch4_scale
-            bufName[6] = HidConfig.ch4_offset
+            bufName[3] = HidConfig.ch4_input_source_display;
+            bufName[4] = HidConfig.ch4_reverse_display;
+            bufName[5] = HidConfig.ch4_scale_display;
+            bufName[6] = HidConfig.ch4_offset_display+100;
             hidDevice.write(bufName);
 
             //通道 5-8
             bufName[0] = 0x0;
             bufName[1] = 0x01;
             bufName[2] = 0x04;
-            bufName[3] = HidConfig.ch5_input_source;
+            bufName[3] = HidConfig.ch5_input_source_display;
             bufName[4] = 0x00;
             bufName[5] = 0x64;
             bufName[6] = 0x64;
@@ -487,7 +488,7 @@ show.initialize = function (callback) {
             bufName[0] = 0x0;
             bufName[1] = 0x01;
             bufName[2] = 0x05;
-            bufName[3] = HidConfig.ch6_input_source;
+            bufName[3] = HidConfig.ch6_input_source_display;
             bufName[4] = 0x00;
             bufName[5] = 0x64;
             bufName[6] = 0x64;
@@ -496,7 +497,7 @@ show.initialize = function (callback) {
             bufName[0] = 0x0;
             bufName[1] = 0x01;
             bufName[2] = 0x06;
-            bufName[3] = HidConfig.ch7_input_source;
+            bufName[3] = HidConfig.ch7_input_source_display;
             bufName[4] = 0x00;
             bufName[5] = 0x64;
             bufName[6] = 0x64;
@@ -505,7 +506,7 @@ show.initialize = function (callback) {
             bufName[0] = 0x0;
             bufName[1] = 0x01;
             bufName[2] = 0x07;
-            bufName[3] = HidConfig.ch8_input_source;
+            bufName[3] = HidConfig.ch8_input_source_display;
             bufName[4] = 0x00;
             bufName[5] = 0x64;
             bufName[6] = 0x64;
