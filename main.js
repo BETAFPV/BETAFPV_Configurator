@@ -79,11 +79,11 @@ app.on('ready',()=>{
     mainWindow.webContents.openDevTools({
         mode:'bottom'
     });
-    //mainWindow.loadURL(`file://${__dirname}/index.html`);
-    mainWindow.loadURL(`file://${__dirname}/liteRadio.html`);
+    mainWindow.loadURL(`file://${__dirname}/index.html`);
+    //mainWindow.loadURL(`file://${__dirname}/liteRadio.html`);
 
-    //  const mainMenu = Menu.buildFromTemplate(menuTemplate);
-    //  Menu.setApplicationMenu(mainMenu);
+     const mainMenu = Menu.buildFromTemplate(menuTemplate);
+     Menu.setApplicationMenu(mainMenu);
 
     
     mainWindow.on('closed',()=>{

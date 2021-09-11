@@ -6196,7 +6196,7 @@
         "message": "External Radio Module"
     },
     "RadioSetupERSystemPower": {
-        "message": "Power"
+        "message": "Power Switch"
     },
     "RadioSetupExELRSSystemPower": {
         "message": "External ELRS System Power"

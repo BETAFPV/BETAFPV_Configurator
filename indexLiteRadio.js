@@ -286,6 +286,7 @@ window.onload=function(){
                     }
                     else if(data[0] == cmd_type.Lite_CONFIGER_INFO_ID)
                     {
+                        console.log("Lite_CONFIGER_INFO_ID");
                         var checkSum=0;
                         var checkSum2=0;
 
@@ -304,13 +305,18 @@ window.onload=function(){
                             if(data[2]==0)
                             {
                                 HidConfig.irSystemProtocol = 1;
+                                HidConfig.erSystemProtocol = 0;
+                                console.log("data[2]=0");
                             }
                             else if(data[2]==1)
                             {
+                                console.log("data[2]=1");
                                 HidConfig.erSystemProtocol = 1;
+                                HidConfig.irSystemProtocol = 0;
                             }
                             else if(data[2]==2)
                             {
+                                console.log("data[2] == 2");
                                 HidConfig.irSystemProtocol = 0;
                             }
                             HidConfig.rocker_mode = data[3];

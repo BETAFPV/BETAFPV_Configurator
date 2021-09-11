@@ -94,6 +94,14 @@ show.refreshUI = function()
         document.getElementById("expower").disabled=false;
     }
 
+    if(HidConfig.erSystemProtocol){
+
+ 
+    }else{
+        
+
+    }
+
 
     show.inputinternalradiosystem.val(HidConfig.irSystemProtocol);
     show.inputinpower.val(HidConfig.irSystemPower);
@@ -337,6 +345,7 @@ show.initialize = function (callback) {
             HidConfig.trainerPort = parseInt($(this).val(), 10);
         });
 
+
         show.inputinternalradiosystem = $('select[id="internalradiosystem"]');
         show.inputinternalradiosystem.change(function () {
             HidConfig.irSystemProtocol = parseInt($(this).val(), 10);
@@ -345,12 +354,18 @@ show.initialize = function (callback) {
             {
                 document.getElementById("externalradiosystem").disabled=false;
                 document.getElementById("expower").disabled=false;
+                document.getElementById("inpower").disabled=true;
+                document.getElementById("inpktRate").disabled=true;
+                document.getElementById("inTLMRadio").disabled=true;
+
             }
             else
             {
+                document.getElementById("inpower").disabled=false;
+                document.getElementById("inpktRate").disabled=false;
+                document.getElementById("inTLMRadio").disabled=false;
                 document.getElementById("externalradiosystem").disabled=true;
                 document.getElementById("expower").disabled=true;
-
                 document.getElementById("exELRSpower").disabled=true;
                 document.getElementById("exELRSpktRate").disabled=true;
                 document.getElementById("exELRSTLMRadio").disabled=true;
@@ -379,12 +394,19 @@ show.initialize = function (callback) {
 
             if(HidConfig.erSystemProtocol)
             {
+                document.getElementById("expower").disabled=false;
                 document.getElementById("internalradiosystem").disabled=true;
                 document.getElementById("inpower").disabled=true;
                 document.getElementById("inpktRate").disabled=true;
                 document.getElementById("inTLMRadio").disabled=true;
             }
             else{
+                document.getElementById("expower").value = 0;//OFF
+                document.getElementById("expower").disabled=true;
+                document.getElementById("exELRSpower").disabled=true;
+                document.getElementById("exELRSpktRate").disabled=true;
+                document.getElementById("exELRSTLMRadio").disabled=true;
+
                 document.getElementById("internalradiosystem").disabled=false;
                 document.getElementById("inpower").disabled=false;
                 document.getElementById("inpktRate").disabled=false;
@@ -428,11 +450,13 @@ show.initialize = function (callback) {
   
         $('a.refresh').click(function () {
             sync_config();
+            console.log("refresh click");
 
 
         });
 
         $('a.save').click(function () {
+            console.log("save click");
             var bufName = new Buffer.alloc(64);
             if(HidConfig.irSystemProtocol==0&&HidConfig.erSystemProtocol==0){
                 alert("save failed!  you need to select at least one protocol");
@@ -558,6 +582,8 @@ show.initialize = function (callback) {
             bufName[0] = 0x0;
             bufName[1] = 0x11;
             bufName[2] = 0x02;
+            console.log("bufName[2]:"+bufName[2]);
+            bufName[3] = 0x00;
 
             hidDevice.write(bufName);
 
@@ -630,6 +656,7 @@ show.initialize = function (callback) {
             bufName[3] = 0x01;
 
             hidDevice.write(bufName);
+            
         }
         
         callback();

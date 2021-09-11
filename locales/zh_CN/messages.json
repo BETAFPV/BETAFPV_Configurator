@@ -5800,7 +5800,7 @@
         "message": "外部高频头"
     },
     "RadioSetupERSystemPower": {
-        "message": "功率"
+        "message": "功率设置"
     },
     "RadioSetupExELRSSystemPower": {
         "message": "外部ELRS系统"
