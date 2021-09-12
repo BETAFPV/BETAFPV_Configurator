@@ -37,13 +37,12 @@
     margin-right: auto;
     margin-top: 5px;
     width: 800px;
-    color: var(--defaultText);
+    color: #3a3a3a;
     font-size: 14px;
     font-weight: 300;
 }
 
 .tab-landing .logowrapper img {
-    width: 600px;
     margin: 5px;
 }
 

@@ -386,7 +386,6 @@ progress[value]::-webkit-progress-bar {
 
 .tab-landing .logowrapper img {
     height: 60px;
-    content:url(../images/bt_logo.png);
 }
 
 .tab-landing .content_mid .text3 .wrap2 {
