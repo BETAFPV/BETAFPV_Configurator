@@ -687,6 +687,18 @@
     "defaultWelcomeText": {
         "message": "The application supports flight controller that can run LiteSilver firmeware. Check flash tab for full list of hardware.<br /><br /><a href=\"https://betafpv.com/collections/brushed-flight-controller/products/betafpv-lite-brushed-flight-controller\" target=\"_blank\" rel=\"noopener noreferrer\">Lite Brushed FC V3</a><br /><a href=\"https://betafpv.com/products/cetus-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus FPV Kit</a><br /><a href=\"https://betafpv.com/products/cetus-pro-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus Pro FPV Kit</a>"
     },
+    "FCConfiguratorChoosed":{
+        "message": "<br />Configurator for FC Board is Active"
+    },
+    "ChooseRadioConfigurator": {
+        "message": "<br /><a href=\"liteRadio.html\">Click to Active Configurator for Radio Transmitter</a>"
+    },
+    "ChooseFCConfigurator":{
+        "message": "<br /><a href=\"index.html\">Click to Active Configurator for FC Board</a>"
+    },
+    "RadioConfiguratorChoosed": {
+        "message": "<br />Configurator for Radio Transmitter is Active"
+    },
     "defaultContributingHead": {
         "message": "Radio Transmitter"
     },
