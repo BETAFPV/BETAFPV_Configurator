@@ -82,8 +82,11 @@ app.on('ready',()=>{
     mainWindow.loadURL(`file://${__dirname}/index.html`);
     //mainWindow.loadURL(`file://${__dirname}/liteRadio.html`);
 
-     const mainMenu = Menu.buildFromTemplate(menuTemplate);
-     Menu.setApplicationMenu(mainMenu);
+    //disable app menu, IF YOU NEED MENU TO DEBUG,UNCOMMENT FOLLOW LINE
+    Menu.setApplicationMenu(null);
+
+     //const mainMenu = Menu.buildFromTemplate(menuTemplate);
+     //Menu.setApplicationMenu(mainMenu);
 
     
     mainWindow.on('closed',()=>{
