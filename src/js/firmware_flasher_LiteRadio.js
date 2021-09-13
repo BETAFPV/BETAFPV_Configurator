@@ -227,7 +227,9 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
             
             //open事件监听
             port.on('open', () =>{
-                console.log('serialport open success LiteRadio')
+
+                console.log('serialport open success LiteRadio');
+                $('div#connectbutton div.connect_state').text(i18n.getMessage('disconnect'));
                 //timerRev = setInterval(wrapEvent,250);
 
                 GUI.connect_lock = true;
@@ -236,7 +238,9 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
 
             //close事件监听
             port.on('close', () =>{
+                GUI.connect_lock = false;
                 console.log('serialport close success')
+                $('div.connect_controls div.connect_state').text(i18n.getMessage('connect'));
             });
 
             //data事件监听
@@ -388,6 +392,8 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
 
             //error事件监听
             port.on('error',function(err){
+                // port.close();
+                $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'));
                 console.log('Error: ',err.message);
             });
         }

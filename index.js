@@ -90,7 +90,7 @@ window.onload=function(){
                 console.log('serialport open success')                
                 GUI.connect_lock = true;
                 $('div#connectbutton a.connect').addClass('active');     
-
+                $('div#connectbutton div.connect_state').text(i18n.getMessage('disconnect')).addClass('active');
                 if(isFlasherTab ==0)
                 {
                     FC.resetState();
@@ -107,6 +107,7 @@ window.onload=function(){
                 GUI.interval_remove('display_Info');
                 GUI.interval_remove('setup_data_pull_fast');
                 console.log('serialport close success');
+                $('div.connect_controls div.connect_state').text(i18n.getMessage('connect'));
                 
             });
 

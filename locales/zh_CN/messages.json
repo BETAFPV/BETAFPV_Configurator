@@ -5822,5 +5822,11 @@
     },
     "RadioSetupSave": {
         "message": "保存"
+    },
+    "Connect_HID":{
+        "message":"连接遥控器"
+    },
+    "disConnect_HID":{
+        "message":"断开遥控器"
     }
 }

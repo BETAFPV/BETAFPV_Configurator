@@ -6230,5 +6230,11 @@
     },
     "RadioSetupSave": {
         "message": "Save"
+    },
+    "Connect_HID":{
+        "message":"connect HID"
+    },
+    "disConnect_HID":{
+        "message":"disconnect HID"
     }
 }
