@@ -179,13 +179,14 @@ window.onload=function(){
     $('div.open_firmware_flasher a.flash').click(function () {
         if (GUI.connect_hid != true) {
             console.log('connect hid');
+           
 
             hidDevice = new HID.HID(VENDOR_ID,PRODUCT_ID);
 
             if(hidDevice)
             {
                 GUI.connect_hid = true;
-
+                $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('disConnect_HID'));
                 $('#tabs ul.mode-disconnected').hide();
 
                 $('#tabs ul.mode-connected').show();
@@ -395,6 +396,7 @@ window.onload=function(){
                 hidDevice.on("error", function(err) {
                     hidDevice.close();
                     GUI.connect_hid = false;
+                    $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('disConnect_HID'));
                     alert("HID Device Disconnected!");
 
                     $('#tabs ul.mode-connected').hide();
@@ -416,6 +418,7 @@ window.onload=function(){
         {
             hidDevice.close();
             GUI.connect_hid = false;
+            $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('Connect_HID'));
             console.log('close hid');
 
             $('#tabs ul.mode-connected').hide();
@@ -444,8 +447,8 @@ window.onload=function(){
             tab_switch_cleanup();
 
             function tab_switch_cleanup () {
-                if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
-                    $('div#flashbutton a.flash_state').removeClass('active');
+                if ($('div#flashbutton a.connect_hid').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
+                    $('div#flashbutton a.connect_hid').removeClass('active');
                     $('div#flashbutton a.flash').removeClass('active');
                 }
                 // disable previously active tab highlight

@@ -25,33 +25,27 @@
                                 <div class="name-helpicon-flex">
                                     <div i18n="pidTuningProportional" class="sm-min">Proportional</div>
                                     <div class="xs">P</div>
-                                    <div class="helpicon cf_tip" i18n_title="pidTuningProportionalHelp"></div>
                                 </div>
                             </th>
                             <th class="integral">
                                 <div class="name-helpicon-flex">
                                     <div i18n="pidTuningIntegral" class="sm-min">Integral</div>
-                                    <div class="xs">I</div>
-                                    <div class="helpicon cf_tip" i18n_title="pidTuningIntegralHelp"></div>
+                                    <div class="xs">I</div> 
                                 </div>
                             </th>
                             <th class="derivative">
                                 <div class="name-helpicon-flex">
                                     <div i18n="pidTuningDerivative" class="derivativeText">Derivative</div>
-                                    <div class="helpicon cf_tip" i18n_title="pidTuningDerivativeHelp"></div>
                                 </div>
                             </th>
                             <th class="dmin">
                                 <div class="name-helpicon-flex">
-                                    <div i18n="pidTuningDMin">Integral MAX</div>
-                                    <div class="helpicon cf_tip"></div>
+                                    <div >MAX threshold for Integral</div>
                                 </div>
                             </th>
                             <th class="feedforward">
                                 <div class="name-helpicon-flex">
-                                    <div i18n="pidTuningFeedforward" class="sm-min">D CutFreq</div>
-                                    <div class="xs">Feedforward</div>
-                                    <div class="helpicon cf_tip"></div>
+                                    <div  class="sm-min">CutOff freq for Derivative</div>
                                 </div>
                             </th>
                         </tr>
@@ -70,7 +64,6 @@
                             <td class="pid_data"><input type="number" id = "roll_d" value="0.56" name="d" step="0.01" min="0" max="10" /></td>
                             <td class="pid_data"><input type="number" id = "roll_imax" value="5" name="imax" step="1" min="0" max="20" /></td>
                             <td class="pid_data"><input type="number" id = "roll_cutfre" value="35" name="cutfreq" step="1" min="0" max="100" /></td>
-
                         </tr>
                         <tr class="PITCH">
                             <!-- 1 -->
@@ -98,9 +91,6 @@
             <div class="subtab-rates" style="display: none;">
                 <div class="clear-both"></div>
                 <div class="cf_column">
-                
-        
-                
                     <div class="note rates-tab-warning maxRateWarning">
                         <p i18n="pidTuningMaxRateWarning"><b>Warning:</b> very high rates can result in desyncs from rapid decelerations</p>
                     </div>
@@ -117,7 +107,6 @@
                                 <th colspan="5">
                                     <div class="pid_mode">
                                         <div i18n="pidTuningRateSetup" class="float-left">Basic/Acro Rates</div>
-                                        <div class="helpicon cf_tip" i18n_title="pidTuningRatesTuningHelp"><b>Rates and Expo</b>: Determine your stick feel based on these parameters. Use the graph and live 3D model to find your favourite rate setting.</div>
                                     </div>
                                 </th>
                             </tr>
@@ -129,16 +118,10 @@
                                 <td class="roll_rate">
                                     <input type="number" class="rate_input" id="roll_rate" name="roll_rate" value="0.7" step="0.01" min="0" max="1.00" />
                                 </td>
-                                <!-- <td class="roll_pitch_rate" rowspan="1">
-                                    <input type="number" name="roll_pitch_rate" step="0.01" min="0" max="1.00" />
-                                </td> -->
+          
                                 <td class="rc_roll_expo" rowspan="1">
                                     <input type="number" id="rc_roll_expo" name="rc_roll_expo" value="0" step="0.01" min="0" max="1.00" />
                                 </td>
-                                <!-- <td rowspan="2" class="inputBackground">
-                                    <input type="number" class="expo_input" name="rc_expo" step="0.01" min="0" max="1" />
-                                    <div class="bracket"></div>
-                                </td> -->
                                 <td class="new_rates maxAngularVelRoll"></td>
                             </tr>
                             <tr class="PITCH">
@@ -178,7 +161,6 @@
                                         <th colspan="2">
                                             <div>
                                                 <div i18n="pidTuningRatesCurve" class="float-left">Rates Preview</div>
-                                                <div class="helpicon cf_tip" i18n_title="pidTuningRatesTip">Play with the rates and see how those affect the stick curve</div>
                                             </div>
                                         </th>
                                     </tr>
@@ -199,8 +181,6 @@
                 </div>
 
                 <div class="cf_column">
-                   
-
                     <div class="gui_box throttle spacer_left">
                         <table class="cf">
                             <thead>
@@ -234,22 +214,12 @@
                             </tr>
                         </table>
                     </div>
-               
             </div>
-
-            <!-- FILTER SUBTAB -->
-            <!-- <div class="subtab-filter" style="display: none;">
-              
-            </div> -->
-            
-
         </form>
         </div>
-
     </div>
 
     <div class="content_toolbar">
-       
         <div class="btn refresh_btn">
             <a class="refresh" href="#" i18n="pidTuningButtonRefresh">Refresh</a>
         </div>
