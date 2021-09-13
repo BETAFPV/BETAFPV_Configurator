@@ -5782,34 +5782,34 @@
         "message": "刷新速率"
     },
     "RadioSetupTrainerPort": {
-        "message": "教练端口输出"
+        "message": "  教练端口输出"
     },
     "RadioSetupIRSystemProtocol": {
-        "message": "内部高频头"
+        "message": "  内部高频头"
     },
     "RadioSetupIRSystemPower": {
-        "message": "功率"
+        "message": "  功率"
     },
     "RadioSetupIRPktRate": {
-        "message": "数据包率"
+        "message": "  数据包率"
     },
     "RadioSetupIRTLMRadio": {
-        "message": "遥测率"
+        "message": "  遥测率"
     },
     "RadioSetupERSystemProtocol": {
-        "message": "外部高频头"
+        "message": "  外部高频头"
     },
     "RadioSetupERSystemPower": {
-        "message": "功率设置"
+        "message": "  功率设置"
     },
     "RadioSetupExELRSSystemPower": {
-        "message": "外部ELRS系统"
+        "message": "  外部ELRS系统"
     },
     "RadioSetupexELRSPktRate": {
-        "message": "数据包率"
+        "message": "  数据包率"
     },
     "RadioSetupexELRSTLMRadio": {
-        "message": "遥测率"
+        "message": "  遥测率"
     },
     "RadioSetupBind": {
         "message": "绑定"

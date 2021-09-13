@@ -484,9 +484,6 @@ window.onload=function(){
                     case 'show':
                         show.initialize(content_ready);
                         break;   
-                    case 'calibrate':
-                        calibrate.initialize(content_ready);
-                        break;   
                     default:
                         console.log(`Tab not found: ${tab}`);
                 }

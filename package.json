@@ -17,16 +17,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "electron": "^13.1.7",
     "i18next": "^19.0.0",
     "i18next-xhr-backend": "^3.2.2",
-    "electron": "^13.1.7",
     "jquery": "^3.6.0",
-    "node-hid": "^2.1.1",
-    "usb": "^1.7.1",
-    "serialport": "^9.2.0",
     "jspack": "^0.0.4",
+    "node-hid": "^2.1.1",
+    "serialport": "^9.2.0",
+    "switchery-latest": "^0.8.2",
+    "three": "~0.97.0",
     "underscore": "^1.13.1",
-    "three": "~0.97.0"
+    "usb": "^1.7.1"
   },
   "devDependencies": {
     "electron-rebuild": "^3.2.3",

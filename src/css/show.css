@@ -65,6 +65,17 @@
 .tab-show .active .steptitle {
     background-color: #37a8db;
 }
+.tab-show .options .description {
+    position: relative;
+    left: 0px;
+    font-style: italic;
+    color: #818181;
+}
+
+.tab-show .options label input {
+    float: left;
+    margin-top: 2px;
+}
 
 .tab-show .active {
     border: solid 1px #37a8db;
@@ -194,7 +205,7 @@
 
 .tab-show .bars li {
     float: left;
-    height: 44px;
+    height: 37px;
     line-height: 40px;
     white-space: nowrap;
 }

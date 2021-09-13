@@ -61,7 +61,7 @@ show.refreshUI = function()
 
     document.getElementById('ch1_check').checked = HidConfig.ch1_reverse;
     document.getElementById('ch2_check').checked = HidConfig.ch2_reverse;
-    document.getElementById('ch3_check').checked =HidConfig.ch3_reverse;
+    document.getElementById('ch3_check').checked = HidConfig.ch3_reverse;
     document.getElementById('ch4_check').checked = HidConfig.ch4_reverse;
     
     show.ch1_scale.val(HidConfig.ch1_scale);
@@ -101,7 +101,6 @@ show.refreshUI = function()
         
 
     }
-
 
     show.inputinternalradiosystem.val(HidConfig.irSystemProtocol);
     show.inputinpower.val(HidConfig.irSystemPower);
@@ -184,6 +183,20 @@ show.initialize = function (callback) {
 
         $(window).on('resize', tabresize).resize(); // trigger so labels get correctly aligned on creation
 
+        const COLOR_ACCENT = 'var(--accent)';
+        const COLOR_SWITCHERY_SECOND = 'var(--switcherysecond)';
+
+        $('.toggle').each(function(index, elem) {
+            const switchery = new Switchery(elem, {
+                color: COLOR_ACCENT,
+                secondaryColor: COLOR_SWITCHERY_SECOND,
+            });
+            $(elem).on("change", function () {
+                switchery.setPosition();
+            });
+            $(elem).removeClass('toggle');
+        });
+
         function update_ui() {
             // update bars with latest data
             for (let i = 0; i < 8; i++) {
@@ -192,15 +205,10 @@ show.initialize = function (callback) {
                 meterLabelArray[i].text(HidConfig.channel_data[i]);
             }
         }
-        let plotUpdateRate;
-        const rxRefreshRate = $('select[name="tx_refresh_rate"]');
 
-        rxRefreshRate.change(function () {
-            plotUpdateRate = parseInt($(this).val(), 1);
-
-            GUI.interval_remove('receiver_pull');
-            GUI.interval_add('receiver_pull', update_ui, plotUpdateRate, true);
-        });
+        GUI.interval_remove('receiver_pull');
+        GUI.interval_add('receiver_pull', update_ui, 50, true);
+    
         
         show.ch1_data_source = $('select[name="ch1_data_source"]');
         show.ch1_data_source.change(function () {
@@ -340,9 +348,9 @@ show.initialize = function (callback) {
             HidConfig.rocker_mode = parseInt($(this).val(), 10);
         });
 
-        show.inputtrainerport = $('select[name="trainer_port"]');
+        show.inputtrainerport = $('input[name="trainer_port"]');
         show.inputtrainerport.change(function () {
-            HidConfig.trainerPort = parseInt($(this).val(), 10);
+            HidConfig.trainerPort = $(this).is(':checked');
         });
 
 
@@ -353,7 +361,6 @@ show.initialize = function (callback) {
             if(HidConfig.irSystemProtocol==0)
             {
                 document.getElementById("externalradiosystem").disabled=false;
-                document.getElementById("expower").disabled=false;
                 document.getElementById("inpower").disabled=true;
                 document.getElementById("inpktRate").disabled=true;
                 document.getElementById("inTLMRadio").disabled=true;
@@ -365,10 +372,6 @@ show.initialize = function (callback) {
                 document.getElementById("inpktRate").disabled=false;
                 document.getElementById("inTLMRadio").disabled=false;
                 document.getElementById("externalradiosystem").disabled=true;
-                document.getElementById("expower").disabled=true;
-                document.getElementById("exELRSpower").disabled=true;
-                document.getElementById("exELRSpktRate").disabled=true;
-                document.getElementById("exELRSTLMRadio").disabled=true;
             }
         });
 
@@ -394,7 +397,6 @@ show.initialize = function (callback) {
 
             if(HidConfig.erSystemProtocol)
             {
-                document.getElementById("expower").disabled=false;
                 document.getElementById("internalradiosystem").disabled=true;
                 document.getElementById("inpower").disabled=true;
                 document.getElementById("inpktRate").disabled=true;
@@ -402,10 +404,6 @@ show.initialize = function (callback) {
             }
             else{
                 document.getElementById("expower").value = 0;//OFF
-                document.getElementById("expower").disabled=true;
-                document.getElementById("exELRSpower").disabled=true;
-                document.getElementById("exELRSpktRate").disabled=true;
-                document.getElementById("exELRSTLMRadio").disabled=true;
 
                 document.getElementById("internalradiosystem").disabled=false;
                 document.getElementById("inpower").disabled=false;
@@ -414,21 +412,23 @@ show.initialize = function (callback) {
             }
         });
 
-        show.inputexpower = $('select[id="expower"]');
+        show.inputexpower = $('input[id="expower"]');
         show.inputexpower.change(function () {
-            HidConfig.erSystemPower = parseInt($(this).val(), 10);
+            HidConfig.erSystemPower = $(this).is(':checked');
 
             if(HidConfig.erSystemPower)
             {
-                document.getElementById("exELRSpower").disabled=false;
-                document.getElementById("exELRSpktRate").disabled=false;
-                document.getElementById("exELRSTLMRadio").disabled=false;
+                console.log("checked");
+
+                $("#exELRSpowerID").css({display: 'block'});
+                $("#exELRSpktRateID").css({display: 'block'});
+                $("#exELRSTLMRadioID").css({display: 'block'});
             }
             else
             {
-                document.getElementById("exELRSpower").disabled=true;
-                document.getElementById("exELRSpktRate").disabled=true;
-                document.getElementById("exELRSTLMRadio").disabled=true;
+                $("#exELRSpowerID").css({display: 'none'});
+                $("#exELRSpktRateID").css({display: 'none'});
+                $("#exELRSTLMRadioID").css({display: 'none'});
             }
         });
 
@@ -451,8 +451,6 @@ show.initialize = function (callback) {
         $('a.refresh').click(function () {
             sync_config();
             console.log("refresh click");
-
-
         });
 
         $('a.save').click(function () {
@@ -572,9 +570,6 @@ show.initialize = function (callback) {
             }
             
         });
-
-
-        rxRefreshRate.change(); 
 
         //请求遥控器参数，使上位机显示的配置与其同步
         function sync_config(){
