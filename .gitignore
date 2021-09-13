@@ -34,3 +34,4 @@ nbproject/
 LiteRadio.json
 board.json
 *.bin
+package-lock.json
