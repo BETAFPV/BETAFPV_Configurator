@@ -126,15 +126,14 @@ function loadRemoteJsonFile(){
     xhr.responseType = 'arraybuffer';
     xhr.onload = function(e) {
         var array = new Uint8Array(xhr.response);
-        var tempFile = path.join(__dirname, "./LiteRadio.json");
-        console.log(tempFile);
+        var file_path = path.join(__dirname, "./LiteRadio.json");
 
-        fs.writeFile(tempFile, array, "utf8",(err)=>{
+        fs.writeFile(file_path, array, "utf8",(err)=>{
             if(err){
                 console.log("error");
             }else {
                 console.log("ok");
-                readJsonFile(jsonfileName);
+                readJsonFile(file_path);
             }
         })
     };
