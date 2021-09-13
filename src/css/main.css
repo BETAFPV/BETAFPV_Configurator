@@ -1658,6 +1658,65 @@ dialog .dialog_toolbar .btn a.disabled {
     opacity: 0.5;
 }
 
+
+
+.content_toolbar_switch {
+    /*  content toolbar panel */
+    width: 100%;
+    height: 20px;
+    background-color: #2E2E2E;
+    box-shadow: rgba(0, 0, 0, 0.10) 0 -3px 8px;
+    padding: 10px 0;
+    overflow: hidden;
+    border-top: 1px solid var(--subtleAccent);
+}
+
+.content_toolbar_switch .btn a {
+    /*  common styles for content toolbar buttons */
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 50px;
+    background-color: var(--accent);
+    border-radius: 3px;
+    border: 1px solid #dba718;
+    color: #000;
+    float: right;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+    display: block;
+    cursor: pointer;
+    transition: all ease 0.2s;
+    padding: 0 9px;
+    line-height: 28px;
+    user-select: none;
+}
+
+.content_toolbar_switch .btn a:hover {
+    background-color: var(--hoverButton-background);
+    transition: all ease 0.2s;
+}
+
+.content_toolbar_switch .btn a:active {
+    background-color: var(--accent);
+    transition: all ease 0.0s;
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.35);
+}
+
+.content_toolbar_switch .btn a.disabled {
+    cursor: default;
+    color: #fff;
+    background-color: #AFAFAF;
+    border: 1px solid #AFAFAF;
+    pointer-events: none;
+    text-shadow: none;
+    opacity: 0.5;
+}
+
+
+
+
+
 .toolbar_scroll_bottom .content_wrapper {
     /*  content wrapper in view with toolbar in scroll bottom
       leave 50px space for the toolbar
