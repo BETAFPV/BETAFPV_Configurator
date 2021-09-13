@@ -711,7 +711,7 @@
         "message": "恢复默认设置"
     },
     "initialSetupResetText": {
-        "message": "恢复<strong>默认</strong>设置"
+        "message": "恢复默认设置（包括PID以及RATE曲线）"
     },
     "initialSetupButtonBackup": {
         "message": "备份"
@@ -2495,32 +2495,34 @@
         "message": "磁力计"
     },
     "sensorsAltitudeSelect": {
-        "message": "高度"
+        "message": "气压计"
     },
     "sensorsSonarSelect": {
-        "message": "声呐"
+        "message": "激光"
     },
     "sensorsDebugSelect": {
-        "message": "调试"
+        "message": "光流"
     },
     "sensorsGyroTitle": {
         "message": "陀螺仪 - 度/秒"
     },
- 
+    "sensorsAccelTitle": {
+        "message": "加速度计 - g"
+    },
     "sensorsMagTitle": {
         "message": "磁力计 - Ga"
     },
     "sensorsAltitudeTitle": {
-        "message": "高度 - 米"
+        "message": "气压计 - 厘米"
     },
     "sensorsAltitudeHint": {
         "message": "高度的计算方法是将气压计(如果可用) 的输出与 GPS(如果可用) 的高度输出结合起来。如果已连接到一个 GPS 模块且 GPS 模块定位成功后，则将在未解锁时显示相对于海平面的绝对高度。解锁后，显示相对于解锁时的相对高度。"
     },
     "sensorsSonarTitle": {
-        "message": "声呐 - 厘米"
+        "message": "激光 - 厘米"
     },
     "sensorsDebugTitle": {
-        "message": "调试"
+        "message": "光流"
     },
     "cliInfo": {
         "message": "<strong>注意：</strong>退出 CLI 页面或者点击断开连接将<strong>自动</strong>向飞控发送“<strong>退出</strong>”指令。在最新的固件中这将使飞控<strong>重启</strong>并且未保存的设置将会<strong>丢失</strong>。<p><strong><span class=\"message-negative\">警告：</span></strong>CLI中的某些命令可能导致电机输出引脚发出随机指令。如果连接电池，这有可能导致电机旋转。因此，强烈建议<strong>在 CLI 中输入命令之前确保未连接电池</strong>。"
