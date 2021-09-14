@@ -20,8 +20,8 @@ HidConfig = {
 
     //遥控器硬件版本
     hardware_version:0,
-    //支持哪些协议
-    support_protocol:0,
+    //当前使用的协议
+    current_protocol:0,
     //支持的功率
     support_power:0,
     
@@ -396,46 +396,68 @@ window.onload=function(){
                         if(checkSum == checkSum2)//校验通过
                         {
 
+                            console.log(data);
                             HidConfig.hardware_version = data[1];
-                            HidConfig.support_protocol = data[2];
+                            HidConfig.current_protocol = data[2];
                             HidConfig.rocker_mode = data[3];
                             HidConfig.support_power =data[4];
                             //遥控器硬件信息获取完毕后，需要在这里根据硬件信息修改对应组件的可选元素
-                            
+                            document.getElementById("racker_mode").disabled = false;
+                            show.rocker_mode.val(HidConfig.rocker_mode);
+                            if(HidConfig.hardware_version==0){//硬件型号为：cc2500
 
-                            //接着请求遥控器通道配置信息（上一帧应答解析完毕则开始下一个请求）
-                            // let rquestBuffer = new Buffer.alloc(64);
+                            }else if(HidConfig.hardware_version==1){//硬件型号为：sx1280
+                                if(HidConfig.current_protocol==0){//当前协议为：内置elrs协议
+                                    document.getElementById("internal_radio_protocol").disabled = false;
+                                    show.internal_radio_protocol.value = 1;
+                                    //请求内置elrs射频模块参数
+                                    rquestBuffer[0] = 0x00;
+                                    rquestBuffer[1] = 0x11;
+                                    rquestBuffer[2] = 0x02;
+                                    rquestBuffer[3] = 0x01;
+                                    hidDevice.write(rquestBuffer);
+
+                                }else if(HidConfig.current_protocol==1){//当前协议为：外置crsf射频模块
+                                    document.getElementById("external_radio_protocol").disabled = false;
+                                    show.external_radio_protocol.value =1;
+                                }
+                            }else if(HidConfig.hardware_version==2){//硬件型号为：sx1276
+
+                            }
+                        }                 
+                    }
+                    else if(data[0] == cmd_type.INTERNAL_CONFIGER_INFO_ID)
+                    {
+                        var checkSum=0;
+                        var checkSum2=0;
+
+                        for(i=0;i<7;i++)
+                        {
+                            checkSum +=data[2*i] & 0x00ff;
+                        }                   
+                        checkSum2 = data[15]<<8 | data[14] ;
+    
+                        if(checkSum == checkSum2)
+                        {
+                            console.log("receive internal radio config：");
+                            console.log(data);
+                            HidConfig.internal_radio_power = data[2];
+                            HidConfig.internal_radio_pkt_rate = data[3];
+                            HidConfig.internal_radio_tlm = data[4];
+                            document.getElementById("internal_radio_power").disabled = false;
+                            document.getElementById("internal_radio_pkt_rate").disabled = false;
+                            document.getElementById("internal_radio_tlm").disabled = false;
+                            show.internal_radio_power.val(HidConfig.internal_radio_power);
+                            show.internal_radio_pkt_rate.val(HidConfig.internal_radio_pkt_rate);
+                            show.internal_radio_tlm.val(HidConfig.internal_radio_tlm);
+
+                             //接着请求遥控器通道配置信息
                             rquestBuffer[0] = 0x00;
                             rquestBuffer[1] = 0x11;
                             rquestBuffer[2] = 0x01;
                             rquestBuffer[3] = 0x01;
                             hidDevice.write(rquestBuffer);
-
-                            show.refreshUI();
-                        }                 
-                    }
-                    else if(data[0] == cmd_type.INTERNAL_CONFIGER_INFO_ID)
-                    {
-                        // var checkSum=0;
-                        // var checkSum2=0;
-
-                        // for(i=0;i<7;i++)
-                        // {
-                        //     checkSum +=data[2*i] & 0x00ff;
-                        // }                   
-                        // checkSum2 = data[15]<<8 | data[14] ;
-    
-                        // if(checkSum == checkSum2)
-                        // {
-
-                        //     HidConfig.irSystemProtocol = data[1];
-                        //     HidConfig.irSystemPower = data[2]; 
-                        //     HidConfig.irPktRate = data[3];
-                        //     HidConfig.irTLMRadio = data[4];
-                        //     console.log(data);
-
-                        //     show.refreshUI();
-                        // }                
+                        }                
                     }
                     else if(data[0] == cmd_type.EXTERNAL_CONFIGER_INFO_ID)
                     {
@@ -475,6 +497,7 @@ window.onload=function(){
                     else
                     {
                         
+                        console.log("receiver hid data");
                         HidConfig.channel_data[0] = (data[1]<<8 | data[0]);
                         HidConfig.channel_data[1] = (data[3]<<8 | data[2]);
                         HidConfig.channel_data[2] = (data[5]<<8 | data[4]);

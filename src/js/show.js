@@ -309,58 +309,19 @@ show.initialize = function (callback) {
             HidConfig.Trainer_port = $(this).is(':checked');
         });
         show.internal_radio_protocol.change(function () {
-           
+            HidConfig.internal_radio_protocol = parseInt($(this).val(), 10);
         });
         show.internal_radio_power.change(function () {
-            HidConfig.irSystemPower = parseInt($(this).val(), 10);
-            //内部高频头配置
-            document.getElementById("inpower").disabled=false;
-            document.getElementById("inpktRate").disabled=false;
-            document.getElementById("inTLMRadio").disabled=false;
-            document.getElementById("externalradiosystem").disabled=true;
-            let  buffer= new Buffer.alloc(64);
-            buffer[0] = 0x06;
-            buffer[1] = 0x02;
-            buffer[2] = document.getElementById("inpower").value;
-            buffer[3] = document.getElementById("inpktRate").value;
-            buffer[4] = document.getElementById("inTLMRadio").value;;
-            buffer[5] = 0x00;//2.4G
-            console.log(buffer);
-            hidDevice.write(buffer);
+            HidConfig.internal_radio_power = parseInt($(this).val(), 10);
+            send_internal_radio_config();
         });
         show.internal_radio_pkt_rate.change(function () {
-            HidConfig.irPktRate = parseInt($(this).val(), 10);
-            //内部高频头配置
-            document.getElementById("inpower").disabled=false;
-            document.getElementById("inpktRate").disabled=false;
-            document.getElementById("inTLMRadio").disabled=false;
-            document.getElementById("externalradiosystem").disabled=true;
-            let  buffer= new Buffer.alloc(64);
-            buffer[0] = 0x06;
-            buffer[1] = 0x02;
-            buffer[2] = document.getElementById("inpower").value;
-            buffer[3] = document.getElementById("inpktRate").value;
-            buffer[4] = document.getElementById("inTLMRadio").value;;
-            buffer[5] = 0x00;//2.4G
-            console.log(buffer);
-            hidDevice.write(buffer);
+            HidConfig.internal_radio_pkt_rate = parseInt($(this).val(), 10);
+            send_internal_radio_config();
         });
         show.internal_radio_tlm.change(function () {
-            HidConfig.irTLMRadio = parseInt($(this).val(), 10);
-            //内部高频头配置
-            document.getElementById("inpower").disabled=false;
-            document.getElementById("inpktRate").disabled=false;
-            document.getElementById("inTLMRadio").disabled=false;
-            document.getElementById("externalradiosystem").disabled=true;
-            let  buffer= new Buffer.alloc(64);
-            buffer[0] = 0x06;
-            buffer[1] = 0x02;
-            buffer[2] = document.getElementById("inpower").value;
-            buffer[3] = document.getElementById("inpktRate").value;
-            buffer[4] = document.getElementById("inTLMRadio").value;;
-            buffer[5] = 0x00;//2.4G
-            console.log(buffer);
-            hidDevice.write(buffer);
+            HidConfig.internal_radio_tlm = parseInt($(this).val(), 10);
+            send_internal_radio_config();
         });
         show.external_radio_protocol.change(function () {
             HidConfig.erSystemProtocol = parseInt($(this).val(), 10);
@@ -461,6 +422,8 @@ show.initialize = function (callback) {
             configBuff[4] = HidConfig.ch1_reverse_display;
             configBuff[5] = HidConfig.ch1_scale_display;
             configBuff[6] = HidConfig.ch1_offset_display+100;
+            configBuff[7] = 0;
+            configBuff[8] = 0;
             hidDevice.write(configBuff);
         }
         function send_ch2_config(){
@@ -471,6 +434,8 @@ show.initialize = function (callback) {
             configBuff[4] = HidConfig.ch2_reverse_display;
             configBuff[5] = HidConfig.ch2_scale_display;
             configBuff[6] = HidConfig.ch2_offset_display+100;
+            configBuff[7] = 0;
+            configBuff[8] = 0;
             hidDevice.write(configBuff);
         }
         function send_ch3_config(){
@@ -481,6 +446,8 @@ show.initialize = function (callback) {
             configBuff[4] = HidConfig.ch3_reverse_display;
             configBuff[5] = HidConfig.ch3_scale_display;
             configBuff[6] = HidConfig.ch3_offset_display+100;
+            configBuff[7] = 0;
+            configBuff[8] = 0;
             hidDevice.write(configBuff);
         }
         function send_ch4_config(){
@@ -491,6 +458,8 @@ show.initialize = function (callback) {
             configBuff[4] = HidConfig.ch4_reverse_display;
             configBuff[5] = HidConfig.ch4_scale_display;
             configBuff[6] = HidConfig.ch4_offset_display+100;
+            configBuff[7] = 0;
+            configBuff[8] = 0;
             hidDevice.write(configBuff);
         }
         function send_ch5_config(){
@@ -498,6 +467,11 @@ show.initialize = function (callback) {
             configBuff[1] = 0x01;
             configBuff[2] = 0x04;
             configBuff[3] = HidConfig.ch5_input_source_display;
+            configBuff[4] = 0;
+            configBuff[5] = 0;
+            configBuff[6] = 0;
+            configBuff[7] = 0;
+            configBuff[8] = 0;
             hidDevice.write(configBuff);
         }
         function send_ch6_config(){
@@ -505,6 +479,11 @@ show.initialize = function (callback) {
             configBuff[1] = 0x01;
             configBuff[2] = 0x05;
             configBuff[3] = HidConfig.ch6_input_source_display;
+            configBuff[4] = 0;
+            configBuff[5] = 0;
+            configBuff[6] = 0;
+            configBuff[7] = 0;
+            configBuff[8] = 0;
             hidDevice.write(configBuff);
         }
         function send_ch7_config(){
@@ -519,9 +498,26 @@ show.initialize = function (callback) {
             configBuff[1] = 0x01;
             configBuff[2] = 0x07;
             configBuff[3] = HidConfig.ch7_input_source_display;
+            configBuff[4] = 0;
+            configBuff[5] = 0;
+            configBuff[6] = 0;
+            configBuff[7] = 0;
+            configBuff[8] = 0;
             hidDevice.write(configBuff);
         }
 
+        function send_internal_radio_config(){
+            configBuff[0] = 0x00;
+            configBuff[1] = 0x06;
+            configBuff[2] = 0x02;
+            configBuff[3] = HidConfig.internal_radio_power;
+            configBuff[4] = HidConfig.internal_radio_pkt_rate;
+            configBuff[5] = HidConfig.internal_radio_tlm;
+            configBuff[6] = 0;
+            configBuff[7] = 0;
+            configBuff[8] = 0;
+            hidDevice.write(configBuff);
+        }
 
 
         $('a.refresh').click(function () {
@@ -532,34 +528,25 @@ show.initialize = function (callback) {
             console.log("save click");
             var bufName = new Buffer.alloc(64);
             
-            if(HidConfig.irSystemProtocol==0&&HidConfig.erSystemProtocol==0){
+            if(HidConfig.internal_radio_protocol==0&&HidConfig.external_radio_protocol==0){
                 alert("save failed!  you need to select at least one protocol");
                 return 0;
             }
-
-            //保存
-            bufName[0] = 0x0;
+            bufName[0] = 0x00;
             bufName[1] = 0x05;
+            bufName[2] = 0x01;
+            bufName[3] = HidConfig.rocker_mode;
+            bufName[4] = 0x02;
+            hidDevice.write(bufName);
 
-            if(HidConfig.irSystemProtocol)
-            {
-                bufName[2] = 0x00;
-                bufName[3] = HidConfig.rocker_mode;
-                bufName[4] = 0x02;
-                hidDevice.write(bufName);
-            }
-            else if( HidConfig.erSystemProtocol)
-            {
-                bufName[2] = 0x01;
-                bufName[3] = HidConfig.rocker_mode;
-                bufName[4] = 0x02;
-                hidDevice.write(bufName);
-            }
-            else
-            {
-                alert("Please Select Correct Protocol!");
-                bufName[2] = 0x00;
-            }
+            //保存并重启
+            bufName[0] = 0x00;
+            bufName[1] = 0x11;
+            bufName[2] = 0x00;
+            bufName[3] = 0x02;
+            bufName[4] = 0x00;
+            hidDevice.write(bufName);
+            
             
         });
 
@@ -571,6 +558,8 @@ show.initialize = function (callback) {
             bufName[1] = 0x11;
             bufName[2] = 0x02;
             bufName[3] = 0x00;
+            bufName[4] = 0x00;
+            bufName[5] = 0x00;
             console.log(bufName);
             hidDevice.write(bufName);
             
