@@ -17,7 +17,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^13.1.7",
     "i18next": "^19.0.0",
     "i18next-xhr-backend": "^3.2.2",
     "jquery": "^3.6.0",
@@ -30,8 +29,8 @@
     "usb": "^1.7.1"
   },
   "devDependencies": {
-    "electron-rebuild": "^3.2.3",
-    "serialport": "^9.2.1"
+    "electron": "^13.1.7",
+    "electron-rebuild": "^3.2.3"
   },
   "repository": {
     "type": "git",

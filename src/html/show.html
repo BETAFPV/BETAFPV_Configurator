@@ -11,7 +11,7 @@
             <div class="spacer">
                 <table class="cf_table" style="margin-top: 10px;">
                     <tr>
-                        <td class="board-select"><select name="radiomode" style="width:40%;">
+                        <td class="board-select"><select name="radiomode" style="width:40%;"disabled = "disabled">
                                 <option value="0" >Mode 1</option>
                                 <option value="1" >Mode 2</option>
                         </select></td>
@@ -39,7 +39,7 @@
                             <tr>
                                 <td>
                                     <div class="input-helpicon-flex">
-                                        <select id="internalradiosystem" style="width:15%; margin-top: 12px;"  >
+                                        <select id="internal_radio_protocol" style="width:15%; margin-top: 12px;" disabled = "disabled" >
                                             <option value="0">OFF</option>
                                             <option value="1" selected="selected" >2.4GHz</option>
                                         </select>
@@ -52,7 +52,7 @@
                             <tr>
                                 <td>
                                     <div class="input-helpicon-flex">
-                                        <select id="inpower" style="width:15%; margin-top: 12px;" >
+                                        <select id="internal_radio_power" style="width:15%; margin-top: 12px;" disabled = "disabled">
                                             <option value="0" selected="selected">25mw</option>
                                             <option value="1">50mw</option>
                                             <option value="2">100mw</option>
@@ -64,7 +64,7 @@
                             <tr>
                                 <td>
                                     <div class="input-helpicon-flex">
-                                        <select id="inpktRate" style="width:15%; margin-top: 12px;" >
+                                        <select id="internal_radio_pkt_rate" style="width:15%; margin-top: 12px;" disabled = "disabled">
                                             <option value="0" selected="selected">500Hz</option>
                                             <option value="1">250Hz</option>
                                             <option value="2">150Hz</option>
@@ -77,7 +77,7 @@
                             <tr>
                                 <td>
                                     <div class="input-helpicon-flex">
-                                        <select id="inTLMRadio" style="width:15%; margin-top: 12px;" >
+                                        <select id="internal_radio_tlm" style="width:15%; margin-top: 12px;" disabled = "disabled">
                                             <option value="0" selected="selected">OFF</option>
                                             <option value="1">1:128</option>
                                             <option value="2">1:64</option>
@@ -102,7 +102,7 @@
                             <tr>
                                 <td>
                                     <div class="input-helpicon-flex">
-                                        <select id="externalradiosystem" style="width:15%; margin-top: 12px;">
+                                        <select id="external_radio_protocol" style="width:15%; margin-top: 12px;"disabled = "disabled">
                                             <option value="0" selected="selected">OFF</option>
                                             <option value="1">CRSF</option>
                                         </select>
@@ -112,9 +112,9 @@
                             </tr>
                             <tr>   
                                 <td>
-                                    <div class="input-helpicon-flex" style="width:15%; margin-top: 12px;">
+                                    <div class="input-helpicon-flex" style="width:15%; margin-top: 12px;"disabled = "disabled">
 
-                                        <input class="toggle" type="checkbox" id="expower"/>
+                                        <input class="toggle" type="checkbox" id="external_radio_power_switch"/>
 
                                         <label i18n = "RadioSetupERSystemPower"></label>
                                     </div>
@@ -124,7 +124,7 @@
                             <tr >
                                 <td style="display: none;" id="exELRSpowerID">
                                     <div class="input-helpicon-flex" >
-                                        <select id="exELRSpower" style="width:15%; margin-top: 12px;">
+                                        <select id="external_radio_power_elrs" style="width:15%; margin-top: 12px;"disabled = "disabled">
                                             <option value="0" selected="selected">10mw</option>
                                             <option value="1">25mw</option>
                                             <option value="2">50mw</option>
@@ -139,11 +139,11 @@
                             <tr >
                                 <td  style="display: none;" id="exELRSpktRateID">
                                     <div class="input-helpicon-flex" >
-                                        <select id="exELRSpktRate" style="width:15%; margin-top: 12px;">
-                                            <option value="0" selected="selected">500Hz</option>
-                                            <option value="1">250Hz</option>
-                                            <option value="2">150Hz</option>
-                                            <option value="3">50Hz</option>
+                                        <select id="external_radio_pkt_rate_elrs" style="width:15%; margin-top: 12px;"disabled = "disabled">
+                                            <option value="0" selected="selected">200Hz</option>
+                                            <option value="1">100Hz</option>
+                                            <option value="2">50Hz</option>
+                                            <option value="3">25Hz</option>
                                         </select>
                                         <label i18n = "RadioSetupexELRSPktRate" style="width:15%; margin-top: 12px;" ></label>
                                     </div>
@@ -152,7 +152,7 @@
                             <tr  >     
                                 <td style="display: none;" id="exELRSTLMRadioID">
                                     <div class="input-helpicon-flex" >
-                                        <select id="exELRSTLMRadio" style="width:15%; margin-top: 12px;">
+                                        <select id="external_radio_tlm_elrs" style="width:15%; margin-top: 12px;"disabled = "disabled">
                                             <option value="0" selected="selected">OFF</option>
                                             <option value="1">1:128</option>
                                             <option value="2">1:64</option>

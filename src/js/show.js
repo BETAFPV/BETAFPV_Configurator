@@ -1,5 +1,12 @@
 const show = {
     
+    /**************show定义的变量用于索引界面组件*******************/
+    //日本手、美国手模式
+    rocker_mode:null,
+    //Trainer 口开关
+    trainer_port:null,
+    
+    
     //通道对应数据来源
     ch1_data_source:null,
     ch2_data_source:null,
@@ -28,27 +35,30 @@ const show = {
     ch3_reverse:null,
     ch4_reverse:null,
 
-    //日本手、美国手模式
-    rocker_mode:null,
+    
+    //内部射频模块配置信息
+    internal_radio_protocol:null,
+    internal_radio_power:null,
+    internal_radio_pkt_rate:null,
+    internal_radio_tlm:null,
 
+    //外置射频模块配置信息
+    external_radio_protocol:null,//外置高频头协议选择
+    external_radio_power_switch:null,//高频头供电开关
+    
+    
+    external_radio_power_elrs:null,
+    external_radio_pkt_rate_elrs:null,
+    external_radio_tlm_elrs:null,
 
-
-    // inputmode:null,
-    inputtrainerport:null,
-    inputinternalradiosystem:null,
-    inputinpower:null,
-    inputinpktRate:null,
-    inputinTLMRadio:null,
-    inputexternalradiosystem:null,
-    inputexpower:null,
-    inputexELRSpower:null,
-    inputexELRSpktRate:null,
-    inputexELRSTLMRadio:null,
 };
 
 
 show.refreshUI = function()
 {
+    show.rocker_mode.val(HidConfig.rocker_mode);
+    // show.trainer_port.val(HidConfig.trainerPort);
+
     show.ch1_data_source.val(HidConfig.ch1_input_source);
     show.ch2_data_source.val(HidConfig.ch2_input_source);
     show.ch3_data_source.val(HidConfig.ch3_input_source);
@@ -74,48 +84,11 @@ show.refreshUI = function()
     show.ch3_offset.val(HidConfig.ch3_offset);
     show.ch4_offset.val(HidConfig.ch4_offset);
 
-    show.rocker_mode.val(HidConfig.rocker_mode);
-    show.inputtrainerport.val(HidConfig.trainerPort);
-
-    if(HidConfig.irSystemProtocol)
-    {
-        document.getElementById("internalradiosystem").disabled=false;
-        document.getElementById("inpower").disabled=false;
-        document.getElementById("inpktRate").disabled=false;
-        document.getElementById("inTLMRadio").disabled=false;
-    }
-    else{
-        document.getElementById("internalradiosystem").disabled=true;
-        document.getElementById("inpower").disabled=true;
-        document.getElementById("inpktRate").disabled=true;
-        document.getElementById("inTLMRadio").disabled=true;
-
-        document.getElementById("externalradiosystem").disabled=false;
-        document.getElementById("expower").disabled=false;
-    }
-
-    if(HidConfig.erSystemProtocol){
-
- 
-    }else{
-        
-
-    }
-
-    show.inputinternalradiosystem.val(HidConfig.irSystemProtocol);
-    show.inputinpower.val(HidConfig.irSystemPower);
-    show.inputinpktRate.val(HidConfig.irPktRate);
-    show.inputinTLMRadio.val(HidConfig.irTLMRadio);
-    show.inputexternalradiosystem.val(HidConfig.erSystemProtocol);
-    show.inputexpower.val(HidConfig.erSystemPower);
-    show.inputexELRSpower.val(HidConfig.exELRSSystemPower);
-    show.inputexELRSpktRate.val(HidConfig.exELRSPktRate);
-    show.inputexELRSTLMRadio.val(HidConfig.exELRSTLMRadio);
 };
 
 
 show.initialize = function (callback) {
-
+    let configBuff = new Buffer.alloc(64);
     $('#content').load("./src/html/show.html", function () {
 
         
@@ -209,190 +182,198 @@ show.initialize = function (callback) {
         GUI.interval_remove('receiver_pull');
         GUI.interval_add('receiver_pull', update_ui, 50, true);
     
-        
+        show.rocker_mode = $('select[name="radiomode"]');
+        show.Trainer_port = $('input[name="trainer_port"]');
+
         show.ch1_data_source = $('select[name="ch1_data_source"]');
-        show.ch1_data_source.change(function () {
-            HidConfig.ch1_input_source_display = parseInt($(this).val(), 10);
-        });
-
         show.ch2_data_source = $('select[name="ch2_data_source"]');
-        show.ch2_data_source.change(function () {
-            HidConfig.ch2_input_source_display = parseInt($(this).val(), 10);
-        });
-
         show.ch3_data_source = $('select[name="ch3_data_source"]');
-        show.ch3_data_source.change(function () {
-            HidConfig.ch3_input_source_display = parseInt($(this).val(), 10);
-        });
-      
         show.ch4_data_source = $('select[name="ch4_data_source"]');
-        show.ch4_data_source.change(function () {
-            HidConfig.ch4_input_source_display = parseInt($(this).val(), 10);
-        });
-
         show.ch5_data_source = $('select[name="ch5_data_source"]');
-        show.ch5_data_source.change(function () {
-            HidConfig.ch5_input_source_display = parseInt($(this).val(), 10);
-        });
-
         show.ch6_data_source = $('select[name="ch6_data_source"]');
-        show.ch6_data_source.change(function () {
-            HidConfig.ch6_input_source_display = parseInt($(this).val(), 10);
-        });
-
         show.ch7_data_source = $('select[name="ch7_data_source"]');
-        show.ch7_data_source.change(function () {
-            HidConfig.ch7_input_source_display = parseInt($(this).val(), 10);
-        });
-
         show.ch8_data_source = $('select[name="ch8_data_source"]');
-        show.ch8_data_source.change(function () {
-            HidConfig.ch8_input_source_display = parseInt($(this).val(), 10);
-        });
-
-        show.ch1_reverse=$('input[id="ch1_check"]');
-        show.ch1_reverse.change(function () {
-            var flag = $(this).is(':checked');
-            if(flag)
-            {
-                HidConfig.ch1_reverse_display = 1;
-            }
-            else
-            {
-                HidConfig.ch1_reverse_display = 0;
-            }
-            
-        });
-
-        show.ch2_reverse=$('input[id="ch2_check"]');
-        show.ch2_reverse.change(function () {
-            var flag = $(this).is(':checked');
-            if(flag)
-            {
-                HidConfig.ch2_reverse_display = 1;
-            }
-            else
-            {
-                HidConfig.ch2_reverse_display = 0;
-            }
-        });
-
-        show.ch3_reverse=$('input[id="ch3_check"]');
-        show.ch3_reverse.change(function () {
-            var flag = $(this).is(':checked');
-            if(flag)
-            {
-                HidConfig.ch3_reverse_display = 1;
-            }
-            else
-            {
-                HidConfig.ch3_reverse_display = 0;
-            }
-        });
-
-        show.ch4_reverse=$('input[id="ch4_check"]');
-        show.ch4_reverse.change(function () {
-            var flag = $(this).is(':checked');
-            if(flag)
-            {
-                HidConfig.ch4_reverse_display = 1;
-            }
-            else
-            {
-                HidConfig.ch4_reverse_display = 0;
-            }
-        });
 
         show.ch1_scale=$('input[name="ch1_scale"]');
-        show.ch1_scale.change(function () {
-            HidConfig.ch1_scale_display = parseInt($(this).val(), 10);
-        });
-
         show.ch2_scale=$('input[name="ch2_scale"]');
-        show.ch2_scale.change(function () {
-            HidConfig.ch2_scale_display = parseInt($(this).val(), 10);
-        });
-
         show.ch3_scale=$('input[name="ch3_scale"]');
-        show.ch3_scale.change(function () {
-            HidConfig.ch3_scale_display = parseInt($(this).val(), 10);
-        });
-
         show.ch4_scale=$('input[name="ch4_scale"]');
-        show.ch4_scale.change(function () {
-            HidConfig.ch4_scale_display = parseInt($(this).val(), 10);
-        });
 
         show.ch1_offset=$('input[name="ch1_offset"]');
+        show.ch2_offset=$('input[name="ch2_offset"]');
+        show.ch3_offset=$('input[name="ch3_offset"]');
+        show.ch4_offset=$('input[name="ch4_offset"]');
+
+        show.ch1_reverse=$('input[id="ch1_check"]');
+        show.ch2_reverse=$('input[id="ch2_check"]');
+        show.ch3_reverse=$('input[id="ch3_check"]');
+        show.ch4_reverse=$('input[id="ch4_check"]');
+
+        show.internal_radio_protocol = $('select[id="internal_radio_protocol"]');
+        show.internal_radio_power = $('select[id="internal_radio_power"]');
+        show.internal_radio_pkt_rate = $('select[id="internal_radio_pkt_rate"]');
+        show.internal_radio_tlm = $('select[id="internal_radio_tlm"]');
+        
+        show.external_radio_protocol = $('select[id="external_radio_protocol"]');
+        show.external_radio_power_switch = $('input[id="external_radio_power_switch"]');
+        
+        show.external_radio_power_elrs = $('select[id="external_radio_power_elrs"]');
+        show.external_radio_pkt_rate_elrs = $('select[id="external_radio_pkt_rate_elrs"]');
+        show.external_radio_tlm_elrs = $('select[id="external_radio_tlm_elrs"]');
+        
+        
+        show.ch1_data_source.change(function () {
+            HidConfig.ch1_input_source_display = parseInt($(this).val(), 10);
+            send_ch1_config();
+        });
+        show.ch2_data_source.change(function () {
+            HidConfig.ch2_input_source_display = parseInt($(this).val(), 10);
+            send_ch2_config();
+        });
+        show.ch3_data_source.change(function () {
+            HidConfig.ch3_input_source_display = parseInt($(this).val(), 10);
+            send_ch3_config();
+        });
+        show.ch4_data_source.change(function () {
+            HidConfig.ch4_input_source_display = parseInt($(this).val(), 10);
+            send_ch4_config();
+        });
+        show.ch5_data_source.change(function () {
+            HidConfig.ch5_input_source_display = parseInt($(this).val(), 10);
+            send_ch5_config();
+        });
+        show.ch6_data_source.change(function () {
+            HidConfig.ch6_input_source_display = parseInt($(this).val(), 10);
+            send_ch6_config();
+        });
+        show.ch7_data_source.change(function () {
+            HidConfig.ch7_input_source_display = parseInt($(this).val(), 10);
+            send_ch7_config();
+        });
+        show.ch8_data_source.change(function () {
+            HidConfig.ch8_input_source_display = parseInt($(this).val(), 10);
+            send_ch8_config();
+        });
+        show.ch1_reverse.change(function () {
+            HidConfig.ch1_reverse_display = $(this).is(':checked')?1:0;
+            send_ch1_config();
+        });
+        show.ch2_reverse.change(function () {
+            HidConfig.ch2_reverse_display = $(this).is(':checked')?1:0;
+            send_ch2_config();
+        });
+        show.ch3_reverse.change(function () {
+            HidConfig.ch3_reverse_display = $(this).is(':checked')?1:0;
+            send_ch3_config();
+        });
+        show.ch4_reverse.change(function () {
+            HidConfig.ch4_reverse_display = $(this).is(':checked')?1:0;
+            send_ch4_config();
+        }); 
+        show.ch1_scale.change(function () {
+            HidConfig.ch1_scale_display = parseInt($(this).val(), 10);
+            send_ch1_config();
+        });
+        show.ch2_scale.change(function () {
+            HidConfig.ch2_scale_display = parseInt($(this).val(), 10);
+            send_ch2_config();
+        });
+        show.ch3_scale.change(function () {
+            HidConfig.ch3_scale_display = parseInt($(this).val(), 10);
+            send_ch3_config();
+        });
+        show.ch4_scale.change(function () {
+            HidConfig.ch4_scale_display = parseInt($(this).val(), 10);
+            send_ch4_config();
+        });     
         show.ch1_offset.change(function () {
             HidConfig.ch1_offset_display = parseInt($(this).val(), 10);
+            send_ch1_config();
         });
-
-        show.ch2_offset=$('input[name="ch2_offset"]');
         show.ch2_offset.change(function () {
             HidConfig.ch2_offset_display = parseInt($(this).val(), 10);
+            send_ch2_config();
         });
-
-        show.ch3_offset=$('input[name="ch3_offset"]');
         show.ch3_offset.change(function () {
             HidConfig.ch3_offset_display = parseInt($(this).val(), 10);
+            send_ch3_config();
         });
-
-        show.ch4_offset=$('input[name="ch4_offset"]');
         show.ch4_offset.change(function () {
             HidConfig.ch4_offset_display = parseInt($(this).val(), 10);
+            send_ch4_config();
         });
-
-        show.rocker_mode = $('select[name="radiomode"]');
         show.rocker_mode.change(function () {
             HidConfig.rocker_mode = parseInt($(this).val(), 10);
         });
-
-        show.inputtrainerport = $('input[name="trainer_port"]');
-        show.inputtrainerport.change(function () {
-            HidConfig.trainerPort = $(this).is(':checked');
+        show.Trainer_port.change(function () {
+            HidConfig.Trainer_port = $(this).is(':checked');
         });
-
-
-        show.inputinternalradiosystem = $('select[id="internalradiosystem"]');
-        show.inputinternalradiosystem.change(function () {
-            HidConfig.irSystemProtocol = parseInt($(this).val(), 10);
-
-            if(HidConfig.irSystemProtocol==0)
-            {
-                document.getElementById("externalradiosystem").disabled=false;
-                document.getElementById("inpower").disabled=true;
-                document.getElementById("inpktRate").disabled=true;
-                document.getElementById("inTLMRadio").disabled=true;
-
-            }
-            else
-            {
-                document.getElementById("inpower").disabled=false;
-                document.getElementById("inpktRate").disabled=false;
-                document.getElementById("inTLMRadio").disabled=false;
-                document.getElementById("externalradiosystem").disabled=true;
-            }
+        show.internal_radio_protocol.change(function () {
+           
         });
-
-        show.inputinpower = $('select[id="inpower"]');
-        show.inputinpower.change(function () {
+        show.internal_radio_power.change(function () {
             HidConfig.irSystemPower = parseInt($(this).val(), 10);
+            //内部高频头配置
+            document.getElementById("inpower").disabled=false;
+            document.getElementById("inpktRate").disabled=false;
+            document.getElementById("inTLMRadio").disabled=false;
+            document.getElementById("externalradiosystem").disabled=true;
+            let  buffer= new Buffer.alloc(64);
+            buffer[0] = 0x06;
+            buffer[1] = 0x02;
+            buffer[2] = document.getElementById("inpower").value;
+            buffer[3] = document.getElementById("inpktRate").value;
+            buffer[4] = document.getElementById("inTLMRadio").value;;
+            buffer[5] = 0x00;//2.4G
+            console.log(buffer);
+            hidDevice.write(buffer);
         });
-
-        show.inputinpktRate = $('select[id="inpktRate"]');
-        show.inputinpktRate.change(function () {
+        show.internal_radio_pkt_rate.change(function () {
             HidConfig.irPktRate = parseInt($(this).val(), 10);
+            //内部高频头配置
+            document.getElementById("inpower").disabled=false;
+            document.getElementById("inpktRate").disabled=false;
+            document.getElementById("inTLMRadio").disabled=false;
+            document.getElementById("externalradiosystem").disabled=true;
+            let  buffer= new Buffer.alloc(64);
+            buffer[0] = 0x06;
+            buffer[1] = 0x02;
+            buffer[2] = document.getElementById("inpower").value;
+            buffer[3] = document.getElementById("inpktRate").value;
+            buffer[4] = document.getElementById("inTLMRadio").value;;
+            buffer[5] = 0x00;//2.4G
+            console.log(buffer);
+            hidDevice.write(buffer);
         });
-
-        show.inputinTLMRadio = $('select[id="inTLMRadio"]');
-        show.inputinTLMRadio.change(function () {
+        show.internal_radio_tlm.change(function () {
             HidConfig.irTLMRadio = parseInt($(this).val(), 10);
+            //内部高频头配置
+            document.getElementById("inpower").disabled=false;
+            document.getElementById("inpktRate").disabled=false;
+            document.getElementById("inTLMRadio").disabled=false;
+            document.getElementById("externalradiosystem").disabled=true;
+            let  buffer= new Buffer.alloc(64);
+            buffer[0] = 0x06;
+            buffer[1] = 0x02;
+            buffer[2] = document.getElementById("inpower").value;
+            buffer[3] = document.getElementById("inpktRate").value;
+            buffer[4] = document.getElementById("inTLMRadio").value;;
+            buffer[5] = 0x00;//2.4G
+            console.log(buffer);
+            hidDevice.write(buffer);
         });
-
-        show.inputexternalradiosystem = $('select[id="externalradiosystem"]');
-        show.inputexternalradiosystem.change(function () {
+        show.external_radio_protocol.change(function () {
             HidConfig.erSystemProtocol = parseInt($(this).val(), 10);
+
+            if(HidConfig.erSystemProtocol){
+                let  buffer= new Buffer.alloc(64);
+                buffer[0] = 0x00; 
+                buffer[1] = 0x05;
+                 buffer[2] = 0x01;
+                 buffer[3] = 0x00;
+                 console.log(buffer);
+                 hidDevice.write(buffer);
+            }
 
 
             if(HidConfig.erSystemProtocol)
@@ -401,6 +382,16 @@ show.initialize = function (callback) {
                 document.getElementById("inpower").disabled=true;
                 document.getElementById("inpktRate").disabled=true;
                 document.getElementById("inTLMRadio").disabled=true;
+                 //外部射频模块配置
+                //  let  buffer= new Buffer.alloc(64);
+                //  buffer[0] = 0x07;
+                //  buffer[1] = 0x02;
+                //  buffer[2] = document.getElementById("exELRSpower").value;
+                //  buffer[3] = document.getElementById("exELRSpktRate").value;
+                //  buffer[4] = document.getElementById("exELRSTLMRadio").value;
+                //  buffer[5] = 0x00;//RF Freq
+                //  console.log(buffer);
+                //  hidDevice.write(buffer);
             }
             else{
                 document.getElementById("expower").value = 0;//OFF
@@ -409,11 +400,10 @@ show.initialize = function (callback) {
                 document.getElementById("inpower").disabled=false;
                 document.getElementById("inpktRate").disabled=false;
                 document.getElementById("inTLMRadio").disabled=false;
+               
             }
         });
-
-        show.inputexpower = $('input[id="expower"]');
-        show.inputexpower.change(function () {
+        show.external_radio_power_switch.change(function () {
             HidConfig.erSystemPower = $(this).is(':checked');
 
             if(HidConfig.erSystemPower)
@@ -423,127 +413,129 @@ show.initialize = function (callback) {
                 $("#exELRSpowerID").css({display: 'block'});
                 $("#exELRSpktRateID").css({display: 'block'});
                 $("#exELRSTLMRadioID").css({display: 'block'});
+                let  buffer= new Buffer.alloc(64);
+                 buffer[0] = 0x00;
+                 buffer[1] = 0x07;
+                 buffer[2] = 0x01;
+                 hidDevice.write(buffer);
             }
             else
             {
+                console.log("exELRSpower ON");
                 $("#exELRSpowerID").css({display: 'none'});
                 $("#exELRSpktRateID").css({display: 'none'});
                 $("#exELRSTLMRadioID").css({display: 'none'});
+                let  buffer= new Buffer.alloc(64);
+                buffer[0] = 0x00; 
+                buffer[1] = 0x07;
+                 buffer[2] = 0x00;
+                 hidDevice.write(buffer);
             }
         });
-
-        show.inputexELRSpower = $('select[id="exELRSpower"]');
-        show.inputexELRSpower.change(function () {
+        show.external_radio_power_elrs.change(function () {
+            let  buffer= new Buffer.alloc(64);
+            buffer[0] = 0x07;
+            buffer[1] = 0x02;
+            buffer[2] = document.getElementById("exELRSpower").value;
+            buffer[3] = document.getElementById("exELRSpktRate").value;
+            buffer[4] = document.getElementById("exELRSTLMRadio").value;
+            buffer[5] = 0x00;//RF Freq
+            console.log(buffer);
+            hidDevice.write(buffer);
             HidConfig.exELRSSystemPower = parseInt($(this).val(), 10);
         });
+        show.external_radio_pkt_rate_elrs.change(function () {
 
-        show.inputexELRSpktRate = $('select[id="exELRSpktRate"]');
-        show.inputexELRSpktRate.change(function () {
             HidConfig.exELRSPktRate = parseInt($(this).val(), 10);
         });
-
-        show.inputexELRSTLMRadio = $('select[id="exELRSTLMRadio"]');
-        show.inputexELRSTLMRadio.change(function () {
-            HidConfig.exELRSTLMRadio = parseInt($(this).val(), 10);
+        show.external_radio_tlm_elrs.change(function () {
+           
         });
 
-  
+
+        function send_ch1_config(){
+            configBuff[0] = 0x00;
+            configBuff[1] = 0x01;
+            configBuff[2] = 0x00;
+            configBuff[3] = HidConfig.ch1_input_source_display;
+            configBuff[4] = HidConfig.ch1_reverse_display;
+            configBuff[5] = HidConfig.ch1_scale_display;
+            configBuff[6] = HidConfig.ch1_offset_display+100;
+            hidDevice.write(configBuff);
+        }
+        function send_ch2_config(){
+            configBuff[0] = 0x00;
+            configBuff[1] = 0x01;
+            configBuff[2] = 0x01;
+            configBuff[3] = HidConfig.ch2_input_source_display;
+            configBuff[4] = HidConfig.ch2_reverse_display;
+            configBuff[5] = HidConfig.ch2_scale_display;
+            configBuff[6] = HidConfig.ch2_offset_display+100;
+            hidDevice.write(configBuff);
+        }
+        function send_ch3_config(){
+            configBuff[0] = 0x00;
+            configBuff[1] = 0x01;
+            configBuff[2] = 0x02;
+            configBuff[3] = HidConfig.ch3_input_source_display;
+            configBuff[4] = HidConfig.ch3_reverse_display;
+            configBuff[5] = HidConfig.ch3_scale_display;
+            configBuff[6] = HidConfig.ch3_offset_display+100;
+            hidDevice.write(configBuff);
+        }
+        function send_ch4_config(){
+            configBuff[0] = 0x00;
+            configBuff[1] = 0x01;
+            configBuff[2] = 0x03;
+            configBuff[3] = HidConfig.ch4_input_source_display;
+            configBuff[4] = HidConfig.ch4_reverse_display;
+            configBuff[5] = HidConfig.ch4_scale_display;
+            configBuff[6] = HidConfig.ch4_offset_display+100;
+            hidDevice.write(configBuff);
+        }
+        function send_ch5_config(){
+            configBuff[0] = 0x00;
+            configBuff[1] = 0x01;
+            configBuff[2] = 0x04;
+            configBuff[3] = HidConfig.ch5_input_source_display;
+            hidDevice.write(configBuff);
+        }
+        function send_ch6_config(){
+            configBuff[0] = 0x00;
+            configBuff[1] = 0x01;
+            configBuff[2] = 0x05;
+            configBuff[3] = HidConfig.ch6_input_source_display;
+            hidDevice.write(configBuff);
+        }
+        function send_ch7_config(){
+            configBuff[0] = 0x00;
+            configBuff[1] = 0x01;
+            configBuff[2] = 0x06;
+            configBuff[3] = HidConfig.ch7_input_source_display;
+            hidDevice.write(configBuff);
+        }
+        function send_ch8_config(){
+            configBuff[0] = 0x00;
+            configBuff[1] = 0x01;
+            configBuff[2] = 0x07;
+            configBuff[3] = HidConfig.ch7_input_source_display;
+            hidDevice.write(configBuff);
+        }
+
+
+
         $('a.refresh').click(function () {
             sync_config();
             console.log("refresh click");
         });
-
         $('a.save').click(function () {
             console.log("save click");
             var bufName = new Buffer.alloc(64);
+            
             if(HidConfig.irSystemProtocol==0&&HidConfig.erSystemProtocol==0){
                 alert("save failed!  you need to select at least one protocol");
                 return 0;
             }
-            //发送 遥控通道参数
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x00;
-            bufName[3] = HidConfig.ch1_input_source_display;
-            bufName[4] = HidConfig.ch1_reverse_display;
-            bufName[5] = HidConfig.ch1_scale_display;
-            bufName[6] = HidConfig.ch1_offset_display+100;
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x01;
-            bufName[3] = HidConfig.ch2_input_source_display;
-            bufName[4] = HidConfig.ch2_reverse_display;
-            bufName[5] = HidConfig.ch2_scale_display;
-            bufName[6] = HidConfig.ch2_offset_display+100;
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x02;
-            bufName[3] = HidConfig.ch3_input_source_display;
-            bufName[4] = HidConfig.ch3_reverse_display;
-            bufName[5] = HidConfig.ch3_scale_display;
-            bufName[6] = HidConfig.ch3_offset_display+100;
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x03;
-            bufName[3] = HidConfig.ch4_input_source_display;
-            bufName[4] = HidConfig.ch4_reverse_display;
-            bufName[5] = HidConfig.ch4_scale_display;
-            bufName[6] = HidConfig.ch4_offset_display+100;
-            hidDevice.write(bufName);
-
-            //通道 5-8
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x04;
-            bufName[3] = HidConfig.ch5_input_source_display;
-            bufName[4] = 0x00;
-            bufName[5] = 0x64;
-            bufName[6] = 0x64;
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x05;
-            bufName[3] = HidConfig.ch6_input_source_display;
-            bufName[4] = 0x00;
-            bufName[5] = 0x64;
-            bufName[6] = 0x64;
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x06;
-            bufName[3] = HidConfig.ch7_input_source_display;
-            bufName[4] = 0x00;
-            bufName[5] = 0x64;
-            bufName[6] = 0x64;
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x01;
-            bufName[2] = 0x07;
-            bufName[3] = HidConfig.ch8_input_source_display;
-            bufName[4] = 0x00;
-            bufName[5] = 0x64;
-            bufName[6] = 0x64;
-            hidDevice.write(bufName);
-
-            //发送 内部遥控协议参数
-            bufName[0] = 0x0;
-            bufName[1] = 0x06;
-            bufName[2] = 0x02;
-            bufName[3] = HidConfig.irSystemPower;
-            bufName[4] = HidConfig.irPktRate;
-            bufName[5] = HidConfig.irTLMRadio;
-
-            hidDevice.write(bufName);
-
 
             //保存
             bufName[0] = 0x0;
@@ -573,83 +565,13 @@ show.initialize = function (callback) {
 
         //请求遥控器参数，使上位机显示的配置与其同步
         function sync_config(){
+            //请求遥控器信息（硬件版本、支持协议、左右手油门、功率）
             let bufName = new Buffer.alloc(64);
             bufName[0] = 0x0;
             bufName[1] = 0x11;
             bufName[2] = 0x02;
-            console.log("bufName[2]:"+bufName[2]);
             bufName[3] = 0x00;
-
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x11;
-            bufName[2] = 0x02;
-            bufName[3] = 0x01;
-
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x11;
-            bufName[2] = 0x01;
-            bufName[3] = 0x01;
-
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x11;
-            bufName[2] = 0x01;
-            bufName[3] = 0x02;
-
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x11;
-            bufName[2] = 0x01;
-            bufName[3] = 0x03;
-
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x11;
-            bufName[2] = 0x01;
-            bufName[3] = 0x04;
-
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x11;
-            bufName[2] = 0x01;
-            bufName[3] = 0x05;
-
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x11;
-            bufName[2] = 0x01;
-            bufName[3] = 0x06;
-
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x11;
-            bufName[2] = 0x01;
-            bufName[3] = 0x07;
-
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x11;
-            bufName[2] = 0x01;
-            bufName[3] = 0x08;
-
-            hidDevice.write(bufName);
-
-            bufName[0] = 0x0;
-            bufName[1] = 0x11;
-            bufName[2] = 0x00;
-            bufName[3] = 0x01;
-
+            console.log(bufName);
             hidDevice.write(bufName);
             
         }
