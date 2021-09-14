@@ -118,7 +118,7 @@ show.initialize = function (callback) {
 
     $('#content').load("./src/html/show.html", function () {
 
-        sync_config();
+        
         i18n.localizePage();
         const bar_names = [
             "CH1",
@@ -653,6 +653,7 @@ show.initialize = function (callback) {
             hidDevice.write(bufName);
             
         }
+        sync_config();
         
         callback();
     });

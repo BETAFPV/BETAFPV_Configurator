@@ -382,9 +382,9 @@ window.onload=function(){
                         HidConfig.channel_data[7] = (data[15]<<8 | data[14]);
 
                         HidConfig.channel_data_raw[0] = gimbal_current_to_raw((data[1]<<8 | data[0]),HidConfig.ch1_scale,HidConfig.ch1_offset,HidConfig.ch1_reverse);
-                        HidConfig.channel_data_raw[1] = gimbal_current_to_raw((data[3]<<8 | data[2]),HidConfig.ch2_scale,HidConfig.ch2_offset,HidConfig.ch1_reverse);
-                        HidConfig.channel_data_raw[2] = gimbal_current_to_raw((data[5]<<8 | data[4]),HidConfig.ch3_scale,HidConfig.ch3_offset,HidConfig.ch1_reverse);
-                        HidConfig.channel_data_raw[3] = gimbal_current_to_raw((data[7]<<8 | data[6]),HidConfig.ch4_scale,HidConfig.ch4_offset,HidConfig.ch1_reverse);
+                        HidConfig.channel_data_raw[1] = gimbal_current_to_raw((data[3]<<8 | data[2]),HidConfig.ch2_scale,HidConfig.ch2_offset,HidConfig.ch2_reverse);
+                        HidConfig.channel_data_raw[2] = gimbal_current_to_raw((data[5]<<8 | data[4]),HidConfig.ch3_scale,HidConfig.ch3_offset,HidConfig.ch3_reverse);
+                        HidConfig.channel_data_raw[3] = gimbal_current_to_raw((data[7]<<8 | data[6]),HidConfig.ch4_scale,HidConfig.ch4_offset,HidConfig.ch4_reverse);
                         
                         HidConfig.channel_data[0] = limit_value(gimbal_raw_to_current(HidConfig.channel_data_raw[0],HidConfig.ch1_scale_display,HidConfig.ch1_offset_display,HidConfig.ch1_reverse_display),0,2047);
                         HidConfig.channel_data[1] = limit_value(gimbal_raw_to_current(HidConfig.channel_data_raw[1],HidConfig.ch2_scale_display,HidConfig.ch2_offset_display,HidConfig.ch2_reverse_display),0,2047);
@@ -396,7 +396,7 @@ window.onload=function(){
                 hidDevice.on("error", function(err) {
                     hidDevice.close();
                     GUI.connect_hid = false;
-                    $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('disConnect_HID'));
+                    $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('Connect_HID'));
                     alert("HID Device Disconnected!");
 
                     $('#tabs ul.mode-connected').hide();
