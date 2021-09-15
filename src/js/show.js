@@ -310,6 +310,13 @@ show.initialize = function (callback) {
         });
         show.internal_radio_protocol.change(function () {
             HidConfig.internal_radio_protocol = parseInt($(this).val(), 10);
+            if(HidConfig.internal_radio_protocol==0){//OFF
+                document.getElementById("external_radio_protocol").disabled = false;
+            }else {
+                HidConfig.external_radio_protocol = 0;
+                show.external_radio_protocol.val(HidConfig.external_radio_protocol);
+
+            }
         });
         show.internal_radio_power.change(function () {
             HidConfig.internal_radio_power = parseInt($(this).val(), 10);
@@ -324,93 +331,63 @@ show.initialize = function (callback) {
             send_internal_radio_config();
         });
         show.external_radio_protocol.change(function () {
-            HidConfig.erSystemProtocol = parseInt($(this).val(), 10);
-
-            if(HidConfig.erSystemProtocol){
-                let  buffer= new Buffer.alloc(64);
-                buffer[0] = 0x00; 
-                buffer[1] = 0x05;
-                 buffer[2] = 0x01;
-                 buffer[3] = 0x00;
-                 console.log(buffer);
-                 hidDevice.write(buffer);
-            }
-
-
-            if(HidConfig.erSystemProtocol)
-            {
-                document.getElementById("internalradiosystem").disabled=true;
-                document.getElementById("inpower").disabled=true;
-                document.getElementById("inpktRate").disabled=true;
-                document.getElementById("inTLMRadio").disabled=true;
-                 //外部射频模块配置
-                //  let  buffer= new Buffer.alloc(64);
-                //  buffer[0] = 0x07;
-                //  buffer[1] = 0x02;
-                //  buffer[2] = document.getElementById("exELRSpower").value;
-                //  buffer[3] = document.getElementById("exELRSpktRate").value;
-                //  buffer[4] = document.getElementById("exELRSTLMRadio").value;
-                //  buffer[5] = 0x00;//RF Freq
-                //  console.log(buffer);
-                //  hidDevice.write(buffer);
-            }
-            else{
-                document.getElementById("expower").value = 0;//OFF
-
-                document.getElementById("internalradiosystem").disabled=false;
-                document.getElementById("inpower").disabled=false;
-                document.getElementById("inpktRate").disabled=false;
-                document.getElementById("inTLMRadio").disabled=false;
+            HidConfig.external_radio_protocol = parseInt($(this).val(), 10);
+            if(HidConfig.external_radio_protocol==0){//OFF
+                HidConfig.internal_radio_protocol = 0;
+                show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
+                document.getElementById("internal_radio_protocol").disabled = false;//外部射频模块关闭后，内部射频模块变为可选项
+                document.getElementById("external_radio_power_switch").disabled = true;
+            }else{
+                HidConfig.internal_radio_protocol = 0;
+                show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
+                document.getElementById("internal_radio_protocol").disabled = true;
                
             }
         });
         show.external_radio_power_switch.change(function () {
-            HidConfig.erSystemPower = $(this).is(':checked');
-
-            if(HidConfig.erSystemPower)
-            {
-                console.log("checked");
-
+            HidConfig.external_radio_power_switch = $(this).is(':checked');//外部射频模块电源开关
+            
+            if(HidConfig.external_radio_power_switch){
+                console.log("elrs power on");
+                document.getElementById("external_radio_power_elrs").disabled = false;
+                document.getElementById("external_radio_pkt_rate_elrs").disabled = false;
+                document.getElementById("external_radio_tlm_elrs").disabled = false;
                 $("#exELRSpowerID").css({display: 'block'});
                 $("#exELRSpktRateID").css({display: 'block'});
                 $("#exELRSTLMRadioID").css({display: 'block'});
                 let  buffer= new Buffer.alloc(64);
-                 buffer[0] = 0x00;
-                 buffer[1] = 0x07;
-                 buffer[2] = 0x01;
-                 hidDevice.write(buffer);
-            }
-            else
-            {
-                console.log("exELRSpower ON");
+                buffer[0] = 0x00;
+                buffer[1] = 0x07;
+                buffer[2] = 0x01;
+                hidDevice.write(buffer);
+
+            }else{
+                console.log("elrs power off");
                 $("#exELRSpowerID").css({display: 'none'});
                 $("#exELRSpktRateID").css({display: 'none'});
                 $("#exELRSTLMRadioID").css({display: 'none'});
                 let  buffer= new Buffer.alloc(64);
                 buffer[0] = 0x00; 
                 buffer[1] = 0x07;
-                 buffer[2] = 0x00;
-                 hidDevice.write(buffer);
+                buffer[2] = 0x00;
+                hidDevice.write(buffer);
+
             }
         });
         show.external_radio_power_elrs.change(function () {
-            let  buffer= new Buffer.alloc(64);
-            buffer[0] = 0x07;
-            buffer[1] = 0x02;
-            buffer[2] = document.getElementById("exELRSpower").value;
-            buffer[3] = document.getElementById("exELRSpktRate").value;
-            buffer[4] = document.getElementById("exELRSTLMRadio").value;
-            buffer[5] = 0x00;//RF Freq
-            console.log(buffer);
-            hidDevice.write(buffer);
-            HidConfig.exELRSSystemPower = parseInt($(this).val(), 10);
+            HidConfig.external_radio_power_elrs = parseInt($(this).val(), 10);
+            send_external_exrs_radio_config();
+            console.log("set elrs power")
         });
         show.external_radio_pkt_rate_elrs.change(function () {
-
-            HidConfig.exELRSPktRate = parseInt($(this).val(), 10);
+            HidConfig.external_radio_pkt_rate_elrs = parseInt($(this).val(), 10);
+            send_external_exrs_radio_config();
+            console.log("set elrs pkt rate");
         });
         show.external_radio_tlm_elrs.change(function () {
-           
+            HidConfig.external_radio_tlm_elrs = parseInt($(this).val(), 10);
+            send_external_exrs_radio_config();
+            console.log("set elrs tlm");
         });
 
 
@@ -518,6 +495,17 @@ show.initialize = function (callback) {
             configBuff[8] = 0;
             hidDevice.write(configBuff);
         }
+        function send_external_exrs_radio_config(){
+            let  buffer= new Buffer.alloc(64);
+            buffer[0] = 0x0
+            buffer[1] = 0x07;
+            buffer[2] = 0x02;
+            buffer[3] = HidConfig.external_radio_power_elrs;
+            buffer[4] = HidConfig.external_radio_pkt_rate_elrs;
+            buffer[5] = HidConfig.external_radio_tlm_elrs;
+            buffer[6] = 0x00;//RF Freq
+            hidDevice.write(buffer);
+        }
 
 
         $('a.refresh').click(function () {
@@ -527,26 +515,24 @@ show.initialize = function (callback) {
         $('a.save').click(function () {
             console.log("save click");
             var bufName = new Buffer.alloc(64);
-            
-            if(HidConfig.internal_radio_protocol==0&&HidConfig.external_radio_protocol==0){
+            if(HidConfig.internal_radio_protocol){
+                bufName[0] = 0x00;
+                bufName[1] = 0x05;
+                bufName[2] = 0x00;
+                bufName[3] = HidConfig.rocker_mode;
+                bufName[4] = 0x02;
+                hidDevice.write(bufName);
+            }else if(HidConfig.external_radio_protocol){
+                bufName[0] = 0x00;
+                bufName[1] = 0x05;
+                bufName[2] = 0x01;
+                bufName[3] = HidConfig.rocker_mode;
+                bufName[4] = 0x02;
+                hidDevice.write(bufName);
+            }else
+            {
                 alert("save failed!  you need to select at least one protocol");
-                return 0;
             }
-            bufName[0] = 0x00;
-            bufName[1] = 0x05;
-            bufName[2] = 0x01;
-            bufName[3] = HidConfig.rocker_mode;
-            bufName[4] = 0x02;
-            hidDevice.write(bufName);
-
-            //保存并重启
-            bufName[0] = 0x00;
-            bufName[1] = 0x11;
-            bufName[2] = 0x00;
-            bufName[3] = 0x02;
-            bufName[4] = 0x00;
-            hidDevice.write(bufName);
-            
             
         });
 
@@ -562,7 +548,6 @@ show.initialize = function (callback) {
             bufName[5] = 0x00;
             console.log(bufName);
             hidDevice.write(bufName);
-            
         }
         sync_config();
         

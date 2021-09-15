@@ -209,7 +209,7 @@ window.onload=function(){
         if (GUI.connect_hid != true) {
             console.log('connect hid');
            
-
+            let ch_receive_step = 0;//这个标志目的是为了确保只发送一次请求命令
             hidDevice = new HID.HID(VENDOR_ID,PRODUCT_ID);
 
             if(hidDevice)
@@ -256,12 +256,16 @@ window.onload=function(){
                                     HidConfig.ch1_offset_display = data[5]-100;
 
                                     //请求通道2配置
-                                    rquestBuffer[0] = 0x00;
-                                    rquestBuffer[1] = 0x11;
-                                    rquestBuffer[2] = 0x01;
-                                    rquestBuffer[3] = 0x02;
-                                    console.log();
-                                    hidDevice.write(rquestBuffer);
+                                    if(ch_receive_step==0){
+                                        ch_receive_step=1;
+                                        rquestBuffer[0] = 0x00;
+                                        rquestBuffer[1] = 0x11;
+                                        rquestBuffer[2] = 0x01;
+                                        rquestBuffer[3] = 0x02;
+                                        console.log();
+                                        hidDevice.write(rquestBuffer);
+                                    }
+                                    
                                     
                                     break;
 
@@ -278,11 +282,14 @@ window.onload=function(){
                                     HidConfig.ch2_offset_display = data[5]-100;
                                     
                                     //请求通道3配置
-                                    rquestBuffer[0] = 0x00;
-                                    rquestBuffer[1] = 0x11;
-                                    rquestBuffer[2] = 0x01;
-                                    rquestBuffer[3] = 0x03;
-                                    hidDevice.write(rquestBuffer);
+                                    if(ch_receive_step==1){
+                                        ch_receive_step=2;
+                                        rquestBuffer[0] = 0x00;
+                                        rquestBuffer[1] = 0x11;
+                                        rquestBuffer[2] = 0x01;
+                                        rquestBuffer[3] = 0x03;
+                                        hidDevice.write(rquestBuffer);
+                                    }
                                     break;
 
                                 case 2:
@@ -298,11 +305,14 @@ window.onload=function(){
                                     HidConfig.ch3_offset_display = data[5]-100;
 
                                     //请求通道4配置
-                                    rquestBuffer[0] = 0x00;
-                                    rquestBuffer[1] = 0x11;
-                                    rquestBuffer[2] = 0x01;
-                                    rquestBuffer[3] = 0x04;
-                                    hidDevice.write(rquestBuffer);
+                                    if(ch_receive_step==2){
+                                        ch_receive_step=3;
+                                        rquestBuffer[0] = 0x00;
+                                        rquestBuffer[1] = 0x11;
+                                        rquestBuffer[2] = 0x01;
+                                        rquestBuffer[3] = 0x04;
+                                        hidDevice.write(rquestBuffer);
+                                    }
                                     break;
 
                                 case 3:
@@ -318,11 +328,14 @@ window.onload=function(){
                                     HidConfig.ch4_offset_display = data[5]-100;
                                     
                                     //请求通道5配置
-                                    rquestBuffer[0] = 0x00;
-                                    rquestBuffer[1] = 0x11;
-                                    rquestBuffer[2] = 0x01;
-                                    rquestBuffer[3] = 0x05;
-                                    hidDevice.write(rquestBuffer);
+                                    if(ch_receive_step==3){
+                                        ch_receive_step=4;
+                                        rquestBuffer[0] = 0x00;
+                                        rquestBuffer[1] = 0x11;
+                                        rquestBuffer[2] = 0x01;
+                                        rquestBuffer[3] = 0x05;
+                                        hidDevice.write(rquestBuffer);
+                                    }
                                     break;
 
                                 case 4:
@@ -331,11 +344,14 @@ window.onload=function(){
                                     HidConfig.ch5_input_source_display = data[2];
                                     
                                     //请求通道6配置
-                                    rquestBuffer[0] = 0x00;
-                                    rquestBuffer[1] = 0x11;
-                                    rquestBuffer[2] = 0x01;
-                                    rquestBuffer[3] = 0x06;
-                                    hidDevice.write(rquestBuffer);
+                                    if(ch_receive_step==4){
+                                        ch_receive_step=5;
+                                        rquestBuffer[0] = 0x00;
+                                        rquestBuffer[1] = 0x11;
+                                        rquestBuffer[2] = 0x01;
+                                        rquestBuffer[3] = 0x06;
+                                        hidDevice.write(rquestBuffer);
+                                    }
                                     break;
 
                                 case 5:
@@ -344,11 +360,14 @@ window.onload=function(){
                                     HidConfig.ch6_input_source_display = data[2];
                                     
                                     //请求通道7配置
-                                    rquestBuffer[0] = 0x00;
-                                    rquestBuffer[1] = 0x11;
-                                    rquestBuffer[2] = 0x01;
-                                    rquestBuffer[3] = 0x07;
-                                    hidDevice.write(rquestBuffer);
+                                    if(ch_receive_step==5){
+                                        ch_receive_step=6;
+                                        rquestBuffer[0] = 0x00;
+                                        rquestBuffer[1] = 0x11;
+                                        rquestBuffer[2] = 0x01;
+                                        rquestBuffer[3] = 0x07;
+                                        hidDevice.write(rquestBuffer);
+                                    }
                                     break;
 
                                 case 6:
@@ -357,11 +376,14 @@ window.onload=function(){
                                     HidConfig.ch7_input_source_display = data[2];
                                     
                                     //请求通道8配置
-                                    rquestBuffer[0] = 0x00;
-                                    rquestBuffer[1] = 0x11;
-                                    rquestBuffer[2] = 0x01;
-                                    rquestBuffer[3] = 0x08;
-                                    hidDevice.write(rquestBuffer);
+                                    if(ch_receive_step==6){
+                                        ch_receive_step=7;
+                                        rquestBuffer[0] = 0x00;
+                                        rquestBuffer[1] = 0x11;
+                                        rquestBuffer[2] = 0x01;
+                                        rquestBuffer[3] = 0x08;
+                                        hidDevice.write(rquestBuffer);
+                                    }
                                     break;
 
                                 case 7:
@@ -370,14 +392,16 @@ window.onload=function(){
                                     HidConfig.ch8_input_source_display = data[2];
                                     
                                     //全部通道配置信息获取完毕，发送停止命令
+                                    
                                     rquestBuffer[0] = 0x00;
                                     rquestBuffer[1] = 0x11;
                                     rquestBuffer[2] = 0x00;
                                     rquestBuffer[3] = 0x01;
                                     hidDevice.write(rquestBuffer);
-                                    show.refreshUI();
+                                    
                                     break;
                             }
+                            show.refreshUI();
                             
                         }
                         
@@ -410,6 +434,7 @@ window.onload=function(){
                                 if(HidConfig.current_protocol==0){//当前协议为：内置elrs协议
                                     document.getElementById("internal_radio_protocol").disabled = false;
                                     show.internal_radio_protocol.value = 1;
+                                    HidConfig.internal_radio_protocol = 1;
                                     //请求内置elrs射频模块参数
                                     rquestBuffer[0] = 0x00;
                                     rquestBuffer[1] = 0x11;
@@ -418,8 +443,17 @@ window.onload=function(){
                                     hidDevice.write(rquestBuffer);
 
                                 }else if(HidConfig.current_protocol==1){//当前协议为：外置crsf射频模块
+                                    console.log("current protocol:external crsf");
                                     document.getElementById("external_radio_protocol").disabled = false;
-                                    show.external_radio_protocol.value =1;
+                                    HidConfig.external_radio_protocol = 1;
+                                    show.external_radio_protocol.val(HidConfig.current_protocol);
+
+                                    //请求遥控器通道配置信息
+                                    rquestBuffer[0] = 0x00;
+                                    rquestBuffer[1] = 0x11;
+                                    rquestBuffer[2] = 0x01;
+                                    rquestBuffer[3] = 0x01;
+                                    hidDevice.write(rquestBuffer);
                                 }
                             }else if(HidConfig.hardware_version==2){//硬件型号为：sx1276
 
@@ -439,8 +473,8 @@ window.onload=function(){
     
                         if(checkSum == checkSum2)
                         {
-                            console.log("receive internal radio config：");
-                            console.log(data);
+                            console.log("receive Internal radio config");
+                            HidConfig.internal_radio_protocol = 1;
                             HidConfig.internal_radio_power = data[2];
                             HidConfig.internal_radio_pkt_rate = data[3];
                             HidConfig.internal_radio_tlm = data[4];
@@ -461,43 +495,52 @@ window.onload=function(){
                     }
                     else if(data[0] == cmd_type.EXTERNAL_CONFIGER_INFO_ID)
                     {
-                        // var checkSum=0;
-                        // var checkSum2=0;
+                        var checkSum=0;
+                        var checkSum2=0;
 
-                        // for(i=0;i<7;i++)
-                        // {
-                        //     checkSum +=data[2*i] & 0x00ff;
-                        // }                   
-                        // checkSum2 = data[15]<<8 | data[14] ;
+                        for(i=0;i<7;i++)
+                        {
+                            checkSum +=data[2*i] & 0x00ff;
+                        }                   
+                        checkSum2 = data[15]<<8 | data[14] ;
     
-                        // if(checkSum == checkSum2)
-                        // {
-                        //     console.log(data);
-                        //     HidConfig.exELRSSystemPower = data[2]; 
-                        //     HidConfig.exELRSPktRate = data[3];
-                        //     HidConfig.exELRSTLMRadio = data[4];
+                        if(checkSum == checkSum2)
+                        {
+                            console.log("receive External radio config");
                             
-                        //     // let  buffer= new Buffer.alloc(64);
-                        //     // buffer[0] = 0x00;
-                        //     // buffer[1] = 0x07;
-                        //     // buffer[2] = 0x02;
-                        //     // buffer[3] = 0x03;
-                        //     // buffer[4] = 0x00;
-                        //     // buffer[5] = 0x02;
-                        //     // buffer[6] = 0x09;
-                        //     // console.log(buffer);
-                        //     // hidDevice.write(buffer);
+                            HidConfig.external_radio_power_elrs = data[2];
+                            HidConfig.external_radio_pkt_rate_elrs = data[3];
+                            console.log("date[3]"+data[3]);
+                            HidConfig.external_radio_tlm_elrs = data[4];
+                            document.getElementById("exELRSpowerID").disabled = false;
+                            document.getElementById("exELRSpktRateID").disabled = false;
+                            document.getElementById("exELRSTLMRadioID").disabled = false;
+                            show.external_radio_power_elrs.val(HidConfig.external_radio_power_elrs);
+                            show.external_radio_pkt_rate_elrs.val(HidConfig.external_radio_pkt_rate_elrs);
+                            show.external_radio_tlm_elrs.val(HidConfig.external_radio_tlm_elrs);
+                            if(data[5] == 0x02){//需要根据外部射频模块硬件型号设置组件可选包率
+                                //外部射频模块可选包率：
+                                //200hz 100hz 50hz 25hz
+                                //工作频段915MHz ISM
+                                console.log("external radio work on 915MHz ISM");
 
+                            }else if(data[5] == 0x03){
+                                //外部射频模块可选包率：
+                                //200hz 100hz 50hz 25hz
+                                //工作频段868MHz ISM
+                                console.log("external radio work on 868MHz ISM");
 
-
-
-                        //     show.refreshUI();
-                        // }
+                            }else if(data[5] == 0x06){
+                                //外部射频模块可选包率：
+                                //500hz 250hz 150hz 50hz
+                                //工作频段2.4GHz ISM
+                                console.log("external radio work on 2.4GHz ISM");
+                            }
+                        }
                     }
                     else
                     {
                         
-                        console.log("receiver hid data");
                         HidConfig.channel_data[0] = (data[1]<<8 | data[0]);
                         HidConfig.channel_data[1] = (data[3]<<8 | data[2]);
                         HidConfig.channel_data[2] = (data[5]<<8 | data[4]);
