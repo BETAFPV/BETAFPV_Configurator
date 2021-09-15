@@ -59,30 +59,30 @@ show.refreshUI = function()
     show.rocker_mode.val(HidConfig.rocker_mode);
     // show.trainer_port.val(HidConfig.trainerPort);
 
-    show.ch1_data_source.val(HidConfig.ch1_input_source);
-    show.ch2_data_source.val(HidConfig.ch2_input_source);
-    show.ch3_data_source.val(HidConfig.ch3_input_source);
-    show.ch4_data_source.val(HidConfig.ch4_input_source);
-    show.ch5_data_source.val(HidConfig.ch5_input_source);
-    show.ch6_data_source.val(HidConfig.ch6_input_source);
-    show.ch7_data_source.val(HidConfig.ch7_input_source);
-    show.ch8_data_source.val(HidConfig.ch8_input_source);
+    show.ch1_data_source.val(HidConfig.ch1_input_source_display);
+    show.ch2_data_source.val(HidConfig.ch2_input_source_display);
+    show.ch3_data_source.val(HidConfig.ch3_input_source_display);
+    show.ch4_data_source.val(HidConfig.ch4_input_source_display);
+    show.ch5_data_source.val(HidConfig.ch5_input_source_display);
+    show.ch6_data_source.val(HidConfig.ch6_input_source_display);
+    show.ch7_data_source.val(HidConfig.ch7_input_source_display);
+    show.ch8_data_source.val(HidConfig.ch8_input_source_display);
 
 
-    document.getElementById('ch1_check').checked = HidConfig.ch1_reverse;
-    document.getElementById('ch2_check').checked = HidConfig.ch2_reverse;
-    document.getElementById('ch3_check').checked = HidConfig.ch3_reverse;
-    document.getElementById('ch4_check').checked = HidConfig.ch4_reverse;
+    document.getElementById('ch1_check').checked = HidConfig.ch1_reverse_display;
+    document.getElementById('ch2_check').checked = HidConfig.ch2_reverse_display;
+    document.getElementById('ch3_check').checked = HidConfig.ch3_reverse_display;
+    document.getElementById('ch4_check').checked = HidConfig.ch4_reverse_display;
     
-    show.ch1_scale.val(HidConfig.ch1_scale);
-    show.ch2_scale.val(HidConfig.ch2_scale);
-    show.ch3_scale.val(HidConfig.ch3_scale);
-    show.ch4_scale.val(HidConfig.ch4_scale);
+    show.ch1_scale.val(HidConfig.ch1_scale_display);
+    show.ch2_scale.val(HidConfig.ch2_scale_display);
+    show.ch3_scale.val(HidConfig.ch3_scale_display);
+    show.ch4_scale.val(HidConfig.ch4_scale_display);
 
-    show.ch1_offset.val(HidConfig.ch1_offset);
-    show.ch2_offset.val(HidConfig.ch2_offset);
-    show.ch3_offset.val(HidConfig.ch3_offset);
-    show.ch4_offset.val(HidConfig.ch4_offset);
+    show.ch1_offset.val(HidConfig.ch1_offset_display);
+    show.ch2_offset.val(HidConfig.ch2_offset_display);
+    show.ch3_offset.val(HidConfig.ch3_offset_display);
+    show.ch4_offset.val(HidConfig.ch4_offset_display);
 
 };
 
@@ -311,7 +311,12 @@ show.initialize = function (callback) {
         show.internal_radio_protocol.change(function () {
             HidConfig.internal_radio_protocol = parseInt($(this).val(), 10);
             if(HidConfig.internal_radio_protocol==0){//OFF
-                document.getElementById("external_radio_protocol").disabled = false;
+                document.getElementById("external_radio_protocol").disabled = false;//内置射频模块关闭时，外置射频协议可选
+                
+                document.getElementById("internal_radio_power").disabled = true;
+                document.getElementById("internal_radio_pkt_rate").disabled = true;
+                document.getElementById("internal_radio_tlm").disabled = true;
+
             }else {
                 HidConfig.external_radio_protocol = 0;
                 show.external_radio_protocol.val(HidConfig.external_radio_protocol);
@@ -332,16 +337,23 @@ show.initialize = function (callback) {
         });
         show.external_radio_protocol.change(function () {
             HidConfig.external_radio_protocol = parseInt($(this).val(), 10);
-            if(HidConfig.external_radio_protocol==0){//OFF
+            if(HidConfig.external_radio_protocol==0){//外置射频协议选择为OFF
                 HidConfig.internal_radio_protocol = 0;
                 show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
-                document.getElementById("internal_radio_protocol").disabled = false;//外部射频模块关闭后，内部射频模块变为可选项
-                document.getElementById("external_radio_power_switch").disabled = true;
-            }else{
+                document.getElementById("internal_radio_protocol").disabled = false;//可以设置内置射频模块协议
+
+                document.getElementById("external_radio_power_elrs").disabled = true;//无法设置外置射频模块
+                document.getElementById("external_radio_pkt_rate_elrs").disabled = true;    
+                document.getElementById("external_radio_tlm_elrs").disabled = true;        
+
+            }else{//外置射频协议选择为CRSF
                 HidConfig.internal_radio_protocol = 0;
                 show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
-                document.getElementById("internal_radio_protocol").disabled = true;
-               
+                document.getElementById("internal_radio_protocol").disabled = true;//无法切换内置射频模块协议
+                
+                document.getElementById("external_radio_power_elrs").disabled = false;//可以设置外置射频模块
+                document.getElementById("external_radio_pkt_rate_elrs").disabled = false;
+                document.getElementById("external_radio_tlm_elrs").disabled = false;
             }
         });
         show.external_radio_power_switch.change(function () {
@@ -349,17 +361,21 @@ show.initialize = function (callback) {
             
             if(HidConfig.external_radio_power_switch){
                 console.log("elrs power on");
-                document.getElementById("external_radio_power_elrs").disabled = false;
-                document.getElementById("external_radio_pkt_rate_elrs").disabled = false;
-                document.getElementById("external_radio_tlm_elrs").disabled = false;
                 $("#exELRSpowerID").css({display: 'block'});
                 $("#exELRSpktRateID").css({display: 'block'});
                 $("#exELRSTLMRadioID").css({display: 'block'});
-                let  buffer= new Buffer.alloc(64);
+                let  buffer= new Buffer.alloc(64);//开始外置射频模块电源
                 buffer[0] = 0x00;
                 buffer[1] = 0x07;
                 buffer[2] = 0x01;
                 hidDevice.write(buffer);
+
+                buffer[0] = 0x00;//获取外置什么模块配置信息
+                buffer[1] = 0x11;
+                buffer[2] = 0x02;
+                buffer[3] = 0x02;
+                hidDevice.write(buffer);
+
 
             }else{
                 console.log("elrs power off");
@@ -548,6 +564,7 @@ show.initialize = function (callback) {
             bufName[5] = 0x00;
             console.log(bufName);
             hidDevice.write(bufName);
+            console.log("get sync config from radio");
         }
         sync_config();
         

@@ -6201,7 +6201,7 @@
         "message": "Trainer Port"
     },
     "RadioSetupIRSystemProtocol": {
-        "message": "Internal Radio System"
+        "message": "Internal Radio System（If the built-in RF module is enabled for the first time, save and retoot the module before modifying its parameters）"
     },
     "RadioSetupIRSystemPower": {
         "message": "Power"
@@ -6213,7 +6213,7 @@
         "message": "TLM Radio"
     },
     "RadioSetupERSystemProtocol": {
-        "message": "External Radio Module"
+        "message": "External Radio Module（If the external RF module is enabled for the first time, save and retoot the module before modifying its parameters）"
     },
     "RadioSetupERSystemPowerSwitch": {
         "message": "Power Switch"
@@ -6237,7 +6237,7 @@
         "message": "Refresh"
     },
     "RadioSetupSave": {
-        "message": "Save"
+        "message": "Save and reboot"
     },
     "Connect_HID":{
         "message":"connect HID"

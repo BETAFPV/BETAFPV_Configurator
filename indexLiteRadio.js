@@ -34,37 +34,7 @@ HidConfig = {
     channel_data :[],//经过offset scale reverse运算后的实际数据
     channel_data_raw :[],//经过offset scale reverse运算之前的原始数据
 
-    /********************（保存从遥控器发送过来的配置）****************************/
-    //通道数据来源
-    ch1_input_source:0,
-    ch2_input_source:1,
-    ch3_input_source:2,
-    ch4_input_source:3,
-    ch5_input_source:4,
-    ch6_input_source:5,
-    ch7_input_source:6,
-    ch8_input_source:7,
 
-
-    //通道缩放比例（0-100对应0%-100%）
-    ch1_scale:100,
-    ch2_scale:100,
-    ch3_scale:100,
-    ch4_scale:100,
-
-    //通道偏移补偿（-100~100，传输协议为无符号类型（映射为0-200），所以接收到的数据要-100再使用，发送时需要+100再发送）
-    ch1_offset:0,
-    ch2_offset:0,
-    ch3_offset:0,
-    ch4_offset:0,
-
-    //通道值反转
-    ch1_reverse:0,
-    ch2_reverse:0,
-    ch3_reverse:0,
-    ch4_reverse:0,
-
-    /********************（添加_display后缀，用于记录上位机手动调整后实时显示的值，未发送至遥控器与其同步）****************************/
     //通道数据来源
     ch1_input_source_display:0,
     ch2_input_source_display:1,
@@ -100,34 +70,15 @@ HidConfig = {
     internal_radio_tlm:0,
 
     //外置射频模块配置信息
-    external_radio_protocol:0,//外置高频头协议选择
-    external_radio_power_switch:0,//高频头供电开关
+    external_radio_protocol:0,//协议选择
+    external_radio_power_switch:0,//外置高频头供电开关
     
-    
+    //外置elrs射频模块参数
     external_radio_power_elrs:0,
     external_radio_pkt_rate_elrs:0,
     external_radio_tlm_elrs:0,
 
 
-
-    trainerPort:0,
-
-    irSystemProtocol:0,
-    irSystemPower:0,
-    irPktRate:0,
-    irTLMRadio:0,
-
-    erSystemProtocol:0,
-    erSystemPower:0,
-
-    exELRSSystemPower:0,
-    exELRSPktRate:0,
-    exELRSTLMRadio:0,
-
-   
-    
-    version:0,
-    protocol:0,
 };
 
 
@@ -245,10 +196,6 @@ window.onload=function(){
                             {
                                 case 0:
                                     console.log("receive ch1 config info");
-                                    HidConfig.ch1_input_source = data[2];
-                                    HidConfig.ch1_reverse = data[3];
-                                    HidConfig.ch1_scale = data[4];
-                                    HidConfig.ch1_offset = data[5]-100;
 
                                     HidConfig.ch1_input_source_display = data[2];
                                     HidConfig.ch1_reverse_display = data[3];
@@ -269,10 +216,6 @@ window.onload=function(){
 
                                 case 1:
                                     console.log("receive ch2 config info");
-                                    HidConfig.ch2_input_source = data[2];
-                                    HidConfig.ch2_reverse = data[3];
-                                    HidConfig.ch2_scale = data[4];
-                                    HidConfig.ch2_offset = data[5]-100;
 
                                     HidConfig.ch2_input_source_display = data[2];
                                     HidConfig.ch2_reverse_display = data[3];
@@ -292,10 +235,6 @@ window.onload=function(){
 
                                 case 2:
                                     console.log("receive ch3 config info");
-                                    HidConfig.ch3_input_source = data[2];
-                                    HidConfig.ch3_reverse = data[3];
-                                    HidConfig.ch3_scale = data[4];
-                                    HidConfig.ch3_offset = data[5]-100;
 
                                     HidConfig.ch3_input_source_display = data[2];
                                     HidConfig.ch3_reverse_display = data[3];
@@ -315,10 +254,6 @@ window.onload=function(){
 
                                 case 3:
                                     console.log("receive ch4 config info");
-                                    HidConfig.ch4_input_source = data[2];
-                                    HidConfig.ch4_reverse = data[3];
-                                    HidConfig.ch4_scale = data[4];
-                                    HidConfig.ch4_offset = data[5]-100;
 
                                     HidConfig.ch4_input_source_display = data[2];
                                     HidConfig.ch4_reverse_display = data[3];
@@ -338,7 +273,6 @@ window.onload=function(){
 
                                 case 4:
                                     console.log("receive ch5 config info");
-                                    HidConfig.ch5_input_source = data[2];
                                     HidConfig.ch5_input_source_display = data[2];
                                     
                                     //请求通道6配置
@@ -354,7 +288,6 @@ window.onload=function(){
 
                                 case 5:
                                     console.log("receive ch6 config info");
-                                    HidConfig.ch6_input_source = data[2];
                                     HidConfig.ch6_input_source_display = data[2];
                                     
                                     //请求通道7配置
@@ -370,7 +303,6 @@ window.onload=function(){
 
                                 case 6:
                                     console.log("receive ch7 config info");
-                                    HidConfig.ch7_input_source = data[2];
                                     HidConfig.ch7_input_source_display = data[2];
                                     
                                     //请求通道8配置
@@ -386,7 +318,6 @@ window.onload=function(){
 
                                 case 7:
                                     console.log("receive ch8 config info");
-                                    HidConfig.ch8_input_source = data[2];
                                     HidConfig.ch8_input_source_display = data[2];
                                     
                                     //全部通道配置信息获取完毕，发送停止命令
@@ -396,11 +327,10 @@ window.onload=function(){
                                     rquestBuffer[2] = 0x00;
                                     rquestBuffer[3] = 0x01;
                                     hidDevice.write(rquestBuffer);
-                                    
+                                    ch_receive_step = 0;
                                     break;
                             }
                             show.refreshUI();
-                            
                         }
                         
                     }
@@ -489,6 +419,7 @@ window.onload=function(){
                             rquestBuffer[2] = 0x01;
                             rquestBuffer[3] = 0x01;
                             hidDevice.write(rquestBuffer);
+                            ch_receive_step = 0;
                         }                
                     }
                     else if(data[0] == cmd_type.EXTERNAL_CONFIGER_INFO_ID)
@@ -548,15 +479,6 @@ window.onload=function(){
                         HidConfig.channel_data[6] = (data[13]<<8 | data[12]);
                         HidConfig.channel_data[7] = (data[15]<<8 | data[14]);
 
-                        // HidConfig.channel_data_raw[0] = gimbal_current_to_raw((data[1]<<8 | data[0]),HidConfig.ch1_scale,HidConfig.ch1_offset,HidConfig.ch1_reverse);
-                        // HidConfig.channel_data_raw[1] = gimbal_current_to_raw((data[3]<<8 | data[2]),HidConfig.ch2_scale,HidConfig.ch2_offset,HidConfig.ch2_reverse);
-                        // HidConfig.channel_data_raw[2] = gimbal_current_to_raw((data[5]<<8 | data[4]),HidConfig.ch3_scale,HidConfig.ch3_offset,HidConfig.ch3_reverse);
-                        // HidConfig.channel_data_raw[3] = gimbal_current_to_raw((data[7]<<8 | data[6]),HidConfig.ch4_scale,HidConfig.ch4_offset,HidConfig.ch4_reverse);
-                        
-                        // HidConfig.channel_data[0] = limit_value(gimbal_raw_to_current(HidConfig.channel_data_raw[0],HidConfig.ch1_scale_display,HidConfig.ch1_offset_display,HidConfig.ch1_reverse_display),0,2047);
-                        // HidConfig.channel_data[1] = limit_value(gimbal_raw_to_current(HidConfig.channel_data_raw[1],HidConfig.ch2_scale_display,HidConfig.ch2_offset_display,HidConfig.ch2_reverse_display),0,2047);
-                        // HidConfig.channel_data[2] = limit_value(gimbal_raw_to_current(HidConfig.channel_data_raw[2],HidConfig.ch3_scale_display,HidConfig.ch3_offset_display,HidConfig.ch3_reverse_display),0,2047);
-                        // HidConfig.channel_data[3] = limit_value(gimbal_raw_to_current(HidConfig.channel_data_raw[3],HidConfig.ch4_scale_display,HidConfig.ch4_offset_display,HidConfig.ch4_reverse_display),0,2047);
                     }               
                 } );
 
