@@ -620,10 +620,13 @@
         "message": "支持遥控器"
     },
     "defaultContributingText": {
-        "message": "本应用只支持运行LiteRadio 2.0固件版本的遥控器。 <br /><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE (2021 Version)</a><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3</a><br /><br />老版本的LiteRadio 2 SE并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。"
+        "message": "本应用只支持下面罗列的遥控器。 <br /><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE (ELRS 2.4G)</a><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3</a><br /><br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。"
+    },
+    "defaultContributingText_radio": {
+        "message": "本应用只支持下面罗列的遥控器。 <br /><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE (ELRS 2.4G)</a><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3</a> <br /><br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br /><br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />遥控器固件烧写请点击左侧“固件烧写工具”；遥控器参数配置，请连接遥控器之后，点击右上角“连接遥控器”按钮进入配置界面。"
     },
     "defaultFacebookText": {
-        "message": "我们还有一个 <a href=\"https://www.facebook.com/groups/betaflightgroup/\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook 小组</a>。<br />加入我们来一起讨论 Betaflight，询问配置问题，或者只是和小伙伴们闲聊。"
+        "message": "我们还有一个 <a href=\"https://www.facebook.com/groups/betaflightgroup/\" target=\"_blank\" rel=\"noopener noreferrer\">微信公众号</a>。<br />关注我们获取最新动态，寻求技术支持，或者只是和小伙伴们闲聊。"
     },
     "defaultChangelogHead": {
         "message": "配置程序 - 更新日志"
@@ -2893,8 +2896,14 @@
     "firmwareFlasherRecoveryHead": {
         "message": "<strong> 恢复/丢失通信 </strong>"
     },
+    "firmwareFlasherRecoveryHead_radio": {
+        "message": "<strong> 遥控器固件烧写步骤 </strong>"
+    },
     "firmwareFlasherRecoveryText": {
         "message": "如果飞控板失去通信，你可以按照以下的几个步骤来恢复：<ul><li>关闭电源</li><li>打开'无重启序列'，打开‘擦除整个芯片‘选项。</li><li>短接 BOOT 引脚，或者按住 BOOT 按键。</li><li>上电(如果操作正确，飞控的“活动”灯不会闪烁)。</li><li>如果需要请安装 STM32 驱动和 Zadig (参阅 Betaflight 手册<a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> 部分 ).</li><li>关闭 Befaflight 软件，关闭所有 Chrome 应用，然后重新启动Betaflight。</li><li>释放 BOOT 按键（如有）。</li><li>烧写正确的固件(参照飞控厂商制定的波特率)。</li><li>断电。</li><li>移除 BOOT 引脚的短接。</li><li>上电(飞控“活动”灯应该会闪烁).</li><li>正常连接。</li></ul>"
+    },
+    "firmwareFlasherRecoveryText_radio": {
+        "message": "遥控器固件烧写步骤如下：<ul><li>遥控器关机；</li><li>按住遥控器SETUP按键，开机，遥控器蓝灯常亮，在“滴滴滴”三声之后，表示已经处于固件烧写状态；</li><li>松开SETUP按键，将遥控器通过USB数据线连接电脑；</li><li>遥控器将会被识别为COM口，在右上角选择其对应的COM口和波特率，再点击“连接”按钮，按钮变为红色则表示连接成功；</li><li>选择对应的固件，点击右下角“烧写固件”按钮</li><li>等待烧写进度条提示烧写完成，关机重启</li><li></li></ul>"
     },
     "firmwareFlasherButtonLeave": {
         "message": "关闭固件烧写"
