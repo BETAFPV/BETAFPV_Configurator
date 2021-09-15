@@ -1671,19 +1671,23 @@ dialog .dialog_toolbar .btn a.disabled {
     border-top: 1px solid var(--subtleAccent);
 }
 
+
+
 .content_toolbar_switch .btn a {
     /*  common styles for content toolbar buttons */
     margin-top: 0;
     margin-bottom: 0;
-    margin-right: 50px;
-    background-color: var(--accent);
+    margin-left: calc(40%);
+    margin-right: calc(40%);
+    background-color: #f5ab0b;
     border-radius: 3px;
     border: 1px solid #dba718;
     color: #000;
-    float: right;
+    float: center;
     font-weight: bold;
     font-size: 12px;
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+    text-align: center;
     display: block;
     cursor: pointer;
     transition: all ease 0.2s;
