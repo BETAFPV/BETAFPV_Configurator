@@ -690,12 +690,6 @@
     "FCConfiguratorChoosed":{
         "message": "Configurator for FC Board is Active"
     },
-    "ChooseRadioConfigurator": {
-        "message": "Click to Active Configurator for Radio Transmitter"
-    },
-    "ChooseFCConfigurator":{
-        "message": "Click to Active Configurator for FC Board"
-    },
     "RadioConfiguratorChoosed": {
         "message": "Configurator for Radio Transmitter is Active"
     },
@@ -6168,6 +6162,20 @@
     "cordovaExitAppMessage": {
         "message": "Do you really want to close the configurator?"
     },
+    "RadioSetup": {
+        "message": "Radio Setup"
+    },
+    
+    "RadioSetupIRSystem": {
+        "message": "Internal radio setting"
+    },
+
+    "RadioSetupERSystem": {
+        "message": "External radio setting"
+    },
+    "RadioSetupMIXS": {
+        "message": "MIXS"
+    },
     "RadioSetupChannel": {
         "message": "Channel"
     },
@@ -6207,7 +6215,7 @@
     "RadioSetupERSystemProtocol": {
         "message": "External Radio Module"
     },
-    "RadioSetupERSystemPower": {
+    "RadioSetupERSystemPowerSwitch": {
         "message": "Power Switch"
     },
     "RadioSetupExELRSSystemPower": {
@@ -6236,5 +6244,11 @@
     },
     "disConnect_HID":{
         "message":"disconnect HID"
+    },
+    "ChooseRadioConfigurator": {
+        "message": "Click to Active Configurator for Radio Transmitter"
+    },
+    "ChooseFCConfigurator":{
+        "message": "Click to Active Configurator for FC Board"
     }
 }

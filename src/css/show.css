@@ -769,7 +769,9 @@
         display: inherit;
     }
 }
-
+.tab-show .cf_table td:last-child {
+    text-align: left;
+}
 
 /* rx configuration */
 

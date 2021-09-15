@@ -265,8 +265,6 @@ window.onload=function(){
                                         console.log();
                                         hidDevice.write(rquestBuffer);
                                     }
-                                    
-                                    
                                     break;
 
                                 case 1:

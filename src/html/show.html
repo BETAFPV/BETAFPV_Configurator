@@ -3,25 +3,23 @@
 
 
         <div class="gui_box_titlebar">
-            <div class="spacer_box_title" >Setup</div>
+            <div class="spacer_box_title" i18n = "RadioSetup">Setup</div>
         </div>
 
         <div class="options gui_box">
             <p>   Radio Setup is used to configure your transmitter . </p>
             <div class="spacer">
-                <table class="cf_table" style="margin-top: 10px;">
+                <table class="cf_table" style=" margin-top: 10px;">
                     <tr>
-                        <td class="board-select"><select name="radiomode" style="width:40%;"disabled = "disabled" id = "racker_mode">
-                                <option value="0" >Mode 1</option>
-                                <option value="1" >Mode 2</option>
+                        <td class="board-select"><select name="radiomode" style="width:8%;"disabled = "disabled" id = "racker_mode">
+                                <option value="1" >Mode 1</option>
+                                <option value="0" >Mode 2</option>
                         </select></td>
-                        <td><label class="description" i18n="firmwareFlasherOnlineSelectBoardDescription"></label></td>
                     </tr>
                     <tr>
                         <td> <input class="toggle" type="checkbox" name="trainer_port"/> <label
                                 i18n="RadioSetupTrainerPort"></label>
                         </td>
-                        <td><label class="description" i18n="firmwareFlasherNoRebootDescription"></label></td>
                     </tr>
                 </table>     
             </div>
@@ -31,7 +29,7 @@
                
                         <table class="inprotocol"  style="margin-top: 20px;"> 
                             <tr>
-                                <th>IR System Protocol</th>
+                                <th i18n = "RadioSetupIRSystem" >IR System Protocol </th>
                                 <!-- <th i18n = "RadioSetupIRSystemPower">IR System Power</th>
                                 <th i18n = "RadioSetupIRPktRate">IR Pkt Rate</th>
                                 <th i18n = "RadioSetupIRTLMRadio">IR TLM Radio</th> -->
@@ -96,7 +94,7 @@
                     <div class="grid-col col6">
                         <table class="exprotocol"   style="margin-top: 20px;">
                             <tr>
-                                <th>ER System Protocol</th>
+                                <th i18n = "RadioSetupERSystem">ER System Protocol</th>
                                 <!-- <th i18n = "RadioSetupERSystemPower">ER System Power</th> -->
                             </tr>
                             <tr>
@@ -112,11 +110,11 @@
                             </tr>
                             <tr>   
                                 <td>
-                                    <div class="input-helpicon-flex" style="width:15%; margin-top: 12px;"disabled = "disabled">
+                                    <div class="input-helpicon-flex" style=" margin-top: 12px;"disabled = "disabled">
 
                                         <input class="toggle" type="checkbox" id="external_radio_power_switch"/>
 
-                                        <label i18n = "RadioSetupERSystemPower"></label>
+                                        <label style = "width:50%;" i18n = "RadioSetupERSystemPowerSwitch"></label>
                                     </div>
                                 </td>
                             </tr>
@@ -132,7 +130,7 @@
                                             <option value="4">250mw</option>
                                             <option value="5">500mw</option>
                                         </select>
-                                        <label i18n = "RadioSetupExELRSSystemPower" style="width:15%; margin-top: 12px;" ></label>
+                                        <label i18n = "RadioSetupExELRSSystemPower" style="width:50%; margin-top: 12px;" ></label>
                                     </div>
                                 </td>
                             </tr>
@@ -145,7 +143,7 @@
                                             <option value="2">50Hz</option>
                                             <option value="3">25Hz</option>
                                         </select>
-                                        <label i18n = "RadioSetupexELRSPktRate" style="width:15%; margin-top: 12px;" ></label>
+                                        <label i18n = "RadioSetupexELRSPktRate" style="width:50%; margin-top: 12px;" ></label>
                                     </div>
                                 </td>
                             </tr>
@@ -174,7 +172,7 @@
         </div>    
         
         <div class="gui_box_titlebar" style="margin-top: 50px;">
-            <div class="spacer_box_title" >MIXS</div>
+            <div class="spacer_box_title" i18n = "RadioSetupMIXS" >MIXS</div>
         </div>
         <div class="gui_box">
             <p>       MIXs is used to assign channels for Roll, Pitch, Yaw and Throttle vehicle control as well as determining whether they are reversed. </p>
