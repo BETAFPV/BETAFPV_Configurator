@@ -6,29 +6,30 @@
                     <tr>
                         <td class="board-select">
                             <select name="board"  id="boardTarget">
-                                <option value="loading" i18n="firmwareFlasherOptionLoading" >Choose a Board</option>
+                                <option value="loading" i18n="firmwareFlasherOptionLoading" ></option>
                             </select>
                         </td>
-                        <td><span class="description" i18n="firmwareFlasherOnlineSelectBoardDescription">Select your board to see available online firmware releases - Select the correct firmware appropriate for your board.</span></td>
+                        <td><span class="description" i18n="firmwareFlasherOnlineSelectBoardDescription_radio"></span></td>
                     </tr>
                     <tr>
                         <td><select name="firmware_version" id="boardVersion">
-                                <option value="loading" i18n="firmwareFlasherOptionLoading">Choose a Firmware version</option>
+                                <option value="loading" i18n="firmwareFlasherOptionLoading"></option>
                         </select></td>
-                        <td><span class="description" i18n="firmwareFlasherOnlineSelectFirmwareVersionDescription">Select firmware version for your board.</span></td>
+                        <td><span class="description" i18n="firmwareFlasherOnlineSelectFirmwareVersionDescription_radio"></span></td>
                     </tr>
                 </table>
             </div>
         </div>
         <div class="gui_box gui_warning">
             <div class="gui_box_titlebar">
-                <div class="spacer_box_title" style="text-align: center;" i18n = "firmwareFlasherWarning">Warning
+                <div class="spacer_box_title" style="text-align: center;"
+                    i18n="warningTitle">
                 </div>
             </div>
             <div class="spacer" style="margin-bottom: 10px;">
-                <p>Please do <span class=\"message-negative\">not</span> try to flash <strong>non-LiteRadio</strong> hardware with this firmware flasher.<br />Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>The bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /></p>
+                <p i18n="firmwareFlasherWarningText_radio"></p>
                 <br />
-                <p><span class=\"message-negative\">IMPORTANT</span>: Ensure you flash a file appropriate for your target.  Flashing a binary for the wrong target can cause <span class=\"message-negative\">bad</span> things to happen.</p>
+                <p i18n="firmwareFlasherTargetWarning_radio"></p>
             </div>
         </div>
         <div class="gui_box gui_note" style="margin-top: 30px;">
