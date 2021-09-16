@@ -354,7 +354,7 @@ window.onload=function(){
                             HidConfig.rocker_mode = data[3];
                             HidConfig.support_power =data[4];
                             //遥控器硬件信息获取完毕后，需要在这里根据硬件信息修改对应组件的可选元素
-                            document.getElementById("racker_mode").disabled = false;
+                            document.getElementById("rocker_mode").disabled = false;
                             show.rocker_mode.val(HidConfig.rocker_mode);
                             if(HidConfig.hardware_version==0){//硬件型号为：cc2500
 
@@ -376,12 +376,22 @@ window.onload=function(){
                                     HidConfig.external_radio_protocol = 1;
                                     show.external_radio_protocol.val(HidConfig.current_protocol);
 
-                                    //请求遥控器通道配置信息
+                                    //开启外部ExpressLRS
                                     rquestBuffer[0] = 0x00;
-                                    rquestBuffer[1] = 0x11;
+                                    rquestBuffer[1] = 0x07;
                                     rquestBuffer[2] = 0x01;
-                                    rquestBuffer[3] = 0x01;
+                                    rquestBuffer[3] = 0x00;
                                     hidDevice.write(rquestBuffer);
+
+                                    document.getElementById("external_radio_power_switch").checked = true;
+
+                                    
+                                    rquestBuffer[0] = 0x00;//获取外置射频模块配置信息
+                                    rquestBuffer[1] = 0x11;
+                                    rquestBuffer[2] = 0x02;
+                                    rquestBuffer[3] = 0x02;
+                                    hidDevice.write(rquestBuffer);
+
                                 }
                             }else if(HidConfig.hardware_version==2){//硬件型号为：sx1276
 
@@ -441,9 +451,10 @@ window.onload=function(){
                             HidConfig.external_radio_pkt_rate_elrs = data[3];
                             console.log("date[3]"+data[3]);
                             HidConfig.external_radio_tlm_elrs = data[4];
-                            document.getElementById("exELRSpowerID").disabled = false;
-                            document.getElementById("exELRSpktRateID").disabled = false;
-                            document.getElementById("exELRSTLMRadioID").disabled = false;
+                            document.getElementById("external_radio_power_switch").disabled = false; 
+                            document.getElementById("external_radio_power_elrs").disabled = false;
+                            document.getElementById("external_radio_pkt_rate_elrs").disabled = false;
+                            document.getElementById("external_radio_tlm_elrs").disabled = false;
                             show.external_radio_power_elrs.val(HidConfig.external_radio_power_elrs);
                             show.external_radio_pkt_rate_elrs.val(HidConfig.external_radio_pkt_rate_elrs);
                             show.external_radio_tlm_elrs.val(HidConfig.external_radio_tlm_elrs);
@@ -465,11 +476,17 @@ window.onload=function(){
                                 //工作频段2.4GHz ISM
                                 console.log("external radio work on 2.4GHz ISM");
                             }
+
+                            //请求遥控器通道配置信息
+                            rquestBuffer[0] = 0x00;
+                            rquestBuffer[1] = 0x11;
+                            rquestBuffer[2] = 0x01;
+                            rquestBuffer[3] = 0x01;
+                            hidDevice.write(rquestBuffer);
                         }
                     }
                     else
                     {
-                        
                         HidConfig.channel_data[0] = (data[1]<<8 | data[0]);
                         HidConfig.channel_data[1] = (data[3]<<8 | data[2]);
                         HidConfig.channel_data[2] = (data[5]<<8 | data[4]);
@@ -478,7 +495,6 @@ window.onload=function(){
                         HidConfig.channel_data[5] = (data[11]<<8 | data[10]);
                         HidConfig.channel_data[6] = (data[13]<<8 | data[12]);
                         HidConfig.channel_data[7] = (data[15]<<8 | data[14]);
-
                     }               
                 } );
 
