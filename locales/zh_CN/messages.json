@@ -5770,15 +5770,18 @@
         "message": "你确定要关闭配置程序吗？"
     },
     "RadioSetup": {
-        "message": "遥控器设置"
+        "message": "遥控器配置"
+    },
+    "rocker_mode_description":{
+        "message":"切换油门杆位置：Mode 1（右手油门）  Mode 2（左手油门）"
     },
     
     "RadioSetupIRSystem": {
-        "message": "内置射频模块配置"
+        "message": "射频模块配置"
     },
 
     "RadioSetupERSystem": {
-        "message": "外置射频模块配置"
+        "message": "ExpressLRS系统配置"
     },
     "RadioSetupMIXS": {
         "message": "通道配置"
@@ -5823,7 +5826,7 @@
         "message": "  外置射频模块协议（若第一次启动外置射频模块，需要保存重启后才能修改其参数）"
     },
     "RadioSetupERSystemPowerSwitch": {
-        "message": "  外置高频头供电开关"
+        "message": "  供电控制（开启/关闭外置ExpressLRS模块的电源）"
     },
     "RadioSetupExELRSSystemPower": {
         "message": "  外部ELRS系统"
@@ -5857,5 +5860,18 @@
     },
     "ChooseFCConfigurator":{
         "message": "切换为飞控设置界面"
+    },
+    "RadioSetupText":{
+        "message": "遥控器配置说明文本"
+    },
+    "RadioSetupRFconfigText":{
+        "message": "射频模块配置说明文本"
+    },
+    "RadioSetupExpressLRSText":{
+        "message": "ExpressLRS系统设置说明文本"
+    }
+    ,
+    "RadioSetupMIXSText":{
+        "message": "通道混控说明文本"
     }
 }

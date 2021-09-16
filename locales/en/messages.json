@@ -6165,13 +6165,15 @@
     "RadioSetup": {
         "message": "Radio Setup"
     },
-    
+    "rocker_mode_description":{
+        "message":"Switch throttle stick position: Mode 1(Right stick throttle) Mode 2(Left stick throttle)"
+    },
     "RadioSetupIRSystem": {
-        "message": "Internal radio setting"
+        "message": "RF Module Setup"
     },
 
     "RadioSetupERSystem": {
-        "message": "External radio setting"
+        "message": "External ExpressLRS Module Setup"
     },
     "RadioSetupMIXS": {
         "message": "MIXS"
@@ -6216,7 +6218,7 @@
         "message": "External Radio Module（If the external RF module is enabled for the first time, save and retoot the module before modifying its parameters）"
     },
     "RadioSetupERSystemPowerSwitch": {
-        "message": "Power Switch"
+        "message": "Power Switch(Power on/off the ExpressLRS Module)"
     },
     "RadioSetupExELRSSystemPower": {
         "message": "External ELRS System Power"
@@ -6250,5 +6252,18 @@
     },
     "ChooseFCConfigurator":{
         "message": "Click to Active Configurator for FC Board"
+    },
+    "RadioSetupText":{
+        "message": "Description of Radio Setup "
+    },
+    "RadioSetupRFconfigText":{
+        "message": "Description of Radio System Setup"
+    },
+    "RadioSetupExpressLRSText":{
+        "message": "Description of ExpressLRS Setup"
+    }
+    ,
+    "RadioSetupMIXSText":{
+        "message": "      MIXs is used to assign channels for Roll, Pitch, Yaw and Throttle vehicle control as well as determining whether they are reversed."
     }
 }
