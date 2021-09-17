@@ -34,6 +34,10 @@ const show = {
     ch2_reverse:null,
     ch3_reverse:null,
     ch4_reverse:null,
+    ch5_reverse:null,
+    ch6_reverse:null,
+    ch7_reverse:null,
+    ch8_reverse:null,
 
     
     //内部射频模块配置信息
@@ -209,6 +213,10 @@ show.initialize = function (callback) {
         show.ch2_reverse=$('input[id="ch2_check"]');
         show.ch3_reverse=$('input[id="ch3_check"]');
         show.ch4_reverse=$('input[id="ch4_check"]');
+        show.ch5_reverse=$('input[id="ch5_check"]');
+        show.ch6_reverse=$('input[id="ch6_check"]');
+        show.ch7_reverse=$('input[id="ch7_check"]');
+        show.ch8_reverse=$('input[id="ch8_check"]');
 
         show.internal_radio_protocol = $('select[id="internal_radio_protocol"]');
         show.internal_radio_power = $('select[id="internal_radio_power"]');
@@ -270,6 +278,22 @@ show.initialize = function (callback) {
         show.ch4_reverse.change(function () {
             HidConfig.ch4_reverse_display = $(this).is(':checked')?1:0;
             send_ch4_config();
+        }); 
+        show.ch5_reverse.change(function () {
+            HidConfig.ch5_reverse_display = $(this).is(':checked')?1:0;
+            send_ch5_config();
+        });
+        show.ch6_reverse.change(function () {
+            HidConfig.ch6_reverse_display = $(this).is(':checked')?1:0;
+            send_ch6_config();
+        });
+        show.ch7_reverse.change(function () {
+            HidConfig.ch7_reverse_display = $(this).is(':checked')?1:0;
+            send_ch7_config();
+        });
+        show.ch8_reverse.change(function () {
+            HidConfig.ch8_reverse_display = $(this).is(':checked')?1:0;
+            send_ch8_config();
         }); 
         show.ch1_scale.change(function () {
             HidConfig.ch1_scale_display = parseInt($(this).val(), 10);
@@ -457,7 +481,7 @@ show.initialize = function (callback) {
             configBuff[1] = 0x01;
             configBuff[2] = 0x04;
             configBuff[3] = HidConfig.ch5_input_source_display;
-            configBuff[4] = 0;
+            configBuff[4] = HidConfig.ch5_reverse_display;
             configBuff[5] = 0;
             configBuff[6] = 0;
             configBuff[7] = 0;
@@ -469,7 +493,7 @@ show.initialize = function (callback) {
             configBuff[1] = 0x01;
             configBuff[2] = 0x05;
             configBuff[3] = HidConfig.ch6_input_source_display;
-            configBuff[4] = 0;
+            configBuff[4] = HidConfig.ch6_reverse_display;
             configBuff[5] = 0;
             configBuff[6] = 0;
             configBuff[7] = 0;
@@ -481,7 +505,7 @@ show.initialize = function (callback) {
             configBuff[1] = 0x01;
             configBuff[2] = 0x06;
             configBuff[3] = HidConfig.ch7_input_source_display;
-            configBuff[4] = 0;
+            configBuff[4] = HidConfig.ch7_reverse_display;
             configBuff[5] = 0;
             configBuff[6] = 0;
             configBuff[7] = 0;
@@ -493,7 +517,7 @@ show.initialize = function (callback) {
             configBuff[1] = 0x01;
             configBuff[2] = 0x07;
             configBuff[3] = HidConfig.ch8_input_source_display;
-            configBuff[4] = 0;
+            configBuff[4] = HidConfig.ch8_reverse_display;
             configBuff[5] = 0;
             configBuff[6] = 0;
             configBuff[7] = 0;

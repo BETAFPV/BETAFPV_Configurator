@@ -62,6 +62,10 @@ HidConfig = {
     ch2_reverse_display:0,
     ch3_reverse_display:0,
     ch4_reverse_display:0,
+    ch5_reverse_display:0,
+    ch6_reverse_display:0,
+    ch7_reverse_display:0,
+    ch8_reverse_display:0,
 
      //内部射频模块配置信息
     internal_radio_protocol:0,
