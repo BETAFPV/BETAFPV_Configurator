@@ -39,6 +39,14 @@ const show = {
     ch7_reverse:null,
     ch8_reverse:null,
 
+    //ExpressLRS系统参数配置
+    ExpressLRS_power_option_box:null,
+    ExpressLRS_pkt_rate_option_box:null,
+    ExpressLRS_tlm_option_box:null,
+
+
+    //外置射频模块供电开关
+    External_radio_module_power_switch:null,
     
     //内部射频模块配置信息
     internal_radio_protocol:null,
@@ -188,7 +196,13 @@ show.initialize = function (callback) {
         GUI.interval_add('receiver_pull', update_ui, 50, true);
     
         show.rocker_mode = $('select[name="radiomode"]');
-        show.Trainer_port = $('input[name="trainer_port"]');
+        show.trainer_port = $('input[name="trainer_port"]');
+
+        show.External_radio_module_power_switch = $('input[id="External_radio_module_power_switch"]');
+
+        show.ExpressLRS_power_option_box = $('select[id="ExpressLRS_power_option_box"]');
+        show.ExpressLRS_pkt_rate_option_box = $('select[id="ExpressLRS_pkt_rate_option_box"]');
+        show.ExpressLRS_tlm_option_box = $('select[id="ExpressLRS_tlm_option_box"]');
 
         show.ch1_data_source = $('select[name="ch1_data_source"]');
         show.ch2_data_source = $('select[name="ch2_data_source"]');
@@ -218,6 +232,7 @@ show.initialize = function (callback) {
         show.ch7_reverse=$('input[id="ch7_check"]');
         show.ch8_reverse=$('input[id="ch8_check"]');
 
+
         show.internal_radio_protocol = $('select[id="internal_radio_protocol"]');
         show.internal_radio_power = $('select[id="internal_radio_power"]');
         show.internal_radio_pkt_rate = $('select[id="internal_radio_pkt_rate"]');
@@ -229,6 +244,68 @@ show.initialize = function (callback) {
         show.external_radio_power_elrs = $('select[id="external_radio_power_elrs"]');
         show.external_radio_pkt_rate_elrs = $('select[id="external_radio_pkt_rate_elrs"]');
         show.external_radio_tlm_elrs = $('select[id="external_radio_tlm_elrs"]');
+
+        show.External_radio_module_power_switch.change(function () {
+            HidConfig.External_radio_module_power_switch = $(this).is(':checked')?1:0;
+            if(HidConfig.External_radio_module_power_switch){
+                console.log("elrs power on");
+                let  buffer= new Buffer.alloc(64);//开始外置射频模块电源
+                buffer[0] = 0x00;
+                buffer[1] = 0x07;
+                buffer[2] = 0x01;
+                hidDevice.write(buffer);
+
+                buffer[0] = 0x00;//获取外置ExpressLRS模块配置信息
+                buffer[1] = 0x11;
+                buffer[2] = 0x02;
+                buffer[3] = 0x02;
+                hidDevice.write(buffer);
+
+            }else{
+                console.log("elrs power off");
+                let  buffer= new Buffer.alloc(64);
+                buffer[0] = 0x00; 
+                buffer[1] = 0x07;
+                buffer[2] = 0x00;
+                hidDevice.write(buffer);
+                document.getElementById("ExpressLRS_power_option_box").disabled = true;
+                document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = true;
+                document.getElementById("ExpressLRS_tlm_option_box").disabled = true;
+            }
+        });
+        show.ExpressLRS_power_option_box.change(function () {
+            HidConfig.ExpressLRS_power_option_value = parseInt($(this).val(), 10);
+            //判断当前使用的是内部射频模块还是外部射频模块
+            if(HidConfig.internal_radio_protocol){
+                send_internal_radio_config();
+                console.log("set internal ELRS power config");
+            }else if(HidConfig.external_radio_protocol){
+                send_external_exrs_radio_config();
+                console.log("set external ELRS power config");
+            }
+        });
+        show.ExpressLRS_pkt_rate_option_box.change(function () {
+            HidConfig.ExpressLRS_pkt_rate_option_value = parseInt($(this).val(), 10);
+            //判断当前使用的是内部射频模块还是外部射频模块
+            if(HidConfig.internal_radio_protocol){
+                send_internal_radio_config();
+                console.log("set internal ELRS pkt rate config");
+            }else if(HidConfig.external_radio_protocol){
+                send_external_exrs_radio_config();
+                console.log("set external ELRS pkt rate config");
+            }
+        });
+        show.ExpressLRS_tlm_option_box.change(function () {
+            HidConfig.ExpressLRS_tlm_option_value = parseInt($(this).val(), 10);
+            //判断当前使用的是内部射频模块还是外部射频模块
+            if(HidConfig.internal_radio_protocol){
+                send_internal_radio_config();
+                console.log("set internal ELRS tml config");
+            }else if(HidConfig.external_radio_protocol){
+                send_external_exrs_radio_config();
+                console.log("set external ELRS tml config");
+            }
+        });
         
         
         show.ch1_data_source.change(function () {
@@ -330,17 +407,18 @@ show.initialize = function (callback) {
         show.rocker_mode.change(function () {
             HidConfig.rocker_mode = parseInt($(this).val(), 10);
         });
-        show.Trainer_port.change(function () {
-            HidConfig.Trainer_port = $(this).is(':checked');
+        show.trainer_port.change(function () {
+            HidConfig.trainer_port = parseInt($(this).val(), 10)
         });
+
         show.internal_radio_protocol.change(function () {
             HidConfig.internal_radio_protocol = parseInt($(this).val(), 10);
             if(HidConfig.internal_radio_protocol==0){//OFF
                 document.getElementById("external_radio_protocol").disabled = false;//内置射频模块关闭时，外置射频协议可选
                 
-                document.getElementById("internal_radio_power").disabled = true;
-                document.getElementById("internal_radio_pkt_rate").disabled = true;
-                document.getElementById("internal_radio_tlm").disabled = true;
+                document.getElementById("ExpressLRS_power_option_box").disabled = true;
+                document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = true;
+                document.getElementById("ExpressLRS_tlm_option_box").disabled = true;
 
             }else {
                 HidConfig.external_radio_protocol = 0;
@@ -348,69 +426,26 @@ show.initialize = function (callback) {
 
             }
         });
-        show.internal_radio_power.change(function () {
-            HidConfig.internal_radio_power = parseInt($(this).val(), 10);
-            send_internal_radio_config();
-        });
-        show.internal_radio_pkt_rate.change(function () {
-            HidConfig.internal_radio_pkt_rate = parseInt($(this).val(), 10);
-            send_internal_radio_config();
-        });
-        show.internal_radio_tlm.change(function () {
-            HidConfig.internal_radio_tlm = parseInt($(this).val(), 10);
-            send_internal_radio_config();
-        });
         show.external_radio_protocol.change(function () {
             HidConfig.external_radio_protocol = parseInt($(this).val(), 10);
             if(HidConfig.external_radio_protocol==0){//外置射频协议选择为OFF
-                HidConfig.internal_radio_protocol = 0;
-                show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
                 document.getElementById("internal_radio_protocol").disabled = false;//可以设置内置射频模块协议
 
-                document.getElementById("external_radio_power_elrs").disabled = true;//无法设置外置射频模块
-                document.getElementById("external_radio_pkt_rate_elrs").disabled = true;    
-                document.getElementById("external_radio_tlm_elrs").disabled = true; 
-                document.getElementById("external_radio_power_switch").disabled = true;      
+                document.getElementById("External_radio_module_power_switch").disabled = true;//无法设置外置射频模块
+                document.getElementById("ExpressLRS_power_option_box").disabled = true;
+                document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = true;
+                document.getElementById("ExpressLRS_tlm_option_box").disabled = true;
 
-            }else{//外置射频协议选择为CRSF
+            }else if(HidConfig.external_radio_protocol==1){//外置射频协议选择为CRSF
                 HidConfig.internal_radio_protocol = 0;
                 show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
                 document.getElementById("internal_radio_protocol").disabled = true;//无法切换内置射频模块协议
             }
-        });
-        show.external_radio_power_switch.change(function () {
-            HidConfig.external_radio_power_switch = $(this).is(':checked');//外部射频模块电源开关
-            
-            if(HidConfig.external_radio_power_switch){
-                console.log("elrs power on");
-                // $("#exELRSpowerID").css({display: 'block'});
-                // $("#exELRSpktRateID").css({display: 'block'});
-                // $("#exELRSTLMRadioID").css({display: 'block'});
-                let  buffer= new Buffer.alloc(64);//开始外置射频模块电源
-                buffer[0] = 0x00;
-                buffer[1] = 0x07;
-                buffer[2] = 0x01;
-                hidDevice.write(buffer);
-
-                buffer[0] = 0x00;//获取外置ExpressLRS模块配置信息
-                buffer[1] = 0x11;
-                buffer[2] = 0x02;
-                buffer[3] = 0x02;
-                hidDevice.write(buffer);
-
-            }else{
-                console.log("elrs power off");
-                let  buffer= new Buffer.alloc(64);
-                buffer[0] = 0x00; 
-                buffer[1] = 0x07;
-                buffer[2] = 0x00;
-                hidDevice.write(buffer);
-                document.getElementById("external_radio_power_elrs").disabled = true;
-                document.getElementById("external_radio_pkt_rate_elrs").disabled = true;
-                document.getElementById("external_radio_tlm_elrs").disabled = true;
-
+            else{//其他未添加的外置射频协议
+                console.log("This External protocol is no supported on your device!");
             }
         });
+
         show.external_radio_power_elrs.change(function () {
             HidConfig.external_radio_power_elrs = parseInt($(this).val(), 10);
             send_external_exrs_radio_config();
@@ -529,9 +564,9 @@ show.initialize = function (callback) {
             configBuff[0] = 0x00;
             configBuff[1] = 0x06;
             configBuff[2] = 0x02;
-            configBuff[3] = HidConfig.internal_radio_power;
-            configBuff[4] = HidConfig.internal_radio_pkt_rate;
-            configBuff[5] = HidConfig.internal_radio_tlm;
+            configBuff[3] = HidConfig.ExpressLRS_power_option_value-1;
+            configBuff[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
+            configBuff[5] = HidConfig.ExpressLRS_tlm_option_value;
             configBuff[6] = 0;
             configBuff[7] = 0;
             configBuff[8] = 0;
@@ -542,9 +577,9 @@ show.initialize = function (callback) {
             buffer[0] = 0x0
             buffer[1] = 0x07;
             buffer[2] = 0x02;
-            buffer[3] = HidConfig.external_radio_power_elrs;
-            buffer[4] = HidConfig.external_radio_pkt_rate_elrs;
-            buffer[5] = HidConfig.external_radio_tlm_elrs;
+            buffer[3] = HidConfig.ExpressLRS_power_option_value;
+            buffer[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
+            buffer[5] = HidConfig.ExpressLRS_tlm_option_value;
             buffer[6] = 0x00;//RF Freq
             hidDevice.write(buffer);
         }

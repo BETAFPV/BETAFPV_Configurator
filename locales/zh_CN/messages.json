@@ -5838,7 +5838,7 @@
         "message": "  外置射频模块协议（若第一次启动外置射频模块，需要保存重启后才能修改其参数）"
     },
     "RadioSetupERSystemPowerSwitch": {
-        "message": "  供电控制（开启/关闭外置ExpressLRS模块的电源）"
+        "message": "  外置射频模块供电控制（开启/关闭外置ExpressLRS模块的电源）"
     },
     "RadioSetupExELRSSystemPower": {
         "message": "  外部ELRS系统"

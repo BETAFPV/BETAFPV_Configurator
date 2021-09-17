@@ -67,6 +67,15 @@ HidConfig = {
     ch7_reverse_display:0,
     ch8_reverse_display:0,
 
+    //ExpressLRS系统参数配置
+    ExpressLRS_power_option_value:null,
+    ExpressLRS_pkt_rate_option_value:null,
+    ExpressLRS_tlm_option_value:null,
+
+
+    //外置射频模块供电开关
+    External_radio_module_power_switch:null,    
+
      //内部射频模块配置信息
     internal_radio_protocol:0,
     internal_radio_power:0,
@@ -385,7 +394,7 @@ window.onload=function(){
                                     rquestBuffer[3] = 0x00;
                                     hidDevice.write(rquestBuffer);
 
-                                    document.getElementById("external_radio_power_switch").checked = true;
+                                    document.getElementById("External_radio_module_power_switch").checked = true;
 
                                     
                                     rquestBuffer[0] = 0x00;//获取外置射频模块配置信息
@@ -414,16 +423,37 @@ window.onload=function(){
                         if(checkSum == checkSum2)
                         {
                             console.log("receive Internal radio config");
+
+                            //功率档位只支持：25 50 100mw档位
+                            $("#ExpressLRS_power_10mw").css({display: 'none'});
+                            $("#ExpressLRS_power_25mw").css({display: 'block'});
+                            $("#ExpressLRS_power_50mw").css({display: 'block'});
+                            $("#ExpressLRS_power_100mw").css({display: 'block'});
+                            $("#ExpressLRS_power_250mw").css({display: 'none'});
+                            $("#ExpressLRS_power_500mw").css({display: 'none'});
+                            $("#ExpressLRS_power_1000mw").css({display: 'none'});
+
+                            //显示当前内置ELRS的配置信息
                             HidConfig.internal_radio_protocol = 1;
-                            HidConfig.internal_radio_power = data[2];
-                            HidConfig.internal_radio_pkt_rate = data[3];
-                            HidConfig.internal_radio_tlm = data[4];
-                            document.getElementById("internal_radio_power").disabled = false;
-                            document.getElementById("internal_radio_pkt_rate").disabled = false;
-                            document.getElementById("internal_radio_tlm").disabled = false;
-                            show.internal_radio_power.val(HidConfig.internal_radio_power);
-                            show.internal_radio_pkt_rate.val(HidConfig.internal_radio_pkt_rate);
-                            show.internal_radio_tlm.val(HidConfig.internal_radio_tlm);
+                            HidConfig.ExpressLRS_power_option_value = data[2];
+                            HidConfig.ExpressLRS_pkt_rate_option_value = data[3];
+                            HidConfig.ExpressLRS_tlm_option_value = data[4];
+
+
+                            show.ExpressLRS_power_option_box.val(HidConfig.ExpressLRS_power_option_value+1);
+                            show.ExpressLRS_pkt_rate_option_box.val(HidConfig.ExpressLRS_pkt_rate_option_value);
+                            show.ExpressLRS_tlm_option_box.val(HidConfig.ExpressLRS_tlm_option_value);
+
+                            
+                            //外部射频模块供电开关失能
+                            document.getElementById("External_radio_module_power_switch").disabled = true; 
+
+                            //ExpressLRS系统可设置
+                            document.getElementById("ExpressLRS_power_option_box").disabled = false;
+                            document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
+                            document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
+
+
 
                              //接着请求遥控器通道配置信息
                             rquestBuffer[0] = 0x00;
@@ -449,17 +479,37 @@ window.onload=function(){
                         {
                             console.log("receive External radio config");
                             
-                            HidConfig.external_radio_power_elrs = data[2];
-                            HidConfig.external_radio_pkt_rate_elrs = data[3];
-                            console.log("date[3]"+data[3]);
-                            HidConfig.external_radio_tlm_elrs = data[4];
-                            document.getElementById("external_radio_power_switch").disabled = false; 
-                            document.getElementById("external_radio_power_elrs").disabled = false;
-                            document.getElementById("external_radio_pkt_rate_elrs").disabled = false;
-                            document.getElementById("external_radio_tlm_elrs").disabled = false;
-                            show.external_radio_power_elrs.val(HidConfig.external_radio_power_elrs);
-                            show.external_radio_pkt_rate_elrs.val(HidConfig.external_radio_pkt_rate_elrs);
-                            show.external_radio_tlm_elrs.val(HidConfig.external_radio_tlm_elrs);
+                            
+                            //支持功率档位：10 25 50 100 250 500mw
+                            $("#ExpressLRS_power_10mw").css({display: 'block'});
+                            $("#ExpressLRS_power_25mw").css({display: 'block'});
+                            $("#ExpressLRS_power_50mw").css({display: 'block'});
+                            $("#ExpressLRS_power_100mw").css({display: 'block'});
+                            $("#ExpressLRS_power_250mw").css({display: 'block'});
+                            $("#ExpressLRS_power_500mw").css({display: 'block'});
+                            $("#ExpressLRS_power_1000mw").css({display: 'none'});
+
+                            HidConfig.ExpressLRS_power_option_value = data[2];
+                            HidConfig.ExpressLRS_pkt_rate_option_value = data[3];
+                            HidConfig.ExpressLRS_tlm_option_value = data[4];
+                            console.log("data[2]"+data[2]);
+                            console.log("data[3]"+data[3]);
+                            console.log("data[4]"+data[4]);
+
+                            show.ExpressLRS_power_option_box.val(HidConfig.ExpressLRS_power_option_value);
+                            show.ExpressLRS_pkt_rate_option_box.val(HidConfig.ExpressLRS_pkt_rate_option_value);
+                            show.ExpressLRS_tlm_option_box.val(HidConfig.ExpressLRS_tlm_option_value);
+                                                    
+
+                            //外部射频模块供电开关使能
+                            document.getElementById("External_radio_module_power_switch").disabled = false; 
+
+                            //ExpressLRS系统可设置
+                            document.getElementById("ExpressLRS_power_option_box").disabled = false;
+                            document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
+                            document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
+
+
                             if(data[5] == 0x02){//需要根据外部射频模块硬件型号设置组件可选包率
                                 //外部射频模块可选包率：
                                 //200hz 100hz 50hz 25hz
@@ -485,6 +535,7 @@ window.onload=function(){
                             rquestBuffer[2] = 0x01;
                             rquestBuffer[3] = 0x01;
                             hidDevice.write(rquestBuffer);
+                            ch_receive_step = 0;
                         }else{
                             console.log("checksum error");
                         }

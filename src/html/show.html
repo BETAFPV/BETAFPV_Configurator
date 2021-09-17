@@ -37,6 +37,11 @@
                             <tr>
                                 <th i18n = "RadioSetupIRSystem" >IR System Protocol </th>
                             </tr>
+                             <tr>
+                                <td>
+                 
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                 <p i18n = "RadioSetupRFconfigText">  </p>
@@ -60,45 +65,11 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr>   
                                 <td>
-                                    <div class="input-helpicon-flex">
-                                        <select id="internal_radio_power" style="width:15%; margin-top: 12px;" disabled = "disabled">
-                                            <option value="0" selected="selected">25mw</option>
-                                            <option value="1">50mw</option>
-                                            <option value="2">100mw</option>
-                                        </select>
-                                        <label i18n = "RadioSetupIRSystemPower" style="width:100%; margin-top: 12px;" ></label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <select id="internal_radio_pkt_rate" style="width:15%; margin-top: 12px;" disabled = "disabled">
-                                            <option value="0" selected="selected">500Hz</option>
-                                            <option value="1">250Hz</option>
-                                            <option value="2">150Hz</option>
-                                            <option value="3">50Hz</option>
-                                        </select>
-                                        <label i18n = "RadioSetupIRPktRate" style="width:100%; margin-top: 12px;" ></label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <select id="internal_radio_tlm" style="width:15%; margin-top: 12px;" disabled = "disabled">
-                                            <option value="0" selected="selected">OFF</option>
-                                            <option value="1">1:128</option>
-                                            <option value="2">1:64</option>
-                                            <option value="3">1:32</option>
-                                            <option value="4">1:16</option>
-                                            <option value="5">1:8</option>
-                                            <option value="6">1:4</option>
-                                            <option value="7">1:2</option>
-                                        </select>
-                                        <label i18n = "RadioSetupIRTLMRadio" style="width:100%; margin-top: 12px;" ></label>
+                                    <div  class="input-helpicon-flex" style=" margin-top: 12px;">
+                                        <input type="checkbox" id="External_radio_module_power_switch" disabled = "disabled"/>
+                                        <label style = "width:100%;margin-top: 6px;" i18n = "RadioSetupERSystemPowerSwitch"></label>
                                     </div>
                                 </td>
                             </tr>
@@ -109,25 +80,22 @@
                             <tr>
                                 <th i18n = "RadioSetupERSystem">ER System Protocol</th>
                             </tr>
-                            <tr>   
+                            <tr>
                                 <td>
-                                <p i18n = "RadioSetupExpressLRSText">  </p>
-                                    <div  class="input-helpicon-flex" style=" margin-top: 12px;">
-                                        <input type="checkbox" id="external_radio_power_switch" disabled = "disabled"/>
-                                        <label style = "width:50%;margin-top: 8px;" i18n = "RadioSetupERSystemPowerSwitch"></label>
-                                    </div>
+                                    <p i18n = "RadioSetupExpressLRSText">  </p>
                                 </td>
                             </tr>
                             <tr >
                                 <td  id="exELRSpowerID" disabled = "disabled">
                                     <div class="input-helpicon-flex" >
-                                        <select id="external_radio_power_elrs" style="width:15%; margin-top: 12px;" disabled = "disabled">
-                                            <option value="0" selected="selected">10mw</option>
-                                            <option value="1">25mw</option>
-                                            <option value="2">50mw</option>
-                                            <option value="3">100mw</option>
-                                            <option value="4">250mw</option>
-                                            <option value="5">500mw</option>
+                                        <select id="ExpressLRS_power_option_box" style="width:15%; margin-top: 12px;" disabled = "disabled">
+                                            <option id = "ExpressLRS_power_10mw" value="0" selected="selected">10mw</option>
+                                            <option id = "ExpressLRS_power_25mw" value="1">25mw</option>
+                                            <option id = "ExpressLRS_power_50mw" value="2">50mw</option>
+                                            <option id = "ExpressLRS_power_100mw" value="3">100mw</option>
+                                            <option id = "ExpressLRS_power_250mw" value="4">250mw</option>
+                                            <option id = "ExpressLRS_power_500mw" value="5">500mw</option>
+                                            <option id = "ExpressLRS_power_1000mw" value="6">1000mw</option>
                                         </select>
                                         <label i18n = "RadioSetupExELRSSystemPower" style="width:50%; margin-top: 12px;" ></label>
                                     </div>
@@ -136,11 +104,11 @@
                             <tr>
                                 <td   id="exELRSpktRateID" disabled = "disabled">
                                     <div class="input-helpicon-flex" >
-                                        <select id="external_radio_pkt_rate_elrs" style="width:15%; margin-top: 12px;" disabled = "disabled">
-                                            <option value="0" selected="selected">200Hz</option>
-                                            <option value="1">100Hz</option>
-                                            <option value="2">50Hz</option>
-                                            <option value="3">25Hz</option>
+                                        <select id="ExpressLRS_pkt_rate_option_box" style="width:15%; margin-top: 12px;" disabled = "disabled">
+                                            <option id="ExpressLRS_pkt_rate_500Hz" value="0" selected="selected">500Hz</option>
+                                            <option id="ExpressLRS_pkt_rate_250Hz" value="1">250Hz</option>
+                                            <option id="ExpressLRS_pkt_rate_100Hz" value="2">100Hz</option>
+                                            <option id="ExpressLRS_pkt_rate_50Hz" value="3">50Hz</option>
                                         </select>
                                         <label i18n = "RadioSetupexELRSPktRate" style="width:50%; margin-top: 12px;" ></label>
                                     </div>
@@ -149,15 +117,15 @@
                             <tr  >     
                                 <td id="exELRSTLMRadioID">
                                     <div class="input-helpicon-flex" >
-                                        <select id="external_radio_tlm_elrs" style="width:15%; margin-top: 12px;" disabled = "disabled">
-                                            <option value="0" selected="selected">OFF</option>
-                                            <option value="1">1:128</option>
-                                            <option value="2">1:64</option>
-                                            <option value="3">1:32</option>
-                                            <option value="4">1:16</option>
-                                            <option value="5">1:8</option>
-                                            <option value="6">1:4</option>
-                                            <option value="7">1:2</option>
+                                        <select id="ExpressLRS_tlm_option_box" style="width:15%; margin-top: 12px;" disabled = "disabled">
+                                            <option id="ExpressLRS_tlm_OFF" value="0" selected="selected">OFF</option>
+                                            <option id="ExpressLRS_tlm_128" value="1">1:128</option>
+                                            <option id="ExpressLRS_tlm_64" value="2">1:64</option>
+                                            <option id="ExpressLRS_tlm_32" value="3">1:32</option>
+                                            <option id="ExpressLRS_tlm_16" value="4">1:16</option>
+                                            <option id="ExpressLRS_tlm_8" value="5">1:8</option>
+                                            <option id="ExpressLRS_tlm_4" value="6">1:4</option>
+                                            <option id="ExpressLRS_tlm_2" value="7">1:2</option>
                                         </select>
                                         <label i18n = "RadioSetupexELRSTLMRadio" style="width:15%; margin-top: 12px;" ></label>
                                     </div>
