@@ -379,11 +379,11 @@ window.onload=function(){
                                 $("#internal_radio_protocol_Frsky_F16_LBT").css({display: 'block'});
                                 
                             }else if(HidConfig.hardware_version==1){//硬件型号为：sx1280
+                                $("#internal_radio_protocol_elrs_2").css({display: 'block'});
+                                $("#internal_radio_protocol_Frsky_F8").css({display: 'none'});
+                                $("#internal_radio_protocol_Frsky_F16_FCC").css({display: 'none'});
+                                $("#internal_radio_protocol_Frsky_F16_LBT").css({display: 'none'});
                                 if(HidConfig.current_protocol==0){//当前协议为：内置elrs协议
-                                    $("#internal_radio_protocol_elrs_2").css({display: 'block'});
-                                    $("#internal_radio_protocol_Frsky_F8").css({display: 'none'});
-                                    $("#internal_radio_protocol_Frsky_F16_FCC").css({display: 'none'});
-                                    $("#internal_radio_protocol_Frsky_F16_LBT").css({display: 'none'});
                                     document.getElementById("internal_radio_protocol").disabled = false;
                                     show.internal_radio_protocol.value = 0;
                                     HidConfig.internal_radio_protocol = 0;

@@ -6202,6 +6202,9 @@
     "RadioSetupTrainerPort": {
         "message": "Trainer Port"
     },
+    "RadioSetupInternalRadioModule":{
+        "message":"Internal radio module"
+    },
     "RadioSetupIRSystemProtocol": {
         "message": "Internal Radio System（If the built-in RF module is enabled for the first time, save and retoot the module before modifying its parameters）"
     },
@@ -6213,6 +6216,9 @@
     },
     "RadioSetupIRTLMRadio": {
         "message": "TLM Radio"
+    },
+    "RadioSetupEXternalRadioModule":{
+        "message":"External radio module"
     },
     "RadioSetupERSystemProtocol": {
         "message": "External Radio Module（If the external RF module is enabled for the first time, save and retoot the module before modifying its parameters）"
