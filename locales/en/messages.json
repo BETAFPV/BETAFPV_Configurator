@@ -6265,5 +6265,14 @@
     ,
     "RadioSetupMIXSText":{
         "message": "      MIXs is used to assign channels for Roll, Pitch, Yaw and Throttle vehicle control as well as determining whether they are reversed."
+    },
+    "RadioSetupFactoryReset":{
+        "message":"Factory Reset"
+    },
+    "RadioSetupEnterBinding":{
+        "message":"Binding Receiver"
+    },
+    "RadioSetupEnterWIFIUpdate":{
+        "message":"Enter WIFI Update"
     }
 }

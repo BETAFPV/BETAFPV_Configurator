@@ -5885,5 +5885,14 @@
     ,
     "RadioSetupMIXSText":{
         "message": "通道混控说明文本"
+    },
+    "RadioSetupFactoryReset":{
+        "message":"恢复出厂设置"
+    },
+    "RadioSetupEnterBinding":{
+        "message":"绑定接收机"
+    },
+    "RadioSetupEnterWIFIUpdate":{
+        "message":"进入WIFI更新"
     }
 }

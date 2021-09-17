@@ -347,8 +347,6 @@ window.onload=function(){
     
                         if(checkSum == checkSum2)//校验通过
                         {
-
-                            console.log(data);
                             HidConfig.hardware_version = data[1];
                             HidConfig.current_protocol = data[2];
                             HidConfig.rocker_mode = data[3];
@@ -483,6 +481,8 @@ window.onload=function(){
                             rquestBuffer[2] = 0x01;
                             rquestBuffer[3] = 0x01;
                             hidDevice.write(rquestBuffer);
+                        }else{
+                            console.log("checksum error");
                         }
                     }
                     else

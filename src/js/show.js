@@ -481,6 +481,11 @@ show.initialize = function (callback) {
             configBuff[1] = 0x01;
             configBuff[2] = 0x06;
             configBuff[3] = HidConfig.ch7_input_source_display;
+            configBuff[4] = 0;
+            configBuff[5] = 0;
+            configBuff[6] = 0;
+            configBuff[7] = 0;
+            configBuff[8] = 0;
             hidDevice.write(configBuff);
         }
         function send_ch8_config(){
@@ -520,7 +525,17 @@ show.initialize = function (callback) {
             hidDevice.write(buffer);
         }
 
-
+        $('a.binding').click(function () {   
+            console.log("ExpressLRS enter to binding");
+        });
+        $('a.wifi_update').click(function () {   
+            console.log("ExpressLRS enter to wifi update");
+        });
+        
+        $('a.factory_reset').click(function () {   
+            console.log("factory reset");
+        });
+        
         $('a.refresh').click(function () {
             sync_config();
             console.log("refresh click");
