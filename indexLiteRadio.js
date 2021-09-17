@@ -67,6 +67,11 @@ HidConfig = {
     ch7_reverse_display:0,
     ch8_reverse_display:0,
 
+    //内外置射频模块开关
+    Internal_radio_module_switch:0,
+    External_radio_module_switch:0,
+    
+
     //ExpressLRS系统参数配置
     ExpressLRS_power_option_value:null,
     ExpressLRS_pkt_rate_option_value:null,
@@ -368,12 +373,20 @@ window.onload=function(){
                             document.getElementById("rocker_mode").disabled = false;
                             show.rocker_mode.val(HidConfig.rocker_mode);
                             if(HidConfig.hardware_version==0){//硬件型号为：cc2500
-
+                                $("#internal_radio_protocol_elrs_2").css({display: 'none'});
+                                $("#internal_radio_protocol_Frsky_F8").css({display: 'block'});
+                                $("#internal_radio_protocol_Frsky_F16_FCC").css({display: 'block'});
+                                $("#internal_radio_protocol_Frsky_F16_LBT").css({display: 'block'});
+                                
                             }else if(HidConfig.hardware_version==1){//硬件型号为：sx1280
                                 if(HidConfig.current_protocol==0){//当前协议为：内置elrs协议
+                                    $("#internal_radio_protocol_elrs_2").css({display: 'block'});
+                                    $("#internal_radio_protocol_Frsky_F8").css({display: 'none'});
+                                    $("#internal_radio_protocol_Frsky_F16_FCC").css({display: 'none'});
+                                    $("#internal_radio_protocol_Frsky_F16_LBT").css({display: 'none'});
                                     document.getElementById("internal_radio_protocol").disabled = false;
-                                    show.internal_radio_protocol.value = 1;
-                                    HidConfig.internal_radio_protocol = 1;
+                                    show.internal_radio_protocol.value = 0;
+                                    HidConfig.internal_radio_protocol = 0;
                                     //请求内置elrs射频模块参数
                                     rquestBuffer[0] = 0x00;
                                     rquestBuffer[1] = 0x11;
@@ -434,17 +447,20 @@ window.onload=function(){
                             $("#ExpressLRS_power_1000mw").css({display: 'none'});
 
                             //显示当前内置ELRS的配置信息
-                            HidConfig.internal_radio_protocol = 1;
+                            HidConfig.internal_radio_protocol = 0;
                             HidConfig.ExpressLRS_power_option_value = data[2];
                             HidConfig.ExpressLRS_pkt_rate_option_value = data[3];
                             HidConfig.ExpressLRS_tlm_option_value = data[4];
 
-
+                            show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
                             show.ExpressLRS_power_option_box.val(HidConfig.ExpressLRS_power_option_value+1);
                             show.ExpressLRS_pkt_rate_option_box.val(HidConfig.ExpressLRS_pkt_rate_option_value);
                             show.ExpressLRS_tlm_option_box.val(HidConfig.ExpressLRS_tlm_option_value);
 
-                            
+                            HidConfig.Internal_radio_module_switch = true;
+                            HidConfig.External_radio_module_switch = false;
+                            document.getElementById('internal_radio_module_switch').checked = true;
+                            document.getElementById('external_radio_module_switch').checked = false;
                             //外部射频模块供电开关失能
                             document.getElementById("External_radio_module_power_switch").disabled = true; 
 
@@ -478,8 +494,10 @@ window.onload=function(){
                         if(checkSum == checkSum2)
                         {
                             console.log("receive External radio config");
-                            
-                            
+                            HidConfig.Internal_radio_module_switch = false;
+                            HidConfig.External_radio_module_switch = true;
+                            document.getElementById('internal_radio_module_switch').checked = false;
+                            document.getElementById('external_radio_module_switch').checked = true;
                             //支持功率档位：10 25 50 100 250 500mw
                             $("#ExpressLRS_power_10mw").css({display: 'block'});
                             $("#ExpressLRS_power_25mw").css({display: 'block'});
@@ -489,6 +507,8 @@ window.onload=function(){
                             $("#ExpressLRS_power_500mw").css({display: 'block'});
                             $("#ExpressLRS_power_1000mw").css({display: 'none'});
 
+                            HidConfig.external_radio_protocol = 0;
+                            show.external_radio_protocol.val(HidConfig.external_radio_protocol);
                             HidConfig.ExpressLRS_power_option_value = data[2];
                             HidConfig.ExpressLRS_pkt_rate_option_value = data[3];
                             HidConfig.ExpressLRS_tlm_option_value = data[4];
