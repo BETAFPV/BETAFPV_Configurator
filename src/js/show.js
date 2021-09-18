@@ -629,6 +629,17 @@ show.initialize = function (callback) {
         }
 
         $('a.binding').click(function () {   
+        let bufBind= new Buffer.alloc(64);
+        bufBind[0] = 0x00;
+        bufBind[1] = 0x07;
+        bufBind[2] = 0x02;
+        bufBind[3] = HidConfig.ExpressLRS_power_option_value;
+        bufBind[4] =HidConfig.ExpressLRS_pkt_rate_option_value;
+        bufBind[5] = HidConfig.ExpressLRS_tlm_option_value;
+        bufBind[6] = 0x06;
+        bufBind[7] = 0x01;
+        bufBind[8] = 0x00;
+        hidDevice.write(bufBind);
             console.log("ExpressLRS enter to binding");
         });
         $('a.wifi_update').click(function () {   
