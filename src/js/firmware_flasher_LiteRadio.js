@@ -15,6 +15,8 @@ const firmware_flasher_LiteRadio ={
     unifiedTarget: {}, // the Unified Target configuration to be spliced into the configuration
     isConfigLocal: false, // Set to true if the user loads one locally
     developmentFirmwareLoaded: false, // Is the firmware to be flashed from the development branch?
+    firmware_version:{},
+    target_board:0
 };
 
 firmware_flasher_LiteRadio.FLASH_MESSAGE_TYPES = {
@@ -103,19 +105,27 @@ function addOptionValue2(id,value,text) {
     if(!isExistOption2(id,value)){$('#'+id).append("<option value="+value+">"+text+"</option>");}      
 } 
 
+
 function readJsonFile(fileName){
     jsonFile.readFile(fileName, function(err, jsonData) {
         if (err) throw err;
-    
-        for (var i = 0; i < jsonData.length; ++i) {
-          console.log("name: "+jsonData[i].name);
-          console.log("version: "+jsonData[i].version);
 
-          addOptionValue2('boardTarget',i,jsonData[i].name);
-          addOptionValue2('boardVersion',i,jsonData[i].version);
+        $('#boardTarget').empty();
+        addOptionValue2('boardTarget',1,"LiteRadio_2_SE");
+        addOptionValue2('boardTarget',2,"LiteRadio_2_SE_V2_SX1280");
+        addOptionValue2('boardTarget',3,"LiteRadio_2_SE_V2_CC2500");
+        addOptionValue2('boardTarget',4,"LiteRadio_3_SX1280");
+        addOptionValue2('boardTarget',5,"LiteRadio_3_CC2500");
 
-          console.log("----------------------------------"); 
+
+        $('#boardVersion').empty();
+        for(let i=0;i<jsonData.LiteRadio_2_SE.length;i++){
+            addOptionValue2('boardVersion',i,jsonData.LiteRadio_2_SE[0].version);
         }
+        firmware_flasher_LiteRadio.firmware_version = jsonData;
+      
+        console.log("----------------------------------"); 
+        // }
     });
 }
 
@@ -442,6 +452,53 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
         });
 
         
+
+        $('select[id="boardTarget"]').change(function () {
+            firmware_flasher_LiteRadio.target_board = parseInt($(this).val(), 10);
+            switch(firmware_flasher_LiteRadio.target_board){
+                case 0:
+                    break;
+                case 1:
+                    $('#boardVersion').empty();
+                    for(let i=0;i<firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE.length;i++){
+                        addOptionValue2('boardVersion',i,firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE[i].version);
+                        console.log(firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE[i].version);
+                    }
+                    break;
+                case 2:
+                    $('#boardVersion').empty();
+                    for(let i=0;i<firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE_V2_SX1280.length;i++){
+                        addOptionValue2('boardVersion',i,firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE_V2_SX1280[i].version);
+                        console.log(firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE_V2_SX1280[i].version);
+                    }
+                    break;
+                case 3:
+                    $('#boardVersion').empty();
+                    for(let i=0;i<firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE_V2_CC2500.length;i++){
+                        addOptionValue2('boardVersion',i,firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE_V2_CC2500[i].version);
+                        console.log(firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE_V2_CC2500[i].version);
+                    }
+                    break;
+                case 4:
+                    $('#boardVersion').empty();
+                    for(let i=0;i<firmware_flasher_LiteRadio.firmware_version.LiteRadio_3_SX1280.length;i++){
+                        addOptionValue2('boardVersion',i,firmware_flasher_LiteRadio.firmware_version.LiteRadio_3_SX1280[i].version);
+                        console.log(firmware_flasher_LiteRadio.firmware_version.LiteRadio_3_SX1280[i].version);
+                    }
+                    break;
+                case 5:
+                    $('#boardVersion').empty();
+                    for(let i=0;i<firmware_flasher_LiteRadio.firmware_version.LiteRadio_3_CC2500.length;i++){
+                        addOptionValue2('boardVersion',i,firmware_flasher_LiteRadio.firmware_version.LiteRadio_3_CC2500[i].version);
+                        console.log(firmware_flasher_LiteRadio.firmware_version.LiteRadio_3_CC2500[i].version);
+                    }
+                    break;
+                default:
+                    $('#boardVersion').empty();
+                    break;
+            }
+            console.log("boardTarget change ");
+        });
         $('a.flash_firmware').click(function () {
             if (!$(this).hasClass('disabled')) {
 

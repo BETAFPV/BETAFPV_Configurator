@@ -20,7 +20,7 @@ HidConfig = {
 
     //遥控器硬件版本
     hardware_version:0,
-    //当前使用的协议
+    //当前使用的协议git
     current_protocol:0,
     //支持的功率
     support_power:0,
@@ -354,7 +354,7 @@ window.onload=function(){
                     }
                     else if(data[0] == cmd_type.Lite_CONFIGER_INFO_ID)//遥控器配置信息（硬件版本、支持协议、左右手油门、功率）
                     {
-                        console.log("receive hardware info");
+                        
                         var checkSum=0;
                         var checkSum2=0;
                         for(i=0;i<7;i++)
@@ -365,6 +365,7 @@ window.onload=function(){
     
                         if(checkSum == checkSum2)//校验通过
                         {
+                            console.log("receive hardware info");
                             HidConfig.hardware_version = data[1];
                             HidConfig.current_protocol = data[2];
                             HidConfig.rocker_mode = data[3];
