@@ -512,28 +512,29 @@ window.onload=function(){
 
 
                             }
-                            HidConfig.external_radio_protocol = 0;
-                            show.external_radio_protocol.val(HidConfig.external_radio_protocol);
-                            HidConfig.ExpressLRS_power_option_value = data[2];
-                            HidConfig.ExpressLRS_pkt_rate_option_value = data[3];
-                            HidConfig.ExpressLRS_tlm_option_value = data[4];
-                            console.log("data[2]"+data[2]);
-                            console.log("data[3]"+data[3]);
-                            console.log("data[4]"+data[4]);
+                            //检测到ELRS模块存在
+                            if(data[5]==0x02||data[5]==0x03||data[5]==0x06){
+                                HidConfig.external_radio_protocol = 0;
+                                HidConfig.ExpressLRS_power_option_value = data[2];
+                                HidConfig.ExpressLRS_pkt_rate_option_value = data[3];
+                                HidConfig.ExpressLRS_tlm_option_value = data[4];
 
-                            show.ExpressLRS_power_option_box.val(HidConfig.ExpressLRS_power_option_value);
-                            show.ExpressLRS_pkt_rate_option_box.val(HidConfig.ExpressLRS_pkt_rate_option_value);
-                            show.ExpressLRS_tlm_option_box.val(HidConfig.ExpressLRS_tlm_option_value);
-                                                    
+                                show.external_radio_protocol.val(HidConfig.external_radio_protocol);
+                                show.ExpressLRS_power_option_box.val(HidConfig.ExpressLRS_power_option_value);
+                                show.ExpressLRS_pkt_rate_option_box.val(HidConfig.ExpressLRS_pkt_rate_option_value);
+                                show.ExpressLRS_tlm_option_box.val(HidConfig.ExpressLRS_tlm_option_value);
+                                                        
 
-                            //外部射频模块供电开关使能
-                            document.getElementById("External_radio_module_power_switch").disabled = false; 
+                                //外部射频模块供电开关使能
+                                document.getElementById("External_radio_module_power_switch").disabled = false; 
 
-                            //ExpressLRS系统可设置
-                            document.getElementById("ExpressLRS_power_option_box").disabled = false;
-                            document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
-                            document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
+                                //ExpressLRS系统可设置
+                                document.getElementById("ExpressLRS_power_option_box").disabled = false;
+                                document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
+                                document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
 
+                            }
+                            
                             //请求遥控器通道配置信息
                             rquestBuffer[0] = 0x00;
                             rquestBuffer[1] = 0x11;
