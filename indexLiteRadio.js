@@ -31,8 +31,8 @@ HidConfig = {
     //Trainer 口开关
     trainer_port:0,
 
-    channel_data :[],//经过offset scale reverse运算后的实际数据
-    channel_data_raw :[],//经过offset scale reverse运算之前的原始数据
+    channel_data :[],//HID发送过来的原始数据
+    channel_data_dispaly :[],//映射为-100~100用于显示
 
 
     //通道数据来源
@@ -90,6 +90,10 @@ HidConfig = {
 
 
 };
+
+function channel_data_map(input,Omin,Omax,Nmin,Nmax){
+   return ((Nmax-Nmin)/(Omax-Omin)*(input-Omin)+Nmin).toFixed(0);
+}
 
 
 function isExistOption(id,value) {  
@@ -551,6 +555,14 @@ window.onload=function(){
                         HidConfig.channel_data[5] = (data[11]<<8 | data[10]);
                         HidConfig.channel_data[6] = (data[13]<<8 | data[12]);
                         HidConfig.channel_data[7] = (data[15]<<8 | data[14]);
+                        HidConfig.channel_data_dispaly[0] = channel_data_map(HidConfig.channel_data[0],0,2047,-100,100);
+                        HidConfig.channel_data_dispaly[1] = channel_data_map(HidConfig.channel_data[1],0,2047,-100,100);
+                        HidConfig.channel_data_dispaly[2] = channel_data_map(HidConfig.channel_data[2],0,2047,-100,100);
+                        HidConfig.channel_data_dispaly[3] = channel_data_map(HidConfig.channel_data[3],0,2047,-100,100);
+                        HidConfig.channel_data_dispaly[4] = channel_data_map(HidConfig.channel_data[4],0,2047,-100,100);
+                        HidConfig.channel_data_dispaly[5] = channel_data_map(HidConfig.channel_data[5],0,2047,-100,100);
+                        HidConfig.channel_data_dispaly[6] = channel_data_map(HidConfig.channel_data[6],0,2047,-100,100);
+                        HidConfig.channel_data_dispaly[7] = channel_data_map(HidConfig.channel_data[7],0,2047,-100,100);
                     }               
                 } );
 

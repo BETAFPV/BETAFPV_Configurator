@@ -142,8 +142,8 @@ show.initialize = function (callback) {
         }
     
         const meterScale = {
-            'min': 000,
-            'max': 2100
+            'min': -100,
+            'max': 100
         };
     
         const meterFillArray = [];
@@ -189,8 +189,8 @@ show.initialize = function (callback) {
             // update bars with latest data
             for (let i = 0; i < 8; i++) {
                 
-                meterFillArray[i].css('width', (HidConfig.channel_data[i] - meterScale.min) / (meterScale.max - meterScale.min)*100+'%');
-                meterLabelArray[i].text(HidConfig.channel_data[i]);
+                meterFillArray[i].css('width', (HidConfig.channel_data_dispaly[i] - meterScale.min) / (meterScale.max - meterScale.min)*100+'%');
+                meterLabelArray[i].text(HidConfig.channel_data_dispaly[i]);
             }
         }
 
