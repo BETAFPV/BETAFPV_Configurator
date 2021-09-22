@@ -55,18 +55,11 @@ const show = {
     
     //内部射频模块配置信息
     internal_radio_protocol:null,
-    internal_radio_power:null,
-    internal_radio_pkt_rate:null,
-    internal_radio_tlm:null,
+   
 
     //外置射频模块配置信息
     external_radio_protocol:null,//外置高频头协议选择
-    external_radio_power_switch:null,//高频头供电开关
-    
-    
-    external_radio_power_elrs:null,
-    external_radio_pkt_rate_elrs:null,
-    external_radio_tlm_elrs:null,
+
 
 };
 
@@ -242,18 +235,8 @@ show.initialize = function (callback) {
 
 
         show.internal_radio_protocol = $('select[id="internal_radio_protocol"]');
-        show.internal_radio_power = $('select[id="internal_radio_power"]');
-        show.internal_radio_pkt_rate = $('select[id="internal_radio_pkt_rate"]');
-        show.internal_radio_tlm = $('select[id="internal_radio_tlm"]');
-        
         show.external_radio_protocol = $('select[id="external_radio_protocol"]');
-        show.external_radio_power_switch = $('input[id="external_radio_power_switch"]');
         
-        show.external_radio_power_elrs = $('select[id="external_radio_power_elrs"]');
-        show.external_radio_pkt_rate_elrs = $('select[id="external_radio_pkt_rate_elrs"]');
-        show.external_radio_tlm_elrs = $('select[id="external_radio_tlm_elrs"]');
-
-
         show.Internal_radio_module_switch.change(function () {
             if( HidConfig.External_radio_module_switch){//开启内置模块前先检查外置模块是否已开启
                 alert("Please close external radio module first");
@@ -490,21 +473,7 @@ show.initialize = function (callback) {
             HidConfig.external_radio_protocol = parseInt($(this).val(), 10);
         });
 
-        show.external_radio_power_elrs.change(function () {
-            HidConfig.external_radio_power_elrs = parseInt($(this).val(), 10);
-            send_external_exrs_radio_config();
-            console.log("set elrs power")
-        });
-        show.external_radio_pkt_rate_elrs.change(function () {
-            HidConfig.external_radio_pkt_rate_elrs = parseInt($(this).val(), 10);
-            send_external_exrs_radio_config();
-            console.log("set elrs pkt rate");
-        });
-        show.external_radio_tlm_elrs.change(function () {
-            HidConfig.external_radio_tlm_elrs = parseInt($(this).val(), 10);
-            send_external_exrs_radio_config();
-            console.log("set elrs tlm");
-        });
+
 
 
         function send_ch1_config(){

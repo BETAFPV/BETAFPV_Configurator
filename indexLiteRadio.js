@@ -84,58 +84,13 @@ HidConfig = {
 
      //内部射频模块配置信息
     internal_radio_protocol:0,
-    internal_radio_power:0,
-    internal_radio_pkt_rate:0,
-    internal_radio_tlm:0,
 
     //外置射频模块配置信息
     external_radio_protocol:0,//协议选择
-    external_radio_power_switch:0,//外置高频头供电开关
-    
-    //外置elrs射频模块参数
-    external_radio_power_elrs:0,
-    external_radio_pkt_rate_elrs:0,
-    external_radio_tlm_elrs:0,
 
 
 };
 
-
-/*通道反向运算*/
-function Gimbalreverse(gimbalValCurr){
-    return 1023 - (gimbalValCurr-1023);
-}
-
-/*通道比例缩放*/
-function Gimbalscale(gimbalValCurr,scale){
-    return 1023 - parseInt((gimbalValCurr-1023)*scale/100);
-}
-
-/*根据遥控器发送过来值，计算出经过比例缩放之前原始数据*/
-function gimbal_current_to_raw(gimbalValCurr,scale,offset,reverse){
-    if(reverse){
-        return 1024-((gimbalValCurr-1024)/(scale/100)-offset*5);
-    }else{
-        return 1024+((gimbalValCurr-1024)/(scale/100)-offset*5);
-    }
-}
-
-/*根据原始数据，计算出当前遥控器经过比例缩放后发送过来的值*/
-function gimbal_raw_to_current(gimbalValRaw,scale,offset,reverse){
-    if(reverse){
-        return 1023-(gimbalValRaw-1023+offset*5)*(scale/100);
-    }else{
-        return 1023+(gimbalValRaw-1023+offset*5)*(scale/100);
-    }
-}
-
-function limit_value(input,min,max){
-    if(input<min)
-    input = min;
-    else if(input>max)
-    input = max;
-    return parseInt(input).toFixed(0);
-}
 
 function isExistOption(id,value) {  
     var isExist = false;  
