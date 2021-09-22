@@ -308,14 +308,14 @@ show.initialize = function (callback) {
 
             }else{
                 console.log("elrs power off");
-                // let  buffer= new Buffer.alloc(64);
-                // buffer[0] = 0x00; 
-                // buffer[1] = 0x07;
-                // buffer[2] = 0x00;
-                // hidDevice.write(buffer);
-                // document.getElementById("ExpressLRS_power_option_box").disabled = true;
-                // document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = true;
-                // document.getElementById("ExpressLRS_tlm_option_box").disabled = true;
+                let  buffer= new Buffer.alloc(64);
+                buffer[0] = 0x00; 
+                buffer[1] = 0x07;
+                buffer[2] = 0x00;
+                hidDevice.write(buffer);
+                document.getElementById("ExpressLRS_power_option_box").disabled = true;
+                document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = true;
+                document.getElementById("ExpressLRS_tlm_option_box").disabled = true;
             }
         });
         show.ExpressLRS_power_option_box.change(function () {
@@ -324,7 +324,7 @@ show.initialize = function (callback) {
             if(HidConfig.Internal_radio_module_switch){
                 if(HidConfig.internal_radio_protocol==0){
                     send_internal_radio_config();
-                    console.log("set internal ELRS tml config");
+                    console.log("set internal ELRS power config");
                 }else{
                     alert("This protocol is not supported on your device,please select other!");
                 }
@@ -332,7 +332,7 @@ show.initialize = function (callback) {
             }else if(HidConfig.External_radio_module_switch){
                 if(HidConfig.external_radio_protocol == 0){
                     send_external_exrs_radio_config();
-                    console.log("set external ELRS tml config");
+                    console.log("set external ELRS power config");
                 }else{
                     alert("This protocol is not supported on your device,please select other!");
                 } 
@@ -344,7 +344,7 @@ show.initialize = function (callback) {
             if(HidConfig.Internal_radio_module_switch){
                 if(HidConfig.internal_radio_protocol==0){
                     send_internal_radio_config();
-                    console.log("set internal ELRS tml config");
+                    console.log("set internal ELRS pkt rate config");
                 }else{
                     alert("This protocol is not supported on your device,please select other!");
                 }
@@ -352,7 +352,7 @@ show.initialize = function (callback) {
             }else if(HidConfig.External_radio_module_switch){
                 if(HidConfig.external_radio_protocol == 0){
                     send_external_exrs_radio_config();
-                    console.log("set external ELRS tml config");
+                    console.log("set external ELRS pkt rate config");
                 }else{
                     alert("This protocol is not supported on your device,please select other!");
                 } 
@@ -624,7 +624,7 @@ show.initialize = function (callback) {
             buffer[3] = HidConfig.ExpressLRS_power_option_value;
             buffer[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
             buffer[5] = HidConfig.ExpressLRS_tlm_option_value;
-            buffer[6] = 0x00;//RF Freq
+            buffer[6] = HidConfig.ExpressLRS_RF_freq_value;//RF Freq
             hidDevice.write(buffer);
         }
 
