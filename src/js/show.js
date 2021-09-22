@@ -264,9 +264,9 @@ show.initialize = function (callback) {
                     document.getElementById('internal_radio_protocol').disabled = false;
                 }else{
                     document.getElementById('internal_radio_protocol').disabled = true;
-                    document.getElementById('ExpressLRS_power_option_box').disabled = true;
-                    document.getElementById('ExpressLRS_pkt_rate_option_box').disabled = true;
-                    document.getElementById('ExpressLRS_tlm_option_box').disabled = true;
+                    // document.getElementById('ExpressLRS_power_option_box').disabled = true;
+                    // document.getElementById('ExpressLRS_pkt_rate_option_box').disabled = true;
+                    // document.getElementById('ExpressLRS_tlm_option_box').disabled = true;
                 }
             }
             
@@ -282,9 +282,9 @@ show.initialize = function (callback) {
                 }else{
                     document.getElementById('external_radio_protocol').disabled = true;
                     document.getElementById('External_radio_module_power_switch').disabled = true;
-                    document.getElementById('ExpressLRS_power_option_box').disabled = true;
-                    document.getElementById('ExpressLRS_pkt_rate_option_box').disabled = true;
-                    document.getElementById('ExpressLRS_tlm_option_box').disabled = true;
+                    // document.getElementById('ExpressLRS_power_option_box').disabled = true;
+                    // document.getElementById('ExpressLRS_pkt_rate_option_box').disabled = true;
+                    // document.getElementById('ExpressLRS_tlm_option_box').disabled = true;
 
                 }
             }
@@ -308,14 +308,14 @@ show.initialize = function (callback) {
 
             }else{
                 console.log("elrs power off");
-                let  buffer= new Buffer.alloc(64);
-                buffer[0] = 0x00; 
-                buffer[1] = 0x07;
-                buffer[2] = 0x00;
-                hidDevice.write(buffer);
-                document.getElementById("ExpressLRS_power_option_box").disabled = true;
-                document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = true;
-                document.getElementById("ExpressLRS_tlm_option_box").disabled = true;
+                // let  buffer= new Buffer.alloc(64);
+                // buffer[0] = 0x00; 
+                // buffer[1] = 0x07;
+                // buffer[2] = 0x00;
+                // hidDevice.write(buffer);
+                // document.getElementById("ExpressLRS_power_option_box").disabled = true;
+                // document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = true;
+                // document.getElementById("ExpressLRS_tlm_option_box").disabled = true;
             }
         });
         show.ExpressLRS_power_option_box.change(function () {
@@ -634,7 +634,7 @@ show.initialize = function (callback) {
         bufBind[1] = 0x07;
         bufBind[2] = 0x02;
         bufBind[3] = HidConfig.ExpressLRS_power_option_value;
-        bufBind[4] =HidConfig.ExpressLRS_pkt_rate_option_value;
+        bufBind[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
         bufBind[5] = HidConfig.ExpressLRS_tlm_option_value;
         bufBind[6] = 0x06;
         bufBind[7] = 0x01;
@@ -643,10 +643,22 @@ show.initialize = function (callback) {
             console.log("ExpressLRS enter to binding");
         });
         $('a.wifi_update').click(function () {   
+            let  bufwifiUpdate= new Buffer.alloc(64);
+            bufwifiUpdate[0] = 0x00;
+            bufwifiUpdate[1] = 0x07;
+            bufwifiUpdate[2] = 0x02;
+            bufwifiUpdate[3] = HidConfig.ExpressLRS_power_option_value;
+            bufwifiUpdate[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
+            bufwifiUpdate[5] = HidConfig.ExpressLRS_tlm_option_value;
+            bufwifiUpdate[6] = 0x06;
+            bufwifiUpdate[7] = 0x00;
+            bufwifiUpdate[8] = 0x01;
+            hidDevice.write(bufwifiUpdate);
             console.log("ExpressLRS enter to wifi update");
         });
         
         $('a.factory_reset').click(function () {   
+            factory_reset();
             console.log("factory reset");
         });
         
@@ -677,6 +689,11 @@ show.initialize = function (callback) {
             }
             
         });
+
+        function factory_reset(){
+  
+            
+        }
 
         //请求遥控器参数，使上位机显示的配置与其同步
         function sync_config(){

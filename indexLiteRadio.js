@@ -437,6 +437,7 @@ window.onload=function(){
                         if(checkSum == checkSum2)
                         {
                             console.log("receive Internal radio config");
+                            document.getElementById("RadioSetupELRSRuningStatus").innerHTML =  i18n.getMessage('RadioSetupInternel2_4G');
 
                             //功率档位只支持：25 50 100mw档位
                             $("#ExpressLRS_power_10mw").css({display: 'none'});
@@ -535,19 +536,25 @@ window.onload=function(){
                                 //外部射频模块可选包率：
                                 //200hz 100hz 50hz 25hz
                                 //工作频段915MHz ISM
+                                
+                                document.getElementById("RadioSetupELRSRuningStatus").innerHTML = i18n.getMessage('RadioSetupExternel915M');
                                 console.log("external radio work on 915MHz ISM");
 
                             }else if(data[5] == 0x03){
                                 //外部射频模块可选包率：
                                 //200hz 100hz 50hz 25hz
                                 //工作频段868MHz ISM
+                                document.getElementById("RadioSetupELRSRuningStatus").innerHTML =  i18n.getMessage('RadioSetupExternel868M');
                                 console.log("external radio work on 868MHz ISM");
 
                             }else if(data[5] == 0x06){
                                 //外部射频模块可选包率：
                                 //500hz 250hz 150hz 50hz
                                 //工作频段2.4GHz ISM
+                                document.getElementById("RadioSetupELRSRuningStatus").innerHTML =  i18n.getMessage('RadioSetupExternel2_4G');
                                 console.log("external radio work on 2.4GHz ISM");
+
+
                             }
 
                             //请求遥控器通道配置信息

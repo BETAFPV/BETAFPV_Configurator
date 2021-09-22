@@ -6227,7 +6227,7 @@
         "message": "Power Switch(Power on/off the ExpressLRS Module)"
     },
     "RadioSetupExELRSSystemPower": {
-        "message": "External ELRS System Power"
+        "message": "Power"
     },
     "RadioSetupexELRSPktRate": {
         "message": "Pkt Rate"
@@ -6267,8 +6267,29 @@
     },
     "RadioSetupExpressLRSText":{
         "message": "Description of ExpressLRS Setup"
-    }
-    ,
+    },
+    "RadioSetupRadioModuleDetect":{
+        "message": "Undetected ELRS"
+    },
+    "RadioSetupInternel868M":{
+        "message": "<strong>Internal ELRS</strong> is runing,Radio frequency:<strong>868MHz</strong>."
+    },
+    "RadioSetupInternel915M":{
+        "message": "<strong>Internal ELRS</strong> is runing,Radio frequency:<strong>915MHz</strong>."
+    },
+    "RadioSetupInternel2_4G":{
+        "message": "<strong>Internal ELRS</strong> is runing,Radio frequency:<strong>2.4GHz</strong>."
+    },
+    "RadioSetupExternel868M":{
+        "message": "<strong>External ELRS</strong> is runing,Radio frequency:<strong>868MHz</strong>."
+    },
+    "RadioSetupExternel915M":{
+        "message": "<strong>External ELRS</strong> is runing,Radio frequency:<strong>915MHz</strong>."
+    },
+    "RadioSetupExternel2_4G":{
+        "message": "<strong>External ELRS</strong> is runing,Radio frequency:<strong>2.4GHz</strong>."
+    },
+    
     "RadioSetupMIXSText":{
         "message": "      MIXs is used to assign channels for Roll, Pitch, Yaw and Throttle vehicle control as well as determining whether they are reversed."
     },
