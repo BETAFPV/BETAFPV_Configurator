@@ -6301,5 +6301,8 @@
     },
     "RadioSetupEnterWIFIUpdate":{
         "message":"Enter WIFI Update"
+    },
+    "RadioSetupfactoryResetAlert":{
+        "message":"Channel Settings have been restored to their default values. Clicking 'Save and reboot' will save this setting"
     }
 }

@@ -5921,5 +5921,8 @@
     },
     "RadioSetupEnterWIFIUpdate":{
         "message":"进入WIFI更新"
+    },
+    "RadioSetupfactoryResetAlert":{
+        "message":"通道设置已恢复默认值，点击'保存并重启'将保存此设置"
     }
 }

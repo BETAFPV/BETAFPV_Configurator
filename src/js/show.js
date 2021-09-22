@@ -83,6 +83,10 @@ show.refreshUI = function()
     document.getElementById('ch2_check').checked = HidConfig.ch2_reverse_display;
     document.getElementById('ch3_check').checked = HidConfig.ch3_reverse_display;
     document.getElementById('ch4_check').checked = HidConfig.ch4_reverse_display;
+    document.getElementById('ch5_check').checked = HidConfig.ch5_reverse_display;
+    document.getElementById('ch6_check').checked = HidConfig.ch6_reverse_display;
+    document.getElementById('ch7_check').checked = HidConfig.ch7_reverse_display;
+    document.getElementById('ch8_check').checked = HidConfig.ch8_reverse_display;
     
     show.ch1_scale.val(HidConfig.ch1_scale_display);
     show.ch2_scale.val(HidConfig.ch2_scale_display);
@@ -660,6 +664,55 @@ show.initialize = function (callback) {
         });
 
         function factory_reset(){
+
+            HidConfig.ch1_input_source_display = 2;
+            HidConfig.ch2_input_source_display = 0;
+            HidConfig.ch3_input_source_display = 1;
+            HidConfig.ch4_input_source_display = 3;
+            HidConfig.ch5_input_source_display = 4;
+            HidConfig.ch6_input_source_display = 5;
+            HidConfig.ch7_input_source_display = 6;
+            HidConfig.ch8_input_source_display = 7;
+
+            HidConfig.ch1_reverse_display = 0;
+            HidConfig.ch2_reverse_display = 0;
+            HidConfig.ch3_reverse_display = 0;
+            HidConfig.ch4_reverse_display = 0;
+            HidConfig.ch5_reverse_display = 0;
+            HidConfig.ch6_reverse_display = 0;
+            HidConfig.ch7_reverse_display = 0;
+            HidConfig.ch8_reverse_display = 0;
+
+            HidConfig.ch1_scale_display = 100;
+            HidConfig.ch2_scale_display = 100;
+            HidConfig.ch3_scale_display = 100;
+            HidConfig.ch4_scale_display = 100;
+            HidConfig.ch5_scale_display = 100;
+            HidConfig.ch6_scale_display = 100;
+            HidConfig.ch7_scale_display = 100;
+            HidConfig.ch8_scale_display = 100;
+
+            HidConfig.ch1_offset_display = 0;
+            HidConfig.ch2_offset_display = 0;
+            HidConfig.ch3_offset_display = 0;
+            HidConfig.ch4_offset_display = 0;
+            HidConfig.ch5_offset_display = 0;
+            HidConfig.ch6_offset_display = 0;
+            HidConfig.ch7_offset_display = 0;
+            HidConfig.ch8_offset_display = 0;
+
+            send_ch1_config();
+            send_ch2_config();
+            send_ch3_config();
+            send_ch4_config();
+            send_ch5_config();
+            send_ch6_config();
+            send_ch7_config();
+            send_ch8_config();
+            
+            show.refreshUI();
+
+            alert(i18n.getMessage('RadioSetupfactoryResetAlert'));
   
             
         }
