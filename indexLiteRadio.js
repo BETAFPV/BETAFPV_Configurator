@@ -460,27 +460,30 @@ window.onload=function(){
                             HidConfig.External_radio_module_switch = true;
                             document.getElementById('internal_radio_module_switch').checked = false;
                             document.getElementById('external_radio_module_switch').checked = true;
-                            //支持功率档位：10 25 50 100 250 500mw
-                            $("#ExpressLRS_power_10mw").css({display: 'block'});
-                            $("#ExpressLRS_power_25mw").css({display: 'block'});
-                            $("#ExpressLRS_power_50mw").css({display: 'block'});
-                            $("#ExpressLRS_power_100mw").css({display: 'block'});
-                            $("#ExpressLRS_power_250mw").css({display: 'block'});
-                            $("#ExpressLRS_power_500mw").css({display: 'block'});
-                            $("#ExpressLRS_power_1000mw").css({display: 'none'});
+                           
 
 
                             if(data[5] == 0x02){//需要根据外部射频模块硬件型号设置组件可选包率
                                 //外部射频模块可选包率：
                                 //200hz 100hz 50hz 25hz
                                 //工作频段915MHz ISM
+
+                                //支持功率档位： 100 250 500mw
+                                $("#ExpressLRS_power_10mw").css({display: 'none'});
+                                $("#ExpressLRS_power_25mw").css({display: 'none'});
+                                $("#ExpressLRS_power_50mw").css({display: 'none'});
+                                $("#ExpressLRS_power_100mw").css({display: 'block'});
+                                $("#ExpressLRS_power_250mw").css({display: 'block'});
+                                $("#ExpressLRS_power_500mw").css({display: 'block'});
+                                $("#ExpressLRS_power_1000mw").css({display: 'none'});
+
                                 $('#ExpressLRS_pkt_rate_option_box').empty();
                                 addOptionValue('ExpressLRS_pkt_rate_option_box',0,"200Hz");
                                 addOptionValue('ExpressLRS_pkt_rate_option_box',1,"100Hz");
                                 addOptionValue('ExpressLRS_pkt_rate_option_box',2,"50Hz");
                                 addOptionValue('ExpressLRS_pkt_rate_option_box',3,"25Hz");
 
-                                HidConfig.ExpressLRS_RF_freq_value = 0x01;
+                                HidConfig.ExpressLRS_RF_freq_value = 0x02;
                                 document.getElementById("RadioSetupELRSRuningStatus").innerHTML = i18n.getMessage('RadioSetupExternel915M');
                                 console.log("external radio work on 915MHz ISM");
 
@@ -501,6 +504,16 @@ window.onload=function(){
                                 //外部射频模块可选包率：
                                 //500hz 250hz 150hz 50hz
                                 //工作频段2.4GHz ISM
+
+                                //支持功率档位：10 25 50 100 250 500mw
+                                $("#ExpressLRS_power_10mw").css({display: 'block'});
+                                $("#ExpressLRS_power_25mw").css({display: 'block'});
+                                $("#ExpressLRS_power_50mw").css({display: 'block'});
+                                $("#ExpressLRS_power_100mw").css({display: 'block'});
+                                $("#ExpressLRS_power_250mw").css({display: 'block'});
+                                $("#ExpressLRS_power_500mw").css({display: 'block'});
+                                $("#ExpressLRS_power_1000mw").css({display: 'none'});
+
                                 $('#ExpressLRS_pkt_rate_option_box').empty();
                                 addOptionValue('ExpressLRS_pkt_rate_option_box',0,"500Hz");
                                 addOptionValue('ExpressLRS_pkt_rate_option_box',1,"250Hz");
