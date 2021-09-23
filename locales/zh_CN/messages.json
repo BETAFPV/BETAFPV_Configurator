@@ -5870,6 +5870,9 @@
     "Connect_HID":{
         "message":"连接遥控器"
     },
+    "HID_Connecting":{
+        "message":"连接中"
+    },
     "disConnect_HID":{
         "message":"断开遥控器"
     },
@@ -5924,5 +5927,8 @@
     },
     "RadioSetupfactoryResetAlert":{
         "message":"通道设置已恢复默认值，点击'保存并重启'将保存此设置"
+    },
+    "RadioSetupHidPowerOffAlert":{
+        "message":"请确保您的遥控器处于关机状态。"
     }
 }

@@ -89,6 +89,11 @@ HidConfig = {
     external_radio_protocol:0,//协议选择
 
 
+
+    //用于首次连接HID设备时，判断是否有接收到遥控器HID数据，若只识别到HID设备但无数据接收则判断为连接失败
+    Have_Receive_HID_Data:false,
+
+
 };
 
 function channel_data_map(input,Omin,Omax,Nmin,Nmax){
@@ -135,30 +140,63 @@ setTimeout(function loadLanguage() {
 window.onload=function(){
 
     $('div.open_firmware_flasher a.flash').click(function () {
+        HidConfig.Have_Receive_HID_Data = false;
         if (GUI.connect_hid != true) {
             console.log('connect hid');
-           
+      
             let ch_receive_step = 0;//这个标志目的是为了确保只发送一次请求命令
             hidDevice = new HID.HID(VENDOR_ID,PRODUCT_ID);
 
             if(hidDevice)
             {
+
+                setTimeout(function Hid_connect_dected() {
+                    if(HidConfig.Have_Receive_HID_Data == true){
+                        console.log("Have Receive HID Data");
+                        $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('disConnect_HID'));
+                        $('div#flashbutton a.flash').addClass('active');
+                        $('#tabs ul.mode-disconnected').hide();
+
+                        $('#tabs ul.mode-connected').show();
+
+                        $('#tabs ul.mode-connected li a:first').click();
+
+                        $('div#flashbutton a.flash').addClass('active');
+                    }else{
+                        GUI.connect_hid = false;
+                        console.log("Have not Receive HID Data");
+                        hidDevice.close();
+                        alert(i18n.getMessage("RadioSetupHidPowerOffAlert"));
+                        $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('Connect_HID'));
+
+                        $('#tabs ul.mode-connected').hide();
+
+                        $('#tabs ul.mode-disconnected').show();
+            
+                        $('#tabs ul.mode-disconnected li a:first').click();
+            
+                        $('div#flashbutton a.flash').removeClass('active');
+                    }
+                }, 2000);
+           
+                console.log("hidDevice has creat");
                 GUI.connect_hid = true;
-                $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('disConnect_HID'));
-                $('#tabs ul.mode-disconnected').hide();
+                $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('HID_Connecting'));
+                // $('#tabs ul.mode-disconnected').hide();
 
-                $('#tabs ul.mode-connected').show();
+                // $('#tabs ul.mode-connected').show();
 
-                $('#tabs ul.mode-connected li a:first').click();
+                // $('#tabs ul.mode-connected li a:first').click();
 
-                $('div#flashbutton a.flash').addClass('active');
+                //  $('div#flashbutton a.flash').addClass('active');
 
 
                 hidDevice.on('data', function(data) {//解析遥控器发送过来的信息
-               
+                    HidConfig.Have_Receive_HID_Data = true;
                     let rquestBuffer = new Buffer.alloc(64);
                     if(data[0] == cmd_type.CHANNELS_INFO_ID)//通道配置信息
                     {
+                        
                         var checkSum=0;
                         var checkSum2=0;
                         

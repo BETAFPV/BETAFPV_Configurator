@@ -6250,6 +6250,9 @@
     "Connect_HID":{
         "message":"connect HID"
     },
+    "HID_Connecting":{
+        "message":"Connecting"
+    },
     "disConnect_HID":{
         "message":"disconnect HID"
     },
@@ -6304,5 +6307,8 @@
     },
     "RadioSetupfactoryResetAlert":{
         "message":"Channel Settings have been restored to their default values. Clicking 'Save and reboot' will save this setting"
+    },
+    "RadioSetupHidPowerOffAlert":{
+        "message":"Please make sure your liteRadio is power off."
     }
 }
