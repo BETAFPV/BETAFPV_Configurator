@@ -536,7 +536,8 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                 var str = targetBoardSelected + "_" + targetVersionSelected + ".bin";
                 console.log(str);
                  
-                var urlValue = "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/" + str;
+                // var urlValue = "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/" + str;
+                var urlValue = "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v2.0.0/" + str;
                 console.log(urlValue);
 
                 var xhr = new XMLHttpRequest();

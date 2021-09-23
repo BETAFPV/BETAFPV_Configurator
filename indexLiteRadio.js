@@ -369,8 +369,8 @@ window.onload=function(){
                             HidConfig.rocker_mode = data[3];
                             HidConfig.support_power =data[4];
                             //遥控器硬件信息获取完毕后，需要在这里根据硬件信息修改对应组件的可选元素
-                            document.getElementById("rocker_mode").disabled = false;
                             show.rocker_mode.val(HidConfig.rocker_mode);
+                            document.getElementById("rocker_mode").disabled = false;
                             if(HidConfig.hardware_version==0){//硬件型号为：cc2500
                                 $("#internal_radio_protocol_elrs_2").css({display: 'none'});
                                 $("#internal_radio_protocol_Frsky_F8").css({display: 'block'});
@@ -406,14 +406,19 @@ window.onload=function(){
                                     rquestBuffer[3] = 0x00;
                                     hidDevice.write(rquestBuffer);
 
+
                                     document.getElementById("External_radio_module_power_switch").checked = true;
 
+                                    //延时一小段时间等待外部ExpressLRS启动后再取获取配置信息
+                                    setTimeout(function loadLanguage() {
+                                        rquestBuffer[0] = 0x00;//获取外置射频模块配置信息
+                                        rquestBuffer[1] = 0x11;
+                                        rquestBuffer[2] = 0x02;
+                                        rquestBuffer[3] = 0x02;
+                                        hidDevice.write(rquestBuffer);
+                                    },300);
+
                                     
-                                    rquestBuffer[0] = 0x00;//获取外置射频模块配置信息
-                                    rquestBuffer[1] = 0x11;
-                                    rquestBuffer[2] = 0x02;
-                                    rquestBuffer[3] = 0x02;
-                                    hidDevice.write(rquestBuffer);
 
                                 }
                             }else if(HidConfig.hardware_version==2){//硬件型号为：sx1276
@@ -500,7 +505,6 @@ window.onload=function(){
                             document.getElementById('external_radio_module_switch').checked = true;
                            
 
-
                             if(data[5] == 0x02){//需要根据外部射频模块硬件型号设置组件可选包率
                                 //外部射频模块可选包率：
                                 //200hz 100hz 50hz 25hz
@@ -584,6 +588,7 @@ window.onload=function(){
                                 document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
                                 document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
 
+                            }else{
                             }
                             
                             //请求遥控器通道配置信息
