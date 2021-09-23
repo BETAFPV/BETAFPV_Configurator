@@ -623,7 +623,7 @@
         "message": "本应用只支持下面罗列的遥控器。 <br /><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE (ELRS 2.4G)</a><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3</a><br /><br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。"
     },
     "defaultContributingText_radio": {
-        "message": "本应用只支持下面罗列的遥控器。 <br /><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE (ELRS 2.4G)</a><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3</a> <br /><br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br /><br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />遥控器固件烧写请点击左侧“固件烧写工具”；遥控器参数配置，请连接遥控器之后，点击右上角“连接遥控器”按钮进入配置界面。"
+        "message": "本应用只支持下面罗列的遥控器。 <br /><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE (ELRS 2.4G)</a><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3</a> <br /><br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br /><br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />遥控器固件烧写请点击左侧“固件烧写工具”；<br />遥控器参数配置，首先将遥控器关机，用USB数据线连接遥控器到电脑，遥控器红色或者绿色灯逐渐闪烁，点击右上角“连接遥控器”按钮进入配置界面。"
     },
     "defaultFacebookText": {
         "message": "我们还有一个 <a href=\"https://www.facebook.com/groups/betaflightgroup/\" target=\"_blank\" rel=\"noopener noreferrer\">微信公众号</a>。<br />关注我们获取最新动态，寻求技术支持，或者只是和小伙伴们闲聊。"
@@ -5782,10 +5782,10 @@
         "message": "你确定要关闭配置程序吗？"
     },
     "RadioSetup": {
-        "message": "遥控器配置"
+        "message": "基本配置"
     },
     "rocker_mode_description":{
-        "message":"切换油门杆位置：Mode 1（右手油门）  Mode 2（左手油门）"
+        "message":"摇杆模式：Mode 1（右手油门，又叫日本手）  Mode 2（左手油门，又叫美国手）"
     },
     
     "RadioSetupIRSystem": {
@@ -5826,7 +5826,7 @@
         "message":"内置射频模块"
     },
     "RadioSetupIRSystemProtocol": {
-        "message": "  内置射频模块协议（若第一次启动内置射频模块，需要保存重启后才能修改其参数）"
+        "message": "  内置射频模块无线协议"
     },
     "RadioSetupIRSystemPower": {
         "message": "  功率"
@@ -5841,13 +5841,13 @@
         "message":"外置射频模块"
     },
     "RadioSetupERSystemProtocol": {
-        "message": "  外置射频模块协议（若第一次启动外置射频模块，需要保存重启后才能修改其参数）"
+        "message": "  外置射频模块接口通信协议（默认CRSF）"
     },
     "RadioSetupERSystemPowerSwitch": {
-        "message": "  外置射频模块供电控制（开启/关闭外置ExpressLRS模块的电源）"
+        "message": "  外置射频模块供电控制（开启/关闭外置射频模块的电源）"
     },
     "RadioSetupExELRSSystemPower": {
-        "message": "  功率"
+        "message": "  发射功率"
     },
     "RadioSetupexELRSPktRate": {
         "message": "  数据包率"
@@ -5886,7 +5886,7 @@
         "message": "遥控器配置说明文本"
     },
     "RadioSetupRFconfigText":{
-        "message": "可以选择遥控器内置射频模块，也可以选择启用外置高频头。两种不可同时启用。"
+        "message": "可以选择遥控器内置射频模块，也可以选择启用外置高频头。两者不可同时启用。<br /><br />"
     },
     "RadioSetupExpressLRSText":{
         "message": "如果内置射频模块或者外置高频头为ELRS系统，则可通过本模块配置其参数。程序能够自动检测ELRS系统是否存在。如果本模块为灰色不可配置，请确保ELRS系统存在，并且连接供电正确。同时，请在左侧“射频模块配置”中配置正确，<span class=\"message-negative\">保存并重启</span>。"
