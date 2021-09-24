@@ -6308,7 +6308,31 @@
     "RadioSetupfactoryResetAlert":{
         "message":"Channel Settings have been restored to their default values. Clicking 'Save and reboot' will save this setting"
     },
-    "RadioSetupHidPowerOffAlert":{
+    "HIDPowerOffDialogLabel":{
         "message":"Please make sure your liteRadio is power off."
+    },
+    "HIDPowerOffDialogTitle":{
+        "message":"Prompt"
+    },
+    "HIDPowerOffConfirm":{
+        "message":"OK"
+    },
+    "CloseInternalRadioDialogTitle":{
+        "message":"Prompt"
+    },
+    "CloseExternalRadioDialogLabel":{
+        "message":"Before enabling the external RF module, ensure that the built-in RF module is disabled."
+    },
+    "CloseExternalRadioConfirm":{
+        "message":"OK"
+    },
+    "CloseExternalRadioDialogTitle":{
+        "message":"Prompt"
+    },
+    "CloseInternalRadioDialogLabel":{
+        "message":"Before enabling the built-in RF module, ensure that the external RF module is disabled."
+    },
+    "CloseInternalRadioConfirm":{
+        "message":"OK"
     }
 }

@@ -1514,7 +1514,7 @@ dialog {
     height: fit-content;
     margin: auto auto;
     position: absolute;
-    width: 50%;
+    width: 25%;
     border-radius: 3px;
     border: 1px solid silver;
 }

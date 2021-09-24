@@ -1,6 +1,7 @@
 const show = {
     
     /**************show定义的变量用于索引界面组件*******************/
+
     //日本手、美国手模式
     rocker_mode:null,
     //Trainer 口开关
@@ -59,6 +60,7 @@ const show = {
 
     //外置射频模块配置信息
     external_radio_protocol:null,//外置高频头协议选择
+
 
 
 };
@@ -167,33 +169,6 @@ show.initialize = function (callback) {
                 meterLabelArray[i].css('margin-left', margin);
             }
         };
-
-        $(window).on('resize', tabresize).resize(); // trigger so labels get correctly aligned on creation
-
-        const COLOR_ACCENT = 'var(--accent)';
-        const COLOR_SWITCHERY_SECOND = 'var(--switcherysecond)';
-
-
-        $('.toggle').each(function(index, elem) {
-            const switchery = new Switchery(elem, {
-                color: COLOR_ACCENT,
-                secondaryColor: COLOR_SWITCHERY_SECOND,
-            });
-            $(elem).on("change", function () {
-                switchery.setPosition();
-            });
-            $(elem).removeClass('toggle');
-        });
-
-        function update_ui() {
-            // update bars with latest data
-            for (let i = 0; i < 8; i++) {
-                
-                meterFillArray[i].css('width', (HidConfig.channel_data_dispaly[i] - meterScale.min) / (meterScale.max - meterScale.min)*100+'%');
-                meterLabelArray[i].text(HidConfig.channel_data_dispaly[i]);
-            }
-        }
-
         GUI.interval_remove('receiver_pull');
         GUI.interval_add('receiver_pull', update_ui, 50, true);
     
@@ -240,10 +215,41 @@ show.initialize = function (callback) {
 
         show.internal_radio_protocol = $('select[id="internal_radio_protocol"]');
         show.external_radio_protocol = $('select[id="external_radio_protocol"]');
+        $(window).on('resize', tabresize).resize(); // trigger so labels get correctly aligned on creation
+
+        const COLOR_ACCENT = 'var(--accent)';
+        const COLOR_SWITCHERY_SECOND = 'var(--switcherysecond)';
+
+
+        $('.toggle').each(function(index, elem) {
+            const switchery = new Switchery(elem, {
+                color: COLOR_ACCENT,
+                secondaryColor: COLOR_SWITCHERY_SECOND,
+            });
+            $(elem).on("change", function () {
+                switchery.setPosition();
+            });
+            $(elem).removeClass('toggle');
+        });
+
+        function update_ui() {
+            // update bars with latest data
+            for (let i = 0; i < 8; i++) {
+                
+                meterFillArray[i].css('width', (HidConfig.channel_data_dispaly[i] - meterScale.min) / (meterScale.max - meterScale.min)*100+'%');
+                meterLabelArray[i].text(HidConfig.channel_data_dispaly[i]);
+            }
+        }
+
+        
         
         show.Internal_radio_module_switch.change(function () {
             if( HidConfig.External_radio_module_switch){//开启内置模块前先检查外置模块是否已开启
-                alert("Please close external radio module first");
+                const dialogConfirmCloseInternalRadio = $('.dialogCloseInternalRadio')[0];
+                dialogConfirmCloseInternalRadio.showModal();
+                $('.dialogCloseInternalRadio-confirmbtn').click(function() {
+                    dialogConfirmCloseInternalRadio.close();
+                });
                 document.getElementById('internal_radio_module_switch').checked = false;
             }else{
                 HidConfig.Internal_radio_module_switch = $(this).is(':checked')?1:0;
@@ -260,7 +266,11 @@ show.initialize = function (callback) {
         });
         show.External_radio_module_switch.change(function () {
             if( HidConfig.Internal_radio_module_switch){//开启外置模块前先检查内置模块是否已开启
-                alert("Please close internal radio module first");
+                const dialogConfirmCloseExternalRadio = $('.dialogCloseExternalRadio')[0];
+                dialogConfirmCloseExternalRadio.showModal();
+                $('.dialogCloseExternalRadio-confirmbtn').click(function() {
+                    dialogConfirmCloseExternalRadio.close();
+                });
                 document.getElementById('external_radio_module_switch').checked = false;
             }else{
                 HidConfig.External_radio_module_switch = $(this).is(':checked')?1:0;
@@ -615,19 +625,40 @@ show.initialize = function (callback) {
         hidDevice.write(bufBind);
             console.log("ExpressLRS enter to binding");
         });
+       
         $('a.wifi_update').click(function () {   
-            let  bufwifiUpdate= new Buffer.alloc(64);
-            bufwifiUpdate[0] = 0x00;
-            bufwifiUpdate[1] = 0x07;
-            bufwifiUpdate[2] = 0x02;
-            bufwifiUpdate[3] = HidConfig.ExpressLRS_power_option_value;
-            bufwifiUpdate[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
-            bufwifiUpdate[5] = HidConfig.ExpressLRS_tlm_option_value;
-            bufwifiUpdate[6] = 0x06;
-            bufwifiUpdate[7] = 0x00;
-            bufwifiUpdate[8] = 0x01;
-            hidDevice.write(bufwifiUpdate);
-            console.log("ExpressLRS enter to wifi update");
+            // let  bufwifiUpdate= new Buffer.alloc(64);
+            // bufwifiUpdate[0] = 0x00;
+            // bufwifiUpdate[1] = 0x07;
+            // bufwifiUpdate[2] = 0x02;
+            // bufwifiUpdate[3] = HidConfig.ExpressLRS_power_option_value;
+            // bufwifiUpdate[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
+            // bufwifiUpdate[5] = HidConfig.ExpressLRS_tlm_option_value;
+            // bufwifiUpdate[6] = 0x06;
+            // bufwifiUpdate[7] = 0x00;
+            // bufwifiUpdate[8] = 0x01;
+            // hidDevice.write(bufwifiUpdate);
+            // console.log("ExpressLRS enter to wifi update");
+            dialogConfirmReset.showModal();
+        });
+
+        $('a.resetSettings').click(function () {
+            dialogConfirmReset.showModal();
+        });
+
+        $('.dialogConfirmReset-cancelbtn').click(function() {
+            dialogConfirmReset.close();
+        });
+
+        $('.dialogConfirmReset-confirmbtn').click(function() {
+            dialogConfirmReset.close();
+            MSP.send_message(MSPCodes.MSP_RESET_CONF, false, false, function () {
+                GUI.log(i18n.getMessage('initialSetupSettingsRestored'));
+
+                GUI.tab_switch_cleanup(function () {
+                    TABS.setup.initialize();
+                });
+            });
         });
         
         $('a.factory_reset').click(function () {   
@@ -719,7 +750,7 @@ show.initialize = function (callback) {
 
         //请求遥控器参数，使上位机显示的配置与其同步
         function sync_config(){
-            //请求遥控器信息（硬件版本、支持协议、左右手油门、功率）
+             //请求遥控器信息（硬件版本、支持协议、左右手油门、功率）
             let bufName = new Buffer.alloc(64);
             bufName[0] = 0x0;
             bufName[1] = 0x11;

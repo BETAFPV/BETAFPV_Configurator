@@ -139,6 +139,7 @@ setTimeout(function loadLanguage() {
 }, 200);
 window.onload=function(){
 
+    
     $('div.open_firmware_flasher a.flash').click(function () {
         HidConfig.Have_Receive_HID_Data = false;
         if (GUI.connect_hid != true) {
@@ -166,7 +167,12 @@ window.onload=function(){
                         GUI.connect_hid = false;
                         console.log("Have not Receive HID Data");
                         hidDevice.close();
-                        alert(i18n.getMessage("RadioSetupHidPowerOffAlert"));
+                        const dialogConfirmHIDPowerOff = $('.dialogConfirmHIDPowerOff')[0];
+                        dialogConfirmHIDPowerOff.showModal();
+                        $('.HIDPowerOffDialog-confirmbtn').click(function() {
+                            dialogConfirmHIDPowerOff.close();
+                        });
+                        //alert(i18n.getMessage("RadioSetupHidPowerOffAlert"));
                         $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('Connect_HID'));
 
                         $('#tabs ul.mode-connected').hide();
@@ -208,6 +214,7 @@ window.onload=function(){
     
                         if(checkSum == checkSum2)
                         {
+                            
                             switch(data[1])//判断是哪个通道
                             {
                                 case 0:
@@ -346,7 +353,7 @@ window.onload=function(){
                                     ch_receive_step = 0;
                                     break;
                             }
-                            show.refreshUI();
+                            //show.refreshUI();
                         }
                         
                     }
@@ -369,6 +376,8 @@ window.onload=function(){
                             HidConfig.rocker_mode = data[3];
                             HidConfig.support_power =data[4];
                             //遥控器硬件信息获取完毕后，需要在这里根据硬件信息修改对应组件的可选元素
+
+                            show.rocker_mode = $('select[name="radiomode"]');
                             show.rocker_mode.val(HidConfig.rocker_mode);
                             document.getElementById("rocker_mode").disabled = false;
                             if(HidConfig.hardware_version==0){//硬件型号为：cc2500
@@ -646,6 +655,7 @@ window.onload=function(){
         }
         else
         {
+            
             hidDevice.close();
             GUI.connect_hid = false;
             $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('Connect_HID'));

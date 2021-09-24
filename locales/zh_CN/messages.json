@@ -5928,7 +5928,31 @@
     "RadioSetupfactoryResetAlert":{
         "message":"通道设置已恢复默认值，点击'保存并重启'将保存此设置"
     },
-    "RadioSetupHidPowerOffAlert":{
+    "HIDPowerOffDialogLabel":{
         "message":"请确保您的遥控器处于关机状态。"
+    },
+    "HIDPowerOffDialogTitle":{
+        "message":"提示"
+    },
+    "HIDPowerOffConfirm":{
+        "message":"确认"
+    },
+    "CloseInternalRadioDialogTitle":{
+        "message":"提示"
+    },
+    "CloseExternalRadioDialogLabel":{
+        "message":"在开启外置射频模块之前，您需要确保内置射频模块处于关闭状态。"
+    },
+    "CloseExternalRadioConfirm":{
+        "message":"确认"
+    },
+    "CloseExternalRadioDialogTitle":{
+        "message":"提示"
+    },
+    "CloseInternalRadioDialogLabel":{
+        "message":"在开启内置射频模块之前，您需要确保外置射频模块处于关闭状态。"
+    },
+    "CloseInternalRadioConfirm":{
+        "message":"确认"
     }
 }
