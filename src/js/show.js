@@ -23,12 +23,20 @@ const show = {
     ch2_scale:null,
     ch3_scale:null,
     ch4_scale:null,
+    ch5_scale:null,
+    ch6_scale:null,
+    ch7_scale:null,
+    ch8_scale:null,
 
     //通道偏移补偿
     ch1_offset:null,
     ch2_offset:null,
     ch3_offset:null,
     ch4_offset:null,
+    ch5_offset:null,
+    ch6_offset:null,
+    ch7_offset:null,
+    ch8_offset:null,
 
     //通道值反转
     ch1_reverse:null,
@@ -94,11 +102,19 @@ show.refreshUI = function()
     show.ch2_scale.val(HidConfig.ch2_scale_display);
     show.ch3_scale.val(HidConfig.ch3_scale_display);
     show.ch4_scale.val(HidConfig.ch4_scale_display);
+    show.ch5_scale.val(HidConfig.ch5_scale_display);
+    show.ch6_scale.val(HidConfig.ch6_scale_display);
+    show.ch7_scale.val(HidConfig.ch7_scale_display);
+    show.ch8_scale.val(HidConfig.ch8_scale_display);
 
     show.ch1_offset.val(HidConfig.ch1_offset_display);
     show.ch2_offset.val(HidConfig.ch2_offset_display);
     show.ch3_offset.val(HidConfig.ch3_offset_display);
     show.ch4_offset.val(HidConfig.ch4_offset_display);
+    show.ch5_offset.val(HidConfig.ch5_offset_display);
+    show.ch6_offset.val(HidConfig.ch6_offset_display);
+    show.ch7_offset.val(HidConfig.ch7_offset_display);
+    show.ch8_offset.val(HidConfig.ch8_offset_display);
 
 };
 
@@ -197,11 +213,19 @@ show.initialize = function (callback) {
         show.ch2_scale=$('input[name="ch2_scale"]');
         show.ch3_scale=$('input[name="ch3_scale"]');
         show.ch4_scale=$('input[name="ch4_scale"]');
+        show.ch5_scale=$('input[name="ch5_scale"]');
+        show.ch6_scale=$('input[name="ch6_scale"]');
+        show.ch7_scale=$('input[name="ch7_scale"]');
+        show.ch8_scale=$('input[name="ch8_scale"]');
 
         show.ch1_offset=$('input[name="ch1_offset"]');
         show.ch2_offset=$('input[name="ch2_offset"]');
         show.ch3_offset=$('input[name="ch3_offset"]');
         show.ch4_offset=$('input[name="ch4_offset"]');
+        show.ch5_offset=$('input[name="ch5_offset"]');
+        show.ch6_offset=$('input[name="ch6_offset"]');
+        show.ch7_offset=$('input[name="ch7_offset"]');
+        show.ch8_offset=$('input[name="ch8_offset"]');
 
         show.ch1_reverse=$('input[id="ch1_check"]');
         show.ch2_reverse=$('input[id="ch2_check"]');
@@ -456,7 +480,23 @@ show.initialize = function (callback) {
         show.ch4_scale.change(function () {
             HidConfig.ch4_scale_display = parseInt($(this).val(), 10);
             send_ch4_config();
-        });     
+        });
+        show.ch5_scale.change(function () {
+            HidConfig.ch5_scale_display = parseInt($(this).val(), 10);
+            send_ch5_config();
+        });  
+        show.ch6_scale.change(function () {
+            HidConfig.ch6_scale_display = parseInt($(this).val(), 10);
+            send_ch6_config();
+        });  
+        show.ch7_scale.change(function () {
+            HidConfig.ch7_scale_display = parseInt($(this).val(), 10);
+            send_ch7_config();
+        });  
+        show.ch8_scale.change(function () {
+            HidConfig.ch8_scale_display = parseInt($(this).val(), 10);
+            send_ch8_config();
+        });       
         show.ch1_offset.change(function () {
             HidConfig.ch1_offset_display = parseInt($(this).val(), 10);
             send_ch1_config();
@@ -472,6 +512,22 @@ show.initialize = function (callback) {
         show.ch4_offset.change(function () {
             HidConfig.ch4_offset_display = parseInt($(this).val(), 10);
             send_ch4_config();
+        });
+        show.ch5_offset.change(function () {
+            HidConfig.ch5_offset_display = parseInt($(this).val(), 10);
+            send_ch5_config();
+        });
+        show.ch6_offset.change(function () {
+            HidConfig.ch6_offset_display = parseInt($(this).val(), 10);
+            send_ch6_config();
+        });
+        show.ch7_offset.change(function () {
+            HidConfig.ch7_offset_display = parseInt($(this).val(), 10);
+            send_ch7_config();
+        });
+        show.ch8_offset.change(function () {
+            HidConfig.ch8_offset_display = parseInt($(this).val(), 10);
+            send_ch8_config();
         });
         show.rocker_mode.change(function () {
             HidConfig.rocker_mode = parseInt($(this).val(), 10);
@@ -544,8 +600,8 @@ show.initialize = function (callback) {
             configBuff[2] = 0x04;
             configBuff[3] = HidConfig.ch5_input_source_display;
             configBuff[4] = HidConfig.ch5_reverse_display;
-            configBuff[5] = 0;
-            configBuff[6] = 0;
+            configBuff[5] = HidConfig.ch5_scale_display;
+            configBuff[6] = HidConfig.ch5_offset_display+100;
             configBuff[7] = 0;
             configBuff[8] = 0;
             hidDevice.write(configBuff);
@@ -556,8 +612,8 @@ show.initialize = function (callback) {
             configBuff[2] = 0x05;
             configBuff[3] = HidConfig.ch6_input_source_display;
             configBuff[4] = HidConfig.ch6_reverse_display;
-            configBuff[5] = 0;
-            configBuff[6] = 0;
+            configBuff[5] = HidConfig.ch6_scale_display;
+            configBuff[6] = HidConfig.ch6_offset_display+100;
             configBuff[7] = 0;
             configBuff[8] = 0;
             hidDevice.write(configBuff);
@@ -568,8 +624,8 @@ show.initialize = function (callback) {
             configBuff[2] = 0x06;
             configBuff[3] = HidConfig.ch7_input_source_display;
             configBuff[4] = HidConfig.ch7_reverse_display;
-            configBuff[5] = 0;
-            configBuff[6] = 0;
+            configBuff[5] = HidConfig.ch7_scale_display;
+            configBuff[6] = HidConfig.ch7_offset_display+100;
             configBuff[7] = 0;
             configBuff[8] = 0;
             hidDevice.write(configBuff);
@@ -580,8 +636,8 @@ show.initialize = function (callback) {
             configBuff[2] = 0x07;
             configBuff[3] = HidConfig.ch8_input_source_display;
             configBuff[4] = HidConfig.ch8_reverse_display;
-            configBuff[5] = 0;
-            configBuff[6] = 0;
+            configBuff[5] = HidConfig.ch8_scale_display;
+            configBuff[6] = HidConfig.ch8_offset_display+100;
             configBuff[7] = 0;
             configBuff[8] = 0;
             hidDevice.write(configBuff);

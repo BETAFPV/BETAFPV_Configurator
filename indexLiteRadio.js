@@ -50,12 +50,20 @@ HidConfig = {
     ch2_scale_display:100,
     ch3_scale_display:100,
     ch4_scale_display:100,
+    ch5_scale_display:100,
+    ch6_scale_display:100,
+    ch7_scale_display:100,
+    ch8_scale_display:100,
 
     //通道偏移补偿
     ch1_offset_display:0,
     ch2_offset_display:0,
     ch3_offset_display:0,
     ch4_offset_display:0,
+    ch5_offset_display:0,
+    ch6_offset_display:0,
+    ch7_offset_display:0,
+    ch8_offset_display:0,
 
     //通道值反转
     ch1_reverse_display:0,
@@ -336,7 +344,7 @@ window.onload=function(){
                                     ch_receive_step = 0;
                                     break;
                             }
-                            //show.refreshUI();
+                            show.refreshUI();
                         }
                         
                     }

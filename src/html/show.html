@@ -207,16 +207,20 @@
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <select name="ch1_data_source" style="width:100%;">
-                                            <option value="0" >Roll(A)</option>
-                                            <option value="1"selected="selected">Pitch(E)</option>
-                                            <option value="3">Yaw(R)</option>
+                                            <option value="0" selected="selected">Roll(A)</option>
+                                            <option value="1">Pitch(E)</option>
                                             <option value="2">Throttle(T)</option>
+                                            <option value="3">Yaw(R)</option>
+                                            <option value="4">SA</option>
+                                            <option value="5">SB</option>
+                                            <option value="6">SC</option>
+                                            <option value="7">SD</option>
                                         </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-helpicon-flex">
-                                        <input type="number" name='ch1_scale' step="1" min="50" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
+                                        <input type="number" name='ch1_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
                                     </div>
                                 </td>
                                 <td>
@@ -240,16 +244,20 @@
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <select name="ch2_data_source" style="width:100%;">
-                                            <option value="0" selected="selected">Roll(A)</option>
-                                            <option value="1">Pitch(E)</option>
-                                            <option value="3">Yaw(R)</option>
+                                            <option value="0">Roll(A)</option>
+                                            <option value="1" selected="selected">Pitch(E)</option>
                                             <option value="2">Throttle(T)</option>
+                                            <option value="3">Yaw(R)</option>
+                                            <option value="4">SA</option>
+                                            <option value="5">SB</option>
+                                            <option value="6">SC</option>
+                                            <option value="7">SD</option>
                                         </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-helpicon-flex">
-                                        <input type="number" name='ch2_scale' step="1" min="50" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
+                                        <input type="number" name='ch2_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
                                     </div>
                                 </td>
                                 <td>
@@ -273,16 +281,20 @@
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <select name="ch3_data_source" style="width:100%;">
-                                            <option value="0" >Roll(A)</option>
+                                            <option value="0">Roll(A)</option>
                                             <option value="1">Pitch(E)</option>
-                                            <option value="3"selected="selected">Yaw(R)</option>
-                                            <option value="2">Throttle(T)</option>
+                                            <option value="2" selected="selected">Throttle(T)</option>
+                                            <option value="3">Yaw(R)</option>
+                                            <option value="4">SA</option>
+                                            <option value="5">SB</option>
+                                            <option value="6">SC</option>
+                                            <option value="7">SD</option>
                                         </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-helpicon-flex">
-                                        <input type="number" name='ch3_scale' step="1" min="50" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
+                                        <input type="number" name='ch3_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
                                     </div>
                                 </td>
                                 <td>
@@ -306,16 +318,20 @@
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <select name="ch4_data_source" style="width:100%;">
-                                            <option value="0" >Roll(A)</option>
+                                            <option value="0">Roll(A)</option>
                                             <option value="1">Pitch(E)</option>
-                                            <option value="3">Yaw(R)</option>
-                                            <option value="2"selected="selected">Throttle(T)</option>
+                                            <option value="2">Throttle(T)</option>
+                                            <option value="3" selected="selected">Yaw(R)</option>
+                                            <option value="4">SA</option>
+                                            <option value="5">SB</option>
+                                            <option value="6">SC</option>
+                                            <option value="7">SD</option>
                                         </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-helpicon-flex">
-                                        <input type="number" name='ch4_scale' step="1" min="50" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
+                                        <input type="number" name='ch4_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
                                     </div>
                                 </td>
                                 <td>
@@ -339,6 +355,10 @@
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <select name="ch5_data_source" style="width:100%;">
+                                            <option value="0">Roll(A)</option>
+                                            <option value="1">Pitch(E)</option>
+                                            <option value="2">Throttle(T)</option>
+                                            <option value="3">Yaw(R)</option>
                                             <option value="4" selected="selected">SA</option>
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
@@ -346,8 +366,16 @@
                                         </select>
                                     </div>
                                 </td>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch5_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch5_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
+                                    </div>
+                                </td>
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <input calss="condition" type="checkbox" width:100%; id='ch5_check'>
@@ -364,15 +392,27 @@
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <select name="ch6_data_source" style="width:100%;">
+                                            <option value="0">Roll(A)</option>
+                                            <option value="1">Pitch(E)</option>
+                                            <option value="2">Throttle(T)</option>
+                                            <option value="3">Yaw(R)</option>
                                             <option value="4">SA</option>
-                                            <option value="5"  selected="selected">SB</option>
+                                            <option value="5" selected="selected">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7">SD</option>
                                         </select>
                                     </div>
                                 </td>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch6_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch6_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
+                                    </div>
+                                </td>
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <input calss="condition" type="checkbox" width:100%; id='ch6_check'>
@@ -389,15 +429,27 @@
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <select name="ch7_data_source" style="width:100%;">
+                                            <option value="0">Roll(A)</option>
+                                            <option value="1">Pitch(E)</option>
+                                            <option value="2">Throttle(T)</option>
+                                            <option value="3">Yaw(R)</option>
                                             <option value="4">SA</option>
                                             <option value="5">SB</option>
-                                            <option value="6"  selected="selected">SC</option>
+                                            <option value="6" selected="selected">SC</option>
                                             <option value="7">SD</option>
                                         </select>
                                     </div>
                                 </td>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch7_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch7_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
+                                    </div>
+                                </td>
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <input calss="condition" type="checkbox" width:100%; id='ch7_check'>
@@ -414,15 +466,27 @@
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <select name="ch8_data_source" style="width:100%;">
+                                            <option value="0">Roll(A)</option>
+                                            <option value="1">Pitch(E)</option>
+                                            <option value="2">Throttle(T)</option>
+                                            <option value="3">Yaw(R)</option>
                                             <option value="4">SA</option>
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
-                                            <option value="7"  selected="selected">SD</option>
+                                            <option value="7" selected="selected">SD</option>
                                         </select>
                                     </div>
                                 </td>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch8_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch8_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
+                                    </div>
+                                </td>
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <input calss="condition" type="checkbox" width:100%; id='ch8_check'>
