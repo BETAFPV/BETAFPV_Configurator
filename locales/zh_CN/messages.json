@@ -608,19 +608,25 @@
         "message": "EEPROM <span class=\"message-positive\">已保存</span>"
     },
     "defaultWelcomeIntro": {
-        "message": "欢迎使用 <strong>BETAFPV - 配置程序</strong>，为简化固件升级，设置和调校而生的工具。"
+        "message": "欢迎使用 <strong>BETAFPV - 配置程序（飞控）</strong>，为简化固件升级，设置和调校而生的工具。"
+    },
+    "defaultWelcomeIntro_radio": {
+        "message": "欢迎使用 <strong>BETAFPV - 配置程序（遥控器）</strong>，为简化遥控器固件升级，设置和调校而生的工具。"
     },
     "defaultWelcomeHead": {
         "message": "支持飞控"
     },
     "defaultWelcomeText": {
-        "message": "本应用只支持运行LiteSilver固件的飞控。在 “固件烧写” 页面查看所有支持的飞控列表。<br /><br /><a href=\"https://betafpv.com/collections/brushed-flight-controller/products/betafpv-lite-brushed-flight-controller\" target=\"_blank\" rel=\"noopener noreferrer\">Lite Brushed FC V3</a><br /><a href=\"https://betafpv.com/products/cetus-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus FPV Kit</a><br /><a href=\"https://betafpv.com/products/cetus-pro-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus Pro FPV Kit</a>"
+        "message": "本应用只支持下面罗列的飞控。<br /><br /><a href=\"https://betafpv.com/collections/brushed-flight-controller/products/betafpv-lite-brushed-flight-controller\" target=\"_blank\" rel=\"noopener noreferrer\">Lite Brushed FC V3</a><br /><a href=\"https://betafpv.com/products/cetus-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus FPV Kit</a><br /><a href=\"https://betafpv.com/products/cetus-pro-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus Pro FPV Kit</a><br /><br /><strong>当前为飞控配置程序，基本使用说明如下：</strong><br />飞控固件烧写请点击左侧“固件烧写工具”；<br />飞控参数配置，用USB数据线连接飞控导电脑，在右上角选择对应的串口，点击右上角“连接飞控”按钮，进入飞控参数设置界面。"
+    },
+    "defaultWelcomeText_radio": {
+        "message": "本应用只支持下面罗列的飞控。<br /><br /><a href=\"https://betafpv.com/collections/brushed-flight-controller/products/betafpv-lite-brushed-flight-controller\" target=\"_blank\" rel=\"noopener noreferrer\">Lite Brushed FC V3</a><br /><a href=\"https://betafpv.com/products/cetus-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus FPV Kit</a><br /><a href=\"https://betafpv.com/products/cetus-pro-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus Pro FPV Kit</a><br /><br />点击下面黄色按钮切换到飞控配置程序。"
     },
     "defaultContributingHead": {
         "message": "支持遥控器"
     },
     "defaultContributingText": {
-        "message": "本应用只支持下面罗列的遥控器。 <br /><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE (ELRS 2.4G)</a><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3</a><br /><br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。"
+        "message": "本应用只支持下面罗列的遥控器。 <br /><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE (ELRS 2.4G)</a><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3</a><br /><br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br /><br />点击下面黄色按钮切换到遥控器配置程序。"
     },
     "defaultContributingText_radio": {
         "message": "本应用只支持下面罗列的遥控器。 <br /><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE (ELRS 2.4G)</a><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3</a> <br /><br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br /><br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />遥控器固件烧写请点击左侧“固件烧写工具”；<br />遥控器参数配置，首先将遥控器关机，用USB数据线连接遥控器到电脑，遥控器红色或者绿色灯逐渐闪烁，点击右上角“连接遥控器”按钮进入配置界面。"
@@ -5877,10 +5883,10 @@
         "message":"断开遥控器"
     },
     "ChooseRadioConfigurator": {
-        "message": "切换为遥控器配置界面"
+        "message": "切换为遥控器配置程序"
     },
     "ChooseFCConfigurator":{
-        "message": "切换为飞控设置界面"
+        "message": "切换为飞控配置程序"
     },
     "RadioSetupText":{
         "message": "遥控器配置说明文本"
