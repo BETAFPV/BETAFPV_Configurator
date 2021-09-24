@@ -143,8 +143,6 @@ window.onload=function(){
     $('div.open_firmware_flasher a.flash').click(function () {
         HidConfig.Have_Receive_HID_Data = false;
         if (GUI.connect_hid != true) {
-            console.log('connect hid');
-      
             let ch_receive_step = 0;//这个标志目的是为了确保只发送一次请求命令
             hidDevice = new HID.HID(VENDOR_ID,PRODUCT_ID);
 
@@ -153,7 +151,6 @@ window.onload=function(){
 
                 setTimeout(function Hid_connect_dected() {
                     if(HidConfig.Have_Receive_HID_Data == true){
-                        console.log("Have Receive HID Data");
                         $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('disConnect_HID'));
                         $('div#flashbutton a.flash').addClass('active');
                         $('#tabs ul.mode-disconnected').hide();
@@ -165,7 +162,6 @@ window.onload=function(){
                         $('div#flashbutton a.flash').addClass('active');
                     }else{
                         GUI.connect_hid = false;
-                        console.log("Have not Receive HID Data");
                         hidDevice.close();
                         const dialogConfirmHIDPowerOff = $('.dialogConfirmHIDPowerOff')[0];
                         dialogConfirmHIDPowerOff.showModal();
@@ -183,9 +179,8 @@ window.onload=function(){
             
                         $('div#flashbutton a.flash').removeClass('active');
                     }
-                }, 2000);
+                }, 1500);
            
-                console.log("hidDevice has creat");
                 GUI.connect_hid = true;
                 $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('HID_Connecting'));
                 // $('#tabs ul.mode-disconnected').hide();
@@ -218,8 +213,6 @@ window.onload=function(){
                             switch(data[1])//判断是哪个通道
                             {
                                 case 0:
-                                    console.log("receive ch1 config info");
-
                                     HidConfig.ch1_input_source_display = data[2];
                                     HidConfig.ch1_reverse_display = data[3];
                                     HidConfig.ch1_scale_display = data[4];
@@ -232,13 +225,11 @@ window.onload=function(){
                                         rquestBuffer[1] = 0x11;
                                         rquestBuffer[2] = 0x01;
                                         rquestBuffer[3] = 0x02;
-                                        console.log();
                                         hidDevice.write(rquestBuffer);
                                     }
                                     break;
 
                                 case 1:
-                                    console.log("receive ch2 config info");
 
                                     HidConfig.ch2_input_source_display = data[2];
                                     HidConfig.ch2_reverse_display = data[3];
@@ -257,8 +248,6 @@ window.onload=function(){
                                     break;
 
                                 case 2:
-                                    console.log("receive ch3 config info");
-
                                     HidConfig.ch3_input_source_display = data[2];
                                     HidConfig.ch3_reverse_display = data[3];
                                     HidConfig.ch3_scale_display = data[4];
@@ -276,8 +265,6 @@ window.onload=function(){
                                     break;
 
                                 case 3:
-                                    console.log("receive ch4 config info");
-
                                     HidConfig.ch4_input_source_display = data[2];
                                     HidConfig.ch4_reverse_display = data[3];
                                     HidConfig.ch4_scale_display = data[4];
@@ -295,7 +282,6 @@ window.onload=function(){
                                     break;
 
                                 case 4:
-                                    console.log("receive ch5 config info");
                                     HidConfig.ch5_input_source_display = data[2];
                                     
                                     //请求通道6配置
@@ -310,7 +296,6 @@ window.onload=function(){
                                     break;
 
                                 case 5:
-                                    console.log("receive ch6 config info");
                                     HidConfig.ch6_input_source_display = data[2];
                                     
                                     //请求通道7配置
@@ -325,7 +310,6 @@ window.onload=function(){
                                     break;
 
                                 case 6:
-                                    console.log("receive ch7 config info");
                                     HidConfig.ch7_input_source_display = data[2];
                                     
                                     //请求通道8配置
@@ -340,7 +324,6 @@ window.onload=function(){
                                     break;
 
                                 case 7:
-                                    console.log("receive ch8 config info");
                                     HidConfig.ch8_input_source_display = data[2];
                                     
                                     //全部通道配置信息获取完毕，发送停止命令
@@ -370,7 +353,6 @@ window.onload=function(){
     
                         if(checkSum == checkSum2)//校验通过
                         {
-                            console.log("receive hardware info");
                             HidConfig.hardware_version = data[1];
                             HidConfig.current_protocol = data[2];
                             HidConfig.rocker_mode = data[3];
@@ -403,7 +385,6 @@ window.onload=function(){
                                     hidDevice.write(rquestBuffer);
 
                                 }else if(HidConfig.current_protocol==1){//当前协议为：外置crsf射频模块
-                                    console.log("current protocol:external crsf");
                                     document.getElementById("external_radio_protocol").disabled = false;
                                     HidConfig.external_radio_protocol = 1;
                                     show.external_radio_protocol.val(HidConfig.current_protocol);
@@ -448,7 +429,6 @@ window.onload=function(){
     
                         if(checkSum == checkSum2)
                         {
-                            console.log("receive Internal radio config");
                             document.getElementById("RadioSetupELRSRuningStatus").innerHTML =  i18n.getMessage('RadioSetupInternel2_4G');
 
                             //功率档位只支持：25 50 100mw档位
@@ -507,7 +487,6 @@ window.onload=function(){
     
                         if(checkSum == checkSum2)
                         {
-                            console.log("receive External radio config");
                             HidConfig.Internal_radio_module_switch = false;
                             HidConfig.External_radio_module_switch = true;
                             document.getElementById('internal_radio_module_switch').checked = false;
@@ -536,7 +515,6 @@ window.onload=function(){
 
                                 HidConfig.ExpressLRS_RF_freq_value = 0x02;
                                 document.getElementById("RadioSetupELRSRuningStatus").innerHTML = i18n.getMessage('RadioSetupExternel915M');
-                                console.log("external radio work on 915MHz ISM");
 
                             }else if(data[5] == 0x03){
                                 //外部射频模块可选包率：
@@ -549,7 +527,6 @@ window.onload=function(){
                                 addOptionValue('ExpressLRS_pkt_rate_option_box',3,"25Hz");
                                 HidConfig.ExpressLRS_RF_freq_value = 0x00;
                                 document.getElementById("RadioSetupELRSRuningStatus").innerHTML =  i18n.getMessage('RadioSetupExternel868M');
-                                console.log("external radio work on 868MHz ISM");
 
                             }else if(data[5] == 0x06){
                                 //外部射频模块可选包率：
@@ -572,7 +549,6 @@ window.onload=function(){
                                 addOptionValue('ExpressLRS_pkt_rate_option_box',3,"50Hz");
                                 HidConfig.ExpressLRS_RF_freq_value = 0x06;
                                 document.getElementById("RadioSetupELRSRuningStatus").innerHTML =  i18n.getMessage('RadioSetupExternel2_4G');
-                                console.log("external radio work on 2.4GHz ISM");
 
 
                             }
@@ -608,7 +584,6 @@ window.onload=function(){
                             hidDevice.write(rquestBuffer);
                             ch_receive_step = 0;
                         }else{
-                            console.log("checksum error");
                         }
                     }
                     else
@@ -655,11 +630,9 @@ window.onload=function(){
         }
         else
         {
-            
             hidDevice.close();
             GUI.connect_hid = false;
             $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('Connect_HID'));
-            console.log('close hid');
 
             $('#tabs ul.mode-connected').hide();
 

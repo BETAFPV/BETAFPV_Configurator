@@ -462,21 +462,18 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                     $('#boardVersion').empty();
                     for(let i=0;i<firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE.length;i++){
                         addOptionValue2('boardVersion',i,firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE[i].version);
-                        console.log(firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE[i].version);
                     }
                     break;
                 case 2:
                     $('#boardVersion').empty();
                     for(let i=0;i<firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE_V2_SX1280.length;i++){
                         addOptionValue2('boardVersion',i,firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE_V2_SX1280[i].version);
-                        console.log(firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE_V2_SX1280[i].version);
                     }
                     break;
                 case 3:
                     $('#boardVersion').empty();
                     for(let i=0;i<firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE_V2_CC2500.length;i++){
                         addOptionValue2('boardVersion',i,firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE_V2_CC2500[i].version);
-                        console.log(firmware_flasher_LiteRadio.firmware_version.LiteRadio_2_SE_V2_CC2500[i].version);
                     }
                     break;
                 case 4:

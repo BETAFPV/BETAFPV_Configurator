@@ -74,8 +74,6 @@ window.onload=function(){
 
             let COM = ($('div#port-picker #port option:selected').text());
 
-            console.log(COM);
-            console.log(selected_baud);
 
             port = new serialport(COM, {
                 baudRate: parseInt(selected_baud),
@@ -86,8 +84,7 @@ window.onload=function(){
             
             
             //open事件监听
-            port.on('open', () =>{
-                console.log('serialport open success')                
+            port.on('open', () =>{            
                 GUI.connect_lock = true;
                 $('div#connectbutton a.connect').addClass('active');     
                 $('div#connectbutton div.connect_state').text(i18n.getMessage('disconnect')).addClass('active');
@@ -106,7 +103,6 @@ window.onload=function(){
                 GUI.interval_remove('mavlink_heartbeat');
                 GUI.interval_remove('display_Info');
                 GUI.interval_remove('setup_data_pull_fast');
-                console.log('serialport close success');
                 $('div.connect_controls div.connect_state').text(i18n.getMessage('connect'));
                 
             });
