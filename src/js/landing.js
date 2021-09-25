@@ -25,11 +25,16 @@ landing.initialize = function (callback) {
     });
     bottomSection.find('a').each(function(index) {
       let element = $(this);
-      element.click(function(){
+      element.click(function(){;
         element = $(this);
         const languageSelected = element.attr('lang');
         if (!languageSelected) { return; }
         if (i18n.selectedLanguage != languageSelected) {
+          if(languageSelected == 'en'){
+            document.getElementById("wechat_facebook_logo_src_switch").src = "./src/images/flogo_RGB_HEX-1024.svg";
+          }else if(languageSelected == "zh_CN"){
+            document.getElementById("wechat_facebook_logo_src_switch").src = "./src/images/wechat_icon.png";
+          }
           i18n.changeLanguage(languageSelected);
           showLang(languageSelected);
         }

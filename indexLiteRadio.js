@@ -182,6 +182,11 @@ setTimeout(function listPorts() {
 
 setTimeout(function loadLanguage() {
     i18next.changeLanguage(i18n.Storage_language);
+    if(i18n.Storage_language == 'en'){
+    document.getElementById("wechat_facebook_logo_src_switch").src = "./src/images/flogo_RGB_HEX-1024.svg";
+    }else if(i18n.Storage_language == "zh_CN"){
+    document.getElementById("wechat_facebook_logo_src_switch").src = "./src/images/wechat_icon.png";
+    }
 }, 200);
 window.onload=function(){
 
