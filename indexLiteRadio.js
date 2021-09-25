@@ -824,6 +824,7 @@ window.onload=function(){
             }
         }
     });
+    firmware_flasher_LiteRadio.connect_init();
     
     i18n.init();
     $('#tabs ul.mode-disconnected li a:first').click();

@@ -205,11 +205,7 @@ function CRC16_Name(puData)
         puData[132] = lo;
     }
 }
-
-firmware_flasher_LiteRadio.initialize = function (callback) {
-    const self = this;
-    self.enableFlashing(false);
-
+firmware_flasher_LiteRadio.connect_init = function(){
     $('div.connect_controls a.connect').click(function () {
         if (GUI.connect_lock != true) { 
             const thisElement = $(this);
@@ -303,7 +299,7 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
 
                         starting =2;
 
-                        firmware_flasher_LiteRadio.flashingMessage("Erasing ...",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                        firmware_flasher_LiteRadio.flashingMessage("Erasing ...","NEUTRAL");
                     }
                 }
                 else{
@@ -355,7 +351,7 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                                     
                             });
 
-                            firmware_flasher_LiteRadio.flashingMessage("Flashing ...",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                            firmware_flasher_LiteRadio.flashingMessage("Flashing ...","NEUTRAL");
                             firmware_flasher_LiteRadio.flashProgress(packNum/packLen*100);
                         }
                     }
@@ -375,7 +371,7 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                             
                             console.log("EOT3 LiteRadio");
 
-                            firmware_flasher_LiteRadio.flashingMessage("Programming: SUCCESSFUL",self.FLASH_MESSAGE_TYPES.VALID);
+                            firmware_flasher_LiteRadio.flashingMessage("Programming: SUCCESSFUL","VALID");
                             $('a.exit_dfu').removeClass('disabled');
                         }
                     }
@@ -394,7 +390,7 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                             starting = 4;
                             console.log("EOT LiteRadio");
 
-                            firmware_flasher_LiteRadio.flashingMessage("Verifying ...",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                            firmware_flasher_LiteRadio.flashingMessage("Verifying ...","NEUTRAL");
                         }         
                     }
                 }
@@ -415,6 +411,15 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
             $('div#connectbutton a.connect').removeClass('active');
         }
     });
+}
+
+
+
+firmware_flasher_LiteRadio.initialize = function (callback) {
+    const self = this;
+    self.enableFlashing(false);
+
+    
 
     $('#content').load("./src/html/firmware_flasher_LiteRadio.html", function () {
         i18n.localizePage();
