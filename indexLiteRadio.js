@@ -5,9 +5,25 @@ var cmd_type = {
     Lite_CONFIGER_INFO_ID:0x05,
     INTERNAL_CONFIGER_INFO_ID:0x06,
     EXTERNAL_CONFIGER_INFO_ID:0x07,
+    DEVICE_INFO_ID:0x5A,
     REQUEST_INFO_ID:0x11,
     REQUESET_SAVE_ID:0x12
 };
+
+var liteRadioUnitType = {
+    UNKNOW:0x00,
+    LiteRadio_2_SE:0x01,
+    LiteRadio_2_SE_V2_SX1280:0x02,
+    LiteRadio_2_SE_V2_CC2500:0x03,
+    LiteRadio_3_SX1280:0x04,
+    LiteRadio_3_CC2500:0x05,
+}
+
+var internalRadioType = {
+    UNKNOW:0x00,
+    CC2500:0x01,
+    SX1280:0x02,
+}
 
 var VENDOR_ID = 1155;
 var PRODUCT_ID = 22352;
@@ -18,13 +34,35 @@ HidConfig = {
 
     /**************HidConfig中定义的变量保存当前界面组件的数值*******************/
 
-    //遥控器硬件版本
-    hardware_version:0,
     //当前使用的协议git
     current_protocol:0,
     //支持的功率
     support_power:0,
     
+    //遥控器型号
+    lite_radio_device:0,
+
+    //内置射频模块型号
+    internal_radio:0,
+
+    //硬件左右手油门杆位置
+    throttle_rocker_position:0,
+
+    //用于判断遥控器发送过来的硬件信息是出厂预存进flash的（等于0xa55a）
+    Hardware_info_storage_mark:0,
+
+
+    //硬件版本号
+    hardware_major_version:0,
+    hardware_minor_version:0,
+    hardware_pitch_version:0,
+
+    //固件版本号
+    firmware_major_version:0,
+    firmware_minor_version:0,
+    firmware_pitch_version:0,
+
+
     //美国手、日本手模式
     rocker_mode:0,
 
@@ -361,7 +399,7 @@ window.onload=function(){
     
                         if(checkSum == checkSum2)//校验通过
                         {
-                            HidConfig.hardware_version = data[1];
+                            HidConfig.internal_radio = data[1];
                             HidConfig.current_protocol = data[2];
                             HidConfig.rocker_mode = data[3];
                             HidConfig.support_power =data[4];
@@ -370,13 +408,13 @@ window.onload=function(){
                             show.rocker_mode = $('select[name="radiomode"]');
                             show.rocker_mode.val(HidConfig.rocker_mode);
                             document.getElementById("rocker_mode").disabled = false;
-                            if(HidConfig.hardware_version==0){//硬件型号为：cc2500
+                            if(HidConfig.internal_radio==0){//硬件型号为：cc2500
                                 $("#internal_radio_protocol_elrs_2").css({display: 'none'});
                                 $("#internal_radio_protocol_Frsky_F8").css({display: 'block'});
                                 $("#internal_radio_protocol_Frsky_F16_FCC").css({display: 'block'});
                                 $("#internal_radio_protocol_Frsky_F16_LBT").css({display: 'block'});
                                 
-                            }else if(HidConfig.hardware_version==1){//硬件型号为：sx1280
+                            }else if(HidConfig.internal_radio==1){//硬件型号为：sx1280
                                 $("#internal_radio_protocol_elrs_2").css({display: 'block'});
                                 $("#internal_radio_protocol_Frsky_F8").css({display: 'none'});
                                 $("#internal_radio_protocol_Frsky_F16_FCC").css({display: 'none'});
@@ -419,7 +457,7 @@ window.onload=function(){
                                     
 
                                 }
-                            }else if(HidConfig.hardware_version==2){//硬件型号为：sx1276
+                            }else if(HidConfig.internal_radio==2){//硬件型号为：sx1276
 
                             }
                         }                 
@@ -593,6 +631,78 @@ window.onload=function(){
                             ch_receive_step = 0;
                         }else{
                         }
+                    }else if(data[0] == cmd_type.DEVICE_INFO_ID){
+                        var checkSum=0;
+                        var checkSum2=0;
+                        for(i=0;i<7;i++)
+                        {
+                            checkSum +=data[2*i] & 0x00ff;
+                        }                   
+                        checkSum2 = data[15]<<8 | data[14] ;
+    
+                        if(checkSum == checkSum2)
+                        {
+                           console.log("DEVICE_INFO_ID");
+                           console.log(data);
+                            HidConfig.lite_radio_device = data[2];
+                            HidConfig.internal_radio = data[3];
+                            HidConfig.throttle_rocker_position = data[4];
+                            HidConfig.hardware_major_version = data[5];
+                            HidConfig.hardware_minor_version = data[6];
+                            HidConfig.hardware_pitch_version = data[7];
+                            HidConfig.firmware_major_version = data[8];
+                            HidConfig.firmware_minor_version = data[9];
+                            HidConfig.firmware_pitch_version = data[10];
+                            HidConfig.Hardware_info_storage_mark = (data[13]<<8|data[12]);
+                            console.log(HidConfig.Hardware_info_storage_mark);
+                            console.log(HidConfig.lite_radio_device);
+                            if(HidConfig.Hardware_info_storage_mark == 0xa55a){
+                                $("#content_literadio_device_info").css({display: 'block'});
+                                switch(HidConfig.lite_radio_device){
+                                    case liteRadioUnitType.UNKNOW:
+                                        document.getElementById("liteRadioInfoDevice").innerHTM = "unknow";
+                                        break;
+                                    case liteRadioUnitType.LiteRadio_2_SE:
+                                        document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 2 SE";
+                                        break;
+                                    case liteRadioUnitType.LiteRadio_2_SE_V2_SX1280:
+                                        document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 2 SE V2 SX1280";
+                                        console.log("LiteRadio 2 SE V2 SX1280");
+                                        break;
+                                    case liteRadioUnitType.LiteRadio_2_SE_V2_CC2500:
+                                        document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 2 SE V2 CC2500";
+                                        break;
+                                    case liteRadioUnitType.LiteRadio_3_SX1280:
+                                        document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 3 SX1280";
+                                        break;
+                                    case liteRadioUnitType.LiteRadio_3_CC2500:
+                                        document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 3 CC2500";
+                                        break;
+                                    default:
+                                        console.log("The unit type of lite_radio cannot be identified");
+                                        break;
+                                }
+                                switch(HidConfig.internal_radio){
+                                    case internalRadioType.UNKNOW:
+                                        break;
+                                    case internalRadioType.CC2500:
+                                        document.getElementById("liteRadioInfoInternalRadio").innerHTML = "CC2500";
+                                        break;
+                                    case internalRadioType.SX1280:
+                                        document.getElementById("liteRadioInfoInternalRadio").innerHTML = "SX1280";
+                                        break;
+                                    default:
+                                        console.log("The type of internal radio cannot be identified");
+                                        break;
+                                }
+                                var board_version = HidConfig.hardware_major_version+'.'+HidConfig.hardware_minor_version+'.'+HidConfig.hardware_pitch_version;
+                                var firmware_version = HidConfig.firmware_major_version+'.'+HidConfig.firmware_minor_version+'.'+HidConfig.firmware_pitch_version;
+                                document.getElementById("liteRadioInfoBoardVersion").innerHTML = board_version;
+                                document.getElementById("liteRadioInfoFirmwareVersion").innerHTML = firmware_version;
+
+                            }
+                        }
+
                     }
                     else
                     {

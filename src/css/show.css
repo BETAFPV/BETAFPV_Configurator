@@ -906,6 +906,39 @@
     border-radius: 3px;
 }
 
+.content_literadio_device_info{
+    display: none;
+    width: 100%;
+    height: 20px;
+    background-color: #393b3a;
+    box-shadow: rgba(0, 0, 0, 0.10) 0 -3px 8px;
+    padding: 10px 0 0 0 ;
+    overflow: hidden;
+    border-top: 1px solid var(--subtleAccent);
+
+}
+.content_literadio_device_info .item span {
+ 
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left:15px;
+    /* background-color: var(--accent); */
+    border-radius: 3px;
+    /* border: 1px solid #dba718; */
+    color: rgb(180, 174, 174);
+    float: left;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    transition: all ease 0.2s;
+    padding: 0 0 0 0;
+    line-height: 28px;
+    user-select: none;
+}
+
+
+
 
 .content_EspressLRS_btn {
     /*  content toolbar panel */

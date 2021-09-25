@@ -69,13 +69,67 @@ const show = {
     //外置射频模块配置信息
     external_radio_protocol:null,//外置高频头协议选择
 
-
+    
 
 };
 
+show.getElementIndex = function(){
+    show.rocker_mode = $('select[name="radiomode"]');
+    show.trainer_port = $('input[name="trainer_port"]');
+
+    show.Internal_radio_module_switch = $('input[id="internal_radio_module_switch"]');
+    show.External_radio_module_switch = $('input[id="external_radio_module_switch"]');
+
+    show.External_radio_module_power_switch = $('input[id="External_radio_module_power_switch"]');
+
+    show.ExpressLRS_power_option_box = $('select[id="ExpressLRS_power_option_box"]');
+    show.ExpressLRS_pkt_rate_option_box = $('select[id="ExpressLRS_pkt_rate_option_box"]');
+    show.ExpressLRS_tlm_option_box = $('select[id="ExpressLRS_tlm_option_box"]');
+
+    show.ch1_data_source = $('select[name="ch1_data_source"]');
+    show.ch2_data_source = $('select[name="ch2_data_source"]');
+    show.ch3_data_source = $('select[name="ch3_data_source"]');
+    show.ch4_data_source = $('select[name="ch4_data_source"]');
+    show.ch5_data_source = $('select[name="ch5_data_source"]');
+    show.ch6_data_source = $('select[name="ch6_data_source"]');
+    show.ch7_data_source = $('select[name="ch7_data_source"]');
+    show.ch8_data_source = $('select[name="ch8_data_source"]');
+
+    show.ch1_scale=$('input[name="ch1_scale"]');
+    show.ch2_scale=$('input[name="ch2_scale"]');
+    show.ch3_scale=$('input[name="ch3_scale"]');
+    show.ch4_scale=$('input[name="ch4_scale"]');
+    show.ch5_scale=$('input[name="ch5_scale"]');
+    show.ch6_scale=$('input[name="ch6_scale"]');
+    show.ch7_scale=$('input[name="ch7_scale"]');
+    show.ch8_scale=$('input[name="ch8_scale"]');
+
+    show.ch1_offset=$('input[name="ch1_offset"]');
+    show.ch2_offset=$('input[name="ch2_offset"]');
+    show.ch3_offset=$('input[name="ch3_offset"]');
+    show.ch4_offset=$('input[name="ch4_offset"]');
+    show.ch5_offset=$('input[name="ch5_offset"]');
+    show.ch6_offset=$('input[name="ch6_offset"]');
+    show.ch7_offset=$('input[name="ch7_offset"]');
+    show.ch8_offset=$('input[name="ch8_offset"]');
+
+    show.ch1_reverse=$('input[id="ch1_check"]');
+    show.ch2_reverse=$('input[id="ch2_check"]');
+    show.ch3_reverse=$('input[id="ch3_check"]');
+    show.ch4_reverse=$('input[id="ch4_check"]');
+    show.ch5_reverse=$('input[id="ch5_check"]');
+    show.ch6_reverse=$('input[id="ch6_check"]');
+    show.ch7_reverse=$('input[id="ch7_check"]');
+    show.ch8_reverse=$('input[id="ch8_check"]');
+
+
+    show.internal_radio_protocol = $('select[id="internal_radio_protocol"]');
+    show.external_radio_protocol = $('select[id="external_radio_protocol"]');
+}
 
 show.refreshUI = function()
 {
+    show.getElementIndex();
     show.rocker_mode.val(HidConfig.rocker_mode);
     // show.trainer_port.val(HidConfig.trainerPort);
 
@@ -187,58 +241,8 @@ show.initialize = function (callback) {
         };
         GUI.interval_remove('receiver_pull');
         GUI.interval_add('receiver_pull', update_ui, 50, true);
-    
-        show.rocker_mode = $('select[name="radiomode"]');
-        show.trainer_port = $('input[name="trainer_port"]');
-
-        show.Internal_radio_module_switch = $('input[id="internal_radio_module_switch"]');
-        show.External_radio_module_switch = $('input[id="external_radio_module_switch"]');
-
-        show.External_radio_module_power_switch = $('input[id="External_radio_module_power_switch"]');
-
-        show.ExpressLRS_power_option_box = $('select[id="ExpressLRS_power_option_box"]');
-        show.ExpressLRS_pkt_rate_option_box = $('select[id="ExpressLRS_pkt_rate_option_box"]');
-        show.ExpressLRS_tlm_option_box = $('select[id="ExpressLRS_tlm_option_box"]');
-
-        show.ch1_data_source = $('select[name="ch1_data_source"]');
-        show.ch2_data_source = $('select[name="ch2_data_source"]');
-        show.ch3_data_source = $('select[name="ch3_data_source"]');
-        show.ch4_data_source = $('select[name="ch4_data_source"]');
-        show.ch5_data_source = $('select[name="ch5_data_source"]');
-        show.ch6_data_source = $('select[name="ch6_data_source"]');
-        show.ch7_data_source = $('select[name="ch7_data_source"]');
-        show.ch8_data_source = $('select[name="ch8_data_source"]');
-
-        show.ch1_scale=$('input[name="ch1_scale"]');
-        show.ch2_scale=$('input[name="ch2_scale"]');
-        show.ch3_scale=$('input[name="ch3_scale"]');
-        show.ch4_scale=$('input[name="ch4_scale"]');
-        show.ch5_scale=$('input[name="ch5_scale"]');
-        show.ch6_scale=$('input[name="ch6_scale"]');
-        show.ch7_scale=$('input[name="ch7_scale"]');
-        show.ch8_scale=$('input[name="ch8_scale"]');
-
-        show.ch1_offset=$('input[name="ch1_offset"]');
-        show.ch2_offset=$('input[name="ch2_offset"]');
-        show.ch3_offset=$('input[name="ch3_offset"]');
-        show.ch4_offset=$('input[name="ch4_offset"]');
-        show.ch5_offset=$('input[name="ch5_offset"]');
-        show.ch6_offset=$('input[name="ch6_offset"]');
-        show.ch7_offset=$('input[name="ch7_offset"]');
-        show.ch8_offset=$('input[name="ch8_offset"]');
-
-        show.ch1_reverse=$('input[id="ch1_check"]');
-        show.ch2_reverse=$('input[id="ch2_check"]');
-        show.ch3_reverse=$('input[id="ch3_check"]');
-        show.ch4_reverse=$('input[id="ch4_check"]');
-        show.ch5_reverse=$('input[id="ch5_check"]');
-        show.ch6_reverse=$('input[id="ch6_check"]');
-        show.ch7_reverse=$('input[id="ch7_check"]');
-        show.ch8_reverse=$('input[id="ch8_check"]');
-
-
-        show.internal_radio_protocol = $('select[id="internal_radio_protocol"]');
-        show.external_radio_protocol = $('select[id="external_radio_protocol"]');
+        show.getElementIndex();
+        
         $(window).on('resize', tabresize).resize(); // trigger so labels get correctly aligned on creation
 
         const COLOR_ACCENT = 'var(--accent)';
@@ -683,40 +687,22 @@ show.initialize = function (callback) {
         });
        
         $('a.wifi_update').click(function () {   
-            // let  bufwifiUpdate= new Buffer.alloc(64);
-            // bufwifiUpdate[0] = 0x00;
-            // bufwifiUpdate[1] = 0x07;
-            // bufwifiUpdate[2] = 0x02;
-            // bufwifiUpdate[3] = HidConfig.ExpressLRS_power_option_value;
-            // bufwifiUpdate[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
-            // bufwifiUpdate[5] = HidConfig.ExpressLRS_tlm_option_value;
-            // bufwifiUpdate[6] = 0x06;
-            // bufwifiUpdate[7] = 0x00;
-            // bufwifiUpdate[8] = 0x01;
-            // hidDevice.write(bufwifiUpdate);
-            // console.log("ExpressLRS enter to wifi update");
-            dialogConfirmReset.showModal();
+            let  bufwifiUpdate= new Buffer.alloc(64);
+            bufwifiUpdate[0] = 0x00;
+            bufwifiUpdate[1] = 0x07;
+            bufwifiUpdate[2] = 0x02;
+            bufwifiUpdate[3] = HidConfig.ExpressLRS_power_option_value;
+            bufwifiUpdate[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
+            bufwifiUpdate[5] = HidConfig.ExpressLRS_tlm_option_value;
+            bufwifiUpdate[6] = 0x06;
+            bufwifiUpdate[7] = 0x00;
+            bufwifiUpdate[8] = 0x01;
+            hidDevice.write(bufwifiUpdate);
+            console.log("ExpressLRS enter to wifi update");
+
         });
 
-        $('a.resetSettings').click(function () {
-            dialogConfirmReset.showModal();
-        });
 
-        $('.dialogConfirmReset-cancelbtn').click(function() {
-            dialogConfirmReset.close();
-        });
-
-        $('.dialogConfirmReset-confirmbtn').click(function() {
-            dialogConfirmReset.close();
-            MSP.send_message(MSPCodes.MSP_RESET_CONF, false, false, function () {
-                GUI.log(i18n.getMessage('initialSetupSettingsRestored'));
-
-                GUI.tab_switch_cleanup(function () {
-                    TABS.setup.initialize();
-                });
-            });
-        });
-        
         $('a.factory_reset').click(function () {   
             factory_reset();
             console.log("factory reset");
@@ -806,6 +792,21 @@ show.initialize = function (callback) {
 
         //请求遥控器参数，使上位机显示的配置与其同步
         function sync_config(){
+            //请求遥控器信息（遥控器类型、内置射频模块类型、硬件油门杆位置、硬件版本号、软件版本号）
+            let requirebuff= new Buffer.alloc(64);
+            requirebuff[0] = 0x00;
+            requirebuff[1] = 0x11;
+            requirebuff[2] = 0x03;
+            requirebuff[3] = 0x00;
+            requirebuff[4] = 0x00;
+            requirebuff[5] = 0x00;
+            requirebuff[6] = 0x00;
+            requirebuff[7] = 0x00;
+            hidDevice.write(requirebuff);
+            hidDevice.write(requirebuff);
+            hidDevice.write(requirebuff);
+            
+
              //请求遥控器信息（硬件版本、支持协议、左右手油门、功率）
             let bufName = new Buffer.alloc(64);
             bufName[0] = 0x0;
