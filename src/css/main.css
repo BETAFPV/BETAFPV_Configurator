@@ -306,30 +306,30 @@ input[type="number"]::-webkit-inner-spin-button {
     align-items: center;
 }
 
-.open_firmware_flasher, .connect_controls {
+.open_hid_device, .connect_controls {
     position: relative;
     width: 80px;
     text-align: center;
     height: 84px;
 }
 
-.firmware_b, .connect_b {
+.hid_btn, .connect_b {
     width: 52px;
     margin: 0 14px;
     height: 52px;
 }
 
 @media all and (min-width: 1125px) {
-    .open_firmware_flasher, .connect_controls {
+    .open_hid_device, .connect_controls {
         width: 100px;
     }
 
-    .firmware_b, .connect_b {
+    .hid_btn, .connect_b {
         margin: 0 24px;
     }
 }
 
-.firmware_b a.flash, .connect_b a.connect {
+.hid_btn a.connect, .connect_b a.connect {
     background-color: var(--accent);
     border: 1px solid #dba718;
     background-repeat: no-repeat;
@@ -341,7 +341,7 @@ input[type="number"]::-webkit-inner-spin-button {
     transition: none;
 }
 
-.firmware_b a.flash {
+.hid_btn a.connect {
     background-image: url(../images/icons/cf_icon_flasher_white.svg);
     background-size: 30px;
     background-position: center 10px;
@@ -353,23 +353,23 @@ input[type="number"]::-webkit-inner-spin-button {
     background-position: center 6px;
 }
 
-.firmware_b a.flash.disabled, .connect_b a.connect.disabled {
+.hid_btn a.connect.disabled, .connect_b a.connect.disabled {
     background-color: #808080;
     pointer-events: none;
     cursor: default;
 }
 
-.firmware_b a.flash:hover, .connect_b a.connect:hover {
+.hid_btn a.connect:hover, .connect_b a.connect:hover {
     background-color: #00C0FF;
 }
 
-.firmware_b a.flash.active, .connect_b a.connect.active {
+.hid_btn a.connect.active, .connect_b a.connect.active {
     background-color: #e60000;
     border: 1px solid #fe0000;
     transition: none;
 }
 
-.firmware_b a.flash.active {
+.hid_btn a.connect.active {
     background-image: url(../images/icons/cf_icon_flasher_white.svg);
 }
 
@@ -377,7 +377,7 @@ input[type="number"]::-webkit-inner-spin-button {
     background-image: url(../images/icons/cf_icon_usb1_white.svg);
 }
 
-.firmware_b a.flash.active:hover, .connect_b a.connect.active:hover {
+.hid_btn a.connect.active:hover, .connect_b a.connect.active:hover {
     background-color: #f21212;
 }
 
@@ -780,13 +780,13 @@ input[type="number"]::-webkit-inner-spin-button {
         order: 3;
     }
 
-    .open_firmware_flasher, .connect_controls {
+    .open_hid_device, .connect_controls {
         width: 31px;
         height: 31px;
         margin-left: 15px;
     }
 
-    .firmware_b, .connect_b {
+    .hid_btn, .connect_b {
         margin: 0;
         zoom: 0.6;
     }

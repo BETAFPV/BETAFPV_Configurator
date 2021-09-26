@@ -191,7 +191,7 @@ setTimeout(function loadLanguage() {
 window.onload=function(){
 
     
-    $('div.open_firmware_flasher a.flash').click(function () {
+    $('div.open_hid_device a.connect').click(function () {
         HidConfig.Have_Receive_HID_Data = false;
         if (GUI.connect_hid != true) {
             let ch_receive_step = 0;//这个标志目的是为了确保只发送一次请求命令
@@ -202,15 +202,16 @@ window.onload=function(){
 
                 setTimeout(function Hid_connect_dected() {
                     if(HidConfig.Have_Receive_HID_Data == true){
-                        $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('disConnect_HID'));
-                        $('div#flashbutton a.flash').addClass('active');
+                        $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
+                        $('div#hidbutton a.connect').addClass('active');
                         $('#tabs ul.mode-disconnected').hide();
 
                         $('#tabs ul.mode-connected').show();
 
                         $('#tabs ul.mode-connected li a:first').click();
 
-                        $('div#flashbutton a.flash').addClass('active');
+                        $('div#hidbutton a.connect').addClass('active');
+                        
                     }else{
                         GUI.connect_hid = false;
                         hidDevice.close();
@@ -220,7 +221,7 @@ window.onload=function(){
                             dialogConfirmHIDPowerOff.close();
                         });
                         //alert(i18n.getMessage("RadioSetupHidPowerOffAlert"));
-                        $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('Connect_HID'));
+                        $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
 
                         $('#tabs ul.mode-connected').hide();
 
@@ -228,19 +229,19 @@ window.onload=function(){
             
                         $('#tabs ul.mode-disconnected li a:first').click();
             
-                        $('div#flashbutton a.flash').removeClass('active');
+                        $('div#hidbutton a.connect').removeClass('active');
                     }
                 }, 1500);
            
                 GUI.connect_hid = true;
-                $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('HID_Connecting'));
+                $('div.open_hid_device div.connect_hid').text(i18n.getMessage('HID_Connecting'));
                 // $('#tabs ul.mode-disconnected').hide();
 
                 // $('#tabs ul.mode-connected').show();
 
                 // $('#tabs ul.mode-connected li a:first').click();
 
-                //  $('div#flashbutton a.flash').addClass('active');
+                //  $('div#hidbutton a.connect').addClass('active');
 
 
                 hidDevice.on('data', function(data) {//解析遥控器发送过来的信息
@@ -733,7 +734,7 @@ window.onload=function(){
                 hidDevice.on("error", function(err) {
                     hidDevice.close();
                     GUI.connect_hid = false;
-                    $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('Connect_HID'));
+                    $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
                     alert("HID Device Disconnected!");
 
                     $('#tabs ul.mode-connected').hide();
@@ -742,7 +743,7 @@ window.onload=function(){
         
                     $('#tabs ul.mode-disconnected li a:first').click();
         
-                    $('div#flashbutton a.flash').removeClass('active');
+                    $('div#hidbutton a.connect').removeClass('active');
                 });
             }
             else
@@ -755,7 +756,7 @@ window.onload=function(){
         {
             hidDevice.close();
             GUI.connect_hid = false;
-            $('div.open_firmware_flasher div.connect_hid').text(i18n.getMessage('Connect_HID'));
+            $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
 
             $('#tabs ul.mode-connected').hide();
 
@@ -763,7 +764,7 @@ window.onload=function(){
 
             $('#tabs ul.mode-disconnected li a:first').click();
 
-            $('div#flashbutton a.flash').removeClass('active');
+            $('div#hidbutton a.connect').removeClass('active');
         }
     });
     
@@ -783,9 +784,9 @@ window.onload=function(){
             tab_switch_cleanup();
 
             function tab_switch_cleanup () {
-                if ($('div#flashbutton a.connect_hid').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
-                    $('div#flashbutton a.connect_hid').removeClass('active');
-                    $('div#flashbutton a.flash').removeClass('active');
+                if ($('div#hidbutton a.connect_hid').hasClass('active') && $('div#hidbutton a.connect').hasClass('active')) {
+                    $('div#hidbutton a.connect_hid').removeClass('active');
+                    $('div#hidbutton a.connect').removeClass('active');
                 }
                 // disable previously active tab highlight
                 $('li', ui_tabs).removeClass('active');
@@ -802,9 +803,9 @@ window.onload=function(){
                 $('div#connectbutton a.connect').addClass('disabled');
                 
 
-                if($('div#flashbutton a.flash').hasClass('disabled'))
+                if($('div#hidbutton a.connect').hasClass('disabled'))
                 {
-                    $('div#flashbutton a.flash').removeClass('disabled');
+                    $('div#hidbutton a.connect').removeClass('disabled');
                 }
                 
                 function content_ready() {
@@ -817,7 +818,7 @@ window.onload=function(){
                         break;
                     case 'firmware_flasher_LiteRadio':
                         $('div#connectbutton a.connect').removeClass('disabled');
-                        $('div#flashbutton a.flash').addClass('disabled');
+                        $('div#hidbutton a.connect').addClass('disabled');
                         firmware_flasher_LiteRadio.initialize(content_ready);
                         break;
                     case 'show':
