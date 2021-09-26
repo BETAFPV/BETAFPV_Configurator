@@ -370,9 +370,18 @@ firmware_flasher_LiteRadio.connect_init = function(){
                             });
                             
                             console.log("EOT3 LiteRadio");
-
+                            
                             firmware_flasher_LiteRadio.flashingMessage("Programming: SUCCESSFUL","VALID");
-                            $('a.exit_dfu').removeClass('disabled');
+                            port.close();
+                            GUI.connect_lock = false;
+                            $('div#connectbutton a.connect').removeClass('active');
+                            $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'));
+
+                            lastSize=0;
+                            binSize=null;
+                            packNum=1;
+                            starting=null;
+
                         }
                     }
                     else if(starting ==3)
@@ -389,8 +398,9 @@ firmware_flasher_LiteRadio.connect_init = function(){
                             });
                             starting = 4;
                             console.log("EOT LiteRadio");
-
                             firmware_flasher_LiteRadio.flashingMessage("Verifying ...","NEUTRAL");
+                            
+                            
                         }         
                     }
                 }
@@ -518,7 +528,7 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                     if (err) return console.log('write Error: ', err.message);
                 });
 
-                $("a.load_file").addClass('disabled');
+                // $("a.load_file").addClass('disabled');
 
                 firmware_flasher_LiteRadio.flashProgress(0);
                 self.enableFlashing(false);
