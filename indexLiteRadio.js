@@ -797,17 +797,29 @@ window.onload=function(){
         }
         else
         {
-            hidDevice.close();
-            GUI.connect_hid = false;
-            $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
-
-            $('#tabs ul.mode-connected').hide();
-
-            $('#tabs ul.mode-disconnected').show();
-
-            $('#tabs ul.mode-disconnected li a:first').click();
-
-            $('div#hidbutton a.connect').removeClass('active');
+            //关闭HID端口之前，让遥控器先停止继续发送配置信息
+            let StopBuffer = new Buffer.alloc(64);
+            StopBuffer[0] = 0x00;
+            StopBuffer[1] = 0x11;
+            StopBuffer[2] = 0x00;
+            StopBuffer[3] = 0x01;
+            hidDevice.write(StopBuffer);
+            ch_receive_step = 0;
+            $('div.open_hid_device div.connect_hid').text(i18n.getMessage('HidDisConnecting'));
+            setTimeout(() => {
+                hidDevice.close();
+                GUI.connect_hid = false;
+                $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
+    
+                $('#tabs ul.mode-connected').hide();
+    
+                $('#tabs ul.mode-disconnected').show();
+    
+                $('#tabs ul.mode-disconnected li a:first').click();
+    
+                $('div#hidbutton a.connect').removeClass('active');
+            }, 1000);
+           
         }
     });
     

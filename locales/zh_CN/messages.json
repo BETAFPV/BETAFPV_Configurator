@@ -5882,6 +5882,9 @@
     "disConnect_HID":{
         "message":"断开遥控器"
     },
+    "HidDisConnecting":{
+        "message":"断开连接中"
+    },
     "ChooseRadioConfigurator": {
         "message": "切换为遥控器配置程序"
     },

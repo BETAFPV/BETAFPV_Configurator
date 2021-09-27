@@ -6280,7 +6280,10 @@
         "message":"Connecting"
     },
     "disConnect_HID":{
-        "message":"Disconnect RC"
+        "message":"Disconnect"
+    },
+    "HidDisConnecting":{
+        "message":"Disconnecting"
     },
     "ChooseRadioConfigurator": {
         "message": "Click to Active Configurator for Radio Transmitter"
