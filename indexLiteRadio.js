@@ -265,6 +265,7 @@ window.onload=function(){
                             switch(data[1])//判断是哪个通道
                             {
                                 case 0:
+                                    console.log("receive ch1 config");
                                     HidConfig.ch1_input_source_display = data[2];
                                     HidConfig.ch1_reverse_display = data[3];
                                     HidConfig.ch1_scale_display = data[4];
@@ -282,7 +283,7 @@ window.onload=function(){
                                     break;
 
                                 case 1:
-
+                                    console.log("receive ch2 config");
                                     HidConfig.ch2_input_source_display = data[2];
                                     HidConfig.ch2_reverse_display = data[3];
                                     HidConfig.ch2_scale_display = data[4];
@@ -300,6 +301,7 @@ window.onload=function(){
                                     break;
 
                                 case 2:
+                                    console.log("receive ch3 config");
                                     HidConfig.ch3_input_source_display = data[2];
                                     HidConfig.ch3_reverse_display = data[3];
                                     HidConfig.ch3_scale_display = data[4];
@@ -317,6 +319,7 @@ window.onload=function(){
                                     break;
 
                                 case 3:
+                                    console.log("receive ch4 config");
                                     HidConfig.ch4_input_source_display = data[2];
                                     HidConfig.ch4_reverse_display = data[3];
                                     HidConfig.ch4_scale_display = data[4];
@@ -334,7 +337,11 @@ window.onload=function(){
                                     break;
 
                                 case 4:
+                                    console.log("receive ch5 config");
                                     HidConfig.ch5_input_source_display = data[2];
+                                    HidConfig.ch5_reverse_display = data[3];
+                                    HidConfig.ch5_scale_display = data[4];
+                                    HidConfig.ch5_offset_display = data[5]-100;
                                     
                                     //请求通道6配置
                                     if(ch_receive_step==4){
@@ -348,7 +355,11 @@ window.onload=function(){
                                     break;
 
                                 case 5:
+                                    console.log("receive ch6 config");
                                     HidConfig.ch6_input_source_display = data[2];
+                                    HidConfig.ch6_reverse_display = data[3];
+                                    HidConfig.ch6_scale_display = data[4];
+                                    HidConfig.ch6_offset_display = data[5]-100;
                                     
                                     //请求通道7配置
                                     if(ch_receive_step==5){
@@ -362,7 +373,11 @@ window.onload=function(){
                                     break;
 
                                 case 6:
+                                    console.log("receive ch7 config");
                                     HidConfig.ch7_input_source_display = data[2];
+                                    HidConfig.ch7_reverse_display = data[3];
+                                    HidConfig.ch7_scale_display = data[4];
+                                    HidConfig.ch7_offset_display = data[5]-100;
                                     
                                     //请求通道8配置
                                     if(ch_receive_step==6){
@@ -376,7 +391,11 @@ window.onload=function(){
                                     break;
 
                                 case 7:
+                                    console.log("receive ch8 config");
                                     HidConfig.ch8_input_source_display = data[2];
+                                    HidConfig.ch8_reverse_display = data[3];
+                                    HidConfig.ch8_scale_display = data[4];
+                                    HidConfig.ch8_offset_display = data[5]-100;
                                     
                                     //全部通道配置信息获取完毕，发送停止命令
                                     
@@ -395,6 +414,7 @@ window.onload=function(){
                     else if(data[0] == cmd_type.Lite_CONFIGER_INFO_ID)//遥控器配置信息（硬件版本、支持协议、左右手油门、功率）
                     {
                         
+                        console.log("receive lite radio config");
                         var checkSum=0;
                         var checkSum2=0;
                         for(i=0;i<7;i++)
@@ -437,6 +457,7 @@ window.onload=function(){
                                     hidDevice.write(rquestBuffer);
 
                                 }else if(HidConfig.current_protocol==1){//当前协议为：外置crsf射频模块
+                                    console.log("external crsf is runing");
                                     document.getElementById("external_radio_protocol").disabled = false;
                                     HidConfig.external_radio_protocol = 1;
                                     show.external_radio_protocol.val(HidConfig.current_protocol);
@@ -470,6 +491,7 @@ window.onload=function(){
                     }
                     else if(data[0] == cmd_type.INTERNAL_CONFIGER_INFO_ID)
                     {
+                        console.log("receive internal radio config");
                         var checkSum=0;
                         var checkSum2=0;
 
@@ -484,13 +506,10 @@ window.onload=function(){
                             document.getElementById("RadioSetupELRSRuningStatus").innerHTML =  i18n.getMessage('RadioSetupInternel2_4G');
 
                             //功率档位只支持：25 50 100mw档位
-                            $("#ExpressLRS_power_10mw").css({display: 'none'});
-                            $("#ExpressLRS_power_25mw").css({display: 'block'});
-                            $("#ExpressLRS_power_50mw").css({display: 'block'});
-                            $("#ExpressLRS_power_100mw").css({display: 'block'});
-                            $("#ExpressLRS_power_250mw").css({display: 'none'});
-                            $("#ExpressLRS_power_500mw").css({display: 'none'});
-                            $("#ExpressLRS_power_1000mw").css({display: 'none'});
+                            $('#ExpressLRS_power_option_box').empty();
+                            addOptionValue('ExpressLRS_power_option_box',0,"25mw");
+                            addOptionValue('ExpressLRS_power_option_box',1,"50mw");
+                            addOptionValue('ExpressLRS_power_option_box',2,"100mw");
 
                             //显示当前内置ELRS的配置信息
                             HidConfig.internal_radio_protocol = 0;
@@ -499,7 +518,7 @@ window.onload=function(){
                             HidConfig.ExpressLRS_tlm_option_value = data[4];
 
                             show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
-                            show.ExpressLRS_power_option_box.val(HidConfig.ExpressLRS_power_option_value+1);
+                            show.ExpressLRS_power_option_box.val(HidConfig.ExpressLRS_power_option_value);
                             show.ExpressLRS_pkt_rate_option_box.val(HidConfig.ExpressLRS_pkt_rate_option_value);
                             show.ExpressLRS_tlm_option_box.val(HidConfig.ExpressLRS_tlm_option_value);
 
@@ -528,6 +547,7 @@ window.onload=function(){
                     }
                     else if(data[0] == cmd_type.EXTERNAL_CONFIGER_INFO_ID)
                     {
+                        console.log("receive external radio config");
                         var checkSum=0;
                         var checkSum2=0;
 
@@ -551,14 +571,26 @@ window.onload=function(){
                                 //工作频段915MHz ISM
 
                                 //支持功率档位： 100 250 500mw
-                                $("#ExpressLRS_power_10mw").css({display: 'none'});
-                                $("#ExpressLRS_power_25mw").css({display: 'none'});
-                                $("#ExpressLRS_power_50mw").css({display: 'none'});
-                                $("#ExpressLRS_power_100mw").css({display: 'block'});
-                                $("#ExpressLRS_power_250mw").css({display: 'block'});
-                                $("#ExpressLRS_power_500mw").css({display: 'block'});
-                                $("#ExpressLRS_power_1000mw").css({display: 'none'});
+                                // $("#ExpressLRS_power_10mw").css({display: 'none'});
+                                // $("#ExpressLRS_power_25mw").css({display: 'none'});
+                                // $("#ExpressLRS_power_50mw").css({display: 'none'});
+                                // $("#ExpressLRS_power_100mw").css({display: 'block'});
+                                // $("#ExpressLRS_power_250mw").css({display: 'block'});
+                                // $("#ExpressLRS_power_500mw").css({display: 'block'});
+                                // $("#ExpressLRS_power_1000mw").css({display: 'none'});
+                                $('#ExpressLRS_power_option_box').empty();
+                                // addOptionValue('ExpressLRS_power_option_box',0,"10mw");
+                                // addOptionValue('ExpressLRS_power_option_box',1,"25mw");
+                                // addOptionValue('ExpressLRS_power_option_box',2,"50mw");
+                                addOptionValue('ExpressLRS_power_option_box',3,"100mw");
+                                addOptionValue('ExpressLRS_power_option_box',4,"250mw");
+                                addOptionValue('ExpressLRS_power_option_box',5,"500mw");
 
+                                // $("#ExpressLRS_power_10mw").css({display: 'none'});
+                                // $("#ExpressLRS_power_25mw").css({display: 'none'});
+                                // $("#ExpressLRS_power_50mw").css({display: 'none'});
+
+                                
                                 $('#ExpressLRS_pkt_rate_option_box').empty();
                                 addOptionValue('ExpressLRS_pkt_rate_option_box',0,"200Hz");
                                 addOptionValue('ExpressLRS_pkt_rate_option_box',1,"100Hz");
@@ -586,13 +618,24 @@ window.onload=function(){
                                 //工作频段2.4GHz ISM
 
                                 //支持功率档位：10 25 50 100 250 500mw
-                                $("#ExpressLRS_power_10mw").css({display: 'block'});
-                                $("#ExpressLRS_power_25mw").css({display: 'block'});
-                                $("#ExpressLRS_power_50mw").css({display: 'block'});
-                                $("#ExpressLRS_power_100mw").css({display: 'block'});
-                                $("#ExpressLRS_power_250mw").css({display: 'block'});
-                                $("#ExpressLRS_power_500mw").css({display: 'block'});
-                                $("#ExpressLRS_power_1000mw").css({display: 'none'});
+                                // $("#ExpressLRS_power_10mw").css({display: 'block'});
+                                // $("#ExpressLRS_power_25mw").css({display: 'block'});
+                                // $("#ExpressLRS_power_50mw").css({display: 'block'});
+                                // $("#ExpressLRS_power_100mw").css({display: 'block'});
+                                // $("#ExpressLRS_power_250mw").css({display: 'block'});
+                                // $("#ExpressLRS_power_500mw").css({display: 'block'});
+                                // $("#ExpressLRS_power_1000mw").css({display: 'none'});
+                                $('#ExpressLRS_power_option_box').empty();
+                                addOptionValue('ExpressLRS_power_option_box',0,"10mw");
+                                addOptionValue('ExpressLRS_power_option_box',1,"25mw");
+                                addOptionValue('ExpressLRS_power_option_box',2,"50mw");
+                                addOptionValue('ExpressLRS_power_option_box',3,"100mw");
+                                addOptionValue('ExpressLRS_power_option_box',4,"250mw");
+                                addOptionValue('ExpressLRS_power_option_box',5,"500mw");
+
+                                $("#ExpressLRS_power_10mw").css({display: 'none'});
+                                $("#ExpressLRS_power_25mw").css({display: 'none'});
+                                $("#ExpressLRS_power_50mw").css({display: 'none'});
 
                                 $('#ExpressLRS_pkt_rate_option_box').empty();
                                 addOptionValue('ExpressLRS_pkt_rate_option_box',0,"500Hz");
