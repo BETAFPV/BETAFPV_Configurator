@@ -1,5 +1,6 @@
 const serialport = require('serialport')
 var HID=require('node-hid')
+var lastPortCount = 0;
 var cmd_type = {
     CHANNELS_INFO_ID:0x01,
     Lite_CONFIGER_INFO_ID:0x05,
@@ -168,10 +169,16 @@ function addOptionValue(id,value,text) {
 
 async function listSerialPorts() {
     await serialport.list().then((ports, err) => {
+        if(ports.length!==lastPortCount){
+            $('#port option').each(function(){ 
+                $(this).remove(); 
+            } );
+        }
 
         for (let i = 0; i < ports.length; i++) {
             addOptionValue('port',i,ports[i].path);
         }
+        lastPortCount = ports.length;
     })
 }
 
