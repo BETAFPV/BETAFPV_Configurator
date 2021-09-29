@@ -1,4 +1,5 @@
 const landing = {};
+var {shell} = require('electron')
 landing.initialize = function (callback) {
 
   $('#content').load("./src/html/landing_radio.html", function () {
@@ -45,10 +46,41 @@ landing.initialize = function (callback) {
     // translate to user-selected language
     i18n.localizePage();  
     
-
+    let Lite_Brushed_FC_V3_href_radio = document.getElementById("Lite_Brushed_FC_V3_href_radio");
+        Lite_Brushed_FC_V3_href_radio.onclick = function(e){
+          e.preventDefault();//关闭使用原生串口
+          shell.openExternal(this.getAttribute('href'));//通过浏览器打开链接
+        }
+  
+        let Cetus_FPV_Kit_href_radio = document.getElementById("Cetus_FPV_Kit_href_radio");
+        Cetus_FPV_Kit_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
+  
+        let Cetus_Pro_FPV_Kit_href_radio = document.getElementById("Cetus_Pro_FPV_Kit_href_radio");
+        Cetus_Pro_FPV_Kit_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
+  
+        let LiteRadio_2_SE_href_radio = document.getElementById("LiteRadio_2_SE_href_radio");
+        LiteRadio_2_SE_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
+  
+        let LiteRadio_3_href_radio = document.getElementById("LiteRadio_3_href_radio");
+        LiteRadio_3_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
     
     callback();
   });
+
+
+ 
 
 };
 

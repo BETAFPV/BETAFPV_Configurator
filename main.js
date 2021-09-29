@@ -20,9 +20,9 @@ app.on('ready',()=>{
             enableRemoteModule: true,
           },
     });
-    // mainWindow.webContents.openDevTools({
-    //     mode:'bottom'
-    // });
+    //   mainWindow.webContents.openDevTools({
+    //       mode:'bottom'
+    //   });
     mainWindow.loadURL(`file://${__dirname}/LiteRadio.html`);
     //mainWindow.loadURL(`file://${__dirname}/index.html`);
 

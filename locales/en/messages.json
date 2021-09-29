@@ -688,10 +688,19 @@
         "message": "Flight Controller"
     },
     "defaultWelcomeText": {
-        "message": "The application supports flight controller that can run LiteSilver firmeware.<br /><br /><a href=\"https://betafpv.com/collections/brushed-flight-controller/products/betafpv-lite-brushed-flight-controller\" target=\"_blank\" rel=\"noopener noreferrer\">Lite Brushed FC V3</a><br /><a href=\"https://betafpv.com/products/cetus-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus FPV Kit</a><br /><a href=\"https://betafpv.com/products/cetus-pro-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus Pro FPV Kit</a><br /><br /><strong>Now configurator for FC board is active. Basic user manual:</strong><br />Click the \"Firmware Flasher\" tab on the left for firmware update.<br />For configuration, connect the FC board to the computer via USB data cable. Select the virtual COM port and click the \"Connect FC\" button on the top right."
+        "message": "The application supports flight controller that can run LiteSilver firmeware."
+    },
+    "promptOfUseFCConfigurator":{
+        "message":"<br /><strong>Now configurator for FC board is active. Basic user manual:</strong><br />Click the \"Firmware Flasher\" tab on the left for firmware update.<br />For configuration, connect the FC board to the computer via USB data cable. Select the virtual COM port and click the \"Connect FC\" button on the top right."
+    },
+    "promptOfUseFCConfigurator_radio":{
+        "message": " <br />Click the yellow button below to active configurator for flight control board."
     },
     "defaultWelcomeText_radio": {
-        "message": "The application supports flight controller that can run LiteSilver firmeware.<br /><br /><a href=\"https://betafpv.com/collections/brushed-flight-controller/products/betafpv-lite-brushed-flight-controller\" target=\"_blank\" rel=\"noopener noreferrer\">Lite Brushed FC V3</a><br /><a href=\"https://betafpv.com/products/cetus-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus FPV Kit</a><br /><a href=\"https://betafpv.com/products/cetus-pro-fpv-kit\" target=\"_blank\" rel=\"noopener noreferrer\">Cetus Pro FPV Kit</a><br /><br />Click the yellow button below to active configurator for flight controller board."
+        "message": "The application supports flight controller that can run LiteSilver firmeware."
+    },
+    "promptOfUseRadioConfigurator_radio":{
+        "message":"<br />The LiteRadio 2 SE Frsky or Bayang version is not supported. LiteRadio 2 and LiteRadio 3 Pro is powered by OpenTX system, please use the OpenTX Companion.<br /><br /><strong>Now configurator for radio controller is active. Basic user manual:</strong><br />Click the \"Firmware Flasher\" tab on the left for firmware update.<br />For configuration, turn off the radio controller first. Then connect it to the computer via USB data cable. Wait for the LED ring breathes in red or green. Then click the \"Connect RC\" button on the top right."
     },
     "FCConfiguratorChoosed":{
         "message": "Configurator for FC Board is Active"
@@ -703,10 +712,13 @@
         "message": "Radio Transmitter"
     },
     "defaultContributingText": {
-        "message": "Support the radio controller come with BETAFPV LiteRadio Firmware 2.0 Version. <br /><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE (ELRS 2.4G)</a><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3</a><br /><br />The LiteRadio 2 SE Frsky or Bayang version is not supported. LiteRadio 2 and LiteRadio 3 Pro is powered by OpenTX system, please use the OpenTX Companion.<br /><br />Click the yellow button below to active configurator for radio controller."
+        "message": "Support the radio controller come with BETAFPV LiteRadio Firmware 2.0 Version."
+    },
+    "promptOfUseRadioConfigurator":{
+        "message": "<br /><br />The LiteRadio 2 SE Frsky or Bayang version is not supported. LiteRadio 2 and LiteRadio 3 Pro is powered by OpenTX system, please use the OpenTX Companion.<br /><br />Click the yellow button below to active configurator for radio controller."
     },
     "defaultContributingText_radio": {
-        "message": "Support the radio controller come with BETAFPV LiteRadio Firmware 2.0 Version. <br /><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE (ELRS 2.4G)</a><br /><a href=\"https://betafpv.com/collections/tx/products/literadio-2-se-radio-transmitter\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3</a><br /><br />The LiteRadio 2 SE Frsky or Bayang version is not supported. LiteRadio 2 and LiteRadio 3 Pro is powered by OpenTX system, please use the OpenTX Companion.<br /><br /><strong>Now configurator for radio controller is active. Basic user manual:</strong><br />Click the \"Firmware Flasher\" tab on the left for firmware update.<br />For configuration, turn off the radio controller first. Then connect it to the computer via USB data cable. Wait for the LED ring breathes in red or green. Then click the \"Connect RC\" button on the top right."
+        "message": "Support the radio controller come with BETAFPV LiteRadio Firmware 2.0 Version. "
     },
     "defaultFacebookText": {
         "message": "We also have a <a href=\"https://www.facebook.com/groups/betafpv/\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a>.<br />Join us to get a place to talk about FPV items, ask configuration questions, or just hang out with fellow pilots."

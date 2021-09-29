@@ -129,46 +129,50 @@ show.getElementIndex = function(){
 
 show.refreshUI = function()
 {
-    show.getElementIndex();
-    show.rocker_mode.val(HidConfig.rocker_mode);
-    // show.trainer_port.val(HidConfig.trainerPort);
-
-    show.ch1_data_source.val(HidConfig.ch1_input_source_display);
-    show.ch2_data_source.val(HidConfig.ch2_input_source_display);
-    show.ch3_data_source.val(HidConfig.ch3_input_source_display);
-    show.ch4_data_source.val(HidConfig.ch4_input_source_display);
-    show.ch5_data_source.val(HidConfig.ch5_input_source_display);
-    show.ch6_data_source.val(HidConfig.ch6_input_source_display);
-    show.ch7_data_source.val(HidConfig.ch7_input_source_display);
-    show.ch8_data_source.val(HidConfig.ch8_input_source_display);
-
-
-    document.getElementById('ch1_check').checked = HidConfig.ch1_reverse_display;
-    document.getElementById('ch2_check').checked = HidConfig.ch2_reverse_display;
-    document.getElementById('ch3_check').checked = HidConfig.ch3_reverse_display;
-    document.getElementById('ch4_check').checked = HidConfig.ch4_reverse_display;
-    document.getElementById('ch5_check').checked = HidConfig.ch5_reverse_display;
-    document.getElementById('ch6_check').checked = HidConfig.ch6_reverse_display;
-    document.getElementById('ch7_check').checked = HidConfig.ch7_reverse_display;
-    document.getElementById('ch8_check').checked = HidConfig.ch8_reverse_display;
+    if(GUI.connect_hid == true){
+        show.getElementIndex();
+        show.rocker_mode.val(HidConfig.rocker_mode);
+        // show.trainer_port.val(HidConfig.trainerPort);
     
-    show.ch1_scale.val(HidConfig.ch1_scale_display);
-    show.ch2_scale.val(HidConfig.ch2_scale_display);
-    show.ch3_scale.val(HidConfig.ch3_scale_display);
-    show.ch4_scale.val(HidConfig.ch4_scale_display);
-    show.ch5_scale.val(HidConfig.ch5_scale_display);
-    show.ch6_scale.val(HidConfig.ch6_scale_display);
-    show.ch7_scale.val(HidConfig.ch7_scale_display);
-    show.ch8_scale.val(HidConfig.ch8_scale_display);
+        show.ch1_data_source.val(HidConfig.ch1_input_source_display);
+        show.ch2_data_source.val(HidConfig.ch2_input_source_display);
+        show.ch3_data_source.val(HidConfig.ch3_input_source_display);
+        show.ch4_data_source.val(HidConfig.ch4_input_source_display);
+        show.ch5_data_source.val(HidConfig.ch5_input_source_display);
+        show.ch6_data_source.val(HidConfig.ch6_input_source_display);
+        show.ch7_data_source.val(HidConfig.ch7_input_source_display);
+        show.ch8_data_source.val(HidConfig.ch8_input_source_display);
+    
+    
+        document.getElementById('ch1_check').checked = HidConfig.ch1_reverse_display;
+        document.getElementById('ch2_check').checked = HidConfig.ch2_reverse_display;
+        document.getElementById('ch3_check').checked = HidConfig.ch3_reverse_display;
+        document.getElementById('ch4_check').checked = HidConfig.ch4_reverse_display;
+        document.getElementById('ch5_check').checked = HidConfig.ch5_reverse_display;
+        document.getElementById('ch6_check').checked = HidConfig.ch6_reverse_display;
+        document.getElementById('ch7_check').checked = HidConfig.ch7_reverse_display;
+        document.getElementById('ch8_check').checked = HidConfig.ch8_reverse_display;
+        
+        show.ch1_scale.val(HidConfig.ch1_scale_display);
+        show.ch2_scale.val(HidConfig.ch2_scale_display);
+        show.ch3_scale.val(HidConfig.ch3_scale_display);
+        show.ch4_scale.val(HidConfig.ch4_scale_display);
+        show.ch5_scale.val(HidConfig.ch5_scale_display);
+        show.ch6_scale.val(HidConfig.ch6_scale_display);
+        show.ch7_scale.val(HidConfig.ch7_scale_display);
+        show.ch8_scale.val(HidConfig.ch8_scale_display);
+    
+        show.ch1_offset.val(HidConfig.ch1_offset_display);
+        show.ch2_offset.val(HidConfig.ch2_offset_display);
+        show.ch3_offset.val(HidConfig.ch3_offset_display);
+        show.ch4_offset.val(HidConfig.ch4_offset_display);
+        show.ch5_offset.val(HidConfig.ch5_offset_display);
+        show.ch6_offset.val(HidConfig.ch6_offset_display);
+        show.ch7_offset.val(HidConfig.ch7_offset_display);
+        show.ch8_offset.val(HidConfig.ch8_offset_display);
 
-    show.ch1_offset.val(HidConfig.ch1_offset_display);
-    show.ch2_offset.val(HidConfig.ch2_offset_display);
-    show.ch3_offset.val(HidConfig.ch3_offset_display);
-    show.ch4_offset.val(HidConfig.ch4_offset_display);
-    show.ch5_offset.val(HidConfig.ch5_offset_display);
-    show.ch6_offset.val(HidConfig.ch6_offset_display);
-    show.ch7_offset.val(HidConfig.ch7_offset_display);
-    show.ch8_offset.val(HidConfig.ch8_offset_display);
+    }
+   
 
 };
 
@@ -822,6 +826,7 @@ show.initialize = function (callback) {
         sync_config();
         
         callback();
+
     });
 };
 

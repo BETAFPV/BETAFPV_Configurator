@@ -209,6 +209,7 @@ window.onload=function(){
 
                 setTimeout(function Hid_connect_dected() {
                     if(HidConfig.Have_Receive_HID_Data == true){
+                        GUI.connect_hid = true;
                         $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
                         $('div#hidbutton a.connect').addClass('active');
                         $('#tabs ul.mode-disconnected').hide();
@@ -240,7 +241,7 @@ window.onload=function(){
                     }
                 }, 1500);
            
-                GUI.connect_hid = true;
+                
                 $('div.open_hid_device div.connect_hid').text(i18n.getMessage('HID_Connecting'));
                 // $('#tabs ul.mode-disconnected').hide();
 
@@ -254,7 +255,7 @@ window.onload=function(){
                 hidDevice.on('data', function(data) {//解析遥控器发送过来的信息
                     HidConfig.Have_Receive_HID_Data = true;
                     let rquestBuffer = new Buffer.alloc(64);
-                    if(data[0] == cmd_type.CHANNELS_INFO_ID)//通道配置信息
+                    if(data[0] == cmd_type.CHANNELS_INFO_ID&&GUI.connect_hid == true)//通道配置信息
                     {
                         
                         var checkSum=0;
@@ -418,7 +419,7 @@ window.onload=function(){
                         }
                         
                     }
-                    else if(data[0] == cmd_type.Lite_CONFIGER_INFO_ID)//遥控器配置信息（硬件版本、支持协议、左右手油门、功率）
+                    else if(data[0] == cmd_type.Lite_CONFIGER_INFO_ID&&GUI.connect_hid == true)//遥控器配置信息（硬件版本、支持协议、左右手油门、功率）
                     {
                         
                         console.log("receive lite radio config");
@@ -496,7 +497,7 @@ window.onload=function(){
                             }
                         }                 
                     }
-                    else if(data[0] == cmd_type.INTERNAL_CONFIGER_INFO_ID)
+                    else if(data[0] == cmd_type.INTERNAL_CONFIGER_INFO_ID&&GUI.connect_hid == true)
                     {
                         console.log("receive internal radio config");
                         var checkSum=0;
@@ -552,7 +553,7 @@ window.onload=function(){
                             ch_receive_step = 0;
                         }                
                     }
-                    else if(data[0] == cmd_type.EXTERNAL_CONFIGER_INFO_ID)
+                    else if(data[0] == cmd_type.EXTERNAL_CONFIGER_INFO_ID&&GUI.connect_hid == true)
                     {
                         console.log("receive external radio config");
                         var checkSum=0;
@@ -687,7 +688,7 @@ window.onload=function(){
                             ch_receive_step = 0;
                         }else{
                         }
-                    }else if(data[0] == cmd_type.DEVICE_INFO_ID){
+                    }else if(data[0] == cmd_type.DEVICE_INFO_ID&&GUI.connect_hid == true){
                         var checkSum=0;
                         var checkSum2=0;
                         for(i=0;i<7;i++)
@@ -805,13 +806,15 @@ window.onload=function(){
         else
         {
             //关闭HID端口之前，让遥控器先停止继续发送配置信息
-            let StopBuffer = new Buffer.alloc(64);
-            StopBuffer[0] = 0x00;
-            StopBuffer[1] = 0x11;
-            StopBuffer[2] = 0x00;
-            StopBuffer[3] = 0x01;
-            hidDevice.write(StopBuffer);
-            ch_receive_step = 0;
+            if(GUI.connect_hid == true){
+                let StopBuffer = new Buffer.alloc(64);
+                StopBuffer[0] = 0x00;
+                StopBuffer[1] = 0x11;
+                StopBuffer[2] = 0x00;
+                StopBuffer[3] = 0x01;
+                hidDevice.write(StopBuffer);
+                ch_receive_step = 0;
+            }
             $('div.open_hid_device div.connect_hid').text(i18n.getMessage('HidDisConnecting'));
             setTimeout(() => {
                 hidDevice.close();
