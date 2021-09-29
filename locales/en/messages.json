@@ -6192,14 +6192,14 @@
         "message": "Radio Setup"
     },
     "rocker_mode_description":{
-        "message":"Switch throttle stick position: Mode 1(Right stick throttle) Mode 2(Left stick throttle)"
+        "message":"Switch throttle stick position: Mode 1 (right stick throttle AKA Japan hand) Mode 2 (left stick throttle AKA American hand)"
     },
     "RadioSetupIRSystem": {
         "message": "RF Module Setup"
     },
 
     "RadioSetupERSystem": {
-        "message": "External ExpressLRS Module Setup"
+        "message": "ExpressLRS Protocol Setup"
     },
     "RadioSetupMIXS": {
         "message": "MIXS"
@@ -6229,10 +6229,10 @@
         "message": "Trainer Port"
     },
     "RadioSetupInternalRadioModule":{
-        "message":"Internal radio module"
+        "message":"Internal RF module"
     },
     "RadioSetupIRSystemProtocol": {
-        "message": "Internal Radio System（If the built-in RF module is enabled for the first time, save and retoot the module before modifying its parameters）"
+        "message": "Internal RF system radio link protocol"
     },
     "RadioSetupIRSystemPower": {
         "message": "Power"
@@ -6243,14 +6243,14 @@
     "RadioSetupIRTLMRadio": {
         "message": "TLM Radio"
     },
-    "RadioSetupEXternalRadioModule":{
-        "message":"External radio module"
+    "RadioSetupExternalRadioModule":{
+        "message":"External RF module"
     },
     "RadioSetupERSystemProtocol": {
-        "message": "External Radio Module（If the external RF module is enabled for the first time, save and retoot the module before modifying its parameters）"
+        "message": "External RF module serial port protocol"
     },
     "RadioSetupERSystemPowerSwitch": {
-        "message": "Power Switch(Power on/off the ExpressLRS Module)"
+        "message": "Power switch (power on/off the external RF module)"
     },
     "RadioSetupExELRSSystemPower": {
         "message": "Power"
@@ -6292,13 +6292,13 @@
         "message": "Click to Active Configurator for FC Board"
     },
     "RadioSetupText":{
-        "message": "Description of Radio Setup "
+        "message": "Internal RF module and external RF moudule could NOT open at the same time."
     },
     "RadioSetupRFconfigText":{
-        "message": "Description of Radio System Setup"
+        "message": "Internal RF module and external RF moudule could NOT open at the same time."
     },
     "RadioSetupExpressLRSText":{
-        "message": "Description of ExpressLRS Setup"
+        "message": "Configurator could detect the ExpressLRS system automatically. Please make sure the ExpressLRS system exist and setup correctly in the left \"RF Module Setup\" tab. Do NOT forget to \"Save and reboot\"." 
     },
     "RadioSetupRadioModuleDetect":{
         "message": "Undetected ELRS"
