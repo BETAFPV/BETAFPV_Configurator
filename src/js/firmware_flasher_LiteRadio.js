@@ -132,7 +132,7 @@ function readJsonFile(fileName){
 function loadRemoteJsonFile(){
     //https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/board.json
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/LiteRadio.json", true);
+    xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v2.0.0/LiteRadio.json", true);
     xhr.responseType = 'arraybuffer';
     xhr.onload = function(e) {
         var array = new Uint8Array(xhr.response);
