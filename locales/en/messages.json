@@ -6363,5 +6363,17 @@
     },
     "CloseInternalRadioConfirm":{
         "message":"OK"
+    },
+    "literadio_type":{
+        "message":"Unit type:"
+    },
+    "literadio_build_in_radio":{
+        "message":"Internal Radio module:"
+    },
+    "literadio_hardwareVersion":{
+        "message":"Hardware version:"
+    },
+    "literadio_firmwareVersion":{
+        "message":"Firmware version:"
     }
 }

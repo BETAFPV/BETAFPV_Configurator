@@ -5963,5 +5963,17 @@
     },
     "CloseInternalRadioConfirm":{
         "message":"确认"
+    },
+    "literadio_type":{
+        "message":"遥控器型号:"
+    },
+    "literadio_build_in_radio":{
+        "message":"内置射频模块:"
+    },
+    "literadio_hardwareVersion":{
+        "message":"硬件版本:"
+    },
+    "literadio_firmwareVersion":{
+        "message":"软件版本:"
     }
 }
