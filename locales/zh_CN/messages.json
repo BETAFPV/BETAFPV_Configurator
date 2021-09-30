@@ -644,7 +644,7 @@
         "message":"<br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br /><br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />遥控器固件烧写请点击左侧“固件烧写工具”；<br />遥控器参数配置，首先将遥控器关机，用USB数据线连接遥控器到电脑，遥控器红色或者绿色灯逐渐闪烁，点击右上角“连接遥控器”按钮进入配置界面。"
     },
     "defaultFacebookText": {
-        "message": "我们还有一个 <a href=\"https://www.facebook.com/groups/betaflightgroup/\" target=\"_blank\" rel=\"noopener noreferrer\">微信公众号</a>。<br />关注我们获取最新动态，寻求技术支持，或者只是和小伙伴们闲聊。"
+        "message": "我们还有一个 <a href=\"https://mp.weixin.qq.com/s/3fxc5h2dheOTfRshuTv9qw\" target=\"_blank\" rel=\"noopener noreferrer\">微信公众号</a>。<br />关注我们获取最新动态，寻求技术支持，或者只是和小伙伴们闲聊。"
     },
     "defaultChangelogHead": {
         "message": "配置程序 - 更新日志"

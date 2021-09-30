@@ -129,7 +129,7 @@ show.getElementIndex = function(){
 
 show.refreshUI = function()
 {
-    if(GUI.connect_hid == true){
+    if(HidConfig.LiteRadio_power== false){
         show.getElementIndex();
         show.rocker_mode.val(HidConfig.rocker_mode);
         // show.trainer_port.val(HidConfig.trainerPort);

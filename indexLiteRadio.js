@@ -1,7 +1,7 @@
 const serialport = require('serialport')
 var HID=require('node-hid')
 var lastPortCount = 0;
-var cmd_type = {
+var Command_ID = {
     CHANNELS_INFO_ID:0x01,
     Lite_CONFIGER_INFO_ID:0x05,
     INTERNAL_CONFIGER_INFO_ID:0x06,
@@ -10,6 +10,10 @@ var cmd_type = {
     REQUEST_INFO_ID:0x11,
     REQUESET_SAVE_ID:0x12
 };
+var CommandType = {
+    requestChannelConfig:0x01,
+    requestRadioConfig:0x02
+}
 
 var liteRadioUnitType = {
     UNKNOW:0x00,
@@ -25,17 +29,41 @@ var internalRadioType = {
     CC2500:0x01,
     SX1280:0x02,
 }
+var Channel = {
+    CHANNEL1:0x00,
+    CHANNEL2:0x01,
+    CHANNEL3:0x02,
+    CHANNEL4:0x03,
+    CHANNEL5:0x04,
+    CHANNEL6:0x05,
+    CHANNEL7:0x06,
+    CHANNEL8:0x07,
+};
+
+var HidConnectStatus = {
+    connected:0x00,     //已连接
+    connecting:0x01,    //连接中
+    disConnecting:0x02, //断开连接中
+    disConnect:0x03,    //未连接
+}
+
 
 var VENDOR_ID = 1155;
 var PRODUCT_ID = 22352;
 let channels = new Array(8);
 var hidDevice = null;
-
+var ch_receive_step  = 0;
 HidConfig = {
 
     /**************HidConfig中定义的变量保存当前界面组件的数值*******************/
 
-    //当前使用的协议git
+    //当前HID的连接状态
+    HID_Connect_State:HidConnectStatus.disConnect,
+
+    //要开启开关机状态
+    LiteRadio_power:true,
+    
+    //当前使用的协议
     current_protocol:0,
     //支持的功率
     support_power:0,
@@ -142,6 +170,23 @@ HidConfig = {
 
 
 };
+//让遥控器停止发送配置信息
+function HIDStopSendingConfig(){
+    let sendBuffer = new Buffer.alloc(64);
+    sendBuffer[0] = 0x00;
+    sendBuffer[1] = Command_ID.REQUEST_INFO_ID;
+    sendBuffer[2] = 0x00;
+    sendBuffer[3] = 0x01;
+    hidDevice.write(sendBuffer);
+}
+function HIDRequestChannelConfig(channel_num){
+    let sendBuffer = new Buffer.alloc(64);
+    sendBuffer[0] = 0x00;
+    sendBuffer[1] = Command_ID.REQUEST_INFO_ID;
+    sendBuffer[2] = CommandType.requestChannelConfig;
+    sendBuffer[3] = channel_num;
+    hidDevice.write(sendBuffer);
+}
 
 function channel_data_map(input,Omin,Omax,Nmin,Nmax){
    return ((Nmax-Nmin)/(Omax-Omin)*(input-Omin)+Nmin).toFixed(0);
@@ -199,80 +244,50 @@ window.onload=function(){
 
     
     $('div.open_hid_device a.connect').click(function () {
-        HidConfig.Have_Receive_HID_Data = false;
-        if (GUI.connect_hid != true) {
-            let ch_receive_step = 0;//这个标志目的是为了确保只发送一次请求命令
-            hidDevice = new HID.HID(VENDOR_ID,PRODUCT_ID);
-
-            if(hidDevice)
-            {
-
-                setTimeout(function Hid_connect_dected() {
-                    if(HidConfig.Have_Receive_HID_Data == true){
-                        GUI.connect_hid = true;
-                        $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
+        if(HidConfig.HID_Connect_State == HidConnectStatus.disConnect){
+            hidDevice = new HID.HID(VENDOR_ID,PRODUCT_ID);//创建一个HID对象
+            if(hidDevice){
+                HidConfig.HID_Connect_State = HidConnectStatus.connecting;
+                $('div.open_hid_device div.connect_hid').text(i18n.getMessage('HID_Connecting'));
+                setTimeout(() => {
+                    if(HidConfig.Have_Receive_HID_Data){//先判断遥控器有数据发送过来
+                        HidConfig.LiteRadio_power = false;
                         $('div#hidbutton a.connect').addClass('active');
                         $('#tabs ul.mode-disconnected').hide();
-
                         $('#tabs ul.mode-connected').show();
-
                         $('#tabs ul.mode-connected li a:first').click();
-
                         $('div#hidbutton a.connect').addClass('active');
-                        
-                    }else{
-                        GUI.connect_hid = false;
+                    }else{//没有接收到数据说明遥控器处于开机状态，提示客户将遥控器关机
+                        HidConfig.LiteRadio_power = true;
+                        HidConfig.HID_Connect_State = HidConnectStatus.disConnect;
                         hidDevice.close();
+                        $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
+                        $('#tabs ul.mode-connected').hide();
+                        $('#tabs ul.mode-disconnected').show();
+                        $('#tabs ul.mode-disconnected li a:first').click();
+                        $('div#hidbutton a.connect').removeClass('active');
                         const dialogConfirmHIDPowerOff = $('.dialogConfirmHIDPowerOff')[0];
                         dialogConfirmHIDPowerOff.showModal();
                         $('.HIDPowerOffDialog-confirmbtn').click(function() {
                             dialogConfirmHIDPowerOff.close();
                         });
-                        //alert(i18n.getMessage("RadioSetupHidPowerOffAlert"));
-                        $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
-
-                        $('#tabs ul.mode-connected').hide();
-
-                        $('#tabs ul.mode-disconnected').show();
-            
-                        $('#tabs ul.mode-disconnected li a:first').click();
-            
-                        $('div#hidbutton a.connect').removeClass('active');
                     }
                 }, 1500);
-           
-                
-                $('div.open_hid_device div.connect_hid').text(i18n.getMessage('HID_Connecting'));
-                // $('#tabs ul.mode-disconnected').hide();
 
-                // $('#tabs ul.mode-connected').show();
-
-                // $('#tabs ul.mode-connected li a:first').click();
-
-                //  $('div#hidbutton a.connect').addClass('active');
-
-
-                hidDevice.on('data', function(data) {//解析遥控器发送过来的信息
-                    HidConfig.Have_Receive_HID_Data = true;
+                hidDevice.on('data', function(data) {//解析遥控器发送过来的信息 
                     let rquestBuffer = new Buffer.alloc(64);
-                    if(data[0] == cmd_type.CHANNELS_INFO_ID&&GUI.connect_hid == true)//通道配置信息
+                    if(data[0] == Command_ID.CHANNELS_INFO_ID && HidConfig.LiteRadio_power == false)//通道配置信息
                     {
-                        
                         var checkSum=0;
                         var checkSum2=0;
-                        
-                        for(i=0;i<7;i++)
-                        {
+                        for(i=0;i<7;i++){
                             checkSum +=data[2*i] & 0x00ff;
-                        }                   
-                        checkSum2 = data[15]<<8 | data[14] ;
-    
-                        if(checkSum == checkSum2)
-                        {
-                            
+                        }                
+                        checkSum2 = data[15]<<8 | data[14];
+                        if(checkSum == checkSum2){
                             switch(data[1])//判断是哪个通道
                             {
-                                case 0:
+                                case Channel.CHANNEL1:
                                     console.log("receive ch1 config");
                                     HidConfig.ch1_input_source_display = data[2];
                                     HidConfig.ch1_reverse_display = data[3];
@@ -282,33 +297,24 @@ window.onload=function(){
                                     //请求通道2配置
                                     if(ch_receive_step==0){
                                         ch_receive_step=1;
-                                        rquestBuffer[0] = 0x00;
-                                        rquestBuffer[1] = 0x11;
-                                        rquestBuffer[2] = 0x01;
-                                        rquestBuffer[3] = 0x02;
-                                        hidDevice.write(rquestBuffer);
+                                        HIDRequestChannelConfig(2);
                                     }
                                     break;
 
-                                case 1:
+                                case Channel.CHANNEL2:
                                     console.log("receive ch2 config");
                                     HidConfig.ch2_input_source_display = data[2];
                                     HidConfig.ch2_reverse_display = data[3];
                                     HidConfig.ch2_scale_display = data[4];
                                     HidConfig.ch2_offset_display = data[5]-100;
-                                    
                                     //请求通道3配置
                                     if(ch_receive_step==1){
                                         ch_receive_step=2;
-                                        rquestBuffer[0] = 0x00;
-                                        rquestBuffer[1] = 0x11;
-                                        rquestBuffer[2] = 0x01;
-                                        rquestBuffer[3] = 0x03;
-                                        hidDevice.write(rquestBuffer);
+                                        HIDRequestChannelConfig(3);
                                     }
                                     break;
 
-                                case 2:
+                                case Channel.CHANNEL3:
                                     console.log("receive ch3 config");
                                     HidConfig.ch3_input_source_display = data[2];
                                     HidConfig.ch3_reverse_display = data[3];
@@ -318,15 +324,11 @@ window.onload=function(){
                                     //请求通道4配置
                                     if(ch_receive_step==2){
                                         ch_receive_step=3;
-                                        rquestBuffer[0] = 0x00;
-                                        rquestBuffer[1] = 0x11;
-                                        rquestBuffer[2] = 0x01;
-                                        rquestBuffer[3] = 0x04;
-                                        hidDevice.write(rquestBuffer);
+                                        HIDRequestChannelConfig(4);
                                     }
                                     break;
 
-                                case 3:
+                                case Channel.CHANNEL4:
                                     console.log("receive ch4 config");
                                     HidConfig.ch4_input_source_display = data[2];
                                     HidConfig.ch4_reverse_display = data[3];
@@ -336,15 +338,11 @@ window.onload=function(){
                                     //请求通道5配置
                                     if(ch_receive_step==3){
                                         ch_receive_step=4;
-                                        rquestBuffer[0] = 0x00;
-                                        rquestBuffer[1] = 0x11;
-                                        rquestBuffer[2] = 0x01;
-                                        rquestBuffer[3] = 0x05;
-                                        hidDevice.write(rquestBuffer);
+                                        HIDRequestChannelConfig(5);
                                     }
                                     break;
 
-                                case 4:
+                                case Channel.CHANNEL5:
                                     console.log("receive ch5 config");
                                     HidConfig.ch5_input_source_display = data[2];
                                     HidConfig.ch5_reverse_display = data[3];
@@ -354,15 +352,11 @@ window.onload=function(){
                                     //请求通道6配置
                                     if(ch_receive_step==4){
                                         ch_receive_step=5;
-                                        rquestBuffer[0] = 0x00;
-                                        rquestBuffer[1] = 0x11;
-                                        rquestBuffer[2] = 0x01;
-                                        rquestBuffer[3] = 0x06;
-                                        hidDevice.write(rquestBuffer);
+                                        HIDRequestChannelConfig(6);
                                     }
                                     break;
 
-                                case 5:
+                                case Channel.CHANNEL6:
                                     console.log("receive ch6 config");
                                     HidConfig.ch6_input_source_display = data[2];
                                     HidConfig.ch6_reverse_display = data[3];
@@ -372,15 +366,11 @@ window.onload=function(){
                                     //请求通道7配置
                                     if(ch_receive_step==5){
                                         ch_receive_step=6;
-                                        rquestBuffer[0] = 0x00;
-                                        rquestBuffer[1] = 0x11;
-                                        rquestBuffer[2] = 0x01;
-                                        rquestBuffer[3] = 0x07;
-                                        hidDevice.write(rquestBuffer);
+                                        HIDRequestChannelConfig(7);
                                     }
                                     break;
 
-                                case 6:
+                                case Channel.CHANNEL7:
                                     console.log("receive ch7 config");
                                     HidConfig.ch7_input_source_display = data[2];
                                     HidConfig.ch7_reverse_display = data[3];
@@ -390,15 +380,11 @@ window.onload=function(){
                                     //请求通道8配置
                                     if(ch_receive_step==6){
                                         ch_receive_step=7;
-                                        rquestBuffer[0] = 0x00;
-                                        rquestBuffer[1] = 0x11;
-                                        rquestBuffer[2] = 0x01;
-                                        rquestBuffer[3] = 0x08;
-                                        hidDevice.write(rquestBuffer);
+                                        HIDRequestChannelConfig(8);
                                     }
                                     break;
 
-                                case 7:
+                                case Channel.CHANNEL8:
                                     console.log("receive ch8 config");
                                     HidConfig.ch8_input_source_display = data[2];
                                     HidConfig.ch8_reverse_display = data[3];
@@ -406,12 +392,9 @@ window.onload=function(){
                                     HidConfig.ch8_offset_display = data[5]-100;
                                     
                                     //全部通道配置信息获取完毕，发送停止命令
-                                    
-                                    rquestBuffer[0] = 0x00;
-                                    rquestBuffer[1] = 0x11;
-                                    rquestBuffer[2] = 0x00;
-                                    rquestBuffer[3] = 0x01;
-                                    hidDevice.write(rquestBuffer);
+                                    HIDStopSendingConfig();
+                                    HidConfig.HID_Connect_State = HidConnectStatus.connected;
+                                    $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
                                     ch_receive_step = 0;
                                     break;
                             }
@@ -419,10 +402,9 @@ window.onload=function(){
                         }
                         
                     }
-                    else if(data[0] == cmd_type.Lite_CONFIGER_INFO_ID&&GUI.connect_hid == true)//遥控器配置信息（硬件版本、支持协议、左右手油门、功率）
+                    else if(data[0] == Command_ID.Lite_CONFIGER_INFO_ID && HidConfig.LiteRadio_power == false)//遥控器配置信息（硬件版本、支持协议、左右手油门、功率）
                     {
                         
-                        console.log("receive lite radio config");
                         var checkSum=0;
                         var checkSum2=0;
                         for(i=0;i<7;i++)
@@ -433,6 +415,7 @@ window.onload=function(){
     
                         if(checkSum == checkSum2)//校验通过
                         {
+                            console.log("receive lite radio config");
                             HidConfig.internal_radio = data[1];
                             HidConfig.current_protocol = data[2];
                             HidConfig.rocker_mode = data[3];
@@ -497,9 +480,9 @@ window.onload=function(){
                             }
                         }                 
                     }
-                    else if(data[0] == cmd_type.INTERNAL_CONFIGER_INFO_ID&&GUI.connect_hid == true)
+                    else if(data[0] == Command_ID.INTERNAL_CONFIGER_INFO_ID && HidConfig.LiteRadio_power == false)
                     {
-                        console.log("receive internal radio config");
+                        
                         var checkSum=0;
                         var checkSum2=0;
 
@@ -511,6 +494,7 @@ window.onload=function(){
     
                         if(checkSum == checkSum2)
                         {
+                            console.log("receive internal radio config");
                             document.getElementById("RadioSetupELRSRuningStatus").innerHTML =  i18n.getMessage('RadioSetupInternel2_4G');
 
                             //功率档位只支持：25 50 100mw档位
@@ -553,9 +537,8 @@ window.onload=function(){
                             ch_receive_step = 0;
                         }                
                     }
-                    else if(data[0] == cmd_type.EXTERNAL_CONFIGER_INFO_ID&&GUI.connect_hid == true)
-                    {
-                        console.log("receive external radio config");
+                    else if(data[0] == Command_ID.EXTERNAL_CONFIGER_INFO_ID && HidConfig.LiteRadio_power == false){
+                        
                         var checkSum=0;
                         var checkSum2=0;
 
@@ -567,6 +550,7 @@ window.onload=function(){
     
                         if(checkSum == checkSum2)
                         {
+                            console.log("receive external radio config");
                             HidConfig.Internal_radio_module_switch = false;
                             HidConfig.External_radio_module_switch = true;
                             document.getElementById('internal_radio_module_switch').checked = false;
@@ -577,28 +561,13 @@ window.onload=function(){
                                 //外部射频模块可选包率：
                                 //200hz 100hz 50hz 25hz
                                 //工作频段915MHz ISM
-
                                 //支持功率档位： 100 250 500mw
-                                // $("#ExpressLRS_power_10mw").css({display: 'none'});
-                                // $("#ExpressLRS_power_25mw").css({display: 'none'});
-                                // $("#ExpressLRS_power_50mw").css({display: 'none'});
-                                // $("#ExpressLRS_power_100mw").css({display: 'block'});
-                                // $("#ExpressLRS_power_250mw").css({display: 'block'});
-                                // $("#ExpressLRS_power_500mw").css({display: 'block'});
-                                // $("#ExpressLRS_power_1000mw").css({display: 'none'});
                                 $('#ExpressLRS_power_option_box').empty();
-                                // addOptionValue('ExpressLRS_power_option_box',0,"10mw");
-                                // addOptionValue('ExpressLRS_power_option_box',1,"25mw");
-                                // addOptionValue('ExpressLRS_power_option_box',2,"50mw");
+
                                 addOptionValue('ExpressLRS_power_option_box',3,"100mw");
                                 addOptionValue('ExpressLRS_power_option_box',4,"250mw");
                                 addOptionValue('ExpressLRS_power_option_box',5,"500mw");
 
-                                // $("#ExpressLRS_power_10mw").css({display: 'none'});
-                                // $("#ExpressLRS_power_25mw").css({display: 'none'});
-                                // $("#ExpressLRS_power_50mw").css({display: 'none'});
-
-                                
                                 $('#ExpressLRS_pkt_rate_option_box').empty();
                                 addOptionValue('ExpressLRS_pkt_rate_option_box',0,"200Hz");
                                 addOptionValue('ExpressLRS_pkt_rate_option_box',1,"100Hz");
@@ -626,13 +595,7 @@ window.onload=function(){
                                 //工作频段2.4GHz ISM
 
                                 //支持功率档位：10 25 50 100 250 500mw
-                                // $("#ExpressLRS_power_10mw").css({display: 'block'});
-                                // $("#ExpressLRS_power_25mw").css({display: 'block'});
-                                // $("#ExpressLRS_power_50mw").css({display: 'block'});
-                                // $("#ExpressLRS_power_100mw").css({display: 'block'});
-                                // $("#ExpressLRS_power_250mw").css({display: 'block'});
-                                // $("#ExpressLRS_power_500mw").css({display: 'block'});
-                                // $("#ExpressLRS_power_1000mw").css({display: 'none'});
+
                                 $('#ExpressLRS_power_option_box').empty();
                                 addOptionValue('ExpressLRS_power_option_box',0,"10mw");
                                 addOptionValue('ExpressLRS_power_option_box',1,"25mw");
@@ -688,7 +651,7 @@ window.onload=function(){
                             ch_receive_step = 0;
                         }else{
                         }
-                    }else if(data[0] == cmd_type.DEVICE_INFO_ID&&GUI.connect_hid == true){
+                    }else if(data[0] == Command_ID.DEVICE_INFO_ID && HidConfig.LiteRadio_power == false){
                         var checkSum=0;
                         var checkSum2=0;
                         for(i=0;i<7;i++)
@@ -763,6 +726,7 @@ window.onload=function(){
                     }
                     else
                     {
+                        HidConfig.Have_Receive_HID_Data = true;
                         HidConfig.channel_data[0] = (data[1]<<8 | data[0]);
                         HidConfig.channel_data[1] = (data[3]<<8 | data[2]);
                         HidConfig.channel_data[2] = (data[5]<<8 | data[4]);
@@ -781,55 +745,51 @@ window.onload=function(){
                         HidConfig.channel_data_dispaly[7] = channel_data_map(HidConfig.channel_data[7],0,2047,-100,100);
                     }               
                 } );
-
                 hidDevice.on("error", function(err) {
                     hidDevice.close();
-                    GUI.connect_hid = false;
+                    HidConfig.HID_Connect_State = HidConnectStatus.disConnect;
                     $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
                     alert("HID Device Disconnected!");
-
                     $('#tabs ul.mode-connected').hide();
-
                     $('#tabs ul.mode-disconnected').show();
-        
                     $('#tabs ul.mode-disconnected li a:first').click();
-        
                     $('div#hidbutton a.connect').removeClass('active');
                 });
+
+            }else{//HID对象创建失败(无法识别到HID设备或者无法识别到遥控器)
+                console.log("hidDevice creat failed!");
+                HidConfig.HID_Connect_State = HidConnectStatus.disConnect;
+                $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
             }
-            else
-            {
-                alert("Not Found HID Device!");
-            }
-             
-        }
-        else
-        {
-            //关闭HID端口之前，让遥控器先停止继续发送配置信息
-            if(GUI.connect_hid == true){
-                let StopBuffer = new Buffer.alloc(64);
-                StopBuffer[0] = 0x00;
-                StopBuffer[1] = 0x11;
-                StopBuffer[2] = 0x00;
-                StopBuffer[3] = 0x01;
-                hidDevice.write(StopBuffer);
-                ch_receive_step = 0;
-            }
+        }else if(HidConfig.HID_Connect_State == HidConnectStatus.connecting){
+            console.log("HID is connecting......");
+        }else if(HidConfig.HID_Connect_State == HidConnectStatus.disConnecting){
+            console.log("HID is disConnecting......");
+        }else if(HidConfig.HID_Connect_State == HidConnectStatus.connected){
+            HidConfig.HID_Connect_State = HidConnectStatus.disConnecting;
             $('div.open_hid_device div.connect_hid').text(i18n.getMessage('HidDisConnecting'));
+            HIDStopSendingConfig();
+            setTimeout(() => {//每隔100ms再发送一次停止命令，连续发3次确保遥控器完全停止发送
+                HIDStopSendingConfig();
+            }, 100);
+            setTimeout(() => {
+                HIDStopSendingConfig();
+            }, 200);
+            setTimeout(() => {
+                HIDStopSendingConfig();
+            }, 300);
             setTimeout(() => {
                 hidDevice.close();
-                GUI.connect_hid = false;
+                HidConfig.HID_Connect_State = HidConnectStatus.disConnect;
                 $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
-    
                 $('#tabs ul.mode-connected').hide();
-    
                 $('#tabs ul.mode-disconnected').show();
-    
                 $('#tabs ul.mode-disconnected li a:first').click();
-    
                 $('div#hidbutton a.connect').removeClass('active');
             }, 1000);
-           
+
+        }else{
+
         }
     });
     
