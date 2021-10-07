@@ -208,7 +208,7 @@ mavlinkSend = function(writedata){
 window.onload=function(){
 
     function mavlink_msg_heartbeat(){
-        let msg = new  mavlink10.messages.heartbeat(3,11);
+        let msg = new  mavlink10.messages.heartbeat(3,11,1);
         let buffer = msg.pack(msg);
         mavlinkSend(buffer);
      }
@@ -262,6 +262,10 @@ window.onload=function(){
                 GUI.interval_remove('mavlink_heartbeat');
                 $('div.connect_controls div.connect_state').text(i18n.getMessage('connect'));
 
+                let msg = new  mavlink10.messages.heartbeat(3,11,0);
+                let buffer = msg.pack(msg);
+                mavlinkSend(buffer);
+
                 if(isFlasherTab ==0)
                 {
                     $('#tabs ul.mode-connected').hide();
@@ -288,6 +292,10 @@ window.onload=function(){
                 $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'));
                 console.log('Error: ',err.message);
 
+                let msg = new  mavlink10.messages.heartbeat(3,11,0);
+                let buffer = msg.pack(msg);
+                mavlinkSend(buffer);
+
                 if(isFlasherTab ==0)
                 {
                     $('#tabs ul.mode-connected').hide();
@@ -301,6 +309,10 @@ window.onload=function(){
         }
         else
         {
+            let msg = new  mavlink10.messages.heartbeat(3,11,0);
+            let buffer = msg.pack(msg);
+            mavlinkSend(buffer);
+
             port.close();
             $('#tabs ul.mode-connected').hide();
             $('#tabs ul.mode-disconnected').show();
