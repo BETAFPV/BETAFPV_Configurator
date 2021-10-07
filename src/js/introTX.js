@@ -2,7 +2,7 @@ const landing = {};
 var {shell} = require('electron')
 landing.initialize = function (callback) {
 
-  $('#content').load("./src/html/landing.html", function () {
+  $('#content').load("./src/html/introTX.html", function () {
     i18n.localizePage();
     function showLang(newLang) {
       bottomSection = $('.languageSwitcher');
@@ -26,7 +26,7 @@ landing.initialize = function (callback) {
     });
     bottomSection.find('a').each(function(index) {
       let element = $(this);
-      element.click(function(){;
+      element.click(function(){
         element = $(this);
         const languageSelected = element.attr('lang');
         if (!languageSelected) { return; }
@@ -46,41 +46,41 @@ landing.initialize = function (callback) {
     // translate to user-selected language
     i18n.localizePage();  
     
-      let Lite_Brushed_FC_V3_href = document.getElementById("Lite_Brushed_FC_V3_href");
-      Lite_Brushed_FC_V3_href.onclick = function(e){
-        e.preventDefault();//关闭使用原生串口
-        shell.openExternal(this.getAttribute('href'));//通过浏览器打开链接
-      }
-
-      let Cetus_FPV_Kit_href = document.getElementById("Cetus_FPV_Kit_href");
-      Cetus_FPV_Kit_href.onclick = function(e){
-        e.preventDefault();
-        shell.openExternal(this.getAttribute('href'));
-      }
-
-      let Cetus_Pro_FPV_Kit_href = document.getElementById("Cetus_Pro_FPV_Kit_href");
-      Cetus_Pro_FPV_Kit_href.onclick = function(e){
-        e.preventDefault();
-        shell.openExternal(this.getAttribute('href'));
-      }
-
-      let LiteRadio_2_SE_href = document.getElementById("LiteRadio_2_SE_href");
-      LiteRadio_2_SE_href.onclick = function(e){
-        e.preventDefault();
-        shell.openExternal(this.getAttribute('href'));
-      }
-
-      let LiteRadio_3_href = document.getElementById("LiteRadio_3_href");
-      LiteRadio_3_href.onclick = function(e){
-        e.preventDefault();
-        shell.openExternal(this.getAttribute('href'));
-      }
-
-   
-
+    let Lite_Brushed_FC_V3_href_radio = document.getElementById("Lite_Brushed_FC_V3_href_radio");
+        Lite_Brushed_FC_V3_href_radio.onclick = function(e){
+          e.preventDefault();//关闭使用原生串口
+          shell.openExternal(this.getAttribute('href'));//通过浏览器打开链接
+        }
+  
+        let Cetus_FPV_Kit_href_radio = document.getElementById("Cetus_FPV_Kit_href_radio");
+        Cetus_FPV_Kit_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
+  
+        let Cetus_Pro_FPV_Kit_href_radio = document.getElementById("Cetus_Pro_FPV_Kit_href_radio");
+        Cetus_Pro_FPV_Kit_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
+  
+        let LiteRadio_2_SE_href_radio = document.getElementById("LiteRadio_2_SE_href_radio");
+        LiteRadio_2_SE_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
+  
+        let LiteRadio_3_href_radio = document.getElementById("LiteRadio_3_href_radio");
+        LiteRadio_3_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
     
     callback();
   });
+
+
+ 
 
 };
 

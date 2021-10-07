@@ -109,6 +109,14 @@ window.onload=function(){
                 GUI.interval_remove('display_Info');
                 GUI.interval_remove('setup_data_pull_fast');
                 $('div.connect_controls div.connect_state').text(i18n.getMessage('connect'));
+
+                if(isFlasherTab ==0)
+                {
+                    $('#tabs ul.mode-connected').hide();
+                    $('#tabs ul.mode-disconnected').show();
+                    $('#tabs ul.mode-disconnected li a:first').click();
+                    $('div#connectbutton a.connect').removeClass('active');
+                }
                 
             });
 
@@ -127,8 +135,17 @@ window.onload=function(){
             //error事件监听
             port.on('error',function(err){
                 console.log('Error: ',err.message);
-            });
 
+                if(isFlasherTab ==0)
+                {
+                    $('#tabs ul.mode-connected').hide();
+                    $('#tabs ul.mode-disconnected').show();
+                    $('#tabs ul.mode-disconnected li a:first').click();
+                    GUI.connect_lock = false;
+                    GUI.interval_remove('mavlink_heartbeat');
+                    $('div#connectbutton a.connect').removeClass('active');
+                }
+            });
         }
         else
         {

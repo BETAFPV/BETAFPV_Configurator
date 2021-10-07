@@ -1,4 +1,4 @@
-const { mavlink10: mavlink, MAVLink10Processor: MAVLink } = require('./libraries/mavlink.js');
+const { mavlink10: mavlink, MAVLink10Processor: MAVLink } = require('./mavlinkFC.js');
 const mavlinkParser = new MAVLink(null, 0, 0);
 
 

@@ -1,0 +1,30 @@
+
+# Get version name from package.json file
+
+# System installed jq tool
+# VERSION=`jq .version ./package.json | tr -d '"'`
+
+# System not install jq tool
+VERSION=`cat ./package.json | grep "\"version\"" | tr -d '[a-z\":,\ ]'`
+
+mkdir -p ./build/linux64/usr/share/yourappname/
+mkdir -p ./build/linux64/DEBIAN/
+mkdir -p ./build/outputs/
+
+cp -r ./yourappfiles/* ./build/linux64/usr/share/yourappname/
+
+touch ./build/linux64/DEBIAN/control
+
+echo "Package: yourappname" >> ./build/linux64/DEBIAN/control
+echo "Version: ${VERSION}" >> ./build/linux64/DEBIAN/control
+echo "Section: net" >> ./build/linux64/DEBIAN/control
+echo "Depends: libgconf-2-4" >> ./build/linux64/DEBIAN/control
+echo "Priority: optional" >> ./build/linux64/DEBIAN/control
+echo "Suggests: sqlcipher" >> ./build/linux64/DEBIAN/control
+echo "Architecture: amd64" >> ./build/linux64/DEBIAN/control
+echo "Maintainer: xxx" >> ./build/linux64/DEBIAN/control
+echo "Provides: xxx" >> ./build/linux64/DEBIAN/control
+echo "Description: xxx" >> ./build/linux64/DEBIAN/control
+
+
+dpkg -b ./build/linux64 ./build/outputs/yourappname-v${VERSION}-linux-amd64.deb

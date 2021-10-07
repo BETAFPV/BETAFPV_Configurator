@@ -30,7 +30,6 @@ const { Console } = require('console');
 const { CONNREFUSED } = require('dns');
 const fs = require('fs');
 
-
 let port = null;
 let binFile = null;
 let binFilePath=null;
@@ -130,7 +129,6 @@ function readJsonFile(fileName){
 }
 
 function loadRemoteJsonFile(){
-    //https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/board.json
     var xhr = new XMLHttpRequest();
     xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v2.0.0/LiteRadio.json", true);
     xhr.responseType = 'arraybuffer';
@@ -178,6 +176,160 @@ function CRC16_Check(puData)
     }
 }
 
+firmware_flasher_LiteRadio.parseData = function(data)
+{
+    if(starting ==1)
+    {
+        if(data[0] == 67)
+        {
+            var bufName = new Buffer(133);
+
+            bufName[0] = 0x01;
+            bufName[1] = 00;
+            bufName[2] = 0xFF;
+            bufName[3] = 0x42;
+            bufName[4] = 0x6f;
+            bufName[5] = 0x6f;
+            bufName[6] = 0x74;
+            bufName[7] = 0x6c;
+            bufName[8] = 0x6f;
+            bufName[9] = 0x61;
+            bufName[10] = 0x64;
+            bufName[11] = 0x65;
+            bufName[12] = 0x72;
+            bufName[13] = 0x5f;
+            bufName[14] = 0x46;
+            bufName[15] = 0x2e;
+            bufName[16] = 0x62;
+            bufName[17] = 0x69;
+            bufName[18] = 0x6e;
+            bufName[19] = 0x00;
+            
+            
+            
+            var str = binSize.toString();
+            var sizeLen = str.length;
+
+            for(var i=0;i<sizeLen;i++)
+            {
+                var value = str.charCodeAt(i).toString(10);
+                bufName[20+i] = value;
+            }
+
+            CRC16_Name(bufName);
+
+            console.log(bufName);
+            
+            port.write(bufName, (err) =>{
+                if (err) return console.log('write Error: ', err.message);
+            });
+
+            starting =2;
+
+            firmware_flasher_LiteRadio.flashingMessage("Erasing ...","NEUTRAL");
+        }
+    }
+    else{
+        if(starting ==2)
+        {
+            if(data[0] == 6)
+            {        
+                var bufData = new Buffer(1029);
+
+                fs.open(binFilePath, 'r', function(err, fd){
+                    if (err) {
+                        return console.error(err);
+                    }
+                    console.log("File opened successfully! LiteRadio");
+            
+                    lastSize = binSize - (packNum-1)*1024;
+                    console.log("lastSize:",lastSize);
+            
+                    if(lastSize>0)
+                    {
+                        bufData[0] = 0x02;
+                        bufData[1] = packNum;
+                        bufData[2] = ~packNum;
+        
+                        console.log("lastSize:",lastSize);
+
+                        fs.read(fd, bufData, 3, 1024, (packNum-1)*1024, function(err, bytes){
+                            if (err){
+                                console.log(err);
+                                }
+                                console.log(bytes + " bytes read");
+                                
+                                CRC16_Check(bufData);
+
+                                // Print only read bytes to avoid junk.
+                                if(bytes > 0){
+                                port.write(bufData, (err) =>{
+                                    if (err) return console.log('write Error: ', err.message);
+                                });
+                                packNum ++;
+                            }
+                        });  
+
+                        if(lastSize<1024)
+                        {
+                            starting = 3;
+                        }
+                    }  
+                        
+                });
+
+                firmware_flasher_LiteRadio.flashingMessage("Flashing ...","NEUTRAL");
+                firmware_flasher_LiteRadio.flashProgress(packNum/packLen*100);
+            }
+        }
+        else if(starting ==4)
+        {
+            console.log(data);
+            if(data[0] == 21)
+            {
+                var buf = new Buffer(133);
+
+                buf[0] = 0x01;
+                buf[1] = 0x00;
+                buf[2] = 0xff;
+                port.write(buf, (err) =>{
+                    if (err) return console.log('write Error: ', err.message);
+                });
+                
+                console.log("EOT3 LiteRadio");
+                
+                firmware_flasher_LiteRadio.flashingMessage("Programming: SUCCESSFUL","VALID");
+                
+                GUI.connect_lock = false;
+                $('div#connectbutton a.connect').removeClass('active');
+                $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'));
+
+                lastSize=0;
+                binSize=null;
+                packNum=1;
+                starting=null;
+            }
+        }
+        else if(starting ==3)
+        {
+            console.log(data);
+            
+            if(data[0] == 6)
+            {
+                var buf = new Buffer(1);
+                buf[0] = 0x04;
+
+                port.write(buf, (err) =>{
+                    if (err) return console.log('write Error: ', err.message);
+                });
+                starting = 4;
+                console.log("EOT LiteRadio");
+                firmware_flasher_LiteRadio.flashingMessage("Verifying ...","NEUTRAL");
+            }         
+        }
+    }
+};
+
 
 function CRC16_Name(puData)
 {
@@ -205,231 +357,10 @@ function CRC16_Name(puData)
         puData[132] = lo;
     }
 }
-firmware_flasher_LiteRadio.connect_init = function(){
-    $('div.connect_controls a.connect').click(function () {
-        if (GUI.connect_lock != true) { 
-            const thisElement = $(this);
-            const clicks = thisElement.data('clicks');
-            
-            const toggleStatus = function() {
-                thisElement.data("clicks", !clicks);
-            };
-
-            GUI.configuration_loaded = false;
-
-            const selected_baud = parseInt($('div#port-picker #baud').val());
-
-            let COM = ($('div#port-picker #port option:selected').text());
-
-            console.log(COM);
-            console.log(selected_baud);
-
-            port = new serialport(COM, {
-                baudRate: parseInt(selected_baud),
-                dataBits: 8,
-                parity: 'none',
-                stopBits: 1
-            });
-            
-            //open事件监听
-            port.on('open', () =>{
-
-                console.log('serialport open success LiteRadio');
-                $('div#connectbutton div.connect_state').text(i18n.getMessage('disconnect'));
-                //timerRev = setInterval(wrapEvent,250);
-
-                GUI.connect_lock = true;
-                $('div#connectbutton a.connect').addClass('active');
-            });
-
-            //close事件监听
-            port.on('close', () =>{
-                GUI.connect_lock = false;
-                console.log('serialport close success')
-                $('div.connect_controls div.connect_state').text(i18n.getMessage('connect'));
-            });
-
-            //data事件监听
-            port.on('data', data => {
-                if(starting ==1)
-                {
-                    if(data[0] == 67)
-                    {
-                        var bufName = new Buffer(133);
-
-                        bufName[0] = 0x01;
-                        bufName[1] = 00;
-                        bufName[2] = 0xFF;
-                        bufName[3] = 0x42;
-                        bufName[4] = 0x6f;
-                        bufName[5] = 0x6f;
-                        bufName[6] = 0x74;
-                        bufName[7] = 0x6c;
-                        bufName[8] = 0x6f;
-                        bufName[9] = 0x61;
-                        bufName[10] = 0x64;
-                        bufName[11] = 0x65;
-                        bufName[12] = 0x72;
-                        bufName[13] = 0x5f;
-                        bufName[14] = 0x46;
-                        bufName[15] = 0x2e;
-                        bufName[16] = 0x62;
-                        bufName[17] = 0x69;
-                        bufName[18] = 0x6e;
-                        bufName[19] = 0x00;
-                        
-                        
-                        
-                        var str = binSize.toString();
-                        var sizeLen = str.length;
-
-                        for(var i=0;i<sizeLen;i++)
-                        {
-                            var value = str.charCodeAt(i).toString(10);
-                            bufName[20+i] = value;
-                        }
-
-                        CRC16_Name(bufName);
-
-                        console.log(bufName);
-                        
-                        port.write(bufName, (err) =>{
-                            if (err) return console.log('write Error: ', err.message);
-                        });
-
-                        starting =2;
-
-                        firmware_flasher_LiteRadio.flashingMessage("Erasing ...","NEUTRAL");
-                    }
-                }
-                else{
-                    if(starting ==2)
-                    {
-                        if(data[0] == 6)
-                        {        
-                            var bufData = new Buffer(1029);
-
-                            fs.open(binFilePath, 'r', function(err, fd){
-                                if (err) {
-                                    return console.error(err);
-                                }
-                                console.log("File opened successfully! LiteRadio");
-                        
-                                lastSize = binSize - (packNum-1)*1024;
-                                console.log("lastSize:",lastSize);
-                        
-                                if(lastSize>0)
-                                {
-                                    bufData[0] = 0x02;
-                                    bufData[1] = packNum;
-                                    bufData[2] = ~packNum;
-                    
-                                    console.log("lastSize:",lastSize);
-
-                                    fs.read(fd, bufData, 3, 1024, (packNum-1)*1024, function(err, bytes){
-                                        if (err){
-                                            console.log(err);
-                                            }
-                                            console.log(bytes + " bytes read");
-                                            
-                                            CRC16_Check(bufData);
-
-                                            // Print only read bytes to avoid junk.
-                                            if(bytes > 0){
-                                            port.write(bufData, (err) =>{
-                                                if (err) return console.log('write Error: ', err.message);
-                                            });
-                                            packNum ++;
-                                        }
-                                    });  
-
-                                    if(lastSize<1024)
-                                    {
-                                        starting = 3;
-                                    }
-                                }  
-                                    
-                            });
-
-                            firmware_flasher_LiteRadio.flashingMessage("Flashing ...","NEUTRAL");
-                            firmware_flasher_LiteRadio.flashProgress(packNum/packLen*100);
-                        }
-                    }
-                    else if(starting ==4)
-                    {
-                        console.log(data);
-                        if(data[0] == 21)
-                        {
-                            var buf = new Buffer(133);
-
-                            buf[0] = 0x01;
-                            buf[1] = 0x00;
-                            buf[2] = 0xff;
-                            port.write(buf, (err) =>{
-                                if (err) return console.log('write Error: ', err.message);
-                            });
-                            
-                            console.log("EOT3 LiteRadio");
-                            
-                            firmware_flasher_LiteRadio.flashingMessage("Programming: SUCCESSFUL","VALID");
-                            port.close();
-                            GUI.connect_lock = false;
-                            $('div#connectbutton a.connect').removeClass('active');
-                            $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'));
-
-                            lastSize=0;
-                            binSize=null;
-                            packNum=1;
-                            starting=null;
-
-                        }
-                    }
-                    else if(starting ==3)
-                    {
-                        console.log(data);
-                        
-                        if(data[0] == 6)
-                        {
-                            var buf = new Buffer(1);
-                            buf[0] = 0x04;
-
-                            port.write(buf, (err) =>{
-                                if (err) return console.log('write Error: ', err.message);
-                            });
-                            starting = 4;
-                            console.log("EOT LiteRadio");
-                            firmware_flasher_LiteRadio.flashingMessage("Verifying ...","NEUTRAL");
-                            
-                            
-                        }         
-                    }
-                }
-            });
-
-            //error事件监听
-            port.on('error',function(err){
-                // port.close();
-                $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'));
-                console.log('Error: ',err.message);
-            });
-        }
-        else
-        {
-            port.close();
-            
-            GUI.connect_lock = false;
-            $('div#connectbutton a.connect').removeClass('active');
-        }
-    });
-}
-
-
 
 firmware_flasher_LiteRadio.initialize = function (callback) {
     const self = this;
     self.enableFlashing(false);
-
-    
 
     $('#content').load("./src/html/firmware_flasher_LiteRadio.html", function () {
         i18n.localizePage();
@@ -465,8 +396,6 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
             })
 
         });
-
-        
 
         $('select[id="boardTarget"]').change(function () {
             firmware_flasher_LiteRadio.target_board = parseInt($(this).val(), 10);
@@ -511,6 +440,7 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
             }
             console.log("boardTarget change ");
         });
+
         $('a.flash_firmware').click(function () {
             if (!$(this).hasClass('disabled')) {
 
@@ -527,8 +457,6 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                 port.write(buf, (err) =>{
                     if (err) return console.log('write Error: ', err.message);
                 });
-
-                // $("a.load_file").addClass('disabled');
 
                 firmware_flasher_LiteRadio.flashProgress(0);
                 self.enableFlashing(false);

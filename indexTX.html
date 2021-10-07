@@ -16,10 +16,13 @@
         <script src="./node_modules/jquery/dist/jquery.js"></script>
         <script src="./node_modules/jquery/dist/jquery.min.js"></script>
         <script src="libraries/d3.min.js"></script>
-        <script src="./src/js/firmware_flasher_LiteRadio.js"></script>
+        <script src="./src/js/firmwareFlasherTX.js"></script>
         <script src="./src/js/gui.js"></script>
-        <script src="./src/js/landing_radio.js"></script>
-        <script src="./src/js/show.js"></script>
+        <script src="./src/js/introTX.js"></script>
+        <script src="./src/js/setupTX.js"></script>
+        <script src="./src/mavlink/mavlinkTX.js"></script>
+        <script src="./src/mavlink/mavlinkDecodeTX.js"></script>
+
 
         <script type="text/javascript" src="./node_modules/three/build/three.min.js"></script>
         <script type="text/javascript" src="./node_modules/three/examples/js/renderers/CanvasRenderer.js"></script>
@@ -65,15 +68,9 @@
                 <div id="header_btns">
                     <div class="connect_controls" id="connectbutton">
                         <div class="connect_b">
-                            <a class="connect disabled" href="#"></a>
-                        </div>
-                        <div class="connect_state" i18n="connect">Connect Serial</div>
-                    </div>
-                    <div class="open_hid_device" id="hidbutton">
-                        <div class="hid_btn">
                             <a class="connect" href="#"></a>
                         </div>
-                        <div class="connect_hid" i18n ="Connect_HID">Connect HID</div>
+                        <div class="connect_state" i18n="connect">Connect Serial</div>
                     </div>
                 </div>
             </div>
@@ -95,6 +92,6 @@
                 </div>              
             </div>
         </div>
-        <script src="./indexLiteRadio.js"></script>        
+        <script src="./indexTX.js"></script>        
     </body>
 </html>
