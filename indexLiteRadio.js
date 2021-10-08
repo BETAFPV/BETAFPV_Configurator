@@ -168,6 +168,10 @@ HidConfig = {
     //用于首次连接HID设备时，判断是否有接收到遥控器HID数据，若只识别到HID设备但无数据接收则判断为连接失败
     Have_Receive_HID_Data:false,
 
+    
+    bind_phrase_switch:false,
+    bind_phrase_input:0,
+    uid_bytes:0,
 
 };
 //让遥控器停止发送配置信息
@@ -525,9 +529,14 @@ window.onload=function(){
                             document.getElementById("ExpressLRS_power_option_box").disabled = false;
                             document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
                             document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
+                            
+                            document.getElementById("externalRadioBinding").style.display="none";
+                            document.getElementById("externalRadioWifiUpdate").style.display="none";
 
 
-
+                         
+                            document.getElementById("content_EspressLRS_bindPhrase").style.display="block";
+                           
                              //接着请求遥控器通道配置信息
                             rquestBuffer[0] = 0x00;
                             rquestBuffer[1] = 0x11;
@@ -638,6 +647,8 @@ window.onload=function(){
                                 document.getElementById("ExpressLRS_power_option_box").disabled = false;
                                 document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
                                 document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
+
+                                document.getElementById("content_EspressLRS_btn").style.display="block";
 
                             }else{
                             }

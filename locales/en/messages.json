@@ -6387,5 +6387,17 @@
     },
     "literadio_firmwareVersion":{
         "message":"Firmware version:"
+    },
+    "bindPhraseprompttext":{
+        "message":"Go to Betaflight CLI and enter the following commands."
+    },
+    "Bind_phrase_setup":{
+        "message":"Enable Bind phrase"
+    },
+    "input_your_custom_binding_phrase_here":{
+        "message":"input your custom binding phrase here"
+    },
+    "bind_phrase_must_be_more_then_6_characters":{
+        "message":"custom binding phrase must be longer than 6 characters"
     }
 }

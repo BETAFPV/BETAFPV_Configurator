@@ -5987,5 +5987,17 @@
     },
     "literadio_firmwareVersion":{
         "message":"软件版本:"
+    },
+    "bindPhraseprompttext":{
+        "message":"请将飞控在Betaflight CLI 中输入以下命令。"
+    },
+    "Bind_phrase_setup":{
+        "message":"使用绑定短语"
+    },
+    "input_your_custom_binding_phrase_here":{
+        "message":"请输入自定义绑定短语"
+    },
+    "bind_phrase_must_be_more_then_6_characters":{
+        "message":"绑定短语不能少于6个字母或数字"
     }
 }

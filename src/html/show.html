@@ -181,14 +181,35 @@
 
                             <tr>
                                 <td>
-                                    <div class="content_EspressLRS_btn">
+                                    <div id = "content_EspressLRS_btn"class="content_EspressLRS_btn">
                                         <div class="btn bind_btn">
-                                            <a class="binding" href="#" i18n="RadioSetupEnterBinding">Enter Binding</a>
+                                            <a id = "externalRadioBinding"class="binding" href="#" i18n="RadioSetupEnterBinding"  >Enter Binding</a>
                                         </div>
                                         <div class="btn wifi_update_btn">
-                                            <a class="wifi_update" href="#" i18n = "RadioSetupEnterWIFIUpdate">Enter WIFI Update </a>
-                                        </div>            
+                                            <a id = "externalRadioWifiUpdate" class="wifi_update" href="#" i18n = "RadioSetupEnterWIFIUpdate">Enter WIFI Update </a>
+                                        </div>
                                     </div>
+                                    <div id = "content_EspressLRS_bindPhrase" class="content_EspressLRS_bindPhrase">
+                                        <div  class="bindPhraseSwitch" >
+                                            <input id = "bindPhraseSwitch" type="checkbox" style = " margin-top:8px;" > </input>
+                                            <label class="message-positive" i18n = "Bind_phrase_setup" >Bind phrase setup</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <div id = "bindPhrase" class="bindPhrase">
+                                    <input id = "customBindPhraseInput" style = " width:40%; text-align: left;"  class="bindPhraseInput" ></input>
+                                    <label id = "UidBytesDisplay" style = " width:60%; text-align: left;" i18n = "input_your_custom_binding_phrase_here" >input your custom binding phrase here</label>
+                                </div>
+                                 <div  id = "set_expresslrs_uid" class="set_expresslrs_uid" >
+                                    <label i18n = "bindPhraseprompttext" ></label>
+                                    <br />
+                                    <label id = "command_set_expresslrs_uid">set expresslrs_uid = 1,2,3,4,5,6</label>
+                                    <br />
+                                    <label >save</label>
+                                </div>
                                 </td>
                             </tr>
 

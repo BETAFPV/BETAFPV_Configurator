@@ -7,7 +7,6 @@
     "package-win": "electron-packager . BETAFPV_Configurator --platform=win32 --arch=x64  --out=./Windows --app-version=0.0.2 --overwrite --icon=./BETAFPV_ICO.ico",
     "package-linux": "electron-packager . BETAFPV_Configurator --platform=linux  --arch=x64 --out=./Linux   --app-version=0.0.0 --overwrite -icon=./BETAFPV_ICO.ico",
     "package-mac": "electron-packager . BETAFPV_Configurator --platform=darwin  --arch=x64 --out=./Mac   --app-version=0.0.0 --overwrite -icon=./BETAFPV_ICO.ico"
-    
   },
   "window": {
     "icon": "images/logo/BETAFPV_logo_blue.png",
@@ -19,11 +18,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "blueimp-md5": "^2.19.0",
+    "crypto-js": "^4.1.1",
     "i18next": "^19.0.0",
     "i18next-xhr-backend": "^3.2.2",
     "jquery": "^3.6.0",
     "jsonfile": "^6.1.0",
     "jspack": "^0.0.4",
+    "md5": "^2.3.0",
     "node-hid": "^2.1.1",
     "serialport": "^9.2.0",
     "switchery-latest": "^0.8.2",

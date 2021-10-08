@@ -75,6 +75,7 @@
 .tab-show .options label input {
     float: left;
     margin-top: 2px;
+    
 }
 
 .tab-show .active {
@@ -392,7 +393,7 @@
 }
 
 .tab-show .tunings table input {
-    width: 20px;
+    width: 25px;
     border: 1px solid var(--subtleAccent);
     border-radius: 3px;
     height: 18px;
@@ -949,6 +950,7 @@
     padding: 10px 0;
     overflow: hidden;
     border-top: 1px solid var(--subtleAccent);
+    display: none;
 }
 
 .content_EspressLRS_btn .btn a {
@@ -964,7 +966,7 @@
     font-weight: bold;
     font-size: 12px;
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
-    display: block;
+    
     cursor: pointer;
     transition: all ease 0.2s;
     padding: 0 9px;
@@ -994,6 +996,136 @@
 }
 
 
+
+.content_EspressLRS_bindPhrase {
+    display: none;
+    width: 100%;
+    height: 25px;
+    background-color: #393b3a;
+    box-shadow: rgba(0, 0, 0, 0.10) 0 -3px 8px;
+    padding: 10px 0;
+    overflow: hidden;
+    border-top: 1px solid var(--subtleAccent);
+}
+.content_EspressLRS_bindPhrase .bindPhraseSwitch{
+   
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 2px;
+    height: 35px;
+    /* background-color: var(--accent); */
+    border-radius: 3px;
+    /* border: 1px solid #dba718; */
+    color: rgb(253, 249, 249);
+    float: left;
+    font-weight: bold;
+    font-size: 15px;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    transition: all ease 0.2s;
+    line-height: 28px;
+    user-select: none;
+}
+.content_EspressLRS_bindPhrase .label {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 8px;
+    /* background-color: var(--accent); */
+    border-radius: 3px;
+    /* border: 1px solid #dba718; */
+    color: #000;
+    float: left;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    transition: all ease 0.2s;
+    line-height: 28px;
+    user-select: none;
+}
+.content_EspressLRS_bindPhrase .bindPhrase input.bindPhraseInput{
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-right: 8px;
+    width: 40%;
+    height: 25px;
+    /* background-color: var(--accent); */
+    border-radius: 3px;
+    border: 1px solid #dba718;
+    color: #000;
+    float: left;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    transition: all ease 0.2s;
+    
+    line-height: 28px;
+    user-select: none;
+}
+
+.content_EspressLRS_bindPhrase .btn a {
+    /*  common styles for content toolbar buttons */
+    width: 20%;
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-right: 20px;
+    background-color: var(--accent);
+    border-radius: 3px;
+    border: 1px solid #dba718;
+    color: #000;
+    float: left;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+
+}
+
+.content_EspressLRS_bindPhrase .btn a:hover {
+    background-color: var(--hoverButton-background);
+    transition: all ease 0.2s;
+}
+
+.content_EspressLRS_bindPhrase .btn a:active {
+    background-color: var(--accent);
+    transition: all ease 0.0s;
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.35);
+}
+
+.content_EspressLRS_bindPhrase .btn a.disabled {
+    cursor: default;
+    color: #fff;
+    background-color: #AFAFAF;
+    border: 1px solid #AFAFAF;
+    pointer-events: none;
+    text-shadow: none;
+    opacity: 0.5;
+}
+
+.bindPhrase {
+    display: none;
+    width: 100%;
+    height: 25px;
+    background-color: #393b3a;
+    box-shadow: rgba(0, 0, 0, 0.10) 0 -3px 8px;
+    padding: 10px 0;
+    overflow: hidden;
+    border-top: 1px solid var(--subtleAccent);
+}
+
+.set_expresslrs_uid{
+    display: none;
+    width: 100%;
+    height: auto;
+    background-color: #3e4242;
+    box-shadow: rgba(0, 0, 0, 0.10) 0 -3px 8px;
+    padding: 10px 0;
+    overflow: hidden;
+    border-top: 1px solid var(--subtleAccent);
+}
+.set_expresslrs_uid label{
+    margin-left: 5px;
+}
 
 .switch {
     margin-top: 4px;
