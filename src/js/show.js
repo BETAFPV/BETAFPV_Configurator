@@ -213,7 +213,7 @@ show.refreshUI = function()
         show.ch7_offset.val(HidConfig.ch7_offset_display);
         show.ch8_offset.val(HidConfig.ch8_offset_display);
 
-        if(HidConfig.firmware_comparison<=0||HidConfig.firmware_comparison ==0xff){
+        if(HidConfig.firmware_comparison<=0||HidConfig.firmware_comparison ==0xff){//遥控器版本高于上位机版本（功能兼容）
             document.getElementById('bindPhraseSwitch').disabled = false;
             ConfigStorage.get('USE_BIND_PHRASE', function (data) {
             if(data.USE_BIND_PHRASE==undefined)
@@ -231,6 +231,17 @@ show.refreshUI = function()
                 HidConfig.uid_bytes = uidBytesFromText(show.bind_phrase_input.val());
                 
                 });
+                HidConfig.uid_bytes = uidBytesFromText(show.bind_phrase_input.val());
+                if(show.bind_phrase_input.val().length>=6){
+
+                    show.uid_bytes.text("UID Bytes:"+HidConfig.uid_bytes);
+                    document.getElementById("set_expresslrs_uid").style.display="block";
+                    show.command_set_expresslrs_uid.val("set"+" "+"expresslrs_uid"+ " "+"="+" "+HidConfig.uid_bytes);
+                    ConfigStorage.set({'BIND_PHRASE': $('#customBindPhraseInput').val()});
+                }else{ 
+                    show.uid_bytes.text(i18n.getMessage('bind_phrase_must_be_more_then_6_characters'));
+                    document.getElementById("set_expresslrs_uid").style.display="none";
+                }
             }else{
             document.getElementById("set_expresslrs_uid").style.display="none";
             document.getElementById("bindPhrase").style.display="none";
@@ -636,6 +647,17 @@ show.initialize = function (callback) {
                 HidConfig.uid_bytes = uidBytesFromText(show.bind_phrase_input.val());
                 
                 });
+                HidConfig.uid_bytes = uidBytesFromText(show.bind_phrase_input.val());
+                if(show.bind_phrase_input.val().length>=6){
+
+                    show.uid_bytes.text("UID Bytes:"+HidConfig.uid_bytes);
+                    document.getElementById("set_expresslrs_uid").style.display="block";
+                    show.command_set_expresslrs_uid.val("set"+" "+"expresslrs_uid"+ " "+"="+" "+HidConfig.uid_bytes);
+                    ConfigStorage.set({'BIND_PHRASE': $('#customBindPhraseInput').val()});
+                }else{ 
+                    show.uid_bytes.text(i18n.getMessage('bind_phrase_must_be_more_then_6_characters'));
+                    document.getElementById("set_expresslrs_uid").style.display="none";
+                }
             }else{
                 ConfigStorage.set({'USE_BIND_PHRASE': HidConfig.bind_phrase_switch});
                 document.getElementById("set_expresslrs_uid").style.display="none";

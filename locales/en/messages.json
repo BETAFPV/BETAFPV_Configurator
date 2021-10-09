@@ -6434,7 +6434,7 @@
         "message":"Firmware version:"
     },
     "bindPhraseprompttext":{
-        "message":"Go to Betaflight CLI and enter the following commands."
+        "message":"If use spi ELRS Receiver,Go to Betaflight CLI and enter the following commands."
     },
     "Bind_phrase_setup":{
         "message":"Enable Bind phrase"

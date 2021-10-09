@@ -6031,10 +6031,10 @@
         "message":"硬件版本:"
     },
     "literadio_firmwareVersion":{
-        "message":"软件版本:"
+        "message":"固件版本:"
     },
     "bindPhraseprompttext":{
-        "message":"请将飞控在Betaflight CLI 中输入以下命令。"
+        "message":"如果使用spi ELRS接收机，需要将飞控在Betaflight CLI 中输入以下命令。"
     },
     "Bind_phrase_setup":{
         "message":"使用绑定密语"
