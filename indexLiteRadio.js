@@ -178,7 +178,44 @@ HidConfig = {
     bind_phrase_input:0,
     uid_bytes:0,
 
+    firmware_comparison:0,
+
 };
+HidConfig.compareFirmwareVersion = function(){
+    HidConfig.firmware_comparison  = (liteRadio_configurator_major_version*100+liteRadio_configurator_minor_version*10+liteRadio_configurator_pitch_version) - 
+                    (HidConfig.firmware_major_version*100+HidConfig.firmware_minor_version*10+HidConfig.firmware_pitch_version);
+   
+   if(HidConfig.firmware_major_version!==0||HidConfig.firmware_minor_version||HidConfig.firmware_pitch_version){
+    if(HidConfig.firmware_comparison<0){
+         //alert("You need to use a new version of configurator");
+        const dialogVersionNotMatched = $('.dialogVersionNotMatched')[0];
+        let labeText = i18n.getMessage("upgrade_version_of_configurator");
+        $('label[id="VersionNotMatchedDialogLabel"]').text(labeText);
+        dialogVersionNotMatched.showModal();
+        $('.VersionNotMatched-confirmbtn').click(function() {
+            dialogVersionNotMatched.close();
+        });
+
+    }else if(HidConfig.firmware_comparison>0){
+         //alert("You need to upgrade the firmware of your liteRadio");
+        const dialogVersionNotMatched = $('.dialogVersionNotMatched')[0];
+        let labeText = i18n.getMessage("upgrade_the_firmware_of_liteRadio");
+        $('label[id="VersionNotMatchedDialogLabel"]').text(labeText);
+        dialogVersionNotMatched.showModal();
+        $('.VersionNotMatched-confirmbtn').click(function() {
+            dialogVersionNotMatched.close();
+        });
+    }else{
+        
+    }
+   }else{
+        HidConfig.firmware_comparison = 0xff;
+       console.log("The version number could not be obtained");
+   }
+
+    
+}
+
 //让遥控器停止发送配置信息
 function HIDStopSendingConfig(){
     let sendBuffer = new Buffer.alloc(64);
@@ -404,10 +441,14 @@ window.onload=function(){
                                     HIDStopSendingConfig();
                                     HidConfig.HID_Connect_State = HidConnectStatus.connected;
                                     $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
-                                    ch_receive_step = 0;
+                                    if(ch_receive_step==7){
+                                        HidConfig.compareFirmwareVersion();
+                                        ch_receive_step = 0;
+                                    }
+                                    show.refreshUI();
                                     break;
                             }
-                            show.refreshUI();
+                            
                         }
                         
                     }

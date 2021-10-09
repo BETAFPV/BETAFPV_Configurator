@@ -6012,6 +6012,15 @@
     "ConfirmfactoryReset":{
         "message":"确认"
     },
+    "DialogTitle":{
+        "message":"提示"
+    },
+    "VersionNotMatchedDialogLabel":{
+        "message":"VersionNotMatchedDialogLabel"
+    },
+    "Confirm":{
+        "message":"确认"
+    },
     "literadio_type":{
         "message":"遥控器型号:"
     },
@@ -6035,5 +6044,11 @@
     },
     "bind_phrase_must_be_more_then_6_characters":{
         "message":"绑定密语不能少于6个字母或数字"
+    },
+    "upgrade_the_firmware_of_liteRadio":{
+        "message":"您需要升级遥控器固件以确保功能正常使用"
+    },
+    "upgrade_version_of_configurator":{
+        "message":"您需要使用更高版本的上位机以确保功能正常使用"
     }
 }

@@ -399,7 +399,7 @@
     height: 18px;
     margin: 4px;
     line-height: 22px;
-    text-align: right;
+    text-align: left;
     box-sizing: border-box;
 }
 
@@ -1125,6 +1125,11 @@
 }
 .set_expresslrs_uid label{
     margin-left: 5px;
+    
+}
+.set_expresslrs_uid input{
+    margin-left: 5px;
+    width: 100%;
 }
 
 .switch {

@@ -6412,6 +6412,15 @@
     "ConfirmfactoryReset":{
         "message":"OK"
     },
+    "DialogTitle":{
+        "message":"Prompt"
+    },
+    "VersionNotMatchedDialogLabel":{
+        "message":"通道配置已经恢复为出厂设置状态，点击‘保存并重启’遥控器将保存此配置。"
+    },
+    "Confirm":{
+        "message":"OK"
+    },
     "literadio_type":{
         "message":"Unit type:"
     },
@@ -6435,5 +6444,11 @@
     },
     "bind_phrase_must_be_more_then_6_characters":{
         "message":"Custom binding phrase must be longer than 6 characters"
+    },
+    "upgrade_the_firmware_of_liteRadio":{
+        "message":"You need to upgrade the firmware of your liteRadio"
+    },
+    "upgrade_version_of_configurator":{
+        "message":"You need to use a new version of configurator"
     }
 }

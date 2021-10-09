@@ -165,7 +165,7 @@ show.getElementIndex = function(){
     show.bind_phrase_input = $('input[id="customBindPhraseInput"]');
     show.uid_bytes = $('label[id="UidBytesDisplay"]');
 
-    show.command_set_expresslrs_uid = $('label[id="command_set_expresslrs_uid"]');
+    show.command_set_expresslrs_uid = $('input[id="command_set_expresslrs_uid"]');
 
 }
 
@@ -213,27 +213,35 @@ show.refreshUI = function()
         show.ch7_offset.val(HidConfig.ch7_offset_display);
         show.ch8_offset.val(HidConfig.ch8_offset_display);
 
-        
-        ConfigStorage.get('USE_BIND_PHRASE', function (data) {
-        if(data.USE_BIND_PHRASE==undefined)
-            data.USE_BIND_PHRASE = false;
-        HidConfig.bind_phrase_switch = data.USE_BIND_PHRASE;
-        });
-
-        document.getElementById('bindPhraseSwitch').checked = HidConfig.bind_phrase_switch;
-        if(HidConfig.bind_phrase_switch){
-            document.getElementById("bindPhrase").style.display="block";
-            ConfigStorage.get('BIND_PHRASE', function (data) {
-            if(data.BIND_PHRASE==undefined)
-                data.BIND_PHRASE = 'custom bind phrase'
-            show.bind_phrase_input.val(data.BIND_PHRASE);
-            HidConfig.uid_bytes = uidBytesFromText(show.bind_phrase_input.val());
-            
+        if(HidConfig.firmware_comparison<=0||HidConfig.firmware_comparison ==0xff){
+            document.getElementById('bindPhraseSwitch').disabled = false;
+            ConfigStorage.get('USE_BIND_PHRASE', function (data) {
+            if(data.USE_BIND_PHRASE==undefined)
+                data.USE_BIND_PHRASE = false;
+            HidConfig.bind_phrase_switch = data.USE_BIND_PHRASE;
             });
+    
+            document.getElementById('bindPhraseSwitch').checked = HidConfig.bind_phrase_switch;
+            if(HidConfig.bind_phrase_switch){
+                document.getElementById("bindPhrase").style.display="block";
+                ConfigStorage.get('BIND_PHRASE', function (data) {
+                if(data.BIND_PHRASE==undefined)
+                    data.BIND_PHRASE = 'custom bind phrase'
+                show.bind_phrase_input.val(data.BIND_PHRASE);
+                HidConfig.uid_bytes = uidBytesFromText(show.bind_phrase_input.val());
+                
+                });
+            }else{
+            document.getElementById("set_expresslrs_uid").style.display="none";
+            document.getElementById("bindPhrase").style.display="none";
+            }
         }else{
+            document.getElementById('bindPhraseSwitch').disabled = true;
             document.getElementById("set_expresslrs_uid").style.display="none";
             document.getElementById("bindPhrase").style.display="none";
         }
+ 
+        
         
 
     }
@@ -640,7 +648,7 @@ show.initialize = function (callback) {
 
                 show.uid_bytes.text("UID Bytes:"+HidConfig.uid_bytes);
                 document.getElementById("set_expresslrs_uid").style.display="block";
-                show.command_set_expresslrs_uid.text("set"+" "+"expresslrs_uid"+ " "+"="+" "+HidConfig.uid_bytes);
+                show.command_set_expresslrs_uid.val("set"+" "+"expresslrs_uid"+ " "+"="+" "+HidConfig.uid_bytes);
                 ConfigStorage.set({'BIND_PHRASE': $('#customBindPhraseInput').val()});
             }else{ 
                 show.uid_bytes.text(i18n.getMessage('bind_phrase_must_be_more_then_6_characters'));
@@ -942,6 +950,7 @@ show.initialize = function (callback) {
                 dialogfactoryReset.close();
             });
 
+            
             // alert(i18n.getMessage('RadioSetupfactoryResetAlert'));
   
             
