@@ -82,6 +82,8 @@ const show = {
 
 };
 
+
+
 function getBytesFromWordArray(wordArray) {
     const result = [];
     result.push(wordArray.words[0] >>> 24);
@@ -164,6 +166,7 @@ show.getElementIndex = function(){
     show.uid_bytes = $('label[id="UidBytesDisplay"]');
 
     show.command_set_expresslrs_uid = $('label[id="command_set_expresslrs_uid"]');
+
 }
 
 show.refreshUI = function()
@@ -209,6 +212,29 @@ show.refreshUI = function()
         show.ch6_offset.val(HidConfig.ch6_offset_display);
         show.ch7_offset.val(HidConfig.ch7_offset_display);
         show.ch8_offset.val(HidConfig.ch8_offset_display);
+
+        
+        ConfigStorage.get('USE_BIND_PHRASE', function (data) {
+        if(data.USE_BIND_PHRASE==undefined)
+            data.USE_BIND_PHRASE = false;
+        HidConfig.bind_phrase_switch = data.USE_BIND_PHRASE;
+        });
+
+        document.getElementById('bindPhraseSwitch').checked = HidConfig.bind_phrase_switch;
+        if(HidConfig.bind_phrase_switch){
+            document.getElementById("bindPhrase").style.display="block";
+            ConfigStorage.get('BIND_PHRASE', function (data) {
+            if(data.BIND_PHRASE==undefined)
+                data.BIND_PHRASE = 'custom bind phrase'
+            show.bind_phrase_input.val(data.BIND_PHRASE);
+            HidConfig.uid_bytes = uidBytesFromText(show.bind_phrase_input.val());
+            
+            });
+        }else{
+            document.getElementById("set_expresslrs_uid").style.display="none";
+            document.getElementById("bindPhrase").style.display="none";
+        }
+        
 
     }
    
@@ -593,9 +619,9 @@ show.initialize = function (callback) {
         show.bind_phrase_switch.change(function () {
             HidConfig.bind_phrase_switch= $(this).is(':checked')?true:false;
             if(HidConfig.bind_phrase_switch){
+                ConfigStorage.set({'USE_BIND_PHRASE': HidConfig.bind_phrase_switch});
                 document.getElementById("bindPhrase").style.display="block";
                 ConfigStorage.get('BIND_PHRASE', function (data) {
-                console.log(data.BIND_PHRASE);
                 if(data.BIND_PHRASE==undefined)
                     data.BIND_PHRASE = 'custom bind phrase'
                 show.bind_phrase_input.val(data.BIND_PHRASE);
@@ -603,14 +629,13 @@ show.initialize = function (callback) {
                 
                 });
             }else{
+                ConfigStorage.set({'USE_BIND_PHRASE': HidConfig.bind_phrase_switch});
                 document.getElementById("set_expresslrs_uid").style.display="none";
                 document.getElementById("bindPhrase").style.display="none";
             }
         });
         show.bind_phrase_input.change(function () {
             HidConfig.uid_bytes = uidBytesFromText(show.bind_phrase_input.val());
-            console.log(HidConfig.uid_bytes);
-            console.log(show.bind_phrase_input.val().length)
             if(show.bind_phrase_input.val().length>=6){
 
                 show.uid_bytes.text("UID Bytes:"+HidConfig.uid_bytes);
@@ -802,7 +827,12 @@ show.initialize = function (callback) {
         $('a.save').click(function () {
             console.log("save click");
             if(HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length<6){
-                alert("save failed!  custom binding phrase must be longer than 6 characters");
+                // alert("save failed!  custom binding phrase must be longer than 6 characters");
+                const dialogConfirmTheLengthOfBindPhrase = $('.dialogConfirmTheLengthOfBindPhrase')[0];
+                dialogConfirmTheLengthOfBindPhrase.showModal();
+                $('.dialogConfirmTheLengthOfBindPhrase-confirmbtn').click(function() {
+                    dialogConfirmTheLengthOfBindPhrase.close();
+                });
             }else{
                 if(HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length>=6){
                     let buffer = new Buffer.alloc(64);
@@ -845,65 +875,16 @@ show.initialize = function (callback) {
                     bufName[4] = 0x02;
                     hidDevice.write(bufName);
                 }else{
-                    alert("save failed!  you need to select at least one protocol");
+                    // alert("save failed!  you need to select at least one protocol");
+                    const dialogSelectAtLeastOneProtocol = $('.dialogSelectAtLeastOneProtocol')[0];
+                    dialogSelectAtLeastOneProtocol.showModal();
+                    $('.dialogSelectAtLeastOneProtocol-confirmbtn').click(function() {
+                        dialogSelectAtLeastOneProtocol.close();
+                    });
                 }
 
             }
             
-            // if(HidConfig.Internal_radio_module_switch==0&&HidConfig.Internal_radio_module_switch==0){
-            //     alert("save failed!  you need to select at least one protocol");
-            // }else{
-            //     if(HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length>6){
-            //         let buffer = new Buffer.alloc(64);
-            //         buffer[0] = 0x00;
-            //         buffer[1] = 0x22;
-            //         buffer[2] = HidConfig.uid_bytes[0];
-            //         buffer[3] = HidConfig.uid_bytes[1];
-            //         buffer[4] = HidConfig.uid_bytes[2];
-            //         buffer[5] = HidConfig.uid_bytes[3];
-            //         buffer[6] = HidConfig.uid_bytes[4];
-            //         buffer[7] = HidConfig.uid_bytes[5];
-            //         hidDevice.write(buffer);
-            //     }
-
-            //     var bufName = new Buffer.alloc(64);
-            //     if(HidConfig.Internal_radio_module_switch){
-            //         bufName[0] = 0x00;
-            //         bufName[1] = 0x05;
-            //         bufName[2] = 0x00;
-            //         bufName[3] = HidConfig.rocker_mode;
-            //         bufName[4] = 0x02;
-            //         hidDevice.write(bufName);
-            //     }else if(HidConfig.External_radio_module_switch){
-            //         bufName[0] = 0x00;
-            //         bufName[1] = 0x05;
-            //         bufName[2] = 0x01;
-            //         bufName[3] = HidConfig.rocker_mode;
-            //         bufName[4] = 0x02;
-            //         hidDevice.write(bufName);
-            //     }
-
-            // }
-           
-            // var bufName = new Buffer.alloc(64);
-            // if(HidConfig.Internal_radio_module_switch){
-            //     bufName[0] = 0x00;
-            //     bufName[1] = 0x05;
-            //     bufName[2] = 0x00;
-            //     bufName[3] = HidConfig.rocker_mode;
-            //     bufName[4] = 0x02;
-            //     hidDevice.write(bufName);
-            // }else if(HidConfig.External_radio_module_switch){
-            //     bufName[0] = 0x00;
-            //     bufName[1] = 0x05;
-            //     bufName[2] = 0x01;
-            //     bufName[3] = HidConfig.rocker_mode;
-            //     bufName[4] = 0x02;
-            //     hidDevice.write(bufName);
-            // }else
-            // {
-            //     alert("save failed!  you need to select at least one protocol");
-            // }
             
         });
 
@@ -955,8 +936,13 @@ show.initialize = function (callback) {
             send_ch8_config();
             
             show.refreshUI();
+            const dialogfactoryReset = $('.dialogfactoryReset')[0];
+            dialogfactoryReset.showModal();
+            $('.dialogfactoryReset-confirmbtn').click(function() {
+                dialogfactoryReset.close();
+            });
 
-            alert(i18n.getMessage('RadioSetupfactoryResetAlert'));
+            // alert(i18n.getMessage('RadioSetupfactoryResetAlert'));
   
             
         }

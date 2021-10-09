@@ -5976,6 +5976,42 @@
     "CloseInternalRadioConfirm":{
         "message":"确认"
     },
+    "ConfirmTheLengthOfBindPhraseDialogTitle":{
+        "message":"提示"
+    },
+    "ConfirmTheLengthOfBindPhraseDialogLabel":{
+        "message":"绑定密语的长度不能少于6个字母或数字。"
+    },
+    "ConfirmTheLengthOfBindPhrase":{
+        "message":"确认"
+    },
+    "HIDisDisconnectDialogTitle":{
+        "message":"提示"
+    },
+    "HIDisDisconnectDialogLabel":{
+        "message":"遥控器已断开连接。"
+    },
+    "HIDisDisconnect":{
+        "message":"确认"
+    },
+    "SelectAtLeastOneProtocolDialogTitle":{
+        "message":"提示"
+    },
+    "SelectAtLeastOneProtocolDialogLabel":{
+        "message":"您至少需要选择一种遥控射频协议。"
+    },
+    "ConfirmSelectAtLeastOneProtocol":{
+        "message":"确认"
+    },
+    "factoryResetDialogTitle":{
+        "message":"提示"
+    },
+    "factoryResetDialogLabel":{
+        "message":"通道配置已经恢复为出厂设置状态，点击‘保存并重启’遥控器将保存此配置。"
+    },
+    "ConfirmfactoryReset":{
+        "message":"确认"
+    },
     "literadio_type":{
         "message":"遥控器型号:"
     },
@@ -5992,12 +6028,12 @@
         "message":"请将飞控在Betaflight CLI 中输入以下命令。"
     },
     "Bind_phrase_setup":{
-        "message":"使用绑定短语"
+        "message":"使用绑定密语"
     },
     "input_your_custom_binding_phrase_here":{
         "message":"请输入自定义绑定短语"
     },
     "bind_phrase_must_be_more_then_6_characters":{
-        "message":"绑定短语不能少于6个字母或数字"
+        "message":"绑定密语不能少于6个字母或数字"
     }
 }

@@ -156,7 +156,8 @@
 }
 
 .tab-landing .regular-button:hover {
-    background-color: var(--hoverButton-background);
+    background-color: #ffcc3e;
+    transition: all ease 0.2s;
 }
 
 .tab-landing .regular-button.pushed {

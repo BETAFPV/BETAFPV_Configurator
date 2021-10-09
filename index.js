@@ -1,5 +1,9 @@
 const serialport = require('serialport')
 
+var flightcontrol_configurator_version ='v1.0.1';
+var flightcontrol_configurator_major_version =1;
+var flightcontrol_configurator_minor_version =0;
+var flightcontrol_configurator_pitch_version =1;
 let isFlasherTab=0;
 var lastPortCount = 0;
 
@@ -51,6 +55,7 @@ setTimeout(function loadLanguage() {
     }else if(i18n.Storage_language == "zh_CN"){
     document.getElementById("wechat_facebook_logo_src_switch").src = "./src/images/wechat_icon.png";
     }
+    
 }, 200);
 
   mavlinkSend = function(writedata){
@@ -64,6 +69,7 @@ setTimeout(function loadLanguage() {
 
 window.onload=function(){
     
+    $('label[id="flightcontrol_configurator_version"]').text(flightcontrol_configurator_version);
     $('div.connect_controls a.connect').click(function () {
         if (GUI.connect_lock != true) { 
             const thisElement = $(this);

@@ -6376,6 +6376,42 @@
     "CloseInternalRadioConfirm":{
         "message":"OK"
     },
+    "ConfirmTheLengthOfBindPhraseDialogTitle":{
+        "message":"Prompt"
+    },
+    "ConfirmTheLengthOfBindPhraseDialogLabel":{
+        "message":"Custom binding phrase must be longer than 6 characters."
+    },
+    "ConfirmTheLengthOfBindPhrase":{
+        "message":"OK"
+    },
+    "HIDisDisconnectDialogTitle":{
+        "message":"Prompt"
+    },
+    "HIDisDisconnectDialogLabel":{
+        "message":"HID is disconnect"
+    },
+    "HIDisDisconnect":{
+        "message":"OK"
+    },
+    "SelectAtLeastOneProtocolDialogTitle":{
+        "message":"Prompt"
+    },
+    "SelectAtLeastOneProtocolDialogLabel":{
+        "message":"You need to select at least one RADIO protocol."
+    },
+    "ConfirmSelectAtLeastOneProtocol":{
+        "message":"OK"
+    },
+    "factoryResetDialogTitle":{
+        "message":"Prompt"
+    },
+    "factoryResetDialogLabel":{
+        "message":"The channel configuration has been restored to factory Settings. Click 'Save and reboot' to save the configuration.  "
+    },
+    "ConfirmfactoryReset":{
+        "message":"OK"
+    },
     "literadio_type":{
         "message":"Unit type:"
     },
@@ -6398,6 +6434,6 @@
         "message":"input your custom binding phrase here"
     },
     "bind_phrase_must_be_more_then_6_characters":{
-        "message":"custom binding phrase must be longer than 6 characters"
+        "message":"Custom binding phrase must be longer than 6 characters"
     }
 }

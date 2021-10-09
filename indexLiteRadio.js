@@ -1,4 +1,8 @@
 const serialport = require('serialport')
+var liteRadio_configurator_version ="v1.0.1";
+var liteRadio_configurator_major_version =1;
+var liteRadio_configurator_minor_version =0;
+var liteRadio_configurator_pitch_version =1;
 var HID=require('node-hid')
 var lastPortCount = 0;
 var Command_ID = {
@@ -46,6 +50,7 @@ var HidConnectStatus = {
     disConnecting:0x02, //断开连接中
     disConnect:0x03,    //未连接
 }
+
 
 
 var VENDOR_ID = 1155;
@@ -246,7 +251,7 @@ setTimeout(function loadLanguage() {
 }, 200);
 window.onload=function(){
 
-    
+    $('label[id="liteRadio_configurator_version"]').text(liteRadio_configurator_version);
     $('div.open_hid_device a.connect').click(function () {
         if(HidConfig.HID_Connect_State == HidConnectStatus.disConnect){
             hidDevice = new HID.HID(VENDOR_ID,PRODUCT_ID);//创建一个HID对象
@@ -760,7 +765,12 @@ window.onload=function(){
                     hidDevice.close();
                     HidConfig.HID_Connect_State = HidConnectStatus.disConnect;
                     $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
-                    alert("HID Device Disconnected!");
+                    const dialogHIDisDisconnect = $('.dialogHIDisDisconnect')[0];
+                    dialogHIDisDisconnect.showModal();
+                    $('.HIDisDisconnect-confirmbtn').click(function() {
+                        dialogHIDisDisconnect.close();
+                    });
+                    // alert("HID Device Disconnected!");
                     $('#tabs ul.mode-connected').hide();
                     $('#tabs ul.mode-disconnected').show();
                     $('#tabs ul.mode-disconnected li a:first').click();
