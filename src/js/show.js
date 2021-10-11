@@ -222,7 +222,7 @@ show.refreshUI = function()
             });
     
             document.getElementById('bindPhraseSwitch').checked = HidConfig.bind_phrase_switch;
-            if(HidConfig.bind_phrase_switch){
+            if(HidConfig.bind_phrase_switch&&HidConfig.Internal_radio_module_switch==true){
                 document.getElementById("bindPhrase").style.display="block";
                 ConfigStorage.get('BIND_PHRASE', function (data) {
                 if(data.BIND_PHRASE==undefined)
@@ -856,7 +856,7 @@ show.initialize = function (callback) {
         });
         $('a.save').click(function () {
             console.log("save click");
-            if(HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length<6){
+            if(HidConfig.Internal_radio_module_switch==true&&HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length<6){
                 // alert("save failed!  custom binding phrase must be longer than 6 characters");
                 const dialogConfirmTheLengthOfBindPhrase = $('.dialogConfirmTheLengthOfBindPhrase')[0];
                 dialogConfirmTheLengthOfBindPhrase.showModal();
@@ -864,7 +864,7 @@ show.initialize = function (callback) {
                     dialogConfirmTheLengthOfBindPhrase.close();
                 });
             }else{
-                if(HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length>=6){
+                if(HidConfig.Internal_radio_module_switch==true&&HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length>=6){
                     let buffer = new Buffer.alloc(64);
                     buffer[0] = 0x00;
                     buffer[1] = 0x22;
