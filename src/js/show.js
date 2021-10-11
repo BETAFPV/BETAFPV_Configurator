@@ -856,13 +856,14 @@ show.initialize = function (callback) {
         });
         $('a.save').click(function () {
             console.log("save click");
-            if(HidConfig.Internal_radio_module_switch==true&&HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length<6){
+            if(HidConfig.External_radio_module_switch==false&&HidConfig.current_protocol==0&&HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length<6){
                 // alert("save failed!  custom binding phrase must be longer than 6 characters");
                 const dialogConfirmTheLengthOfBindPhrase = $('.dialogConfirmTheLengthOfBindPhrase')[0];
                 dialogConfirmTheLengthOfBindPhrase.showModal();
                 $('.dialogConfirmTheLengthOfBindPhrase-confirmbtn').click(function() {
                     dialogConfirmTheLengthOfBindPhrase.close();
                 });
+                console.log("send bind phrase");
             }else{
                 if(HidConfig.Internal_radio_module_switch==true&&HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length>=6){
                     let buffer = new Buffer.alloc(64);
