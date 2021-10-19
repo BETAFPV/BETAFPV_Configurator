@@ -1021,7 +1021,6 @@
     font-weight: bold;
     font-size: 15px;
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
-    cursor: pointer;
     transition: all ease 0.2s;
     line-height: 28px;
     user-select: none;

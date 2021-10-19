@@ -5,7 +5,6 @@ const path = require('path')
 var jsonFile = require('jsonfile')
 var jsonfileName = 'LiteRadio.json'
 
-
 const firmware_flasher_LiteRadio ={
     localFirmwareLoaded: false,
     selectedBoard: undefined,
@@ -16,7 +15,8 @@ const firmware_flasher_LiteRadio ={
     isConfigLocal: false, // Set to true if the user loads one locally
     developmentFirmwareLoaded: false, // Is the firmware to be flashed from the development branch?
     firmware_version:{},
-    target_board:0
+    target_board:0,
+   
 };
 
 firmware_flasher_LiteRadio.FLASH_MESSAGE_TYPES = {
@@ -42,7 +42,8 @@ let binSize=null;
 let packNum=1;
 let ack = null;
 let starting=null;
-
+var loadJsonFileFromGithubSuccessful = true;
+var loadFirmwareFromGithubSuccessful = true;
 firmware_flasher_LiteRadio.flashingMessage = function(message, type) {
     let self = this;
 
@@ -109,22 +110,27 @@ function addOptionValue2(id,value,text) {
 function readJsonFile(fileName){
     jsonFile.readFile(fileName, function(err, jsonData) {
         if (err) throw err;
+        console.log(jsonData.status);
+        if(jsonData.status!==404){
+            $('#boardTarget').empty();
+            addOptionValue2('boardTarget',1,"LiteRadio_2_SE");
+            addOptionValue2('boardTarget',2,"LiteRadio_2_SE_V2_SX1280");
+            addOptionValue2('boardTarget',3,"LiteRadio_2_SE_V2_CC2500");
+            addOptionValue2('boardTarget',4,"LiteRadio_3_SX1280");
+            addOptionValue2('boardTarget',5,"LiteRadio_3_CC2500");
 
-        $('#boardTarget').empty();
-        addOptionValue2('boardTarget',1,"LiteRadio_2_SE");
-        addOptionValue2('boardTarget',2,"LiteRadio_2_SE_V2_SX1280");
-        addOptionValue2('boardTarget',3,"LiteRadio_2_SE_V2_CC2500");
-        addOptionValue2('boardTarget',4,"LiteRadio_3_SX1280");
-        addOptionValue2('boardTarget',5,"LiteRadio_3_CC2500");
 
+            $('#boardVersion').empty();
+            for(let i=0;i<jsonData.LiteRadio_2_SE.length;i++){
+                addOptionValue2('boardVersion',i,jsonData.LiteRadio_2_SE[0].version);
+            }
+            firmware_flasher_LiteRadio.firmware_version = jsonData;
+        
+            console.log("----------------------------------"); 
+        }else{
 
-        $('#boardVersion').empty();
-        for(let i=0;i<jsonData.LiteRadio_2_SE.length;i++){
-            addOptionValue2('boardVersion',i,jsonData.LiteRadio_2_SE[0].version);
         }
-        firmware_flasher_LiteRadio.firmware_version = jsonData;
-      
-        console.log("----------------------------------"); 
+        
         // }
     });
 }
@@ -132,24 +138,82 @@ function readJsonFile(fileName){
 function loadRemoteJsonFile(){
     //https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/board.json
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v2.0.0/LiteRadio.json", true);
+    
     xhr.responseType = 'arraybuffer';
+    console.log(xhr.readyState);
     xhr.onload = function(e) {
         var array = new Uint8Array(xhr.response);
         var file_path = path.join(__dirname, "./LiteRadio.json");
 
         fs.writeFile(file_path, array, "utf8",(err)=>{
             if(err){
-                console.log("error");
+                alert("write  json file of LiteRadio firmware failed!");
             }else {
-                console.log("ok");
                 readJsonFile(file_path);
             }
         })
     };
-    xhr.send();
+    //1.优先访问github上的固件
+    xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v2.0.0/LiteRadio.json", true);
+    xhr.send(null);
+    
+   
+   xhr.onreadystatechange = function(){
+       console.log(xhr.readyState);
+       if(xhr.readyState==2){
+           console.log("The server is connected:"+xhr.status);
+       }else if(xhr.readyState==3){
+           console.log("Request was received :"+xhr.status);
+       }
 
-}
+        if (xhr.readyState == 4){
+            if(xhr.status == 200){//ok
+                //从github上加载固件成功
+                // alert("Request firmware successful: "+xhr.status);
+                loadJsonFileFromGithubSuccessful = true;
+            }
+            // else if(xhr.status == 400){
+            //     alert("Bad Request : "+xhr.status);
+            // }else if(xhr.status == 401){
+            //     alert("Request was Unauthonzed: "+xhr.status);
+            // }else if(xhr.status == 403){
+            //     alert("Request was Forbidden: "+xhr.status);
+            // }else if(xhr.status == 404){
+            //     alert("Request was Not Found: "+xhr.status);
+            // }else if(xhr.status == 500){
+            //     alert(" Internal Server Error: "+xhr.status);
+            // }else if(xhr.status == 503){
+            //     alert("Service Unavailable : "+xhr.status);
+            // }      
+            else{
+                console.log("Github cannot be accessed : "+xhr.status);
+                //2.github无法访问切换到gittee上访问
+                if(loadJsonFileFromGithubSuccessful == true){
+                    loadJsonFileFromGithubSuccessful = false;
+                    console.log("can't load json file from github");
+                }else{
+                    console.log("can't load json file from gitee");
+                }
+            } 
+        }
+    };
+
+    //3.超市无法连接github则从gitee上加载
+    setTimeout(() => {
+        if(loadJsonFileFromGithubSuccessful == false){
+            xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/856825/download/LiteRadio.json", true);
+            xhr.send(null);
+            console.log("get json file from gitee");
+        }    
+    }, 1000);
+
+    xhr.timeout = 3000; 
+    xhr.ontimeout = function(){
+        console.log("time out");
+    }
+
+
+};
 
 function CRC16_Check(puData)
 {
@@ -451,12 +515,17 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                     if (err) {
                         alert(err)
                     } else {
-                        self.enableFlashing(true);
+                        
                         binSize = binFile.length;
 
                         packLen = Math.round(binSize / 1024);
-
-                        firmware_flasher_LiteRadio.flashingMessage("Loaded Local Firmware : ( "+ binFile.length +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                        if(packLen>10){
+                            self.enableFlashing(true);
+                            firmware_flasher_LiteRadio.flashingMessage("Load Firmware Sucessfuly! Firmware Size: ( "+ binFile.length +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                        }else{
+                            self.enableFlashing(false);
+                            firmware_flasher_LiteRadio.flashingMessage("Load Firmware Failure!");
+                        }
                     }
                 });
     
@@ -568,19 +637,80 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                                 if (err) {
                                     alert(err)
                                 } else {
-                                    self.enableFlashing(true);
+                                    
                                     binSize = binFile.length;
             
                                     packLen = Math.round(binSize / 1024);
-            
-                                    firmware_flasher_LiteRadio.flashingMessage("Loaded Local Firmware : ( "+ binFile.length +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                                    console.log("packLen:"+packLen);
+                                    if(packLen>10){
+                                        self.enableFlashing(true);
+                                        firmware_flasher_LiteRadio.flashingMessage("Load Firmware Sucessfuly! Firmware Size: ( "+ binFile.length +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                                    }else{
+                                        self.enableFlashing(false);
+                                        firmware_flasher_LiteRadio.flashingMessage("Load Firmware Failure!");
+                                    }
+                                    
                                 }
                             });
 
                         }
                     })
                 };
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState==2){
+                        console.log("The server is connected:"+xhr.status);
+                    }else if(xhr.readyState==3){
+                        console.log("Request was received :"+xhr.status);
+                    }
+             
+                     if (xhr.readyState == 4){
+                         if(xhr.status == 200){//ok
+                            loadFirmwareFromGithubSuccessful = true;
+                         }
+                         else{
+                             if(loadFirmwareFromGithubSuccessful == true){
+                                loadFirmwareFromGithubSuccessful = false;
+                                console.log("can't load firmware from github");
+                             }else{
+                                console.log("can't load firmware from gitee");
+                             }
+                             
+                         } 
+                     }
+                 };
                 xhr.send();
+                setTimeout(() => {
+                    if(loadFirmwareFromGithubSuccessful == false){
+                        let firmware_name = targetBoardSelected + "_" + targetVersionSelected+ ".bin";
+                        switch(firmware_name){
+                            case "LiteRadio_2_SE_1.0.0.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/856826/download/LiteRadio_2_SE_1.0.0.bin", true);
+                                xhr.send(null);
+                                break;
+                            case "LiteRadio_2_SE_V2_SX1280_1.0.0.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/856827/download/LiteRadio_2_SE_V2_SX1280_1.0.0.bin", true);
+                                xhr.send(null);
+                                break;
+                            case "LiteRadio_2_SE_V2_SX1280_1.0.1.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/856830/download/LiteRadio_2_SE_V2_SX1280_1.0.1.bin", true);
+                                xhr.send(null);
+                                break;
+                            case "LiteRadio_3_SX1280_1.0.0.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/856828/download/LiteRadio_3_SX1280_1.0.0.bin", true);
+                                xhr.send(null);
+                                break;
+                            case "LiteRadio_3_SX1280_1.0.1.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/856829/download/LiteRadio_3_SX1280_1.0.1.bin", true);
+                                xhr.send(null);
+                                break;
+                            default:
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/856701/download/null.bin", true);
+                                xhr.send(null);
+                                break;    
+                        }
+                       
+                    }
+                }, 1000);
             }
         });
 

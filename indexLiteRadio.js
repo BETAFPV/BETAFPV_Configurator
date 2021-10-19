@@ -1,8 +1,8 @@
 const serialport = require('serialport')
-var liteRadio_configurator_version ="v1.0.1";
-var liteRadio_configurator_major_version =1;
-var liteRadio_configurator_minor_version =0;
-var liteRadio_configurator_pitch_version =1;
+var liteRadio_configurator_version ="v1.0.2";
+var liteRadio_major_version_match = 1;
+var liteRadio_minor_version_match =0;
+var liteRadio_pitch_version_match =1;
 var HID=require('node-hid')
 var lastPortCount = 0;
 var Command_ID = {
@@ -182,7 +182,7 @@ HidConfig = {
 
 };
 HidConfig.compareFirmwareVersion = function(){
-    HidConfig.firmware_comparison  = (liteRadio_configurator_major_version*100+liteRadio_configurator_minor_version*10+liteRadio_configurator_pitch_version) - 
+    HidConfig.firmware_comparison  = (liteRadio_major_version_match*100+liteRadio_minor_version_match*10+liteRadio_pitch_version_match) - 
                     (HidConfig.firmware_major_version*100+HidConfig.firmware_minor_version*10+HidConfig.firmware_pitch_version);
    
    if(HidConfig.firmware_major_version!==0||HidConfig.firmware_minor_version||HidConfig.firmware_pitch_version){
