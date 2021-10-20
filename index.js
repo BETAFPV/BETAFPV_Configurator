@@ -56,7 +56,7 @@ setTimeout(function loadLanguage() {
     document.getElementById("wechat_facebook_logo_src_switch").src = "./src/images/wechat_icon.png";
     }
     
-}, 200);
+}, 500);
 
   mavlinkSend = function(writedata){
     port.write(writedata, function (err) {

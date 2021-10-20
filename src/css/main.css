@@ -239,8 +239,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #portsinput {
-    width: 180px;
-    margin-right: 15px;
+    width: auto;
 }
 
 #portsinput .dropdown {
@@ -262,7 +261,7 @@ input[type="number"]::-webkit-inner-spin-button {
 #baudselect {
     width: 80px;
     float: right;
-    margin-right: 2px;
+    margin-left: 20px;
 }
 
 #port-picker .auto_connect, .gray {

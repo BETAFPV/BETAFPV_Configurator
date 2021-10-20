@@ -286,7 +286,7 @@ setTimeout(function loadLanguage() {
     }else if(i18n.Storage_language == "zh_CN"){
     document.getElementById("wechat_facebook_logo_src_switch").src = "./src/images/wechat_icon.png";
     }
-}, 200);
+}, 500);
 window.onload=function(){
 
     $('label[id="liteRadio_configurator_version"]').text(liteRadio_configurator_version);
