@@ -1,3 +1,4 @@
+const {dialog}=require('electron').remote;
 const os = require('os')
 const path = require('path')
 
@@ -270,6 +271,8 @@ firmware_flasher.initialize = function (callback) {
     const self = this;
     self.enableFlashing(false);
 
+
+
     $('#content').load("./src/html/firmware_flasher.html", function () {
         i18n.localizePage();
 
@@ -308,19 +311,53 @@ firmware_flasher.initialize = function (callback) {
      
         $('a.flash_firmware').click(function () {
             if (!$(this).hasClass('disabled')) {
-                packNum = 0;
-                var buf = Buffer(1);
-                buf[0] = 0x01;
 
-                port.write(buf, (err) =>{
-                    if (err) return console.log('write Error: ', err.message);
-                });
+                let targetSelected = ($('#TargetSelect option:selected').text());
 
-                $("a.load_file").addClass('disabled');
+                const options = {
+                    type: 'question',
+                    buttons: [ 'Yes, please', 'No, thanks','Cancel'],
+                    defaultId: 2,
+                    title: 'Question',
+                    message: 'Do you want to update ' +  targetSelected + '?',
+                    detail: 'You need to make sure you select the right target.',
+                    noLink:true,
+                };
                 
-                firmware_flasher.flashProgress(0);
-                self.enableFlashing(false);
-                starting = 1;
+                 var resNum = dialog.showMessageBoxSync(null, options);
+
+                if(resNum>0)
+                {
+                    console.log("canceled");
+                }
+                else{                   
+                    if(targetSelected === "Flight Controller")
+                    {
+                        packNum = 0;
+                        var buf = Buffer(1);
+                        buf[0] = 0x01;
+                    }
+                    else if(targetSelected === "Optical Sensor"){
+                        packNum = 0;
+                        var buf = Buffer(1);
+                        buf[0] = 0x03;
+                    }
+                    else{
+                        packNum = 0;
+                        var buf = Buffer(1);
+                        buf[0] = 0x05;
+                    }
+                
+                    port.write(buf, (err) =>{
+                        if (err) return console.log('write Error: ', err.message);
+                    });
+
+                    $("a.load_file").addClass('disabled');
+                    
+                    firmware_flasher.flashProgress(0);
+                    self.enableFlashing(false);
+                    starting = 1;
+                }
             }
         });
         

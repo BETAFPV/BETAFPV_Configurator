@@ -3032,6 +3032,9 @@
     "firmwareFlasherSteps": {
         "message": "Stpes of how to flasher"
     },
+    "firmwareTarget": {
+        "message": "Current Selected Target"
+    },
     "firmwareFlasherOnlineSelectBuildType": {
         "message": "Select build type to see available boards."
     },

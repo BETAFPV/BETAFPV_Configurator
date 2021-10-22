@@ -2797,11 +2797,17 @@
     "firmwareFlasherSteps": {
         "message": "固件刷写步骤"
     },
+    "firmwareTarget": {
+        "message": "当前更新目标"
+    },
     "firmwareFlasherOnlineSelectBuildType": {
         "message": "选择 \"生成类型\" 以查看可用的飞控板。"
     },
     "firmwareFlasherOnlineSelectBoardDescription": {
-        "message": "选择你的飞控型号"
+        "message": "选择你的硬件型号"
+    },
+    "firmwareFlasherOnlineSelectTargetDescription": {
+        "message": "选择你的目标型号"
     },
     "firmwareFlasherOnlineSelectBoardDescription_radio": {
         "message": "选择你的遥控器型号"
@@ -2810,7 +2816,7 @@
         "message": "从 Betaflight 4.1 开始，Betaflight 引入了对<strong>统一目标</strong>的支持。统一目标的概念意味着使用相同MCU (F4、F7) 的飞控板可以使用相同的 .hex 固件文件。为了使不同的飞控板使用相同的固件，在刷写统一目标后，将在固件内部署一个特定的配置文件。<br>此版本的 Betaflight 配置程序支持一步刷写带有各自飞控板特定配置的统一目标。下拉列表中显示了每个飞控板可用的不同固件类型，如下所示: <br><br><strong>&lt;board name&gt;</strong>或<br><strong>&lt;board name&gt;(旧格式)</strong>:<br>非统一目标，或4.1版本之前的统一目标。<br><br><strong>&lt;board name&gt;(&lt;manufacturer id&gt;)</strong>:<br>(4字母制造商ID)<br>统一目标。<br><br><strong>若统一目标可用请使用统一目标。</strong>如果您在使用统一目标时遇到问题，请打开一个<a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">issue</a>然后使用非统一目标，直至问题解决。"
     },
     "firmwareFlasherOnlineSelectFirmwareVersionDescription": {
-        "message": "选择对应你飞控型号的固件版本"
+        "message": "选择对应你硬件型号的固件版本"
     },
     "firmwareFlasherOnlineSelectFirmwareVersionDescription_radio": {
         "message": "选择对应你遥控器型号的固件版本"
