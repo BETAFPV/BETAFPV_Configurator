@@ -6015,9 +6015,6 @@
     "DialogTitle":{
         "message":"提示"
     },
-    "VersionNotMatchedDialogLabel":{
-        "message":"VersionNotMatchedDialogLabel"
-    },
     "Confirm":{
         "message":"确认"
     },
@@ -6046,9 +6043,12 @@
         "message":"绑定密语不能少于6个字母或数字"
     },
     "upgrade_the_firmware_of_liteRadio":{
-        "message":"您需要升级遥控器固件以确保功能正常使用"
+        "message":"您的遥控器固件有最新版本可用，可在“固件烧写工具”进行升级"
     },
     "upgrade_version_of_configurator":{
         "message":"您需要使用更高版本的上位机以确保功能正常使用"
+    },
+    "write_file_failed":{
+        "message":"保存遥控器固件信息失败，请以管理员身份运行软件."
     }
 }

@@ -147,7 +147,7 @@ function loadRemoteJsonFile(){
 
         fs.writeFile(file_path, array, "utf8",(err)=>{
             if(err){
-                alert("write  json file of LiteRadio firmware failed!");
+                alert(i18n.getMessage("write_file_failed"));
             }else {
                 readJsonFile(file_path);
             }
@@ -207,9 +207,10 @@ function loadRemoteJsonFile(){
         }    
     }, 1000);
 
-    xhr.timeout = 3000; 
+    xhr.timeout = 800; 
     xhr.ontimeout = function(){
-        console.log("time out");
+        loadJsonFileFromGithubSuccessful = false;
+        console.log("get json file time out");
     }
 
 
@@ -630,12 +631,14 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                     fs.writeFile(path.join(__dirname, str), array, "utf8",(err)=>{
                         if(err){
                             console.log("error");
+                            alert(i18n.getMessage("write_file_failed"));
+                            
                         }else {
                             console.log("ok");
                             binFilePath = path.join(__dirname, str);
                             fs.readFile(binFilePath, (err, binFile) => {
                                 if (err) {
-                                    alert(err)
+                                    
                                 } else {
                                     
                                     binSize = binFile.length;
@@ -711,8 +714,15 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                        
                     }
                 }, 1000);
-            }
-        });
+
+
+                xhr.timeout = 800; 
+                xhr.ontimeout = function(){
+                    console.log("get firmware time out");
+                    loadFirmwareFromGithubSuccessful = false;
+                }
+                    }
+                });
 
         loadRemoteJsonFile();
         callback();
