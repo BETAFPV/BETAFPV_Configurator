@@ -1,5 +1,5 @@
 const serialport = require('serialport')
-var liteRadio_configurator_version ="v1.0.0-RC4";
+var liteRadio_configurator_version ="v1.0.0 Release ";
 
 var liteRadio_major_version_match = 1;
 var liteRadio_minor_version_match =0;
