@@ -108,8 +108,9 @@ window.onload=function(){
                 GUI.interval_remove('mavlink_heartbeat');
                 GUI.interval_remove('display_Info');
                 GUI.interval_remove('setup_data_pull_fast');
+                GUI.connect_lock = false;
                 $('div.connect_controls div.connect_state').text(i18n.getMessage('connect'));
-                
+                $('div#connectbutton a.connect').removeClass('active');
             });
 
             //data事件监听
@@ -127,6 +128,13 @@ window.onload=function(){
             //error事件监听
             port.on('error',function(err){
                 console.log('Error: ',err.message);
+                GUI.interval_remove('mavlink_heartbeat');
+                GUI.interval_remove('display_Info');
+                GUI.interval_remove('setup_data_pull_fast');
+                $('div.connect_controls div.connect_state').text(i18n.getMessage('connect'));
+                $('div#connectbutton a.connect').removeClass('active');
+                $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'));
+                GUI.connect_lock = false;
             });
 
         }
@@ -138,6 +146,7 @@ window.onload=function(){
             $('#tabs ul.mode-disconnected li a:first').click();
             GUI.connect_lock = false;
             $('div#connectbutton a.connect').removeClass('active');
+       
         }
     });
 

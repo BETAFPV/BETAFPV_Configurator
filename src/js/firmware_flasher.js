@@ -190,8 +190,7 @@ firmware_flasher.parseData = function(data)
                     {
                         starting = 3;
                     }
-                }  
-                
+                }                 
             });
 
             firmware_flasher.flashingMessage("Flashing ...",firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
@@ -205,7 +204,7 @@ firmware_flasher.parseData = function(data)
             port.write(buf, (err) =>{
                 if (err) return console.log('write Error: ', err.message);
             });
-            firmware_flasher.flashingMessage("update finished",firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
+            firmware_flasher.flashingMessage("Flash Finished",firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
             firmware_flasher.flashProgress(packNum/packLen*100);
         }
     }

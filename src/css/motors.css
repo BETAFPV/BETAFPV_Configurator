@@ -602,7 +602,7 @@
 .tab-motors .motor_testing .sliders input {
     -webkit-appearance: slider-vertical;
     width: calc((100% / 9) - 13px);
-    height: 73px;
+    height: 123px;
     margin-left: 10px;
 }
 
@@ -656,9 +656,9 @@
 }
 
 .tab-motors .motor_testing .notice .motorsEnableTestMode {
-    margin-left: 10px;
+    margin-left: 5px;
     color: #e8b423;
-    font-size: large;
+    font-size: medium;
 }
 
 .tab-motors .motorDialogButtons {
