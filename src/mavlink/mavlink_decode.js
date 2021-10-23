@@ -163,43 +163,7 @@ mavlinkParser.on('COMMAND_ACK', function(msg) {
             console.log("unknow command ack");
             break;
     }
-
-
-    if(cmdAck.command == mav_cmd.MAV_CMD_PREFLIGHT_CALIBRATION){
-        if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_LEVEL_CALI_START){
-            $('#accel_calib_running').show();
-            $('a.calibrateAccel').hide();
-            
-        }else if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_LEVEL_CALI_OK){
-            $('#accel_calib_running').hide();
-            $('a.calibrateAccel').show();
-            alert("Calibrate Acclerometer ok!");
-        }else if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_ERR_FAIL){
-            $('#accel_calib_running').hide();
-            $('a.calibrateAccel').show();
-            alert("Calibrate Acclerometer failed!");
-        }
-        cmdAck.command = 0;
-        cmdAck.result = 0;
-        
-    }
-    if(cmdAck.command == mavlink10.MAVLINK_MSG_ID_RATE){
-        if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_OK){
-            pid_tuning.rate_saving_ack = true;
-        }
-        else {
-            pid_tuning.rate_saving_ack = false;
-        }
-    }
-
-    if(cmdAck.command == mavlink10.MAVLINK_MSG_ID_PID){
-        if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_OK){
-            pid_tuning.pid_saving_ack = true;
-        }
-        else {
-            pid_tuning.pid_saving_ack = false;
-        }
-    }
-    
+    cmdAck.command = 0;
+    cmdAck.result = 0;
 });
 
