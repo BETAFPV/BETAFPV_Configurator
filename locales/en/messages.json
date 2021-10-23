@@ -6390,5 +6390,11 @@
     },
     "literadio_firmwareVersion":{
         "message":"Firmware version:"
+    },
+    "dialogCalibrateAcclerometerOK":{
+        "message":"Calibrate Acclerometer OK!"
+    },
+    "dialogCalibrateAcclerometerFailed":{
+        "message":"Calibrate Acclerometer failed!"
     }
 }

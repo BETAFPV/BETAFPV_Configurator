@@ -5993,5 +5993,11 @@
     },
     "literadio_firmwareVersion":{
         "message":"软件版本:"
+    },
+    "dialogCalibrateAcclerometerOK":{
+        "message":"加速度计校准完成!"
+    },
+    "dialogCalibrateAcclerometerFailed":{
+        "message":"加速度计校准失败!"
     }
 }

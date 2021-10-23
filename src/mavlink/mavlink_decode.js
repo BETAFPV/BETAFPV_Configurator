@@ -143,11 +143,23 @@ mavlinkParser.on('COMMAND_ACK', function(msg) {
             }else if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_LEVEL_CALI_OK){
                 $('#accel_calib_running').hide();
                 $('a.calibrateAccel').show();
-                alert("Calibrate Acclerometer ok!");
+                //alert("Calibrate Acclerometer ok!");
+                const dialogCalibrateAcclerometerOK = $('.dialogCalibrateAcclerometerOK')[0];
+                dialogCalibrateAcclerometerOK.showModal();
+                $('.dialogCalibrateAcclerometerOK-confirmbtn').click(function() {
+                    dialogCalibrateAcclerometerOK.close();
+                });
+
             }else if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_ERR_FAIL){
                 $('#accel_calib_running').hide();
                 $('a.calibrateAccel').show();
-                alert("Calibrate Acclerometer failed!");
+                //alert("Calibrate Acclerometer failed!");
+                const dialogCalibrateAcclerometerFailed = $('.dialogCalibrateAcclerometerFailed')[0];
+                dialogCalibrateAcclerometerFailed.showModal();
+                $('.dialogCalibrateAcclerometerFailed-confirmbtn').click(function() {
+                    dialogCalibrateAcclerometerFailed.close();
+                });
+                
             }
             break;
         case mav_cmd.MAV_CMD_RESTORE_FACTORY_SETTING:
