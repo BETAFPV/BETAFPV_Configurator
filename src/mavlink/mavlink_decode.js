@@ -136,6 +136,7 @@ mavlinkParser.on('MOTORS_MINIVALUE', function(msg) {
     // the parsed message is here
     motors.idelThrottleValue = msg.miniValue1.toFixed(0);
     console.log(motors.idelThrottleValue);
+    document.getElementById('idelThrottleValue').value = motors.idelThrottleValue;
 });
 
 mavlinkParser.on('COMMAND_ACK', function(msg) {
