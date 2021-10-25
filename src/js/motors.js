@@ -1,5 +1,7 @@
 // // 'use strict';
-const motors = {};
+const motors = {
+    idelThrottleValue:0,
+};
 motors.initialize = function (callback) {
     const self = this;
     let rangeMin = 0;
@@ -8,7 +10,39 @@ motors.initialize = function (callback) {
     let motorsRunning = false;
     const motorData = [];
 
+   
+
+
     $('#content').load("./src/html/motors.html", function () {
+    
+    $('a.refresh').click(function () {   
+        console.log("get motor setting");
+
+        let msg = new mavlink10.messages.command(1,mav_cmd.MAV_CMD_GET_IDLE_THROTTLE_VALUE,0,0);
+        let buffer = msg.pack(msg);
+        mavlinkSend(buffer);
+
+    });
+
+    $('a.update').click(function () { 
+        console.log("save motor setting");  
+        let idelThrottleValue = parseInt(document.getElementById('idelThrottleValue').value);
+        console.log(idelThrottleValue);
+        if(idelThrottleValue>30){
+            idelThrottleValue = 30;
+            document.getElementById('idelThrottleValue').value = idelThrottleValue;
+        }
+        if(idelThrottleValue<0){
+            idelThrottleValue = 0;
+            document.getElementById('idelThrottleValue').value = idelThrottleValue;
+        }
+
+        let msg = new mavlink10.messages.pmotors_minivalue(1,idelThrottleValue);
+        let buffer = msg.pack(msg);
+        mavlinkSend(buffer);
+
+    });
+
       i18n.localizePage();
 
       const motorsEnableTestModeElement = $('#motorsEnableTestMode');
@@ -82,5 +116,5 @@ motors.initialize = function (callback) {
         callback();
     });
 
-
+ 
 };

@@ -2505,7 +2505,7 @@
     },
 
     "motorsText":{
-        "message": "Motors"
+        "message": "Motor test"
     },
     "motorNumber1":{
         "message": "Motor - 1"
@@ -2530,6 +2530,12 @@
     },
     "motorNumber8":{
         "message": "Motor - 8"
+    },
+    "motorButtonSave": {
+        "message": "Save"
+    },
+    "motorButtonRefresh": {
+        "message": "Refresh"
     },
 
     "servosText":{

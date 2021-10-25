@@ -12,6 +12,7 @@ var mav_cmd = {
     MAV_CMD_RESTORE_FACTORY_SETTING:1,
     MAV_CMD_READ_PID_FROM_FC:2,
     MAV_CMD_READ_RATE_FROM_FC:3,
+    MAV_CMD_GET_IDLE_THROTTLE_VALUE:4,
     MAV_CMD_PREFLIGHT_CALIBRATION:241,
 };
 
@@ -128,6 +129,13 @@ mavlinkParser.on('RATE', function(msg) {
 
     document.getElementById('throttle_mid').value = msg.throttleMid.toFixed(2);
     document.getElementById('throttle_expo').value = msg.throttleExpo.toFixed(2);
+});
+
+
+mavlinkParser.on('MOTORS_MINIVALUE', function(msg) {
+    // the parsed message is here
+    motors.idelThrottleValue = msg.miniValue1.toFixed(0);
+    console.log(motors.idelThrottleValue);
 });
 
 mavlinkParser.on('COMMAND_ACK', function(msg) {

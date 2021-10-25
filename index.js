@@ -42,7 +42,7 @@ async function listSerialPorts() {
 setTimeout(function listPorts() {
     listSerialPorts();
     setTimeout(listPorts, 2000);
-  }, 2000);
+  }, 500);
 
 setTimeout(function loadLanguage() {
     i18next.changeLanguage(i18n.Storage_language);

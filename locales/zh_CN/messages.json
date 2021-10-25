@@ -2407,7 +2407,7 @@
         "message": "$1 mAh"
     },
     "motorsText": {
-        "message": "电机"
+        "message": "电机测试"
     },
     "motorNumber1": {
         "message": "电机 - 1"
@@ -2432,6 +2432,12 @@
     },
     "motorNumber8": {
         "message": "电机 - 8"
+    },
+    "motorButtonSave": {
+        "message": "保存"
+    },
+    "motorButtonRefresh": {
+        "message": "刷新"
     },
     "servosText": {
         "message": "舵机"

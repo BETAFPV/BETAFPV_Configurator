@@ -43,6 +43,7 @@ pid_tuning.initialize = function (callback) {
     $('a.refresh').click(function () {   
         if(self.activeSubtab == 'pid'){
             readPidFromFC();
+            console.log("refresh");
             
         }else if(self.activeSubtab == 'rates'){
             readRateFromFC();
