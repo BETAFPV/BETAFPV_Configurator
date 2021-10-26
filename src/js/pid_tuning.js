@@ -487,7 +487,8 @@ pid_tuning.checkThrottle = function() {
 };
 
   activateSubtab(self.activeSubtab);
-
+  readPidFromFC();
+  readRateFromFC();
 };
 
 

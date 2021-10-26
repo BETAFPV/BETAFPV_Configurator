@@ -114,8 +114,11 @@ window.onload=function(){
                 GUI.interval_remove('mavlink_heartbeat');
                 GUI.interval_remove('display_Info');
                 GUI.interval_remove('setup_data_pull_fast');
+                port.close();
+                $('#tabs ul.mode-connected').hide();
+                $('#tabs ul.mode-disconnected').show();
+                $('#tabs ul.mode-disconnected li a:first').click();
                 GUI.connect_lock = false;
-                $('div.connect_controls div.connect_state').text(i18n.getMessage('connect'));
                 $('div#connectbutton a.connect').removeClass('active');
             });
 
@@ -137,20 +140,24 @@ window.onload=function(){
                 GUI.interval_remove('mavlink_heartbeat');
                 GUI.interval_remove('display_Info');
                 GUI.interval_remove('setup_data_pull_fast');
-                $('div.connect_controls div.connect_state').text(i18n.getMessage('connect'));
                 $('div#connectbutton a.connect').removeClass('active');
                 $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'));
+
+                $('#tabs ul.mode-disconnected li a:first').click();
                 GUI.connect_lock = false;
             });
-
         }
         else
         {
             port.close();
+            GUI.interval_remove('mavlink_heartbeat');
+            GUI.interval_remove('display_Info');
+            GUI.interval_remove('setup_data_pull_fast');
             $('#tabs ul.mode-connected').hide();
             $('#tabs ul.mode-disconnected').show();
             $('#tabs ul.mode-disconnected li a:first').click();
             GUI.connect_lock = false;
+            $('#tabs ul.mode-disconnected li a:first').click();
             $('div#connectbutton a.connect').removeClass('active');
        
         }
