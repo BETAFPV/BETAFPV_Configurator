@@ -1,6 +1,6 @@
 const serialport = require('serialport')
 
-var flightcontrol_configurator_version ='v1.0.1_alhpa';
+var flightcontrol_configurator_version ='v1.0.1_alpha';
 var flightcontrol_configurator_major_version =1;
 var flightcontrol_configurator_minor_version =0;
 var flightcontrol_configurator_pitch_version =1;

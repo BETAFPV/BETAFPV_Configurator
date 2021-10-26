@@ -16,7 +16,11 @@ const firmware_flasher ={
     unifiedTarget: {}, // the Unified Target configuration to be spliced into the configuration
     isConfigLocal: false, // Set to true if the user loads one locally
     developmentFirmwareLoaded: false, // Is the firmware to be flashed from the development branch?
+    firmware_version:{},
+    target_board:0,
 };
+var loadJsonFileFromGithubSuccessful = true;
+var loadFirmwareFromGithubSuccessful = true;
 
 firmware_flasher.FLASH_MESSAGE_TYPES = {
     NEUTRAL : 'NEUTRAL',
@@ -232,6 +236,22 @@ function addOptionValue2(id,value,text) {
 function readJsonFile(fileName){
     jsonFile.readFile(fileName, function(err, jsonData) {
         if (err) throw err;
+        if(jsonData.status!==404){
+            $('#boardTarget').empty();
+            addOptionValue2('boardTarget',1,"Cetus");
+            addOptionValue2('boardTarget',2,"Cetus_pro");
+            addOptionValue2('boardTarget',3,"Lite_v3");
+
+            $('#boardVersion').empty();
+            for(let i=0;i<jsonData.Cetus.length;i++){
+                addOptionValue2('boardVersion',i,jsonData.Cetus[0].version);
+            }
+            firmware_flasher.firmware_version = jsonData;
+        
+            console.log("----------------------------------"); 
+        }else{
+
+        }
     
         
         if(document.getElementById("TargetSelect").value == 0)
@@ -254,7 +274,7 @@ function readJsonFile(fileName){
 function loadRemoteJsonFile(){
     //https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/board.json
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/board.json", true);
+    xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v3.0.0/board.json", true);
     xhr.responseType = 'arraybuffer';
     xhr.onload = function(e) { 
         var array = new Uint8Array(xhr.response);
@@ -269,6 +289,60 @@ function loadRemoteJsonFile(){
         })
     };
     xhr.send();
+    xhr.onreadystatechange = function(){
+        console.log(xhr.readyState);
+        if(xhr.readyState==2){
+            console.log("The server is connected:"+xhr.status);
+        }else if(xhr.readyState==3){
+            console.log("Request was received :"+xhr.status);
+        }
+ 
+         if (xhr.readyState == 4){
+             if(xhr.status == 200){//ok
+                 //从github上加载固件成功
+                 // alert("Request firmware successful: "+xhr.status);
+                 loadJsonFileFromGithubSuccessful = true;
+             }
+             // else if(xhr.status == 400){
+             //     alert("Bad Request : "+xhr.status);
+             // }else if(xhr.status == 401){
+             //     alert("Request was Unauthonzed: "+xhr.status);
+             // }else if(xhr.status == 403){
+             //     alert("Request was Forbidden: "+xhr.status);
+             // }else if(xhr.status == 404){
+             //     alert("Request was Not Found: "+xhr.status);
+             // }else if(xhr.status == 500){
+             //     alert(" Internal Server Error: "+xhr.status);
+             // }else if(xhr.status == 503){
+             //     alert("Service Unavailable : "+xhr.status);
+             // }      
+             else{
+                 console.log("Github cannot be accessed : "+xhr.status);
+                 //2.github无法访问切换到gittee上访问
+                 if(loadJsonFileFromGithubSuccessful == true){
+                     loadJsonFileFromGithubSuccessful = false;
+                     console.log("can't load json file from github");
+                 }else{
+                     console.log("can't load json file from gitee");
+                 }
+             } 
+         }
+     };
+ 
+     //3.超市无法连接github则从gitee上加载
+     setTimeout(() => {
+         if(loadJsonFileFromGithubSuccessful == false){
+            //  xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/856825/download/LiteRadio.json", true);
+            //  xhr.send(null);
+             console.log("get json file from gitee");
+         }    
+     }, 1000);
+ 
+     xhr.timeout = 800; 
+     xhr.ontimeout = function(){
+         loadJsonFileFromGithubSuccessful = false;
+         console.log("get json file time out");
+     }
 
 }
 
@@ -377,8 +451,7 @@ firmware_flasher.initialize = function (callback) {
 
                 var str = targetBoardSelected + "_" + targetVersionSelected + ".bin";
                 console.log(str);
-                 
-                var urlValue = "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/" + str;
+                var urlValue = "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v3.0.0/" + str;
                 console.log(urlValue);
 
                 var xhr = new XMLHttpRequest();
@@ -401,6 +474,7 @@ firmware_flasher.initialize = function (callback) {
                                     binSize = binFile.length;
             
                                     packLen = Math.round(binSize / 1024);
+                                    
             
                                     firmware_flasher.flashingMessage("Loaded Local Firmware : ( "+ binFile.length +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
                                 }
@@ -428,6 +502,33 @@ firmware_flasher.initialize = function (callback) {
                 case '2'://OSD
                     $('#boardTarget').empty();
                     $('#boardVersion').empty();
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        $('select[id="boardTarget"]').change(function(){
+            console.log("FC boardTarget change:"+boardTarget);
+            firmware_flasher.boardTarget = parseInt($(this).val(), 10);
+            switch(firmware_flasher.boardTarget){
+                case 0:
+                    $('#boardVersion').empty();
+                    for(let i=0;i<firmware_flasher.firmware_version.Cetus.length;i++){
+                        addOptionValue2('boardVersion',i,firmware_flasher.firmware_version.Cetus[i].version);
+                    }
+                    break;
+                case 1:
+                    $('#boardVersion').empty();
+                    for(let i=0;i<firmware_flasher.firmware_version.Cetus_pro.length;i++){
+                        addOptionValue2('boardVersion',i,firmware_flasher.firmware_version.Cetus_pro[i].version);
+                    }
+                    break;
+                case 2:
+                    $('#boardVersion').empty();
+                    for(let i=0;i<firmware_flasher.firmware_version.Lite_v3.length;i++){
+                        addOptionValue2('boardVersion',i,firmware_flasher.firmware_version.Lite_v3[i].version);
+                    }
                     break;
                 default:
                     break;

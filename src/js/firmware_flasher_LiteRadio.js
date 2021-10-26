@@ -119,7 +119,7 @@ function readJsonFile(fileName){
             addOptionValue2('boardTarget',4,"LiteRadio_3_SX1280");
             addOptionValue2('boardTarget',5,"LiteRadio_3_CC2500");
 
-
+            console.log("jsonData.LiteRadio_2_SE.length:"+jsonData.LiteRadio_2_SE.length);
             $('#boardVersion').empty();
             for(let i=0;i<jsonData.LiteRadio_2_SE.length;i++){
                 addOptionValue2('boardVersion',i,jsonData.LiteRadio_2_SE[0].version);
