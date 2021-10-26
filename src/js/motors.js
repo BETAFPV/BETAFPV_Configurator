@@ -111,5 +111,5 @@ motors.initialize = function (callback) {
         callback();
     });
 
- 
+    $('a.refresh').click();
 };
