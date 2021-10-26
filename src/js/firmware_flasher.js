@@ -1,3 +1,4 @@
+const {dialog}=require('electron').remote;
 const os = require('os')
 const path = require('path')
 
@@ -189,8 +190,7 @@ firmware_flasher.parseData = function(data)
                     {
                         starting = 3;
                     }
-                }  
-                
+                }                 
             });
 
             firmware_flasher.flashingMessage("Flashing ...",firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
@@ -204,7 +204,7 @@ firmware_flasher.parseData = function(data)
             port.write(buf, (err) =>{
                 if (err) return console.log('write Error: ', err.message);
             });
-            firmware_flasher.flashingMessage("update finished",firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
+            firmware_flasher.flashingMessage("Flash Finished",firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
             firmware_flasher.flashProgress(packNum/packLen*100);
         }
     }
@@ -233,15 +233,21 @@ function readJsonFile(fileName){
     jsonFile.readFile(fileName, function(err, jsonData) {
         if (err) throw err;
     
-        for (var i = 0; i < jsonData.length; ++i) {
-          console.log("name: "+jsonData[i].name);
-          console.log("version: "+jsonData[i].version);
-
-          addOptionValue2('boardTarget',i,jsonData[i].name);
-          addOptionValue2('boardVersion',i,jsonData[i].version);
-
-          console.log("----------------------------------"); 
+        
+        if(document.getElementById("TargetSelect").value == 0)
+        {
+            for (var i = 0; i < jsonData.length; ++i) {
+                console.log("name: "+jsonData[i].name);
+                console.log("version: "+jsonData[i].version);
+                $('#boardTarget').empty();
+                $('#boardVersion').empty();
+                addOptionValue2('boardTarget',i,jsonData[i].name);
+                addOptionValue2('boardVersion',i,jsonData[i].version);
+      
+                console.log("----------------------------------"); 
+              }
         }
+        
     });
 }
 
@@ -269,6 +275,8 @@ function loadRemoteJsonFile(){
 firmware_flasher.initialize = function (callback) {
     const self = this;
     self.enableFlashing(false);
+
+
 
     $('#content').load("./src/html/firmware_flasher.html", function () {
         i18n.localizePage();
@@ -308,19 +316,53 @@ firmware_flasher.initialize = function (callback) {
      
         $('a.flash_firmware').click(function () {
             if (!$(this).hasClass('disabled')) {
-                packNum = 0;
-                var buf = Buffer(1);
-                buf[0] = 0x01;
 
-                port.write(buf, (err) =>{
-                    if (err) return console.log('write Error: ', err.message);
-                });
+                let targetSelected = ($('#TargetSelect option:selected').text());
 
-                $("a.load_file").addClass('disabled');
+                const options = {
+                    type: 'question',
+                    buttons: [ 'Yes, please', 'No, thanks','Cancel'],
+                    defaultId: 2,
+                    title: 'Question',
+                    message: 'Do you want to update ' +  targetSelected + '?',
+                    detail: 'You need to make sure you select the right target.',
+                    noLink:true,
+                };
                 
-                firmware_flasher.flashProgress(0);
-                self.enableFlashing(false);
-                starting = 1;
+                 var resNum = dialog.showMessageBoxSync(null, options);
+
+                if(resNum>0)
+                {
+                    console.log("canceled");
+                }
+                else{                   
+                    if(targetSelected === "Flight Controller")
+                    {
+                        packNum = 0;
+                        var buf = Buffer(1);
+                        buf[0] = 0x01;
+                    }
+                    else if(targetSelected === "Optical Sensor"){
+                        packNum = 0;
+                        var buf = Buffer(1);
+                        buf[0] = 0x03;
+                    }
+                    else{
+                        packNum = 0;
+                        var buf = Buffer(1);
+                        buf[0] = 0x05;
+                    }
+                
+                    port.write(buf, (err) =>{
+                        if (err) return console.log('write Error: ', err.message);
+                    });
+
+                    $("a.load_file").addClass('disabled');
+                    
+                    firmware_flasher.flashProgress(0);
+                    self.enableFlashing(false);
+                    starting = 1;
+                }
             }
         });
         
@@ -370,6 +412,28 @@ firmware_flasher.initialize = function (callback) {
                 xhr.send();
             }
         });
+
+        $('select[id="TargetSelect"]').change(function () {
+            let TargetSelect = document.getElementById("TargetSelect").value;
+            console.log("TargetSelect:"+TargetSelect);
+            switch(TargetSelect){
+                case '0':// FC
+                    let file_path = path.join(__dirname, "./board.json");
+                    readJsonFile(file_path);
+                    break;
+                case '1'://Optical Flow
+                    $('#boardTarget').empty();
+                    $('#boardVersion').empty();              
+                    break;
+                case '2'://OSD
+                    $('#boardTarget').empty();
+                    $('#boardVersion').empty();
+                    break;
+                default:
+                    break;
+            }
+        });
+
 
         loadRemoteJsonFile();
         

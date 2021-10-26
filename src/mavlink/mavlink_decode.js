@@ -12,6 +12,7 @@ var mav_cmd = {
     MAV_CMD_RESTORE_FACTORY_SETTING:1,
     MAV_CMD_READ_PID_FROM_FC:2,
     MAV_CMD_READ_RATE_FROM_FC:3,
+    MAV_CMD_GET_IDLE_THROTTLE_VALUE:4,
     MAV_CMD_PREFLIGHT_CALIBRATION:241,
 };
 
@@ -130,6 +131,14 @@ mavlinkParser.on('RATE', function(msg) {
     document.getElementById('throttle_expo').value = msg.throttleExpo.toFixed(2);
 });
 
+
+mavlinkParser.on('MOTORS_MINIVALUE', function(msg) {
+    // the parsed message is here
+    motors.idelThrottleValue = msg.miniValue1.toFixed(0);
+    console.log(motors.idelThrottleValue);
+    document.getElementById('idelThrottleValue').value = motors.idelThrottleValue;
+});
+
 mavlinkParser.on('COMMAND_ACK', function(msg) {
     // the parsed message is here
     cmdAck.command = msg.command;
@@ -143,11 +152,23 @@ mavlinkParser.on('COMMAND_ACK', function(msg) {
             }else if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_LEVEL_CALI_OK){
                 $('#accel_calib_running').hide();
                 $('a.calibrateAccel').show();
-                alert("Calibrate Acclerometer ok!");
+                //alert("Calibrate Acclerometer ok!");
+                const dialogCalibrateAcclerometerOK = $('.dialogCalibrateAcclerometerOK')[0];
+                dialogCalibrateAcclerometerOK.showModal();
+                $('.dialogCalibrateAcclerometerOK-confirmbtn').click(function() {
+                    dialogCalibrateAcclerometerOK.close();
+                });
+
             }else if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_ERR_FAIL){
                 $('#accel_calib_running').hide();
                 $('a.calibrateAccel').show();
-                alert("Calibrate Acclerometer failed!");
+                //alert("Calibrate Acclerometer failed!");
+                const dialogCalibrateAcclerometerFailed = $('.dialogCalibrateAcclerometerFailed')[0];
+                dialogCalibrateAcclerometerFailed.showModal();
+                $('.dialogCalibrateAcclerometerFailed-confirmbtn').click(function() {
+                    dialogCalibrateAcclerometerFailed.close();
+                });
+                
             }
             break;
         case mav_cmd.MAV_CMD_RESTORE_FACTORY_SETTING:
@@ -163,43 +184,7 @@ mavlinkParser.on('COMMAND_ACK', function(msg) {
             console.log("unknow command ack");
             break;
     }
-
-
-    if(cmdAck.command == mav_cmd.MAV_CMD_PREFLIGHT_CALIBRATION){
-        if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_LEVEL_CALI_START){
-            $('#accel_calib_running').show();
-            $('a.calibrateAccel').hide();
-            
-        }else if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_LEVEL_CALI_OK){
-            $('#accel_calib_running').hide();
-            $('a.calibrateAccel').show();
-            alert("Calibrate Acclerometer ok!");
-        }else if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_ERR_FAIL){
-            $('#accel_calib_running').hide();
-            $('a.calibrateAccel').show();
-            alert("Calibrate Acclerometer failed!");
-        }
-        cmdAck.command = 0;
-        cmdAck.result = 0;
-        
-    }
-    if(cmdAck.command == mavlink10.MAVLINK_MSG_ID_RATE){
-        if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_OK){
-            pid_tuning.rate_saving_ack = true;
-        }
-        else {
-            pid_tuning.rate_saving_ack = false;
-        }
-    }
-
-    if(cmdAck.command == mavlink10.MAVLINK_MSG_ID_PID){
-        if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_OK){
-            pid_tuning.pid_saving_ack = true;
-        }
-        else {
-            pid_tuning.pid_saving_ack = false;
-        }
-    }
-    
+    cmdAck.command = 0;
+    cmdAck.result = 0;
 });
 

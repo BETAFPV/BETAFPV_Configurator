@@ -433,11 +433,6 @@ progress[value]::-webkit-progress-bar {
     color: white;
 }
 
-.tab-motors input,
-.tab-motors select {
-    background-color: #3a3a3a;
-    color: white;
-}
 
 .tab-motors .plot_control {
     background-color: #393b3a;
