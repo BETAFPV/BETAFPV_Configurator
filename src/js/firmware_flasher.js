@@ -233,15 +233,21 @@ function readJsonFile(fileName){
     jsonFile.readFile(fileName, function(err, jsonData) {
         if (err) throw err;
     
-        for (var i = 0; i < jsonData.length; ++i) {
-          console.log("name: "+jsonData[i].name);
-          console.log("version: "+jsonData[i].version);
-
-          addOptionValue2('boardTarget',i,jsonData[i].name);
-          addOptionValue2('boardVersion',i,jsonData[i].version);
-
-          console.log("----------------------------------"); 
+        
+        if(document.getElementById("TargetSelect").value == 0)
+        {
+            for (var i = 0; i < jsonData.length; ++i) {
+                console.log("name: "+jsonData[i].name);
+                console.log("version: "+jsonData[i].version);
+                $('#boardTarget').empty();
+                $('#boardVersion').empty();
+                addOptionValue2('boardTarget',i,jsonData[i].name);
+                addOptionValue2('boardVersion',i,jsonData[i].version);
+      
+                console.log("----------------------------------"); 
+              }
         }
+        
     });
 }
 
@@ -406,6 +412,28 @@ firmware_flasher.initialize = function (callback) {
                 xhr.send();
             }
         });
+
+        $('select[id="TargetSelect"]').change(function () {
+            let TargetSelect = document.getElementById("TargetSelect").value;
+            console.log("TargetSelect:"+TargetSelect);
+            switch(TargetSelect){
+                case '0':// FC
+                    let file_path = path.join(__dirname, "./board.json");
+                    readJsonFile(file_path);
+                    break;
+                case '1'://Optical Flow
+                    $('#boardTarget').empty();
+                    $('#boardVersion').empty();              
+                    break;
+                case '2'://OSD
+                    $('#boardTarget').empty();
+                    $('#boardVersion').empty();
+                    break;
+                default:
+                    break;
+            }
+        });
+
 
         loadRemoteJsonFile();
         
