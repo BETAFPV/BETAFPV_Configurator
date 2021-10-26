@@ -2505,7 +2505,7 @@
     },
 
     "motorsText":{
-        "message": "Motor test"
+        "message": "Motors Test"
     },
     "motorNumber1":{
         "message": "Motor - 1"
@@ -2537,7 +2537,12 @@
     "motorButtonRefresh": {
         "message": "Refresh"
     },
-
+    "motor_setup":{
+        "message":"Motors Setup"
+    },
+    "idelThrottleValue":{
+        "message":"Motor Idel Throttle Value[%]"
+    },
     "servosText":{
         "message": "Servos"
     },
@@ -6459,5 +6464,11 @@
     },
     "write_file_failed":{
         "message":"Save LiteRadio firmware failed.Please run the configurator as an administrator."
+    },
+    "dialogCalibrateAcclerometerOK":{
+        "message":"Calibration accelerometer successful."
+    },
+    "dialogCalibrateAcclerometerFailed":{
+        "message":"Calibration accelerometer failed."
     }
 }

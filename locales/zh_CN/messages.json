@@ -2439,6 +2439,12 @@
     "motorButtonRefresh": {
         "message": "刷新"
     },
+    "motor_setup":{
+        "message":"电机设置"
+    },
+    "idelThrottleValue":{
+        "message":"电机怠速数值[%]"
+    },
     "servosText": {
         "message": "舵机"
     },
@@ -6062,5 +6068,11 @@
     },
     "write_file_failed":{
         "message":"保存遥控器固件信息失败，请以管理员身份运行软件."
+    },
+    "dialogCalibrateAcclerometerOK":{
+        "message":"加速度计校准成功"
+    },
+    "dialogCalibrateAcclerometerFailed":{
+        "message":"加速度计校准失败"
     }
 }
