@@ -152,6 +152,7 @@ mavlinkParser.on('COMMAND_ACK', function(msg) {
             }else if(cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_LEVEL_CALI_OK){
                 $('#accel_calib_running').hide();
                 $('a.calibrateAccel').show();
+                $('a.calibrateAccel').removeClass('calibrating');
                 //alert("Calibrate Acclerometer ok!");
                 const dialogCalibrateAcclerometerOK = $('.dialogCalibrateAcclerometerOK')[0];
                 dialogCalibrateAcclerometerOK.showModal();
