@@ -432,13 +432,26 @@ firmware_flasher.initialize = function (callback) {
                         });
     
                         $("a.load_file").addClass('disabled');
-                        
+                        $("a.load_remote_file").addClass('disabled');
+
                         firmware_flasher.flashProgress(0);
                         self.enableFlashing(false);
+
                         starting = 1;
                     }
                 }else{
-                    alert("please connect COM first");
+                    //alert("please connect COM first");
+
+                    const options = {
+                        type: 'warning',
+                        buttons: [ 'ok'],
+                        defaultId: 0,
+                        title: 'Warn',
+                        message: 'Please Select Correct Serial Port and Connect It Firstly',
+                        noLink:true,
+                    };
+                    
+                    dialog.showMessageBoxSync(null, options);                    
                 }
 
                
@@ -486,12 +499,9 @@ firmware_flasher.initialize = function (callback) {
                                     }else{
                                         self.enableFlashing(false);
                                         firmware_flasher.flashingMessage("Load Firmware Failure!");
-                                    }
-            
-                                    
+                                    }                                  
                                 }
                             });
-
                         }
                     })
                 };
