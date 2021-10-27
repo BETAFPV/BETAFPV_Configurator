@@ -834,7 +834,7 @@
         "message": "Configuration restored <span class=\"message-positive\">successfully</span>"
     },
     "initialSetupButtonResetZaxis": {
-        "message": "Reset Z axis, offset: 0 deg"
+        "message": "Reset Z axis"
     },
     "initialSetupButtonResetZaxisValue": {
         "message": "Reset Z axis, offset: $1 deg"

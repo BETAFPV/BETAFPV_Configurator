@@ -756,7 +756,7 @@
         "message": "配置恢复<span class=\"message-positive\">成功</span>"
     },
     "initialSetupButtonResetZaxis": {
-        "message": "重置 Z 轴，补偿：0 度"
+        "message": "重置 Z 轴"
     },
     "initialSetupButtonResetZaxisValue": {
         "message": "重置 Z 轴，补偿: $1 度"
