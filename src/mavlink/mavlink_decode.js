@@ -88,9 +88,18 @@ mavlinkParser.on('IMU', function(msg) {
     FC.SENSOR_DATA.magnetometer[2] = msg.zMag;
     
 });
-
+var nowheartBeatTime;
+var lastheartBeatTime;
 mavlinkParser.on('SYS_STATUS', function(msg) {
     setup.battery_voltage = msg.voltageBattery;
+    nowheartBeatTime = new Date().getTime();
+    if(nowheartBeatTime-lastheartBeatTime<3000){
+        setup.mavlinkConnected = true;
+    }else{
+        setup.mavlinkConnected = false;
+    }
+    lastheartBeatTime = new Date().getTime();
+    console.log(setup.mavlinkConnected);
 });
 
 mavlinkParser.on('PID', function(msg) { 

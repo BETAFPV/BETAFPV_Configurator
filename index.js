@@ -95,31 +95,54 @@ window.onload=function(){
             
             
             //open事件监听
-            port.on('open', () =>{            
+            port.on('open', () =>{
+                setup.mavlinkConnected = false;       
                 GUI.connect_lock = true;
                 $('div#connectbutton a.connect').addClass('active');     
-                $('div#connectbutton div.connect_state').text(i18n.getMessage('disconnect')).addClass('active');
+                $('div#connectbutton div.connect_state').text(i18n.getMessage('connecting')).addClass('active');
                 if(isFlasherTab ==0)
                 {
                     FC.resetState();
-                    $('#tabs ul.mode-disconnected').hide();
-                    $('#tabs ul.mode-connected').show();
-                    $('#tabs ul.mode-connected li a:first').click();
+                   
+                    setTimeout(() => {
+                          if(setup.mavlinkConnected==true){
+                            $('#tabs ul.mode-disconnected').hide();
+                            $('#tabs ul.mode-connected').show();
+                            $('#tabs ul.mode-connected li a:first').click();
+                            $('div#connectbutton div.connect_state').text(i18n.getMessage('disconnect')).addClass('active');
+                          }else{
+                            port.close();
+                            GUI.connect_lock = true;
+                            GUI.interval_remove('mavlink_heartbeat');
+                            $('div#connectbutton a.connect').removeClass('active');
+                            const options = {
+                                type: 'warning',
+                                buttons: [ 'ok'],
+                                defaultId: 0,
+                                title: 'Warn',
+                                message: 'Failed to open serial port',
+                                detail: 'No configuration received within 3 seconds, communication failed',
+                                noLink:true,
+                            };
+                            dialog.showMessageBoxSync(null, options);    
+                          }
+                    }, 2000);
                     GUI.interval_add('mavlink_heartbeat', mavlink_msg_heartbeat, 1000, true);
                 }                     
             });
 
             //close事件监听
             port.on('close', () =>{
+                console.log("close");
+                GUI.connect_lock = false;
                 GUI.interval_remove('mavlink_heartbeat');
                 GUI.interval_remove('display_Info');
                 GUI.interval_remove('setup_data_pull_fast');
-                port.close();
                 $('#tabs ul.mode-connected').hide();
                 $('#tabs ul.mode-disconnected').show();
                 $('#tabs ul.mode-disconnected li a:first').click();
-                GUI.connect_lock = false;
                 $('div#connectbutton a.connect').removeClass('active');
+                $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'));
             });
 
             //data事件监听
@@ -150,15 +173,7 @@ window.onload=function(){
         else
         {
             port.close();
-            GUI.interval_remove('mavlink_heartbeat');
-            GUI.interval_remove('display_Info');
-            GUI.interval_remove('setup_data_pull_fast');
-            $('#tabs ul.mode-connected').hide();
-            $('#tabs ul.mode-disconnected').show();
-            $('#tabs ul.mode-disconnected li a:first').click();
-            GUI.connect_lock = false;
-            $('#tabs ul.mode-disconnected li a:first').click();
-            $('div#connectbutton a.connect').removeClass('active');
+            
        
         }
     });

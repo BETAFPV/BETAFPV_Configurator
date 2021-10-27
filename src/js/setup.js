@@ -9,7 +9,8 @@ const setup = {
     month:         0,
     day:           0,
     battery_voltage:0,
-    factory_reset_ack:false
+    factory_reset_ack:false,
+    mavlinkConnected:false
 };
 setup.initialize = function (callback) {
     const self = this;
