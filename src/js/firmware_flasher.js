@@ -390,53 +390,58 @@ firmware_flasher.initialize = function (callback) {
      
         $('a.flash_firmware').click(function () {
             if (!$(this).hasClass('disabled')) {
+                if(GUI.connect_lock){//串口已连接
+                    let targetSelected = ($('#TargetSelect option:selected').text());
 
-                let targetSelected = ($('#TargetSelect option:selected').text());
-
-                const options = {
-                    type: 'question',
-                    buttons: [ 'Yes, please', 'No, thanks','Cancel'],
-                    defaultId: 2,
-                    title: 'Question',
-                    message: 'Do you want to update ' +  targetSelected + '?',
-                    detail: 'You need to make sure you select the right target.',
-                    noLink:true,
-                };
-                
-                 var resNum = dialog.showMessageBoxSync(null, options);
-
-                if(resNum>0)
-                {
-                    console.log("canceled");
-                }
-                else{                   
-                    if(targetSelected === "Flight Controller")
-                    {
-                        packNum = 0;
-                        var buf = Buffer(1);
-                        buf[0] = 0x01;
-                    }
-                    else if(targetSelected === "Optical Sensor"){
-                        packNum = 0;
-                        var buf = Buffer(1);
-                        buf[0] = 0x03;
-                    }
-                    else{
-                        packNum = 0;
-                        var buf = Buffer(1);
-                        buf[0] = 0x05;
-                    }
-                
-                    port.write(buf, (err) =>{
-                        if (err) return console.log('write Error: ', err.message);
-                    });
-
-                    $("a.load_file").addClass('disabled');
+                    const options = {
+                        type: 'question',
+                        buttons: [ 'Yes, please', 'No, thanks','Cancel'],
+                        defaultId: 2,
+                        title: 'Question',
+                        message: 'Do you want to update ' +  targetSelected + '?',
+                        detail: 'You need to make sure you select the right target.',
+                        noLink:true,
+                    };
                     
-                    firmware_flasher.flashProgress(0);
-                    self.enableFlashing(false);
-                    starting = 1;
+                     var resNum = dialog.showMessageBoxSync(null, options);
+    
+                    if(resNum>0)
+                    {
+                        console.log("canceled");
+                    }
+                    else{                   
+                        if(targetSelected === "Flight Controller")
+                        {
+                            packNum = 0;
+                            var buf = Buffer(1);
+                            buf[0] = 0x01;
+                        }
+                        else if(targetSelected === "Optical Sensor"){
+                            packNum = 0;
+                            var buf = Buffer(1);
+                            buf[0] = 0x03;
+                        }
+                        else{
+                            packNum = 0;
+                            var buf = Buffer(1);
+                            buf[0] = 0x05;
+                        }
+                    
+                        port.write(buf, (err) =>{
+                            if (err) return console.log('write Error: ', err.message);
+                        });
+    
+                        $("a.load_file").addClass('disabled');
+                        
+                        firmware_flasher.flashProgress(0);
+                        self.enableFlashing(false);
+                        starting = 1;
+                    }
+                }else{
+                    alert("please connect COM first");
                 }
+
+               
             }
         });
         
@@ -474,9 +479,16 @@ firmware_flasher.initialize = function (callback) {
                                     binSize = binFile.length;
             
                                     packLen = Math.round(binSize / 1024);
-                                    
+                                    console.log("packLen:"+packLen);
+                                    if(packLen>5){
+                                        self.enableFlashing(true);
+                                        firmware_flasher.flashingMessage("Load Firmware Sucessfuly! Firmware Size: ( "+ binFile.length +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                                    }else{
+                                        self.enableFlashing(false);
+                                        firmware_flasher.flashingMessage("Load Firmware Failure!");
+                                    }
             
-                                    firmware_flasher.flashingMessage("Loaded Local Firmware : ( "+ binFile.length +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                                    
                                 }
                             });
 
