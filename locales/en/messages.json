@@ -3050,7 +3050,7 @@
         "message": "Select build type to see available boards."
     },
     "firmwareFlasherOnlineSelectBoardDescription": {
-        "message": "Select or auto-detect your board to see available online firmware releases - Select the correct firmware appropriate for your board."
+        "message": "Select the correct firmware appropriate for your board."
     },
     "firmwareFlasherOnlineSelectBoardDescription_radio": {
         "message": "Select your radio controller to see available online firmware releases - Select the correct firmware appropriate for your readio controller."
@@ -3145,8 +3145,14 @@
     "firmwareFlasherExitDfu": {
         "message": "Exit DFU Mode"
     },
-    "firmwareFlasherFlashFirmware": {
-        "message": "Flash Firmware"
+    "firmwareFlasherFlashOSD": {
+        "message": "Flash OSD"
+    },
+    "firmwareFlasherFlashSensor": {
+        "message": "Flash Sensor"
+    },
+    "firmwareFlasherFlashFC": {
+        "message": "Flash FC"
     },
     "firmwareFlasherGithubInfoHead": {
         "message": "GitHub Firmware Info"

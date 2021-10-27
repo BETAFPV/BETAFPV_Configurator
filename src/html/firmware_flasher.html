@@ -4,22 +4,12 @@
             <div class="spacer">
                 <table class="cf_table" style="margin-top: 10px;">
                     <tr>
-                        <td class="target-select">
-                            <select name="target"  id="TargetSelect">
-                                <option value="0" >Flight Controller</option>
-                                <option value="1" >Optical Sensor</option>
-                                <option value="2" >OSD</option>
-                            </select>
-                        </td>
-                        <td><span class="description" i18n="firmwareFlasherOnlineSelectTargetDescription">Select the correct target.</span></td>
-                    </tr>
-                    <tr>
                         <td class="board-select">
                             <select name="board"  id="boardTarget">
                                 <option value="loading" i18n="firmwareFlasherOptionLoading" >Choose a Board</option>
                             </select>
                         </td>
-                        <td><span class="description" i18n="firmwareFlasherOnlineSelectBoardDescription">Select your board to see available online firmware releases - Select the correct firmware appropriate for your board.</span></td>
+                        <td><span class="description" i18n="firmwareFlasherOnlineSelectBoardDescription"></span></td>
                     </tr>
                     <tr>
                         <td><select name="firmware_version" id="boardVersion">
@@ -65,7 +55,13 @@
             <span class="progressLabel">Please load firmware file</span>
         </div>
         <div class="btn">
-            <a class="flash_firmware disabled" href="#progressbar" i18n="firmwareFlasherFlashFirmware">Flash Firmware</a>
+            <a class="flash_OSD disabled" href="#progressbar" i18n="firmwareFlasherFlashOSD">Flash OSD</a>
+        </div>
+        <div class="btn">
+            <a class="flash_opf disabled" href="#progressbar" i18n="firmwareFlasherFlashSensor">Flash Sensor</a>
+        </div>
+        <div class="btn">
+            <a class="flash_firmware disabled" href="#progressbar" i18n="firmwareFlasherFlashFC">Flash FC</a>
         </div>
         <div class="btn">
             <a class="load_remote_file" href="#" i18n="firmwareFlasherButtonLoadOnline">Load Firmware [Online]</a>
