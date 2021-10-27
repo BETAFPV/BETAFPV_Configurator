@@ -42,6 +42,8 @@ mavlinkParser.on('FIRMWARE_INFO', function(msg) {
 
 mavlinkParser.on('ATTITUDE', function(msg) {
     // the parsed message is here
+    setup.mavlinkConnected = true;
+
     FC.SENSOR_DATA.kinematics[0] = msg.roll;
     FC.SENSOR_DATA.kinematics[1] = msg.pitch;
     FC.SENSOR_DATA.kinematics[2] = msg.yaw;
@@ -92,14 +94,7 @@ var nowheartBeatTime;
 var lastheartBeatTime;
 mavlinkParser.on('SYS_STATUS', function(msg) {
     setup.battery_voltage = msg.voltageBattery;
-    nowheartBeatTime = new Date().getTime();
-    if(nowheartBeatTime-lastheartBeatTime<3000){
-        setup.mavlinkConnected = true;
-    }else{
-        setup.mavlinkConnected = false;
-    }
-    lastheartBeatTime = new Date().getTime();
-    console.log(setup.mavlinkConnected);
+
 });
 
 mavlinkParser.on('PID', function(msg) { 

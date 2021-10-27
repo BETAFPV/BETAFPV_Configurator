@@ -125,7 +125,7 @@ window.onload=function(){
                             };
                             dialog.showMessageBoxSync(null, options);    
                           }
-                    }, 2000);
+                    }, 1000);
                     GUI.interval_add('mavlink_heartbeat', mavlink_msg_heartbeat, 1000, true);
                 }                     
             });
