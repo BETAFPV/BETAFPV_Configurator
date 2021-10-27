@@ -28,7 +28,6 @@ function addOptionValue(id,value,text) {
 } 
 
 async function listSerialPorts() {
-
     await serialport.list().then((ports, err) => {
         if(ports.length!==lastPortCount){
             $('#port option').each(function(){ 
@@ -45,7 +44,7 @@ async function listSerialPorts() {
 
 setTimeout(function listPorts() {
     listSerialPorts();
-    setTimeout(listPorts, 2000);
+    setTimeout(listPorts, 500);
   }, 500);
 
 setTimeout(function loadLanguage() {
