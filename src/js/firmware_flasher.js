@@ -75,11 +75,29 @@ firmware_flasher.flashingMessage = function(message, type) {
     return self;
 };
 
-firmware_flasher.enableFlashing = function (enabled) {
+firmware_flasher.enableFlashing = function (enabled,match) {
     if (enabled) {
-        $('a.flash_firmware').removeClass('disabled');
+        if(match==1)
+        {
+            $('a.flash_firmware').removeClass('disabled');
+        }
+        else if(match==3){
+            $('a.flash_opf').removeClass('disabled');
+        }
+        else if(match==5){
+            $('a.flash_OSD').removeClass('disabled');
+        }  
     } else {
-        $('a.flash_firmware').addClass('disabled');
+        if(match==1)
+        {
+            $('a.flash_firmware').addClass('disabled');
+        }
+        else if(match==3){
+            $('a.flash_opf').addClass('disabled');
+        }
+        else if(match==5){
+            $('a.flash_OSD').addClass('disabled');
+        }
     }
 };
 
@@ -253,21 +271,16 @@ function readJsonFile(fileName){
 
         }
     
-        
-        if(document.getElementById("TargetSelect").value == 0)
-        {
-            for (var i = 0; i < jsonData.length; ++i) {
-                console.log("name: "+jsonData[i].name);
-                console.log("version: "+jsonData[i].version);
-                $('#boardTarget').empty();
-                $('#boardVersion').empty();
-                addOptionValue2('boardTarget',i,jsonData[i].name);
-                addOptionValue2('boardVersion',i,jsonData[i].version);
-      
-                console.log("----------------------------------"); 
-              }
-        }
-        
+        for (var i = 0; i < jsonData.length; ++i) {
+            console.log("name: "+jsonData[i].name);
+            console.log("version: "+jsonData[i].version);
+            $('#boardTarget').empty();
+            $('#boardVersion').empty();
+            addOptionValue2('boardTarget',i,jsonData[i].name);
+            addOptionValue2('boardVersion',i,jsonData[i].version);
+    
+            console.log("----------------------------------"); 
+            }
     });
 }
 
@@ -348,16 +361,18 @@ function loadRemoteJsonFile(){
 
 firmware_flasher.initialize = function (callback) {
     const self = this;
-    self.enableFlashing(false);
-
+    self.enableFlashing(false,1);
+    self.enableFlashing(false,3);
+    self.enableFlashing(false,5);
 
 
     $('#content').load("./src/html/firmware_flasher.html", function () {
         i18n.localizePage();
 
         $('a.load_file').click(function () {
-  
-            const { dialog } = require('electron').remote;
+            self.enableFlashing(false,1);
+            self.enableFlashing(false,3);
+            self.enableFlashing(false,5);
             dialog.showOpenDialog({
                 title: "openFile",
                 defaultPath: "",
@@ -366,14 +381,37 @@ firmware_flasher.initialize = function (callback) {
                     { name: 'target files', extensions: ['bin'] },
                 ]
             }).then(result => {
+                
                 binFilePath = result.filePaths[0];
                 strFileName = binFilePath.substring(binFilePath.lastIndexOf("\\")+1); 
-                   
+                console.log(strFileName);
+
+                let regFC=/\bCetus/;
+                let regOPF=/\bOptical/;
+                let regOSD=/\bLiteSilverOSD/;
+                let regMatch=10;
+
+                if(strFileName.match(regFC))
+                {
+                    console.log("mFC");
+                    regMatch=1;
+                }
+                if(strFileName.match(regOPF))
+                {
+                    console.log("mOPF");
+                    regMatch=3;
+                }
+                if(strFileName.match(regOSD))
+                {
+                    console.log("mOSD");
+                    regMatch=5;
+                }
+
                 fs.readFile(result.filePaths[0], (err, binFile) => {
                     if (err) {
                         alert(err)
                     } else {
-                        self.enableFlashing(true);
+                        self.enableFlashing(true,regMatch);
                         binSize = binFile.length;
 
                         packLen = Math.round(binSize / 1024);
@@ -390,58 +428,106 @@ firmware_flasher.initialize = function (callback) {
      
         $('a.flash_firmware').click(function () {
             if (!$(this).hasClass('disabled')) {
-                if(GUI.connect_lock){//串口已连接
-                    let targetSelected = ($('#TargetSelect option:selected').text());
+                if(GUI.connect_lock){//串口已连接          
+                    // if(targetSelected === "Flight Controller")
+                    // {
+                        packNum = 0;
+                        var buf = Buffer(1);
+                        buf[0] = 0x01;
+                    // }
+                    // else if(targetSelected === "Optical Sensor"){
+                    //     packNum = 0;
+                    //     var buf = Buffer(1);
+                    //     buf[0] = 0x03;
+                    // }
+                    // else{
+                    //     packNum = 0;
+                    //     var buf = Buffer(1);
+                    //     buf[0] = 0x05;
+                    // }
+                
+                    port.write(buf, (err) =>{
+                        if (err) return console.log('write Error: ', err.message);
+                    });
 
-                    const options = {
-                        type: 'question',
-                        buttons: [ 'Yes, please', 'No, thanks','Cancel'],
-                        defaultId: 2,
-                        title: 'Question',
-                        message: 'Do you want to update ' +  targetSelected + '?',
-                        detail: 'You need to make sure you select the right target.',
-                        noLink:true,
-                    };
-                    
-                     var resNum = dialog.showMessageBoxSync(null, options);
-    
-                    if(resNum>0)
-                    {
-                        console.log("canceled");
-                    }
-                    else{                   
-                        if(targetSelected === "Flight Controller")
-                        {
-                            packNum = 0;
-                            var buf = Buffer(1);
-                            buf[0] = 0x01;
-                        }
-                        else if(targetSelected === "Optical Sensor"){
-                            packNum = 0;
-                            var buf = Buffer(1);
-                            buf[0] = 0x03;
-                        }
-                        else{
-                            packNum = 0;
-                            var buf = Buffer(1);
-                            buf[0] = 0x05;
-                        }
-                    
-                        port.write(buf, (err) =>{
-                            if (err) return console.log('write Error: ', err.message);
-                        });
-    
-                        $("a.load_file").addClass('disabled');
-                        $("a.load_remote_file").addClass('disabled');
+                    $("a.load_file").addClass('disabled');
+                    $("a.load_remote_file").addClass('disabled');
 
-                        firmware_flasher.flashProgress(0);
-                        self.enableFlashing(false);
+                    firmware_flasher.flashProgress(0);
+                    self.enableFlashing(false,1);
 
-                        starting = 1;
-                    }
+                    starting = 1;
                 }else{
                     //alert("please connect COM first");
 
+                    const options = {
+                        type: 'warning',
+                        buttons: [ 'ok'],
+                        defaultId: 0,
+                        title: 'Warn',
+                        message: 'Please Select Correct Serial Port and Connect It Firstly',
+                        noLink:true,
+                    };
+                    
+                    dialog.showMessageBoxSync(null, options);                    
+                }
+
+               
+            }
+        });
+
+        $('a.flash_opf').click(function () {
+            if (!$(this).hasClass('disabled')) {
+                if(GUI.connect_lock){//串口已连接          
+                    packNum = 0;
+                    var buf = Buffer(1);
+                    buf[0] = 0x03;
+              
+                    port.write(buf, (err) =>{
+                        if (err) return console.log('write Error: ', err.message);
+                    });
+
+                    $("a.load_file").addClass('disabled');
+                    $("a.load_remote_file").addClass('disabled');
+
+                    firmware_flasher.flashProgress(0);
+                    self.enableFlashing(false,3);
+
+                    starting = 1;
+                }else{
+                    const options = {
+                        type: 'warning',
+                        buttons: [ 'ok'],
+                        defaultId: 0,
+                        title: 'Warn',
+                        message: 'Please Select Correct Serial Port and Connect It Firstly',
+                        noLink:true,
+                    };
+                    
+                    dialog.showMessageBoxSync(null, options);                    
+                }      
+            }
+        });
+
+        $('a.flash_OSD').click(function () {
+            if (!$(this).hasClass('disabled')) {
+                if(GUI.connect_lock){//串口已连接          
+                    packNum = 0;
+                    var buf = Buffer(1);
+                    buf[0] = 0x05;
+
+                    port.write(buf, (err) =>{
+                        if (err) return console.log('write Error: ', err.message);
+                    });
+
+                    $("a.load_file").addClass('disabled');
+                    $("a.load_remote_file").addClass('disabled');
+
+                    firmware_flasher.flashProgress(0);
+                    self.enableFlashing(false,5);
+
+                    starting = 1;
+                }else{
                     const options = {
                         type: 'warning',
                         buttons: [ 'ok'],
@@ -488,16 +574,16 @@ firmware_flasher.initialize = function (callback) {
                                 if (err) {
                                     alert(err)
                                 } else {
-                                    self.enableFlashing(true);
+                                    self.enableFlashing(true,1);
                                     binSize = binFile.length;
             
                                     packLen = Math.round(binSize / 1024);
                                     console.log("packLen:"+packLen);
                                     if(packLen>5){
-                                        self.enableFlashing(true);
+                                        self.enableFlashing(true,1);
                                         firmware_flasher.flashingMessage("Load Firmware Sucessfuly! Firmware Size: ( "+ binFile.length +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
                                     }else{
-                                        self.enableFlashing(false);
+                                        self.enableFlashing(false,1);
                                         firmware_flasher.flashingMessage("Load Firmware Failure!");
                                     }                                  
                                 }
@@ -506,27 +592,6 @@ firmware_flasher.initialize = function (callback) {
                     })
                 };
                 xhr.send();
-            }
-        });
-
-        $('select[id="TargetSelect"]').change(function () {
-            let TargetSelect = document.getElementById("TargetSelect").value;
-            console.log("TargetSelect:"+TargetSelect);
-            switch(TargetSelect){
-                case '0':// FC
-                    let file_path = path.join(__dirname, "./board.json");
-                    readJsonFile(file_path);
-                    break;
-                case '1'://Optical Flow
-                    $('#boardTarget').empty();
-                    $('#boardVersion').empty();              
-                    break;
-                case '2'://OSD
-                    $('#boardTarget').empty();
-                    $('#boardVersion').empty();
-                    break;
-                default:
-                    break;
             }
         });
 

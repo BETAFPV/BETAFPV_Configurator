@@ -2914,8 +2914,14 @@
     "firmwareFlasherExitDfu": {
         "message": "退出 DFU 模式"
     },
-    "firmwareFlasherFlashFirmware": {
-        "message": "烧写固件"
+    "firmwareFlasherFlashOSD": {
+        "message": "烧写OSD"
+    },
+    "firmwareFlasherFlashSensor": {
+        "message": "烧写传感器"
+    },
+    "firmwareFlasherFlashFC": {
+        "message": "烧写飞控"
     },
     "firmwareFlasherGithubInfoHead": {
         "message": "GitHub 固件信息"
