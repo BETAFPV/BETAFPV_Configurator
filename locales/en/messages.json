@@ -6470,5 +6470,17 @@
     },
     "dialogCalibrateAcclerometerFailed":{
         "message":"Calibration accelerometer failed."
+    },
+    "dialogFactoryResetOK":{
+        "message":"Restore factory settings successfull"
+    },
+    "dialogFactoryResetfailed":{
+        "message":"Restore factory settings failed"
+    },
+    "dialogPidSaveOK":{
+        "message":"Save PID successful"
+    },
+    "dialogPidSaveFaild":{
+        "message":"Save PID failed! Please check the connection"
     }
 }

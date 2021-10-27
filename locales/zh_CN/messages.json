@@ -6074,5 +6074,23 @@
     },
     "dialogCalibrateAcclerometerFailed":{
         "message":"加速度计校准失败"
+    },
+    "dialogFactoryResetOK":{
+        "message":"恢复出厂设置成功"
+    },
+    "dialogFactoryResetfailed":{
+        "message":"恢复出厂设置失败"
+    },
+    "dialogPidSaveOK":{
+        "message":"PID设置成功"
+    },
+    "dialogPidSaveFaild":{
+        "message":"PID设置失败，请检查连接并重试"
+    },
+    "dialogRatesSaveOK":{
+        "message":"Rates值设置成功"
+    },
+    "dialogRatesSaveFaild":{
+        "message":"Rates值保存失败，请检查连接并重试"
     }
 }

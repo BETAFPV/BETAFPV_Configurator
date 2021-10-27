@@ -42,11 +42,20 @@ setup.initialize = function (callback) {
         console.log(buffer);
         mavlinkSend(buffer);
 
-        setTimeout(function listPorts() {
+        setTimeout(() => {
             if(setup.factory_reset_ack==true){
-                alert("factory reset OK,please repower on");
+                const dialogFactoryResetOK = $('.dialogFactoryResetOK')[0];
+                dialogFactoryResetOK.showModal();
+                $('.dialogFactoryResetOK-confirmbtn').click(function() {
+                    console.log(" dialogFactoryResetOK.close");
+                    dialogFactoryResetOK.close();
+                });
             }else{
-                alert("factory reset failed,please check the connetion");
+                const dialogFactoryResetfailed = $('.dialogFactoryResetfailed')[0];
+                dialogFactoryResetfailed.showModal();
+                $('.dialogFactoryResetfailed-confirmbtn').click(function() {
+                    dialogFactoryResetfailed.close();
+                });
             }
           }, 1000);
     });
