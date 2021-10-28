@@ -2777,7 +2777,7 @@
         "message": "手动下载"
     },
     "firmwareFlasherTargetWarning": {
-        "message": "<span class=\"message-negative\">重要</span>：请选择飞控对应的固件，如果烧写错误的固件将会导致 <span class=\"message-negative\">糟糕</span> 的事发生。"
+        "message": "请选择飞控对应的固件，如果烧写错误的固件将会导致 <span class=\"message-negative\">糟糕</span> 的事发生。可以通过本上位机烧写飞控板上的3份不同固件：<br><span class=\"message-negative\">飞控固件</span>：飞行控制的主程序固件；<br><span class=\"message-negative\">OSD固件</span>：控制OSD信息显示的程序固件；<br><span class=\"message-negative\">传感器固件</span>：对光流、TOF等传感器数据进行采集处理的程序固件；"
     },
     "firmwareFlasherTargetWarning_radio": {
         "message": "<span class=\"message-negative\">重要</span>：请选择遥控器对应的固件，如果烧写错误的固件将会导致 <span class=\"message-negative\">糟糕</span> 的事发生。"
@@ -2945,10 +2945,10 @@
         "message": "信息："
     },
     "firmwareFlasherWarningText": {
-        "message": "请<span class=\"message-negative\">不要</span>尝试烧写<strong> Betaflight 不支持的飞控板</strong>。<br />烧写固件过程中千万<span class=\"message-negative\">不要</span> <strong>断开飞控连接</strong> 或 <strong>关闭电脑</strong><br /><br /><strong>注意：</strong>STM32 的 bootloader 储存在ROM中，所以不会有变砖可能。<br /><strong>注意：在固件烧写页面</strong><span class=\"message-negative\">自动连接</span>会被自动禁用。<br /><strong>注意：</strong>烧写固件可能会清空设置，请务必先备份好你的数据。<br /><strong>注意：</strong>如果烧写遇到问题，<strong>尝试拔掉连接到飞控的所有连线</strong> 然后尝试重启，更新配置程序，升级驱动。<br /><strong>注意：</strong>当使用虚拟USB（VCP）的飞控（大多数新的飞控都是），请仔细阅读 Betaflight 手册 USB flashing 部分章节，并确保驱动和软件已正确安装。"
+        "message": "请<span class=\"message-negative\">不要</span>尝试烧写<strong>不支持的飞控</strong>。<br />烧写固件过程中千万<span class=\"message-negative\">不要</span> <strong>断开飞控连接</strong> 或 <strong>关闭电脑</strong><br /><br /><strong class=\"message-negative\">驱动要求：</strong>飞控升级使用虚拟USB（VCP），请确保驱动和软件已正确安装。<br /><strong>注意：</strong>Bootloader储存在ROM中，所以不会有变砖可能。<br /><strong>注意：</strong>烧写固件可能会清空设置，请务必先备份好你的数据。<br /><strong>注意：</strong>如果烧写遇到问题，<strong>尝试拔掉连接到遥控器的所有连线</strong> 然后尝试重启，更新配置程序，升级驱动。"
     },
     "firmwareFlasherWarningText_radio": {
-        "message": "请<span class=\"message-negative\">不要</span>尝试烧写<strong>不支持的遥控器</strong>。<br />烧写固件过程中千万<span class=\"message-negative\">不要</span> <strong>断开飞控连接</strong> 或 <strong>关闭电脑</strong><br /><br /><strong class=\"message-negative\">驱动要求：</strong>遥控器升级使用虚拟USB（VCP），请确保驱动和软件已正确安装。<br /><strong>注意：</strong>Bootloader储存在ROM中，所以不会有变砖可能。<br /><strong>注意：</strong>烧写固件可能会清空设置，请务必先备份好你的数据。<br /><strong>注意：</strong>如果烧写遇到问题，<strong>尝试拔掉连接到遥控器的所有连线</strong> 然后尝试重启，更新配置程序，升级驱动。"
+        "message": "请<span class=\"message-negative\">不要</span>尝试烧写<strong>不支持的遥控器</strong>。<br />烧写固件过程中千万<span class=\"message-negative\">不要</span> <strong>断开遥控器连接</strong> 或 <strong>关闭电脑</strong><br /><br /><strong class=\"message-negative\">驱动要求：</strong>遥控器升级使用虚拟USB（VCP），请确保驱动和软件已正确安装。<br /><strong>注意：</strong>Bootloader储存在ROM中，所以不会有变砖可能。<br /><strong>注意：</strong>烧写固件可能会清空设置，请务必先备份好你的数据。<br /><strong>注意：</strong>如果烧写遇到问题，<strong>尝试拔掉连接到遥控器的所有连线</strong> 然后尝试重启，更新配置程序，升级驱动。"
     },
     "firmwareFlasherRecoveryHead": {
         "message": "<strong> 恢复/丢失通信 </strong>"
@@ -2957,7 +2957,7 @@
         "message": "<strong> 遥控器固件烧写步骤 </strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "如果飞控板失去通信，你可以按照以下的几个步骤来恢复：<ul><li>关闭电源</li><li>打开'无重启序列'，打开‘擦除整个芯片‘选项。</li><li>短接 BOOT 引脚，或者按住 BOOT 按键。</li><li>上电(如果操作正确，飞控的“活动”灯不会闪烁)。</li><li>如果需要请安装 STM32 驱动和 Zadig (参阅 Betaflight 手册<a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> 部分 ).</li><li>关闭 Befaflight 软件，关闭所有 Chrome 应用，然后重新启动Betaflight。</li><li>释放 BOOT 按键（如有）。</li><li>烧写正确的固件(参照飞控厂商制定的波特率)。</li><li>断电。</li><li>移除 BOOT 引脚的短接。</li><li>上电(飞控“活动”灯应该会闪烁).</li><li>正常连接。</li></ul>"
+        "message": "你可以按照以下的几个步骤来重刷飞控板固件。其中包括飞控固件，OSD固件和传感器固件（可选）：<ul><li>飞控断电；</li><li>按住飞控底部的按键；</li><li>上电（通过电池或者USB上电都可以），如果操作正确，飞控底部LED灯白色常亮，表示已经处于固件烧写状态；</li><li>松开飞控底部按键，将飞控通过USB数据线连接电脑；</li><li>飞控将会被识别为COM口，在右上角选择其对应的COM口和波特率，再点击“连接”按钮，按钮变为红色则表示连接成功；如果未被正确识别为COM口，请检查驱动是否安装正确。需要请安装 STM32 驱动和 Zadig (参阅 Betaflight 手册<a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> 部分 ).</li><li>在本页面顶部下拉框中，选择对应的飞控硬件型号和固件版本，点击从网络加载固件。若网络无法连接则需要在本地导入固件。点击右下角“烧写xxx固件”按钮；</li><li>等待烧写进度条提示烧写完成，断开USB连接并重启飞控；</li></ul>"
     },
     "firmwareFlasherRecoveryText_radio": {
         "message": "遥控器固件烧写步骤如下：<ul><li>遥控器关机；</li><li>按住遥控器SETUP按键，开机，遥控器蓝灯常亮，在“滴滴滴”三声之后，表示已经处于固件烧写状态；</li><li>松开SETUP按键，将遥控器通过USB数据线连接电脑；</li><li>遥控器将会被识别为COM口，在右上角选择其对应的COM口和波特率，再点击“连接”按钮，按钮变为红色则表示连接成功；</li><li>选择对应的固件，点击从网络加载固件。若网络无法连接则需要在本地导入固件。点击右下角“烧写固件”按钮</li><li>等待烧写进度条提示烧写完成，断开USB连接并重启遥控器</li></ul>"
