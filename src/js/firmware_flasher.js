@@ -345,8 +345,8 @@ function loadRemoteJsonFile(){
      //3.超市无法连接github则从gitee上加载
      setTimeout(() => {
          if(loadJsonFileFromGithubSuccessful == false){
-            //  xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/856825/download/LiteRadio.json", true);
-            //  xhr.send(null);
+             xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/865137/download/board.json", true);
+             xhr.send(null);
              console.log("get json file from gitee");
          }    
      }, 1000);
@@ -438,11 +438,11 @@ firmware_flasher.initialize = function (callback) {
                         }
                         else
                         {
-                            $('#TargetID').text(" ");
-                            $('#BoardID').text(" ");
+                            $('#FileID').text("Unrecognized firmware!");
+                            $('#TargetID').text("    ");
+                            $('#BoardID').text("   ");
                             $('#VersionID').text(" ");
                             $('#DateID').text(" ");
-                            $('#FileID').text(" ");
                             firmware_flasher.flashingMessage("Failed to Load Firmware",self.FLASH_MESSAGE_TYPES.INVALID);
                         }
                     }
@@ -652,13 +652,77 @@ firmware_flasher.initialize = function (callback) {
                                     }else{
                                         self.enableFlashing(false,1);
                                         firmware_flasher.flashingMessage("Load Firmware Failure!");
+                                        $('#FileID').text("Unrecognized firmware!");
+                                        $('#TargetID').text("    ");
+                                        $('#BoardID').text("   ");
+                                        $('#VersionID').text(" ");
+                                        $('#DateID').text(" ");
+                                        
+
                                     }                                  
                                 }
                             });
                         }
                     })
                 };
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState==2){
+                        console.log("The server is connected:"+xhr.status);
+                    }else if(xhr.readyState==3){
+                        console.log("Request was received :"+xhr.status);
+                    }
+             
+                     if (xhr.readyState == 4){
+                         if(xhr.status == 200){//ok
+                            loadFirmwareFromGithubSuccessful = true;
+                         }
+                         else{
+                             if(loadFirmwareFromGithubSuccessful == true){
+                                loadFirmwareFromGithubSuccessful = false;
+                                console.log("can't load firmware from github");
+                             }else{
+                                console.log("can't load firmware from gitee");
+                             }
+                             
+                         } 
+                     }
+                 };
+
                 xhr.send();
+                xhr.timeout = 800; 
+                xhr.ontimeout = function(){
+                    console.log("get firmware time out");
+                    loadFirmwareFromGithubSuccessful = false;
+                }
+                setTimeout(() => {
+                    if(loadFirmwareFromGithubSuccessful == false){
+                        let firmware_name = targetBoardSelected + "_" + targetVersionSelected+ ".bin";
+                        switch(firmware_name){
+                            case "Cetus_1.0.0.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/865138/download/Cetus_1.0.0.bin", true);
+                                xhr.send(null);
+                                break;
+                            case "Cetus_pro_1.1.0.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/865141/download/Cetus_pro_1.1.0.bin", true);
+                                xhr.send(null);
+                                break;
+                            case "Cetus_pro_1.2.0.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/865140/download/Cetus_pro_1.2.0.bin", true);
+                                xhr.send(null);
+                                break;
+                            case "Lite_v3_1.0.0.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/865139/download/Lite_v3_1.0.0.bin", true);
+                                xhr.send(null);
+                                break;
+                            default:
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/856701/download/null.bin", true);
+                                xhr.send(null);
+                                break;    
+                        }
+                       
+                    }
+                }, 1000);
+                
             }
         });
 
