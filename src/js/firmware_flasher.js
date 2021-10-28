@@ -1,6 +1,7 @@
 const {dialog}=require('electron').remote;
 const os = require('os')
 const path = require('path')
+const {remote} = require('electron')
 
 var jsonFile = require('jsonfile')
 
@@ -476,7 +477,8 @@ firmware_flasher.initialize = function (callback) {
                                 message: i18n.getMessage('Check_Serial_Port_and_enter_bootloader'),
                                 noLink:true,
                             };
-                            dialog.showMessageBoxSync(null, options); 
+                            let WIN      = remote.getCurrentWindow();
+                            dialog.showMessageBoxSync(WIN, options); 
                             $('a.flash_firmware').removeClass('disabled');
                             $("a.load_file").removeClass('disabled');
                             $("a.load_remote_file").removeClass('disabled');
@@ -494,8 +496,8 @@ firmware_flasher.initialize = function (callback) {
                         message: i18n.getMessage('Connect_Serial_Port_Firstlt'),
                         noLink:true,
                     };
-                    
-                    dialog.showMessageBoxSync(null, options);                    
+                    let WIN      = remote.getCurrentWindow();
+                    dialog.showMessageBoxSync(WIN, options);                    
                 }
 
                
@@ -533,7 +535,8 @@ firmware_flasher.initialize = function (callback) {
                                 message: i18n.getMessage('Check_Serial_Port_and_enter_bootloader'),
                                 noLink:true,
                             };
-                            dialog.showMessageBoxSync(null, options); 
+                            let WIN      = remote.getCurrentWindow();
+                            dialog.showMessageBoxSync(WIN, options); 
                             $('a.flash_opf').removeClass('disabled');
                             $("a.load_file").removeClass('disabled');
                             $("a.load_remote_file").removeClass('disabled');
@@ -549,8 +552,8 @@ firmware_flasher.initialize = function (callback) {
                         message: i18n.getMessage('Connect_Serial_Port_Firstlt'),
                         noLink:true,
                     };
-                    
-                    dialog.showMessageBoxSync(null, options);                    
+                    let WIN      = remote.getCurrentWindow();
+                    dialog.showMessageBoxSync(WIN, options);                    
                 }      
             }
         });
@@ -586,7 +589,8 @@ firmware_flasher.initialize = function (callback) {
                                 message: i18n.getMessage('Check_Serial_Port_and_enter_bootloader'),
                                 noLink:true,
                             };
-                            dialog.showMessageBoxSync(null, options); 
+                            let WIN      = remote.getCurrentWindow();
+                            dialog.showMessageBoxSync(WIN, options); 
                             $('a.flash_OSD').removeClass('disabled');
                             $("a.load_file").removeClass('disabled');
                             $("a.load_remote_file").removeClass('disabled');
@@ -602,8 +606,8 @@ firmware_flasher.initialize = function (callback) {
                         message: i18n.getMessage('Connect_Serial_Port_Firstlt'),
                         noLink:true,
                     };
-                    
-                    dialog.showMessageBoxSync(null, options);                    
+                    let WIN      = remote.getCurrentWindow();
+                    dialog.showMessageBoxSync(WIN, options);                    
                 }
 
                

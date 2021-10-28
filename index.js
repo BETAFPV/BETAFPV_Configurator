@@ -1,5 +1,6 @@
 const serialport = require('serialport')
 
+
 var flightcontrol_configurator_version ='v1.0.1_alpha';
 var flightcontrol_configurator_major_version =1;
 var flightcontrol_configurator_minor_version =0;
@@ -123,32 +124,14 @@ window.onload=function(){
                                 detail: 'No configuration received within 3 seconds, communication failed',
                                 noLink:true,
                             };
-                            dialog.showMessageBoxSync(null, options);    
+                            let WIN      = remote.getCurrentWindow();
+                            dialog.showMessageBoxSync(WIN, options);    
                           }
                     }, 1000);
                     GUI.interval_add('mavlink_heartbeat', mavlink_msg_heartbeat, 1000, true);
                 }
                 else{
                     $('div#connectbutton div.connect_state').text(i18n.getMessage('disconnect')).addClass('active');
-                //     setTimeout(() => {
-                //         if(setup.mavlinkConnected==false){
-                //           $('div#connectbutton a.connect').removeClass('active');
-                          
-                //           port.close();
-                //           GUI.connect_lock = true;
-                          
-                //           const options = {
-                //               type: 'warning',
-                //               buttons: [ 'ok'],
-                //               defaultId: 0,
-                //               title: 'Warn',
-                //               message: 'Failed to open serial port',
-                //               detail: 'No configuration received within 3 seconds, communication failed',
-                //               noLink:true,
-                //           };
-                //           dialog.showMessageBoxSync(null, options);    
-                //         }
-                //   }, 1000);
                 }                     
             });
 
