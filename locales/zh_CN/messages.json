@@ -6101,5 +6101,14 @@
     },
     "dialogRatesSaveFaild":{
         "message":"Rates值保存失败，请检查连接并重试"
+    },
+    "Connect_Serial_Port_Firstlt":{
+        "message":"请选择正确的串口并先连接它"
+    },
+    "Flash_failed":{
+        "message":"刷写失败!"
+    },
+    "Check_Serial_Port_and_enter_bootloader":{
+        "message":"请检查串口是否选择正确，且飞控处于bootloader状态."
     }
 }

@@ -6491,5 +6491,14 @@
     },
     "dialogPidSaveFaild":{
         "message":"Save PID failed! Please check the connection"
+    },
+    "Connect_Serial_Port_Firstlt":{
+        "message":"Please Select Correct Serial Port and Connect It Firstly"
+    },
+    "Flash_failed":{
+        "message":"Flash failed!"
+    },
+    "Check_Serial_Port_and_enter_bootloader":{
+        "message":"Please check the serial port is correctly selected and the FC has entered the bootloader."
     }
 }

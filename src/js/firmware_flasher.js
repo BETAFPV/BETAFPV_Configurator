@@ -472,8 +472,8 @@ firmware_flasher.initialize = function (callback) {
                                 type: 'warning',
                                 buttons: [ 'ok'],
                                 defaultId: 0,
-                                title: 'Flash failed!',
-                                message: 'Please check the serial port is correctly selected and the FC has entered the bootloader',
+                                title: i18n.getMessage('Flash_failed'),
+                                message: i18n.getMessage('Check_Serial_Port_and_enter_bootloader'),
                                 noLink:true,
                             };
                             dialog.showMessageBoxSync(null, options); 
@@ -490,8 +490,8 @@ firmware_flasher.initialize = function (callback) {
                         type: 'warning',
                         buttons: [ 'ok'],
                         defaultId: 0,
-                        title: 'Warn',
-                        message: 'Please Select Correct Serial Port and Connect It Firstly',
+                        title: i18n.getMessage('warningTitle'),
+                        message: i18n.getMessage('Connect_Serial_Port_Firstlt'),
                         noLink:true,
                     };
                     
@@ -529,8 +529,8 @@ firmware_flasher.initialize = function (callback) {
                                 type: 'warning',
                                 buttons: [ 'ok'],
                                 defaultId: 0,
-                                title: 'Flash failed!',
-                                message: 'Please check the serial port is correctly selected and the FC has entered the bootloader',
+                                title: i18n.getMessage('Flash_failed'),
+                                message: i18n.getMessage('Check_Serial_Port_and_enter_bootloader'),
                                 noLink:true,
                             };
                             dialog.showMessageBoxSync(null, options); 
@@ -545,8 +545,8 @@ firmware_flasher.initialize = function (callback) {
                         type: 'warning',
                         buttons: [ 'ok'],
                         defaultId: 0,
-                        title: 'Warn',
-                        message: 'Please Select Correct Serial Port and Connect It Firstly',
+                        title: i18n.getMessage('warningTitle'),
+                        message: i18n.getMessage('Connect_Serial_Port_Firstlt'),
                         noLink:true,
                     };
                     
@@ -582,8 +582,8 @@ firmware_flasher.initialize = function (callback) {
                                 type: 'warning',
                                 buttons: [ 'ok'],
                                 defaultId: 0,
-                                title: 'Flash failed!',
-                                message: 'Please check the serial port is correctly selected and the FC has entered the bootloader',
+                                title: i18n.getMessage('Flash_failed'),
+                                message: i18n.getMessage('Check_Serial_Port_and_enter_bootloader'),
                                 noLink:true,
                             };
                             dialog.showMessageBoxSync(null, options); 
@@ -598,8 +598,8 @@ firmware_flasher.initialize = function (callback) {
                         type: 'warning',
                         buttons: [ 'ok'],
                         defaultId: 0,
-                        title: 'Warn',
-                        message: 'Please Select Correct Serial Port and Connect It Firstly',
+                        title: i18n.getMessage('warningTitle'),
+                        message: i18n.getMessage('Connect_Serial_Port_Firstlt'),
                         noLink:true,
                     };
                     
