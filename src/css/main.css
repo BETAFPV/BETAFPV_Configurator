@@ -1676,8 +1676,8 @@ dialog .dialog_toolbar .btn a.disabled {
     /*  common styles for content toolbar buttons */
     margin-top: 0;
     margin-bottom: 0;
-    margin-left: calc(40%);
-    margin-right: calc(40%);
+    margin-left: calc(36%);
+    margin-right: calc(36%);
     background-color: #f5ab0b;
     border-radius: 3px;
     border: 1px solid #dba718;
