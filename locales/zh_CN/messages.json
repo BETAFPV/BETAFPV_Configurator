@@ -2809,6 +2809,9 @@
     "firmwareFlasherSteps": {
         "message": "固件刷写步骤"
     },
+    "firmwareInfo": {
+        "message": "固件信息"
+    },
     "firmwareTarget": {
         "message": "当前更新目标"
     },

@@ -384,39 +384,67 @@ firmware_flasher.initialize = function (callback) {
                 
                 binFilePath = result.filePaths[0];
                 strFileName = binFilePath.substring(binFilePath.lastIndexOf("\\")+1); 
-                console.log(strFileName);
-
-                let regFC=/\bCetus/;
-                let regOPF=/\bOptical/;
-                let regOSD=/\bLiteSilverOSD/;
-                let regMatch=10;
-
-                if(strFileName.match(regFC))
-                {
-                    console.log("mFC");
-                    regMatch=1;
-                }
-                if(strFileName.match(regOPF))
-                {
-                    console.log("mOPF");
-                    regMatch=3;
-                }
-                if(strFileName.match(regOSD))
-                {
-                    console.log("mOSD");
-                    regMatch=5;
-                }
 
                 fs.readFile(result.filePaths[0], (err, binFile) => {
                     if (err) {
                         alert(err)
                     } else {
-                        self.enableFlashing(true,regMatch);
-                        binSize = binFile.length;
+                        
+                        binSize = binFile.length - 12;
+                        var binSizeTemp = binFile.length;
+                        
 
-                        packLen = Math.round(binSize / 1024);
+                        if(binFile[binSizeTemp-12] == 0x5a)
+                        {
+                            let targetID = binFile[binSizeTemp-11];
+                            if(targetID ==1)
+                            {
+                                $('#TargetID').text("   Flight Controller");
+                            }
+                            else if(targetID ==3)
+                            {
+                                $('#TargetID').text("   OpticalFlow Sensor");
+                            }
+                            else if(targetID ==5)
+                            {
+                                $('#TargetID').text("   OSD");
+                            }
+                            let boardID = binFile[binSizeTemp-10];
+                            if(boardID ==1)
+                            {
+                                $('#BoardID').text("   Cetus");
+                            }
+                            else if(boardID ==3)
+                            {
+                                $('#BoardID').text("   Cetus Pro");
+                            }
+                            else if(boardID ==5)
+                            {
+                                $('#BoardID').text("   Lite Brushed v3");
+                            }
 
-                        firmware_flasher.flashingMessage("Loaded Local Firmware : ( "+ binFile.length +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                            var versionID = "  v" + binFile[binSizeTemp-9] + "." +binFile[binSizeTemp-8] +"." +binFile[binSizeTemp-7];
+                            $('#VersionID').text(versionID);
+
+                            var dateID = "  " + binFile[binSizeTemp-6] + binFile[binSizeTemp-5] + binFile[binSizeTemp-4] + binFile[binSizeTemp-3] + "-" +binFile[binSizeTemp-2] + "-"+binFile[binSizeTemp-1];
+                            $('#DateID').text(dateID);
+
+                            $('#FileID').text(strFileName);
+                            
+                            self.enableFlashing(true,targetID);
+                            packLen = Math.round(binSize / 1024);
+
+                            firmware_flasher.flashingMessage("Loaded Local Firmware : ( "+ binSize +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                        }
+                        else
+                        {
+                            $('#TargetID').text(" ");
+                            $('#BoardID').text(" ");
+                            $('#VersionID').text(" ");
+                            $('#DateID').text(" ");
+                            $('#FileID').text(" ");
+                            firmware_flasher.flashingMessage("Failed to Load Firmware",self.FLASH_MESSAGE_TYPES.INVALID);
+                        }
                     }
                 });
     

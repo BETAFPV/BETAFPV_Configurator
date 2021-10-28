@@ -3043,6 +3043,9 @@
     "firmwareFlasherSteps": {
         "message": "Stpes of how to flasher"
     },
+    "firmwareInfo": {
+        "message": "Firmware Info"
+    },
     "firmwareTarget": {
         "message": "Current Selected Target"
     },
