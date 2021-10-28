@@ -271,16 +271,16 @@ function readJsonFile(fileName){
 
         }
     
-        for (var i = 0; i < jsonData.length; ++i) {
-            console.log("name: "+jsonData[i].name);
-            console.log("version: "+jsonData[i].version);
-            $('#boardTarget').empty();
-            $('#boardVersion').empty();
-            addOptionValue2('boardTarget',i,jsonData[i].name);
-            addOptionValue2('boardVersion',i,jsonData[i].version);
+        // for (var i = 0; i < jsonData.length; ++i) {
+        //     console.log("name: "+jsonData[i].name);
+        //     console.log("version: "+jsonData[i].version);
+        //     $('#boardTarget').empty();
+        //     $('#boardVersion').empty();
+        //     addOptionValue2('boardTarget',i,jsonData[i].name);
+        //     addOptionValue2('boardVersion',i,jsonData[i].version);
     
-            console.log("----------------------------------"); 
-            }
+        //     console.log("----------------------------------"); 
+        //     }
     });
 }
 
@@ -603,13 +603,52 @@ firmware_flasher.initialize = function (callback) {
                                     alert(err)
                                 } else {
                                     self.enableFlashing(true,1);
-                                    binSize = binFile.length;
+                                    binSize = binFile.length - 12;
+                                    var binSizeTemp = binFile.length;
             
                                     packLen = Math.round(binSize / 1024);
                                     console.log("packLen:"+packLen);
                                     if(packLen>5){
                                         self.enableFlashing(true,1);
                                         firmware_flasher.flashingMessage("Load Firmware Sucessfuly! Firmware Size: ( "+ binFile.length +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                                        if(binFile[binSizeTemp-12] == 0x5a)
+                                        {
+                                            let targetID = binFile[binSizeTemp-11];
+                                            if(targetID ==1)
+                                            {
+                                                $('#TargetID').text("   Flight Controller");
+                                            }
+                                            else if(targetID ==3)
+                                            {
+                                                $('#TargetID').text("   OpticalFlow Sensor");
+                                            }
+                                            else if(targetID ==5)
+                                            {
+                                                $('#TargetID').text("   OSD");
+                                            }
+                                            let boardID = binFile[binSizeTemp-10];
+                                            if(boardID ==1)
+                                            {
+                                                $('#BoardID').text("   Cetus");
+                                            }
+                                            else if(boardID ==3)
+                                            {
+                                                $('#BoardID').text("   Cetus Pro");
+                                            }
+                                            else if(boardID ==5)
+                                            {
+                                                $('#BoardID').text("   Lite Brushed v3");
+                                            }
+
+                                            var versionID = "  v" + binFile[binSizeTemp-9] + "." +binFile[binSizeTemp-8] +"." +binFile[binSizeTemp-7];
+                                            $('#VersionID').text(versionID);
+
+                                            var dateID = "  " + binFile[binSizeTemp-6] + binFile[binSizeTemp-5] + binFile[binSizeTemp-4] + binFile[binSizeTemp-3] + "-" +binFile[binSizeTemp-2] + "-"+binFile[binSizeTemp-1];
+                                            $('#DateID').text(dateID);
+
+                                            $('#FileID').text(str);
+                                        }
+                            
                                     }else{
                                         self.enableFlashing(false,1);
                                         firmware_flasher.flashingMessage("Load Firmware Failure!");
@@ -627,20 +666,23 @@ firmware_flasher.initialize = function (callback) {
             console.log("FC boardTarget change:"+boardTarget);
             firmware_flasher.boardTarget = parseInt($(this).val(), 10);
             switch(firmware_flasher.boardTarget){
-                case 0:
+                case 1://cetus
                     $('#boardVersion').empty();
                     for(let i=0;i<firmware_flasher.firmware_version.Cetus.length;i++){
+                        console.log("firmware_flasher.firmware_version.Cetus.length:"+firmware_flasher.firmware_version.Cetus.length);
                         addOptionValue2('boardVersion',i,firmware_flasher.firmware_version.Cetus[i].version);
                     }
                     break;
-                case 1:
+                case 2://cetus_pro
                     $('#boardVersion').empty();
                     for(let i=0;i<firmware_flasher.firmware_version.Cetus_pro.length;i++){
+                        console.log("firmware_flasher.firmware_version.Cetus_pro.length:"+firmware_flasher.firmware_version.Cetus_pro.length);
                         addOptionValue2('boardVersion',i,firmware_flasher.firmware_version.Cetus_pro[i].version);
                     }
                     break;
-                case 2:
+                case 3://lite_ve
                     $('#boardVersion').empty();
+                    console.log("firmware_flasher.firmware_version.Lite_v3.length:"+firmware_flasher.firmware_version.Lite_v3.length);
                     for(let i=0;i<firmware_flasher.firmware_version.Lite_v3.length;i++){
                         addOptionValue2('boardVersion',i,firmware_flasher.firmware_version.Lite_v3[i].version);
                     }
