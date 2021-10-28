@@ -154,16 +154,24 @@ window.onload=function(){
 
             //close事件监听
             port.on('close', () =>{
-                console.log("close");
-                GUI.connect_lock = false;
-                GUI.interval_remove('mavlink_heartbeat');
-                GUI.interval_remove('display_Info');
-                GUI.interval_remove('setup_data_pull_fast');
-                $('#tabs ul.mode-connected').hide();
-                $('#tabs ul.mode-disconnected').show();
-                $('#tabs ul.mode-disconnected li a:first').click();
-                $('div#connectbutton a.connect').removeClass('active');
-                $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'));
+                if(isFlasherTab ==0){
+                    console.log("close");
+                    GUI.connect_lock = false;
+                    GUI.interval_remove('mavlink_heartbeat');
+                    GUI.interval_remove('display_Info');
+                    GUI.interval_remove('setup_data_pull_fast');
+                    $('#tabs ul.mode-connected').hide();
+                    $('#tabs ul.mode-disconnected').show();
+                    $('#tabs ul.mode-disconnected li a:first').click();
+                    $('div#connectbutton a.connect').removeClass('active');
+                    $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'));
+                }else{
+                    GUI.connect_lock = false;
+                    $('div#connectbutton a.connect').removeClass('active');
+                    $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'));
+
+                }
+                
             });
 
             //data事件监听

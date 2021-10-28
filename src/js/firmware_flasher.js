@@ -18,6 +18,7 @@ const firmware_flasher ={
     developmentFirmwareLoaded: false, // Is the firmware to be flashed from the development branch?
     firmware_version:{},
     target_board:0,
+    flashFirmwareAck:false,
 };
 var loadJsonFileFromGithubSuccessful = true;
 var loadFirmwareFromGithubSuccessful = true;
@@ -180,6 +181,7 @@ firmware_flasher.parseData = function(data)
     {
         if(starting ==2)
         {
+            firmware_flasher.flashFirmwareAck = true;
             var bufData = new Buffer(1029);
 
             fs.open(binFilePath, 'r', function(err, fd){
@@ -271,21 +273,11 @@ function readJsonFile(fileName){
 
         }
     
-        // for (var i = 0; i < jsonData.length; ++i) {
-        //     console.log("name: "+jsonData[i].name);
-        //     console.log("version: "+jsonData[i].version);
-        //     $('#boardTarget').empty();
-        //     $('#boardVersion').empty();
-        //     addOptionValue2('boardTarget',i,jsonData[i].name);
-        //     addOptionValue2('boardVersion',i,jsonData[i].version);
-    
-        //     console.log("----------------------------------"); 
-        //     }
+
     });
 }
 
 function loadRemoteJsonFile(){
-    //https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/board.json
     var xhr = new XMLHttpRequest();
     xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v3.0.0/board.json", true);
     xhr.responseType = 'arraybuffer';
@@ -457,23 +449,9 @@ firmware_flasher.initialize = function (callback) {
         $('a.flash_firmware').click(function () {
             if (!$(this).hasClass('disabled')) {
                 if(GUI.connect_lock){//串口已连接          
-                    // if(targetSelected === "Flight Controller")
-                    // {
                         packNum = 0;
                         var buf = Buffer(1);
                         buf[0] = 0x01;
-                    // }
-                    // else if(targetSelected === "Optical Sensor"){
-                    //     packNum = 0;
-                    //     var buf = Buffer(1);
-                    //     buf[0] = 0x03;
-                    // }
-                    // else{
-                    //     packNum = 0;
-                    //     var buf = Buffer(1);
-                    //     buf[0] = 0x05;
-                    // }
-                
                     port.write(buf, (err) =>{
                         if (err) return console.log('write Error: ', err.message);
                     });
@@ -485,6 +463,26 @@ firmware_flasher.initialize = function (callback) {
                     self.enableFlashing(false,1);
 
                     starting = 1;
+                    firmware_flasher.flashFirmwareAck = false;
+                    setTimeout(() => {
+                        if(firmware_flasher.flashFirmwareAck == true){//固件写入正常
+
+                        }else{//固件烧写没有收到飞控应答
+                            const options = {
+                                type: 'warning',
+                                buttons: [ 'ok'],
+                                defaultId: 0,
+                                title: 'Flash failed!',
+                                message: 'Please check the serial port is correctly selected and the FC has entered the bootloader',
+                                noLink:true,
+                            };
+                            dialog.showMessageBoxSync(null, options); 
+                            $('a.flash_firmware').removeClass('disabled');
+                            $("a.load_file").removeClass('disabled');
+                            $("a.load_remote_file").removeClass('disabled');
+                            port.close();
+                        }
+                    }, 3000);
                 }else{
                     //alert("please connect COM first");
 
@@ -522,6 +520,26 @@ firmware_flasher.initialize = function (callback) {
                     self.enableFlashing(false,3);
 
                     starting = 1;
+                    firmware_flasher.flashFirmwareAck = false;
+                    setTimeout(() => {
+                        if(firmware_flasher.flashFirmwareAck == true){//固件写入正常
+
+                        }else{//固件烧写没有收到飞控应答
+                            const options = {
+                                type: 'warning',
+                                buttons: [ 'ok'],
+                                defaultId: 0,
+                                title: 'Flash failed!',
+                                message: 'Please check the serial port is correctly selected and the FC has entered the bootloader',
+                                noLink:true,
+                            };
+                            dialog.showMessageBoxSync(null, options); 
+                            $('a.flash_opf').removeClass('disabled');
+                            $("a.load_file").removeClass('disabled');
+                            $("a.load_remote_file").removeClass('disabled');
+                            port.close();
+                        }
+                    }, 3000);
                 }else{
                     const options = {
                         type: 'warning',
@@ -555,6 +573,26 @@ firmware_flasher.initialize = function (callback) {
                     self.enableFlashing(false,5);
 
                     starting = 1;
+                    firmware_flasher.flashFirmwareAck = false;
+                    setTimeout(() => {
+                        if(firmware_flasher.flashFirmwareAck == true){//固件写入正常
+
+                        }else{//固件烧写没有收到飞控应答
+                            const options = {
+                                type: 'warning',
+                                buttons: [ 'ok'],
+                                defaultId: 0,
+                                title: 'Flash failed!',
+                                message: 'Please check the serial port is correctly selected and the FC has entered the bootloader',
+                                noLink:true,
+                            };
+                            dialog.showMessageBoxSync(null, options); 
+                            $('a.flash_OSD').removeClass('disabled');
+                            $("a.load_file").removeClass('disabled');
+                            $("a.load_remote_file").removeClass('disabled');
+                            port.close();
+                        }
+                    }, 3000);
                 }else{
                     const options = {
                         type: 'warning',
