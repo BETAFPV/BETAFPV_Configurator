@@ -66,7 +66,23 @@ setup.initialize = function (callback) {
         version_e = $('.firmwareVersion');
         build_time_e = $('.buil-time');
         voltage_e = $('.bat-voltage');
-        target_id_e.text((setup.targetID==0? 'Unknow' : (setup.targetID==1)? 'Cetus' : 'Cetus pro'));
+        switch(setup.targetID){
+            case 0:
+                target_id_e.text('Unknow');
+                break;
+            case 1:
+                target_id_e.text('Cetus');
+                break;
+            case 2:
+                target_id_e.text('Cetus pro');
+                break;
+            case 3:
+                target_id_e.text('Lite brush v3');
+                break;
+            default:
+                target_id_e.text('Unknow');
+                break;
+        }
         version_e.text(setup.major_version+'.'+setup.minor_version+'.'+setup.patch_version);
         build_time_e.text(setup.year+'-'+setup.month+'-'+setup.day);
         voltage_e.text(setup.battery_voltage.toFixed(2));
