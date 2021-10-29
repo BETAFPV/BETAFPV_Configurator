@@ -471,7 +471,7 @@ firmware_flasher.initialize = function (callback) {
                         }else{//固件烧写没有收到飞控应答
                             const options = {
                                 type: 'warning',
-                                buttons: [ 'ok'],
+                                buttons: [ i18n.getMessage('Confirm')],
                                 defaultId: 0,
                                 title: i18n.getMessage('Flash_failed'),
                                 message: i18n.getMessage('Check_Serial_Port_and_enter_bootloader'),
@@ -490,7 +490,7 @@ firmware_flasher.initialize = function (callback) {
 
                     const options = {
                         type: 'warning',
-                        buttons: [ 'ok'],
+                        buttons: [ i18n.getMessage('Confirm')],
                         defaultId: 0,
                         title: i18n.getMessage('warningTitle'),
                         message: i18n.getMessage('Connect_Serial_Port_Firstlt'),
@@ -529,7 +529,7 @@ firmware_flasher.initialize = function (callback) {
                         }else{//固件烧写没有收到飞控应答
                             const options = {
                                 type: 'warning',
-                                buttons: [ 'ok'],
+                                buttons: [i18n.getMessage('Confirm')],
                                 defaultId: 0,
                                 title: i18n.getMessage('Flash_failed'),
                                 message: i18n.getMessage('Check_Serial_Port_and_enter_bootloader'),
@@ -546,7 +546,7 @@ firmware_flasher.initialize = function (callback) {
                 }else{
                     const options = {
                         type: 'warning',
-                        buttons: [ 'ok'],
+                        buttons: [ i18n.getMessage('Confirm')],
                         defaultId: 0,
                         title: i18n.getMessage('warningTitle'),
                         message: i18n.getMessage('Connect_Serial_Port_Firstlt'),
@@ -583,7 +583,7 @@ firmware_flasher.initialize = function (callback) {
                         }else{//固件烧写没有收到飞控应答
                             const options = {
                                 type: 'warning',
-                                buttons: [ 'ok'],
+                                buttons: [ i18n.getMessage('Confirm')],
                                 defaultId: 0,
                                 title: i18n.getMessage('Flash_failed'),
                                 message: i18n.getMessage('Check_Serial_Port_and_enter_bootloader'),
@@ -600,7 +600,7 @@ firmware_flasher.initialize = function (callback) {
                 }else{
                     const options = {
                         type: 'warning',
-                        buttons: [ 'ok'],
+                        buttons: [ i18n.getMessage('Confirm')],
                         defaultId: 0,
                         title: i18n.getMessage('warningTitle'),
                         message: i18n.getMessage('Connect_Serial_Port_Firstlt'),
@@ -638,7 +638,7 @@ firmware_flasher.initialize = function (callback) {
                         if(err){
                             console.log("error");
                         }else {
-                            console.log("ok");
+                            console.log(i18n.getMessage('Confirm'));
                             binFilePath = path.join(__dirname, str);
                             fs.readFile(binFilePath, (err, binFile) => {
                                 if (err) {

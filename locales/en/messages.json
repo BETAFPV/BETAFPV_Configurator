@@ -6500,5 +6500,14 @@
     },
     "Check_Serial_Port_and_enter_bootloader":{
         "message":"Please check the serial port is correctly selected and the FC has entered the bootloader."
+    },
+    "DeviceOpenFail": {
+        "message": "Failed to open USB device!"
+    },
+    "NoConfigurationReceived": {
+        "message": "No configuration received, communication failed"
+    },
+    "NoValidPort": {
+        "message": "Please select valid serial port"
     }
 }

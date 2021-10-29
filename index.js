@@ -117,11 +117,11 @@ window.onload=function(){
                             $('div#connectbutton a.connect').removeClass('active');
                             const options = {
                                 type: 'warning',
-                                buttons: [ 'ok'],
+                                buttons: [ i18n.getMessage('Confirm')],
                                 defaultId: 0,
-                                title: 'Warn',
-                                message: 'Failed to open serial port',
-                                detail: 'No configuration received within 3 seconds, communication failed',
+                                title: i18n.getMessage('warningTitle'),
+                                message: i18n.getMessage('NoValidPort'),
+                                detail: i18n.getMessage('NoConfigurationReceived'),
                                 noLink:true,
                             };
                             let WIN      = remote.getCurrentWindow();
