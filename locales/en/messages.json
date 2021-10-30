@@ -691,7 +691,7 @@
         "message": "The application supports flight controller that can run LiteSilver firmeware."
     },
     "promptOfUseFCConfigurator":{
-        "message":"<br /><strong>Now configurator for FC board is active. Basic user manual:</strong><br />Click the \"Firmware Flasher\" tab on the left for firmware update.<br />For configuration, connect the FC board to the computer via USB data cable. Select the virtual COM port and click the \"Connect FC\" button on the top right."
+        "message":"<br /><strong>Configurator for FC board is active. Follow the steps to enter FC Setup page.</strong><br />1. Connect the FC board to the computer via USB data cable. <br />2. Select the virtual COM port and click the \"Connect\" button on the top right.<br /><strong class=\"message-negative\">Note: </strong>If enter FC Setup page fail, please update the FC firmware first.<br /><br />Click the \"Firmware Flasher\" tab on the left for firmware update."
     },
     "promptOfUseFCConfigurator_radio":{
         "message": " <br />Click the yellow button below to active configurator for flight control board."
@@ -3011,7 +3011,7 @@
         "message": "Download manually."
     },
     "firmwareFlasherTargetWarning": {
-        "message": "<span class=\"message-negative\">IMPORTANT</span>: Ensure you flash a file appropriate for your target.  Flashing a binary for the wrong target can cause <span class=\"message-negative\">bad</span> things to happen."
+        "message": "Ensure you flash a file appropriate for your target.  Flashing a binary for the wrong target can cause <span class=\"message-negative\">bad</span> things to happen. 3 different firmware files could be flashed to the FC board:<br /><strong class=\"message-negative\">FC Firmware: </strong>the main fimware for flight controller.<br /><strong class=\"message-negative\">OSD Firmware: </strong>the firmware for OSD information.<br /><strong class=\"message-negative\">Sensor Firmware: </strong>the fimware for sensor data management."
     },
     "firmwareFlasherTargetWarning_radio": {
         "message": ""
@@ -3045,6 +3045,9 @@
     },
     "firmwareInfo": {
         "message": "Firmware Info"
+    },
+    "firmwareInfoText": {
+        "message": "Configurator could recognise the loaded firmware automatically. The \"Flash xxx\" button will be active then."
     },
     "firmwareTarget": {
         "message": "Current Selected Target"
@@ -3176,7 +3179,7 @@
         "message": "Message:"
     },
     "firmwareFlasherWarningText": {
-        "message": "Please do <span class=\"message-negative\">not</span> try to flash <strong>non-Betaflight</strong> hardware with this firmware flasher.<br />Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>STM32 bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note: </strong><span class=\"message-negative\">Auto-Connect</span> is always disabled while you are inside firmware flasher.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your FC</strong> first, try rebooting, upgrade drivers.<br /><strong>Note:</strong> When flashing boards that have directly connected USB sockets (most newer boards) ensure you have read the USB Flashing section of the Betaflight manual and have the correct software and drivers installed"
+        "message": "Please do <span class=\"message-negative\">not</span> try to flash <strong>non-listed</strong> hardware with this firmware flasher. Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>Bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your FC</strong> first, try rebooting, upgrade drivers."
     },
     "firmwareFlasherWarningText_radio": {
         "message": "Please do <span class=\"message-negative\">not</span> try to flash <strong>non-listed</strong> radio controller with this firmware flasher.<br />Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>Bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your radio controller</strong> first, try rebooting, upgrade drivers.<br />"
@@ -3188,7 +3191,7 @@
         "message": "<strong>Firmware Update Steps</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of Betaflight manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
+        "message": "Follow these steps to update the firmware of the FC board, include FC firmware, OSD firmware or Sensor firmware: <ul><li>Power off</li><li>Hold the button on the FC board.</li><li>Power on the FC board (via battery or USB), LED will be solid white if done correctly.</li><li>Release the button now. Connect the FC to the computer via USB data cable.</li><li>Select the correct COM port and click the \"Connect\" button on the top right of this page. Make sure the button change to red and text is \"Disconnect\".</li><li>Select the correct firmware and version at the top of this page and click the button \"Load Firmware [Online]\" (load the firmware local from your computer would also be okay). The Configurator will recognise the firmware type automatically. Click the button \"Flash xxx\" to start flashing.</li><li>When flashing successfully, the FC wil re-start automatically.</li></ul>"
     },
     "firmwareFlasherRecoveryText_radio": {
         "message": "Here is the step by step manual to update the firmware of the radio controller. <ul><li>Power off the radio controller.</li><li>Hold SETUP button and then Power on (LED ring will be solid blue and NOT red if done correctly).</li><li>Install all STM32 drivers and Zadig in your computer if required</li><li>Release SETUP button and connect it to the computer via USB data cable.</li><li>Select the correct COM port and click the \"Connect\" button on the top right of this page.</li><li>Flash with correct firmware.</li><li>Power off.</li></ul>"
