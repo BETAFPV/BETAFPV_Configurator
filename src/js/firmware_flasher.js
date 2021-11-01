@@ -280,6 +280,7 @@ function readJsonFile(fileName){
 
 function loadRemoteJsonFile(){
     var xhr = new XMLHttpRequest();
+    loadJsonFileFromGithubSuccessful = true;
     xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v3.0.0/board.json", true);
     xhr.responseType = 'arraybuffer';
     xhr.onload = function(e) { 
@@ -330,6 +331,16 @@ function loadRemoteJsonFile(){
                      console.log("can't load json file from github");
                  }else{
                      console.log("can't load json file from gitee");
+                     const options = {
+                        type: 'warning',
+                        buttons: [ i18n.getMessage('Confirm')],
+                        defaultId: 0,
+                        title: i18n.getMessage('FailedToLoadFile'),
+                        message: i18n.getMessage("InvalidNetwork"),
+                        noLink:true,
+                    };
+                    let WIN      = remote.getCurrentWindow();
+                    dialog.showMessageBoxSync(WIN, options); 
                  }
              } 
          }
@@ -622,7 +633,7 @@ firmware_flasher.initialize = function (callback) {
                 let targetVersionSelected = ($('#boardVersion option:selected').text());
                 console.log(targetBoardSelected);
                 console.log(targetVersionSelected);
-
+                loadFirmwareFromGithubSuccessful = true;
                 var str = targetBoardSelected + "_" + targetVersionSelected + ".bin";
                 console.log(str);
                 var urlValue = "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v3.0.0/" + str;
@@ -652,7 +663,7 @@ firmware_flasher.initialize = function (callback) {
                                     console.log("packLen:"+packLen);
                                     if(packLen>5){
                                         self.enableFlashing(true,1);
-                                        firmware_flasher.flashingMessage("Load Firmware Sucessfuly! Firmware Size: ( "+ binFile.length +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
+                                        firmware_flasher.flashingMessage(i18n.getMessage("firmwareFlasherRemoteFirmwareLoaded")+ binFile.length +"bytes ",self.FLASH_MESSAGE_TYPES.NEUTRAL);
                                         if(binFile[binSizeTemp-12] == 0x5a)
                                         {
                                             let targetID = binFile[binSizeTemp-11];
@@ -693,7 +704,7 @@ firmware_flasher.initialize = function (callback) {
                             
                                     }else{
                                         self.enableFlashing(false,1);
-                                        firmware_flasher.flashingMessage("Load Firmware Failure!");
+                                        firmware_flasher.flashingMessage(i18n.getMessage("firmwareFlasherFailedToLoadOnlineFirmware"));
                                         $('#FileID').text("Unrecognized firmware!");
                                         $('#TargetID').text("    ");
                                         $('#BoardID').text("   ");
@@ -724,6 +735,16 @@ firmware_flasher.initialize = function (callback) {
                                 console.log("can't load firmware from github");
                              }else{
                                 console.log("can't load firmware from gitee");
+                                const options = {
+                                    type: 'warning',
+                                    buttons: [ i18n.getMessage('Confirm')],
+                                    defaultId: 0,
+                                    title: i18n.getMessage('FailedToLoadFile'),
+                                    message: i18n.getMessage("InvalidNetwork"),
+                                    noLink:true,
+                                };
+                                let WIN      = remote.getCurrentWindow();
+                                dialog.showMessageBoxSync(WIN, options); 
                              }
                              
                          } 
@@ -753,7 +774,7 @@ firmware_flasher.initialize = function (callback) {
                                 xhr.send(null);
                                 break;
                             case "Lite_v3_1.0.0.bin":
-                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/865139/download/Lite_v3_1.0.0.bin", true);
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/867760/download/Lite_v3_1.0.0.bin", true);
                                 xhr.send(null);
                                 break;
                             default:

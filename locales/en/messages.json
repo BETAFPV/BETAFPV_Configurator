@@ -3220,7 +3220,7 @@
         "description": "shown in the log, more wordy"
     },
     "firmwareFlasherRemoteFirmwareLoaded": {
-        "message": "<span class=\"message-positive\">Remote Firmware loaded, ready for flashing</span>"
+        "message": "<span class=\"message-positive\">Remote Firmware loaded, ready for flashing,Size:</span>"
     },
     "firmwareFlasherFailedToLoadOnlineFirmware": {
         "message": "Failed to load remote firmware"
@@ -6512,5 +6512,11 @@
     },
     "NoValidPort": {
         "message": "Please select valid serial port"
+    },
+    "FailedToLoadFile":{
+        "message":"Invalid network "
+    },
+    "InvalidNetwork":{
+        "message":"Please check whether your network is connected."
     }
 }

@@ -2989,7 +2989,7 @@
         "description": "shown in the log, more wordy"
     },
     "firmwareFlasherRemoteFirmwareLoaded": {
-        "message": "<span class=\"message-positive\">固件加载成功，可供烧录</span>"
+        "message": "<span class=\"message-positive\">固件加载成功，可供烧录。固件大小：</span>"
     },
     "firmwareFlasherFailedToLoadOnlineFirmware": {
         "message": "加载固件失败"
@@ -6122,5 +6122,12 @@
     },
     "NoValidPort": {
         "message": "请选择有效的串口"
+    },
+    "FailedToLoadFile":{
+        "message":"固件加载失败！"
+    },
+    "InvalidNetwork":{
+        "message":"请检查您的网络是否可用。"
     }
+    
 }
