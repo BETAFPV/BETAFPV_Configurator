@@ -36,8 +36,12 @@ async function listSerialPorts() {
             } );
         }
 
-        for (let i = 0; i < ports.length; i++) {
-            addOptionValue('port',i,ports[i].path);
+        for (let i = 0; i < ports.length; i++) {            
+            if(ports[i].productId == "5740" && ((ports[i].vendorId == "0483") || (ports[i].vendorId == "0493")))
+            {
+                addOptionValue('port',i,ports[i].path);
+            }
+                
         }
         lastPortCount = ports.length;
     })
