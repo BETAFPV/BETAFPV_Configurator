@@ -6121,7 +6121,7 @@
         "message": "没有接收到配置信息，飞控通信失败"
     },
     "NoValidPort": {
-        "message": "请选择有效的串口"
+        "message": "1.请选择有效的串口号.\n2.若串口号正确，请更新您的飞控固件后再尝试连接"
     },
     "FailedToLoadFile":{
         "message":"固件加载失败！"

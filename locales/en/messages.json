@@ -6511,7 +6511,7 @@
         "message": "No configuration received, communication failed"
     },
     "NoValidPort": {
-        "message": "Please select valid serial port"
+        "message": "1.Please select valid serial port.\n2.Or upgrade your flight control firmware and connect again."
     },
     "FailedToLoadFile":{
         "message":"Invalid network "

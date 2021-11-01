@@ -120,8 +120,8 @@ window.onload=function(){
                                 buttons: [ i18n.getMessage('Confirm')],
                                 defaultId: 0,
                                 title: i18n.getMessage('warningTitle'),
-                                message: i18n.getMessage('NoValidPort'),
-                                detail: i18n.getMessage('NoConfigurationReceived'),
+                                message: i18n.getMessage('NoConfigurationReceived'),
+                                detail: i18n.getMessage('NoValidPort'),
                                 noLink:true,
                             };
                             let WIN      = remote.getCurrentWindow();
