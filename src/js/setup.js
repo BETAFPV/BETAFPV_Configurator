@@ -21,7 +21,8 @@ setup.initialize = function (callback) {
 
 
       $('div#interactive_block > a.reset').click(function () {
-         self.yaw_fix = FC.SENSOR_DATA.kinematics[2] * 1.0;
+         self.yaw_fix = FC.SENSOR_DATA.kinematics[2] * -1.0;
+         $(this).text(i18n.getMessage('initialSetupButtonResetZaxisValue', [self.yaw_fix]));
     });
 
 
@@ -125,6 +126,13 @@ setup.cleanup = function (callback) {
     const x = (FC.SENSOR_DATA.kinematics[1] * -1.0) * 0.017453292519943295,
     y = (parseInt((FC.SENSOR_DATA.kinematics[2] * 1.0) -setup.yaw_fix )) * 0.017453292519943295,
     z = (FC.SENSOR_DATA.kinematics[0] * -1.0) * 0.017453292519943295;
+
+    let roll = parseInt(FC.SENSOR_DATA.kinematics[0]).toFixed(0);
+    let pitch = parseInt(FC.SENSOR_DATA.kinematics[1]).toFixed(0);
+    let yaw = parseInt(FC.SENSOR_DATA.kinematics[2]).toFixed(0);
+    $('dd.roll_display').text(roll+' '+"deg");   
+    $('dd.pitch_display').text(pitch+' '+"deg");   
+    $('dd.yaw_dislpay').text(yaw+' '+"deg");   
     this.model.rotateTo(x, y, z);
 };
 
