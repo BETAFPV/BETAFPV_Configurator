@@ -21,7 +21,7 @@ setup.initialize = function (callback) {
 
 
       $('div#interactive_block > a.reset').click(function () {
-         self.yaw_fix = FC.SENSOR_DATA.kinematics[2] * -1.0;
+         self.yaw_fix = FC.SENSOR_DATA.kinematics[2] * 1.0;
          $(this).text(i18n.getMessage('initialSetupButtonResetZaxisValue', [self.yaw_fix]));
     });
 
