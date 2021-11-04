@@ -135,7 +135,7 @@ window.onload=function(){
                     GUI.interval_add('mavlink_heartbeat', mavlink_msg_heartbeat, 1000, true);
                 }
                 else{
-                    $('div#connectbutton div.connect_state').text(i18n.getMessage('disconnect')).addClass('active');
+                    $('div#connectbutton div.connect_state').text(i18n.getMessage('flashTab')).addClass('active');
                 }                     
             });
 
