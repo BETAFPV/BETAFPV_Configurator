@@ -76,7 +76,7 @@ landing.initialize = function (callback) {
         shell.openExternal(this.getAttribute('href'));
       }
 
-   
+      
 
     
     callback();

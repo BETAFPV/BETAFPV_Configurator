@@ -231,6 +231,10 @@ firmware_flasher.parseData = function(data)
             });
             firmware_flasher.flashingMessage("Flash Finished",firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
             firmware_flasher.flashProgress(packNum/packLen*100);
+            $('a.flash_firmware').removeClass('disabled');
+            $("a.load_file").removeClass('disabled');
+            $("a.load_remote_file").removeClass('disabled');
+
         }
     }
 };
