@@ -469,21 +469,61 @@ window.onload=function(){
                             console.log("receive lite radio config");
                             HidConfig.internal_radio = data[1];
                             HidConfig.current_protocol = data[2];
+                            HidConfig.internal_radio_protocol = data[2];
+                            console.log("HidConfig.current_protocol:"+HidConfig.current_protocol);
                             HidConfig.rocker_mode = data[3];
                             HidConfig.support_power =data[4];
                             //遥控器硬件信息获取完毕后，需要在这里根据硬件信息修改对应组件的可选元素
-
+                            console.log(data);
                             show.rocker_mode = $('select[name="radiomode"]');
                             show.rocker_mode.val(HidConfig.rocker_mode);
                             document.getElementById("rocker_mode").disabled = false;
-                            if(HidConfig.internal_radio==0){//硬件型号为：cc2500
-                                $("#internal_radio_protocol_elrs_2").css({display: 'none'});
-                                $("#internal_radio_protocol_Frsky_F8").css({display: 'block'});
-                                $("#internal_radio_protocol_Frsky_F16_FCC").css({display: 'block'});
-                                $("#internal_radio_protocol_Frsky_F16_LBT").css({display: 'block'});
+                            
+                            if(HidConfig.internal_radio==0){//内置射频模块型号为：cc2500
+                                console.log("HidConfig.current_protocol:"+HidConfig.current_protocol);
+                                HidConfig.Internal_radio_module_switch = true;
+                                HidConfig.External_radio_module_switch = false;
+                                document.getElementById('internal_radio_module_switch').checked = true;
+                                document.getElementById('external_radio_module_switch').checked = false;
+                                $('#internal_radio_protocol').empty();
+                                addOptionValue('internal_radio_protocol',0,"Frsky_D16_FCC");
+                                addOptionValue('internal_radio_protocol',1,"Frsky_D16_LBT");
+                                addOptionValue('internal_radio_protocol',2,"Frsky_D8");
+                                addOptionValue('internal_radio_protocol',3,"FUTABA_SFHSS");
+                                switch(HidConfig.current_protocol){
+                                    case 0://D16 FCC
+                                    show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
+                                    document.getElementById("internal_radio_protocol").disabled = false;
+                                        break;
+                                    case 1://D16 LBT
+                                    show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
+                                    document.getElementById("internal_radio_protocol").disabled = false;
+                                        break;
+                                    case 2://D8
+                                    show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
+                                    document.getElementById("internal_radio_protocol").disabled = false;
+                                        break;
+                                    case 3://FUTABA SFHSS
+                                    show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
+                                    document.getElementById("internal_radio_protocol").disabled = false;
+                                        break;
+                                    default:
+                                        document.getElementById("internal_radio_protocol").disabled = true;
+                                        break;
+    
+                                }
+                                //接着请求遥控器通道配置信息
+                                rquestBuffer[0] = 0x00;
+                                rquestBuffer[1] = 0x11;
+                                rquestBuffer[2] = 0x01;
+                                rquestBuffer[3] = 0x01;
+                                hidDevice.write(rquestBuffer);
+                                ch_receive_step = 0;
+
+                           
                                 
                             }else if(HidConfig.internal_radio==1){//硬件型号为：sx1280
-                                $("#internal_radio_protocol_elrs_2").css({display: 'block'});
+                                $("#internal_radio_protocol_elrs_2.4G").css({display: 'block'});
                                 $("#internal_radio_protocol_Frsky_F8").css({display: 'none'});
                                 $("#internal_radio_protocol_Frsky_F16_FCC").css({display: 'none'});
                                 $("#internal_radio_protocol_Frsky_F16_LBT").css({display: 'none'});

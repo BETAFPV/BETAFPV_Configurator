@@ -213,7 +213,7 @@ show.refreshUI = function()
         show.ch7_offset.val(HidConfig.ch7_offset_display);
         show.ch8_offset.val(HidConfig.ch8_offset_display);
 
-        if(HidConfig.firmware_comparison<=0||HidConfig.firmware_comparison ==0xff){//遥控器版本高于上位机版本（功能兼容）
+        if((HidConfig.firmware_comparison<=0||HidConfig.firmware_comparison ==0xff)&&HidConfig.internal_radio==1){//遥控器版本高于上位机版本（功能兼容）
             document.getElementById('bindPhraseSwitch').disabled = false;
             ConfigStorage.get('USE_BIND_PHRASE', function (data) {
             if(data.USE_BIND_PHRASE==undefined)
@@ -856,7 +856,7 @@ show.initialize = function (callback) {
         });
         $('a.save').click(function () {
             console.log("save click");
-            if(HidConfig.External_radio_module_switch==false&&HidConfig.current_protocol==0&&HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length<6){
+            if(HidConfig.External_radio_module_switch==false&&HidConfig.current_protocol==0&&HidConfig.internal_radio==1&&HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length<6){
                 // alert("save failed!  custom binding phrase must be longer than 6 characters");
                 const dialogConfirmTheLengthOfBindPhrase = $('.dialogConfirmTheLengthOfBindPhrase')[0];
                 dialogConfirmTheLengthOfBindPhrase.showModal();
