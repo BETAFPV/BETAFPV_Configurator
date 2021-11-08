@@ -371,6 +371,7 @@ show.initialize = function (callback) {
                 HidConfig.Internal_radio_module_switch = $(this).is(':checked')?1:0;
                 if(HidConfig.Internal_radio_module_switch){
                     document.getElementById('internal_radio_protocol').disabled = false;
+                    HidConfig.internal_radio_protocol = 0;
                 }else{
                     document.getElementById('internal_radio_protocol').disabled = true;
                     // document.getElementById('ExpressLRS_power_option_box').disabled = true;
@@ -891,17 +892,24 @@ show.initialize = function (callback) {
                 }
 
                 var bufName = new Buffer.alloc(64);
+                console.log("HidConfig.internal_radio_protocol:"+HidConfig.internal_radio_protocol);
+                console.log("HidConfig.Internal_radio_module_switch:"+HidConfig.Internal_radio_module_switch);
                 if(HidConfig.Internal_radio_module_switch){
                     bufName[0] = 0x00;
                     bufName[1] = 0x05;
-                    bufName[2] = 0x00;
+                    bufName[2] = HidConfig.internal_radio_protocol;
                     bufName[3] = HidConfig.rocker_mode;
                     bufName[4] = 0x02;
                     hidDevice.write(bufName);
                 }else if(HidConfig.External_radio_module_switch){
                     bufName[0] = 0x00;
                     bufName[1] = 0x05;
-                    bufName[2] = 0x01;
+                    if(HidConfig.internal_radio==0) {
+                        bufName[2] = 0x04;//cc2500 外置射频模块为第五个协议
+                    }else{
+                        bufName[2] = 0x01;//sx1280 外置射频模块为第二个协议
+                    }
+                    
                     bufName[3] = HidConfig.rocker_mode;
                     bufName[4] = 0x02;
                     hidDevice.write(bufName);

@@ -481,37 +481,33 @@ window.onload=function(){
                             
                             if(HidConfig.internal_radio==0){//内置射频模块型号为：cc2500
                                 console.log("HidConfig.current_protocol:"+HidConfig.current_protocol);
-                                HidConfig.Internal_radio_module_switch = true;
-                                HidConfig.External_radio_module_switch = false;
-                                document.getElementById('internal_radio_module_switch').checked = true;
-                                document.getElementById('external_radio_module_switch').checked = false;
+                                
                                 $('#internal_radio_protocol').empty();
                                 addOptionValue('internal_radio_protocol',0,"Frsky_D16_FCC");
                                 addOptionValue('internal_radio_protocol',1,"Frsky_D16_LBT");
                                 addOptionValue('internal_radio_protocol',2,"Frsky_D8");
                                 addOptionValue('internal_radio_protocol',3,"FUTABA_SFHSS");
-                                switch(HidConfig.current_protocol){
-                                    case 0://D16 FCC
-                                    show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
-                                    document.getElementById("internal_radio_protocol").disabled = false;
-                                        break;
-                                    case 1://D16 LBT
-                                    show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
-                                    document.getElementById("internal_radio_protocol").disabled = false;
-                                        break;
-                                    case 2://D8
-                                    show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
-                                    document.getElementById("internal_radio_protocol").disabled = false;
-                                        break;
-                                    case 3://FUTABA SFHSS
-                                    show.internal_radio_protocol.val(HidConfig.internal_radio_protocol);
-                                    document.getElementById("internal_radio_protocol").disabled = false;
-                                        break;
-                                    default:
-                                        document.getElementById("internal_radio_protocol").disabled = true;
-                                        break;
-    
+                                if(HidConfig.current_protocol<=3){//CC2500 使用内置射频模块
+                                    HidConfig.Internal_radio_module_switch = true;
+                                    HidConfig.External_radio_module_switch = false;
+                                    document.getElementById('internal_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
+                                    document.getElementById('external_radio_module_switch').checked = HidConfig.External_radio_module_switch;
+                                    show.internal_radio_protocol.val(HidConfig.current_protocol);
+                                    HidConfig.external_radio_protocol = true;
+                                    HidConfig.internal_radio_protocol = false;
+                                    document.getElementById("external_radio_protocol").disabled = HidConfig.external_radio_protocol;
+                                    document.getElementById("internal_radio_protocol").disabled = HidConfig.internal_radio_protocol;
+                                }else{//cc2500 使用外置射频模块
+                                    
+                                    HidConfig.Internal_radio_module_switch = false;
+                                    HidConfig.External_radio_module_switch = true;
+                                    document.getElementById('internal_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
+                                    document.getElementById('external_radio_module_switch').checked = HidConfig.External_radio_module_switch;
+                                    document.getElementById("internal_radio_protocol").disabled = true;
+                                    document.getElementById("external_radio_protocol").disabled = false;
+                                    show.external_radio_protocol.val(0);
                                 }
+                    
                                 //接着请求遥控器通道配置信息
                                 rquestBuffer[0] = 0x00;
                                 rquestBuffer[1] = 0x11;
