@@ -497,6 +497,13 @@ window.onload=function(){
                                     HidConfig.internal_radio_protocol = false;
                                     document.getElementById("external_radio_protocol").disabled = HidConfig.external_radio_protocol;
                                     document.getElementById("internal_radio_protocol").disabled = HidConfig.internal_radio_protocol;
+                                     //接着请求遥控器通道配置信息
+                                    rquestBuffer[0] = 0x00;
+                                    rquestBuffer[1] = 0x11;
+                                    rquestBuffer[2] = 0x01;
+                                    rquestBuffer[3] = 0x01;
+                                    hidDevice.write(rquestBuffer);
+                                    ch_receive_step = 0;
                                 }else{//cc2500 使用外置射频模块
                                     
                                     HidConfig.Internal_radio_module_switch = false;
@@ -506,15 +513,28 @@ window.onload=function(){
                                     document.getElementById("internal_radio_protocol").disabled = true;
                                     document.getElementById("external_radio_protocol").disabled = false;
                                     show.external_radio_protocol.val(0);
+
+                                     //开启外部ExpressLRS
+                                     rquestBuffer[0] = 0x00;
+                                     rquestBuffer[1] = 0x07;
+                                     rquestBuffer[2] = 0x01;
+                                     rquestBuffer[3] = 0x00;
+                                     hidDevice.write(rquestBuffer);
+ 
+ 
+                                     document.getElementById("External_radio_module_power_switch").checked = true;
+ 
+                                     //延时一小段时间等待外部ExpressLRS启动后再取获取配置信息
+                                     setTimeout(function loadLanguage() {
+                                         rquestBuffer[0] = 0x00;//获取外置射频模块配置信息
+                                         rquestBuffer[1] = 0x11;
+                                         rquestBuffer[2] = 0x02;
+                                         rquestBuffer[3] = 0x02;
+                                         hidDevice.write(rquestBuffer);
+                                     },300);
                                 }
                     
-                                //接着请求遥控器通道配置信息
-                                rquestBuffer[0] = 0x00;
-                                rquestBuffer[1] = 0x11;
-                                rquestBuffer[2] = 0x01;
-                                rquestBuffer[3] = 0x01;
-                                hidDevice.write(rquestBuffer);
-                                ch_receive_step = 0;
+                               
 
                            
                                 
