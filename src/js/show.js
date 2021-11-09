@@ -213,7 +213,7 @@ show.refreshUI = function()
         show.ch7_offset.val(HidConfig.ch7_offset_display);
         show.ch8_offset.val(HidConfig.ch8_offset_display);
 
-        if((HidConfig.firmware_comparison<=0||HidConfig.firmware_comparison ==0xff)&&HidConfig.internal_radio==1){//遥控器版本高于上位机版本（功能兼容）
+        if((HidConfig.firmware_comparison<=0||HidConfig.firmware_comparison ==0xff)&&HidConfig.internal_radio==RFmodule.SX1280){
             document.getElementById('bindPhraseSwitch').disabled = false;
             ConfigStorage.get('USE_BIND_PHRASE', function (data) {
             if(data.USE_BIND_PHRASE==undefined)
@@ -904,7 +904,7 @@ show.initialize = function (callback) {
                 }else if(HidConfig.External_radio_module_switch){
                     bufName[0] = 0x00;
                     bufName[1] = 0x05;
-                    if(HidConfig.internal_radio==0) {
+                    if(HidConfig.internal_radio==RFmodule.CC2500) {
                         bufName[2] = 0x04;//cc2500 外置射频模块为第五个协议
                     }else{
                         bufName[2] = 0x01;//sx1280 外置射频模块为第二个协议

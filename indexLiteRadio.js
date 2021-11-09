@@ -52,7 +52,11 @@ var HidConnectStatus = {
     disConnect:0x03,    //未连接
 }
 
-
+var RFmodule = {
+    CC2500:0x00,
+    SX1280:0x01,
+    SX1276:0x02,
+}
 
 var VENDOR_ID = 1155;
 var PRODUCT_ID = 22352;
@@ -479,7 +483,7 @@ window.onload=function(){
                             show.rocker_mode.val(HidConfig.rocker_mode);
                             document.getElementById("rocker_mode").disabled = false;
                             
-                            if(HidConfig.internal_radio==0){//内置射频模块型号为：cc2500
+                            if(HidConfig.internal_radio==RFmodule.CC2500){//内置射频模块型号为：cc2500
                                 console.log("HidConfig.current_protocol:"+HidConfig.current_protocol);
                                 
                                 $('#internal_radio_protocol').empty();
@@ -538,7 +542,7 @@ window.onload=function(){
 
                            
                                 
-                            }else if(HidConfig.internal_radio==1){//硬件型号为：sx1280
+                            }else if(HidConfig.internal_radio==RFmodule.SX1280){//硬件型号为：sx1280
                                 $("#internal_radio_protocol_elrs_2.4G").css({display: 'block'});
                                 $("#internal_radio_protocol_Frsky_F8").css({display: 'none'});
                                 $("#internal_radio_protocol_Frsky_F16_FCC").css({display: 'none'});
@@ -582,7 +586,7 @@ window.onload=function(){
                                     
 
                                 }
-                            }else if(HidConfig.internal_radio==2){//硬件型号为：sx1276
+                            }else if(HidConfig.internal_radio==RFmodule.sx1276){//硬件型号为：sx1276
 
                             }
                         }                 
