@@ -3191,7 +3191,7 @@
         "message": "<strong>Firmware Update Steps</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "Follow these steps to update the firmware of the FC board, include FC firmware, OSD firmware or Sensor firmware: <ul><li>Power off</li><li>Hold the button on the FC board.</li><li>Power on the FC board (via battery or USB), LED will be solid white if done correctly.</li><li>Release the button now. Connect the FC to the computer via USB data cable.</li><li>Select the correct COM port and click the \"Connect\" button on the top right of this page. Make sure the button change to red and text is \"Disconnect\".</li><li>Select the correct firmware and version at the top of this page and click the button \"Load Firmware [Online]\" (load the firmware local from your computer would also be okay). The Configurator will recognise the firmware type automatically. Click the button \"Flash xxx\" to start flashing.</li><li>When flashing successfully, the FC wil re-start automatically.</li></ul>"
+        "message": "Follow these steps to update the firmware of the FC board, include FC firmware, OSD firmware or Sensor firmware: <ul><li>Power off</li><li>Hold the button on the FC board.</li><li>Power on the FC board (via battery or USB), LED will be solid white if done correctly.</li><li>Release the button now. Connect the FC to the computer via USB data cable.</li><li>Select the correct COM port and click the \"Connect\" button on the top right of this page. Make sure the button change to red and text is \"Update Firmware\".If you are having trouble connecting to your flight controller,Click <a href=\"https://github.com/BETAFPV/BETAFPV_Configurator/blob/f8081ee8cfe1d636979aa5ec3e6427bb3e589ceb/docs/UpdateFirmwareProcedure.md\"target=\"_blank\" rel=\"noopener noreferrer\">How to update the firmware</a> ).</li><li>Select the correct firmware and version at the top of this page and click the button \"Load Firmware [Online]\" (load the firmware local from your computer would also be okay). The Configurator will recognise the firmware type automatically. Click the button \"Flash xxx\" to start flashing.</li><li>When flashing successfully, the FC wil re-start automatically.</li></ul>"
     },
     "firmwareFlasherRecoveryText_radio": {
         "message": "Here is the step by step manual to update the firmware of the radio controller. <ul><li>Power off the radio controller.</li><li>Hold SETUP button and then Power on (LED ring will be solid blue and NOT red if done correctly).</li><li>Install all STM32 drivers and Zadig in your computer if required</li><li>Release SETUP button and connect it to the computer via USB data cable.</li><li>Select the correct COM port and click the \"Connect\" button on the top right of this page.</li><li>Flash with correct firmware.</li><li>Power off.</li></ul>"
@@ -6492,8 +6492,14 @@
     "dialogPidSaveOK":{
         "message":"Save PID successful"
     },
-    "dialogPidSaveFaild":{
+    "dialogPidSavefailed":{
         "message":"Save PID failed! Please check the connection"
+    },
+    "dialogRatesSaveOK":{
+        "message":"Save Rates successful"
+    },
+    "dialogRatesSavefailed":{
+        "message":"Save Rates failed! Please check the connection"
     },
     "Connect_Serial_Port_Firstlt":{
         "message":"Please Select Correct Serial Port and Connect It Firstly"

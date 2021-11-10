@@ -763,7 +763,7 @@ firmware_flasher.initialize = function (callback) {
                  };
 
                 xhr.send();
-                xhr.timeout = 1800; 
+                xhr.timeout = 1000; 
                 xhr.ontimeout = function(){
                     console.log("get firmware time out");
                     loadFirmwareFromGithubSuccessful = false;
@@ -795,7 +795,7 @@ firmware_flasher.initialize = function (callback) {
                         }
                        
                     }
-                }, 2000);
+                }, 1100);
                 
             }
         });
