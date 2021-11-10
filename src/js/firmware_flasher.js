@@ -353,13 +353,13 @@ function loadRemoteJsonFile(){
      //3.超市无法连接github则从gitee上加载
      setTimeout(() => {
          if(loadJsonFileFromGithubSuccessful == false){
-             xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/865137/download/board.json", true);
+             xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/876365/download/board.json", true);
              xhr.send(null);
              console.log("get json file from gitee");
          }    
-     }, 1000);
+     }, 1600);
  
-     xhr.timeout = 800; 
+     xhr.timeout = 1500; 
      xhr.ontimeout = function(){
          loadJsonFileFromGithubSuccessful = false;
          console.log("get json file time out");
@@ -690,7 +690,14 @@ firmware_flasher.initialize = function (callback) {
                                             }
                                             else if(boardID ==3)
                                             {
-                                                $('#BoardID').text("   Cetus Pro");
+                                                if(str.includes('Cetus_pro_1.1.') ){
+                                                    $('#BoardID').text("   Cetus Pro which hardware version is earlier than 1.2 ");
+                                                }else if(str.includes('Cetus_pro_1.2.') ){
+                                                    $('#BoardID').text("   Cetus Pro which hardware version is 1.2 or later");
+                                                }else {
+                                                    $('#BoardID').text("   Cetus Pro");
+                                                }
+                                                
                                             }
                                             else if(boardID ==5)
                                             {
@@ -756,7 +763,7 @@ firmware_flasher.initialize = function (callback) {
                  };
 
                 xhr.send();
-                xhr.timeout = 800; 
+                xhr.timeout = 1800; 
                 xhr.ontimeout = function(){
                     console.log("get firmware time out");
                     loadFirmwareFromGithubSuccessful = false;
@@ -769,12 +776,12 @@ firmware_flasher.initialize = function (callback) {
                                 xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/865138/download/Cetus_1.0.0.bin", true);
                                 xhr.send(null);
                                 break;
-                            case "Cetus_pro_1.1.0.bin":
-                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/865141/download/Cetus_pro_1.1.0.bin", true);
+                            case "Cetus_pro_1.1.1.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/876366/download/Cetus_pro_1.1.1.bin", true);
                                 xhr.send(null);
                                 break;
-                            case "Cetus_pro_1.2.0.bin":
-                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/865140/download/Cetus_pro_1.2.0.bin", true);
+                            case "Cetus_pro_1.2.1.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/876367/download/Cetus_pro_1.2.1.bin", true);
                                 xhr.send(null);
                                 break;
                             case "Lite_v3_1.0.0.bin":
@@ -788,7 +795,7 @@ firmware_flasher.initialize = function (callback) {
                         }
                        
                     }
-                }, 1000);
+                }, 2000);
                 
             }
         });
