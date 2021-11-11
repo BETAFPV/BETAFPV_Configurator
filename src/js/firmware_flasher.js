@@ -47,6 +47,12 @@ let binSize=null;
 let packNum=0;
 let ack = null;
 let starting=null;
+var flashTarget = {
+    flightControl:1,
+    opticalFlow:3,
+    OSD:5,
+}
+let currentflashTarget = null;
 
 firmware_flasher.flashingMessage = function(message, type) {
     let self = this;
@@ -231,9 +237,22 @@ firmware_flasher.parseData = function(data)
             });
             firmware_flasher.flashingMessage("Flash Finished",firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
             firmware_flasher.flashProgress(packNum/packLen*100);
-            $('a.flash_firmware').removeClass('disabled');
+            
             $("a.load_file").removeClass('disabled');
             $("a.load_remote_file").removeClass('disabled');
+            switch(currentflashTarget){
+                case flashTarget.flightControl:
+                    $('a.flash_firmware').removeClass('disabled');
+                    break;
+                case flashTarget.opticalFlow:
+                    $('a.flash_opf').removeClass('disabled');
+                    break;
+                case flashTarget.OSD:
+                    $('a.flash_OSD').removeClass('disabled');
+                    break;
+                default:
+                    break;
+            }
 
         }
     }
@@ -408,14 +427,17 @@ firmware_flasher.initialize = function (callback) {
                             if(targetID ==1)
                             {
                                 $('#TargetID').text("   Flight Controller");
+                                currentflashTarget = flashTarget.flightControl;
                             }
                             else if(targetID ==3)
                             {
                                 $('#TargetID').text("   OpticalFlow Sensor");
+                                currentflashTarget = flashTarget.opticalFlow;
                             }
                             else if(targetID ==5)
                             {
                                 $('#TargetID').text("   OSD");
+                                currentflashTarget = flashTarget.OSD;
                             }
                             let boardID = binFile[binSizeTemp-10];
                             if(boardID ==1)
