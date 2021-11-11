@@ -840,15 +840,7 @@ show.initialize = function (callback) {
         $('a.factory_reset').click(function () {   
             factory_reset();
             console.log("factory reset");
-            // // var hash = $.md5("value");
-            // var hash = uidBytesFromText("aaaaaa");
-            // console.log(hash.length);
-            // console.log(hash);
-            // // ConfigStorage.set({'BIND_PHRASE': $('#customBindPhraseInput').val()});
-            // ConfigStorage.get('BIND_PHRASE', function (data) {
-            //     console.log(data.BIND_PHRASE);
-            //     // $('#port-override').val(data.portOverride);
-            // });
+           
         });
         
         $('a.refresh').click(function () {

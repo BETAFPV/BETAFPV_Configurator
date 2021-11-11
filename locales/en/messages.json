@@ -2541,7 +2541,7 @@
         "message":"Motors Setup"
     },
     "idelThrottleValue":{
-        "message":"Motor Idel Throttle Value[%]"
+        "message":"Motor Idle Throttle Value[%]"
     },
     "servosText":{
         "message": "Servos"

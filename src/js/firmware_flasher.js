@@ -53,7 +53,11 @@ var flashTarget = {
     OSD:5,
 }
 let currentflashTarget = null;
-
+var flashBoard = {
+    Cetus:1,
+    Cetus_pro:3,
+    Lite_v3:5,
+}
 firmware_flasher.flashingMessage = function(message, type) {
     let self = this;
 
@@ -424,31 +428,31 @@ firmware_flasher.initialize = function (callback) {
                         if(binFile[binSizeTemp-12] == 0x5a)
                         {
                             let targetID = binFile[binSizeTemp-11];
-                            if(targetID ==1)
+                            if(targetID == flashTarget.flightControl)
                             {
                                 $('#TargetID').text("   Flight Controller");
                                 currentflashTarget = flashTarget.flightControl;
                             }
-                            else if(targetID ==3)
+                            else if(targetID == flashTarget.opticalFlow)
                             {
                                 $('#TargetID').text("   OpticalFlow Sensor");
                                 currentflashTarget = flashTarget.opticalFlow;
                             }
-                            else if(targetID ==5)
+                            else if(targetID == flashTarget.OSD)
                             {
                                 $('#TargetID').text("   OSD");
                                 currentflashTarget = flashTarget.OSD;
                             }
                             let boardID = binFile[binSizeTemp-10];
-                            if(boardID ==1)
+                            if(boardID == flashBoard.Cetus)
                             {
                                 $('#BoardID').text("   Cetus");
                             }
-                            else if(boardID ==3)
+                            else if(boardID == flashBoard.Cetus_pro)
                             {
                                 $('#BoardID').text("   Cetus Pro");
                             }
-                            else if(boardID ==5)
+                            else if(boardID == flashBoard.Lite_v3)
                             {
                                 $('#BoardID').text("   Lite Brushed v3");
                             }
@@ -693,24 +697,27 @@ firmware_flasher.initialize = function (callback) {
                                         if(binFile[binSizeTemp-12] == 0x5a)
                                         {
                                             let targetID = binFile[binSizeTemp-11];
-                                            if(targetID ==1)
+                                            if(targetID == flashTarget.flightControl)
                                             {
                                                 $('#TargetID').text("   Flight Controller");
+                                                currentflashTarget = flashTarget.flightControl;
                                             }
-                                            else if(targetID ==3)
+                                            else if(targetID == flashTarget.opticalFlow)
                                             {
                                                 $('#TargetID').text("   OpticalFlow Sensor");
+                                                currentflashTarget = flashTarget.opticalFlow;
                                             }
-                                            else if(targetID ==5)
+                                            else if(targetID == flashTarget.OSD)
                                             {
                                                 $('#TargetID').text("   OSD");
+                                                currentflashTarget = flashTarget.OSD;
                                             }
                                             let boardID = binFile[binSizeTemp-10];
-                                            if(boardID ==1)
+                                            if(boardID == flashBoard.Cetus)
                                             {
                                                 $('#BoardID').text("   Cetus");
                                             }
-                                            else if(boardID ==3)
+                                            else if(boardID == flashBoard.Cetus_pro)
                                             {
                                                 if(str.includes('Cetus_pro_1.1.') ){
                                                     $('#BoardID').text("   Cetus Pro which hardware version is earlier than 1.2 ");
@@ -721,7 +728,7 @@ firmware_flasher.initialize = function (callback) {
                                                 }
                                                 
                                             }
-                                            else if(boardID ==5)
+                                            else if(boardID == flashBoard.Lite_v3)
                                             {
                                                 $('#BoardID').text("   Lite Brushed v3");
                                             }
