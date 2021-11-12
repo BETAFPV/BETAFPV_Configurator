@@ -371,7 +371,7 @@ show.initialize = function (callback) {
                 HidConfig.Internal_radio_module_switch = $(this).is(':checked')?1:0;
                 if(HidConfig.Internal_radio_module_switch){
                     document.getElementById('internal_radio_protocol').disabled = false;
-                    HidConfig.internal_radio_protocol = 0;
+                    HidConfig.internal_radio_protocol = show.internal_radio_protocol.val();
                 }else{
                     document.getElementById('internal_radio_protocol').disabled = true;
                     // document.getElementById('ExpressLRS_power_option_box').disabled = true;
