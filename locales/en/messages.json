@@ -3151,6 +3151,9 @@
     "firmwareFlasherExitDfu": {
         "message": "Exit DFU Mode"
     },
+    "firmwareFlasherFlashFirmware": {
+        "message": "Flash Firmware"
+    },
     "firmwareFlasherFlashOSD": {
         "message": "Flash OSD"
     },

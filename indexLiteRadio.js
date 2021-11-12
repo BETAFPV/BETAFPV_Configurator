@@ -1,4 +1,5 @@
 const serialport = require('serialport')
+const semver = require('semver')
 var liteRadio_configurator_version ="v1.1.0_alpha";
 
 var liteRadio_major_version_match = 1;
@@ -101,6 +102,8 @@ HidConfig = {
     firmware_minor_version:0,
     firmware_pitch_version:0,
 
+    //固件版本号
+    lite_Radio_version:[],
 
     //美国手、日本手模式
     rocker_mode:0,
@@ -191,7 +194,7 @@ HidConfig.compareFirmwareVersion = function(){
                     (HidConfig.firmware_major_version*100+HidConfig.firmware_minor_version*10+HidConfig.firmware_pitch_version);
    
    if(HidConfig.firmware_major_version!==0||HidConfig.firmware_minor_version||HidConfig.firmware_pitch_version){
-    if(HidConfig.firmware_comparison<0){
+    if(HidConfig.firmware_comparison<0&&HidConfig.internal_radio==RFmodule.SX1280){
          //alert("You need to use a new version of configurator");
         const dialogVersionNotMatched = $('.dialogVersionNotMatched')[0];
         let labeText = i18n.getMessage("upgrade_version_of_configurator");
@@ -201,7 +204,7 @@ HidConfig.compareFirmwareVersion = function(){
             dialogVersionNotMatched.close();
         });
 
-    }else if(HidConfig.firmware_comparison>0){
+    }else if(HidConfig.firmware_comparison>0&&HidConfig.internal_radio==RFmodule.SX1280){
          //alert("You need to upgrade the firmware of your liteRadio");
         const dialogVersionNotMatched = $('.dialogVersionNotMatched')[0];
         let labeText = i18n.getMessage("upgrade_the_firmware_of_liteRadio");
@@ -497,10 +500,8 @@ window.onload=function(){
                                     document.getElementById('internal_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
                                     document.getElementById('external_radio_module_switch').checked = HidConfig.External_radio_module_switch;
                                     show.internal_radio_protocol.val(HidConfig.current_protocol);
-                                    HidConfig.external_radio_protocol = true;
-                                    HidConfig.internal_radio_protocol = false;
-                                    document.getElementById("external_radio_protocol").disabled = HidConfig.external_radio_protocol;
-                                    document.getElementById("internal_radio_protocol").disabled = HidConfig.internal_radio_protocol;
+                                    document.getElementById("external_radio_protocol").disabled = true;
+                                    document.getElementById("internal_radio_protocol").disabled = false;
                                      //接着请求遥控器通道配置信息
                                     rquestBuffer[0] = 0x00;
                                     rquestBuffer[1] = 0x11;
@@ -835,6 +836,12 @@ window.onload=function(){
                                 }
                                 var board_version = HidConfig.hardware_major_version+'.'+HidConfig.hardware_minor_version+'.'+HidConfig.hardware_pitch_version;
                                 var firmware_version = HidConfig.firmware_major_version+'.'+HidConfig.firmware_minor_version+'.'+HidConfig.firmware_pitch_version;
+                                HidConfig.lite_Radio_version = firmware_version;
+                                console.log("HidConfig.lite_Radio_version:"+HidConfig.lite_Radio_version);
+                                // if(semver.gte(HidConfig.lite_Radio_version, "1.0.1"))
+                                // {
+                                //     console.log("123");
+                                // }
                                 document.getElementById("liteRadioInfoBoardVersion").innerHTML = board_version;
                                 document.getElementById("liteRadioInfoFirmwareVersion").innerHTML = firmware_version;
 

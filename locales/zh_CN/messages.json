@@ -2920,6 +2920,9 @@
     "firmwareFlasherExitDfu": {
         "message": "退出 DFU 模式"
     },
+    "firmwareFlasherFlashFirmware": {
+        "message": "烧写固件"
+    },
     "firmwareFlasherFlashOSD": {
         "message": "烧写OSD"
     },
