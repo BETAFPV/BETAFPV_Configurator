@@ -190,36 +190,17 @@ HidConfig = {
 
 };
 HidConfig.compareFirmwareVersion = function(){
-    HidConfig.firmware_comparison  = (liteRadio_major_version_match*100+liteRadio_minor_version_match*10+liteRadio_pitch_version_match) - 
-                    (HidConfig.firmware_major_version*100+HidConfig.firmware_minor_version*10+HidConfig.firmware_pitch_version);
-   
-   if(HidConfig.firmware_major_version!==0||HidConfig.firmware_minor_version||HidConfig.firmware_pitch_version){
-    if(HidConfig.firmware_comparison<0&&HidConfig.internal_radio==RFmodule.SX1280){
-         //alert("You need to use a new version of configurator");
-        const dialogVersionNotMatched = $('.dialogVersionNotMatched')[0];
-        let labeText = i18n.getMessage("upgrade_version_of_configurator");
-        $('label[id="VersionNotMatchedDialogLabel"]').text(labeText);
-        dialogVersionNotMatched.showModal();
-        $('.VersionNotMatched-confirmbtn').click(function() {
-            dialogVersionNotMatched.close();
-        });
-
-    }else if(HidConfig.firmware_comparison>0&&HidConfig.internal_radio==RFmodule.SX1280){
-         //alert("You need to upgrade the firmware of your liteRadio");
-        const dialogVersionNotMatched = $('.dialogVersionNotMatched')[0];
-        let labeText = i18n.getMessage("upgrade_the_firmware_of_liteRadio");
-        $('label[id="VersionNotMatchedDialogLabel"]').text(labeText);
-        dialogVersionNotMatched.showModal();
-        $('.VersionNotMatched-confirmbtn').click(function() {
-            dialogVersionNotMatched.close();
-        });
-    }else{
-        
+    if(HidConfig.internal_radio == RFmodule.SX1280){//若为 SX1280 1.0.0版本固件：提示客户更新固件以使用新功能bind phrase
+        if(semver.eq(HidConfig.lite_Radio_version, '1.0.0')){
+            const dialogVersionNotMatched = $('.dialogVersionNotMatched')[0];
+            let labeText = i18n.getMessage("upgrade_the_firmware_of_liteRadio");
+            $('label[id="VersionNotMatchedDialogLabel"]').text(labeText);
+            dialogVersionNotMatched.showModal();
+            $('.VersionNotMatched-confirmbtn').click(function() {
+                dialogVersionNotMatched.close();
+            });
+        }
     }
-   }else{
-        HidConfig.firmware_comparison = 0xff;
-       console.log("The version number could not be obtained");
-   }
 
     
 }
@@ -838,10 +819,6 @@ window.onload=function(){
                                 var firmware_version = HidConfig.firmware_major_version+'.'+HidConfig.firmware_minor_version+'.'+HidConfig.firmware_pitch_version;
                                 HidConfig.lite_Radio_version = firmware_version;
                                 console.log("HidConfig.lite_Radio_version:"+HidConfig.lite_Radio_version);
-                                // if(semver.gte(HidConfig.lite_Radio_version, "1.0.1"))
-                                // {
-                                //     console.log("123");
-                                // }
                                 document.getElementById("liteRadioInfoBoardVersion").innerHTML = board_version;
                                 document.getElementById("liteRadioInfoFirmwareVersion").innerHTML = firmware_version;
 

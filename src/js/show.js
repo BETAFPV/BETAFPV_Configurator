@@ -212,47 +212,57 @@ show.refreshUI = function()
         show.ch7_offset.val(HidConfig.ch7_offset_display);
         show.ch8_offset.val(HidConfig.ch8_offset_display);
 
-        if((HidConfig.firmware_comparison<=0||HidConfig.firmware_comparison ==0xff)&&HidConfig.internal_radio==RFmodule.SX1280){
-            document.getElementById('bindPhraseSwitch').disabled = false;
-            ConfigStorage.get('USE_BIND_PHRASE', function (data) {
-            if(data.USE_BIND_PHRASE==undefined)
-                data.USE_BIND_PHRASE = false;
-            HidConfig.bind_phrase_switch = data.USE_BIND_PHRASE;
-            });
-    
-            document.getElementById('bindPhraseSwitch').checked = HidConfig.bind_phrase_switch;
-            if(HidConfig.bind_phrase_switch&&HidConfig.Internal_radio_module_switch==true){
-                document.getElementById("bindPhrase").style.display="block";
-                ConfigStorage.get('BIND_PHRASE', function (data) {
-                if(data.BIND_PHRASE==undefined)
-                    data.BIND_PHRASE = 'custom bind phrase'
-                show.bind_phrase_input.val(data.BIND_PHRASE);
-                HidConfig.uid_bytes = uidBytesFromText(show.bind_phrase_input.val());
-                
-                });
-                HidConfig.uid_bytes = uidBytesFromText(show.bind_phrase_input.val());
-                if(show.bind_phrase_input.val().length>=6){
 
-                    show.uid_bytes.text("UID Bytes:"+HidConfig.uid_bytes);
-                    document.getElementById("set_expresslrs_uid").style.display="block";
-                    show.command_set_expresslrs_uid.val("set"+" "+"expresslrs_uid"+ " "+"="+" "+HidConfig.uid_bytes);
-                    ConfigStorage.set({'BIND_PHRASE': $('#customBindPhraseInput').val()});
-                }else{ 
-                    show.uid_bytes.text(i18n.getMessage('bind_phrase_must_be_more_then_6_characters'));
-                    document.getElementById("set_expresslrs_uid").style.display="none";
+        //bind phrase 功能只有在1.0.1版本之后的SX1280固件才支持
+        if(semver.gte(HidConfig.lite_Radio_version, "1.0.1")){
+            if(HidConfig.internal_radio == RFmodule.SX1280){
+                document.getElementById('bindPhraseSwitch').disabled = false;
+                ConfigStorage.get('USE_BIND_PHRASE', function (data) {//获取上次打开地面站是否使用bind phrase
+                    if(data.USE_BIND_PHRASE==undefined)
+                        data.USE_BIND_PHRASE = false;
+                    HidConfig.bind_phrase_switch = data.USE_BIND_PHRASE;
+                });
+                document.getElementById('bindPhraseSwitch').checked = HidConfig.bind_phrase_switch;
+
+                if(HidConfig.bind_phrase_switch&&HidConfig.Internal_radio_module_switch==true){
+                    document.getElementById("bindPhrase").style.display="block";
+                    ConfigStorage.get('BIND_PHRASE', function (data) {//获取本地保存的bind phrase
+                    if(data.BIND_PHRASE==undefined)
+                        data.BIND_PHRASE = 'custom bind phrase'
+                    show.bind_phrase_input.val(data.BIND_PHRASE);
+                    HidConfig.uid_bytes = uidBytesFromText(show.bind_phrase_input.val());
+                    
+                    });
+                    HidConfig.uid_bytes = uidBytesFromText(show.bind_phrase_input.val());
+                    if(show.bind_phrase_input.val().length>=6){
+    
+                        show.uid_bytes.text("UID Bytes:"+HidConfig.uid_bytes);
+                        document.getElementById("set_expresslrs_uid").style.display="block";
+                        show.command_set_expresslrs_uid.val("set"+" "+"expresslrs_uid"+ " "+"="+" "+HidConfig.uid_bytes);
+                        ConfigStorage.set({'BIND_PHRASE': $('#customBindPhraseInput').val()});
+                    }else{ 
+                        show.uid_bytes.text(i18n.getMessage('bind_phrase_must_be_more_then_6_characters'));
+                        document.getElementById("set_expresslrs_uid").style.display="none";
+                    }
+                }else{
+                document.getElementById("set_expresslrs_uid").style.display="none";
+                document.getElementById("bindPhrase").style.display="none";
                 }
-            }else{
-            document.getElementById("set_expresslrs_uid").style.display="none";
-            document.getElementById("bindPhrase").style.display="none";
             }
-        }else{
+            else{
+                document.getElementById('bindPhraseSwitch').disabled = true;
+                document.getElementById("set_expresslrs_uid").style.display="none";
+                document.getElementById("bindPhrase").style.display="none";
+            }
+        }
+        else{
             document.getElementById('bindPhraseSwitch').disabled = true;
             document.getElementById("set_expresslrs_uid").style.display="none";
             document.getElementById("bindPhrase").style.display="none";
         }
- 
+
         $('a.save').removeClass('disabled');
-        
+       
 
     }
    
