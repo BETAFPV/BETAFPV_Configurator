@@ -166,7 +166,6 @@ show.getElementIndex = function(){
     show.uid_bytes = $('label[id="UidBytesDisplay"]');
 
     show.command_set_expresslrs_uid = $('input[id="command_set_expresslrs_uid"]');
-
 }
 
 show.refreshUI = function()
@@ -252,7 +251,7 @@ show.refreshUI = function()
             document.getElementById("bindPhrase").style.display="none";
         }
  
-        
+        $('a.save').removeClass('disabled');
         
 
     }
@@ -856,7 +855,7 @@ show.initialize = function (callback) {
                 $('.dialogConfirmTheLengthOfBindPhrase-confirmbtn').click(function() {
                     dialogConfirmTheLengthOfBindPhrase.close();
                 });
-                console.log("send bind phrase");
+               
             }else{
                 if(HidConfig.Internal_radio_module_switch==true&&HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length>=6){
                     let buffer = new Buffer.alloc(64);
