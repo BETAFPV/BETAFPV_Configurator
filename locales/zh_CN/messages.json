@@ -2747,7 +2747,7 @@
         "message": "制造商 ID："
     },
     "firmwareFlasherReleaseVersion": {
-        "message": "版本:"
+        "message": "固件版本："
     },
     "firmwareFlasherReleaseVersionUrl": {
         "message": "访问发布信息页面"
@@ -2756,13 +2756,22 @@
         "message": "发布说明："
     },
     "firmwareFlasherReleaseDate": {
-        "message": "日期："
+        "message": "编译日期："
     },
     "firmwareFlasherReleaseTarget": {
-        "message": "飞控目标："
+        "message": "固件类型："
     },
     "firmwareFlasherReleaseFile": {
         "message": "二进制"
+    },
+    "firmwareFlasherFileName":{
+        "message":"文件名："
+    },
+    "firmwareFlasherTarget":{
+        "message":"目标："
+    },
+    "firmwareFlasherBoard":{
+        "message":"目标板："
     },
     "firmwareFlasherUnifiedTargetName": {
         "message": "统一目标："
@@ -6131,6 +6140,21 @@
     },
     "InvalidNetwork":{
         "message":"请检查您的网络是否可用。"
+    },
+    "flightControl":{
+        "message": "飞控固件"
+    },
+    "Sensors":{
+        "message": "传感器固件"
+    },
+    "OSD":{
+        "message": "OSD固件"
+    },
+    "cetus_pro_hardware_gte_1_2":{
+        "message": "Cetus Pro 硬件版本号为1.2或以上"
+    },
+    "cetus_pro_hardware_lt_1_2":{
+        "message": "Cetus Pro 硬件版本号为1.0/1.1"
     }
     
 }

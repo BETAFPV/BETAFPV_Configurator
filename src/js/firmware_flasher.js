@@ -699,17 +699,17 @@ firmware_flasher.initialize = function (callback) {
                                             let targetID = binFile[binSizeTemp-11];
                                             if(targetID == flashTarget.flightControl)
                                             {
-                                                $('#TargetID').text("   Flight Controller");
+                                                $('#TargetID').text(i18n.getMessage('flightControl'));
                                                 currentflashTarget = flashTarget.flightControl;
                                             }
                                             else if(targetID == flashTarget.opticalFlow)
                                             {
-                                                $('#TargetID').text("   OpticalFlow Sensor");
+                                                $('#TargetID').text(i18n.getMessage('Sensors'));
                                                 currentflashTarget = flashTarget.opticalFlow;
                                             }
                                             else if(targetID == flashTarget.OSD)
                                             {
-                                                $('#TargetID').text("   OSD");
+                                                $('#TargetID').text(i18n.getMessage('OSD'));
                                                 currentflashTarget = flashTarget.OSD;
                                             }
                                             let boardID = binFile[binSizeTemp-10];
@@ -720,9 +720,9 @@ firmware_flasher.initialize = function (callback) {
                                             else if(boardID == flashBoard.Cetus_pro)
                                             {
                                                 if(str.includes('Cetus_pro_1.1.') ){
-                                                    $('#BoardID').text("   Cetus Pro which hardware version is earlier than 1.2 ");
+                                                    $('#BoardID').text(i18n.getMessage('cetus_pro_hardware_lt_1_2'));
                                                 }else if(str.includes('Cetus_pro_1.2.') ){
-                                                    $('#BoardID').text("   Cetus Pro which hardware version is 1.2 or later");
+                                                    $('#BoardID').text(i18n.getMessage('cetus_pro_hardware_gte_1_2'));
                                                 }else {
                                                     $('#BoardID').text("   Cetus Pro");
                                                 }
@@ -847,7 +847,7 @@ firmware_flasher.initialize = function (callback) {
                         addOptionValue2('boardVersion',i,firmware_flasher.firmware_version.Cetus_pro[i].version);
                     }
                     break;
-                case 3://lite_ve
+                case 3://lite_v3
                     $('#boardVersion').empty();
                     console.log("firmware_flasher.firmware_version.Lite_v3.length:"+firmware_flasher.firmware_version.Lite_v3.length);
                     for(let i=0;i<firmware_flasher.firmware_version.Lite_v3.length;i++){

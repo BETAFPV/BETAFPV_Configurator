@@ -1,10 +1,7 @@
 const serialport = require('serialport')
 const semver = require('semver')
-var liteRadio_configurator_version ="v1.1.0_alpha";
+var liteRadio_configurator_version ="v1.1.0_RC1";
 
-var liteRadio_major_version_match = 1;
-var liteRadio_minor_version_match =0;
-var liteRadio_pitch_version_match =1;
 var HID=require('node-hid')
 var lastPortCount = 0;
 var Command_ID = {
