@@ -90,14 +90,13 @@ mavlinkParser.on('IMU', function(msg) {
     FC.SENSOR_DATA.magnetometer[2] = msg.zMag;
     
 });
-var nowheartBeatTime;
-var lastheartBeatTime;
 mavlinkParser.on('SYS_STATUS', function(msg) {
     setup.battery_voltage = msg.voltageBattery;
 
 });
 
 mavlinkParser.on('PID', function(msg) { 
+    setTimeout(() => {
     document.getElementById('roll_p').value = msg.PID_ROLL_P.toFixed(2);
     document.getElementById('roll_i').value = msg.PID_ROLL_I.toFixed(2);
     document.getElementById('roll_d').value = msg.PID_ROLL_D.toFixed(2);
@@ -115,10 +114,13 @@ mavlinkParser.on('PID', function(msg) {
     document.getElementById('yaw_d').value = msg.PID_YAW_D.toFixed(2);
     document.getElementById('yaw_imax').value = msg.PID_YAW_I_MAX;
     document.getElementById('yaw_cutfre').value = msg.PID_YAW_D_CUTFREQ;
+        
+    }, 100);
+    
 });
 
 mavlinkParser.on('RATE', function(msg) {
-
+    setTimeout(() => {
     document.getElementById('rc_rate_roll').value = msg.rcRateRoll.toFixed(2);
     document.getElementById('roll_rate').value = msg.rateRoll.toFixed(2);
     document.getElementById('rc_roll_expo').value = msg.rcExpoRoll.toFixed(2);
@@ -133,6 +135,8 @@ mavlinkParser.on('RATE', function(msg) {
 
     document.getElementById('throttle_mid').value = msg.throttleMid.toFixed(2);
     document.getElementById('throttle_expo').value = msg.throttleExpo.toFixed(2);
+    }, 100);
+    
 });
 
 
@@ -140,7 +144,10 @@ mavlinkParser.on('MOTORS_MINIVALUE', function(msg) {
     // the parsed message is here
     motors.idelThrottleValue = msg.miniValue1.toFixed(0);
     console.log(motors.idelThrottleValue);
-    document.getElementById('idelThrottleValue').value = motors.idelThrottleValue;
+    setTimeout(() => {
+        document.getElementById('idelThrottleValue').value = motors.idelThrottleValue;
+    }, 50);
+    
 });
 
 mavlinkParser.on('COMMAND_ACK', function(msg) {

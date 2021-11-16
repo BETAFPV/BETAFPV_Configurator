@@ -100,7 +100,7 @@ HidConfig = {
     firmware_pitch_version:0,
 
     //固件版本号
-    lite_Radio_version:[],
+    lite_Radio_version:'0.0.0',
 
     //美国手、日本手模式
     rocker_mode:0,
