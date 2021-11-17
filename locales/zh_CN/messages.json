@@ -6155,6 +6155,9 @@
     },
     "cetus_pro_hardware_lt_1_2":{
         "message": "Cetus Pro 硬件版本号为1.0/1.1"
+    },
+    "Unable_to_find_serial_port":{
+        "message":"无法识别到串口？"
     }
     
 }

@@ -6551,5 +6551,8 @@
     },
     "cetus_pro_hardware_lt_1_2":{
         "message": "Cetus Pro which hardware version is earlier than 1.2"
+    },
+    "Unable_to_find_serial_port":{
+        "message":"Unable to find serial port？"
     }
 }

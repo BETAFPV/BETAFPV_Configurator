@@ -281,6 +281,7 @@ window.onload=function(){
             if(hidDevice){
                 HidConfig.HID_Connect_State = HidConnectStatus.connecting;
                 $('div.open_hid_device div.connect_hid').text(i18n.getMessage('HID_Connecting'));
+                HidConfig.Have_Receive_HID_Data = false;
                 setTimeout(() => {
                     if(HidConfig.Have_Receive_HID_Data){//先判断遥控器有数据发送过来
                         HidConfig.LiteRadio_power = false;
