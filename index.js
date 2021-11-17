@@ -1,5 +1,5 @@
 const serialport = require('serialport')
-
+var {shell} = require('electron')
 
 var flightcontrol_configurator_version ='v1.1.0_RC1';
 let isFlasherTab=0;
@@ -70,6 +70,17 @@ setTimeout(function loadLanguage() {
 
 window.onload=function(){
     
+    let Unable_to_find_serial_port = document.getElementById("Unable_to_find_serial_port");
+    Unable_to_find_serial_port.onclick = function(e){
+          e.preventDefault();
+          if(i18n.Storage_language == 'en'){
+            shell.openExternal("https://github.com/BETAFPV/BETAFPV_Configurator/blob/007c7f8bb7f03966e1920da3b544479e3e0de88f/docs/UnableToFindSerialPort_EN.md");
+          }else{
+            shell.openExternal("https://github.com/BETAFPV/BETAFPV_Configurator/blob/007c7f8bb7f03966e1920da3b544479e3e0de88f/docs/UnableToFindSerialPort_CN.md");
+          }
+          
+        }
+
     $('label[id="flightcontrol_configurator_version"]').text(flightcontrol_configurator_version);
     $('div.connect_controls a.connect').click(function () {
         if (GUI.connect_lock != true) { 
