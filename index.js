@@ -73,10 +73,10 @@ window.onload=function(){
     let Unable_to_find_serial_port = document.getElementById("Unable_to_find_serial_port");
     Unable_to_find_serial_port.onclick = function(e){
           e.preventDefault();
-          if(i18n.Storage_language == 'en'){
-            shell.openExternal("https://github.com/BETAFPV/BETAFPV_Configurator/blob/007c7f8bb7f03966e1920da3b544479e3e0de88f/docs/UnableToFindSerialPort_EN.md");
+          if(i18n.selectedLanguage == 'zh_CN'){
+            shell.openExternal("https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/UnableToFindSerialPort_CN.md");
           }else{
-            shell.openExternal("https://github.com/BETAFPV/BETAFPV_Configurator/blob/007c7f8bb7f03966e1920da3b544479e3e0de88f/docs/UnableToFindSerialPort_CN.md");
+            shell.openExternal("https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/UnableToFindSerialPort_EN.md");
           }
           
         }
