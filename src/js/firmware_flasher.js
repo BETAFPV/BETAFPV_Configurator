@@ -324,11 +324,8 @@ function loadRemoteJsonFile(){
     };
     xhr.send();
     xhr.onreadystatechange = function(){
-        console.log(xhr.readyState);
         if(xhr.readyState==2){
-            console.log("The server is connected:"+xhr.status);
         }else if(xhr.readyState==3){
-            console.log("Request was received :"+xhr.status);
         }
  
          if (xhr.readyState == 4){
@@ -351,7 +348,6 @@ function loadRemoteJsonFile(){
              //     alert("Service Unavailable : "+xhr.status);
              // }      
              else{
-                 console.log("Github cannot be accessed : "+xhr.status);
                  //2.github无法访问切换到gittee上访问
                  if(loadJsonFileFromGithubSuccessful == true){
                      loadJsonFileFromGithubSuccessful = false;
@@ -380,9 +376,9 @@ function loadRemoteJsonFile(){
              xhr.send(null);
              console.log("get json file from gitee");``
          }    
-     }, 1600);
+     }, 3000);
  
-     xhr.timeout = 1500; 
+     xhr.timeout = 2500; 
      xhr.ontimeout = function(){
          loadJsonFileFromGithubSuccessful = false;
          console.log("get json file time out");
@@ -657,17 +653,12 @@ firmware_flasher.initialize = function (callback) {
         
         $('a.load_remote_file').click(function () {
             if (!$(this).hasClass('disabled')) {
-                console.log("click");
 
                 let targetBoardSelected = ($('#boardTarget option:selected').text());
                 let targetVersionSelected = ($('#boardVersion option:selected').text());
-                console.log(targetBoardSelected);
-                console.log(targetVersionSelected);
                 loadFirmwareFromGithubSuccessful = true;
                 var str = targetBoardSelected + "_" + targetVersionSelected + ".bin";
-                console.log(str);
                 var urlValue = "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v3.0.0/" + str;
-                console.log(urlValue);
 
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', urlValue, true);
@@ -679,7 +670,6 @@ firmware_flasher.initialize = function (callback) {
                         if(err){
                             console.log("error");
                         }else {
-                            console.log(i18n.getMessage('Confirm'));
                             binFilePath = path.join(__dirname, str);
                             fs.readFile(binFilePath, (err, binFile) => {
                                 if (err) {
@@ -690,7 +680,6 @@ firmware_flasher.initialize = function (callback) {
                                     var binSizeTemp = binFile.length;
             
                                     packLen = Math.round(binSize / 1024);
-                                    console.log("packLen:"+packLen);
                                     if(packLen>5){
                                         self.enableFlashing(true,1);
                                         firmware_flasher.flashingMessage(i18n.getMessage("firmwareFlasherRemoteFirmwareLoaded")+ binFile.length +"bytes ",self.FLASH_MESSAGE_TYPES.NEUTRAL);

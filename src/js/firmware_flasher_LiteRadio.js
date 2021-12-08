@@ -110,7 +110,6 @@ function addOptionValue2(id,value,text) {
 function readJsonFile(fileName){
     jsonFile.readFile(fileName, function(err, jsonData) {
         if (err) throw err;
-        console.log(jsonData.status);
         if(jsonData.status!==404){
             $('#boardTarget').empty();
             addOptionValue2('boardTarget',1,"LiteRadio_2_SE");
@@ -118,8 +117,6 @@ function readJsonFile(fileName){
             addOptionValue2('boardTarget',3,"LiteRadio_2_SE_V2_CC2500");
             addOptionValue2('boardTarget',4,"LiteRadio_3_SX1280");
             addOptionValue2('boardTarget',5,"LiteRadio_3_CC2500");
-
-            console.log("jsonData.LiteRadio_2_SE.length:"+jsonData.LiteRadio_2_SE.length);
             $('#boardVersion').empty();
             for(let i=0;i<jsonData.LiteRadio_2_SE.length;i++){
                 addOptionValue2('boardVersion',i,jsonData.LiteRadio_2_SE[0].version);
@@ -136,11 +133,8 @@ function readJsonFile(fileName){
 }
 
 function loadRemoteJsonFile(){
-    //https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/board.json
     var xhr = new XMLHttpRequest();
-    
     xhr.responseType = 'arraybuffer';
-    console.log(xhr.readyState);
     xhr.onload = function(e) {
         var array = new Uint8Array(xhr.response);
         var file_path = path.join(__dirname, "./LiteRadio.json");
@@ -154,22 +148,23 @@ function loadRemoteJsonFile(){
         })
     };
     //1.优先访问github上的固件
-    xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v2.0.0/LiteRadio.json", true);
-    xhr.send(null);
-    
+    setTimeout(() => {
+        xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v2.0.0/LiteRadio.json", true);
+        xhr.send(null);    
+        console.log("get literadio.json from github");
+    }, 1000);
+ 
    
    xhr.onreadystatechange = function(){
-       console.log(xhr.readyState);
        if(xhr.readyState==2){
-           console.log("The server is connected:"+xhr.status);
        }else if(xhr.readyState==3){
-           console.log("Request was received :"+xhr.status);
        }
 
         if (xhr.readyState == 4){
             if(xhr.status == 200){//ok
                 //从github上加载固件成功
                 // alert("Request firmware successful: "+xhr.status);
+                console.log("get json file successful");
                 loadJsonFileFromGithubSuccessful = true;
             }
             // else if(xhr.status == 400){
@@ -186,7 +181,6 @@ function loadRemoteJsonFile(){
             //     alert("Service Unavailable : "+xhr.status);
             // }      
             else{
-                console.log("Github cannot be accessed : "+xhr.status);
                 //2.github无法访问切换到gittee上访问
                 if(loadJsonFileFromGithubSuccessful == true){
                     loadJsonFileFromGithubSuccessful = false;
@@ -198,22 +192,20 @@ function loadRemoteJsonFile(){
         }
     };
 
-    //3.超市无法连接github则从gitee上加载
+    //3.超时无法连接github则从gitee上加载
     setTimeout(() => {
         if(loadJsonFileFromGithubSuccessful == false){
             xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/881714/download/LiteRadio.json", true);
             xhr.send(null);
             console.log("get json file from gitee");
         }    
-    }, 1000);
+    }, 5000);
 
-    xhr.timeout = 800; 
+    xhr.timeout = 3000; 
     xhr.ontimeout = function(){
         loadJsonFileFromGithubSuccessful = false;
         console.log("get json file time out");
     }
-
-
 };
 
 function CRC16_Check(puData)
@@ -285,9 +277,6 @@ firmware_flasher_LiteRadio.connect_init = function(){
             const selected_baud = parseInt($('div#port-picker #baud').val());
 
             let COM = ($('div#port-picker #port option:selected').text());
-
-            console.log(COM);
-            console.log(selected_baud);
 
             port = new serialport(COM, {
                 baudRate: parseInt(selected_baud),
@@ -451,7 +440,6 @@ firmware_flasher_LiteRadio.connect_init = function(){
                     }
                     else if(starting ==3)
                     {
-                        console.log(data);
                         
                         if(data[0] == 6)
                         {
@@ -462,7 +450,6 @@ firmware_flasher_LiteRadio.connect_init = function(){
                                 if (err) return console.log('write Error: ', err.message);
                             });
                             starting = 4;
-                            console.log("EOT LiteRadio");
                             firmware_flasher_LiteRadio.flashingMessage("Verifying ...","NEUTRAL");
                             
                             
@@ -565,21 +552,18 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                     $('#boardVersion').empty();
                     for(let i=0;i<firmware_flasher_LiteRadio.firmware_version.LiteRadio_3_SX1280.length;i++){
                         addOptionValue2('boardVersion',i,firmware_flasher_LiteRadio.firmware_version.LiteRadio_3_SX1280[i].version);
-                        console.log(firmware_flasher_LiteRadio.firmware_version.LiteRadio_3_SX1280[i].version);
                     }
                     break;
                 case 5:
                     $('#boardVersion').empty();
                     for(let i=0;i<firmware_flasher_LiteRadio.firmware_version.LiteRadio_3_CC2500.length;i++){
                         addOptionValue2('boardVersion',i,firmware_flasher_LiteRadio.firmware_version.LiteRadio_3_CC2500[i].version);
-                        console.log(firmware_flasher_LiteRadio.firmware_version.LiteRadio_3_CC2500[i].version);
                     }
                     break;
                 default:
                     $('#boardVersion').empty();
                     break;
             }
-            console.log("boardTarget change ");
         });
         $('a.flash_firmware').click(function () {
             if (!$(this).hasClass('disabled')) {
@@ -608,19 +592,14 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
         
         $('a.load_remote_file').click(function () {
             if (!$(this).hasClass('disabled')) {
-                console.log("click");
 
                 let targetBoardSelected = ($('#boardTarget option:selected').text());
                 let targetVersionSelected = ($('#boardVersion option:selected').text());
-                console.log(targetBoardSelected);
-                console.log(targetVersionSelected);
 
                 var str = targetBoardSelected + "_" + targetVersionSelected + ".bin";
-                console.log(str);
                  
                 // var urlValue = "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v1/" + str;
                 var urlValue = "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v2.0.0/" + str;
-                console.log(urlValue);
 
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', urlValue, true);
@@ -630,21 +609,16 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
 
                     fs.writeFile(path.join(__dirname, str), array, "utf8",(err)=>{
                         if(err){
-                            console.log("error");
                             alert(i18n.getMessage("write_file_failed"));
                             
                         }else {
-                            console.log("ok");
                             binFilePath = path.join(__dirname, str);
                             fs.readFile(binFilePath, (err, binFile) => {
                                 if (err) {
                                     
                                 } else {
-                                    
                                     binSize = binFile.length;
-            
                                     packLen = Math.round(binSize / 1024);
-                                    console.log("packLen:"+packLen);
                                     if(packLen>10){
                                         self.enableFlashing(true);
                                         firmware_flasher_LiteRadio.flashingMessage("Load Firmware Sucessfuly! Firmware Size: ( "+ binFile.length +"bytes )",self.FLASH_MESSAGE_TYPES.NEUTRAL);
@@ -661,9 +635,7 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                 };
                 xhr.onreadystatechange = function(){
                     if(xhr.readyState==2){
-                        console.log("The server is connected:"+xhr.status);
                     }else if(xhr.readyState==3){
-                        console.log("Request was received :"+xhr.status);
                     }
              
                      if (xhr.readyState == 4){
@@ -721,10 +693,10 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                         }
                        
                     }
-                }, 1000);
+                }, 2000);
 
 
-                xhr.timeout = 800; 
+                xhr.timeout = 1800; 
                 xhr.ontimeout = function(){
                     console.log("get firmware time out");
                     loadFirmwareFromGithubSuccessful = false;
