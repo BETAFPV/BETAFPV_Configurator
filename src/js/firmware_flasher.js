@@ -378,7 +378,7 @@ function loadRemoteJsonFile(){
          if(loadJsonFileFromGithubSuccessful == false){
              xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/876365/download/board.json", true);
              xhr.send(null);
-             console.log("get json file from gitee");
+             console.log("get json file from gitee");``
          }    
      }, 1600);
  

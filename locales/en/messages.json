@@ -6554,5 +6554,12 @@
     },
     "Unable_to_find_serial_port":{
         "message":"Unable to find serial port？"
+    },
+    "UniqueDeviceId":{
+        "message":"SerialNumber"
+    },
+    "updateFCfirmware":
+    {
+        "message":"update newer firmware"
     }
 }

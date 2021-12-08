@@ -6158,6 +6158,13 @@
     },
     "Unable_to_find_serial_port":{
         "message":"无法识别到串口？"
+    },
+    "UniqueDeviceId":{
+        "message":"飞控序列号"
+    },
+    "updateFCfirmware":
+    {
+        "message":"请更新固件后显示"
     }
     
 }

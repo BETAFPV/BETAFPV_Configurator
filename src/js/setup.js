@@ -1,5 +1,6 @@
 var setupModel;
 const setup = {
+    SerialNumber: null,
     yaw_fix:       0,
     targetID :     0,
     major_version: 0,
@@ -12,8 +13,23 @@ const setup = {
     factory_reset_ack:false,
     mavlinkConnected:false
 };
+function resetSetup(){
+    setup.SerialNumber = null;
+    setup.yaw_fix=       0;
+    setup.targetID =     0;
+    setup.major_version= 0;
+    setup.minor_version= 0;
+    setup.patch_version= 0;
+    setup.year=          0;
+    setup.month=         0;
+    setup.day=           0;
+    setup.battery_voltage=0;
+    setup.factory_reset_ack=false;
+    setup.mavlinkConnected=false;
+}
 setup.initialize = function (callback) {
     const self = this;
+    resetSetup();
   $('#content').load("./src/html/setup.html", function () {
     i18n.localizePage();
       const backupButton = $('#content .backup');
@@ -63,7 +79,8 @@ setup.initialize = function (callback) {
 
 
     function display_Info(){
-        const target_id_e = $('.target'),
+        const SerialNumber_e = $('.SerialNumber');
+        target_id_e = $('.target');
         version_e = $('.firmwareVersion');
         build_time_e = $('.buil-time');
         voltage_e = $('.bat-voltage');
@@ -83,6 +100,9 @@ setup.initialize = function (callback) {
             default:
                 target_id_e.text('Unknow');
                 break;
+        }
+        if(setup.SerialNumber!=null){
+            SerialNumber_e.text(setup.SerialNumber);
         }
         version_e.text(setup.major_version+'.'+setup.minor_version+'.'+setup.patch_version);
         build_time_e.text(setup.year+'-'+setup.month+'-'+setup.day);

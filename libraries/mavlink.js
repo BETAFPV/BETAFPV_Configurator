@@ -116,6 +116,7 @@ mavlink10.MAVLINK_MSG_ID_ALTITUDE = 12
 mavlink10.MAVLINK_MSG_ID_RATE = 13
 mavlink10.MAVLINK_MSG_ID_PID = 14
 mavlink10.MAVLINK_MSG_ID_MOTORS_MINIVALUE = 15
+mavlink10.MAVLINK_MSG_ID_UNIQUE_DEVICE_ID = 16
 mavlink10.messages = {};
 
 /* 
@@ -566,6 +567,42 @@ mavlink10.messages.motors_minivalue.prototype.pack = function(mav) {
     return mavlink10.message.prototype.pack.call(this, mav, this.crc_extra, jspack.Pack(this.format, [ this.miniValue1]));
 }
 
+/* 
+flightcontrol's unique device Id
+
+                chipId1                   : chip Id 1 (uint8_t)
+                chipId2                   : chip Id 2 (uint8_t)
+                chipId3                   : chip Id 3 (uint8_t)
+                chipId4                   : chip Id 4 (uint8_t)
+                chipId5                   : chip Id 5 (uint8_t)
+                chipId6                   : chip Id 6 (uint8_t)
+                chipId7                   : chip Id 7 (uint8_t)
+                chipId8                   : chip Id 8 (uint8_t)
+                chipId9                   : chip Id 9 (uint8_t)
+                chipId10                  : chip Id 10 (uint8_t)
+                chipId11                  : chip Id 11 (uint8_t)
+                chipId12                  : chip Id 12 (uint8_t)
+
+*/
+mavlink10.messages.unique_device_id = function(chipId1, chipId2, chipId3, chipId4, chipId5, chipId6, chipId7, chipId8, chipId9, chipId10, chipId11, chipId12) {
+
+    this.format = '<BBBBBBBBBBBB';
+    this.id = mavlink10.MAVLINK_MSG_ID_UNIQUE_DEVICE_ID;
+    this.order_map = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    this.crc_extra = 247;
+    this.name = 'UNIQUE_DEVICE_ID';
+
+    this.fieldnames = ['chipId1', 'chipId2', 'chipId3', 'chipId4', 'chipId5', 'chipId6', 'chipId7', 'chipId8', 'chipId9', 'chipId10', 'chipId11', 'chipId12'];
+
+
+    this.set(arguments);
+
+}
+        mavlink10.messages.unique_device_id.prototype = new mavlink10.message;
+mavlink10.messages.unique_device_id.prototype.pack = function(mav) {
+    return mavlink10.message.prototype.pack.call(this, mav, this.crc_extra, jspack.Pack(this.format, [ this.chipId1, this.chipId2, this.chipId3, this.chipId4, this.chipId5, this.chipId6, this.chipId7, this.chipId8, this.chipId9, this.chipId10, this.chipId11, this.chipId12]));
+}
+
 
 mavlink10.map = {
         1: { format: '<BB', type: mavlink10.messages.heartbeat, order_map: [0, 1], crc_extra: 196 },
@@ -583,6 +620,7 @@ mavlink10.map = {
         13: { format: '<fffffffffff', type: mavlink10.messages.rate, order_map: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], crc_extra: 119 },
         14: { format: '<fffffffffBBBBBB', type: mavlink10.messages.pid, order_map: [0, 1, 2, 9, 10, 3, 4, 5, 11, 12, 6, 7, 8, 13, 14], crc_extra: 158 },
         15: { format: '<H', type: mavlink10.messages.motors_minivalue, order_map: [0], crc_extra: 194 },
+        16: { format: '<BBBBBBBBBBBB', type: mavlink10.messages.unique_device_id, order_map: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], crc_extra: 247 },
 }
 
 
@@ -922,5 +960,4 @@ MAVLink10Processor.prototype.decode = function(msgbuf) {
 
 // Expose this code as a module
 module.exports = {mavlink10, MAVLink10Processor};
-
 

@@ -1,6 +1,6 @@
 const { mavlink10: mavlink, MAVLink10Processor: MAVLink } = require('./libraries/mavlink.js');
 const mavlinkParser = new MAVLink(null, 0, 0);
-
+const CryptoJS = require('crypto-js');
 
 const commandAck = function(){
     this.command;
@@ -199,4 +199,42 @@ mavlinkParser.on('COMMAND_ACK', function(msg) {
     cmdAck.command = 0;
     cmdAck.result = 0;
 });
+
+
+mavlinkParser.on('UNIQUE_DEVICE_ID', function(msg) {
+    let chipID =  (msg.chipId1+msg.chipId2).toString(16)+(msg.chipId3+msg.chipId4+0x11).toString(16)+" "+(msg.chipId5+msg.chipId6).toString(16)+(msg.chipId7+msg.chipId8).toString(16)+" "+(msg.chipId9+msg.chipId10).toString(16)+(msg.chipId11+msg.chipId12).toString(16);
+    const SerialNumberFullEncoded = CryptoJS.enc.Utf8.parse(chipID);
+    const SerialNumberHashed = CryptoJS.MD5(SerialNumberFullEncoded);
+    const uidBytes = getBytesFromWordArray(SerialNumberHashed);
+    
+    for(let i = 0;i<14;i++){
+        if(uidBytes[i]<0x0f)
+            uidBytes[i]+=0x0f;
+    }
+    setup.SerialNumber = uidBytes[1].toString(16)+" "+uidBytes[3].toString(16)+uidBytes[5].toString(16)+" "+uidBytes[7].toString(16)+uidBytes[9].toString(16)+" "+uidBytes[11].toString(16)+uidBytes[13].toString(16);
+    
+});
+
+function getBytesFromWordArray(wordArray) {
+    const result = [];
+    result.push(wordArray.words[0] >>> 24);
+    result.push((wordArray.words[0] >>> 16) & 0xff);
+    result.push((wordArray.words[0] >>> 8) & 0xff);
+    result.push(wordArray.words[0] & 0xff);
+  
+   
+    result.push(wordArray.words[1] >>> 24);
+    result.push((wordArray.words[1] >>> 16) & 0xff);
+    result.push((wordArray.words[1] >>> 8) & 0xff);
+    result.push(wordArray.words[1] & 0xff);
+  
+    result.push(wordArray.words[2] >>> 24);
+    result.push((wordArray.words[2] >>> 16) & 0xff);
+    result.push((wordArray.words[2] >>> 8) & 0xff);
+    result.push(wordArray.words[2] & 0xff);
+
+    result.push(wordArray.words[3] >>> 24);
+    result.push((wordArray.words[3] >>> 16) & 0xff);
+    return result;
+  }
 
