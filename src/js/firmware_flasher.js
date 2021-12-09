@@ -802,7 +802,7 @@ firmware_flasher.initialize = function (callback) {
                                 xhr.send(null);
                                 break;
                             case "Cetus_1.0.1.bin":
-                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/907653/download/Cetus_1.0.1.bin", true);
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/flight_control_firmware/attach_files/908085/download/Cetus_1.0.1.bin", true);
                                 xhr.send(null);
                                 break;
                             case "Cetus_pro_1.1.1.bin":
