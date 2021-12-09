@@ -1,7 +1,7 @@
 const serialport = require('serialport')
 var {shell} = require('electron')
 
-var flightcontrol_configurator_version ='v1.1.0';
+var flightcontrol_configurator_version ='v1.1.0-RC2';
 let isFlasherTab=0;
 var lastPortCount = 0;
 

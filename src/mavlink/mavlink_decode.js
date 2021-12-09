@@ -98,6 +98,7 @@ mavlinkParser.on('LOCAL_POSITION', function(msg) {
     FC.SENSOR_DATA.opticalflow[1] = 0;
     FC.SENSOR_DATA.opticalflow[2] = msg.xPosition/10;
     FC.SENSOR_DATA.opticalflow[3] = msg.yPosition/10;
+    console.log(msg.xPosition);
     
 });
 mavlinkParser.on('SYS_STATUS', function(msg) {
