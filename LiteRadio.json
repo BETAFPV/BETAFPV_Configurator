@@ -3,16 +3,22 @@
 	],
 	"LiteRadio_2_SE_V2_SX1280":[
 	{"version":"1.0.0"},
-	{"version":"1.0.1"}
+	{"version":"1.0.1"},
+	{"version":"1.0.2"}
 	],
 	"LiteRadio_2_SE_V2_CC2500":[
-	{"version":"1.0.0"}
+	{"version":"1.0.0"},
+	{"version":"1.0.1"},
+	{"version":"1.0.2"}
 	],
 	"LiteRadio_3_SX1280":[
 	{"version":"1.0.0"},
-	{"version":"1.0.1"}
+	{"version":"1.0.1"},
+	{"version":"1.0.2"}
 	],
 	"LiteRadio_3_CC2500":[
-	{"version":"1.0.0"}
+	{"version":"1.0.0"},
+	{"version":"1.0.1"},
+	{"version":"1.0.2"}
 	]
 }

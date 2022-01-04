@@ -308,7 +308,8 @@ function readJsonFile(fileName){
 function loadRemoteJsonFile(){
     var xhr = new XMLHttpRequest();
     loadJsonFileFromGithubSuccessful = true;
-    xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v3.0.0/board.json", true);
+   
+    
     xhr.responseType = 'arraybuffer';
     xhr.onload = function(e) { 
         var array = new Uint8Array(xhr.response);
@@ -322,7 +323,14 @@ function loadRemoteJsonFile(){
             }
         })
     };
-    xhr.send();
+
+     //1.优先访问github上的固件
+     setTimeout(() => {
+        xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v3.0.0/board.json", true);
+        xhr.send(null);    
+        console.log("get literadio.json from github");
+    }, 1000);
+    
     xhr.onreadystatechange = function(){
         if(xhr.readyState==2){
         }else if(xhr.readyState==3){
@@ -376,7 +384,7 @@ function loadRemoteJsonFile(){
              xhr.send(null);
              console.log("get json file from gitee");``
          }    
-     }, 3000);
+     }, 4000);
  
      xhr.timeout = 2500; 
      xhr.ontimeout = function(){
