@@ -78,6 +78,8 @@ const show = {
 
     command_set_expresslrs_uid:null,
 
+    BuzzerSwitch:null,
+    JoystickDeadZonePercent:null,
     
 
 };
@@ -166,6 +168,9 @@ show.getElementIndex = function(){
     show.uid_bytes = $('label[id="UidBytesDisplay"]');
 
     show.command_set_expresslrs_uid = $('input[id="command_set_expresslrs_uid"]');
+
+    show.BuzzerSwitch = $('input[id="BuzzerSwitch"]');
+    show.JoystickDeadZonePercent = $('select[id="JoystickDeadZonePercent"]');
 }
 
 show.refreshUI = function()
@@ -645,6 +650,28 @@ show.initialize = function (callback) {
             HidConfig.external_radio_protocol = parseInt($(this).val(), 10);
         });
 
+        show.BuzzerSwitch.change(function(){
+            HidConfig.BuzzerSwitch= $(this).is(':checked')?true:0x0F;
+            console.log("BuzzerSwitch change:");
+            console.log(HidConfig.BuzzerSwitch);
+            configBuff[0] = 0x00;
+            configBuff[1] = 0x08;
+            configBuff[2] = 0x01;
+            configBuff[3] = HidConfig.BuzzerSwitch;//0x0F:蜂鸣器关闭 其他值：蜂鸣器开启
+            hidDevice.write(configBuff);
+        });
+        show.JoystickDeadZonePercent.change(function()
+        {
+            HidConfig.JoystickDeadZonePercent = parseInt($(this).val(), 10);
+            console.log("JoystickDeadZonePercent change:");
+            console.log(HidConfig.JoystickDeadZonePercent);
+            configBuff[0] = 0x00;
+            configBuff[1] = 0x08;
+            configBuff[2] = 0x02;
+            configBuff[3] = HidConfig.JoystickDeadZonePercent;
+            hidDevice.write(configBuff);
+        });
+
         show.bind_phrase_switch.change(function () {
             HidConfig.bind_phrase_switch= $(this).is(':checked')?true:false;
             if(HidConfig.bind_phrase_switch){
@@ -802,7 +829,7 @@ show.initialize = function (callback) {
         }
         function send_external_exrs_radio_config(){
             let  buffer= new Buffer.alloc(64);
-            buffer[0] = 0x0
+            buffer[0] = 0x00;
             buffer[1] = 0x07;
             buffer[2] = 0x02;
             buffer[3] = HidConfig.ExpressLRS_power_option_value;

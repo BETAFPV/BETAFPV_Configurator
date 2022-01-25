@@ -1,6 +1,6 @@
 const serialport = require('serialport')
 const semver = require('semver')
-var liteRadio_configurator_version ="v1.1.0";
+var liteRadio_configurator_version ="v1.1.1-RC1";
 var {shell} = require('electron')
 var HID=require('node-hid')
 var lastPortCount = 0;
@@ -9,14 +9,20 @@ var Command_ID = {
     Lite_CONFIGER_INFO_ID:0x05,
     INTERNAL_CONFIGER_INFO_ID:0x06,
     EXTERNAL_CONFIGER_INFO_ID:0x07,
+    EXTRA_CUSTOM_CONFIG_ID:0x08,
     DEVICE_INFO_ID:0x5A,
     REQUEST_INFO_ID:0x11,
     REQUESET_SAVE_ID:0x12
 };
 var CommandType = {
+    requestCommond : 0x00,
     requestChannelConfig:0x01,
-    requestRadioConfig:0x02
+    requestRadioConfig:0x02,
+    requestDeviceInfo:0x03,
+    request_extra_config:0x04
 }
+
+
 
 var liteRadioUnitType = {
     UNKNOW:0x00,
@@ -185,6 +191,9 @@ HidConfig = {
 
     firmware_comparison:0,
 
+    BuzzerSwitch:0,
+    JoystickDeadZonePercent:0,
+
 };
 HidConfig.compareFirmwareVersion = function(){
     if(HidConfig.internal_radio == RFmodule.SX1280){//若为 SX1280 1.0.0版本固件：提示客户更新固件以使用新功能bind phrase
@@ -219,6 +228,14 @@ function HIDRequestChannelConfig(channel_num){
     sendBuffer[3] = channel_num;
     hidDevice.write(sendBuffer);
 }
+function HIDRequestExtraCustomConfig(){
+    let sendBuffer = new Buffer.alloc(64);
+    sendBuffer[0] = 0x00;
+    sendBuffer[1] = Command_ID.REQUEST_INFO_ID;
+    sendBuffer[2] = CommandType.request_extra_config;
+    hidDevice.write(sendBuffer);
+}
+
 
 function channel_data_map(input,Omin,Omax,Nmin,Nmax){
    return ((Nmax-Nmin)/(Omax-Omin)*(input-Omin)+Nmin).toFixed(0);
@@ -433,16 +450,19 @@ window.onload=function(){
                                     HidConfig.ch8_reverse_display = data[3];
                                     HidConfig.ch8_scale_display = data[4];
                                     HidConfig.ch8_offset_display = data[5]-100;
+                                    HIDRequestExtraCustomConfig();
+                                    setTimeout(() => {
+                                        //全部通道配置信息获取完毕，发送停止命令
+                                        HIDStopSendingConfig();
+                                        HidConfig.HID_Connect_State = HidConnectStatus.connected;
+                                        $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
+                                        if(ch_receive_step==7){
+                                            HidConfig.compareFirmwareVersion();
+                                            ch_receive_step = 0;
+                                        }
+                                        show.refreshUI();
+                                    }, 500);
                                     
-                                    //全部通道配置信息获取完毕，发送停止命令
-                                    HIDStopSendingConfig();
-                                    HidConfig.HID_Connect_State = HidConnectStatus.connected;
-                                    $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
-                                    if(ch_receive_step==7){
-                                        HidConfig.compareFirmwareVersion();
-                                        ch_receive_step = 0;
-                                    }
-                                    show.refreshUI();
                                     break;
                             }
                             
@@ -831,6 +851,28 @@ window.onload=function(){
                                 document.getElementById("liteRadioInfoFirmwareVersion").innerHTML = firmware_version;
 
                             }
+                        }
+
+                    }
+                    else if(data[0] == Command_ID.EXTRA_CUSTOM_CONFIG_ID && HidConfig.LiteRadio_power == false)
+                    {
+                        var checkSum=0;
+                        var checkSum2=0;
+                        for(i=0;i<7;i++)
+                        {
+                            checkSum +=data[2*i] & 0x00ff;
+                        }                   
+                        checkSum2 = data[15]<<8 | data[14] ;
+    
+                        if(checkSum == checkSum2)
+                        {
+                            console.log("EXTRA_CUSTOM_CONFIG_ID:");
+                            console.log(data);
+                            HidConfig.JoystickDeadZonePercent = data[2];
+                            HidConfig.BuzzerSwitch = (data[3] == 0x0f)?false:true;
+                            document.getElementById("BuzzerSwitch").checked = HidConfig.BuzzerSwitch;
+                            show.JoystickDeadZonePercent.val(HidConfig.JoystickDeadZonePercent);
+                            $("#extra_custom_config").css({display: 'block'});
                         }
 
                     }

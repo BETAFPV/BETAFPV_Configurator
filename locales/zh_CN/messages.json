@@ -6165,6 +6165,18 @@
     "updateFCfirmware":
     {
         "message":"请更新固件后显示"
+    },
+    "JoystickDeadZone":
+    {
+        "message":"摇杆中间死区"
+    },
+    "BuzzerSwitch":
+    {
+        "message":"蜂鸣器提示音开关"
+    },
+    "extra_custom_config":
+    {
+        "message":"其他设置"
     }
     
 }

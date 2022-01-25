@@ -220,7 +220,7 @@
             </div>
         </div>    
         
-        <div class="gui_box_titlebar" style="margin-top: 50px;">
+        <div class="gui_box_titlebar" style="margin-top: 20px;">
             <div class="spacer_box_title" i18n = "RadioSetupMIXS" >MIXS</div>
         </div>
         <div class="gui_box">
@@ -537,7 +537,46 @@
                         </table>
                     </div> 
                 </div>
-        </div>  
+        </div> 
+    </div>
+    <div class="gui_box_titlebar"  style="width:100%; margin-top: 8px;">
+        <div class="spacer_box_title" i18n = "extra_custom_config" >自定义配置</div>
+    </div>
+    <div class="gui_box" id = "extra_custom_config"  style="width:100%; display :none ">
+        <table   style="width:100%; margin-left: 6px; margin-top: 8px;"> 
+            <tr>
+                <td>
+                 <div class="input-helpicon-flex">
+                    <label class="switch">
+                        <input id = "BuzzerSwitch"class="switch-input" type="checkbox"  />
+                        <span class="switch-label" data-on="On" data-off="Off"></span> 
+                        <span class="switch-handle"></span> 
+                    </label>
+                    <label  style="width:100%; margin-left: 6px; margin-top: 8px;" i18n = "BuzzerSwitch" " >蜂鸣器提示音</label>
+                </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-helpicon-flex">
+                        <select id="JoystickDeadZonePercent" style="width:15%; margin-top: 12px; " >
+                            <option value="1">1%</option>
+                            <option value="2">2%</option>
+                            <option value="3">3%</option>
+                            <option value="4">4%</option>
+                            <option value="5">5%</option>
+                            <option value="6">6%</option>
+                            <option value="7">7%</option>
+                            <option value="8">8%</option>
+                            <option value="9">9%</option>
+                            <option value="10">10%</option>
+                        </select>
+                        <label  style="width:100%; margin-top: 12px;" i18n = "JoystickDeadZone" >摇杆死区</label>
+                    </div>
+                </td>
+            </tr>
+        
+        </table>
     </div>
     <div class="content_toolbar">
         <div class="btn reset_btn">

@@ -6561,5 +6561,17 @@
     "updateFCfirmware":
     {
         "message":"update newer firmware"
+    },
+    "JoystickDeadZone":
+    {
+        "message":"Joystick Dead Zone"
+    },
+    "BuzzerSwitch":
+    {
+        "message":"Buzzer Switch"
+    },
+    "extra_custom_config":
+    {
+        "message":"Other Setting"
     }
 }
