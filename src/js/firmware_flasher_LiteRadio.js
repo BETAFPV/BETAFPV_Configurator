@@ -195,7 +195,7 @@ function loadRemoteJsonFile(){
     //3.超时无法连接github则从gitee上加载
     setTimeout(() => {
         if(loadJsonFileFromGithubSuccessful == false){
-            xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/933684/download/LiteRadio.json", true);
+            xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/955204/download/LiteRadio.json", true);
             xhr.send(null);
             console.log("get json file from gitee");
         }    
@@ -673,8 +673,15 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                             case "LiteRadio_2_SE_V2_SX1280_1.0.2.bin":
                                 xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/933691/download/LiteRadio_2_SE_V2_SX1280_1.0.2.bin", true);
                                 xhr.send(null);
-                                break;    
-
+                                break;
+                            case "LiteRadio_2_SE_V2_SX1280_2.0.0.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/955209/download/LiteRadio_2_SE_V2_SX1280_2.0.0.bin", true);
+                                xhr.send(null);
+                                break; 
+                            case "LiteRadio_2_SE_V2_SX1280_2.0.1.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/955205/download/LiteRadio_2_SE_V2_SX1280_2.0.1.bin", true);
+                                xhr.send(null);
+                                break; 
 
                             case "LiteRadio_3_SX1280_1.0.0.bin":
                                 xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/881711/download/LiteRadio_3_SX1280_1.0.0.bin", true);
@@ -687,7 +694,15 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                             case "LiteRadio_3_SX1280_1.0.2.bin":
                                 xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/933685/download/LiteRadio_3_SX1280_1.0.2.bin", true);
                                 xhr.send(null);
-                            break;
+                                break;
+                            case "LiteRadio_3_SX1280_2.0.0.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/955211/download/LiteRadio_3_SX1280_2.0.0.bin", true);
+                                xhr.send(null);
+                                break;
+                            case "LiteRadio_3_SX1280_2.0.1.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/955206/download/LiteRadio_3_SX1280_2.0.1.bin", true);
+                                xhr.send(null);
+                                break;
 
                             case "LiteRadio_2_SE_V2_CC2500_1.0.0.bin":
                                 xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/881707/download/LiteRadio_2_SE_V2_CC2500_1.0.0.bin", true);
@@ -701,6 +716,16 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                                 xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/933689/download/LiteRadio_2_SE_V2_CC2500_1.0.2.bin", true);
                                 xhr.send(null);
                                 break;
+                            case "LiteRadio_2_SE_V2_CC2500_2.0.0.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/955210/download/LiteRadio_2_SE_V2_CC2500_2.0.0.bin", true);
+                                xhr.send(null);
+                                break;
+                            case "LiteRadio_2_SE_V2_CC2500_2.0.1.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/955208/download/LiteRadio_2_SE_V2_CC2500_2.0.1.bin", true);
+                                xhr.send(null);
+                                break;
+
+
                             case "LiteRadio_3_CC2500_1.0.0.bin":
                                 xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/881712/download/LiteRadio_3_CC2500_1.0.0.bin", true);
                                 xhr.send(null);
@@ -713,6 +738,16 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
                                 xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/933681/download/LiteRadio_3_CC2500_1.0.2.bin", true);
                                 xhr.send(null);
                                 break;
+                            case "LiteRadio_3_CC2500_2.0.0.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/955212/download/LiteRadio_3_CC2500_2.0.0.bin", true);
+                                xhr.send(null);
+                                break;
+                            case "LiteRadio_3_CC2500_2.0.1.bin":
+                                xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/955207/download/LiteRadio_3_CC2500_2.0.1.bin", true);
+                                xhr.send(null);
+                                break;
+
+
                             default:
                                 xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/856701/download/null.bin", true);
                                 xhr.send(null);
