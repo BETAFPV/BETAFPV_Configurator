@@ -36,8 +36,9 @@
     "usb": "^1.7.1"
   },
   "devDependencies": {
-    "electron": "^13.1.7",
-    "electron-rebuild": "^3.2.3"
+    "electron": "^12.0.0",
+    "electron-rebuild": "^3.2.9",
+    "electron-reloader": "^1.2.3"
   },
   "repository": {
     "type": "git",

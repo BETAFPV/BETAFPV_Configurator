@@ -9,6 +9,9 @@ var mainWindow = null
 
 app.allowRendererProcessReuse = false
 
+const reloader = require('electron-reloader');
+reloader(module);
+
 app.on('ready',()=>{
     mainWindow = new BrowserWindow({
         minWidth: 1024,
@@ -21,18 +24,17 @@ app.on('ready',()=>{
             enableRemoteModule: true,
           },
     });
-    //   mainWindow.webContents.openDevTools({
-    //       mode:'bottom'
-    //   });
-    //mainWindow.loadURL(`file://${__dirname}/LiteRadio.html`);
-    mainWindow.loadURL(`file://${__dirname}/index.html`);
+      mainWindow.webContents.openDevTools({
+          mode:'bottom'
+      });
+    mainWindow.loadURL(`file://${__dirname}/LiteRadio.html`);
+    //mainWindow.loadURL(`file://${__dirname}/index.html`);
 
     //disable app menu, IF YOU NEED MENU TO DEBUG,UNCOMMENT FOLLOW LINE
     Menu.setApplicationMenu(null);
 
     mainWindow.on('closed',()=>{
         mainWindow = null;
-
         app.quit();
     });
 })

@@ -276,7 +276,7 @@ show.refreshUI = function()
 
 
 show.initialize = function (callback) {
-    let configBuff = new Buffer.alloc(64);
+    let configBuff = new Buffer.alloc(8);
     $('#content').load("./src/html/show.html", function () {
 
         
@@ -422,25 +422,23 @@ show.initialize = function (callback) {
             HidConfig.External_radio_module_power_switch = $(this).is(':checked')?1:0;
             if(HidConfig.External_radio_module_power_switch){
                 console.log("elrs power on");
-                let  buffer= new Buffer.alloc(64);//开始外置射频模块电源
-                buffer[0] = 0x00;
-                buffer[1] = 0x07;
-                buffer[2] = 0x01;
-                hidDevice.write(buffer);
+                let  buffer= new Buffer.alloc(8);//开始外置射频模块电源
+                buffer[0] = 0x07;
+                buffer[1] = 0x01;
+                port.write(buffer);
 
-                buffer[0] = 0x00;//获取外置ExpressLRS模块配置信息
-                buffer[1] = 0x11;
+                 //获取外置ExpressLRS模块配置信息
+                buffer[0] = 0x11;
+                buffer[1] = 0x02;
                 buffer[2] = 0x02;
-                buffer[3] = 0x02;
-                hidDevice.write(buffer);
+                port.write(buffer);
 
             }else{
                 console.log("elrs power off");
-                let  buffer= new Buffer.alloc(64);
-                buffer[0] = 0x00; 
-                buffer[1] = 0x07;
-                buffer[2] = 0x00;
-                hidDevice.write(buffer);
+                let  buffer= new Buffer.alloc(8);
+                buffer[0] = 0x07; 
+                buffer[1] = 0x00;
+                port.write(buffer);
                 document.getElementById("ExpressLRS_power_option_box").disabled = true;
                 document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = true;
                 document.getElementById("ExpressLRS_tlm_option_box").disabled = true;
@@ -654,22 +652,20 @@ show.initialize = function (callback) {
             HidConfig.BuzzerSwitch= $(this).is(':checked')?true:0x0F;
             console.log("BuzzerSwitch change:");
             console.log(HidConfig.BuzzerSwitch);
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x08;
-            configBuff[2] = 0x01;
-            configBuff[3] = HidConfig.BuzzerSwitch;//0x0F:蜂鸣器关闭 其他值：蜂鸣器开启
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x08;
+            configBuff[1] = 0x01;
+            configBuff[2] = HidConfig.BuzzerSwitch;//0x0F:蜂鸣器关闭 其他值：蜂鸣器开启;
+            port.write(configBuff);
         });
         show.JoystickDeadZonePercent.change(function()
         {
             HidConfig.JoystickDeadZonePercent = parseInt($(this).val(), 10);
             console.log("JoystickDeadZonePercent change:");
             console.log(HidConfig.JoystickDeadZonePercent);
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x08;
-            configBuff[2] = 0x02;
-            configBuff[3] = HidConfig.JoystickDeadZonePercent;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x08;
+            configBuff[1] = 0x02;
+            configBuff[2] = HidConfig.JoystickDeadZonePercent;
+            port.write(configBuff);
         });
 
         show.bind_phrase_switch.change(function () {
@@ -719,155 +715,135 @@ show.initialize = function (callback) {
 
 
         function send_ch1_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x00;
-            configBuff[3] = HidConfig.ch1_input_source_display;
-            configBuff[4] = HidConfig.ch1_reverse_display;
-            configBuff[5] = HidConfig.ch1_scale_display;
-            configBuff[6] = HidConfig.ch1_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x00;
+            configBuff[2] = HidConfig.ch1_input_source_display;
+            configBuff[3] = HidConfig.ch1_reverse_display;
+            configBuff[4] = HidConfig.ch1_scale_display;
+            configBuff[5] = HidConfig.ch1_offset_display+100;
+            configBuff[6] = 0;
+            port.write(configBuff);
         }
         function send_ch2_config(){
-            configBuff[0] = 0x00;
+            configBuff[0] = 0x01;
             configBuff[1] = 0x01;
-            configBuff[2] = 0x01;
-            configBuff[3] = HidConfig.ch2_input_source_display;
-            configBuff[4] = HidConfig.ch2_reverse_display;
-            configBuff[5] = HidConfig.ch2_scale_display;
-            configBuff[6] = HidConfig.ch2_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[2] = HidConfig.ch2_input_source_display;
+            configBuff[3] = HidConfig.ch2_reverse_display;
+            configBuff[4] = HidConfig.ch2_scale_display;
+            configBuff[5] = HidConfig.ch2_offset_display+100;
+            configBuff[6] = 0;
+            port.write(configBuff);
         }
         function send_ch3_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x02;
-            configBuff[3] = HidConfig.ch3_input_source_display;
-            configBuff[4] = HidConfig.ch3_reverse_display;
-            configBuff[5] = HidConfig.ch3_scale_display;
-            configBuff[6] = HidConfig.ch3_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x02;
+            configBuff[2] = HidConfig.ch3_input_source_display;
+            configBuff[3] = HidConfig.ch3_reverse_display;
+            configBuff[4] = HidConfig.ch3_scale_display;
+            configBuff[5] = HidConfig.ch3_offset_display+100;
+            configBuff[6] = 0;
+            port.write(configBuff);
         }
         function send_ch4_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x03;
-            configBuff[3] = HidConfig.ch4_input_source_display;
-            configBuff[4] = HidConfig.ch4_reverse_display;
-            configBuff[5] = HidConfig.ch4_scale_display;
-            configBuff[6] = HidConfig.ch4_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x03;
+            configBuff[2] = HidConfig.ch4_input_source_display;
+            configBuff[3] = HidConfig.ch4_reverse_display;
+            configBuff[4] = HidConfig.ch4_scale_display;
+            configBuff[5] = HidConfig.ch4_offset_display+100;
+            configBuff[6] = 0;
+            port.write(configBuff);
         }
         function send_ch5_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x04;
-            configBuff[3] = HidConfig.ch5_input_source_display;
-            configBuff[4] = HidConfig.ch5_reverse_display;
-            configBuff[5] = HidConfig.ch5_scale_display;
-            configBuff[6] = HidConfig.ch5_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x04;
+            configBuff[2] = HidConfig.ch5_input_source_display;
+            configBuff[3] = HidConfig.ch5_reverse_display;
+            configBuff[4] = HidConfig.ch5_scale_display;
+            configBuff[5] = HidConfig.ch5_offset_display+100;
+            configBuff[6] = 0;
+            port.write(configBuff);
         }
         function send_ch6_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x05;
-            configBuff[3] = HidConfig.ch6_input_source_display;
-            configBuff[4] = HidConfig.ch6_reverse_display;
-            configBuff[5] = HidConfig.ch6_scale_display;
-            configBuff[6] = HidConfig.ch6_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x05;
+            configBuff[2] = HidConfig.ch6_input_source_display;
+            configBuff[3] = HidConfig.ch6_reverse_display;
+            configBuff[4] = HidConfig.ch6_scale_display;
+            configBuff[5] = HidConfig.ch6_offset_display+100;
+            configBuff[6] = 0;
+            port.write(configBuff);
         }
         function send_ch7_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x06;
-            configBuff[3] = HidConfig.ch7_input_source_display;
-            configBuff[4] = HidConfig.ch7_reverse_display;
-            configBuff[5] = HidConfig.ch7_scale_display;
-            configBuff[6] = HidConfig.ch7_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x06;
+            configBuff[2] = HidConfig.ch7_input_source_display;
+            configBuff[3] = HidConfig.ch7_reverse_display;
+            configBuff[4] = HidConfig.ch7_scale_display;
+            configBuff[5] = HidConfig.ch7_offset_display+100;
+            configBuff[6] = 0;
+            port.write(configBuff);
         }
         function send_ch8_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x07;
-            configBuff[3] = HidConfig.ch8_input_source_display;
-            configBuff[4] = HidConfig.ch8_reverse_display;
-            configBuff[5] = HidConfig.ch8_scale_display;
-            configBuff[6] = HidConfig.ch8_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x07;
+            configBuff[2] = HidConfig.ch8_input_source_display;
+            configBuff[3] = HidConfig.ch8_reverse_display;
+            configBuff[4] = HidConfig.ch8_scale_display;
+            configBuff[5] = HidConfig.ch8_offset_display+100;
+            configBuff[6] = 0;
+            port.write(configBuff);
         }
 
         function send_internal_radio_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x06;
-            configBuff[2] = 0x02;
-            configBuff[3] = HidConfig.ExpressLRS_power_option_value;
-            configBuff[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
-            configBuff[5] = HidConfig.ExpressLRS_tlm_option_value;
+            configBuff[0] = 0x06;
+            configBuff[1] = 0x02;
+            configBuff[2] = HidConfig.ExpressLRS_power_option_value;
+            configBuff[3] = HidConfig.ExpressLRS_pkt_rate_option_value;
+            configBuff[4] = HidConfig.ExpressLRS_tlm_option_value;
+            configBuff[5] = 0;
             configBuff[6] = 0;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            port.write(configBuff);
         }
         function send_external_exrs_radio_config(){
-            let  buffer= new Buffer.alloc(64);
-            buffer[0] = 0x00;
-            buffer[1] = 0x07;
-            buffer[2] = 0x02;
-            buffer[3] = HidConfig.ExpressLRS_power_option_value;
-            buffer[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
-            buffer[5] = HidConfig.ExpressLRS_tlm_option_value;
-            buffer[6] = HidConfig.ExpressLRS_RF_freq_value;//RF Freq
-            hidDevice.write(buffer);
+            let  buffer= new Buffer.alloc(8);
+            buffer[0] = 0x07;
+            buffer[1] = 0x02;
+            buffer[2] = HidConfig.ExpressLRS_power_option_value;
+            buffer[3] = HidConfig.ExpressLRS_pkt_rate_option_value;
+            buffer[4] = HidConfig.ExpressLRS_tlm_option_value;
+            buffer[5] = HidConfig.ExpressLRS_RF_freq_value;//RF Freq
+            configBuff[6] = 0;
+            port.write(buffer);
         }
 
        
 
         $('a.binding').click(function () {   
-        let bufBind= new Buffer.alloc(64);
-        bufBind[0] = 0x00;
-        bufBind[1] = 0x07;
-        bufBind[2] = 0x02;
-        bufBind[3] = HidConfig.ExpressLRS_power_option_value;
-        bufBind[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
-        bufBind[5] = HidConfig.ExpressLRS_tlm_option_value;
-        bufBind[6] = 0x06;
-        bufBind[7] = 0x01;
-        bufBind[8] = 0x00;
-        hidDevice.write(bufBind);
+        let bufBind= new Buffer.alloc(8);
+        bufBind[0] = 0x07;
+        bufBind[1] = 0x02;
+        bufBind[2] = HidConfig.ExpressLRS_power_option_value;
+        bufBind[3] = HidConfig.ExpressLRS_pkt_rate_option_value;
+        bufBind[4] = HidConfig.ExpressLRS_tlm_option_value;
+        bufBind[5] = 0x06;
+        bufBind[6] = 0x01;
+        bufBind[7] = 0x00;
+        port.write(bufBind);
             console.log("ExpressLRS enter to binding");
         });
        
         $('a.wifi_update').click(function () {   
-            let  bufwifiUpdate= new Buffer.alloc(64);
-            bufwifiUpdate[0] = 0x00;
-            bufwifiUpdate[1] = 0x07;
-            bufwifiUpdate[2] = 0x02;
-            bufwifiUpdate[3] = HidConfig.ExpressLRS_power_option_value;
-            bufwifiUpdate[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
-            bufwifiUpdate[5] = HidConfig.ExpressLRS_tlm_option_value;
-            bufwifiUpdate[6] = 0x06;
-            bufwifiUpdate[7] = 0x00;
-            bufwifiUpdate[8] = 0x01;
-            hidDevice.write(bufwifiUpdate);
+            let  bufwifiUpdate= new Buffer.alloc(8);
+            bufwifiUpdate[0] = 0x07;
+            bufwifiUpdate[1] = 0x02;
+            bufwifiUpdate[2] = HidConfig.ExpressLRS_power_option_value;
+            bufwifiUpdate[3] = HidConfig.ExpressLRS_pkt_rate_option_value;
+            bufwifiUpdate[4] = HidConfig.ExpressLRS_tlm_option_value;
+            bufwifiUpdate[5] = 0x06;
+            bufwifiUpdate[6] = 0x00;
+            bufwifiUpdate[7] = 0x01;
+            port.write(bufwifiUpdate);
             console.log("ExpressLRS enter to wifi update");
 
         });
@@ -895,52 +871,48 @@ show.initialize = function (callback) {
                
             }else{
                 if(HidConfig.Internal_radio_module_switch==true&&HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length>=6){
-                    let buffer = new Buffer.alloc(64);
-                    buffer[0] = 0x00;
-                    buffer[1] = 0x22;
-                    buffer[2] = HidConfig.uid_bytes[0];
-                    buffer[3] = HidConfig.uid_bytes[1];
-                    buffer[4] = HidConfig.uid_bytes[2];
-                    buffer[5] = HidConfig.uid_bytes[3];
-                    buffer[6] = HidConfig.uid_bytes[4];
-                    buffer[7] = HidConfig.uid_bytes[5];
-                    hidDevice.write(buffer);
+                    let buffer = new Buffer.alloc(8);
+                    buffer[0] = 0x22;
+                    buffer[1] = HidConfig.uid_bytes[0];
+                    buffer[2] = HidConfig.uid_bytes[1];
+                    buffer[3] = HidConfig.uid_bytes[2];
+                    buffer[4] = HidConfig.uid_bytes[3];
+                    buffer[5] = HidConfig.uid_bytes[4];
+                    buffer[6] = HidConfig.uid_bytes[5];
+                    port.write(buffer);
                     console.log("send binding phrase");
                 }else if(HidConfig.bind_phrase_switch == false){
-                    let buffer = new Buffer.alloc(64);
-                    buffer[0] = 0x00;
-                    buffer[1] = 0x22;
+                    let buffer = new Buffer.alloc(8);
+                    buffer[0] = 0x22;
+                    buffer[1] = 0;
                     buffer[2] = 0;
                     buffer[3] = 0;
                     buffer[4] = 0;
                     buffer[5] = 0;
                     buffer[6] = 0;
-                    buffer[7] = 0;
-                    hidDevice.write(buffer);
+                    port.write(buffer);
                 }
 
-                var bufName = new Buffer.alloc(64);
+                var bufName = new Buffer.alloc(8);
                 console.log("HidConfig.internal_radio_protocol:"+HidConfig.internal_radio_protocol);
                 console.log("HidConfig.Internal_radio_module_switch:"+HidConfig.Internal_radio_module_switch);
                 if(HidConfig.Internal_radio_module_switch){
-                    bufName[0] = 0x00;
-                    bufName[1] = 0x05;
-                    bufName[2] = HidConfig.internal_radio_protocol;
-                    bufName[3] = HidConfig.rocker_mode;
-                    bufName[4] = 0x02;
-                    hidDevice.write(bufName);
+                    bufName[0] = 0x05;
+                    bufName[1] = HidConfig.internal_radio_protocol;
+                    bufName[2] = HidConfig.rocker_mode;
+                    bufName[3] = 0x02;
+                    port.write(bufName);
                 }else if(HidConfig.External_radio_module_switch){
-                    bufName[0] = 0x00;
-                    bufName[1] = 0x05;
+                    bufName[0] = 0x05;
                     if(HidConfig.internal_radio==RFmodule.CC2500) {
-                        bufName[2] = 0x04;//cc2500 外置射频模块为第五个协议
+                        bufName[1] = 0x04;//cc2500 外置射频模块为第五个协议
                     }else{
-                        bufName[2] = 0x01;//sx1280 外置射频模块为第二个协议
+                        bufName[1] = 0x01;//sx1280 外置射频模块为第二个协议
                     }
                     
-                    bufName[3] = HidConfig.rocker_mode;
-                    bufName[4] = 0x02;
-                    hidDevice.write(bufName);
+                    bufName[2] = HidConfig.rocker_mode;
+                    bufName[3] = 0x02;
+                    port.write(bufName);
                 }else{
                     // alert("save failed!  you need to select at least one protocol");
                     const dialogSelectAtLeastOneProtocol = $('.dialogSelectAtLeastOneProtocol')[0];
@@ -1018,30 +990,27 @@ show.initialize = function (callback) {
         //请求遥控器参数，使上位机显示的配置与其同步
         function sync_config(){
             //请求遥控器信息（遥控器类型、内置射频模块类型、硬件油门杆位置、硬件版本号、软件版本号）
-            let requirebuff= new Buffer.alloc(64);
-            requirebuff[0] = 0x00;
-            requirebuff[1] = 0x11;
-            requirebuff[2] = 0x03;
+            let requirebuff= new Buffer.alloc(8);
+            requirebuff[0] = 0x11;
+            requirebuff[1] = 0x03;
+            requirebuff[2] = 0x00;
             requirebuff[3] = 0x00;
             requirebuff[4] = 0x00;
             requirebuff[5] = 0x00;
             requirebuff[6] = 0x00;
-            requirebuff[7] = 0x00;
-            hidDevice.write(requirebuff);
-            hidDevice.write(requirebuff);
-            hidDevice.write(requirebuff);
+            port.write(requirebuff);
+            console.log(requirebuff);
             
 
              //请求遥控器信息（硬件版本、支持协议、左右手油门、功率）
-            let bufName = new Buffer.alloc(64);
-            bufName[0] = 0x0;
-            bufName[1] = 0x11;
-            bufName[2] = 0x02;
+            let bufName = new Buffer.alloc(8);
+            bufName[0] = 0x11;
+            bufName[1] = 0x02;
+            bufName[2] = 0x00;
             bufName[3] = 0x00;
             bufName[4] = 0x00;
-            bufName[5] = 0x00;
             console.log(bufName);
-            hidDevice.write(bufName);
+            port.write(bufName);
             console.log("get sync config from radio");
         }
         sync_config();
