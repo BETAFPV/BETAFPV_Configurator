@@ -307,7 +307,7 @@ window.onload=function(){
     $('label[id="liteRadio_configurator_version"]').text(liteRadio_configurator_version);
     $('div.open_hid_device a.connect').click(function () {
         if(HidConfig.HID_Connect_State == HidConnectStatus.disConnect){
-
+            HidConfig.Have_Receive_HID_Data = false;    
             HidConfig.HID_Connect_State = HidConnectStatus.connecting;
             $('div.open_hid_device div.connect_hid').text(i18n.getMessage('HID_Connecting'));
             
@@ -321,19 +321,38 @@ window.onload=function(){
                 stopBits: 1
             });
 
+            setTimeout(() => {
+                if(HidConfig.Have_Receive_HID_Data){//先判断遥控器有数据发送过来
+                    HidConfig.LiteRadio_power = false;
+                    $('div#hidbutton a.connect').addClass('active');
+                    $('#tabs ul.mode-disconnected').hide();
+                    $('#tabs ul.mode-connected').show();
+                    $('#tabs ul.mode-connected li a:first').click();
+                    $('div#hidbutton a.connect').addClass('active');
+                }else{//没有接收到数据说明遥控器处于开机状态，提示客户将遥控器关机
+                    HidConfig.LiteRadio_power = true;
+                    HidConfig.HID_Connect_State = HidConnectStatus.disConnect;
+                    port.close();
+                    $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
+                    $('#tabs ul.mode-connected').hide();
+                    $('#tabs ul.mode-disconnected').show();
+                    $('#tabs ul.mode-disconnected li a:first').click();
+                    $('div#hidbutton a.connect').removeClass('active');
+                    const dialogConfirmHIDPowerOff = $('.dialogConfirmHIDPowerOff')[0];
+                    dialogConfirmHIDPowerOff.showModal();
+                    $('.HIDPowerOffDialog-confirmbtn').click(function() {
+                        dialogConfirmHIDPowerOff.close();
+                    });
+                }
+            }, 1500);
 
             //open事件监听
             port.on('open', () =>{
-                HidConfig.Have_Receive_HID_Data = false;
-
-                $('div#hidbutton a.connect').addClass('active');
-                $('#tabs ul.mode-disconnected').hide();
-                $('#tabs ul.mode-connected').show();
-                $('#tabs ul.mode-connected li a:first').click();
-                $('div#hidbutton a.connect').addClass('active');
+                
             });
             port.on('data', function(data) {//解析遥控器发送过来的信息 
                 let rquestBuffer = new Buffer.alloc(8);
+                HidConfig.Have_Receive_HID_Data = true;
                 if(data[0] == Command_ID.CHANNELS_INFO_ID && HidConfig.LiteRadio_power == false)//通道配置信息
                 {
                     var checkSum=0;
@@ -891,11 +910,13 @@ window.onload=function(){
                     HidConfig.channel_data_dispaly[5] = channel_data_map(HidConfig.channel_data[5],0,2047,-100,100);
                     HidConfig.channel_data_dispaly[6] = channel_data_map(HidConfig.channel_data[6],0,2047,-100,100);
                     HidConfig.channel_data_dispaly[7] = channel_data_map(HidConfig.channel_data[7],0,2047,-100,100);
+                
+                    //console.log(HidConfig.channel_data[0],HidConfig.channel_data[1],HidConfig.channel_data[2],HidConfig.channel_data[3]);
                 }               
             } );
 
             port.on('close', () =>{
-                port.close();
+                HidConfig.HID_Connect_State = HidConnectStatus.disConnect;
                 $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
                 $('#tabs ul.mode-connected').hide();
                 $('#tabs ul.mode-disconnected').show();
@@ -918,35 +939,10 @@ window.onload=function(){
                 $('#tabs ul.mode-disconnected li a:first').click();
                 $('div#hidbutton a.connect').removeClass('active');
             });
-        }else if(HidConfig.HID_Connect_State == HidConnectStatus.connecting){
-            console.log("HID is connecting......");
-        }else if(HidConfig.HID_Connect_State == HidConnectStatus.disConnecting){
-            console.log("HID is disConnecting......");
-        }else if(HidConfig.HID_Connect_State == HidConnectStatus.connected){
-            HidConfig.HID_Connect_State = HidConnectStatus.disConnecting;
-            $('div.open_hid_device div.connect_hid').text(i18n.getMessage('HidDisConnecting'));
-            HIDStopSendingConfig();
-            setTimeout(() => {//每隔100ms再发送一次停止命令，连续发3次确保遥控器完全停止发送
-                HIDStopSendingConfig();
-            }, 100);
-            setTimeout(() => {
-                HIDStopSendingConfig();
-            }, 200);
-            setTimeout(() => {
-                HIDStopSendingConfig();
-            }, 300);
-            setTimeout(() => {
-                port.close();
-                HidConfig.HID_Connect_State = HidConnectStatus.disConnect;
-                $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
-                $('#tabs ul.mode-connected').hide();
-                $('#tabs ul.mode-disconnected').show();
-                $('#tabs ul.mode-disconnected li a:first').click();
-                $('div#hidbutton a.connect').removeClass('active');
-            }, 1000);
-
-        }else{
-
+        }
+        else
+        {
+            port.close();
         }
     });
     

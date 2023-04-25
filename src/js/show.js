@@ -425,7 +425,7 @@ show.initialize = function (callback) {
                 let  buffer= new Buffer.alloc(8);//开始外置射频模块电源
                 buffer[0] = 0x07;
                 buffer[1] = 0x01;
-                port.write(buffer);
+                port.write(buffer); 
 
                  //获取外置ExpressLRS模块配置信息
                 buffer[0] = 0x11;
