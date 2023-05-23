@@ -133,79 +133,79 @@ function readJsonFile(fileName){
 }
 
 function loadRemoteJsonFile(){
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'arraybuffer';
-    xhr.onload = function(e) {
-        var array = new Uint8Array(xhr.response);
-        var file_path = path.join(__dirname, "./LiteRadio.json");
+//     var xhr = new XMLHttpRequest();
+//     xhr.responseType = 'arraybuffer';
+//     xhr.onload = function(e) {
+//         var array = new Uint8Array(xhr.response);
+//         var file_path = path.join(__dirname, "./LiteRadio.json");
 
-        fs.writeFile(file_path, array, "utf8",(err)=>{
-            if(err){
-                alert(i18n.getMessage("write_file_failed"));
-            }else {
-                readJsonFile(file_path);
-            }
-        })
-    };
-    //1.优先访问github上的固件
-    setTimeout(() => {
-        xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v2.0.0/LiteRadio.json", true);
-        xhr.send(null);    
-        console.log("get literadio.json from github");
-    }, 1000);
+//         fs.writeFile(file_path, array, "utf8",(err)=>{
+//             if(err){
+//                 alert(i18n.getMessage("write_file_failed"));
+//             }else {
+//                 readJsonFile(file_path);
+//             }
+//         })
+//     };
+//     //1.优先访问github上的固件
+//     setTimeout(() => {
+//         xhr.open('GET', "https://github.com/BETAFPV/BETAFPV.github.io/releases/download/v2.0.0/LiteRadio.json", true);
+//         xhr.send(null);    
+//         console.log("get literadio.json from github");
+//     }, 1000);
  
    
-   xhr.onreadystatechange = function(){
-       if(xhr.readyState==2){
-       }else if(xhr.readyState==3){
-       }
+//    xhr.onreadystatechange = function(){
+//        if(xhr.readyState==2){
+//        }else if(xhr.readyState==3){
+//        }
 
-        if (xhr.readyState == 4){
-            if(xhr.status == 200){//ok
-                //从github上加载固件成功
-                // alert("Request firmware successful: "+xhr.status);
-                console.log("get json file successful");
-                loadJsonFileFromGithubSuccessful = true;
-            }
-            // else if(xhr.status == 400){
-            //     alert("Bad Request : "+xhr.status);
-            // }else if(xhr.status == 401){
-            //     alert("Request was Unauthonzed: "+xhr.status);
-            // }else if(xhr.status == 403){
-            //     alert("Request was Forbidden: "+xhr.status);
-            // }else if(xhr.status == 404){
-            //     alert("Request was Not Found: "+xhr.status);
-            // }else if(xhr.status == 500){
-            //     alert(" Internal Server Error: "+xhr.status);
-            // }else if(xhr.status == 503){
-            //     alert("Service Unavailable : "+xhr.status);
-            // }      
-            else{
-                //2.github无法访问切换到gittee上访问
-                if(loadJsonFileFromGithubSuccessful == true){
-                    loadJsonFileFromGithubSuccessful = false;
-                    console.log("can't load json file from github");
-                }else{
-                    console.log("can't load json file from gitee");
-                }
-            } 
-        }
-    };
+//         if (xhr.readyState == 4){
+//             if(xhr.status == 200){//ok
+//                 //从github上加载固件成功
+//                 // alert("Request firmware successful: "+xhr.status);
+//                 console.log("get json file successful");
+//                 loadJsonFileFromGithubSuccessful = true;
+//             }
+//             // else if(xhr.status == 400){
+//             //     alert("Bad Request : "+xhr.status);
+//             // }else if(xhr.status == 401){
+//             //     alert("Request was Unauthonzed: "+xhr.status);
+//             // }else if(xhr.status == 403){
+//             //     alert("Request was Forbidden: "+xhr.status);
+//             // }else if(xhr.status == 404){
+//             //     alert("Request was Not Found: "+xhr.status);
+//             // }else if(xhr.status == 500){
+//             //     alert(" Internal Server Error: "+xhr.status);
+//             // }else if(xhr.status == 503){
+//             //     alert("Service Unavailable : "+xhr.status);
+//             // }      
+//             else{
+//                 //2.github无法访问切换到gittee上访问
+//                 if(loadJsonFileFromGithubSuccessful == true){
+//                     loadJsonFileFromGithubSuccessful = false;
+//                     console.log("can't load json file from github");
+//                 }else{
+//                     console.log("can't load json file from gitee");
+//                 }
+//             } 
+//         }
+//     };
 
-    //3.超时无法连接github则从gitee上加载
-    setTimeout(() => {
-        if(loadJsonFileFromGithubSuccessful == false){
-            xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/955204/download/LiteRadio.json", true);
-            xhr.send(null);
-            console.log("get json file from gitee");
-        }    
-    }, 5000);
+//     //3.超时无法连接github则从gitee上加载
+//     setTimeout(() => {
+//         if(loadJsonFileFromGithubSuccessful == false){
+//             xhr.open('GET', "https://gitee.com/huang_wen_tao123/lite-radio_-elrs_-release/attach_files/955204/download/LiteRadio.json", true);
+//             xhr.send(null);
+//             console.log("get json file from gitee");
+//         }    
+//     }, 5000);
 
-    xhr.timeout = 3000; 
-    xhr.ontimeout = function(){
-        loadJsonFileFromGithubSuccessful = false;
-        console.log("get json file time out");
-    }
+//     xhr.timeout = 3000; 
+//     xhr.ontimeout = function(){
+//         loadJsonFileFromGithubSuccessful = false;
+//         console.log("get json file time out");
+//     }
 };
 
 function CRC16_Check(puData)

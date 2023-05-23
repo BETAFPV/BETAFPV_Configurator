@@ -4,9 +4,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package-win": "electron-packager . BETAFPV_Configurator --platform=win32 --arch=x64  --out=./Windows --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
-    "package-linux": "electron-packager . BETAFPV_Configurator --platform=linux  --arch=x64 --out=./Linux   --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
-    "package-mac": "electron-packager . BETAFPV_Configurator --platform=darwin  --arch=x64 --out=./Mac   --app-version=1.1.0 --overwrite --icon=./BETAFPV_LOGO.icns"
+    "package-win": "electron-packager . BETAFPV_Configurator3.0 --platform=win32 --arch=x64  --out=./Windows --app-version=2.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
+    "package-linux": "electron-packager . BETAFPV_Configurator3.0 --platform=linux  --arch=x64 --out=./Linux   --app-version=2.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
+    "package-mac": "electron-packager . BETAFPV_Configurator3.0 --platform=darwin  --arch=x64 --out=./Mac   --app-version=2.1.0 --overwrite --icon=./BETAFPV_LOGO.icns"
   },
   "window": {
     "icon": "images/logo/BETAFPV_logo_blue.png",
