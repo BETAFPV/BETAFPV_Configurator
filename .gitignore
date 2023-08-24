@@ -12,6 +12,7 @@ dist/
 dist_cordova/
 debug/
 release/
+Windows/
 testresults/
 .eslintcache
 
