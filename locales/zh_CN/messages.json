@@ -638,10 +638,10 @@
         "message": "<br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br /><br />点击下面黄色按钮切换到遥控器配置程序。"
     },
     "defaultContributingText_radio": {
-        "message": "本应用只支持下面罗列的遥控器。"
+        "message": "本应用为V2.0-RC1版本，只支持下面罗列的遥控器的ELRS 3协议版本（3.0-3.3）。"
     },
     "promptOfUseRadioConfigurator_radio":{
-        "message":"<br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br /><br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />遥控器固件烧写请点击左侧“固件烧写工具”；<br />遥控器参数配置，首先将遥控器关机，用USB数据线连接遥控器到电脑，遥控器红色或者绿色灯逐渐闪烁，点击右上角“连接遥控器”按钮进入配置界面。"
+        "message":"<br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />请点击左侧“固件烧写工具”，将遥控器升级到支持ELRS 3协议。固件下载地址：<br /><br /><a href=\"https://www.jianguoyun.com/p/DYhoOIUQ_afyCRi8wLYEIAA#dir=%2FLiteradio2%20se%E9%81%A5%E6%8E%A7%E5%99%A8%E7%9B%B8%E5%85%B3%2FLite%20Radio2%20se%E5%9B%BA%E4%BB%B6::mode=0\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE固件</a><br /><a href=\"https://www.jianguoyun.com/p/DYhoOIUQ_afyCRi8wLYEIAA#dir=%2FLiteRadio%203%2F%E5%9B%BA%E4%BB%B6::mode=0\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3固件</a><br /><br />遥控器参数配置界面连接基本步骤如下：<br />1. 首先将遥控器关机<br />2. 用USB数据线连接遥控器到电脑，遥控器红色或者绿色灯逐渐闪烁<br />3. 右上角选择对应的串口，波特率使用默认115200即可，点击右上角“连接遥控器”按钮进入配置界面。<br /><br /><strong>注意：</strong><br />1. LiteRadio 2 SE和LiteRadio 3的ELRS 2协议版本，请使用上位机V1.1.1-RC1版本；<br />2. LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。<br />3. LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br />"
     },
     "defaultFacebookText": {
         "message": "我们还有一个 <a href=\"https://mp.weixin.qq.com/s/3fxc5h2dheOTfRshuTv9qw\" target=\"_blank\" rel=\"noopener noreferrer\">微信公众号</a>。<br />关注我们获取最新动态，寻求技术支持，或者只是和小伙伴们闲聊。"

@@ -700,7 +700,7 @@
         "message": "The application supports flight controller that can run LiteSilver firmeware."
     },
     "promptOfUseRadioConfigurator_radio":{
-        "message":"<br />The LiteRadio 2 SE Frsky or Bayang version is not supported. LiteRadio 2 and LiteRadio 3 Pro is powered by OpenTX system, please use the OpenTX Companion.<br /><br /><strong>Now configurator for radio controller is active. Basic user manual:</strong><br />Click the \"Firmware Flasher\" tab on the left for firmware update.<br />For configuration, turn off the radio controller first. Then connect it to the computer via USB data cable. Wait for the LED ring breathes in red or green. Then click the \"Connect RC\" button on the top right."
+        "message": "<br /><strong>Note:</strong><br />1. LiteRadio with ELRS 2 protocol is not supported. Plesae use the Configurator V1.1.1-RC1.<br />2. The LiteRadio 2 SE Frsky or Bayang version is not supported. <br />3. LiteRadio 2 and LiteRadio 3 Pro is powered by OpenTX system, please use the OpenTX Companion.<br /><br /><br /><strong>Now configurator for radio controller is active. Basic user manual:</strong><br />Click the \"Firmware Flasher\" tab on the left to flash the ELRS 3 protocol firmware <br />For configuration, follow the steps below:<br />1. Turn off the radio controller first. Then connect it to the computer via USB data cable. <br />2. Wait for the LED ring breathes in red or green. <br />3. Select the correct COM port and click the \"Connect RC\" button on the top right."
     },
     "FCConfiguratorChoosed":{
         "message": "Configurator for FC Board is Active"
@@ -718,7 +718,7 @@
         "message": "<br /><br />The LiteRadio 2 SE Frsky or Bayang version is not supported. LiteRadio 2 and LiteRadio 3 Pro is powered by OpenTX system, please use the OpenTX Companion.<br /><br />Click the yellow button below to active configurator for radio controller."
     },
     "defaultContributingText_radio": {
-        "message": "Support the radio controller come with BETAFPV LiteRadio Firmware 2.0 Version. "
+        "message": "This Configurator is V2.0-RC1 version, only for radio transmitter with ELRS 3 protocol version"
     },
     "defaultFacebookText": {
         "message": "We also have a <a href=\"https://www.facebook.com/groups/betafpv/\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a>.<br />Join us to get a place to talk about FPV items, ask configuration questions, or just hang out with fellow pilots."
