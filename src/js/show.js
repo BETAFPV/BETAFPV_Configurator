@@ -217,9 +217,8 @@ show.refreshUI = function()
         show.ch7_offset.val(HidConfig.ch7_offset_display);
         show.ch8_offset.val(HidConfig.ch8_offset_display);
 
-
-        //bind phrase 功能只有在1.0.1版本之后的SX1280固件才支持
-        if(semver.gte(HidConfig.lite_Radio_version, "1.0.1")){
+        //bind phrase 功能只有在1.0.1版本之后的SX1280固件才支持，该版本上位机暂不支持向前支持，先直接注释掉
+        //  if(semver.gte(HidConfig.lite_Radio_version, "1.0.1")){
             if(HidConfig.internal_radio == RFmodule.SX1280){
                 document.getElementById('bindPhraseSwitch').disabled = false;
                 ConfigStorage.get('USE_BIND_PHRASE', function (data) {//获取上次打开地面站是否使用bind phrase
@@ -259,12 +258,12 @@ show.refreshUI = function()
                 document.getElementById("set_expresslrs_uid").style.display="none";
                 document.getElementById("bindPhrase").style.display="none";
             }
-        }
-        else{
-            document.getElementById('bindPhraseSwitch').disabled = true;
-            document.getElementById("set_expresslrs_uid").style.display="none";
-            document.getElementById("bindPhrase").style.display="none";
-        }
+        //}
+        // else{
+        //    document.getElementById('bindPhraseSwitch').disabled = true;
+        //    document.getElementById("set_expresslrs_uid").style.display="none";
+        //    document.getElementById("bindPhrase").style.display="none";
+        // }
 
         $('a.save').removeClass('disabled');
        
