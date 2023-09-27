@@ -33,12 +33,12 @@
     "switchery-latest": "^0.8.2",
     "three": "~0.97.0",
     "underscore": "^1.13.1",
-    "usb": "^1.7.1"
+    "usb": "^1.7.1",
+    "electron-reloader": "^1.2.3"
   },
   "devDependencies": {
     "electron": "^12.0.0",
-    "electron-rebuild": "^3.2.9",
-    "electron-reloader": "^1.2.3"
+    "electron-rebuild": "^3.2.9"
   },
   "repository": {
     "type": "git",
