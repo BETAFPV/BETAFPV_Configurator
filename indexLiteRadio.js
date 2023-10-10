@@ -504,13 +504,13 @@ window.onload=function(){
                         HidConfig.current_protocol = data[2];
                         HidConfig.internal_radio_protocol = data[2];
                         console.log("HidConfig.current_protocol:"+HidConfig.current_protocol);
-                        HidConfig.rocker_mode = data[3];
-                        HidConfig.support_power =data[4];
+                        HidConfig.rocker_mode = data[4];
+                        //HidConfig.support_power =data[4];
                         //遥控器硬件信息获取完毕后，需要在这里根据硬件信息修改对应组件的可选元素
                         console.log(data);
                         show.rocker_mode = $('select[name="radiomode"]');
                         show.rocker_mode.val(HidConfig.rocker_mode);
-                        //document.getElementById("rocker_mode").disabled = false;
+                        document.getElementById("rocker_mode").disabled = false;   /* 打开rocker_mode 下拉列表 */
                         
                         if(HidConfig.internal_radio==RFmodule.CC2500){//内置射频模块型号为：cc2500
                             console.log("HidConfig.current_protocol:"+HidConfig.current_protocol);
