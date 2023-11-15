@@ -718,7 +718,7 @@
         "message": "<br /><br />The LiteRadio 2 SE Frsky or Bayang version is not supported. LiteRadio 2 and LiteRadio 3 Pro is powered by OpenTX system, please use the OpenTX Companion.<br /><br />Click the yellow button below to active configurator for radio controller."
     },
     "defaultContributingText_radio": {
-        "message": "This Configurator is V2.0-RC1 version, only for radio transmitter with ELRS 3 protocol version"
+        "message": "This Configurator is V2.0-RC2 version, only for radio transmitter with ELRS 3 protocol version"
     },
     "defaultFacebookText": {
         "message": "We also have a <a href=\"https://www.facebook.com/groups/betafpv/\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a>.<br />Join us to get a place to talk about FPV items, ask configuration questions, or just hang out with fellow pilots."

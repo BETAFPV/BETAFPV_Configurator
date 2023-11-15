@@ -57,6 +57,9 @@ var flashBoard = {
     Cetus:1,
     Cetus_pro:3,
     Lite_v3:5,
+    Cetus_X:6,
+    Cetus_X_HD:7,
+    Aquila16:8,
 }
 firmware_flasher.flashingMessage = function(message, type) {
     let self = this;
@@ -287,8 +290,11 @@ function readJsonFile(fileName){
         if(jsonData.status!==404){
             $('#boardTarget').empty();
             addOptionValue2('boardTarget',1,"Cetus");
-            addOptionValue2('boardTarget',2,"Cetus_pro");
-            addOptionValue2('boardTarget',3,"Lite_v3");
+            addOptionValue2('boardTarget',2,"Cetus Pro");
+            addOptionValue2('boardTarget',3,"Lite V3");
+            addOptionValue2('boardTarget',4,"Cetus X");
+            addOptionValue2('boardTarget',5,"Cetus X HD");
+            addOptionValue2('boardTarget',6,"Aquila16");
 
             $('#boardVersion').empty();
             for(let i=0;i<jsonData.Cetus.length;i++){
@@ -466,6 +472,18 @@ firmware_flasher.initialize = function (callback) {
                             else if(boardID == flashBoard.Lite_v3)
                             {
                                 $('#BoardID').text("   Lite Brushed v3");
+                            }
+							else if(boardID == flashBoard.Cetus_X)
+                            {
+                                $('#BoardID').text("   Cetus X");
+                            }
+							else if(boardID == flashBoard.Cetus_X_HD)
+                            {
+                                $('#BoardID').text("   Cetus X HD");
+                            }
+							else if(boardID == flashBoard.Cetus_2_Pro)
+                            {
+                                $('#BoardID').text("   Aquila16");
                             }
 
                             var versionID = "  v" + binFile[binSizeTemp-9] + "." +binFile[binSizeTemp-8] +"." +binFile[binSizeTemp-7];
