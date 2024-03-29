@@ -4,9 +4,10 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package-win": "electron-packager . BETAFPV_Configurator --platform=win32 --arch=x64  --out=./Windows --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
-    "package-linux": "electron-packager . BETAFPV_Configurator --platform=linux  --arch=x64 --out=./Linux   --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
-    "package-mac": "electron-packager . BETAFPV_Configurator --platform=darwin  --arch=x64 --out=./Mac   --app-version=1.1.0 --overwrite --icon=./BETAFPV_LOGO.icns"
+    "package-win": "electron-packager . BETAFPV_Configurator --platform=win32 --arch=x64 --out=./Windows --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
+    "package-linux": "electron-packager . BETAFPV_Configurator --platform=linux --arch=x64 --out=./Linux --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
+    "package-mac": "electron-packager . BETAFPV_Configurator --platform=darwin --arch=x64 --out=./Mac --app-version=1.1.0 --overwrite --icon=./BETAFPV_LOGO.icns",
+    "fmt": "prettierx --write \"./**/*.{js,jsx,css,html}\""
   },
   "window": {
     "icon": "images/logo/BETAFPV_logo_blue.png",
@@ -19,25 +20,35 @@
   "license": "ISC",
   "dependencies": {
     "blueimp-md5": "^2.19.0",
-    "crypto-js": "^4.1.1",
-    "electron-packager": "^15.4.0",
-    "i18next": "^19.0.0",
+    "crypto-js": "^4.2.0",
+    "electron-packager": "^17.1.2",
+    "i18next": "^23.10.1",
     "i18next-xhr-backend": "^3.2.2",
-    "jquery": "^3.6.0",
+    "jquery": "^3.7.1",
     "jsonfile": "^6.1.0",
     "jspack": "^0.0.4",
     "md5": "^2.3.0",
-    "node-hid": "^2.1.1",
-    "semver": "^7.3.5",
-    "serialport": "^9.2.0",
+    "node-hid": "^3.0.0",
+    "semver": "^7.6.0",
+    "serialport": "^12.0.0",
     "switchery-latest": "^0.8.2",
-    "three": "~0.97.0",
-    "underscore": "^1.13.1",
-    "usb": "^1.7.1"
+    "three": "~0.163.0",
+    "underscore": "^1.13.6",
+    "usb": "^2.12.1"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "alignObjectProperties": true,
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "printWidth": 1024
   },
   "devDependencies": {
-    "electron": "^13.1.7",
-    "electron-rebuild": "^3.2.3"
+    "electron": "^29.1.6",
+    "electron-rebuild": "^3.2.3",
+    "prettierx": "^0.19.0"
   },
   "repository": {
     "type": "git",

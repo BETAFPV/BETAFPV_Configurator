@@ -27,5 +27,37 @@ electron .
 - 按下Window+R，输入**powershell**，回车或确定。
 - 输入**Set-Executionpolicy remotesigned**,回车。
 - 输入**y**回车。
+```
+
+## 2024/3/29 
+
+```shell
+% node -v
+v20.11.0
+% npm -v
+10.2.4
+% yarn -v
+1.22.21
+```
+
+・npm -> yarn
+```shell
+# npm install
+yarn
+```
+
+・run app on mac
+```shell
+npx electron-packager . BETAFPV_Configurator --platform=darwin --arch=x64 --out=./Mac --app-version=1.1.1 --overwrite --icon=./BETAFPV_LOGO.icns
+
+open Mac/BETAFPV_Configurator-darwin-x64
+
+# double click app file!!
+```
+![Mac](mac.png "Mac")
 
 
+・add formatter
+```shell
+yarn fmt
+```
