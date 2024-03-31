@@ -1,136 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>BETAFPV Configurator</title>
-        <link type="text/css" rel="stylesheet" href="./src/css/main.css"/>
-        <link type="text/css" rel="stylesheet" href="./src/css/dark-theme.css"/>
-        <link type="text/css" rel="stylesheet" href="./src/css/landing.css" media="all"/>
-        <link type="text/css" rel="stylesheet" href="./src/css/firmware_flasher.css"/>
-        <link type="text/css" rel="stylesheet" href="./src/css/setup.css"/>
-        <link type="text/css" rel="stylesheet" href="./src/css/receiver.css"/>
-        <link type="text/css" rel="stylesheet" href="./src/css/motors.css"/>
-        <link type="text/css" rel="stylesheet" href="./src/css/pid_tuning.css"/>
-        <link type="text/css" rel="stylesheet" href="./src/css/sensor.css"/>
+  <head>
+    <title>BETAFPV Configurator</title>
+    <link type="text/css" rel="stylesheet" href="./src/css/main.css" />
+    <link type="text/css" rel="stylesheet" href="./src/css/dark-theme.css" />
+    <link type="text/css" rel="stylesheet" href="./src/css/landing.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./src/css/firmware_flasher.css" />
+    <link type="text/css" rel="stylesheet" href="./src/css/setup.css" />
+    <link type="text/css" rel="stylesheet" href="./src/css/receiver.css" />
+    <link type="text/css" rel="stylesheet" href="./src/css/motors.css" />
+    <link type="text/css" rel="stylesheet" href="./src/css/pid_tuning.css" />
+    <link type="text/css" rel="stylesheet" href="./src/css/sensor.css" />
 
-        <script src="./src/js/localization.js"></script>
-        <script src="libraries//mavlink.js"></script>
-        <script src="./src/mavlink/mavlink_decode.js"></script>
-        <script src="./node_modules/jquery/dist/jquery.js"></script>
-        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-        <script src="libraries/d3.min.js"></script>
-        <script src="./src/js/firmware_flasher.js"></script>
-        <script src="./src/js/fc.js"></script>
-        <script src="./src/js/gui.js"></script>
-        <script src="./src/js/injected_methods.js"></script>
-        <script src="./src/js/RateCurve.js"></script>
-        <script src="./src/js/ConfigStorage.js"></script>
-        <script src="./src/js/setup.js"></script>
-        <script src="./src/js/model.js"></script>
-        <script src="./src/js/serial_backend.js"></script>
-        <script src="./src/js/landing.js"></script>
-        <script src="./src/js/receiver.js"></script>
-        <script src="./src/js/motors.js"></script>
-        <script src="./src/js/pid_tuning.js"></script>
-        <script src="./src/js/sensors.js"></script>
+    <script src="./src/js/localization.js"></script>
+    <script src="libraries//mavlink.js"></script>
+    <script src="./src/mavlink/mavlink_decode.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="libraries/d3.min.js"></script>
+    <script src="./src/js/firmware_flasher.js"></script>
+    <script src="./src/js/fc.js"></script>
+    <script src="./src/js/gui.js"></script>
+    <script src="./src/js/injected_methods.js"></script>
+    <script src="./src/js/RateCurve.js"></script>
+    <script src="./src/js/ConfigStorage.js"></script>
+    <script src="./src/js/setup.js"></script>
+    <script src="./src/js/model.js"></script>
+    <script src="./src/js/serial_backend.js"></script>
+    <script src="./src/js/landing.js"></script>
+    <script src="./src/js/receiver.js"></script>
+    <script src="./src/js/motors.js"></script>
+    <script src="./src/js/pid_tuning.js"></script>
+    <script src="./src/js/sensors.js"></script>
 
-
-        <script type="text/javascript" src="./node_modules/three/build/three.min.js"></script>
-        <script type="text/javascript" src="./node_modules/three/examples/js/renderers/CanvasRenderer.js"></script>
-        <script type="text/javascript" src="./node_modules/three/examples/js/renderers/Projector.js"></script>
-
-    </head>
-    <body>
-        <div id="main-wrapper">
-            <div class="headerbar">
-                <div id="logo">
-                    <img src="./src/images/bt_logo.png"/>
-                    <label id = "flightcontrol_configurator_version">
-                    </label>
-                </div>
-                <div id="port-picker">
-                    <div id="portsinput">
-                        <div class="dropdown dropdown-dark">
-                            <select class="dropdown-select" id="port">FlasherManualPort
-                                <option value="loading">Loading</option>
-                                <!-- port list gets generated here -->
-                            </select>
-                            <div id="baudselect">
-                                <div class="dropdown dropdown-dark">
-                                    <select class="dropdown-select" id="baud">FlasherBaudRate
-                                        <option value="1000000">1000000</option>
-                                        <option value="500000">500000</option>
-                                        <option value="250000">250000</option>
-                                        <option value="115200" selected="selected">115200</option>
-                                        <option value="57600">57600</option>
-                                        <option value="38400">38400</option>
-                                        <option value="28800">28800</option>
-                                        <option value="19200">19200</option>
-                                        <option value="14400">14400</option>
-                                        <option value="9600">9600</option>
-                                        <option value="4800">4800</option>
-                                        <option value="2400">2400</option>
-                                        <option value="1200">1200</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <a i18n = "Unable_to_find_serial_port" id = "Unable_to_find_serial_port" href='#'></a>
-                        </div>
-                    </div>
-                </div>
-                <div id="header_btns">
-                    <div class="connect_controls" id="connectbutton">
-                        <div class="connect_b">
-                            <a class="connect " href="#"></a>
-                        </div>
-                        <div class="connect_state" i18n="connect"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="tab-content-container">
-                <div class="tab_container">
-                    <div id="tabs">
-                        <ul class="mode-disconnected">
-                            <li class="tab_landing" id="tab_landing"><a href="#"class="tabicon ic_welcome" i18n="tabLanding" ></a>
-                            <li class="tab_firmware_flasher" id="tabFirmware"><a href="#" class="tabicon ic_flasher" i18n="tabFirmwareFlasher"></a></li>
-                        </ul>
-                        <ul class="mode-connected">
-                           <li class="tab-setup"><a href="#"  class="tabicon ic_setup" i18n="tabSetup"></a></li>
-                            <li class="tab_receiver"><a href="#"  class="tabicon ic_rx"  i18n="tabReceiver" ></a></li>
-                            <li class="tab_motors"><a href="#"  class="tabicon ic_motor" i18n="tabMotorTesting" ></a></li>
-                            <li class="tab_pid_tuning"><a href="#"  class="tabicon ic_pid" i18n="tabPidTuning"></a></li>
-                            <li class="tab_sensors"><a href="#"  class="tabicon ic_sensors"  i18n="tabRawSensorData"></a></li>
-                        </ul>
-                    </div>  
-                </div>
-                <div id='content'>                   
-                </div>              
-            </div>
-
-            <dialog class="dialogCalibrateAcclerometerOK">
-                <h3 i18n = "DialogTitle"></h3>
-                <div class="content">
-                    <div i18n="dialogCalibrateAcclerometerOK" style="margin-top: 10px"></div> 
-                </div>
-                <div class="regular-button">
-                    <a href="#" class="dialogCalibrateAcclerometerOK-confirmbtn" i18n = "Confirm"></a>
-                </div>
-            </dialog>
-
-            <dialog class="dialogCalibrateAcclerometerFailed">
-                <h3 i18n = "DialogTitle">title</h3>
-                <div class="content">
-                    <div i18n="dialogCalibrateAcclerometerFailed" style="margin-top: 10px"></div> 
-                </div>
-                <div class="regular-button">
-                    <a href="#" class="dialogCalibrateAcclerometerFailed-confirmbtn" i18n = "Confirm"></a>
-                </div>
-            </dialog>
-
-
+    <script type="text/javascript" src="./node_modules/three/build/three.min.js"></script>
+    <script type="text/javascript" src="./node_modules/three/examples/js/renderers/CanvasRenderer.js"></script>
+    <script type="text/javascript" src="./node_modules/three/examples/js/renderers/Projector.js"></script>
+  </head>
+  <body>
+    <div id="main-wrapper">
+      <div class="headerbar">
+        <div id="logo">
+          <img src="./src/images/bt_logo.png" />
+          <label id="flightcontrol_configurator_version"> </label>
         </div>
-        <script src="./index.js"></script>        
-    </body>
+        <div id="port-picker">
+          <div id="portsinput">
+            <div class="dropdown dropdown-dark">
+              <select class="dropdown-select" id="port">
+                FlasherManualPort
+                <option value="loading">Loading</option>
+                <!-- port list gets generated here -->
+              </select>
+              <div id="baudselect">
+                <div class="dropdown dropdown-dark">
+                  <select class="dropdown-select" id="baud">
+                    FlasherBaudRate
+                    <option value="1000000">1000000</option>
+                    <option value="500000">500000</option>
+                    <option value="250000">250000</option>
+                    <option value="115200" selected="selected">115200</option>
+                    <option value="57600">57600</option>
+                    <option value="38400">38400</option>
+                    <option value="28800">28800</option>
+                    <option value="19200">19200</option>
+                    <option value="14400">14400</option>
+                    <option value="9600">9600</option>
+                    <option value="4800">4800</option>
+                    <option value="2400">2400</option>
+                    <option value="1200">1200</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div>
+              <a i18n="Unable_to_find_serial_port" id="Unable_to_find_serial_port" href="#"></a>
+            </div>
+          </div>
+        </div>
+        <div id="header_btns">
+          <div class="connect_controls" id="connectbutton">
+            <div class="connect_b">
+              <a class="connect" href="#"></a>
+            </div>
+            <div class="connect_state" i18n="connect"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-content-container">
+        <div class="tab_container">
+          <div id="tabs">
+            <ul class="mode-disconnected">
+              <li class="tab_landing" id="tab_landing"><a href="#" class="tabicon ic_welcome" i18n="tabLanding"></a></li>
+              <li class="tab_firmware_flasher" id="tabFirmware"><a href="#" class="tabicon ic_flasher" i18n="tabFirmwareFlasher"></a></li>
+            </ul>
+            <ul class="mode-connected">
+              <li class="tab-setup"><a href="#" class="tabicon ic_setup" i18n="tabSetup"></a></li>
+              <li class="tab_receiver"><a href="#" class="tabicon ic_rx" i18n="tabReceiver"></a></li>
+              <li class="tab_motors"><a href="#" class="tabicon ic_motor" i18n="tabMotorTesting"></a></li>
+              <li class="tab_pid_tuning"><a href="#" class="tabicon ic_pid" i18n="tabPidTuning"></a></li>
+              <li class="tab_sensors"><a href="#" class="tabicon ic_sensors" i18n="tabRawSensorData"></a></li>
+            </ul>
+          </div>
+        </div>
+        <div id="content"></div>
+      </div>
+
+      <dialog class="dialogCalibrateAcclerometerOK">
+        <h3 i18n="DialogTitle"></h3>
+        <div class="content">
+          <div i18n="dialogCalibrateAcclerometerOK" style="margin-top: 10px"></div>
+        </div>
+        <div class="regular-button">
+          <a href="#" class="dialogCalibrateAcclerometerOK-confirmbtn" i18n="Confirm"></a>
+        </div>
+      </dialog>
+
+      <dialog class="dialogCalibrateAcclerometerFailed">
+        <h3 i18n="DialogTitle">title</h3>
+        <div class="content">
+          <div i18n="dialogCalibrateAcclerometerFailed" style="margin-top: 10px"></div>
+        </div>
+        <div class="regular-button">
+          <a href="#" class="dialogCalibrateAcclerometerFailed-confirmbtn" i18n="Confirm"></a>
+        </div>
+      </dialog>
+    </div>
+    <script src="./index.js"></script>
+  </body>
 </html>

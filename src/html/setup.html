@@ -1,134 +1,131 @@
 <div class="tab-setup">
-    <div class="content_wrapper">
-        <!-- should be the first DIV on each tab -->
-        <div class="tab_title" i18n="tabSetup"></div>
+  <div class="content_wrapper">
+    <!-- should be the first DIV on each tab -->
+    <div class="tab_title" i18n="tabSetup"></div>
 
-        <div class="grid-row">
-            <div class="grid-col col3">
-                <div class="default_btn">
-                    <div id="accel_calib_rest">
-                        <a class="calibrateAccel" id="default_btn green" href="#" i18n="initialSetupButtonCalibrateAccel"></a>
-                    </div>
-                    <div id="accel_calib_running">
-                        <div class="data-loading-setup">
-                            <p i18n="initialSetupButtonCalibratingText"></p>
-                        </div>
-                    </div>
-                </div>
+    <div class="grid-row">
+      <div class="grid-col col3">
+        <div class="default_btn">
+          <div id="accel_calib_rest">
+            <a class="calibrateAccel" id="default_btn green" href="#" i18n="initialSetupButtonCalibrateAccel"></a>
+          </div>
+          <div id="accel_calib_running">
+            <div class="data-loading-setup">
+              <p i18n="initialSetupButtonCalibratingText"></p>
             </div>
-            <div class="grid-col col9">
-                <div class="cell_setup">
-                    <span i18n="initialSetupCalibrateAccelText"></span>
-                </div>
-            </div>
+          </div>
         </div>
-        <div class="grid-row">
-            <div class="grid-col col3">
-                <div class="default_btn">
-                    <div id="mag_calib_rest">
-                        <a class="calibrateMag" href="#" i18n="initialSetupButtonCalibrateMag" ></a>
-                    </div>
-                    <div id="mag_calib_running">
-                        <div class="data-loading-setup">
-                            <p i18n="initialSetupButtonCalibratingText"></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-col col9">
-                <div class="cell_setup">
-                    <span i18n="initialSetupCalibrateMagText"></span>
-                </div>
-            </div>
+      </div>
+      <div class="grid-col col9">
+        <div class="cell_setup">
+          <span i18n="initialSetupCalibrateAccelText"></span>
         </div>
-        <div class="grid-row">
-            <div class="grid-col col3">
-                <div class="default_btn">
-                    <a class="resetSettings" href="#" i18n="initialSetupButtonReset"></a>
-                </div>
+      </div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-col col3">
+        <div class="default_btn">
+          <div id="mag_calib_rest">
+            <a class="calibrateMag" href="#" i18n="initialSetupButtonCalibrateMag"></a>
+          </div>
+          <div id="mag_calib_running">
+            <div class="data-loading-setup">
+              <p i18n="initialSetupButtonCalibratingText"></p>
             </div>
-            <div class="grid-col col9">
-                <div class="cell_setup">
-                    <span i18n="initialSetupResetText"></span>
-                </div>
-            </div>
+          </div>
         </div>
-       
-        <div class="modelwrapper"></div>
-        <div class="grid-row">
-            <div class="grid-col col9 model-and-info">
-                <div id="interactive_block">
-                    <div id="canvas_wrapper" class="background_paper">
-                        <canvas id="canvas"></canvas>
-                        <div class="attitude_info">
-                            <dl>
-                                <dt>Heading: </dt>
-                                <dd class="yaw_dislpay"id = "yaw_dislpay">&nbsp;</dd>
-                                <dt>Pitch:</dt>
-                                <dd class="pitch_display" id = "pitch_display">&nbsp;</dd>
-                                <dt>Roll:</dt>
-                                <dd class="roll_display" id = "roll_display">&nbsp;</dd>
-                            </dl>
-                        </div>
-                    </div>
-                    <a class="reset sm-min" href="#" i18n="initialSetupButtonResetZaxisValue"></a>
-                </div>
-            </div>
-            <div class="grid-col col3">
-                <div class="gui_box grey">
-                    <div class="gui_box_titlebar">
-                        <div class="spacer_box_title" i18n="initialSetupInfoHead">Info</div>
-                    </div>
-                    <div class="spacer_box">
-                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cf_table">
-                            <tbody>
-                            <tr>
-                                <td class="cf_tip"  i18n = "UniqueDeviceId">序列号:</td>
-                                <td class="SerialNumber" i18n = "updateFCfirmware"></td>
-                            </tr>
-                            <tr>
-                                <td class="cf_tip"  i18n = "FlightControl">Flight control:</td>
-                                <td class="target"></td>
-                            </tr>
-                            <tr>
-                                <td i18n = "FirmwareVersion">Version:</td>
-                                <td  class="firmwareVersion"></td>
-                            </tr>
-                            <tr>
-                                <td i18n = "FirmwareBuildTime">Buil time:</td>
-                                <td class="buil-time"></td>
-                            </tr>
-                            <tr>
-                                <td i18n="initialSetupBattery">Battery voltage:</td>
-                                <td class="bat-voltage"></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="grid-col col9">
+        <div class="cell_setup">
+          <span i18n="initialSetupCalibrateMagText"></span>
         </div>
-        <dialog class="dialogFactoryResetOK">
-                <h3 i18n = "DialogTitle"></h3>
-                <div class="content">
-                    <div i18n="dialogFactoryResetOK" style="margin-top: 10px"></div> 
-                </div>
-                <div class="regular-button">
-                    <a href="#" class="dialogFactoryResetOK-confirmbtn" i18n = "Confirm"></a>
-                </div>
-        </dialog>
-
-        <dialog class="dialogFactoryResetfailed">
-                <h3 i18n = "DialogTitle"></h3>
-                <div class="content">
-                    <div i18n="dialogFactoryResetfailed" style="margin-top: 10px"></div> 
-                </div>
-                <div class="regular-button">
-                    <a href="#" class="dialogFactoryResetfailed-confirmbtn" i18n = "Confirm"></a>
-                </div>
-        </dialog>
+      </div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-col col3">
+        <div class="default_btn">
+          <a class="resetSettings" href="#" i18n="initialSetupButtonReset"></a>
+        </div>
+      </div>
+      <div class="grid-col col9">
+        <div class="cell_setup">
+          <span i18n="initialSetupResetText"></span>
+        </div>
+      </div>
     </div>
 
+    <div class="modelwrapper"></div>
+    <div class="grid-row">
+      <div class="grid-col col9 model-and-info">
+        <div id="interactive_block">
+          <div id="canvas_wrapper" class="background_paper">
+            <canvas id="canvas"></canvas>
+            <div class="attitude_info">
+              <dl>
+                <dt>Heading:</dt>
+                <dd class="yaw_dislpay" id="yaw_dislpay">&nbsp;</dd>
+                <dt>Pitch:</dt>
+                <dd class="pitch_display" id="pitch_display">&nbsp;</dd>
+                <dt>Roll:</dt>
+                <dd class="roll_display" id="roll_display">&nbsp;</dd>
+              </dl>
+            </div>
+          </div>
+          <a class="reset sm-min" href="#" i18n="initialSetupButtonResetZaxisValue"></a>
+        </div>
+      </div>
+      <div class="grid-col col3">
+        <div class="gui_box grey">
+          <div class="gui_box_titlebar">
+            <div class="spacer_box_title" i18n="initialSetupInfoHead">Info</div>
+          </div>
+          <div class="spacer_box">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cf_table">
+              <tbody>
+                <tr>
+                  <td class="cf_tip" i18n="UniqueDeviceId">序列号:</td>
+                  <td class="SerialNumber" i18n="updateFCfirmware"></td>
+                </tr>
+                <tr>
+                  <td class="cf_tip" i18n="FlightControl">Flight control:</td>
+                  <td class="target"></td>
+                </tr>
+                <tr>
+                  <td i18n="FirmwareVersion">Version:</td>
+                  <td class="firmwareVersion"></td>
+                </tr>
+                <tr>
+                  <td i18n="FirmwareBuildTime">Buil time:</td>
+                  <td class="buil-time"></td>
+                </tr>
+                <tr>
+                  <td i18n="initialSetupBattery">Battery voltage:</td>
+                  <td class="bat-voltage"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <dialog class="dialogFactoryResetOK">
+      <h3 i18n="DialogTitle"></h3>
+      <div class="content">
+        <div i18n="dialogFactoryResetOK" style="margin-top: 10px"></div>
+      </div>
+      <div class="regular-button">
+        <a href="#" class="dialogFactoryResetOK-confirmbtn" i18n="Confirm"></a>
+      </div>
+    </dialog>
 
-
+    <dialog class="dialogFactoryResetfailed">
+      <h3 i18n="DialogTitle"></h3>
+      <div class="content">
+        <div i18n="dialogFactoryResetfailed" style="margin-top: 10px"></div>
+      </div>
+      <div class="regular-button">
+        <a href="#" class="dialogFactoryResetfailed-confirmbtn" i18n="Confirm"></a>
+      </div>
+    </dialog>
+  </div>
 </div>
