@@ -1,647 +1,635 @@
 <div class="tab-show toolbar_fixed_bottom">
-    <div class="content_wrapper">
-
-
-        <div class="gui_box_titlebar">
-            <div class="spacer_box_title" i18n = "RadioSetup">Setup</div>
-        </div>
-
-        <div class="options gui_box">
-             <tr>
-                <td>
-                    <div id = "content_literadio_device_info" class="content_literadio_device_info" >
-                        <div class="item">
-                            <span class="message-positive" i18n = "literadio_type"> 遥控器型号：</span>
-                            <span id = "liteRadioInfoDevice"   >unknow </span>
-                        </div>
-                        <div class="item ">
-                            <span class="message-positive" i18n = "literadio_build_in_radio" > 内置射频模块：</span>
-                            <span id = "liteRadioInfoInternalRadio"  >unknow </span>
-                        </div>
-                        <div class="item ">
-                            <span  class="message-positive" i18n = "literadio_hardwareVersion"> 硬件版本：</span>
-                            <span id = "liteRadioInfoBoardVersion"   >unknow </span>
-                        </div>
-                        <div class="item ">
-                            <span  class="message-positive" i18n = "literadio_firmwareVersion"> 固件版本：</span>
-                            <span id = "liteRadioInfoFirmwareVersion"  >unknow </span>
-                        </div>          
-                    </div>
-                </td>
-            </tr>
-            <div class="spacer">
-                <table class="cf_table" style=" margin-top: 10px;">
-                    <tr>
-                        <td class="board-select">
-                        <select name="radiomode" style="width:10%;"disabled = "disabled" id = "rocker_mode">
-                                <option value="1" >Mode 1</option>
-                                <option value="0" >Mode 2</option>
-                        </select>
-                        <label  i18n = "rocker_mode_description" style="width:100%; margin-top: 12px;" ></label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="board-select">
-                        <select name="trainer_port" style="width:10%;"disabled = "disabled" id = "trainer_port">
-                                <option value="0" >OFF</option>
-                                <option value="1" >ON</option>
-                        </select>
-                         <label i18n="RadioSetupTrainerPort"></label>
-                        </td>
-                    </tr>
-                </table>     
-            </div>
-            <div class=" tunings">
-                <div class="grid-row">
-                    <div class="grid-col col6">   
-               
-                        <table class="inprotocol"  style="margin-top: 20px;"> 
-                            <tr>
-                                <th i18n = "RadioSetupIRSystem" >IR System Protocol </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p i18n = "RadioSetupRFconfigText">  </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                 <div class="input-helpicon-flex">
-                                    <label class="switch">
-                                        <input id = "internal_radio_module_switch"class="switch-input" type="checkbox" />
-                                        <span class="switch-label" data-on="On" data-off="Off"></span> 
-                                        <span class="switch-handle"></span> 
-                                    </label>
-                                    <label  style="width:100%; margin-left: 6px; margin-top: 8px;" i18n = "RadioSetupInternalRadioModule" >内置射频模块</label>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <select id="internal_radio_protocol" style="width:30%; margin-top: 12px;" disabled = "disabled" >
-                                            <option id = "internal_radio_protocol_elrs_2.4G" value="0"  >ELRS 2.4G</option>
-                                            <option id = "internal_radio_protocol_Frsky_F8" value="1" >Frsky D8</option>
-                                            <option id = "internal_radio_protocol_Frsky_F16_FCC" value="2" >Frsky D16 FCC</option>
-                                            <option id = "internal_radio_protocol_Frsky_F16_LBT" value="3" >Frsky D16 LBT</option>
-                                        </select>
-                                        <label i18n = "RadioSetupIRSystemProtocol" style="width:100%; margin-top: 12px;" ></label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                 <div class="input-helpicon-flex">
-                                    <label class="switch">
-                                        <input id = "external_radio_module_switch"class="switch-input" type="checkbox" />
-                                        <span class="switch-label" data-on="On" data-off="Off"></span> 
-                                        <span class="switch-handle"></span> 
-                                    </label>
-                                    <label  style="width:100%; margin-left: 6px; margin-top: 8px;"i18n = "RadioSetupExternalRadioModule" >外置射频模块</label>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <select id="external_radio_protocol" style="width:30%; margin-top: 12px;"disabled = "disabled">
-                                            <option value="0">CRSF</option>
-                                        </select>
-                                        <label i18n = "RadioSetupERSystemProtocol" style="width:100%; margin-top: 12px;" ></label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>   
-                                <td>
-                                    <div  class="input-helpicon-flex" style=" margin-top: 12px;">
-                                        <input type="checkbox" id="External_radio_module_power_switch" disabled = "disabled"/>
-                                        <label style = "width:100%;margin-top: 6px;" i18n = "RadioSetupERSystemPowerSwitch"></label>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="grid-col col6">
-                        <table class="exprotocol"   style="margin-top: 20px;">
-                            <tr>
-                                <th i18n = "RadioSetupERSystem">ER System Protocol</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p i18n = "RadioSetupExpressLRSText">  </p>
-                                    <span class="message-positive" id = "RadioSetupELRSRuningStatus" i18n = "RadioSetupRadioModuleDetect"></span>
-                                </td>
-                            </tr>
-                            <tr >
-                                <td  id="exELRSpowerID" disabled = "disabled">
-                                    <div class="input-helpicon-flex" >
-                                        <select id="ExpressLRS_power_option_box" style="width:15%; margin-top: 12px;" disabled = "disabled">
-                                            <option id = "ExpressLRS_power_10mw" value="0" selected="selected">10mw</option>
-                                            <option id = "ExpressLRS_power_25mw" value="1">25mw</option>
-                                            <option id = "ExpressLRS_power_50mw" value="2">50mw</option>
-                                            <option id = "ExpressLRS_power_100mw" value="3">100mw</option>
-                                            <option id = "ExpressLRS_power_250mw" value="4">250mw</option>
-                                            <option id = "ExpressLRS_power_500mw" value="5">500mw</option>
-                                        </select>
-                                        <label i18n = "RadioSetupExELRSSystemPower" style="width:50%; margin-top: 12px;" ></label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td   id="exELRSpktRateID" disabled = "disabled">
-                                    <div class="input-helpicon-flex" >
-                                        <select id="ExpressLRS_pkt_rate_option_box" style="width:15%; margin-top: 12px;" disabled = "disabled">
-                                            <option id="ExpressLRS_pkt_rate_500Hz" value="0" selected="selected">500Hz</option>
-                                            <option id="ExpressLRS_pkt_rate_250Hz" value="1">250Hz</option>
-                                            <option id="ExpressLRS_pkt_rate_100Hz" value="2">150Hz</option>
-                                            <option id="ExpressLRS_pkt_rate_50Hz" value="3">50Hz</option>
-                                         
-                                        </select>
-                                        <label i18n = "RadioSetupexELRSPktRate" style="width:50%; margin-top: 12px;" ></label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr  >     
-                                <td id="exELRSTLMRadioID">
-                                    <div class="input-helpicon-flex" >
-                                        <select id="ExpressLRS_tlm_option_box" style="width:15%; margin-top: 12px;" disabled = "disabled">
-                                            <option id="ExpressLRS_tlm_OFF" value="0" selected="selected">OFF</option>
-                                            <option id="ExpressLRS_tlm_128" value="1">1:128</option>
-                                            <option id="ExpressLRS_tlm_64" value="2">1:64</option>
-                                            <option id="ExpressLRS_tlm_32" value="3">1:32</option>
-                                            <option id="ExpressLRS_tlm_16" value="4">1:16</option>
-                                            <option id="ExpressLRS_tlm_8" value="5">1:8</option>
-                                            <option id="ExpressLRS_tlm_4" value="6">1:4</option>
-                                            <option id="ExpressLRS_tlm_2" value="7">1:2</option>
-                                        </select>
-                                        <label i18n = "RadioSetupexELRSTLMRadio" style="width:15%; margin-top: 12px;" ></label>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div id = "content_EspressLRS_btn"class="content_EspressLRS_btn">
-                                        <div class="btn bind_btn">
-                                            <a id = "externalRadioBinding"class="binding" href="#" i18n="RadioSetupEnterBinding"  >Enter Binding</a>
-                                        </div>
-                                        <div class="btn wifi_update_btn">
-                                            <a id = "externalRadioWifiUpdate" class="wifi_update" href="#" i18n = "RadioSetupEnterWIFIUpdate">Enter WIFI Update </a>
-                                        </div>
-                                    </div>
-                                    <div id = "content_EspressLRS_bindPhrase" class="content_EspressLRS_bindPhrase">
-                                        <div  class="bindPhraseSwitch" >
-                                            <input id = "bindPhraseSwitch" type="checkbox" style = " margin-top:8px;" disabled = "disabled" />
-                                            <label class="message-positive" i18n = "Bind_phrase_setup" >Bind phrase setup</label>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <div id = "bindPhrase" class="bindPhrase">
-                                    <input id = "customBindPhraseInput" style = " width:40%; text-align: left;"  class="bindPhraseInput" />
-                                    <label id = "UidBytesDisplay" style = " width:60%; text-align: left;" i18n = "input_your_custom_binding_phrase_here" >input your custom binding phrase here</label>
-                                </div>
-                                 <div  id = "set_expresslrs_uid" class="set_expresslrs_uid" >
-                                    <label i18n = "bindPhraseprompttext" ></label>
-                                    <br />
-                                    <input style="width:60%; margin-left: 6px; margin-top: 8px;" readonly id = "command_set_expresslrs_uid" />
-                                    <br />
-                                    <input  style="width:60%; margin-left: 6px; margin-top: 8px;" value = "save" readonly />
-                                </div>
-                                </td>
-                            </tr>
-
-                        </table>
- 
-                    </div>
-                </div>
-            </div>
-        </div>    
-        
-        <div class="gui_box_titlebar" style="margin-top: 20px;">
-            <div class="spacer_box_title" i18n = "RadioSetupMIXS" >MIXS</div>
-        </div>
-        <div class="gui_box">
-            <p i18n = "RadioSetupMIXSText">  </p>
-            <p><br/> </p>
-            <div class="grid-row">
-                <div class="grid-col col6 bars"></div>
-                <div class="grid-col col6">
-        
-                    <div class="gui_box tunings grey">
-                        <table class="roll_set">
-                            <tr>
-                                <th i18n = "RadioSetupChannel">Channel</th>
-                                <th i18n = "RadioSetupInput">Input</th>
-                                <th i18n = "RadioSetupWeight">Weight</th>
-                                <th i18n = "RadioSetupOffset">Offset</th>
-                                <th i18n = "RadioSetupReverse">Reverse</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <label style="width:100%;">CH1</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <select name="ch1_data_source" style="width:100%;">
-                                            <option value="0" selected="selected">Roll(A)</option>
-                                            <option value="1">Pitch(E)</option>
-                                            <option value="2">Throttle(T)</option>
-                                            <option value="3">Yaw(R)</option>
-                                            <option value="4">SA</option>
-                                            <option value="5">SB</option>
-                                            <option value="6">SC</option>
-                                            <option value="7">SD</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch1_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch1_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input calss="condition" type="checkbox" width:100%; id='ch1_check'>
-                                    </div>
-                                </td>
-                            </tr>
-        
-                            <tr>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <label style="width:100%;">CH2</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <select name="ch2_data_source" style="width:100%;">
-                                            <option value="0">Roll(A)</option>
-                                            <option value="1" selected="selected">Pitch(E)</option>
-                                            <option value="2">Throttle(T)</option>
-                                            <option value="3">Yaw(R)</option>
-                                            <option value="4">SA</option>
-                                            <option value="5">SB</option>
-                                            <option value="6">SC</option>
-                                            <option value="7">SD</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch2_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch2_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input calss="condition" type="checkbox" width:100%; id='ch2_check'>
-                                    </div>
-                                </td>
-                            </tr>
-        
-                            <tr>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <label style="width:100%;">CH3</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <select name="ch3_data_source" style="width:100%;">
-                                            <option value="0">Roll(A)</option>
-                                            <option value="1">Pitch(E)</option>
-                                            <option value="2" selected="selected">Throttle(T)</option>
-                                            <option value="3">Yaw(R)</option>
-                                            <option value="4">SA</option>
-                                            <option value="5">SB</option>
-                                            <option value="6">SC</option>
-                                            <option value="7">SD</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch3_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch3_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input calss="condition" type="checkbox" width:100%; id='ch3_check'>
-                                    </div>
-                                </td>
-                            </tr>
-        
-                            <tr>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <label style="width:100%;">CH4</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <select name="ch4_data_source" style="width:100%;">
-                                            <option value="0">Roll(A)</option>
-                                            <option value="1">Pitch(E)</option>
-                                            <option value="2">Throttle(T)</option>
-                                            <option value="3" selected="selected">Yaw(R)</option>
-                                            <option value="4">SA</option>
-                                            <option value="5">SB</option>
-                                            <option value="6">SC</option>
-                                            <option value="7">SD</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch4_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch4_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input calss="condition" type="checkbox" width:100%; id='ch4_check'>
-                                    </div>
-                                </td>
-                            </tr>
-        
-                            <tr>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <label style="width:100%;">CH5</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <select name="ch5_data_source" style="width:100%;">
-                                            <option value="0">Roll(A)</option>
-                                            <option value="1">Pitch(E)</option>
-                                            <option value="2">Throttle(T)</option>
-                                            <option value="3">Yaw(R)</option>
-                                            <option value="4" selected="selected">SA</option>
-                                            <option value="5">SB</option>
-                                            <option value="6">SC</option>
-                                            <option value="7">SD</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch5_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch5_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input calss="condition" type="checkbox" width:100%; id='ch5_check'>
-                                    </div>
-                                </td>
-                            </tr>
-        
-                            <tr>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <label style="width:100%;">CH6</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <select name="ch6_data_source" style="width:100%;">
-                                            <option value="0">Roll(A)</option>
-                                            <option value="1">Pitch(E)</option>
-                                            <option value="2">Throttle(T)</option>
-                                            <option value="3">Yaw(R)</option>
-                                            <option value="4">SA</option>
-                                            <option value="5" selected="selected">SB</option>
-                                            <option value="6">SC</option>
-                                            <option value="7">SD</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch6_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch6_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input calss="condition" type="checkbox" width:100%; id='ch6_check'>
-                                    </div>
-                                </td>
-                            </tr>
-        
-                            <tr>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <label style="width:100%;">CH7</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <select name="ch7_data_source" style="width:100%;">
-                                            <option value="0">Roll(A)</option>
-                                            <option value="1">Pitch(E)</option>
-                                            <option value="2">Throttle(T)</option>
-                                            <option value="3">Yaw(R)</option>
-                                            <option value="4">SA</option>
-                                            <option value="5">SB</option>
-                                            <option value="6" selected="selected">SC</option>
-                                            <option value="7">SD</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch7_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch7_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input calss="condition" type="checkbox" width:100%; id='ch7_check'>
-                                    </div>
-                                </td>
-                            </tr>
-        
-                            <tr>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <label style="width:100%;">CH8</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <select name="ch8_data_source" style="width:100%;">
-                                            <option value="0">Roll(A)</option>
-                                            <option value="1">Pitch(E)</option>
-                                            <option value="2">Throttle(T)</option>
-                                            <option value="3">Yaw(R)</option>
-                                            <option value="4">SA</option>
-                                            <option value="5">SB</option>
-                                            <option value="6">SC</option>
-                                            <option value="7" selected="selected">SD</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch8_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input type="number" name='ch8_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-helpicon-flex">
-                                        <input calss="condition" type="checkbox" width:100%; id='ch8_check'>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div> 
-                </div>
-        </div> 
+  <div class="content_wrapper">
+    <div class="gui_box_titlebar">
+      <div class="spacer_box_title" i18n="RadioSetup">Setup</div>
     </div>
-    <div class="gui_box_titlebar"  style="width:100%; margin-top: 8px;">
-        <div class="spacer_box_title" i18n = "extra_custom_config" >自定义配置</div>
-    </div>
-    <div class="gui_box" id = "extra_custom_config"  style="width:100%; display :none ">
-        <table   style="width:100%; margin-left: 6px; margin-top: 8px;"> 
-            <tr>
-                <td>
-                 <div class="input-helpicon-flex">
-                    <label class="switch">
-                        <input id = "BuzzerSwitch"class="switch-input" type="checkbox"  />
-                        <span class="switch-label" data-on="On" data-off="Off"></span> 
-                        <span class="switch-handle"></span> 
-                    </label>
-                    <label  style="width:100%; margin-left: 6px; margin-top: 8px;" i18n = "BuzzerSwitch"  >蜂鸣器提示音</label>
-                </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="input-helpicon-flex">
-                        <select id="JoystickDeadZonePercent" style="width:15%; margin-top: 12px; " >
-                            <option value="1">1%</option>
-                            <option value="2">2%</option>
-                            <option value="3">3%</option>
-                            <option value="4">4%</option>
-                            <option value="5">5%</option>
-                            <option value="6">6%</option>
-                            <option value="7">7%</option>
-                            <option value="8">8%</option>
-                            <option value="9">9%</option>
-                            <option value="10">10%</option>
-                        </select>
-                        <label  style="width:100%; margin-top: 12px;" i18n = "JoystickDeadZone" >摇杆死区</label>
-                    </div>
-                </td>
-            </tr>
-        
+
+    <div class="options gui_box">
+      <tr>
+        <td>
+          <div id="content_literadio_device_info" class="content_literadio_device_info">
+            <div class="item">
+              <span class="message-positive" i18n="literadio_type"> 遥控器型号：</span>
+              <span id="liteRadioInfoDevice">unknow </span>
+            </div>
+            <div class="item">
+              <span class="message-positive" i18n="literadio_build_in_radio"> 内置射频模块：</span>
+              <span id="liteRadioInfoInternalRadio">unknow </span>
+            </div>
+            <div class="item">
+              <span class="message-positive" i18n="literadio_hardwareVersion"> 硬件版本：</span>
+              <span id="liteRadioInfoBoardVersion">unknow </span>
+            </div>
+            <div class="item">
+              <span class="message-positive" i18n="literadio_firmwareVersion"> 固件版本：</span>
+              <span id="liteRadioInfoFirmwareVersion">unknow </span>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <div class="spacer">
+        <table class="cf_table" style="margin-top: 10px">
+          <tr>
+            <td class="board-select">
+              <select name="radiomode" style="width: 10%" disabled="disabled" id="rocker_mode">
+                <option value="1">Mode 1</option>
+                <option value="0">Mode 2</option>
+              </select>
+              <label i18n="rocker_mode_description" style="width: 100%; margin-top: 12px"></label>
+            </td>
+          </tr>
+          <tr>
+            <td class="board-select">
+              <select name="trainer_port" style="width: 10%" disabled="disabled" id="trainer_port">
+                <option value="0">OFF</option>
+                <option value="1">ON</option>
+              </select>
+              <label i18n="RadioSetupTrainerPort"></label>
+            </td>
+          </tr>
         </table>
+      </div>
+      <div class="tunings">
+        <div class="grid-row">
+          <div class="grid-col col6">
+            <table class="inprotocol" style="margin-top: 20px">
+              <tr>
+                <th i18n="RadioSetupIRSystem">IR System Protocol</th>
+              </tr>
+              <tr>
+                <td>
+                  <p i18n="RadioSetupRFconfigText"></p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <label class="switch">
+                      <input id="internal_radio_module_switch" class="switch-input" type="checkbox" />
+                      <span class="switch-label" data-on="On" data-off="Off"></span>
+                      <span class="switch-handle"></span>
+                    </label>
+                    <label style="width: 100%; margin-left: 6px; margin-top: 8px" i18n="RadioSetupInternalRadioModule">内置射频模块</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <select id="internal_radio_protocol" style="width: 30%; margin-top: 12px" disabled="disabled">
+                      <option id="internal_radio_protocol_elrs_2.4G" value="0">ELRS 2.4G</option>
+                      <option id="internal_radio_protocol_Frsky_F8" value="1">Frsky D8</option>
+                      <option id="internal_radio_protocol_Frsky_F16_FCC" value="2">Frsky D16 FCC</option>
+                      <option id="internal_radio_protocol_Frsky_F16_LBT" value="3">Frsky D16 LBT</option>
+                    </select>
+                    <label i18n="RadioSetupIRSystemProtocol" style="width: 100%; margin-top: 12px"></label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <label class="switch">
+                      <input id="external_radio_module_switch" class="switch-input" type="checkbox" />
+                      <span class="switch-label" data-on="On" data-off="Off"></span>
+                      <span class="switch-handle"></span>
+                    </label>
+                    <label style="width: 100%; margin-left: 6px; margin-top: 8px" i18n="RadioSetupExternalRadioModule">外置射频模块</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <select id="external_radio_protocol" style="width: 30%; margin-top: 12px" disabled="disabled">
+                      <option value="0">CRSF</option>
+                    </select>
+                    <label i18n="RadioSetupERSystemProtocol" style="width: 100%; margin-top: 12px"></label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="input-helpicon-flex" style="margin-top: 12px">
+                    <input type="checkbox" id="External_radio_module_power_switch" disabled="disabled" />
+                    <label style="width: 100%; margin-top: 6px" i18n="RadioSetupERSystemPowerSwitch"></label>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="grid-col col6">
+            <table class="exprotocol" style="margin-top: 20px">
+              <tr>
+                <th i18n="RadioSetupERSystem">ER System Protocol</th>
+              </tr>
+              <tr>
+                <td>
+                  <p i18n="RadioSetupExpressLRSText"></p>
+                  <span class="message-positive" id="RadioSetupELRSRuningStatus" i18n="RadioSetupRadioModuleDetect"></span>
+                </td>
+              </tr>
+              <tr>
+                <td id="exELRSpowerID" disabled="disabled">
+                  <div class="input-helpicon-flex">
+                    <select id="ExpressLRS_power_option_box" style="width: 15%; margin-top: 12px" disabled="disabled">
+                      <option id="ExpressLRS_power_10mw" value="0" selected="selected">10mw</option>
+                      <option id="ExpressLRS_power_25mw" value="1">25mw</option>
+                      <option id="ExpressLRS_power_50mw" value="2">50mw</option>
+                      <option id="ExpressLRS_power_100mw" value="3">100mw</option>
+                      <option id="ExpressLRS_power_250mw" value="4">250mw</option>
+                      <option id="ExpressLRS_power_500mw" value="5">500mw</option>
+                    </select>
+                    <label i18n="RadioSetupExELRSSystemPower" style="width: 50%; margin-top: 12px"></label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td id="exELRSpktRateID" disabled="disabled">
+                  <div class="input-helpicon-flex">
+                    <select id="ExpressLRS_pkt_rate_option_box" style="width: 15%; margin-top: 12px" disabled="disabled">
+                      <option id="ExpressLRS_pkt_rate_500Hz" value="0" selected="selected">500Hz</option>
+                      <option id="ExpressLRS_pkt_rate_250Hz" value="1">250Hz</option>
+                      <option id="ExpressLRS_pkt_rate_100Hz" value="2">150Hz</option>
+                      <option id="ExpressLRS_pkt_rate_50Hz" value="3">50Hz</option>
+                    </select>
+                    <label i18n="RadioSetupexELRSPktRate" style="width: 50%; margin-top: 12px"></label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td id="exELRSTLMRadioID">
+                  <div class="input-helpicon-flex">
+                    <select id="ExpressLRS_tlm_option_box" style="width: 15%; margin-top: 12px" disabled="disabled">
+                      <option id="ExpressLRS_tlm_OFF" value="0" selected="selected">OFF</option>
+                      <option id="ExpressLRS_tlm_128" value="1">1:128</option>
+                      <option id="ExpressLRS_tlm_64" value="2">1:64</option>
+                      <option id="ExpressLRS_tlm_32" value="3">1:32</option>
+                      <option id="ExpressLRS_tlm_16" value="4">1:16</option>
+                      <option id="ExpressLRS_tlm_8" value="5">1:8</option>
+                      <option id="ExpressLRS_tlm_4" value="6">1:4</option>
+                      <option id="ExpressLRS_tlm_2" value="7">1:2</option>
+                    </select>
+                    <label i18n="RadioSetupexELRSTLMRadio" style="width: 15%; margin-top: 12px"></label>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div id="content_EspressLRS_btn" class="content_EspressLRS_btn">
+                    <div class="btn bind_btn">
+                      <a id="externalRadioBinding" class="binding" href="#" i18n="RadioSetupEnterBinding">Enter Binding</a>
+                    </div>
+                    <div class="btn wifi_update_btn">
+                      <a id="externalRadioWifiUpdate" class="wifi_update" href="#" i18n="RadioSetupEnterWIFIUpdate">Enter WIFI Update </a>
+                    </div>
+                  </div>
+                  <div id="content_EspressLRS_bindPhrase" class="content_EspressLRS_bindPhrase">
+                    <div class="bindPhraseSwitch">
+                      <input id="bindPhraseSwitch" type="checkbox" style="margin-top: 8px" disabled="disabled" />
+                      <label class="message-positive" i18n="Bind_phrase_setup">Bind phrase setup</label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div id="bindPhrase" class="bindPhrase">
+                    <input id="customBindPhraseInput" style="width: 40%; text-align: left" class="bindPhraseInput" />
+                    <label id="UidBytesDisplay" style="width: 60%; text-align: left" i18n="input_your_custom_binding_phrase_here">input your custom binding phrase here</label>
+                  </div>
+                  <div id="set_expresslrs_uid" class="set_expresslrs_uid">
+                    <label i18n="bindPhraseprompttext"></label>
+                    <br />
+                    <input style="width: 60%; margin-left: 6px; margin-top: 8px" readonly id="command_set_expresslrs_uid" />
+                    <br />
+                    <input style="width: 60%; margin-left: 6px; margin-top: 8px" value="save" readonly />
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gui_box_titlebar" style="margin-top: 20px">
+      <div class="spacer_box_title" i18n="RadioSetupMIXS">MIXS</div>
+    </div>
+    <div class="gui_box">
+      <p i18n="RadioSetupMIXSText"></p>
+      <p><br /></p>
+      <div class="grid-row">
+        <div class="grid-col col6 bars"></div>
+        <div class="grid-col col6">
+          <div class="gui_box tunings grey">
+            <table class="roll_set">
+              <tr>
+                <th i18n="RadioSetupChannel">Channel</th>
+                <th i18n="RadioSetupInput">Input</th>
+                <th i18n="RadioSetupWeight">Weight</th>
+                <th i18n="RadioSetupOffset">Offset</th>
+                <th i18n="RadioSetupReverse">Reverse</th>
+              </tr>
+              <tr>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <label style="width: 100%">CH1</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <select name="ch1_data_source" style="width: 100%">
+                      <option value="0" selected="selected">Roll(A)</option>
+                      <option value="1">Pitch(E)</option>
+                      <option value="2">Throttle(T)</option>
+                      <option value="3">Yaw(R)</option>
+                      <option value="4">SA</option>
+                      <option value="5">SB</option>
+                      <option value="6">SC</option>
+                      <option value="7">SD</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch1_scale" step="1" min="1" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="100" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch1_offset" step="1" min="-100" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="0" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input calss="condition" type="checkbox" width:100%; id="ch1_check" />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <label style="width: 100%">CH2</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <select name="ch2_data_source" style="width: 100%">
+                      <option value="0">Roll(A)</option>
+                      <option value="1" selected="selected">Pitch(E)</option>
+                      <option value="2">Throttle(T)</option>
+                      <option value="3">Yaw(R)</option>
+                      <option value="4">SA</option>
+                      <option value="5">SB</option>
+                      <option value="6">SC</option>
+                      <option value="7">SD</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch2_scale" step="1" min="1" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="100" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch2_offset" step="1" min="-100" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="0" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input calss="condition" type="checkbox" width:100%; id="ch2_check" />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <label style="width: 100%">CH3</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <select name="ch3_data_source" style="width: 100%">
+                      <option value="0">Roll(A)</option>
+                      <option value="1">Pitch(E)</option>
+                      <option value="2" selected="selected">Throttle(T)</option>
+                      <option value="3">Yaw(R)</option>
+                      <option value="4">SA</option>
+                      <option value="5">SB</option>
+                      <option value="6">SC</option>
+                      <option value="7">SD</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch3_scale" step="1" min="1" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="100" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch3_offset" step="1" min="-100" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="0" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input calss="condition" type="checkbox" width:100%; id="ch3_check" />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <label style="width: 100%">CH4</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <select name="ch4_data_source" style="width: 100%">
+                      <option value="0">Roll(A)</option>
+                      <option value="1">Pitch(E)</option>
+                      <option value="2">Throttle(T)</option>
+                      <option value="3" selected="selected">Yaw(R)</option>
+                      <option value="4">SA</option>
+                      <option value="5">SB</option>
+                      <option value="6">SC</option>
+                      <option value="7">SD</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch4_scale" step="1" min="1" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="100" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch4_offset" step="1" min="-100" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="0" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input calss="condition" type="checkbox" width:100%; id="ch4_check" />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <label style="width: 100%">CH5</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <select name="ch5_data_source" style="width: 100%">
+                      <option value="0">Roll(A)</option>
+                      <option value="1">Pitch(E)</option>
+                      <option value="2">Throttle(T)</option>
+                      <option value="3">Yaw(R)</option>
+                      <option value="4" selected="selected">SA</option>
+                      <option value="5">SB</option>
+                      <option value="6">SC</option>
+                      <option value="7">SD</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch5_scale" step="1" min="1" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="100" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch5_offset" step="1" min="-100" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="0" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input calss="condition" type="checkbox" width:100%; id="ch5_check" />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <label style="width: 100%">CH6</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <select name="ch6_data_source" style="width: 100%">
+                      <option value="0">Roll(A)</option>
+                      <option value="1">Pitch(E)</option>
+                      <option value="2">Throttle(T)</option>
+                      <option value="3">Yaw(R)</option>
+                      <option value="4">SA</option>
+                      <option value="5" selected="selected">SB</option>
+                      <option value="6">SC</option>
+                      <option value="7">SD</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch6_scale" step="1" min="1" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="100" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch6_offset" step="1" min="-100" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="0" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input calss="condition" type="checkbox" width:100%; id="ch6_check" />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <label style="width: 100%">CH7</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <select name="ch7_data_source" style="width: 100%">
+                      <option value="0">Roll(A)</option>
+                      <option value="1">Pitch(E)</option>
+                      <option value="2">Throttle(T)</option>
+                      <option value="3">Yaw(R)</option>
+                      <option value="4">SA</option>
+                      <option value="5">SB</option>
+                      <option value="6" selected="selected">SC</option>
+                      <option value="7">SD</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch7_scale" step="1" min="1" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="100" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch7_offset" step="1" min="-100" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="0" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input calss="condition" type="checkbox" width:100%; id="ch7_check" />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <label style="width: 100%">CH8</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <select name="ch8_data_source" style="width: 100%">
+                      <option value="0">Roll(A)</option>
+                      <option value="1">Pitch(E)</option>
+                      <option value="2">Throttle(T)</option>
+                      <option value="3">Yaw(R)</option>
+                      <option value="4">SA</option>
+                      <option value="5">SB</option>
+                      <option value="6">SC</option>
+                      <option value="7" selected="selected">SD</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch8_scale" step="1" min="1" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="100" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input type="number" name="ch8_offset" step="1" min="-100" max="100" style="background-color: rgba(255, 255, 255, 0); width: 100%; border: 1px solid" value="0" />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-helpicon-flex">
+                    <input calss="condition" type="checkbox" width:100%; id="ch8_check" />
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gui_box_titlebar" style="width: 100%; margin-top: 8px">
+      <div class="spacer_box_title" i18n="extra_custom_config">自定义配置</div>
+    </div>
+    <div class="gui_box" id="extra_custom_config" style="width: 100%; display: none">
+      <table style="width: 100%; margin-left: 6px; margin-top: 8px">
+        <tr>
+          <td>
+            <div class="input-helpicon-flex">
+              <label class="switch">
+                <input id="BuzzerSwitch" class="switch-input" type="checkbox" />
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
+              </label>
+              <label style="width: 100%; margin-left: 6px; margin-top: 8px" i18n="BuzzerSwitch">蜂鸣器提示音</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="input-helpicon-flex">
+              <select id="JoystickDeadZonePercent" style="width: 15%; margin-top: 12px">
+                <option value="1">1%</option>
+                <option value="2">2%</option>
+                <option value="3">3%</option>
+                <option value="4">4%</option>
+                <option value="5">5%</option>
+                <option value="6">6%</option>
+                <option value="7">7%</option>
+                <option value="8">8%</option>
+                <option value="9">9%</option>
+                <option value="10">10%</option>
+              </select>
+              <label style="width: 100%; margin-top: 12px" i18n="JoystickDeadZone">摇杆死区</label>
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
     <div class="content_toolbar">
-        <div class="btn reset_btn">
-            <a class="factory_reset " href="#" i18n = "RadioSetupFactoryReset">Factory reset</a>
-        </div>
-        <div class="btn refresh_btn">
-            <a class="refresh" href="#" i18n = "RadioSetupRefresh">Refresh </a>
-        </div>            
-        <div class="btn save_btn" >
-            <a  class="save disabled" href="#" i18n = "RadioSetupSave"  >Save</a>
-        </div>
+      <div class="btn reset_btn">
+        <a class="factory_reset" href="#" i18n="RadioSetupFactoryReset">Factory reset</a>
+      </div>
+      <div class="btn refresh_btn">
+        <a class="refresh" href="#" i18n="RadioSetupRefresh">Refresh </a>
+      </div>
+      <div class="btn save_btn">
+        <a class="save disabled" href="#" i18n="RadioSetupSave">Save</a>
+      </div>
     </div>
 
     <dialog class="dialogCloseExternalRadio">
-        <h3 i18n = "CloseExternalRadioDialogTitle"></h3>
-        <div class="content">
-            <div i18n="CloseExternalRadioDialogLabel" style="margin-top: 10px"></div> 
-        </div>
-        <div class="regular-button">
-            <a href="#" class="dialogCloseExternalRadio-confirmbtn"i18n = "CloseExternalRadioConfirm" ></a>
-        </div>
+      <h3 i18n="CloseExternalRadioDialogTitle"></h3>
+      <div class="content">
+        <div i18n="CloseExternalRadioDialogLabel" style="margin-top: 10px"></div>
+      </div>
+      <div class="regular-button">
+        <a href="#" class="dialogCloseExternalRadio-confirmbtn" i18n="CloseExternalRadioConfirm"></a>
+      </div>
     </dialog>
 
     <dialog class="dialogCloseInternalRadio">
-        <h3 i18n = "CloseInternalRadioDialogTitle"></h3>
-        <div class="content">
-            <div i18n="CloseInternalRadioDialogLabel" style="margin-top: 10px"></div> 
-        </div>
-        <div class="regular-button">
-            <a href="#" class="dialogCloseInternalRadio-confirmbtn" i18n = "CloseInternalRadioConfirm"></a>
-        </div>
+      <h3 i18n="CloseInternalRadioDialogTitle"></h3>
+      <div class="content">
+        <div i18n="CloseInternalRadioDialogLabel" style="margin-top: 10px"></div>
+      </div>
+      <div class="regular-button">
+        <a href="#" class="dialogCloseInternalRadio-confirmbtn" i18n="CloseInternalRadioConfirm"></a>
+      </div>
     </dialog>
 
-
     <dialog class="dialogConfirmTheLengthOfBindPhrase">
-        <h3 i18n = "ConfirmTheLengthOfBindPhraseDialogTitle"></h3>
-        <div class="content">
-            <div i18n="ConfirmTheLengthOfBindPhraseDialogLabel" style="margin-top: 10px"></div> 
-        </div>
-        <div class="regular-button">
-            <a href="#" class="dialogConfirmTheLengthOfBindPhrase-confirmbtn" i18n = "ConfirmTheLengthOfBindPhrase"></a>
-        </div>
+      <h3 i18n="ConfirmTheLengthOfBindPhraseDialogTitle"></h3>
+      <div class="content">
+        <div i18n="ConfirmTheLengthOfBindPhraseDialogLabel" style="margin-top: 10px"></div>
+      </div>
+      <div class="regular-button">
+        <a href="#" class="dialogConfirmTheLengthOfBindPhrase-confirmbtn" i18n="ConfirmTheLengthOfBindPhrase"></a>
+      </div>
     </dialog>
 
     <dialog class="dialogSelectAtLeastOneProtocol">
-        <h3 i18n = "SelectAtLeastOneProtocolDialogTitle"></h3>
-        <div class="content">
-            <div i18n="SelectAtLeastOneProtocolDialogLabel" style="margin-top: 10px"></div> 
-        </div>
-        <div class="regular-button">
-            <a href="#" class="dialogSelectAtLeastOneProtocol-confirmbtn" i18n = "ConfirmSelectAtLeastOneProtocol"></a>
-        </div>
+      <h3 i18n="SelectAtLeastOneProtocolDialogTitle"></h3>
+      <div class="content">
+        <div i18n="SelectAtLeastOneProtocolDialogLabel" style="margin-top: 10px"></div>
+      </div>
+      <div class="regular-button">
+        <a href="#" class="dialogSelectAtLeastOneProtocol-confirmbtn" i18n="ConfirmSelectAtLeastOneProtocol"></a>
+      </div>
     </dialog>
 
     <dialog class="dialogfactoryReset">
-        <h3 i18n = "factoryResetDialogTitle"></h3>
-        <div class="content">
-            <div i18n="factoryResetDialogLabel" style="margin-top: 10px"></div> 
-        </div>
-        <div class="regular-button">
-            <a href="#" class="dialogfactoryReset-confirmbtn" i18n = "ConfirmfactoryReset"></a>
-        </div>
+      <h3 i18n="factoryResetDialogTitle"></h3>
+      <div class="content">
+        <div i18n="factoryResetDialogLabel" style="margin-top: 10px"></div>
+      </div>
+      <div class="regular-button">
+        <a href="#" class="dialogfactoryReset-confirmbtn" i18n="ConfirmfactoryReset"></a>
+      </div>
     </dialog>
-
-  
-
-
+  </div>
 </div>

@@ -4,10 +4,11 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "dev": "cross-env ELECTRON_DISABLE_SECURITY_WARNINGS=true ELECTRON_ENABLE_LOGGING=true electron .",
     "package-win": "electron-packager . BETAFPV_Configurator --platform=win32 --arch=x64 --out=./Windows --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
     "package-linux": "electron-packager . BETAFPV_Configurator --platform=linux --arch=x64 --out=./Linux --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
     "package-mac": "electron-packager . BETAFPV_Configurator --platform=darwin --arch=x64 --out=./Mac --app-version=1.1.0 --overwrite --icon=./BETAFPV_LOGO.icns",
-    "fmt": "prettierx --write \"./**/*.{js,jsx,css,html}\""
+    "fmt": "prettierx --ignore-path .prettierignore --write \"./**/*.{js,css,html}\""
   },
   "window": {
     "icon": "images/logo/BETAFPV_logo_blue.png",
@@ -46,6 +47,7 @@
     "printWidth": 1024
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "electron": "^29.1.6",
     "electron-rebuild": "^3.2.3",
     "prettierx": "^0.19.0"

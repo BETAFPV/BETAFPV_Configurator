@@ -1,94 +1,81 @@
 <div class="tab-motors toolbar_fixed_bottom">
-    <div class="content_wrapper">
-     <div class="tab_title" i18n="tabMotorTesting">Motors</div>
-        
-        
-        <div class="grid-row">
-            <img class = "img_quad" id = "quad_p" src="src\images\motor_order\quad_x.svg" alt="quad_p" width="20%" />
-            <div class = "motor_test" >
+  <div class="content_wrapper">
+    <div class="tab_title" i18n="tabMotorTesting">Motors</div>
 
-                <!-- MOTOR TEST SECTION -->
-                <div class="gui_box motorblock" >
-                    <div class="spacer">
-
-                   
-                        <!-- MOTOR TESTING -->
-                        <div class="left motors">
-                            <div class="title2" i18n="motorsText"></div>
-                                <ul class="titles">
-                                <li i18n_title="motorNumber1">1</li>
-                                <li i18n_title="motorNumber2">2</li>
-                                <li i18n_title="motorNumber3">3</li>
-                                <li i18n_title="motorNumber4">4</li>
-                            </ul>
-                            <div class="bar-wrapper"></div>
-                        </div>
-                        <div class="clear-both"></div>
-                        <!-- MOTOR TESTING -->
-                        <div class="motor_testing">
-                            <div class="left">
-                                <div class="sliders">
-                                    <input type="range" min="0" max="2000" value="0" disabled="disabled"/>
-                                    <input type="range" min="0" max="2000" value="0" disabled="disabled"/>
-                                    <input type="range" min="0" max="2000" value="0" disabled="disabled"/>
-                                    <input type="range" min="0" max="2000" value="0" disabled="disabled"/>
-                                    <input type="range" min="0" max="2000" value="0"  class="master" disabled="disabled"/>
-                                </div>
-                                <div class="values">
-                                    <ul>
-                                        <li>0</li>
-                                        <li>0</li>
-                                        <li>0</li>
-                                        <li>0</li>
-                                        <li style="font-weight: bold" i18n="motorsMaster"></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="notice">
-                                <input id="motorsEnableTestMode" type="checkbox" class="togglesmall"/>
-                                <span class="motorsEnableTestMode" i18n="motorsEnableControl"></span>
-                            </div>               
-                        </div>
-
-                    </div>
-                </div>    
-             
-               
+    <div class="grid-row">
+      <img class="img_quad" id="quad_p" src="src\images\motor_order\quad_x.svg" alt="quad_p" width="20%" />
+      <div class="motor_test">
+        <!-- MOTOR TEST SECTION -->
+        <div class="gui_box motorblock">
+          <div class="spacer">
+            <!-- MOTOR TESTING -->
+            <div class="left motors">
+              <div class="title2" i18n="motorsText"></div>
+              <ul class="titles">
+                <li i18n_title="motorNumber1">1</li>
+                <li i18n_title="motorNumber2">2</li>
+                <li i18n_title="motorNumber3">3</li>
+                <li i18n_title="motorNumber4">4</li>
+              </ul>
+              <div class="bar-wrapper"></div>
             </div>
-
-             <div class = "idel_throttle">
-                <!-- MOTOR TEST SECTION -->
-                <div class="gui_box motorblock">
-                    <div class="spacer">
-                        <!-- MOTOR TESTING -->
-                        <div >
-                            <div class="title2" i18n = "motor_setup">电机设置</div>
-                                <ul class="values">
-                                    <tr  class="titles">
-                                        <td ><input type="number" id = "idelThrottleValue"  value="10"  step="1" min="0" max="20" /></td>
-                                       <label style = "width:100%;margin-top: 6px;" i18n = "idelThrottleValue"></label>
-                                    </tr>
-                                </ul>
-                        </div>
-                    </div>
-                </div>    
+            <div class="clear-both"></div>
+            <!-- MOTOR TESTING -->
+            <div class="motor_testing">
+              <div class="left">
+                <div class="sliders">
+                  <input type="range" min="0" max="2000" value="0" disabled="disabled" />
+                  <input type="range" min="0" max="2000" value="0" disabled="disabled" />
+                  <input type="range" min="0" max="2000" value="0" disabled="disabled" />
+                  <input type="range" min="0" max="2000" value="0" disabled="disabled" />
+                  <input type="range" min="0" max="2000" value="0" class="master" disabled="disabled" />
+                </div>
+                <div class="values">
+                  <ul>
+                    <li>0</li>
+                    <li>0</li>
+                    <li>0</li>
+                    <li>0</li>
+                    <li style="font-weight: bold" i18n="motorsMaster"></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="notice">
+                <input id="motorsEnableTestMode" type="checkbox" class="togglesmall" />
+                <span class="motorsEnableTestMode" i18n="motorsEnableControl"></span>
+              </div>
             </div>
-           
-        
-        
+          </div>
         </div>
-        
-   
+      </div>
 
-
-    </div> <!-- END CONTENT_WRAPPER -->
-    
-    <div class="content_toolbar">
-        <div class="btn refresh_btn">
-            <a class="refresh" id = "motor_refresh" href="#" i18n="motorButtonRefresh">Refresh</a>
+      <div class="idel_throttle">
+        <!-- MOTOR TEST SECTION -->
+        <div class="gui_box motorblock">
+          <div class="spacer">
+            <!-- MOTOR TESTING -->
+            <div>
+              <div class="title2" i18n="motor_setup">电机设置</div>
+              <ul class="values">
+                <tr class="titles">
+                  <td><input type="number" id="idelThrottleValue" value="10" step="1" min="0" max="20" /></td>
+                  <label style="width: 100%; margin-top: 6px" i18n="idelThrottleValue"></label>
+                </tr>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="btn save_btn">
-            <a class="update" id = "motor_update" href="#" i18n="motorButtonSave">Save</a>
-        </div>
+      </div>
     </div>
+  </div>
+  <!-- END CONTENT_WRAPPER -->
+
+  <div class="content_toolbar">
+    <div class="btn refresh_btn">
+      <a class="refresh" id="motor_refresh" href="#" i18n="motorButtonRefresh">Refresh</a>
+    </div>
+    <div class="btn save_btn">
+      <a class="update" id="motor_update" href="#" i18n="motorButtonSave">Save</a>
+    </div>
+  </div>
 </div>
