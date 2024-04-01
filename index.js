@@ -48,11 +48,7 @@ setTimeout(function listPorts() {
 
 setTimeout(function loadLanguage() {
   i18next.changeLanguage(i18n.Storage_language)
-  if (i18n.Storage_language == 'en') {
-    document.getElementById('wechat_facebook_logo_src_switch').src = './src/images/flogo_RGB_HEX-1024.svg'
-  } else if (i18n.Storage_language == 'zh_CN') {
-    document.getElementById('wechat_facebook_logo_src_switch').src = './src/images/wechat_icon.png'
-  }
+  switchLanguage(i18n.Storage_language)
 }, 500)
 
 mavlinkSend = function (writedata) {
@@ -67,11 +63,7 @@ window.onload = function () {
   let Unable_to_find_serial_port = document.getElementById('Unable_to_find_serial_port')
   Unable_to_find_serial_port.onclick = function (e) {
     e.preventDefault()
-    if (i18n.selectedLanguage == 'zh_CN') {
-      shell.openExternal('https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/UnableToFindSerialPort_CN.md')
-    } else {
-      shell.openExternal('https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/UnableToFindSerialPort_EN.md')
-    }
+    switchLanguageOpen(i18n.selectedLanguage)
   }
 
   $('label[id="flightcontrol_configurator_version"]').text(flightcontrol_configurator_version)
@@ -267,6 +259,7 @@ window.onload = function () {
       }
     }
   })
+
   i18n.init()
 
   $('#tabs ul.mode-disconnected li a:first').click()

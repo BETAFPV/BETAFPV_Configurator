@@ -22,20 +22,20 @@
 1. 将飞控连接至电脑，打开电脑设备管理器，找到设备'MMF103Virtual COM Port'。
 
 2. 右键点击'MMF103Virtual COM Port' 选择 '更新驱动程序'.
- ![updateDriver1](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/updateDriver1.png)
+ ![updateDriver1](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/updateDriver1.png)
 
 3. 点击 '浏览我的电脑以查找驱动程序'-->'让我从计算机上的可用程序列表中选取'。
-![updateDriver2](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/updateDriver2.png)
-![updateDriver3](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/updateDriver3.png)
+![updateDriver2](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/updateDriver2.png)
+![updateDriver3](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/updateDriver3.png)
 
 4. 选择 'STMicroelectronics Virtual COM Port' 或者 'USB Serial Device'其中一个,然后点击'下一页'。
-![updateDriver4](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/updateDriver4.png)
+![updateDriver4](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/updateDriver4.png)
 
 5. 完成以上步骤后，在设备管理器中的“端口（COM和LPT）”栏出现一个COMx口，说明驱动更新完成。
 
-![USBSerialPort](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/USBSerialPort.png)
-![stmVCP](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/stmVCP.png)
-![CorrectSerialPort](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/CorrectSerialPort.png)
+![USBSerialPort](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/USBSerialPort.png)
+![stmVCP](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/stmVCP.png)
+![CorrectSerialPort](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/CorrectSerialPort.png)
 
 
 

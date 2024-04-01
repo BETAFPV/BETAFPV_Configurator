@@ -3,18 +3,43 @@ var i18nextXHRBackend = require('i18next-xhr-backend')
 var i18n = {
   Storage_language : 0,
 }
+var { shell } = require('electron')
+
 /*
  * Wrapper around the i18n system
  */
 window.i18n = i18n
 
 // const languagesAvailables = ['ca', 'de', 'en', 'es', 'eu', 'fr', 'gl', 'hr', 'hu', 'id', 'it', 'ja', 'ko', 'lv', 'nl', 'pt', 'pt_BR', 'pl', 'ru', 'sv', 'zh_CN', 'zh_TW'];
-const languagesAvailables = ['en', 'zh_CN']
+const languagesAvailables = ['en', 'zh_CN', 'ja_JP']
 
 const languageFallback = {
   pt      : ['pt_BR', 'en'],
   pt_BR   : ['pt', 'en'],
   default : ['en'],
+}
+
+function switchLanguage(language) {
+  if (language === 'en') {
+    document.getElementById('wechat_facebook_logo_src_switch').src = './src/images/flogo_RGB_HEX-1024.svg'
+  } else if (language === 'zh_CN') {
+    document.getElementById('wechat_facebook_logo_src_switch').src = './src/images/wechat_icon.png'
+  } else if (language === 'ja_JP') {
+    document.getElementById('wechat_facebook_logo_src_switch').src = './src/images/line_icon.png'
+  }
+}
+
+// const DOC_URL = 'https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/'
+const DOC_URL = 'https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/'
+
+function switchLanguageOpen(language) {
+  if (language === 'en') {
+    shell.openExternal(`${DOC_URL}UnableToFindSerialPort_EN.md`)
+  } else if (language === 'zh_CN') {
+    shell.openExternal(`${DOC_URL}UnableToFindSerialPort_CN.md`)
+  } else if (language === 'ja_JP') {
+    shell.openExternal(`${DOC_URL}UnableToFindSerialPort_JA.md`)
+  }
 }
 
 /**

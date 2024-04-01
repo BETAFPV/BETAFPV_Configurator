@@ -22,20 +22,20 @@ Select Target and Version in the upper left corner. Press "Load Firmwar {Online]
 1. Open 'Device Manager' on your PC,you can see there's a new device named 'MMF103Virtual COM Port' here.
 
 2. Right click the 'MMF103Virtual COM Port' and select 'Update driver'.
- ![updateDriver1](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/updateDriver1.png)
+ ![updateDriver1](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/updateDriver1.png)
 
 3. search the avaliable drivers by click 'Brower my computer for drivers'-->'Let me pick from a list of avaliable drivers on my computer'
-![updateDriver2](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/updateDriver2.png)
-![updateDriver3](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/updateDriver3.png)
+![updateDriver2](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/updateDriver2.png)
+![updateDriver3](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/updateDriver3.png)
 
 4. Update it to either 'STMicroelectronics Virtual COM Port' or 'USB Serial Device',click 'Next'.
-![updateDriver4](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/updateDriver4.png)
+![updateDriver4](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/updateDriver4.png)
 
 5. After the above steps there's a new 'COMx' device on the Ports of 'Device Manger',you can connect your flight controller normally now.
 
-![USBSerialPort](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/USBSerialPort.png)
-![stmVCP](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/stmVCP.png)
-![CorrectSerialPort](https://github.com/BETAFPV/BETAFPV_Configurator/blob/master/docs/image/updateVCP/CorrectSerialPort.png)
+![USBSerialPort](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/USBSerialPort.png)
+![stmVCP](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/stmVCP.png)
+![CorrectSerialPort](https://github.com/hexaforce/BETAFPV_Configurator/blob/main/docs/image/updateVCP/CorrectSerialPort.png)
 
 
 

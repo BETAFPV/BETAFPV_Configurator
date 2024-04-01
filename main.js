@@ -15,8 +15,8 @@ app.on('ready', () => {
     width          : 1500,
     height         : 1000,
     webPreferences : {
-      nodeIntegration    : true,
-      contextIsolation   : false,
+      nodeIntegration  : true,
+      contextIsolation : false,
       // enableRemoteModule : true,
     },
   })

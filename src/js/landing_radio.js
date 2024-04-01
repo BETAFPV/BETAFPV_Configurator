@@ -1,5 +1,6 @@
 const landing = {}
 var { shell } = require('electron')
+
 landing.initialize = function (callback) {
   $('#content').load('./src/html/landing_radio.html', function () {
     i18n.localizePage()
@@ -32,11 +33,7 @@ landing.initialize = function (callback) {
           return
         }
         if (i18n.selectedLanguage != languageSelected) {
-          if (languageSelected == 'en') {
-            document.getElementById('wechat_facebook_logo_src_switch').src = './src/images/flogo_RGB_HEX-1024.svg'
-          } else if (languageSelected == 'zh_CN') {
-            document.getElementById('wechat_facebook_logo_src_switch').src = './src/images/wechat_icon.png'
-          }
+          switchLanguage(languageSelected)
           i18n.changeLanguage(languageSelected)
           showLang(languageSelected)
         }

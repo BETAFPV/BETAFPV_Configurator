@@ -103,11 +103,11 @@
         "message": "Language change saved"
     },
     "language_choice_message": {
-        "message": "Change language:",
-        "description": "Try and be brief"
+        "message": "言語選択:",
+        "description": "簡潔に話すように努めてください"
     },
     "language_default": {
-        "message": "System Default"
+        "message": "システム デフォルト"
     },
     "language_default_pretty": {
         "message": "System Default ($t(detectedLanguage))"
@@ -298,7 +298,7 @@
         "message": "Firmware Flasher"
     },
     "tabLanding": {
-        "message": "Welcome"
+        "message": "ようこそ"
     },
     "tabChangelog": {
         "message": "Changelog"

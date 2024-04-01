@@ -368,7 +368,7 @@ sensors.initialize = function (callback) {
         checkboxes.push($(this).prop('checked'))
       })
 
-      // // timer initialization
+      // timer initialization
       GUI.interval_remove('IMU_pull')
       GUI.interval_remove('altitude_pull')
       GUI.interval_remove('sonar_pull')
