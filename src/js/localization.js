@@ -10,7 +10,7 @@ var { shell } = require('electron')
  */
 window.i18n = i18n
 
-// const languagesAvailables = ['ca', 'de', 'en', 'es', 'eu', 'fr', 'gl', 'hr', 'hu', 'id', 'it', 'ja', 'ko', 'lv', 'nl', 'pt', 'pt_BR', 'pl', 'ru', 'sv', 'zh_CN', 'zh_TW'];
+// const languagesAvailables = ['ca', 'de', 'en', 'es', 'eu', 'fr', 'gl', 'hr', 'hu', 'id', 'it', 'ja', 'ko', 'lv', 'nl', 'pt', 'pt_BR', 'pl', 'ru', 'sv', 'zh', 'zh_TW'];
 const languagesAvailables = ['en', 'zh', 'ja']
 
 const languageFallback = {
@@ -23,9 +23,9 @@ const languageFallback = {
 function switchLanguage(language) {
   if (language === 'en') {
     document.getElementById('wechat_facebook_logo_src_switch').src = './src/images/flogo_RGB_HEX-1024.svg'
-  } else if (language === 'zh_CN') {
+  } else if (language === 'zh') {
     document.getElementById('wechat_facebook_logo_src_switch').src = './src/images/wechat_icon.png'
-  } else if (language === 'ja_JP') {
+  } else if (language === 'ja') {
     document.getElementById('wechat_facebook_logo_src_switch').src = './src/images/line_icon.png'
   }
 }
@@ -36,9 +36,9 @@ const DOC_URL = 'https://github.com/hexaforce/BETAFPV_Configurator/blob/main/doc
 function switchLanguageOpen(language) {
   if (language === 'en') {
     shell.openExternal(`${DOC_URL}UnableToFindSerialPort_EN.md`)
-  } else if (language === 'zh_CN') {
+  } else if (language === 'zh') {
     shell.openExternal(`${DOC_URL}UnableToFindSerialPort_CN.md`)
-  } else if (language === 'ja_JP') {
+  } else if (language === 'ja') {
     shell.openExternal(`${DOC_URL}UnableToFindSerialPort_JA.md`)
   }
 }

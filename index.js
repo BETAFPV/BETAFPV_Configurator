@@ -34,22 +34,24 @@ async function listSerialPorts() {
   const uniqueHIDDevices = Array.from(new Map(HIDDevices.map((HIDDevice) => [HIDDevice.serialNumber, HIDDevice])).values())
 
   if (uniqueHIDDevices.length !== lastPortCount) {
+
     $('#port option').each(function () {
       $(this).remove()
     })
-  }
 
-  for (let i = 0; i < uniqueHIDDevices.length; i++) {
-    let path = uniqueHIDDevices[i].path
-    let product = uniqueHIDDevices[i].product
-    let manufacturer = uniqueHIDDevices[i].manufacturer
-
-    if (!isExistOption(path)) {
-      let disabled = isBetaFPVdevices(uniqueHIDDevices[i]) ? '' : 'disabled'
-      $('#port').append(`<option value="${path}" ${disabled}>${product} (${manufacturer})</option>`)
+    for (let i = 0; i < uniqueHIDDevices.length; i++) {
+      let path = uniqueHIDDevices[i].path
+      let product = uniqueHIDDevices[i].product
+      let manufacturer = uniqueHIDDevices[i].manufacturer
+  
+      if (!isExistOption(path)) {
+        let disabled = isBetaFPVdevices(uniqueHIDDevices[i]) ? '' : 'disabled'
+        $('#port').append(`<option value="${path}" ${disabled}>${product} (${manufacturer})</option>`)
+      }
     }
-  }
 
+  }
+  
   lastPortCount = uniqueHIDDevices.length
 }
 
