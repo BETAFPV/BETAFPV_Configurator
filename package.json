@@ -3,9 +3,10 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "dev": "cross-env ELECTRON_OPEN_DEV_TOOLS=true ELECTRON_DISABLE_SECURITY_WARNINGS=true ELECTRON_ENABLE_LOGGING=true electron .",
-    "dev2": "cross-env ELECTRON_OPEN_DEV_TOOLS=false ELECTRON_DISABLE_SECURITY_WARNINGS=true ELECTRON_ENABLE_LOGGING=true electron .",
+    "start": "cross-env liteRadio=false electron .",
+    "start2": "cross-env liteRadio=true electron .",
+    "dev": "cross-env ELECTRON_OPEN_DEV_TOOLS=true ELECTRON_DISABLE_SECURITY_WARNINGS=true ELECTRON_ENABLE_LOGGING=true liteRadio=false electron .",
+    "dev2": "cross-env ELECTRON_OPEN_DEV_TOOLS=true ELECTRON_DISABLE_SECURITY_WARNINGS=true ELECTRON_ENABLE_LOGGING=true liteRadio=true electron .",
     "package-win": "electron-packager . BETAFPV_Configurator --platform=win32 --arch=x64 --out=./Windows --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
     "package-linux": "electron-packager . BETAFPV_Configurator --platform=linux --arch=x64 --out=./Linux --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
     "package-mac": "electron-packager . BETAFPV_Configurator --platform=darwin --arch=x64 --out=./Mac --app-version=1.1.0 --overwrite --icon=./BETAFPV_LOGO.icns",

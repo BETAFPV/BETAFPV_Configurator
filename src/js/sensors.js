@@ -229,7 +229,7 @@ sensors.initialize = function (callback) {
     //     }
     // }
 
-    $('.tab-sensors .info .checkboxes input').change(function () {
+    $('.tab-sensors .info .checkboxes input').on('change', function () {
       const enable = $(this).prop('checked')
       const index = $(this).parent().index()
 
@@ -321,7 +321,7 @@ sensors.initialize = function (callback) {
       }
     })
 
-    $('.tab-sensors .rate select, .tab-sensors .scale select').change(function () {
+    $('.tab-sensors .rate select, .tab-sensors .scale select').on('change', function () {
       // if any of the select fields change value, all of the select values are grabbed
       // and timers are re-initialized with the new settings
       const rates = {

@@ -1,4 +1,5 @@
-const serialport = require('serialport')
+// const serialport = require('serialport')
+var HID = require('node-hid')
 const { dialog, getCurrentWindow } = require('@electron/remote')
 
 var flightcontrol_configurator_version = 'v1.1.1-RC1'
@@ -18,27 +19,38 @@ function isExistOption(id, value) {
   return isExist
 }
 
-function addOptionValue(id, value, text) {
-  if (!isExistOption(id, value)) {
-    $('#' + id).append('<option value=' + value + '>' + text + '</option>')
-  }
+function isBetaFPVdevices(port) {
+  return port.vendorId === 1155 && port.productId === 22352
+}
+
+function mavlink_msg_heartbeat() {
+  let msg = new mavlink10.messages.heartbeat(0, 1)
+  let buffer = msg.pack(msg)
+  mavlinkSend(buffer)
 }
 
 async function listSerialPorts() {
-  await serialport.SerialPort.list().then((ports, err) => {
-    if (ports.length !== lastPortCount) {
-      $('#port option').each(function () {
-        $(this).remove()
-      })
-    }
+  const HIDDevices = HID.devices()
+  const uniqueHIDDevices = Array.from(new Map(HIDDevices.map((HIDDevice) => [HIDDevice.serialNumber, HIDDevice])).values())
 
-    for (let i = 0; i < ports.length; i++) {
-      if (ports[i].productId == '5740' && (ports[i].vendorId == '0483' || ports[i].vendorId == '0493')) {
-        addOptionValue('port', i, ports[i].path)
-      }
+  if (uniqueHIDDevices.length !== lastPortCount) {
+    $('#port option').each(function () {
+      $(this).remove()
+    })
+  }
+
+  for (let i = 0; i < uniqueHIDDevices.length; i++) {
+    let path = uniqueHIDDevices[i].path
+    let product = uniqueHIDDevices[i].product
+    let manufacturer = uniqueHIDDevices[i].manufacturer
+
+    if (!isExistOption(path)) {
+      let disabled = isBetaFPVdevices(uniqueHIDDevices[i]) ? '' : 'disabled'
+      $('#port').append(`<option value="${path}" ${disabled}>${product} (${manufacturer})</option>`)
     }
-    lastPortCount = ports.length
-  })
+  }
+
+  lastPortCount = uniqueHIDDevices.length
 }
 
 setTimeout(function listPorts() {
@@ -52,11 +64,67 @@ setTimeout(function loadLanguage() {
 }, 500)
 
 mavlinkSend = function (writedata) {
-  port.write(writedata, function (err) {
-    if (err) {
-      return console.log('Error on write: ', err.message)
-    }
-  })
+  port.write(writedata)
+}
+
+// open事件监听
+function portOpen() {
+  console.log('open')
+  setup.mavlinkConnected = false
+  GUI.connect_lock = true
+  $('div#connectbutton a.connect').addClass('active')
+
+  if (isFlasherTab == 0) {
+    FC.resetState()
+    $('div#connectbutton div.connect_state').text(i18n.getMessage('connecting')).addClass('active')
+    setTimeout(() => {
+      if (setup.mavlinkConnected == true) {
+        $('#tabs ul.mode-disconnected').hide()
+        $('#tabs ul.mode-connected').show()
+        $('#tabs ul.mode-connected li a:first').click()
+        $('div#connectbutton div.connect_state').text(i18n.getMessage('disconnect')).addClass('active')
+      } else {
+        // port.close()
+        portClose()
+        GUI.connect_lock = true
+        GUI.interval_remove('mavlink_heartbeat')
+        $('div#connectbutton a.connect').removeClass('active')
+        dialog.showMessageBoxSync(getCurrentWindow(), {
+          type      : 'warning',
+          buttons   : [i18n.getMessage('Confirm')],
+          defaultId : 0,
+          title     : i18n.getMessage('warningTitle'),
+          message   : i18n.getMessage('NoConfigurationReceived'),
+          detail    : i18n.getMessage('NoValidPort'),
+          noLink    : true,
+        })
+      }
+    }, 1000)
+    GUI.interval_add('mavlink_heartbeat', mavlink_msg_heartbeat, 1000, true)
+  } else {
+    $('div#connectbutton div.connect_state').text(i18n.getMessage('flashTab')).addClass('active')
+  }
+}
+
+//close事件监听
+function portClose() {
+  port.close()
+  if (isFlasherTab == 0) {
+    console.log('close')
+    GUI.connect_lock = false
+    GUI.interval_remove('mavlink_heartbeat')
+    GUI.interval_remove('display_Info')
+    GUI.interval_remove('setup_data_pull_fast')
+    $('#tabs ul.mode-connected').hide()
+    $('#tabs ul.mode-disconnected').show()
+    $('#tabs ul.mode-disconnected li a:first').click()
+    $('div#connectbutton a.connect').removeClass('active')
+    $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'))
+  } else {
+    GUI.connect_lock = false
+    $('div#connectbutton a.connect').removeClass('active')
+    $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'))
+  }
 }
 
 window.onload = function () {
@@ -68,7 +136,7 @@ window.onload = function () {
     }
 
     $('label[id="flightcontrol_configurator_version"]').text(flightcontrol_configurator_version)
-    $('div.connect_controls a.connect').on('click', function () {
+    $('div.connect_controls a.connect').on('click', async function () {
       if (GUI.connect_lock != true) {
         const thisElement = $(this)
         const clicks = thisElement.data('clicks')
@@ -81,71 +149,16 @@ window.onload = function () {
 
         const selected_baud = parseInt($('div#port-picker #baud').val())
 
-        let COM = $('div#port-picker #port option:selected').text()
+        let COM = $('div#port-picker #port option:selected').val()
 
-        port = new serialport(COM, {
-          baudRate : parseInt(selected_baud),
-          dataBits : 8,
-          parity   : 'none',
-          stopBits : 1,
-        })
-
-        //open事件监听
-        port.on('open', () => {
-          setup.mavlinkConnected = false
-          GUI.connect_lock = true
-          $('div#connectbutton a.connect').addClass('active')
-
-          if (isFlasherTab == 0) {
-            FC.resetState()
-            $('div#connectbutton div.connect_state').text(i18n.getMessage('connecting')).addClass('active')
-            setTimeout(() => {
-              if (setup.mavlinkConnected == true) {
-                $('#tabs ul.mode-disconnected').hide()
-                $('#tabs ul.mode-connected').show()
-                $('#tabs ul.mode-connected li a:first').click()
-                $('div#connectbutton div.connect_state').text(i18n.getMessage('disconnect')).addClass('active')
-              } else {
-                port.close()
-                GUI.connect_lock = true
-                GUI.interval_remove('mavlink_heartbeat')
-                $('div#connectbutton a.connect').removeClass('active')
-                dialog.showMessageBoxSync(getCurrentWindow(), {
-                  type      : 'warning',
-                  buttons   : [i18n.getMessage('Confirm')],
-                  defaultId : 0,
-                  title     : i18n.getMessage('warningTitle'),
-                  message   : i18n.getMessage('NoConfigurationReceived'),
-                  detail    : i18n.getMessage('NoValidPort'),
-                  noLink    : true,
-                })
-              }
-            }, 1000)
-            GUI.interval_add('mavlink_heartbeat', mavlink_msg_heartbeat, 1000, true)
-          } else {
-            $('div#connectbutton div.connect_state').text(i18n.getMessage('flashTab')).addClass('active')
-          }
-        })
-
-        //close事件监听
-        port.on('close', () => {
-          if (isFlasherTab == 0) {
-            console.log('close')
-            GUI.connect_lock = false
-            GUI.interval_remove('mavlink_heartbeat')
-            GUI.interval_remove('display_Info')
-            GUI.interval_remove('setup_data_pull_fast')
-            $('#tabs ul.mode-connected').hide()
-            $('#tabs ul.mode-disconnected').show()
-            $('#tabs ul.mode-disconnected li a:first').click()
-            $('div#connectbutton a.connect').removeClass('active')
-            $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'))
-          } else {
-            GUI.connect_lock = false
-            $('div#connectbutton a.connect').removeClass('active')
-            $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'))
-          }
-        })
+        // port = new serialport.SerialPort(COM, {
+        //   baudRate : parseInt(selected_baud),
+        //   dataBits : 8,
+        //   parity   : 'none',
+        //   stopBits : 1,
+        // })
+        port = await HID.HIDAsync.open(COM)
+        portOpen()
 
         //data事件监听
         port.on('data', (data) => {
@@ -169,15 +182,10 @@ window.onload = function () {
           GUI.connect_lock = false
         })
       } else {
-        port.close()
+        // port.close()
+        portClose()
       }
     })
-
-    function mavlink_msg_heartbeat() {
-      let msg = new mavlink10.messages.heartbeat(0, 1)
-      let buffer = msg.pack(msg)
-      mavlinkSend(buffer)
-    }
 
     const ui_tabs = $('#tabs > ul')
     $('a', ui_tabs).on('click', function () {
@@ -258,7 +266,6 @@ window.onload = function () {
         }
       }
     })
+    $('#tabs ul.mode-disconnected li a:first').click()
   })
-
-  $('#tabs ul.mode-disconnected li a:first').click()
 }

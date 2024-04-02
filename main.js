@@ -32,8 +32,11 @@ app.on('ready', () => {
     })
   }
 
-  // mainWindow.loadURL(`file://${__dirname}/LiteRadio.html`)
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  if (process.env.liteRadio === 'true') {
+    mainWindow.loadURL(`file://${__dirname}/LiteRadio.html`)
+  } else {
+    mainWindow.loadURL(`file://${__dirname}/index.html`)
+  }
 
   //disable app menu, IF YOU NEED MENU TO DEBUG,UNCOMMENT FOLLOW LINE
   Menu.setApplicationMenu(null)

@@ -296,7 +296,7 @@ firmware_flasher_LiteRadio.connect_init = function () {
             var bufName = new Buffer(133)
 
             bufName[0] = 0x01
-            bufName[1] = 00
+            bufName[1] = 0x00
             bufName[2] = 0xff
             bufName[3] = 0x42
             bufName[4] = 0x6f
@@ -479,7 +479,7 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
         })
     })
 
-    $('select[id="boardTarget"]').change(function () {
+    $('select[id="boardTarget"]').on('change', function () {
       firmware_flasher_LiteRadio.target_board = parseInt($(this).val(), 10)
       switch (firmware_flasher_LiteRadio.target_board) {
         case 0:

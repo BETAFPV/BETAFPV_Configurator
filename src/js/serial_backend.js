@@ -25,7 +25,7 @@ function initializeSerialBackend() {
 
   GUI.updateManualPortVisibility()
 
-  $('#port-override').change(function () {
+  $('#port-override').on('change', function () {
     ConfigStorage.set({ portOverride: $('#port-override').val() })
   })
 
@@ -33,7 +33,7 @@ function initializeSerialBackend() {
     $('#port-override').val(data.portOverride)
   })
 
-  $('div#port-picker #port').change(function (target) {
+  $('div#port-picker #port').on('change', function (target) {
     GUI.updateManualPortVisibility()
   })
 
@@ -132,7 +132,7 @@ function initializeSerialBackend() {
     }
 
     // bind UI hook to auto-connect checkbos
-    $('input.auto_connect').change(function () {
+    $('input.auto_connect').on('change', function () {
       GUI.auto_connect = $(this).is(':checked')
 
       // update title/tooltip

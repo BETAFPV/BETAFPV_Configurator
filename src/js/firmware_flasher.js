@@ -771,7 +771,7 @@ firmware_flasher.initialize = function (callback) {
       }
     })
 
-    $('select[id="boardTarget"]').change(function () {
+    $('select[id="boardTarget"]').on('change', function () {
       console.log('FC boardTarget change:' + boardTarget)
       firmware_flasher.boardTarget = parseInt($(this).val(), 10)
       switch (firmware_flasher.boardTarget) {

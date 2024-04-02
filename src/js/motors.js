@@ -96,7 +96,7 @@ motors.initialize = function (callback) {
     }
 
     motorsEnableTestModeElement
-      .change(function () {
+      .on('change', function () {
         let enabled = $(this).is(':checked')
         console.log(enabled)
         setSlidersEnabled(enabled)

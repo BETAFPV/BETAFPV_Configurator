@@ -333,7 +333,7 @@ show.initialize = function (callback) {
       }
     }
 
-    show.Internal_radio_module_switch.change(function () {
+    show.Internal_radio_module_switch.on('change', function () {
       if (HidConfig.External_radio_module_switch) {
         //开启内置模块前先检查外置模块是否已开启
         const dialogConfirmCloseInternalRadio = $('.dialogCloseInternalRadio')[0]
@@ -355,7 +355,7 @@ show.initialize = function (callback) {
         }
       }
     })
-    show.External_radio_module_switch.change(function () {
+    show.External_radio_module_switch.on('change', function () {
       if (HidConfig.Internal_radio_module_switch) {
         //开启外置模块前先检查内置模块是否已开启
         const dialogConfirmCloseExternalRadio = $('.dialogCloseExternalRadio')[0]
@@ -378,7 +378,7 @@ show.initialize = function (callback) {
       }
     })
 
-    show.External_radio_module_power_switch.change(function () {
+    show.External_radio_module_power_switch.on('change', function () {
       HidConfig.External_radio_module_power_switch = $(this).is(':checked') ? 1 : 0
       if (HidConfig.External_radio_module_power_switch) {
         console.log('elrs power on')
@@ -405,7 +405,7 @@ show.initialize = function (callback) {
         document.getElementById('ExpressLRS_tlm_option_box').disabled = true
       }
     })
-    show.ExpressLRS_power_option_box.change(function () {
+    show.ExpressLRS_power_option_box.on('change', function () {
       HidConfig.ExpressLRS_power_option_value = parseInt($(this).val(), 10)
       //判断当前使用的是内部射频模块还是外部射频模块
       if (HidConfig.Internal_radio_module_switch) {
@@ -424,7 +424,7 @@ show.initialize = function (callback) {
         }
       }
     })
-    show.ExpressLRS_pkt_rate_option_box.change(function () {
+    show.ExpressLRS_pkt_rate_option_box.on('change', function () {
       HidConfig.ExpressLRS_pkt_rate_option_value = parseInt($(this).val(), 10)
       //判断当前使用的是内部射频模块还是外部射频模块
       if (HidConfig.Internal_radio_module_switch) {
@@ -443,7 +443,7 @@ show.initialize = function (callback) {
         }
       }
     })
-    show.ExpressLRS_tlm_option_box.change(function () {
+    show.ExpressLRS_tlm_option_box.on('change', function () {
       HidConfig.ExpressLRS_tlm_option_value = parseInt($(this).val(), 10)
       //判断当前使用的是内部射频模块还是外部射频模块
       if (HidConfig.Internal_radio_module_switch) {
@@ -463,149 +463,149 @@ show.initialize = function (callback) {
       }
     })
 
-    show.ch1_data_source.change(function () {
+    show.ch1_data_source.on('change', function () {
       HidConfig.ch1_input_source_display = parseInt($(this).val(), 10)
       send_ch1_config()
     })
-    show.ch2_data_source.change(function () {
+    show.ch2_data_source.on('change', function () {
       HidConfig.ch2_input_source_display = parseInt($(this).val(), 10)
       send_ch2_config()
     })
-    show.ch3_data_source.change(function () {
+    show.ch3_data_source.on('change', function () {
       HidConfig.ch3_input_source_display = parseInt($(this).val(), 10)
       send_ch3_config()
     })
-    show.ch4_data_source.change(function () {
+    show.ch4_data_source.on('change', function () {
       HidConfig.ch4_input_source_display = parseInt($(this).val(), 10)
       send_ch4_config()
     })
-    show.ch5_data_source.change(function () {
+    show.ch5_data_source.on('change', function () {
       HidConfig.ch5_input_source_display = parseInt($(this).val(), 10)
       send_ch5_config()
     })
-    show.ch6_data_source.change(function () {
+    show.ch6_data_source.on('change', function () {
       HidConfig.ch6_input_source_display = parseInt($(this).val(), 10)
       send_ch6_config()
     })
-    show.ch7_data_source.change(function () {
+    show.ch7_data_source.on('change', function () {
       HidConfig.ch7_input_source_display = parseInt($(this).val(), 10)
       send_ch7_config()
     })
-    show.ch8_data_source.change(function () {
+    show.ch8_data_source.on('change', function () {
       HidConfig.ch8_input_source_display = parseInt($(this).val(), 10)
       send_ch8_config()
     })
-    show.ch1_reverse.change(function () {
+    show.ch1_reverse.on('change', function () {
       HidConfig.ch1_reverse_display = $(this).is(':checked') ? 1 : 0
       send_ch1_config()
     })
-    show.ch2_reverse.change(function () {
+    show.ch2_reverse.on('change', function () {
       HidConfig.ch2_reverse_display = $(this).is(':checked') ? 1 : 0
       send_ch2_config()
     })
-    show.ch3_reverse.change(function () {
+    show.ch3_reverse.on('change', function () {
       HidConfig.ch3_reverse_display = $(this).is(':checked') ? 1 : 0
       send_ch3_config()
     })
-    show.ch4_reverse.change(function () {
+    show.ch4_reverse.on('change', function () {
       HidConfig.ch4_reverse_display = $(this).is(':checked') ? 1 : 0
       send_ch4_config()
     })
-    show.ch5_reverse.change(function () {
+    show.ch5_reverse.on('change', function () {
       HidConfig.ch5_reverse_display = $(this).is(':checked') ? 1 : 0
       send_ch5_config()
     })
-    show.ch6_reverse.change(function () {
+    show.ch6_reverse.on('change', function () {
       HidConfig.ch6_reverse_display = $(this).is(':checked') ? 1 : 0
       send_ch6_config()
     })
-    show.ch7_reverse.change(function () {
+    show.ch7_reverse.on('change', function () {
       HidConfig.ch7_reverse_display = $(this).is(':checked') ? 1 : 0
       send_ch7_config()
     })
-    show.ch8_reverse.change(function () {
+    show.ch8_reverse.on('change', function () {
       HidConfig.ch8_reverse_display = $(this).is(':checked') ? 1 : 0
       send_ch8_config()
     })
-    show.ch1_scale.change(function () {
+    show.ch1_scale.on('change', function () {
       HidConfig.ch1_scale_display = parseInt($(this).val(), 10)
       send_ch1_config()
     })
-    show.ch2_scale.change(function () {
+    show.ch2_scale.on('change', function () {
       HidConfig.ch2_scale_display = parseInt($(this).val(), 10)
       send_ch2_config()
     })
-    show.ch3_scale.change(function () {
+    show.ch3_scale.on('change', function () {
       HidConfig.ch3_scale_display = parseInt($(this).val(), 10)
       send_ch3_config()
     })
-    show.ch4_scale.change(function () {
+    show.ch4_scale.on('change', function () {
       HidConfig.ch4_scale_display = parseInt($(this).val(), 10)
       send_ch4_config()
     })
-    show.ch5_scale.change(function () {
+    show.ch5_scale.on('change', function () {
       HidConfig.ch5_scale_display = parseInt($(this).val(), 10)
       send_ch5_config()
     })
-    show.ch6_scale.change(function () {
+    show.ch6_scale.on('change', function () {
       HidConfig.ch6_scale_display = parseInt($(this).val(), 10)
       send_ch6_config()
     })
-    show.ch7_scale.change(function () {
+    show.ch7_scale.on('change', function () {
       HidConfig.ch7_scale_display = parseInt($(this).val(), 10)
       send_ch7_config()
     })
-    show.ch8_scale.change(function () {
+    show.ch8_scale.on('change', function () {
       HidConfig.ch8_scale_display = parseInt($(this).val(), 10)
       send_ch8_config()
     })
-    show.ch1_offset.change(function () {
+    show.ch1_offset.on('change', function () {
       HidConfig.ch1_offset_display = parseInt($(this).val(), 10)
       send_ch1_config()
     })
-    show.ch2_offset.change(function () {
+    show.ch2_offset.on('change', function () {
       HidConfig.ch2_offset_display = parseInt($(this).val(), 10)
       send_ch2_config()
     })
-    show.ch3_offset.change(function () {
+    show.ch3_offset.on('change', function () {
       HidConfig.ch3_offset_display = parseInt($(this).val(), 10)
       send_ch3_config()
     })
-    show.ch4_offset.change(function () {
+    show.ch4_offset.on('change', function () {
       HidConfig.ch4_offset_display = parseInt($(this).val(), 10)
       send_ch4_config()
     })
-    show.ch5_offset.change(function () {
+    show.ch5_offset.on('change', function () {
       HidConfig.ch5_offset_display = parseInt($(this).val(), 10)
       send_ch5_config()
     })
-    show.ch6_offset.change(function () {
+    show.ch6_offset.on('change', function () {
       HidConfig.ch6_offset_display = parseInt($(this).val(), 10)
       send_ch6_config()
     })
-    show.ch7_offset.change(function () {
+    show.ch7_offset.on('change', function () {
       HidConfig.ch7_offset_display = parseInt($(this).val(), 10)
       send_ch7_config()
     })
-    show.ch8_offset.change(function () {
+    show.ch8_offset.on('change', function () {
       HidConfig.ch8_offset_display = parseInt($(this).val(), 10)
       send_ch8_config()
     })
-    show.rocker_mode.change(function () {
+    show.rocker_mode.on('change', function () {
       HidConfig.rocker_mode = parseInt($(this).val(), 10)
     })
-    show.trainer_port.change(function () {
+    show.trainer_port.on('change', function () {
       HidConfig.trainer_port = parseInt($(this).val(), 10)
     })
 
-    show.internal_radio_protocol.change(function () {
+    show.internal_radio_protocol.on('change', function () {
       HidConfig.internal_radio_protocol = parseInt($(this).val(), 10)
     })
-    show.external_radio_protocol.change(function () {
+    show.external_radio_protocol.on('change', function () {
       HidConfig.external_radio_protocol = parseInt($(this).val(), 10)
     })
 
-    show.BuzzerSwitch.change(function () {
+    show.BuzzerSwitch.on('change', function () {
       HidConfig.BuzzerSwitch = $(this).is(':checked') ? true : 0x0f
       console.log('BuzzerSwitch change:')
       console.log(HidConfig.BuzzerSwitch)
@@ -615,7 +615,7 @@ show.initialize = function (callback) {
       configBuff[3] = HidConfig.BuzzerSwitch //0x0F:蜂鸣器关闭 其他值：蜂鸣器开启
       hidDevice.write(configBuff)
     })
-    show.JoystickDeadZonePercent.change(function () {
+    show.JoystickDeadZonePercent.on('change', function () {
       HidConfig.JoystickDeadZonePercent = parseInt($(this).val(), 10)
       console.log('JoystickDeadZonePercent change:')
       console.log(HidConfig.JoystickDeadZonePercent)
@@ -626,7 +626,7 @@ show.initialize = function (callback) {
       hidDevice.write(configBuff)
     })
 
-    show.bind_phrase_switch.change(function () {
+    show.bind_phrase_switch.on('change', function () {
       HidConfig.bind_phrase_switch = $(this).is(':checked') ? true : false
       if (HidConfig.bind_phrase_switch) {
         ConfigStorage.set({ USE_BIND_PHRASE: HidConfig.bind_phrase_switch })
@@ -652,7 +652,7 @@ show.initialize = function (callback) {
         document.getElementById('bindPhrase').style.display = 'none'
       }
     })
-    show.bind_phrase_input.change(function () {
+    show.bind_phrase_input.on('change', function () {
       HidConfig.uid_bytes = uidBytesFromText(show.bind_phrase_input.val())
       if (show.bind_phrase_input.val().length >= 6) {
         show.uid_bytes.text('UID Bytes:' + HidConfig.uid_bytes)

@@ -75,7 +75,7 @@ receiver.initialize = function (callback) {
     let plotUpdateRate
     const rxRefreshRate = $('select[name="tx_refresh_rate"]')
 
-    rxRefreshRate.change(function () {
+    rxRefreshRate.on('change', function () {
       // plotUpdateRate = parseInt($(this).val(), 10);
       plotUpdateRate = parseInt(50, 10)
       GUI.interval_remove('receiver_pull')
