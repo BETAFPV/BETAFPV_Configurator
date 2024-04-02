@@ -156,7 +156,7 @@
         "message": "Italiano",
         "description": "Don't translate!!!"
     },
-    "language_ja_JP": {
+    "language_ja": {
         "message": "\u65E5\u672C\u8A9E",
         "description": "Don't translate!!!"
     },
@@ -192,7 +192,7 @@
         "message": "Svenska",
         "description": "Don't translate!!!"
     },
-    "language_zh_CN": {
+    "language_zh": {
         "message": "\u7b80\u4f53\u4e2d\u6587",
         "description": "Don't translate!!!"
     },

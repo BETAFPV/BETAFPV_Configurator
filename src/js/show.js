@@ -338,7 +338,7 @@ show.initialize = function (callback) {
         //开启内置模块前先检查外置模块是否已开启
         const dialogConfirmCloseInternalRadio = $('.dialogCloseInternalRadio')[0]
         dialogConfirmCloseInternalRadio.showModal()
-        $('.dialogCloseInternalRadio-confirmbtn').click(function () {
+        $('.dialogCloseInternalRadio-confirmbtn').on('click', function () {
           dialogConfirmCloseInternalRadio.close()
         })
         document.getElementById('internal_radio_module_switch').checked = false
@@ -360,7 +360,7 @@ show.initialize = function (callback) {
         //开启外置模块前先检查内置模块是否已开启
         const dialogConfirmCloseExternalRadio = $('.dialogCloseExternalRadio')[0]
         dialogConfirmCloseExternalRadio.showModal()
-        $('.dialogCloseExternalRadio-confirmbtn').click(function () {
+        $('.dialogCloseExternalRadio-confirmbtn').on('click', function () {
           dialogConfirmCloseExternalRadio.close()
         })
         document.getElementById('external_radio_module_switch').checked = false
@@ -786,7 +786,7 @@ show.initialize = function (callback) {
       hidDevice.write(buffer)
     }
 
-    $('a.binding').click(function () {
+    $('a.binding').on('click', function () {
       let bufBind = new Buffer.alloc(64)
       bufBind[0] = 0x00
       bufBind[1] = 0x07
@@ -801,7 +801,7 @@ show.initialize = function (callback) {
       console.log('ExpressLRS enter to binding')
     })
 
-    $('a.wifi_update').click(function () {
+    $('a.wifi_update').on('click', function () {
       let bufwifiUpdate = new Buffer.alloc(64)
       bufwifiUpdate[0] = 0x00
       bufwifiUpdate[1] = 0x07
@@ -816,22 +816,22 @@ show.initialize = function (callback) {
       console.log('ExpressLRS enter to wifi update')
     })
 
-    $('a.factory_reset').click(function () {
+    $('a.factory_reset').on('click', function () {
       factory_reset()
       console.log('factory reset')
     })
 
-    $('a.refresh').click(function () {
+    $('a.refresh').on('click', function () {
       sync_config()
       console.log('refresh click')
     })
-    $('a.save').click(function () {
+    $('a.save').on('click', function () {
       console.log('save click')
       if (HidConfig.External_radio_module_switch == false && HidConfig.current_protocol == 0 && HidConfig.internal_radio == 1 && HidConfig.bind_phrase_switch == true && show.bind_phrase_input.val().length < 6) {
         // alert("save failed!  custom binding phrase must be longer than 6 characters");
         const dialogConfirmTheLengthOfBindPhrase = $('.dialogConfirmTheLengthOfBindPhrase')[0]
         dialogConfirmTheLengthOfBindPhrase.showModal()
-        $('.dialogConfirmTheLengthOfBindPhrase-confirmbtn').click(function () {
+        $('.dialogConfirmTheLengthOfBindPhrase-confirmbtn').on('click', function () {
           dialogConfirmTheLengthOfBindPhrase.close()
         })
       } else {
@@ -886,7 +886,7 @@ show.initialize = function (callback) {
           // alert("save failed!  you need to select at least one protocol");
           const dialogSelectAtLeastOneProtocol = $('.dialogSelectAtLeastOneProtocol')[0]
           dialogSelectAtLeastOneProtocol.showModal()
-          $('.dialogSelectAtLeastOneProtocol-confirmbtn').click(function () {
+          $('.dialogSelectAtLeastOneProtocol-confirmbtn').on('click', function () {
             dialogSelectAtLeastOneProtocol.close()
           })
         }
@@ -942,7 +942,7 @@ show.initialize = function (callback) {
       show.refreshUI()
       const dialogfactoryReset = $('.dialogfactoryReset')[0]
       dialogfactoryReset.showModal()
-      $('.dialogfactoryReset-confirmbtn').click(function () {
+      $('.dialogfactoryReset-confirmbtn').on('click', function () {
         dialogfactoryReset.close()
       })
 

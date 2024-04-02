@@ -35,12 +35,12 @@ setup.initialize = function (callback) {
     const backupButton = $('#content .backup')
     self.initModel()
 
-    $('div#interactive_block > a.reset').click(function () {
+    $('div#interactive_block > a.reset').on('click', function () {
       self.yaw_fix = FC.SENSOR_DATA.kinematics[2] * 1.0
       $(this).text(i18n.getMessage('initialSetupButtonResetZaxisValue', [self.yaw_fix]))
     })
 
-    $('a.calibrateAccel').click(function () {
+    $('a.calibrateAccel').on('click', function () {
       const _self = $(this)
       if (!_self.hasClass('calibrating')) {
         _self.addClass('calibrating')
@@ -51,7 +51,7 @@ setup.initialize = function (callback) {
       }
     })
 
-    $('a.resetSettings').click(function () {
+    $('a.resetSettings').on('click', function () {
       let msg = new mavlink10.messages.command(1, mav_cmd.MAV_CMD_RESTORE_FACTORY_SETTING, 0, 0)
       let buffer = msg.pack(msg)
       console.log(buffer)
@@ -61,14 +61,14 @@ setup.initialize = function (callback) {
         if (setup.factory_reset_ack == true) {
           const dialogFactoryResetOK = $('.dialogFactoryResetOK')[0]
           dialogFactoryResetOK.showModal()
-          $('.dialogFactoryResetOK-confirmbtn').click(function () {
+          $('.dialogFactoryResetOK-confirmbtn').on('click', function () {
             console.log(' dialogFactoryResetOK.close')
             dialogFactoryResetOK.close()
           })
         } else {
           const dialogFactoryResetfailed = $('.dialogFactoryResetfailed')[0]
           dialogFactoryResetfailed.showModal()
-          $('.dialogFactoryResetfailed-confirmbtn').click(function () {
+          $('.dialogFactoryResetfailed-confirmbtn').on('click', function () {
             dialogFactoryResetfailed.close()
           })
         }

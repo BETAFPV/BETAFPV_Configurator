@@ -26,7 +26,7 @@ landing.initialize = function (callback) {
     })
     bottomSection.find('a').each(function (index) {
       let element = $(this)
-      element.click(function () {
+      element.on('click', function () {
         element = $(this)
         const languageSelected = element.attr('lang')
         if (!languageSelected) {

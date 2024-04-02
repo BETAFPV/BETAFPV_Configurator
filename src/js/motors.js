@@ -11,7 +11,7 @@ motors.initialize = function (callback) {
   const motorData = []
 
   $('#content').load('./src/html/motors.html', function () {
-    $('a.refresh').click(function () {
+    $('a.refresh').on('click', function () {
       console.log('get motor setting')
 
       let msg = new mavlink10.messages.command(1, mav_cmd.MAV_CMD_GET_IDLE_THROTTLE_VALUE, 0, 0)
@@ -20,7 +20,7 @@ motors.initialize = function (callback) {
       console.log(buffer)
     })
 
-    $('a.update').click(function () {
+    $('a.update').on('click', function () {
       console.log('save motor setting')
       let idelThrottleValue = parseInt(document.getElementById('idelThrottleValue').value)
       console.log(idelThrottleValue)

@@ -40,7 +40,7 @@ pid_tuning.initialize = function (callback) {
 
     $('.tab-pid_tuning .tab-container .rates').on('click', () => activateSubtab('rates'))
 
-    $('a.refresh').click(function () {
+    $('a.refresh').on('click', function () {
       if (self.activeSubtab == 'pid') {
         readPidFromFC()
         console.log('refresh')
@@ -51,7 +51,7 @@ pid_tuning.initialize = function (callback) {
     })
 
     //update == save
-    $('a.update').click(function () {
+    $('a.update').on('click', function () {
       if (self.activeSubtab == 'pid') {
         mavlink_send_pid()
       } else if (self.activeSubtab == 'rates') {
@@ -303,13 +303,13 @@ pid_tuning.initialize = function (callback) {
           pid_tuning.rate_saving_ack = 0
           const dialogRatesSaveOK = $('.dialogRatesSaveOK')[0]
           dialogRatesSaveOK.showModal()
-          $('.dialogRatesSaveOK-confirmbtn').click(function () {
+          $('.dialogRatesSaveOK-confirmbtn').on('click', function () {
             dialogRatesSaveOK.close()
           })
         } else {
           const dialogRatesSavefailed = $('.dialogRatesSavefailed')[0]
           dialogRatesSavefailed.showModal()
-          $('.dialogRatesSavefailed-confirmbtn').click(function () {
+          $('.dialogRatesSavefailed-confirmbtn').on('click', function () {
             dialogRatesSavefailed.close()
           })
         }
@@ -368,14 +368,14 @@ pid_tuning.initialize = function (callback) {
           pid_tuning.pid_saving_ack = 0
           const dialogPidSaveOK = $('.dialogPidSaveOK')[0]
           dialogPidSaveOK.showModal()
-          $('.dialogPidSaveOK-confirmbtn').click(function () {
+          $('.dialogPidSaveOK-confirmbtn').on('click', function () {
             dialogPidSaveOK.close()
           })
         } else {
           alert('PID saving failed! Please check the connection!')
           const dialogPidSavefailed = $('.dialogPidSavefailed')[0]
           dialogPidSavefailed.showModal()
-          $('.dialogPidSavefailed-confirmbtn').click(function () {
+          $('.dialogPidSavefailed-confirmbtn').on('click', function () {
             dialogPidSavefailed.close()
           })
         }

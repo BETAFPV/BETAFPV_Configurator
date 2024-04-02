@@ -4,7 +4,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dev": "cross-env ELECTRON_DISABLE_SECURITY_WARNINGS=true ELECTRON_ENABLE_LOGGING=true electron .",
+    "dev": "cross-env ELECTRON_OPEN_DEV_TOOLS=true ELECTRON_DISABLE_SECURITY_WARNINGS=true ELECTRON_ENABLE_LOGGING=true electron .",
+    "dev2": "cross-env ELECTRON_OPEN_DEV_TOOLS=false ELECTRON_DISABLE_SECURITY_WARNINGS=true ELECTRON_ENABLE_LOGGING=true electron .",
     "package-win": "electron-packager . BETAFPV_Configurator --platform=win32 --arch=x64 --out=./Windows --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
     "package-linux": "electron-packager . BETAFPV_Configurator --platform=linux --arch=x64 --out=./Linux --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
     "package-mac": "electron-packager . BETAFPV_Configurator --platform=darwin --arch=x64 --out=./Mac --app-version=1.1.0 --overwrite --icon=./BETAFPV_LOGO.icns",
@@ -33,7 +34,7 @@
     "semver": "^7.6.0",
     "serialport": "^12.0.0",
     "switchery-latest": "^0.8.2",
-    "three": "~0.163.0",
+    "three": "~0.97.0",
     "underscore": "^1.13.6",
     "usb": "^2.12.1"
   },
@@ -47,6 +48,7 @@
     "printWidth": 1024
   },
   "devDependencies": {
+    "@electron/remote": "^2.1.2",
     "cross-env": "^7.0.3",
     "electron": "^29.1.6",
     "electron-rebuild": "^3.2.3",

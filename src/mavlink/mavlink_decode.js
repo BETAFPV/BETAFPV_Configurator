@@ -161,7 +161,7 @@ mavlinkParser.on('COMMAND_ACK', function (msg) {
         //alert("Calibrate Acclerometer ok!");
         const dialogCalibrateAcclerometerOK = $('.dialogCalibrateAcclerometerOK')[0]
         dialogCalibrateAcclerometerOK.showModal()
-        $('.dialogCalibrateAcclerometerOK-confirmbtn').click(function () {
+        $('.dialogCalibrateAcclerometerOK-confirmbtn').on('click', function () {
           dialogCalibrateAcclerometerOK.close()
         })
       } else if (cmdAck.result == mav_cmd_ack.MAV_CMD_ACK_ERR_FAIL) {
@@ -170,7 +170,7 @@ mavlinkParser.on('COMMAND_ACK', function (msg) {
         //alert("Calibrate Acclerometer failed!");
         const dialogCalibrateAcclerometerFailed = $('.dialogCalibrateAcclerometerFailed')[0]
         dialogCalibrateAcclerometerFailed.showModal()
-        $('.dialogCalibrateAcclerometerFailed-confirmbtn').click(function () {
+        $('.dialogCalibrateAcclerometerFailed-confirmbtn').on('click', function () {
           dialogCalibrateAcclerometerFailed.close()
         })
       }

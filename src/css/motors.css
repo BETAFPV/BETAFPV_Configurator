@@ -608,7 +608,7 @@
 }
 
 .tab-motors .motor_testing .sliders input {
-  -webkit-appearance: slider-vertical;
+  writing-mode: vertical-lr;
   width: calc((100% / 5) - 13px);
   height: 123px;
   margin-left: 10px;
@@ -632,14 +632,14 @@
 }
 
 .tab-motors .values input {
-  -webkit-appearance: slider-vertical;
+  writing-mode: vertical-lr;
   width: calc((100% / 3) - 13px);
   margin-left: 2px;
   margin-top: 2px;
 }
 
 .tab-motors .values button {
-  -webkit-appearance: slider-vertical;
+  writing-mode: vertical-lr;
   width: calc((100% / 3) - 25px);
   margin-left: 10px;
   background-color: #00a0de;

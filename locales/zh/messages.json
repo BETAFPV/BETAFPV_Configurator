@@ -134,7 +134,7 @@
         "message": "Italiano",
         "description": "Don't translate!!!"
     },
-    "language_ja_JP": {
+    "language_ja": {
         "message": "日本語",
         "description": "Don't translate!!!"
     },
@@ -158,7 +158,7 @@
         "message": "Svenska",
         "description": "Don't translate!!!"
     },
-    "language_zh_CN": {
+    "language_zh": {
         "message": "简体中文",
         "description": "Don't translate!!!"
     },

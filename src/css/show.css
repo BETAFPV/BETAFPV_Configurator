@@ -539,7 +539,7 @@
 }
 
 .tab-show .rcInterpolation .slider input {
-  -webkit-appearance: slider-horizontal;
+  writing-mode: horizontal-tb;
 }
 
 /*Plot Control*/

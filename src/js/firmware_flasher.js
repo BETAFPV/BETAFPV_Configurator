@@ -1,10 +1,7 @@
-const { dialog } = require('electron')
 const os = require('os')
 const path = require('path')
-const { remote } = require('electron')
 
 var jsonFile = require('jsonfile')
-
 var jsonfileName = 'board.json'
 
 const firmware_flasher = {
@@ -334,16 +331,15 @@ function loadRemoteJsonFile() {
           console.log("can't load json file from github")
         } else {
           console.log("can't load json file from gitee")
-          const options = {
+
+          dialog.showMessageBoxSync(getCurrentWindow, {
             type      : 'warning',
             buttons   : [i18n.getMessage('Confirm')],
             defaultId : 0,
             title     : i18n.getMessage('FailedToLoadFile'),
             message   : i18n.getMessage('InvalidNetwork'),
             noLink    : true,
-          }
-          let WIN = remote.getCurrentWindow()
-          dialog.showMessageBoxSync(WIN, options)
+          })
         }
       }
     }
@@ -375,7 +371,7 @@ firmware_flasher.initialize = function (callback) {
   $('#content').load('./src/html/firmware_flasher.html', function () {
     i18n.localizePage()
 
-    $('a.load_file').click(function () {
+    $('a.load_file').on('click', function () {
       self.enableFlashing(false, 1)
       self.enableFlashing(false, 3)
       self.enableFlashing(false, 5)
@@ -452,7 +448,7 @@ firmware_flasher.initialize = function (callback) {
         })
     })
 
-    $('a.flash_firmware').click(function () {
+    $('a.flash_firmware').on('click', function () {
       if (!$(this).hasClass('disabled')) {
         if (GUI.connect_lock) {
           //串口已连接
@@ -476,16 +472,15 @@ firmware_flasher.initialize = function (callback) {
               //固件写入正常
             } else {
               //固件烧写没有收到飞控应答
-              const options = {
+
+              dialog.showMessageBoxSync(getCurrentWindow, {
                 type      : 'warning',
                 buttons   : [i18n.getMessage('Confirm')],
                 defaultId : 0,
                 title     : i18n.getMessage('Flash_failed'),
                 message   : i18n.getMessage('Check_Serial_Port_and_enter_bootloader'),
                 noLink    : true,
-              }
-              let WIN = remote.getCurrentWindow()
-              dialog.showMessageBoxSync(WIN, options)
+              })
               $('a.flash_firmware').removeClass('disabled')
               $('a.load_file').removeClass('disabled')
               $('a.load_remote_file').removeClass('disabled')
@@ -495,21 +490,19 @@ firmware_flasher.initialize = function (callback) {
         } else {
           //alert("please connect COM first");
 
-          const options = {
+          dialog.showMessageBoxSync(getCurrentWindow, {
             type      : 'warning',
             buttons   : [i18n.getMessage('Confirm')],
             defaultId : 0,
             title     : i18n.getMessage('warningTitle'),
             message   : i18n.getMessage('Connect_Serial_Port_Firstlt'),
             noLink    : true,
-          }
-          let WIN = remote.getCurrentWindow()
-          dialog.showMessageBoxSync(WIN, options)
+          })
         }
       }
     })
 
-    $('a.flash_opf').click(function () {
+    $('a.flash_opf').on('click', function () {
       if (!$(this).hasClass('disabled')) {
         if (GUI.connect_lock) {
           //串口已连接
@@ -534,16 +527,15 @@ firmware_flasher.initialize = function (callback) {
               //固件写入正常
             } else {
               //固件烧写没有收到飞控应答
-              const options = {
+
+              dialog.showMessageBoxSync(getCurrentWindow, {
                 type      : 'warning',
                 buttons   : [i18n.getMessage('Confirm')],
                 defaultId : 0,
                 title     : i18n.getMessage('Flash_failed'),
                 message   : i18n.getMessage('Check_Serial_Port_and_enter_bootloader'),
                 noLink    : true,
-              }
-              let WIN = remote.getCurrentWindow()
-              dialog.showMessageBoxSync(WIN, options)
+              })
               $('a.flash_opf').removeClass('disabled')
               $('a.load_file').removeClass('disabled')
               $('a.load_remote_file').removeClass('disabled')
@@ -551,21 +543,19 @@ firmware_flasher.initialize = function (callback) {
             }
           }, 3000)
         } else {
-          const options = {
+          dialog.showMessageBoxSync(getCurrentWindow, {
             type      : 'warning',
             buttons   : [i18n.getMessage('Confirm')],
             defaultId : 0,
             title     : i18n.getMessage('warningTitle'),
             message   : i18n.getMessage('Connect_Serial_Port_Firstlt'),
             noLink    : true,
-          }
-          let WIN = remote.getCurrentWindow()
-          dialog.showMessageBoxSync(WIN, options)
+          })
         }
       }
     })
 
-    $('a.flash_OSD').click(function () {
+    $('a.flash_OSD').on('click', function () {
       if (!$(this).hasClass('disabled')) {
         if (GUI.connect_lock) {
           //串口已连接
@@ -590,16 +580,15 @@ firmware_flasher.initialize = function (callback) {
               //固件写入正常
             } else {
               //固件烧写没有收到飞控应答
-              const options = {
+
+              dialog.showMessageBoxSync(getCurrentWindow, {
                 type      : 'warning',
                 buttons   : [i18n.getMessage('Confirm')],
                 defaultId : 0,
                 title     : i18n.getMessage('Flash_failed'),
                 message   : i18n.getMessage('Check_Serial_Port_and_enter_bootloader'),
                 noLink    : true,
-              }
-              let WIN = remote.getCurrentWindow()
-              dialog.showMessageBoxSync(WIN, options)
+              })
               $('a.flash_OSD').removeClass('disabled')
               $('a.load_file').removeClass('disabled')
               $('a.load_remote_file').removeClass('disabled')
@@ -607,21 +596,19 @@ firmware_flasher.initialize = function (callback) {
             }
           }, 3000)
         } else {
-          const options = {
+          dialog.showMessageBoxSync(getCurrentWindow, {
             type      : 'warning',
             buttons   : [i18n.getMessage('Confirm')],
             defaultId : 0,
             title     : i18n.getMessage('warningTitle'),
             message   : i18n.getMessage('Connect_Serial_Port_Firstlt'),
             noLink    : true,
-          }
-          let WIN = remote.getCurrentWindow()
-          dialog.showMessageBoxSync(WIN, options)
+          })
         }
       }
     })
 
-    $('a.load_remote_file').click(function () {
+    $('a.load_remote_file').on('click', function () {
       if (!$(this).hasClass('disabled')) {
         let targetBoardSelected = $('#boardTarget option:selected').text()
         let targetVersionSelected = $('#boardVersion option:selected').text()
@@ -718,16 +705,15 @@ firmware_flasher.initialize = function (callback) {
                 console.log("can't load firmware from github")
               } else {
                 console.log("can't load firmware from gitee")
-                const options = {
+
+                dialog.showMessageBoxSync(getCurrentWindow, {
                   type      : 'warning',
                   buttons   : [i18n.getMessage('Confirm')],
                   defaultId : 0,
                   title     : i18n.getMessage('FailedToLoadFile'),
                   message   : i18n.getMessage('InvalidNetwork'),
                   noLink    : true,
-                }
-                let WIN = remote.getCurrentWindow()
-                dialog.showMessageBoxSync(WIN, options)
+                })
               }
             }
           }

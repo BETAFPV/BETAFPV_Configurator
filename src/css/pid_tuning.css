@@ -217,7 +217,7 @@
 }
 
 .tab-pid_tuning .pidTuningFeatures .slider input {
-  -webkit-appearance: slider-horizontal;
+  writing-mode: horizontal-tb;
 }
 
 .tab-pid_tuning table td {

@@ -1,9 +1,14 @@
-const { TouchBarColorPicker } = require('electron')
-var electron = require('electron')
+const { app, BrowserWindow, Menu, webContents } = require('electron')
+const { initialize, enable } = require('@electron/remote/main')
 
-var app = electron.app
-var BrowserWindow = electron.BrowserWindow
-var Menu = electron.Menu
+app.whenReady().then(() => {
+  for (const wc of webContents.getAllWebContents()) {
+    enable(wc)
+  }
+})
+
+initialize()
+
 var mainWindow = null
 
 app.allowRendererProcessReuse = false
@@ -15,13 +20,13 @@ app.on('ready', () => {
     width          : 1500,
     height         : 1000,
     webPreferences : {
-      nodeIntegration  : true,
-      contextIsolation : false,
-      // enableRemoteModule : true,
+      nodeIntegration    : true,
+      contextIsolation   : false,
+      enableRemoteModule : true,
     },
   })
 
-  if (process.env.ELECTRON_ENABLE_LOGGING) {
+  if (process.env.ELECTRON_OPEN_DEV_TOOLS === 'true') {
     mainWindow.webContents.openDevTools({
       mode : 'bottom',
     })
@@ -35,7 +40,6 @@ app.on('ready', () => {
 
   mainWindow.on('closed', () => {
     mainWindow = null
-
     app.quit()
   })
 })

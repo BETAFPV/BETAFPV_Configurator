@@ -61,3 +61,21 @@ open Mac/BETAFPV_Configurator-darwin-x64
 ```shell
 yarn fmt
 ```
+
+```shell
+$ sudo dmesg | grep BETAFPV
+
+$ sudo lsusb -v -d 0483:5750
+
+$ sudo udevadm info -n /dev/bus/usb/003/007
+
+$ sudo ls /dev/ttyACM*
+
+$ sudo ls /dev/ttyUSB*
+
+$ sudo ls /dev/serial/by-id/
+
+$ ls /dev/input/event*
+
+$ ls /dev/input/js*
+```

@@ -37,7 +37,7 @@ function initializeSerialBackend() {
     GUI.updateManualPortVisibility()
   })
 
-  $('div.connect_controls a.connect').click(function () {
+  $('div.connect_controls a.connect').on('click', function () {
     if (GUI.connect_lock != true) {
       // GUI control overrides the user control
 
@@ -101,7 +101,7 @@ function initializeSerialBackend() {
     }
   })
 
-  $('div.open_hid_device a.flash').click(function () {
+  $('div.open_hid_device a.flash').on('click', function () {
     if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
       $('div#flashbutton a.flash_state').removeClass('active')
       $('div#flashbutton a.flash').removeClass('active')
@@ -277,7 +277,7 @@ function onOpen(openInfo) {
 
             $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareTypeNotSupported'))
 
-            $('.dialogConnectWarning-closebtn').click(function () {
+            $('.dialogConnectWarning-closebtn').on('click', function () {
               dialog.close()
             })
 
@@ -293,7 +293,7 @@ function onOpen(openInfo) {
 
         $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareVersionNotSupported', [CONFIGURATOR.API_VERSION_ACCEPTED]))
 
-        $('.dialogConnectWarning-closebtn').click(function () {
+        $('.dialogConnectWarning-closebtn').on('click', function () {
           dialog.close()
         })
 
@@ -352,7 +352,7 @@ function processBoardInfo() {
   if (bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.SUPPORTS_CUSTOM_DEFAULTS) && bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.HAS_CUSTOM_DEFAULTS) && FC.CONFIG.configurationState === FC.CONFIGURATION_STATES.DEFAULTS_BARE) {
     const dialog = $('#dialogResetToCustomDefaults')[0]
 
-    $('#dialogResetToCustomDefaults-acceptbtn').click(function () {
+    $('#dialogResetToCustomDefaults-acceptbtn').on('click', function () {
       analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'AcceptResetToCustomDefaults')
 
       const buffer = []
@@ -370,7 +370,7 @@ function processBoardInfo() {
       )
     })
 
-    $('#dialogResetToCustomDefaults-cancelbtn').click(function () {
+    $('#dialogResetToCustomDefaults-cancelbtn').on('click', function () {
       analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'CancelResetToCustomDefaults')
 
       dialog.close()
@@ -431,7 +431,7 @@ function checkReportProblems() {
 
     if (needsProblemReportingDialog) {
       const problemDialog = $('#dialogReportProblems')[0]
-      $('#dialogReportProblems-closebtn').click(function () {
+      $('#dialogReportProblems-closebtn').on('click', function () {
         problemDialog.close()
       })
 

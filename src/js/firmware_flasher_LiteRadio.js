@@ -250,7 +250,7 @@ function CRC16_Name(puData) {
   }
 }
 firmware_flasher_LiteRadio.connect_init = function () {
-  $('div.connect_controls a.connect').click(function () {
+  $('div.connect_controls a.connect').on('click', function () {
     if (GUI.connect_lock != true) {
       const thisElement = $(this)
       const clicks = thisElement.data('clicks')
@@ -444,7 +444,7 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
 
   $('#content').load('./src/html/firmware_flasher_LiteRadio.html', function () {
     i18n.localizePage()
-    $('a.load_file').click(function () {
+    $('a.load_file').on('click', function () {
       const { dialog } = require('electron')
       dialog
         .showOpenDialog({
@@ -519,7 +519,7 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
           break
       }
     })
-    $('a.flash_firmware').click(function () {
+    $('a.flash_firmware').on('click', function () {
       if (!$(this).hasClass('disabled')) {
         var buf = Buffer(8)
         buf[0] = 0x75
@@ -543,7 +543,7 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
       }
     })
 
-    $('a.load_remote_file').click(function () {
+    $('a.load_remote_file').on('click', function () {
       if (!$(this).hasClass('disabled')) {
         let targetBoardSelected = $('#boardTarget option:selected').text()
         let targetVersionSelected = $('#boardVersion option:selected').text()

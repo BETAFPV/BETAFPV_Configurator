@@ -61,7 +61,7 @@ receiver.initialize = function (callback) {
       }
     }
 
-    $('a.refresh').click(function () {})
+    $('a.refresh').on('click', function () {})
 
     function update_ui() {
       // update bars with latest data
