@@ -6000,6 +6000,15 @@
     "HIDPowerOffConfirm":{
         "message":"确认"
     },
+    "JoystickExistDialogLabel":{
+        "message":"未检测到遥控器。"
+    },
+    "JoystickExistDialogTitle":{
+        "message":"提示"
+    },
+    "JoystickExistConfirm":{
+        "message":"确认"
+    },
     "CloseInternalRadioDialogTitle":{
         "message":"提示"
     },

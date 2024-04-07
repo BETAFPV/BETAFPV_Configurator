@@ -6396,6 +6396,15 @@
     "HIDPowerOffConfirm":{
         "message":"OK"
     },
+    "JoystickExistDialogLabel":{
+        "message":"Remote control not detected."
+    },
+    "JoystickExistDialogTitle":{
+        "message":"Prompt"
+    },
+    "JoystickExistConfirm":{
+        "message":"OK"
+    },
     "CloseInternalRadioDialogTitle":{
         "message":"Prompt"
     },
