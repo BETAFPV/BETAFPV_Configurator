@@ -1,0 +1,62 @@
+<div class="tab-firmware_flasher toolbar_fixed_bottom">
+    <div class="content_wrapper">
+        <div class="options gui_box">
+            <div class="spacer">
+                <table class="cf_table" style="margin-top: 10px;">
+                    <tr>
+                        <td class="board-select">
+                            <select name="board"  id="boardTarget">
+                                <option value="loading" i18n="firmwareFlasherOptionLoading" ></option>
+                            </select>
+                        </td>
+                        <td><span class="description" i18n="firmwareFlasherOnlineSelectBoardDescription_radio"></span></td>
+                    </tr>
+                    <tr>
+                        <td><select name="firmware_version" id="boardVersion">
+                                <option value="loading" i18n="firmwareFlasherOptionLoading"></option>
+                        </select></td>
+                        <td><span class="description" i18n="firmwareFlasherOnlineSelectFirmwareVersionDescription_radio"></span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="gui_box gui_warning">
+            <div class="gui_box_titlebar">
+                <div class="spacer_box_title" style="text-align: center;"
+                    i18n="warningTitle">
+                </div>
+            </div>
+            <div class="spacer" style="margin-bottom: 10px;">
+                <p i18n="firmwareFlasherWarningText_radio"></p>
+                <br />
+                <p i18n="firmwareFlasherTargetWarning_radio"></p>
+            </div>
+        </div>
+        <div class="gui_box gui_note" style="margin-top: 30px;">
+            <div class="gui_box_titlebar">
+                <div class="spacer_box_title" style="text-align: center;"
+                    i18n="firmwareFlasherRecoveryHead_radio">
+                </div>
+            </div>
+            <div class="spacer" style="margin-bottom: 10px;">
+                <p i18n="firmwareFlasherRecoveryText_radio"></p>
+            </div>
+        </div>
+            
+    </div>
+    <div class="content_toolbar">
+        <div class="info"><a name="progressbar"></a>
+            <progress class="progress" value="0" min="0" max="100"></progress>
+            <span class="progressLabel">Please load firmware file</span>
+        </div>
+        <div class="btn">
+            <a class="flash_firmware disabled" href="#progressbar" i18n="firmwareFlasherFlashFirmware">Flash Firmware</a>
+        </div>
+        <div class="btn">
+            <a class="load_remote_file " href="#" i18n="firmwareFlasherButtonLoadOnline">Load Firmware [Online]</a>
+        </div>
+        <div class="btn">
+            <a class="load_file" href="#" i18n="firmwareFlasherButtonLoadLocal">Load Firmware [Local]</a>
+        </div>
+    </div>
+</div>

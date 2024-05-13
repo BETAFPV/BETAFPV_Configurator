@@ -1,11 +1,12 @@
 {
-  "name": "test",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager . 'BETAFPV_Configurator' --platform=win64 --arch=x64  --out=./out --app-version=0.0.1 --overwrite"
+    "package-win": "electron-packager . BETAFPV_Configurator --platform=win32 --arch=x64  --out=./Windows --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
+    "package-linux": "electron-packager . BETAFPV_Configurator --platform=linux  --arch=x64 --out=./Linux   --app-version=1.1.0 --overwrite --icon=./BETAFPV_ICO.ico",
+    "package-mac": "electron-packager . BETAFPV_Configurator --platform=darwin  --arch=x64 --out=./Mac   --app-version=1.1.0 --overwrite --icon=./BETAFPV_LOGO.icns"
   },
   "window": {
     "icon": "images/logo/BETAFPV_logo_blue.png",
@@ -17,18 +18,25 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "blueimp-md5": "^2.19.0",
+    "crypto-js": "^4.1.1",
+    "electron-packager": "^15.4.0",
     "i18next": "^19.0.0",
     "i18next-xhr-backend": "^3.2.2",
-    "electron": "^13.1.7",
     "jquery": "^3.6.0",
-    "node-hid": "^2.1.1",
-    "usb": "^1.7.1",
-    "serialport": "^9.2.0",
+    "jsonfile": "^6.1.0",
     "jspack": "^0.0.4",
+    "md5": "^2.3.0",
+    "node-hid": "^2.1.1",
+    "semver": "^7.3.5",
+    "serialport": "^9.2.0",
+    "switchery-latest": "^0.8.2",
+    "three": "~0.97.0",
     "underscore": "^1.13.1",
-    "three": "~0.97.0"
+    "usb": "^1.7.1"
   },
   "devDependencies": {
+    "electron": "^13.1.7",
     "electron-rebuild": "^3.2.3"
   },
   "repository": {

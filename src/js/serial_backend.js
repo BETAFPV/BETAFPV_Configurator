@@ -103,7 +103,7 @@ function initializeSerialBackend() {
        }
     });
 
-    $('div.open_firmware_flasher a.flash').click(function () {
+    $('div.open_hid_device a.flash').click(function () {
         if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
             $('div#flashbutton a.flash_state').removeClass('active');
             $('div#flashbutton a.flash').removeClass('active');

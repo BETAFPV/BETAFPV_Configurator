@@ -2,9 +2,7 @@
     <div class="content_wrapper">
         <!-- should be the first DIV on each tab -->
         <div class="tab_title" i18n="tabSetup"></div>
-        <div class="cf_doc_version_bt">
-            <a id="button-documentation" href="" target="_blank"></a>
-        </div>
+
         <div class="grid-row">
             <div class="grid-col col3">
                 <div class="default_btn">
@@ -28,7 +26,7 @@
             <div class="grid-col col3">
                 <div class="default_btn">
                     <div id="mag_calib_rest">
-                        <a class="calibrateMag" href="#" i18n="initialSetupButtonCalibrateMag"></a>
+                        <a class="calibrateMag" href="#" i18n="initialSetupButtonCalibrateMag" ></a>
                     </div>
                     <div id="mag_calib_running">
                         <div class="data-loading-setup">
@@ -64,16 +62,16 @@
                         <canvas id="canvas"></canvas>
                         <div class="attitude_info">
                             <dl>
-                                <dt>Heading:</dt>
-                                <dd class="heading">&nbsp;</dd>
+                                <dt>Heading: </dt>
+                                <dd class="yaw_dislpay"id = "yaw_dislpay">&nbsp;</dd>
                                 <dt>Pitch:</dt>
-                                <dd class="pitch">&nbsp;</dd>
+                                <dd class="pitch_display" id = "pitch_display">&nbsp;</dd>
                                 <dt>Roll:</dt>
-                                <dd class="roll">&nbsp;</dd>
+                                <dd class="roll_display" id = "roll_display">&nbsp;</dd>
                             </dl>
                         </div>
                     </div>
-                    <a class="reset sm-min" href="#" i18n="initialSetupButtonResetZaxis"></a>
+                    <a class="reset sm-min" href="#" i18n="initialSetupButtonResetZaxisValue"></a>
                 </div>
             </div>
             <div class="grid-col col3">
@@ -84,6 +82,10 @@
                     <div class="spacer_box">
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cf_table">
                             <tbody>
+                            <tr>
+                                <td class="cf_tip"  i18n = "UniqueDeviceId">序列号:</td>
+                                <td class="SerialNumber" i18n = "updateFCfirmware"></td>
+                            </tr>
                             <tr>
                                 <td class="cf_tip"  i18n = "FlightControl">Flight control:</td>
                                 <td class="target"></td>
@@ -98,31 +100,35 @@
                             </tr>
                             <tr>
                                 <td i18n="initialSetupBattery">Battery voltage:</td>
-                                <td class="bat-voltage">0 V</td>
+                                <td class="bat-voltage"></td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="gui_box grey setting" align="center">
-                    <div class="gui_box_titlebar" align="left">
-                        <div class="spacer_box_title" i18n="initialSetupInstrumentsHead">Setting</div>
-                    </div>
-                    <span id="attitude"></span> <span id="heading"></span>
-                </div>
             </div>
         </div>
+        <dialog class="dialogFactoryResetOK">
+                <h3 i18n = "DialogTitle"></h3>
+                <div class="content">
+                    <div i18n="dialogFactoryResetOK" style="margin-top: 10px"></div> 
+                </div>
+                <div class="regular-button">
+                    <a href="#" class="dialogFactoryResetOK-confirmbtn" i18n = "Confirm"></a>
+                </div>
+        </dialog>
+
+        <dialog class="dialogFactoryResetfailed">
+                <h3 i18n = "DialogTitle"></h3>
+                <div class="content">
+                    <div i18n="dialogFactoryResetfailed" style="margin-top: 10px"></div> 
+                </div>
+                <div class="regular-button">
+                    <a href="#" class="dialogFactoryResetfailed-confirmbtn" i18n = "Confirm"></a>
+                </div>
+        </dialog>
     </div>
 
-    <dialog class="dialogConfirmReset">
-        <h3 i18n="dialogConfirmResetTitle">Confirm</h3>
-        <div class="content">
-            <div i18n="dialogConfirmResetNote" style="margin-top: 10px">WARNING: Are you sure you want to reset ALL settings to default?</div>
-        </div>
-        <div class="buttons">
-            <a href="#" class="dialogConfirmReset-confirmbtn regular-button" i18n="dialogConfirmResetConfirm">Reset</a>
-            <a href="#" class="dialogConfirmReset-cancelbtn regular-button" i18n="dialogConfirmResetClose">Cancel</a>
-        </div>
-    </dialog>
+
 
 </div>

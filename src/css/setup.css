@@ -185,7 +185,7 @@
     margin-top: 8px;
     margin-bottom: 8px;
     margin-right: 10px;
-    background-color: #ffbb00;
+    background-color: #00B0FF;
     border-radius: 3px;
     border: 1px solid #dba718;
     color: #000;
@@ -198,11 +198,11 @@
     line-height: 28px;
 }
 .tab-setup .regular-button:hover {
-    background-color: #ffcc3e;
+    background-color: #00C0FF;
     transition: all ease 0.2s;
 }
 .tab-setup .regular-button:active {
-    background-color: #ffcc3e;
+    background-color: #00C0FF;
     transition: all ease 0.0s;
     box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.35);
 }

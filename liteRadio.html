@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+      
+        <title>BETAFPV Configurator</title>
+        <link type="text/css" rel="stylesheet" href="./src/css/main.css"/>
+        <link type="text/css" rel="stylesheet" href="./src/css/dark-theme.css"/>
+        <link type="text/css" rel="stylesheet" href="./src/css/landing.css" media="all"/>
+        <link type="text/css" rel="stylesheet" href="./src/css/firmware_flasher_LiteRadio.css"/>
+        <link type="text/css" rel="stylesheet" href="./src/css/show.css"/>      
+        <link type="text/css" rel="stylesheet" href="./node_modules/switchery-latest/dist/switchery.min.css" media="all"/>
+        <link type="text/css" rel="stylesheet" href="./src/css/switchery_custom.css"/>
+
+        <script src="./src/js/ConfigStorage.js"></script>
+        <script src="./src/js/localization.js"></script>
+        <script src="./node_modules/jquery/dist/jquery.js"></script>
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="libraries/d3.min.js"></script>
+        <script src="./src/js/firmware_flasher_LiteRadio.js"></script>
+        <script src="./src/js/gui.js"></script>
+        <script src="./src/js/landing_radio.js"></script>
+        <script src="./src/js/show.js"></script>
+   
+
+        <script type="text/javascript" src="./node_modules/three/build/three.min.js"></script>
+        <script type="text/javascript" src="./node_modules/three/examples/js/renderers/CanvasRenderer.js"></script>
+        <script type="text/javascript" src="./node_modules/three/examples/js/renderers/Projector.js"></script>
+        <script type="text/javascript" src="./node_modules/switchery-latest/dist/switchery.min.js"></script>
+    </head>
+    <body>
+        <div id="main-wrapper">
+            <div class="headerbar">
+                <div id="logo">
+                    <img src="./src/images/bt_logo.png"/>
+                    <label id = "liteRadio_configurator_version">
+                    </label>
+                </div>
+                <div id="port-picker">
+                    <div id="portsinput">
+                        <div class="dropdown dropdown-dark">
+                            <select class="dropdown-select" id="port">FlasherManualPort
+                                <option value="loading">Loading</option>
+                                <!-- port list gets generated here -->
+                            </select>
+                            <div id="baudselect">
+                                <div class="dropdown dropdown-dark">
+                                    <select class="dropdown-select" id="baud">FlasherBaudRate
+                                        <option value="1000000">1000000</option>
+                                        <option value="500000">500000</option>
+                                        <option value="250000">250000</option>
+                                        <option value="115200" selected="selected">115200</option>
+                                        <option value="57600">57600</option>
+                                        <option value="38400">38400</option>
+                                        <option value="28800">28800</option>
+                                        <option value="19200">19200</option>
+                                        <option value="14400">14400</option>
+                                        <option value="9600">9600</option>
+                                        <option value="4800">4800</option>
+                                        <option value="2400">2400</option>
+                                        <option value="1200">1200</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <a i18n = "Unable_to_find_serial_port" id = "Unable_to_find_serial_port" href='#'></a>
+                        </div>
+                    </div>
+                </div>
+                <div id="header_btns">
+                    <div class="connect_controls" id="connectbutton">
+                        <div class="connect_b">
+                            <a class="connect disabled" href="#"></a>
+                        </div>
+                        <div class="connect_state" i18n="connect">Connect Serial</div>
+                    </div>
+                    <div class="open_hid_device" id="hidbutton">
+                        <div class="hid_btn">
+                            <a class="connect" href="#"></a>
+                        </div>
+                        <div class="connect_hid" i18n ="Connect_HID">Connect HID</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="tab-content-container">
+                <div class="tab_container">
+                    <div id="tabs">
+                        <ul class="mode-disconnected">
+                            <li class="tab_landing" id="tab_landing"><a href="#"class="tabicon ic_welcome" i18n="tabLanding">Welcom</a>
+                            </li>
+                            <li class="tab_firmware_flasher_LiteRadio" id="tabFirmware"><a href="#" class="tabicon ic_flasher" i18n="tabFirmwareFlasher">Firmware Flasher</a></li>
+                        </ul>
+                        <ul class="mode-connected">
+                            <li class="tab_show"><a href="#"  class="tabicon ic_setup" i18n="tabSetup">Setup</a></li>
+                        </ul>
+                    </div>  
+                </div>
+                <div id='content'>                   
+                </div>              
+            </div>
+            <dialog class="dialogHIDisDisconnect">
+                <h3 i18n = "HIDisDisconnectDialogTitle"></h3>
+                <div class="content">
+                    <div i18n="HIDisDisconnectDialogLabel" style="margin-top: 10px"> </div> 
+                </div>
+                <div class="regular-button">
+                    <a href="#" class="HIDisDisconnect-confirmbtn" i18n = "Confirm"></a>
+                </div>
+            </dialog>
+            <dialog class="dialogVersionNotMatched">
+                <h3 i18n = "DialogTitle"></h3>
+                <div class="content">
+                    <div  style="margin-top: 10px">
+                        <label id="VersionNotMatchedDialogLabel">
+                        123
+                        </label>
+                    </div> 
+                </div>
+                <div class="regular-button">
+                    <a href="#" class="VersionNotMatched-confirmbtn" i18n = "Confirm"></a>
+                </div>
+            </dialog>
+        </div>
+        <script src="./indexLiteRadio.js"></script>        
+    </body>
+</html>

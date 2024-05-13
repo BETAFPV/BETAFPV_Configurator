@@ -40,12 +40,20 @@ pid_tuning.initialize = function (callback) {
 
     $('.tab-pid_tuning .tab-container .rates').on('click', () => activateSubtab('rates'));
 
-  
+    $('a.refresh').click(function () {   
+        if(self.activeSubtab == 'pid'){
+            readPidFromFC();
+            console.log("refresh");
+            
+        }else if(self.activeSubtab == 'rates'){
+            readRateFromFC();
+        }else {
+
+        }
+    });
 
     //update == save
-    $('a.update').click(function () {
-
-            
+    $('a.update').click(function () {   
             if(self.activeSubtab == 'pid'){
                 mavlink_send_pid();
 
@@ -54,8 +62,6 @@ pid_tuning.initialize = function (callback) {
             }else {
 
             }
-
-        
     });
     function checkInput(element) {
         let value = parseFloat(element.val());
@@ -327,9 +333,19 @@ pid_tuning.initialize = function (callback) {
             setTimeout(()=>{
                 if(pid_tuning.rate_saving_ack){
                     pid_tuning.rate_saving_ack = 0;
-                    alert("rate saving successful!");
+                    const dialogRatesSaveOK = $('.dialogRatesSaveOK')[0];
+                    dialogRatesSaveOK.showModal();
+                    $('.dialogRatesSaveOK-confirmbtn').click(function() {
+                        dialogRatesSaveOK.close();
+                    });
+
                 }else{
-                    alert("rate saving failed! Please check the connection!");
+                    const dialogRatesSavefailed = $('.dialogRatesSavefailed')[0];
+                    dialogRatesSavefailed.showModal();
+                    $('.dialogRatesSavefailed-confirmbtn').click(function() {
+                        dialogRatesSavefailed.close();
+                    });
+
                 }
 
             },2000)
@@ -395,9 +411,18 @@ pid_tuning.initialize = function (callback) {
             setTimeout(()=>{
                 if(pid_tuning.pid_saving_ack){
                     pid_tuning.pid_saving_ack = 0;
-                    alert("PID saving successful!");
+                    const dialogPidSaveOK = $('.dialogPidSaveOK')[0];
+                    dialogPidSaveOK.showModal();
+                    $('.dialogPidSaveOK-confirmbtn').click(function() {
+                        dialogPidSaveOK.close();
+                    });
                 }else{
                     alert("PID saving failed! Please check the connection!");
+                    const dialogPidSavefailed = $('.dialogPidSavefailed')[0];
+                    dialogPidSavefailed.showModal();
+                    $('.dialogPidSavefailed-confirmbtn').click(function() {
+                        dialogPidSavefailed.close();
+                    });
                 }       
 
             },2000)
@@ -432,7 +457,19 @@ pid_tuning.initialize = function (callback) {
         mavlinkSend(buffer);
     }
 
-    
+    function readPidFromFC(){
+        let msg = new mavlink10.messages.command(1,mav_cmd.MAV_CMD_READ_PID_FROM_FC,0,0);
+        let buffer = msg.pack(msg);
+        console.log(buffer);
+        mavlinkSend(buffer);
+    }
+
+    function readRateFromFC(){
+        let msg = new mavlink10.messages.command(1,mav_cmd.MAV_CMD_READ_RATE_FROM_FC,0,0);
+        let buffer = msg.pack(msg);
+        console.log(buffer);
+        mavlinkSend(buffer);
+    }
 
 
     
@@ -469,7 +506,8 @@ pid_tuning.checkThrottle = function() {
 };
 
   activateSubtab(self.activeSubtab);
-
+  readPidFromFC();
+  readRateFromFC();
 };
 
 

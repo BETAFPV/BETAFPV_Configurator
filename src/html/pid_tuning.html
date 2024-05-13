@@ -1,10 +1,7 @@
 <div class="tab-pid_tuning toolbar_fixed_bottom">
     <div class="content_wrapper">
         <div class="tab_title" i18n="tabPidTuning">PID Tuning</div>
-        <div class="cf_doc_version_bt">
-            <a id="button-documentation" href="https://github.com/betaflight/betaflight/releases" target="_blank" rel="noopener noreferrer"></a>
-        </div>
-        
+
         <div class="tab-container">
             <div class="tab pid active">
                 <a href="#" i18n="pidTuningSubTabPid">PID Profile Settings</a>
@@ -25,33 +22,27 @@
                                 <div class="name-helpicon-flex">
                                     <div i18n="pidTuningProportional" class="sm-min">Proportional</div>
                                     <div class="xs">P</div>
-                                    <div class="helpicon cf_tip" i18n_title="pidTuningProportionalHelp"></div>
                                 </div>
                             </th>
                             <th class="integral">
                                 <div class="name-helpicon-flex">
                                     <div i18n="pidTuningIntegral" class="sm-min">Integral</div>
-                                    <div class="xs">I</div>
-                                    <div class="helpicon cf_tip" i18n_title="pidTuningIntegralHelp"></div>
+                                    <div class="xs">I</div> 
                                 </div>
                             </th>
                             <th class="derivative">
                                 <div class="name-helpicon-flex">
                                     <div i18n="pidTuningDerivative" class="derivativeText">Derivative</div>
-                                    <div class="helpicon cf_tip" i18n_title="pidTuningDerivativeHelp"></div>
                                 </div>
                             </th>
                             <th class="dmin">
                                 <div class="name-helpicon-flex">
-                                    <div i18n="pidTuningDMin">Integral MAX</div>
-                                    <div class="helpicon cf_tip"></div>
+                                    <div >MAX threshold for Integral</div>
                                 </div>
                             </th>
                             <th class="feedforward">
                                 <div class="name-helpicon-flex">
-                                    <div i18n="pidTuningFeedforward" class="sm-min">D CutFreq</div>
-                                    <div class="xs">Feedforward</div>
-                                    <div class="helpicon cf_tip"></div>
+                                    <div  class="sm-min">CutOff freq for Derivative</div>
                                 </div>
                             </th>
                         </tr>
@@ -65,30 +56,29 @@
                         <tr class="ROLL">
                             <!-- 0 -->
                             <td class="pid_roll">ROLL</td>
-                            <td class="pid_data"><input type="number" value="0.14" name="p" step="0.01" min="0" max="10" /></td>
-                            <td class="pid_data"><input type="number" value="1.4" name="i" step="0.01" min="0" max="10" /></td>
-                            <td class="pid_data"><input type="number" value="0.56" name="d" step="0.01" min="0" max="10" /></td>
-                            <td class="pid_data"><input type="number" value="5" name="imax" step="1" min="0" max="20" /></td>
-                            <td class="pid_data"><input type="number" value="35" name="cutfreq" step="1" min="0" max="100" /></td>
-
+                            <td class="pid_data"><input type="number" id = "roll_p" value="0.14" name="p" step="0.01" min="0" max="10" /></td>
+                            <td class="pid_data"><input type="number" id = "roll_i" value="1.4" name="i" step="0.01" min="0" max="10" /></td>
+                            <td class="pid_data"><input type="number" id = "roll_d" value="0.56" name="d" step="0.01" min="0" max="10" /></td>
+                            <td class="pid_data"><input type="number" id = "roll_imax" value="5" name="imax" step="1" min="0" max="20" /></td>
+                            <td class="pid_data"><input type="number" id = "roll_cutfre" value="35" name="cutfreq" step="1" min="0" max="100" /></td>
                         </tr>
                         <tr class="PITCH">
                             <!-- 1 -->
                             <td class="pid_pitch">PITCH</td>
-                            <td class="pid_data"><input type="number" value="0.14" name="p" step="0.01" min="0" max="10" /></td>
-                            <td class="pid_data"><input type="number" value="1.4" name="i" step="0.01" min="0" max="10" /></td>
-                            <td class="pid_data"><input type="number" value="0.56" name="d" step="0.01" min="0" max="10" /></td>
-                            <td class="pid_data"><input type="number" value="5" name="imax" step="1" min="0" max="20" /></td>
-                            <td class="pid_data"><input type="number" value="35" name="cutfreq" step="1" min="0" max="100" /></td>
+                            <td class="pid_data"><input type="number" id = "pitch_p" value="0.14" name="p" step="0.01" min="0" max="10" /></td>
+                            <td class="pid_data"><input type="number" id = "pitch_i" value="1.4" name="i" step="0.01" min="0" max="10" /></td>
+                            <td class="pid_data"><input type="number" id = "pitch_d" value="0.56" name="d" step="0.01" min="0" max="10" /></td>
+                            <td class="pid_data"><input type="number" id = "pitch_imax" value="5" name="imax" step="1" min="0" max="20" /></td>
+                            <td class="pid_data"><input type="number" id = "pitch_cutfre" value="35" name="cutfreq" step="1" min="0" max="100" /></td>
                         </tr>
                         <tr class="YAW">
                             <!-- 2 -->
                             <td class="pid_yaw">YAW</td>
-                            <td class="pid_data"><input type="number" value="0.24" name="p" step="0.01" min="0" max="10" /></td>
-                            <td class="pid_data"><input type="number" value="1.4" name="i" step="0.01" min="0" max="10" /></td>
-                            <td class="pid_data"><input type="number" value="0.05" name="d" step="0.01" min="0" max="10" /></td>
-                            <td class="pid_data"><input type="number" value="5" name="imax" step="1" min="0" max="20" /></td>
-                            <td class="pid_data"><input type="number" value="35" name="cutfreq" step="1" min="0" max="100" /></td>
+                            <td class="pid_data"><input type="number" id = "yaw_p" value="0.24" name="p" step="0.01" min="0" max="10" /></td>
+                            <td class="pid_data"><input type="number" id = "yaw_i" value="1.4" name="i" step="0.01" min="0" max="10" /></td>
+                            <td class="pid_data"><input type="number" id = "yaw_d" value="0.05" name="d" step="0.01" min="0" max="10" /></td>
+                            <td class="pid_data"><input type="number" id = "yaw_imax" value="5" name="imax" step="1" min="0" max="20" /></td>
+                            <td class="pid_data"><input type="number" id = "yaw_cutfre" value="35" name="cutfreq" step="1" min="0" max="100" /></td>
                         </tr>
                     </table>
                 </div>
@@ -98,9 +88,6 @@
             <div class="subtab-rates" style="display: none;">
                 <div class="clear-both"></div>
                 <div class="cf_column">
-                
-        
-                
                     <div class="note rates-tab-warning maxRateWarning">
                         <p i18n="pidTuningMaxRateWarning"><b>Warning:</b> very high rates can result in desyncs from rapid decelerations</p>
                     </div>
@@ -117,53 +104,46 @@
                                 <th colspan="5">
                                     <div class="pid_mode">
                                         <div i18n="pidTuningRateSetup" class="float-left">Basic/Acro Rates</div>
-                                        <div class="helpicon cf_tip" i18n_title="pidTuningRatesTuningHelp"><b>Rates and Expo</b>: Determine your stick feel based on these parameters. Use the graph and live 3D model to find your favourite rate setting.</div>
                                     </div>
                                 </th>
                             </tr>
                             <tr class="ROLL">
                                 <td class="pid_roll">ROLL</td>
                                 <td class="rc_rate_roll">
-                                    <input type="number" class="rc_rate_input" name="rc_rate_roll" value="1.2" step="0.01" min="0.01" max="2.55" />
+                                    <input type="number" class="rc_rate_input"id = "rc_rate_roll" name="rc_rate_roll" value="1.2" step="0.01" min="0.01" max="2.55" />
                                 </td>
                                 <td class="roll_rate">
-                                    <input type="number" class="rate_input" name="roll_rate" value="0.7" step="0.01" min="0" max="1.00" />
+                                    <input type="number" class="rate_input" id="roll_rate" name="roll_rate" value="0.7" step="0.01" min="0" max="1.00" />
                                 </td>
-                                <!-- <td class="roll_pitch_rate" rowspan="1">
-                                    <input type="number" name="roll_pitch_rate" step="0.01" min="0" max="1.00" />
-                                </td> -->
+          
                                 <td class="rc_roll_expo" rowspan="1">
-                                    <input type="number" name="rc_roll_expo" value="0" step="0.01" min="0" max="1.00" />
+                                    <input type="number" id="rc_roll_expo" name="rc_roll_expo" value="0" step="0.01" min="0" max="1.00" />
                                 </td>
-                                <!-- <td rowspan="2" class="inputBackground">
-                                    <input type="number" class="expo_input" name="rc_expo" step="0.01" min="0" max="1" />
-                                    <div class="bracket"></div>
-                                </td> -->
                                 <td class="new_rates maxAngularVelRoll"></td>
                             </tr>
                             <tr class="PITCH">
                                 <td class="pid_pitch">PITCH</td>
                                 <td>
-                                    <input type="number" class="rc_rate_input" name="rc_rate_pitch" value="1.2" step="0.01" min="0.01" max="2.55" />
+                                    <input type="number" class="rc_rate_input" id="rc_rate_pitch" name="rc_rate_pitch" value="1.2" step="0.01" min="0.01" max="2.55" />
                                 </td>
                                 <td class="pitch_rate">
-                                    <input type="number" class="rate_input" name="pitch_rate" value="0.7" step="0.01" min="0" max="1.00" />
+                                    <input type="number" class="rate_input"  id="pitch_rate" name="pitch_rate" value="0.7" step="0.01" min="0" max="1.00" />
                                 </td>
                                 <td>
-                                    <input type="number" class="expo_input" name="rc_pitch_expo" value="0" step="0.01" min="0" max="1" />
+                                    <input type="number" class="expo_input" id="rc_pitch_expo" name="rc_pitch_expo" value="0" step="0.01" min="0" max="1" />
                                 </td>
                                 <td class="new_rates maxAngularVelPitch"></td>
                             </tr>
                             <tr class="YAW">
                                 <td class="pid_yaw">YAW</td>
                                 <td rowspan="1">
-                                    <input type="number" class="rc_rate_input" name="rc_rate_yaw" value="0.9" step="0.01" min="0.01" max="2.55" />
+                                    <input type="number" class="rc_rate_input" id="rc_rate_yaw" name="rc_rate_yaw" value="0.9" step="0.01" min="0.01" max="2.55" />
                                 </td>
                                 <td>
-                                    <input type="number" class="rate_input" name="yaw_rate" value="0.7" step="0.01" min="0" max="1" />
+                                    <input type="number" class="rate_input" id="yaw_rate" name="yaw_rate" value="0.7" step="0.01" min="0" max="1" />
                                 </td>
                                 <td>
-                                    <input type="number" class="expo_input" name="rc_yaw_expo" value="0" step="0.01" min="0" max="1" />
+                                    <input type="number" class="expo_input" id="rc_yaw_expo" name="rc_yaw_expo" value="0" step="0.01" min="0" max="1" />
                                 </td>
                                 <td class="new_rates maxAngularVelYaw"></td>
                             </tr>
@@ -178,7 +158,6 @@
                                         <th colspan="2">
                                             <div>
                                                 <div i18n="pidTuningRatesCurve" class="float-left">Rates Preview</div>
-                                                <div class="helpicon cf_tip" i18n_title="pidTuningRatesTip">Play with the rates and see how those affect the stick curve</div>
                                             </div>
                                         </th>
                                     </tr>
@@ -199,8 +178,6 @@
                 </div>
 
                 <div class="cf_column">
-                   
-
                     <div class="gui_box throttle spacer_left">
                         <table class="cf">
                             <thead>
@@ -234,22 +211,12 @@
                             </tr>
                         </table>
                     </div>
-               
             </div>
-
-            <!-- FILTER SUBTAB -->
-            <!-- <div class="subtab-filter" style="display: none;">
-              
-            </div> -->
-            
-
         </form>
         </div>
-
     </div>
 
     <div class="content_toolbar">
-       
         <div class="btn refresh_btn">
             <a class="refresh" href="#" i18n="pidTuningButtonRefresh">Refresh</a>
         </div>
@@ -257,4 +224,44 @@
             <a class="update" href="#" i18n="pidTuningButtonSave">Save</a>
         </div>
     </div>
+
+    <dialog class="dialogPidSaveOK">
+            <h3 i18n = "DialogTitle"></h3>
+            <div class="content">
+                <div i18n="dialogPidSaveOK" style="margin-top: 10px"></div> 
+            </div>
+            <div class="regular-button">
+                <a href="#" class="dialogPidSaveOK-confirmbtn" i18n = "Confirm"></a>
+            </div>
+    </dialog>
+
+    <dialog class="dialogPidSavefailed">
+            <h3 i18n = "DialogTitle"></h3>
+            <div class="content">
+                <div i18n="dialogPidSavefailed" style="margin-top: 10px"></div> 
+            </div>
+            <div class="regular-button">
+                <a href="#" class="dialogPidSavefailed-confirmbtn" i18n = "Confirm"></a>
+            </div>
+    </dialog>
+
+    <dialog class="dialogRatesSaveOK">
+            <h3 i18n = "DialogTitle"></h3>
+            <div class="content">
+                <div i18n="dialogRatesSaveOK" style="margin-top: 10px"></div> 
+            </div>
+            <div class="regular-button">
+                <a href="#" class="dialogRatesSaveOK-confirmbtn" i18n = "Confirm"></a>
+            </div>
+    </dialog>
+
+    <dialog class="dialogRatesSavefailed">
+            <h3 i18n = "DialogTitle"></h3>
+            <div class="content">
+                <div i18n="dialogRatesSavefailed" style="margin-top: 10px"></div> 
+            </div>
+            <div class="regular-button">
+                <a href="#" class="dialogRatesSavefailed-confirmbtn" i18n = "Confirm"></a>
+            </div>
+    </dialog>
 </div>

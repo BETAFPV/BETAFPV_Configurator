@@ -88,6 +88,7 @@ i18n.changeLanguage = function(languageSelected) {
     i18next.changeLanguage(getValidLocale(languageSelected));
     i18n.selectedLanguage = languageSelected;
     console.log(i18n.getMessage('language_changed'));
+
 };
 
 i18n.getMessage = function(messageID, parameters) {
@@ -202,9 +203,10 @@ function getStoredUserLocale(cb) {
             i18n.selectedLanguage = userLanguage;
 
             userLanguage = getValidLocale(userLanguage);
-
             cb(userLanguage);
             i18n.Storage_language = userLanguage;
+      
+            
         });
         
     } else {

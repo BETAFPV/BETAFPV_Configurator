@@ -312,6 +312,9 @@
     "tabOptions": {
         "message": "Options"
     },
+    "tabCalibration":{
+        "message": "Calibrate"
+    },
 
     "tabSetup": {
         "message": "Setup"
@@ -675,23 +678,50 @@
     },
 
     "defaultWelcomeIntro": {
-        "message": "Welcome to <strong>Betaflight - Configurator</strong>, a utility designed to simplify updating, configuring and tuning of your flight controller."
+        "message": "Welcome to <strong>BETAFPV - Configurator (FC)</strong>, a utility designed to simplify updating, configuring and tuning of your flight controller."
+    },
+    "defaultWelcomeIntro_radio": {
+        "message": "Welcome to <strong>BETAFPV - Configurator (RC)</strong>, a utility designed to simplify updating, configuring and tuning of your radio controller."
     },
 
     "defaultWelcomeHead": {
-        "message": "Hardware"
+        "message": "Flight Controller"
     },
     "defaultWelcomeText": {
-        "message": "The application supports all hardware that can run Betaflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/betaflight/blackbox-log-viewer/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Betaflight Blackbox Log Viewer</a><br /><br /><a href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Betaflight TX Lua Scripts</a><br /><br />The firmware source code can be downloaded from <a href=\"https://github.com/betaflight/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />For legacy hardware using a CP210x USB to serial chip:<br />The latest <b>CP210x Drivers</b> can be downloaded from <a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />The latest <b>Zadig</b> for Windows USB driver installation can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />"
+        "message": "The application supports flight controller that can run LiteSilver firmeware."
+    },
+    "promptOfUseFCConfigurator":{
+        "message":"<br /><strong>Configurator for FC board is active. Follow the steps to enter FC Setup page.</strong><br />1. Connect the FC board to the computer via USB data cable. <br />2. Select the virtual COM port and click the \"Connect\" button on the top right.<br /><strong class=\"message-negative\">Note: </strong>If enter FC Setup page fail, please update the FC firmware first.<br /><br />Click the \"Firmware Flasher\" tab on the left for firmware update."
+    },
+    "promptOfUseFCConfigurator_radio":{
+        "message": " <br />Click the yellow button below to active configurator for flight control board."
+    },
+    "defaultWelcomeText_radio": {
+        "message": "The application supports flight controller that can run LiteSilver firmeware."
+    },
+    "promptOfUseRadioConfigurator_radio":{
+        "message":"<br />The LiteRadio 2 SE Frsky or Bayang version is not supported. LiteRadio 2 and LiteRadio 3 Pro is powered by OpenTX system, please use the OpenTX Companion.<br /><br /><strong>Now configurator for radio controller is active. Basic user manual:</strong><br />Click the \"Firmware Flasher\" tab on the left for firmware update.<br />For configuration, turn off the radio controller first. Then connect it to the computer via USB data cable. Wait for the LED ring breathes in red or green. Then click the \"Connect RC\" button on the top right."
+    },
+    "FCConfiguratorChoosed":{
+        "message": "Configurator for FC Board is Active"
+    },
+    "RadioConfiguratorChoosed": {
+        "message": "Configurator for Radio Transmitter is Active"
     },
     "defaultContributingHead": {
-        "message": "Contributing"
+        "message": "Radio Transmitter"
     },
     "defaultContributingText": {
-        "message": "If you would like to help make Betaflight even better you can help in many ways, including:<br /><ul><li>using your knowledge of Betaflight to create or update content on <a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">our Wiki</a>, or answering other users' questions in online forums;</li><li><a href=\"https://github.com/betaflight/betaflight/blob/master/docs/development/Development.md\" target=\"_blank\" rel=\"noopener noreferrer\">contributing code</a> to the firmware and Configurator - new features, fixes, improvements;</li><li>testing <a href=\"https://github.com/Betaflight/betaflight/pulls\" target=\"_blank\" rel=\"noopener noreferrer\">new features and fixes</a> and providing feedback;</li><li>helping other users solve the problems they report in <a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">our issue tracker</a>, and participating in discussions on feature requests;</li><li><a href=\"https://github.com/betaflight/betaflight/tree/master/README.md#Translators\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Betaflight Configurator into a new language, or helping to maintain the existing translations.</li></ul>"
+        "message": "Support the radio controller come with BETAFPV LiteRadio Firmware 2.0 Version."
+    },
+    "promptOfUseRadioConfigurator":{
+        "message": "<br /><br />The LiteRadio 2 SE Frsky or Bayang version is not supported. LiteRadio 2 and LiteRadio 3 Pro is powered by OpenTX system, please use the OpenTX Companion.<br /><br />Click the yellow button below to active configurator for radio controller."
+    },
+    "defaultContributingText_radio": {
+        "message": "Support the radio controller come with BETAFPV LiteRadio Firmware 2.0 Version. "
     },
     "defaultFacebookText": {
-        "message": "We also have a <a href=\"https://www.facebook.com/groups/betaflightgroup/\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a>.<br />Join us to get a place to talk about Betaflight, ask configuration questions, or just hang out with fellow pilots."
+        "message": "We also have a <a href=\"https://www.facebook.com/groups/betafpv/\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a>.<br />Join us to get a place to talk about FPV items, ask configuration questions, or just hang out with fellow pilots."
     },
     "defaultChangelogHead": {
         "message": "Configurator - Changelog"
@@ -780,7 +810,7 @@
         "message": "Reset Settings"
     },
     "initialSetupResetText": {
-        "message": "Restore settings to <strong>default</strong>"
+        "message": "Restore settings to default（include PID and RATE）"
     },
     "initialSetupButtonBackup": {
         "message": "Backup"
@@ -804,7 +834,7 @@
         "message": "Configuration restored <span class=\"message-positive\">successfully</span>"
     },
     "initialSetupButtonResetZaxis": {
-        "message": "Reset Z axis, offset: 0 deg"
+        "message": "Reset Z axis"
     },
     "initialSetupButtonResetZaxisValue": {
         "message": "Reset Z axis, offset: $1 deg"
@@ -2475,7 +2505,7 @@
     },
 
     "motorsText":{
-        "message": "Motors"
+        "message": "Motors Test"
     },
     "motorNumber1":{
         "message": "Motor - 1"
@@ -2501,7 +2531,18 @@
     "motorNumber8":{
         "message": "Motor - 8"
     },
-
+    "motorButtonSave": {
+        "message": "Save"
+    },
+    "motorButtonRefresh": {
+        "message": "Refresh"
+    },
+    "motor_setup":{
+        "message":"Motors Setup"
+    },
+    "idelThrottleValue":{
+        "message":"Motor Idle Throttle Value[%]"
+    },
     "servosText":{
         "message": "Servos"
     },
@@ -2565,7 +2606,7 @@
         "message": "<strong>Motor Test Mode / Arming Notice:</strong><br />Moving the sliders or arming your craft with the transmitter will cause the motors to <strong>spin up</strong>.<br />In order to prevent injury <strong class=\"message-negative\">remove ALL propellers</strong> before using this feature.<br />Enabling motor test mode will also temporarily disable Runaway Takeoff Prevention, to stop it from disarming the craft when bench testing without propellers.<br />"
     },
     "motorsEnableControl": {
-        "message": "<strong>I understand the risks</strong>, the propellers are removed - enable motor control and arming, and disable Runaway Takeoff Prevention."
+        "message": "<strong>I understand the risks</strong>, the propellers are removed - enable motor control and arming."
     },
     "motorsDialogMixerReset": {
         "message": "<strong>Invalid mixer mode selected.</strong><br /><br />The {{mixerName}} model needs {{mixerMotors}} motor resources.<br /><br />If using a custom mixer mode you need to define a custom mmix before changing mixer mode. If you come back to the motor tab after setting a mmix for your mode it won't reset the mode anymore. Please see the wiki for more information how to set this up.<br /><br />You are not able to test any motors or fly because firmware has {{outputs}} outputs for the selected mode.<br /><br />Resetting to default mixer mode"
@@ -2711,34 +2752,34 @@
         "message": "Magnetometer"
     },
     "sensorsAltitudeSelect": {
-        "message": "Altitude"
+        "message": "Barometer"
     },
     "sensorsSonarSelect": {
-        "message": "Sonar"
+        "message": "TOF"
     },
     "sensorsDebugSelect": {
-        "message": "Debug"
+        "message": "OPF"
     },
     "sensorsGyroTitle": {
         "message": "Gyroscope - deg/s"
     },
     "sensorsAccelTitle": {
-        "message": "Accelerometer - g (deg)"
+        "message": "Accelerometer - g"
     },
     "sensorsMagTitle": {
         "message": "Magnetometer - Ga"
     },
     "sensorsAltitudeTitle": {
-        "message": "Altitude - meters"
+        "message": "Barometer - cm"
     },
     "sensorsAltitudeHint": {
         "message": "The altitude is calculated by combining the output of the barometer (if available) with the altitude output from the GPS (if available). If a GPS connected and the GPS has a fix, the absolute altitude above sea level will be shown when disarmed. When armed, the altitude relative to the position when arming will be shown."
     },
     "sensorsSonarTitle": {
-        "message": "Sonar - cm"
+        "message": "TOF - cm"
     },
     "sensorsDebugTitle": {
-        "message": "Debug"
+        "message": "OPF"
     },
 
     "cliInfo": {
@@ -2949,13 +2990,22 @@
         "message": "Release notes:"
     },
     "firmwareFlasherReleaseDate": {
-        "message": "Date:"
+        "message": "Build Date:"
     },
     "firmwareFlasherReleaseTarget": {
         "message": "Target:"
     },
     "firmwareFlasherReleaseFile": {
         "message": "Binary:"
+    },
+    "firmwareFlasherFileName":{
+        "message":"File Name:"
+    },
+    "firmwareFlasherTarget":{
+        "message":"Target:"
+    },
+    "firmwareFlasherBoard":{
+        "message":"Board:"
     },
     "firmwareFlasherUnifiedTargetName": {
         "message": "Unified Target:"
@@ -2970,9 +3020,11 @@
         "message": "Download manually."
     },
     "firmwareFlasherTargetWarning": {
-        "message": "<span class=\"message-negative\">IMPORTANT</span>: Ensure you flash a file appropriate for your target.  Flashing a binary for the wrong target can cause <span class=\"message-negative\">bad</span> things to happen."
+        "message": "Ensure you flash a file appropriate for your target.  Flashing a binary for the wrong target can cause <span class=\"message-negative\">bad</span> things to happen. 3 different firmware files could be flashed to the FC board:<br /><strong class=\"message-negative\">FC Firmware: </strong>the main fimware for flight controller.<br /><strong class=\"message-negative\">OSD Firmware: </strong>the firmware for OSD information.<br /><strong class=\"message-negative\">Sensor Firmware: </strong>the fimware for sensor data management."
     },
-
+    "firmwareFlasherTargetWarning_radio": {
+        "message": ""
+    },
     "firmwareFlasherPath": {
         "message": "Path:"
     },
@@ -3000,17 +3052,32 @@
     "firmwareFlasherSteps": {
         "message": "Stpes of how to flasher"
     },
+    "firmwareInfo": {
+        "message": "Firmware Info"
+    },
+    "firmwareInfoText": {
+        "message": "Configurator could recognise the loaded firmware automatically. The \"Flash xxx\" button will be active then."
+    },
+    "firmwareTarget": {
+        "message": "Current Selected Target"
+    },
     "firmwareFlasherOnlineSelectBuildType": {
         "message": "Select build type to see available boards."
     },
     "firmwareFlasherOnlineSelectBoardDescription": {
-        "message": "Select or auto-detect your board to see available online firmware releases - Select the correct firmware appropriate for your board."
+        "message": "Select the correct firmware appropriate for your board."
+    },
+    "firmwareFlasherOnlineSelectBoardDescription_radio": {
+        "message": "Select your radio controller to see available online firmware releases - Select the correct firmware appropriate for your readio controller."
     },
     "firmwareFlasherOnlineSelectBoardHint": {
         "message": "Starting with Betaflight 4.1, Betaflight is introducing support for <strong>Unified Targets</strong>. The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (F4, F7). To make the different boards work with the same firmware, a specific configuration file is deployed alongside the firmware when a Unified Target is flashed.<br>This version of Betaflight configurator supports flashing of Unified Targets with the respective board specific configurations in one step. The different firmware types that are available for each board are shown in the drop-down as follows:<br /><br /><strong>&lt;board name&gt;</strong> or<br><strong>&lt;board name&gt; (Legacy)</strong>:<br>non-unified target, or pre-4.1 versions of the firmware for Unified Targets.<br /><br /><strong>&lt;board name&gt; (&lt;manufacturer id&gt;)</strong>:<br>(4 character manufacturer id)<br>Unified Target.<br /><br /><strong>Please use Unified Targets where available.</strong> If you encounter problems using a Unified Target, please open an <a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">issue</a> and then use the non-unified target until the issue has been resolved."
     },
     "firmwareFlasherOnlineSelectFirmwareVersionDescription": {
         "message": "Select firmware version for your board."
+    },
+    "firmwareFlasherOnlineSelectFirmwareVersionDescription_radio": {
+        "message": "Select firmware version for your radio controller."
     },
     "firmwareFlasherNoRebootDescription": {
         "message": "Enable if your FC is in boot mode. i.e. if you powered on your FC with the bootloader pins jumped or whilst holding your FC's BOOT button."
@@ -3096,6 +3163,15 @@
     "firmwareFlasherFlashFirmware": {
         "message": "Flash Firmware"
     },
+    "firmwareFlasherFlashOSD": {
+        "message": "Flash OSD"
+    },
+    "firmwareFlasherFlashSensor": {
+        "message": "Flash Sensor"
+    },
+    "firmwareFlasherFlashFC": {
+        "message": "Flash FC"
+    },
     "firmwareFlasherGithubInfoHead": {
         "message": "GitHub Firmware Info"
     },
@@ -3115,13 +3191,22 @@
         "message": "Message:"
     },
     "firmwareFlasherWarningText": {
-        "message": "Please do <span class=\"message-negative\">not</span> try to flash <strong>non-Betaflight</strong> hardware with this firmware flasher.<br />Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>STM32 bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note: </strong><span class=\"message-negative\">Auto-Connect</span> is always disabled while you are inside firmware flasher.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your FC</strong> first, try rebooting, upgrade drivers.<br /><strong>Note:</strong> When flashing boards that have directly connected USB sockets (most newer boards) ensure you have read the USB Flashing section of the Betaflight manual and have the correct software and drivers installed"
+        "message": "Please do <span class=\"message-negative\">not</span> try to flash <strong>non-listed</strong> hardware with this firmware flasher. Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>Bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your FC</strong> first, try rebooting, upgrade drivers."
+    },
+    "firmwareFlasherWarningText_radio": {
+        "message": "Please do <span class=\"message-negative\">not</span> try to flash <strong>non-listed</strong> radio controller with this firmware flasher.<br />Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>Bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your radio controller</strong> first, try rebooting, upgrade drivers.<br />"
     },
     "firmwareFlasherRecoveryHead": {
         "message": "<strong>Recovery / Lost communication</strong>"
     },
+    "firmwareFlasherRecoveryHead_radio": {
+        "message": "<strong>Firmware Update Steps</strong>"
+    },
     "firmwareFlasherRecoveryText": {
-        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of Betaflight manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
+        "message": "Follow these steps to update the firmware of the FC board, include FC firmware, OSD firmware or Sensor firmware: <ul><li>Power off</li><li>Hold the button on the FC board.</li><li>Power on the FC board (via battery or USB), LED will be solid white if done correctly.</li><li>Release the button now. Connect the FC to the computer via USB data cable.</li><li>Select the correct COM port and click the \"Connect\" button on the top right of this page. Make sure the button change to red and text is \"Update Firmware\".If you are having trouble connecting to your flight controller,Click <a href=\"https://github.com/BETAFPV/BETAFPV_Configurator/blob/f8081ee8cfe1d636979aa5ec3e6427bb3e589ceb/docs/UpdateFirmwareProcedure.md\"target=\"_blank\" rel=\"noopener noreferrer\">How to update the firmware</a> ).</li><li>Select the correct firmware and version at the top of this page and click the button \"Load Firmware [Online]\" (load the firmware local from your computer would also be okay). The Configurator will recognise the firmware type automatically. Click the button \"Flash xxx\" to start flashing.</li><li>When flashing successfully, the FC wil re-start automatically.</li></ul>"
+    },
+    "firmwareFlasherRecoveryText_radio": {
+        "message": "Here is the step by step manual to update the firmware of the radio controller. <ul><li>Power off the radio controller.</li><li>Hold SETUP button and then Power on (LED ring will be solid blue and NOT red if done correctly).</li><li>Install all STM32 drivers and Zadig in your computer if required</li><li>Release SETUP button and connect it to the computer via USB data cable.</li><li>Select the correct COM port and click the \"Connect\" button on the top right of this page.</li><li>Flash with correct firmware.</li><li>Power off.</li></ul>"
     },
     "firmwareFlasherButtonLeave": {
         "message": "Leave Firmware Flasher"
@@ -3147,7 +3232,7 @@
         "description": "shown in the log, more wordy"
     },
     "firmwareFlasherRemoteFirmwareLoaded": {
-        "message": "<span class=\"message-positive\">Remote Firmware loaded, ready for flashing</span>"
+        "message": "<span class=\"message-positive\">Remote Firmware loaded, ready for flashing,Size:</span>"
     },
     "firmwareFlasherFailedToLoadOnlineFirmware": {
         "message": "Failed to load remote firmware"
@@ -6152,5 +6237,341 @@
     },
     "cordovaExitAppMessage": {
         "message": "Do you really want to close the configurator?"
+    },
+    "RadioSetup": {
+        "message": "Radio Setup"
+    },
+    "rocker_mode_description":{
+        "message":"Switch throttle stick position: Mode 1 (right stick throttle AKA Japan hand) Mode 2 (left stick throttle AKA American hand)"
+    },
+    "RadioSetupIRSystem": {
+        "message": "RF Module Setup"
+    },
+
+    "RadioSetupERSystem": {
+        "message": "ExpressLRS Protocol Setup"
+    },
+    "RadioSetupMIXS": {
+        "message": "MIXS"
+    },
+    "RadioSetupChannel": {
+        "message": "Channel"
+    },
+    "RadioSetupInput": {
+        "message": "Input"
+    },
+    "RadioSetupWeight": {
+        "message": "Scale"
+    },
+    "RadioSetupOffset": {
+        "message": "Offset"
+    },
+    "RadioSetupReverse": {
+        "message": "Reverse"
+    },
+    "RadioSetupMode": {
+        "message": "Mode"
+    },
+    "RadioSetupRefreshRate": {
+        "message": "Refresh Rate"
+    },
+    "RadioSetupTrainerPort": {
+        "message": "Trainer Port"
+    },
+    "RadioSetupInternalRadioModule":{
+        "message":"Internal RF module"
+    },
+    "RadioSetupIRSystemProtocol": {
+        "message": "Internal RF system radio link protocol"
+    },
+    "RadioSetupIRSystemPower": {
+        "message": "Power"
+    },
+    "RadioSetupIRPktRate": {
+        "message": "Pkt Rate"
+    },
+    "RadioSetupIRTLMRadio": {
+        "message": "TLM Radio"
+    },
+    "RadioSetupExternalRadioModule":{
+        "message":"External RF module"
+    },
+    "RadioSetupERSystemProtocol": {
+        "message": "External RF module serial port protocol"
+    },
+    "RadioSetupERSystemPowerSwitch": {
+        "message": "Power switch (power on/off the external RF module)"
+    },
+    "RadioSetupExELRSSystemPower": {
+        "message": "Power"
+    },
+    "RadioSetupexELRSPktRate": {
+        "message": "Pkt Rate"
+    },
+    "RadioSetupexELRSTLMRadio": {
+        "message": "TLM Radio"
+    },
+    "RadioSetupBind": {
+        "message": "Bind"
+    },
+    "RadioSetupWIFIUpdate": {
+        "message": "WIFI Update"
+    },
+    "RadioSetupRefresh": {
+        "message": "Refresh"
+    },
+    "RadioSetupSave": {
+        "message": "Save and reboot"
+    },
+    "Connect_HID":{
+        "message":"Connect RC"
+    },
+    "HID_Connecting":{
+        "message":"Connecting"
+    },
+    "disConnect_HID":{
+        "message":"Disconnect"
+    },
+    "HidDisConnecting":{
+        "message":"Disconnecting"
+    },
+    "ChooseRadioConfigurator": {
+        "message": "Click to Active Configurator for Radio Transmitter"
+    },
+    "ChooseFCConfigurator":{
+        "message": "Click to Active Configurator for FC Board"
+    },
+    "RadioSetupText":{
+        "message": "Internal RF module and external RF moudule could NOT open at the same time."
+    },
+    "RadioSetupRFconfigText":{
+        "message": "Internal RF module and external RF moudule could NOT open at the same time."
+    },
+    "RadioSetupExpressLRSText":{
+        "message": "Configurator could detect the ExpressLRS system automatically. Please make sure the ExpressLRS system exist and setup correctly in the left \"RF Module Setup\" tab. Do NOT forget to \"Save and reboot\"." 
+    },
+    "RadioSetupRadioModuleDetect":{
+        "message": "Undetected ELRS"
+    },
+    "RadioSetupInternel868M":{
+        "message": "<strong>Internal ELRS</strong> is runing,Radio frequency:<strong>868MHz</strong>."
+    },
+    "RadioSetupInternel915M":{
+        "message": "<strong>Internal ELRS</strong> is runing,Radio frequency:<strong>915MHz</strong>."
+    },
+    "RadioSetupInternel2_4G":{
+        "message": "<strong>Internal ELRS</strong> is runing,Radio frequency:<strong>2.4GHz</strong>."
+    },
+    "RadioSetupExternel868M":{
+        "message": "<strong>External ELRS</strong> is runing,Radio frequency:<strong>868MHz</strong>."
+    },
+    "RadioSetupExternel915M":{
+        "message": "<strong>External ELRS</strong> is runing,Radio frequency:<strong>915MHz</strong>."
+    },
+    "RadioSetupExternel2_4G":{
+        "message": "<strong>External ELRS</strong> is runing,Radio frequency:<strong>2.4GHz</strong>."
+    },
+    
+    "RadioSetupMIXSText":{
+        "message": "      MIXs is used to assign channels for Roll, Pitch, Yaw and Throttle vehicle control as well as determining whether they are reversed."
+    },
+    "RadioSetupFactoryReset":{
+        "message":"Factory Reset"
+    },
+    "RadioSetupEnterBinding":{
+        "message":"Binding Receiver"
+    },
+    "RadioSetupEnterWIFIUpdate":{
+        "message":"Enter WIFI Update"
+    },
+    "RadioSetupfactoryResetAlert":{
+        "message":"Channel Settings have been restored to their default values. Clicking 'Save and reboot' will save this setting"
+    },
+    "HIDPowerOffDialogLabel":{
+        "message":"Please make sure your liteRadio is power off."
+    },
+    "HIDPowerOffDialogTitle":{
+        "message":"Prompt"
+    },
+    "HIDPowerOffConfirm":{
+        "message":"OK"
+    },
+    "CloseInternalRadioDialogTitle":{
+        "message":"Prompt"
+    },
+    "CloseExternalRadioDialogLabel":{
+        "message":"Before enabling the external RF module, ensure that the built-in RF module is disabled."
+    },
+    "CloseExternalRadioConfirm":{
+        "message":"OK"
+    },
+    "CloseExternalRadioDialogTitle":{
+        "message":"Prompt"
+    },
+    "CloseInternalRadioDialogLabel":{
+        "message":"Before enabling the built-in RF module, ensure that the external RF module is disabled."
+    },
+    "CloseInternalRadioConfirm":{
+        "message":"OK"
+    },
+    "ConfirmTheLengthOfBindPhraseDialogTitle":{
+        "message":"Prompt"
+    },
+    "ConfirmTheLengthOfBindPhraseDialogLabel":{
+        "message":"Custom binding phrase must be longer than 6 characters."
+    },
+    "ConfirmTheLengthOfBindPhrase":{
+        "message":"OK"
+    },
+    "HIDisDisconnectDialogTitle":{
+        "message":"Prompt"
+    },
+    "HIDisDisconnectDialogLabel":{
+        "message":"HID is disconnect"
+    },
+    "HIDisDisconnect":{
+        "message":"OK"
+    },
+    "SelectAtLeastOneProtocolDialogTitle":{
+        "message":"Prompt"
+    },
+    "SelectAtLeastOneProtocolDialogLabel":{
+        "message":"You need to select at least one RADIO protocol."
+    },
+    "ConfirmSelectAtLeastOneProtocol":{
+        "message":"OK"
+    },
+    "factoryResetDialogTitle":{
+        "message":"Prompt"
+    },
+    "factoryResetDialogLabel":{
+        "message":"The channel configuration has been restored to factory Settings. Click 'Save and reboot' to save the configuration.  "
+    },
+    "ConfirmfactoryReset":{
+        "message":"OK"
+    },
+    "DialogTitle":{
+        "message":"Prompt"
+    },
+    "Confirm":{
+        "message":"OK"
+    },
+    "literadio_type":{
+        "message":"Unit type:"
+    },
+    "literadio_build_in_radio":{
+        "message":"Internal Radio module:"
+    },
+    "literadio_hardwareVersion":{
+        "message":"Hardware version:"
+    },
+    "literadio_firmwareVersion":{
+        "message":"Firmware version:"
+    },
+    "bindPhraseprompttext":{
+        "message":"If use spi ELRS Receiver,Go to Betaflight CLI and enter the following commands."
+    },
+    "Bind_phrase_setup":{
+        "message":"Enable Bind phrase"
+    },
+    "input_your_custom_binding_phrase_here":{
+        "message":"input your custom binding phrase here"
+    },
+    "bind_phrase_must_be_more_then_6_characters":{
+        "message":"Custom binding phrase must be longer than 6 characters"
+    },
+    "upgrade_the_firmware_of_liteRadio":{
+        "message":"Your firmware is not the latest version and you can upgrade it on 'Firmware Flasher'"
+    },
+    "upgrade_version_of_configurator":{
+        "message":"You need to use a new version of configurator"
+    },
+    "write_file_failed":{
+        "message":"Save LiteRadio firmware failed.Please run the configurator as an administrator."
+    },
+    "dialogCalibrateAcclerometerOK":{
+        "message":"Calibration accelerometer successful."
+    },
+    "dialogCalibrateAcclerometerFailed":{
+        "message":"Calibration accelerometer failed."
+    },
+    "dialogFactoryResetOK":{
+        "message":"Restore factory settings successfull"
+    },
+    "dialogFactoryResetfailed":{
+        "message":"Restore factory settings failed"
+    },
+    "dialogPidSaveOK":{
+        "message":"Save PID successful"
+    },
+    "dialogPidSavefailed":{
+        "message":"Save PID failed! Please check the connection"
+    },
+    "dialogRatesSaveOK":{
+        "message":"Save Rates successful"
+    },
+    "dialogRatesSavefailed":{
+        "message":"Save Rates failed! Please check the connection"
+    },
+    "Connect_Serial_Port_Firstlt":{
+        "message":"Please Select Correct Serial Port and Connect It Firstly"
+    },
+    "Flash_failed":{
+        "message":"Flash failed!"
+    },
+    "Check_Serial_Port_and_enter_bootloader":{
+        "message":"Please check the serial port is correctly selected and the FC has entered the bootloader."
+    },
+    "DeviceOpenFail": {
+        "message": "Failed to open USB device!"
+    },
+    "NoConfigurationReceived": {
+        "message": "No configuration received, communication failed"
+    },
+    "NoValidPort": {
+        "message": "1.Please select valid serial port.\n2.Or upgrade your flight control firmware and connect again."
+    },
+    "FailedToLoadFile":{
+        "message":"Invalid network "
+    },
+    "InvalidNetwork":{
+        "message":"Please check whether your network is connected."
+    },
+    "flightControl":{
+        "message": "Flight Control"
+    },
+    "Sensors":{
+        "message": "Sensors"
+    },
+    "OSD":{
+        "message": "OSD"
+    },
+    "cetus_pro_hardware_gte_1_2":{
+        "message": "Cetus Pro which hardware version is 1.2 or later"
+    },
+    "cetus_pro_hardware_lt_1_2":{
+        "message": "Cetus Pro which hardware version is earlier than 1.2"
+    },
+    "Unable_to_find_serial_port":{
+        "message":"Unable to find serial port？"
+    },
+    "UniqueDeviceId":{
+        "message":"SerialNumber"
+    },
+    "updateFCfirmware":
+    {
+        "message":"update newer firmware"
+    },
+    "JoystickDeadZone":
+    {
+        "message":"Joystick Dead Zone"
+    },
+    "BuzzerSwitch":
+    {
+        "message":"Buzzer Switch"
+    },
+    "extra_custom_config":
+    {
+        "message":"Other Setting"
     }
 }

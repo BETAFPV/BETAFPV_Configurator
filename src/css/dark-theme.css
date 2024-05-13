@@ -78,7 +78,7 @@ dialog {
 }
 
 .gui_box {
-    border: 1px solid #4d4d4d;
+    border: 4px solid #4d4d4d;
     background-color: #393b3a;
 }
 
@@ -385,7 +385,7 @@ progress[value]::-webkit-progress-bar {
 }
 
 .tab-landing .logowrapper img {
-    content:url(../images/cf_logo_black.svg);
+    height: 60px;
 }
 
 .tab-landing .content_mid .text3 .wrap2 {
@@ -433,11 +433,6 @@ progress[value]::-webkit-progress-bar {
     color: white;
 }
 
-.tab-motors input,
-.tab-motors select {
-    background-color: #3a3a3a;
-    color: white;
-}
 
 .tab-motors .plot_control {
     background-color: #393b3a;

@@ -269,6 +269,9 @@
     "tabOptions": {
         "message": "选项"
     },
+    "tabCalibration":{
+        "message": "校准"
+    },
     "tabSetup": {
         "message": "设置"
     },
@@ -459,7 +462,7 @@
         "message": "解除保护程序初始化失败"
     },
     "noConfigurationReceived": {
-        "message": "<span class=\"message-negative\">10秒</span>内没有接收到配置信息，飞控通信 <span class=\"message-negative\"> 失败</span>"
+        "message": "<span class=\"message-negative\">3秒</span>内没有接收到配置信息，飞控通信 <span class=\"message-negative\"> 失败</span>"
     },
     "firmwareVersionNotSupported": {
         "message": "Betaflight 配置程序<span class=\"message-negative\">不支持</span>该固件版本。请更新固件以确保其API版本为 <strong>$1</strong> 或者更高。更新固件之前，使用 CLI 来备份设置。使用 CLI 进行备份/恢复的具体操作流程请参考Betaflight文档。<br />如果不想将固件更新到最新版本，可以下载使用支持该固件的旧版配置程序。"
@@ -605,22 +608,43 @@
         "message": "EEPROM <span class=\"message-positive\">已保存</span>"
     },
     "defaultWelcomeIntro": {
-        "message": "欢迎使用 <strong>Betaflight - 配置程序</strong>，为简化固件升级，设置和调校飞控而生的工具。"
+        "message": "欢迎使用 <strong>BETAFPV - 配置程序（飞控）</strong>，为简化固件升级，设置和调校而生的工具。"
+    },
+    "defaultWelcomeIntro_radio": {
+        "message": "欢迎使用 <strong>BETAFPV - 配置程序（遥控器）</strong>，为简化遥控器固件升级，设置和调校而生的工具。"
     },
     "defaultWelcomeHead": {
-        "message": "硬件"
+        "message": "支持飞控"
     },
     "defaultWelcomeText": {
-        "message": "本应用支持所有能运行 Betaflight 的飞控。在 “固件烧写” 页面查看所有支持的飞控列表。<br /><br /><a href=\"https://github.com/betaflight/blackbox-log-viewer/releases\" target=\"_blank\" rel=\"noopener noreferrer\">下载 Betaflight Blackbox 日志查看工具</a><br /><br />固件源代码可以点击<a href=\"https://github.com/betaflight/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">这里</a>下载<br /><br />最新的<b>STM USB VCP 驱动</b>可以点击<a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">这里</a>下载<br />对于旧的使用 CP210x USB 转串口芯片的硬件：<br />最新的<b>CP210x 驱动</b>可以点击<a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers\" target=\"_blank\" rel=\"noopener noreferrer\">这里</a>下载<br />最新的<b>Zadig</b> Windows USB驱动安装程序可以点击<a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">这里</a>下载<br />"
+        "message": "本应用只支持下面罗列的飞控。"
+    },
+    "promptOfUseFCConfigurator":{
+        "message": "<br /><strong>当前为飞控配置程序，基本使用说明如下：</strong><br />飞控固件升级和烧写请点击左侧“固件烧写工具；<br /><br />进入飞控参数配置界面步骤如下：<br />1.用USB数据线连接飞控到电脑；<br />2.飞控将会被识别为COM口；<br />3.在右上角选择对应的COM口和波特率（默认115200即可），点击右上角“连接”按钮，进入飞控参数设置界面。<br /><strong class=\"message-negative\">注意：如果无法进入参数配置界面，请先升级飞控固件。</strong>"
+    },
+    "defaultWelcomeText_radio": {
+        "message": "本应用只支持下面罗列的飞控。 "
+    },
+    "promptOfUseFCConfigurator_radio":{
+        "message": " <br />点击下面黄色按钮切换到飞控配置程序。"
     },
     "defaultContributingHead": {
-        "message": "参与开发"
+        "message": "支持遥控器"
     },
     "defaultContributingText": {
-        "message": "如果你想帮助 Betaflight 变得更好，你可以：<br /><ul><li>用您的 Betaflight 知识来为 <a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">我们的wiki</a> 创建或更新内容，或者是在论坛里回答其他用户的问题；</li><li>为固件和配置程序 <a href=\"https://github.com/betaflight/betaflight/blob/master/docs/development/Development.md\" target=\"_blank\" rel=\"noopener noreferrer\">贡献代码</a> - 增加新功能，解决漏洞，改善代码；</li><li>测试 <a href=\"https://github.com/Betaflight/betaflight/pulls\" target=\"_blank\" rel=\"noopener noreferrer\">新功能和修改</a> 并提供测试反馈；</li><li>帮助在 <a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">问题追踪器</a> 上报告问题的用户解决问题，并参与功能请求的讨论；</li><li><a href=\"https://github.com/betaflight/betaflight/tree/master/README.md#Translators\" target=\"_blank\" rel=\"noopener noreferrer\">为 Betaflight 配置程序添加新语言的翻译</a>，或者帮助维护既有的翻译。</li></ul>"
+        "message": "本应用只支持下面罗列的遥控器。"
+    },
+    "promptOfUseRadioConfigurator":{
+        "message": "<br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br /><br />点击下面黄色按钮切换到遥控器配置程序。"
+    },
+    "defaultContributingText_radio": {
+        "message": "本应用只支持下面罗列的遥控器。"
+    },
+    "promptOfUseRadioConfigurator_radio":{
+        "message":"<br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br /><br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />遥控器固件烧写请点击左侧“固件烧写工具”；<br />遥控器参数配置，首先将遥控器关机，用USB数据线连接遥控器到电脑，遥控器红色或者绿色灯逐渐闪烁，点击右上角“连接遥控器”按钮进入配置界面。"
     },
     "defaultFacebookText": {
-        "message": "我们还有一个 <a href=\"https://www.facebook.com/groups/betaflightgroup/\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook 小组</a>。<br />加入我们来一起讨论 Betaflight，询问配置问题，或者只是和小伙伴们闲聊。"
+        "message": "我们还有一个 <a href=\"https://mp.weixin.qq.com/s/3fxc5h2dheOTfRshuTv9qw\" target=\"_blank\" rel=\"noopener noreferrer\">微信公众号</a>。<br />关注我们获取最新动态，寻求技术支持，或者只是和小伙伴们闲聊。"
     },
     "defaultChangelogHead": {
         "message": "配置程序 - 更新日志"
@@ -708,7 +732,7 @@
         "message": "恢复默认设置"
     },
     "initialSetupResetText": {
-        "message": "恢复<strong>默认</strong>设置"
+        "message": "恢复默认设置（包括PID以及RATE曲线）"
     },
     "initialSetupButtonBackup": {
         "message": "备份"
@@ -732,7 +756,7 @@
         "message": "配置恢复<span class=\"message-positive\">成功</span>"
     },
     "initialSetupButtonResetZaxis": {
-        "message": "重置 Z 轴，补偿：0 度"
+        "message": "重置 Z 轴"
     },
     "initialSetupButtonResetZaxisValue": {
         "message": "重置 Z 轴，补偿: $1 度"
@@ -2383,7 +2407,7 @@
         "message": "$1 mAh"
     },
     "motorsText": {
-        "message": "电机"
+        "message": "电机测试"
     },
     "motorNumber1": {
         "message": "电机 - 1"
@@ -2408,6 +2432,18 @@
     },
     "motorNumber8": {
         "message": "电机 - 8"
+    },
+    "motorButtonSave": {
+        "message": "保存"
+    },
+    "motorButtonRefresh": {
+        "message": "刷新"
+    },
+    "motor_setup":{
+        "message":"电机设置"
+    },
+    "idelThrottleValue":{
+        "message":"电机怠速数值[%]"
     },
     "servosText": {
         "message": "舵机"
@@ -2471,7 +2507,7 @@
         "message": "<strong>电机测试模式/解除锁定提示：</strong> <br/>移动滑块或用遥控器解锁飞机会导致电机 <strong> 旋转 </strong>！ <br/> 为了避免造成伤害，在使用此功能之前<strong class=\"message-negative\">卸下所有螺旋桨</strong>！ <br/> 启用电机测试模式还将暂时禁用[预防起飞失控]，以避免在工作台上无螺旋桨测试时自动锁定电机。 <br/>"
     },
     "motorsEnableControl": {
-        "message": "<strong>我已了解风险 </strong>， 螺旋桨已被拆除 - 启用电机控制和允许解锁，并禁用[预防起飞失控]。"
+        "message": "<strong>我已了解风险 </strong>， 螺旋桨已被拆除 - 启用电机控制和允许解锁"
     },
     "sensorsInfo": {
         "message": "请注意，设置过高的图形刷新率会缩短尤其是笔记本电脑的电池使用时间。<br />建议只打开你感兴趣的传感器的图形显示并使用合理的刷新率"
@@ -2492,32 +2528,34 @@
         "message": "磁力计"
     },
     "sensorsAltitudeSelect": {
-        "message": "高度"
+        "message": "气压计"
     },
     "sensorsSonarSelect": {
-        "message": "声呐"
+        "message": "激光"
     },
     "sensorsDebugSelect": {
-        "message": "调试"
+        "message": "光流"
     },
     "sensorsGyroTitle": {
         "message": "陀螺仪 - 度/秒"
     },
- 
+    "sensorsAccelTitle": {
+        "message": "加速度计 - g"
+    },
     "sensorsMagTitle": {
         "message": "磁力计 - Ga"
     },
     "sensorsAltitudeTitle": {
-        "message": "高度 - 米"
+        "message": "气压计 - 厘米"
     },
     "sensorsAltitudeHint": {
         "message": "高度的计算方法是将气压计(如果可用) 的输出与 GPS(如果可用) 的高度输出结合起来。如果已连接到一个 GPS 模块且 GPS 模块定位成功后，则将在未解锁时显示相对于海平面的绝对高度。解锁后，显示相对于解锁时的相对高度。"
     },
     "sensorsSonarTitle": {
-        "message": "声呐 - 厘米"
+        "message": "激光 - 厘米"
     },
     "sensorsDebugTitle": {
-        "message": "调试"
+        "message": "光流"
     },
     "cliInfo": {
         "message": "<strong>注意：</strong>退出 CLI 页面或者点击断开连接将<strong>自动</strong>向飞控发送“<strong>退出</strong>”指令。在最新的固件中这将使飞控<strong>重启</strong>并且未保存的设置将会<strong>丢失</strong>。<p><strong><span class=\"message-negative\">警告：</span></strong>CLI中的某些命令可能导致电机输出引脚发出随机指令。如果连接电池，这有可能导致电机旋转。因此，强烈建议<strong>在 CLI 中输入命令之前确保未连接电池</strong>。"
@@ -2709,7 +2747,7 @@
         "message": "制造商 ID："
     },
     "firmwareFlasherReleaseVersion": {
-        "message": "版本:"
+        "message": "固件版本："
     },
     "firmwareFlasherReleaseVersionUrl": {
         "message": "访问发布信息页面"
@@ -2718,13 +2756,22 @@
         "message": "发布说明："
     },
     "firmwareFlasherReleaseDate": {
-        "message": "日期："
+        "message": "编译日期："
     },
     "firmwareFlasherReleaseTarget": {
-        "message": "飞控目标："
+        "message": "固件类型："
     },
     "firmwareFlasherReleaseFile": {
         "message": "二进制"
+    },
+    "firmwareFlasherFileName":{
+        "message":"文件名："
+    },
+    "firmwareFlasherTarget":{
+        "message":"目标："
+    },
+    "firmwareFlasherBoard":{
+        "message":"目标板："
     },
     "firmwareFlasherUnifiedTargetName": {
         "message": "统一目标："
@@ -2739,7 +2786,10 @@
         "message": "手动下载"
     },
     "firmwareFlasherTargetWarning": {
-        "message": "<span class=\"message-negative\">重要</span>：请选择飞控对应的固件，如果烧写错误的固件将会导致 <span class=\"message-negative\">糟糕</span> 的事发生。"
+        "message": "请选择飞控对应的固件，如果烧写错误的固件将会导致 <span class=\"message-negative\">糟糕</span> 的事发生。可以通过本上位机烧写飞控板上的3份不同固件：<br><span class=\"message-negative\">飞控固件</span>：飞行控制的主程序固件；<br><span class=\"message-negative\">OSD固件</span>：控制OSD信息显示的程序固件；<br><span class=\"message-negative\">传感器固件</span>：对光流、TOF等传感器数据进行采集处理的程序固件；"
+    },
+    "firmwareFlasherTargetWarning_radio": {
+        "message": "<span class=\"message-negative\">重要</span>：请选择遥控器对应的固件，如果烧写错误的固件将会导致 <span class=\"message-negative\">糟糕</span> 的事发生。"
     },
     "firmwareFlasherPath": {
         "message": "路径："
@@ -2768,17 +2818,35 @@
     "firmwareFlasherSteps": {
         "message": "固件刷写步骤"
     },
+    "firmwareInfo": {
+        "message": "固件信息"
+    },
+    "firmwareInfoText": {
+        "message": "本程序自动识别加载的固件信息，并且激活右下角的“烧写xxx”按钮。"
+    },
+    "firmwareTarget": {
+        "message": "当前更新目标"
+    },
     "firmwareFlasherOnlineSelectBuildType": {
         "message": "选择 \"生成类型\" 以查看可用的飞控板。"
     },
     "firmwareFlasherOnlineSelectBoardDescription": {
-        "message": "选择你的飞控型号"
+        "message": "选择你的硬件型号"
+    },
+    "firmwareFlasherOnlineSelectTargetDescription": {
+        "message": "选择你的目标型号"
+    },
+    "firmwareFlasherOnlineSelectBoardDescription_radio": {
+        "message": "选择你的遥控器型号"
     },
     "firmwareFlasherOnlineSelectBoardHint": {
         "message": "从 Betaflight 4.1 开始，Betaflight 引入了对<strong>统一目标</strong>的支持。统一目标的概念意味着使用相同MCU (F4、F7) 的飞控板可以使用相同的 .hex 固件文件。为了使不同的飞控板使用相同的固件，在刷写统一目标后，将在固件内部署一个特定的配置文件。<br>此版本的 Betaflight 配置程序支持一步刷写带有各自飞控板特定配置的统一目标。下拉列表中显示了每个飞控板可用的不同固件类型，如下所示: <br><br><strong>&lt;board name&gt;</strong>或<br><strong>&lt;board name&gt;(旧格式)</strong>:<br>非统一目标，或4.1版本之前的统一目标。<br><br><strong>&lt;board name&gt;(&lt;manufacturer id&gt;)</strong>:<br>(4字母制造商ID)<br>统一目标。<br><br><strong>若统一目标可用请使用统一目标。</strong>如果您在使用统一目标时遇到问题，请打开一个<a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">issue</a>然后使用非统一目标，直至问题解决。"
     },
     "firmwareFlasherOnlineSelectFirmwareVersionDescription": {
-        "message": "选择对应你飞控型号的固件版本"
+        "message": "选择对应你硬件型号的固件版本"
+    },
+    "firmwareFlasherOnlineSelectFirmwareVersionDescription_radio": {
+        "message": "选择对应你遥控器型号的固件版本"
     },
     "firmwareFlasherNoRebootDescription": {
         "message": "如果你的飞控已经处于boot模式下则启用这个选项。比如你在插电时已经短接了飞控的boot引脚或者按住了boot按钮。"
@@ -2864,6 +2932,15 @@
     "firmwareFlasherFlashFirmware": {
         "message": "烧写固件"
     },
+    "firmwareFlasherFlashOSD": {
+        "message": "烧写OSD"
+    },
+    "firmwareFlasherFlashSensor": {
+        "message": "烧写传感器"
+    },
+    "firmwareFlasherFlashFC": {
+        "message": "烧写飞控"
+    },
     "firmwareFlasherGithubInfoHead": {
         "message": "GitHub 固件信息"
     },
@@ -2883,13 +2960,22 @@
         "message": "信息："
     },
     "firmwareFlasherWarningText": {
-        "message": "请<span class=\"message-negative\">不要</span>尝试烧写<strong> Betaflight 不支持的飞控板</strong>。<br />烧写固件过程中千万<span class=\"message-negative\">不要</span> <strong>断开飞控连接</strong> 或 <strong>关闭电脑</strong><br /><br /><strong>注意：</strong>STM32 的 bootloader 储存在ROM中，所以不会有变砖可能。<br /><strong>注意：在固件烧写页面</strong><span class=\"message-negative\">自动连接</span>会被自动禁用。<br /><strong>注意：</strong>烧写固件可能会清空设置，请务必先备份好你的数据。<br /><strong>注意：</strong>如果烧写遇到问题，<strong>尝试拔掉连接到飞控的所有连线</strong> 然后尝试重启，更新配置程序，升级驱动。<br /><strong>注意：</strong>当使用虚拟USB（VCP）的飞控（大多数新的飞控都是），请仔细阅读 Betaflight 手册 USB flashing 部分章节，并确保驱动和软件已正确安装。"
+        "message": "请<span class=\"message-negative\">不要</span>尝试烧写<strong>不支持的飞控</strong>。烧写固件过程中千万<span class=\"message-negative\">不要</span> <strong>断开飞控连接</strong> 或 <strong>关闭电脑</strong><br /><br /><strong class=\"message-negative\">驱动要求：</strong>飞控升级使用虚拟USB（VCP），请确保驱动和软件已正确安装。<br /><strong>注意：</strong>Bootloader储存在ROM中，所以不会有变砖可能。<br /><strong>注意：</strong>烧写固件可能会清空设置，请务必先备份好你的数据。<br /><strong>注意：</strong>如果烧写遇到问题，<strong>尝试拔掉连接到飞控的所有连线</strong> 然后尝试重启，更新配置程序，升级驱动。"
+    },
+    "firmwareFlasherWarningText_radio": {
+        "message": "请<span class=\"message-negative\">不要</span>尝试烧写<strong>不支持的遥控器</strong>。<br />烧写固件过程中千万<span class=\"message-negative\">不要</span> <strong>断开遥控器连接</strong> 或 <strong>关闭电脑</strong><br /><br /><strong class=\"message-negative\">驱动要求：</strong>遥控器升级使用虚拟USB（VCP），请确保驱动和软件已正确安装。<br /><strong>注意：</strong>Bootloader储存在ROM中，所以不会有变砖可能。<br /><strong>注意：</strong>烧写固件可能会清空设置，请务必先备份好你的数据。<br /><strong>注意：</strong>如果烧写遇到问题，<strong>尝试拔掉连接到遥控器的所有连线</strong> 然后尝试重启，更新配置程序，升级驱动。"
     },
     "firmwareFlasherRecoveryHead": {
         "message": "<strong> 恢复/丢失通信 </strong>"
     },
+    "firmwareFlasherRecoveryHead_radio": {
+        "message": "<strong> 遥控器固件烧写步骤 </strong>"
+    },
     "firmwareFlasherRecoveryText": {
-        "message": "如果飞控板失去通信，你可以按照以下的几个步骤来恢复：<ul><li>关闭电源</li><li>打开'无重启序列'，打开‘擦除整个芯片‘选项。</li><li>短接 BOOT 引脚，或者按住 BOOT 按键。</li><li>上电(如果操作正确，飞控的“活动”灯不会闪烁)。</li><li>如果需要请安装 STM32 驱动和 Zadig (参阅 Betaflight 手册<a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> 部分 ).</li><li>关闭 Befaflight 软件，关闭所有 Chrome 应用，然后重新启动Betaflight。</li><li>释放 BOOT 按键（如有）。</li><li>烧写正确的固件(参照飞控厂商制定的波特率)。</li><li>断电。</li><li>移除 BOOT 引脚的短接。</li><li>上电(飞控“活动”灯应该会闪烁).</li><li>正常连接。</li></ul>"
+        "message": "你可以按照以下的几个步骤来重刷固件，包括飞控固件，OSD固件或者传感器固件。<ul><li>飞控断电；</li><li>按住飞控底部的按键；</li><li>上电（通过电池或者USB上电都可以），如果操作正确，飞控底部LED灯白色常亮，表示已经处于固件烧写状态；</li><li>松开飞控底部按键，将飞控通过USB数据线连接电脑；</li><li>飞控将会被识别为COM口，在右上角选择其对应的COM口和波特率（默认使用115200），再点击“连接”按钮，按钮变为红色且显示“更新固件”则表示连接成功；如果未被正确识别为COM口，请检查驱动是否安装正确。(参阅链接：<a href=\"https://github.com/BETAFPV/BETAFPV_Configurator/blob/3d91a106fb9f8dc863cd80cc85afa5c0b9b194c8/docs/UpdateFirmwareProcedure_CN.md\"target=\"_blank\" rel=\"noopener noreferrer\">如何更新飞控固件</a> ).</li><li>在本页面顶部下拉框中，选择对应的飞控硬件型号和固件版本，点击从网络加载固件（或者从本地电脑加载固件）。上位机能够自动识别加载的固件类型（飞控固件、OSD固件或者传感器固件），并且点亮右下角对应的“烧写xxx”按钮，点击该按钮开始烧写；</li><li>等待烧写进度条提示烧写完成，飞控将可以自动重启。</li></ul>"
+    },
+    "firmwareFlasherRecoveryText_radio": {
+        "message": "遥控器固件烧写步骤如下：<ul><li>遥控器关机；</li><li>按住遥控器SETUP按键，开机，遥控器蓝灯常亮，在“滴滴滴”三声之后，表示已经处于固件烧写状态；</li><li>松开SETUP按键，将遥控器通过USB数据线连接电脑；</li><li>遥控器将会被识别为COM口，在右上角选择其对应的COM口和波特率，再点击“连接”按钮，按钮变为红色则表示连接成功；</li><li>选择对应的固件，点击从网络加载固件。若网络无法连接则需要在本地导入固件。点击右下角“烧写固件”按钮</li><li>等待烧写进度条提示烧写完成，断开USB连接并重启遥控器</li></ul>"
     },
     "firmwareFlasherButtonLeave": {
         "message": "关闭固件烧写"
@@ -2915,7 +3001,7 @@
         "description": "shown in the log, more wordy"
     },
     "firmwareFlasherRemoteFirmwareLoaded": {
-        "message": "<span class=\"message-positive\">固件加载成功，可供烧录</span>"
+        "message": "<span class=\"message-positive\">固件加载成功，可供烧录。固件大小：</span>"
     },
     "firmwareFlasherFailedToLoadOnlineFirmware": {
         "message": "加载固件失败"
@@ -5754,5 +5840,343 @@
     },
     "cordovaExitAppMessage": {
         "message": "你确定要关闭配置程序吗？"
+    },
+    "RadioSetup": {
+        "message": "基本配置"
+    },
+    "rocker_mode_description":{
+        "message":"摇杆模式：Mode 1（右手油门，又叫日本手）  Mode 2（左手油门，又叫美国手）"
+    },
+    
+    "RadioSetupIRSystem": {
+        "message": "射频模块配置"
+    },
+
+    "RadioSetupERSystem": {
+        "message": "ExpressLRS系统配置"
+    },
+    "RadioSetupMIXS": {
+        "message": "通道配置"
+    },
+    "RadioSetupChannel": {
+        "message": "通道"
+    },
+    "RadioSetupInput": {
+        "message": "输入"
+    },
+    "RadioSetupWeight": {
+        "message": "比例"
+    },
+    "RadioSetupOffset": {
+        "message": "偏移补偿"
+    },
+    "RadioSetupReverse": {
+        "message": "反向"
+    },
+    "RadioSetupMode": {
+        "message": "模式"
+    },
+    "RadioSetupRefreshRate": {
+        "message": "刷新速率"
+    },
+    "RadioSetupTrainerPort": {
+        "message": "  教练端口输出"
+    },
+    "RadioSetupInternalRadioModule":{
+        "message":"内置射频模块"
+    },
+    "RadioSetupIRSystemProtocol": {
+        "message": "  内置射频模块无线协议"
+    },
+    "RadioSetupIRSystemPower": {
+        "message": "  功率"
+    },
+    "RadioSetupIRPktRate": {
+        "message": "  数据包率"
+    },
+    "RadioSetupIRTLMRadio": {
+        "message": "  遥测率"
+    },
+    "RadioSetupExternalRadioModule":{
+        "message":"外置射频模块"
+    },
+    "RadioSetupERSystemProtocol": {
+        "message": "  外置射频模块接口通信协议（默认CRSF）"
+    },
+    "RadioSetupERSystemPowerSwitch": {
+        "message": "  外置射频模块供电控制（开启/关闭外置射频模块的电源）"
+    },
+    "RadioSetupExELRSSystemPower": {
+        "message": "  发射功率"
+    },
+    "RadioSetupexELRSPktRate": {
+        "message": "  数据包率"
+    },
+    "RadioSetupexELRSTLMRadio": {
+        "message": "  遥测率"
+    },
+    "RadioSetupBind": {
+        "message": "绑定"
+    },
+    "RadioSetupWIFIUpdate": {
+        "message": "WIFI 更新"
+    },
+    "RadioSetupRefresh": {
+        "message": "刷新"
+    },
+    "RadioSetupSave": {
+        "message": "保存并重启"
+    },
+    "Connect_HID":{
+        "message":"连接遥控器"
+    },
+    "HID_Connecting":{
+        "message":"连接中"
+    },
+    "disConnect_HID":{
+        "message":"断开遥控器"
+    },
+    "HidDisConnecting":{
+        "message":"断开连接中"
+    },
+    "ChooseRadioConfigurator": {
+        "message": "切换为遥控器配置程序"
+    },
+    "ChooseFCConfigurator":{
+        "message": "切换为飞控配置程序"
+    },
+    "RadioSetupText":{
+        "message": "遥控器配置说明文本"
+    },
+    "RadioSetupRFconfigText":{
+        "message": "可以选择遥控器内置射频模块，也可以选择启用外置高频头。两者不可同时启用。<br /><br />"
+    },
+    "RadioSetupExpressLRSText":{
+        "message": "如果内置射频模块或者外置高频头为ELRS系统，则可通过本模块配置其参数。程序能够自动检测ELRS系统是否存在。如果本模块为灰色不可配置，请确保ELRS系统存在，并且连接供电正确。同时，请在左侧“射频模块配置”中配置正确，<span class=\"message-negative\">保存并重启</span>。"
+    },
+    "RadioSetupRadioModuleDetect":{
+        "message": "未检测到LERS系统"
+    },
+    "RadioSetupInternel868M":{
+        "message": "<strong>内置ELRS</strong>正在运行中，工作频段：<strong>868MHz</strong>。"
+    },
+    "RadioSetupInternel915M":{
+        "message": "<strong>内置ELRS</strong>正在运行中，工作频段：<strong>915MHz</strong>。"
+    },
+    "RadioSetupInternel2_4G":{
+        "message": "<strong>内置ELRS</strong>正在运行中，工作频段：<strong>2.4GHz</strong>。"
+    },
+    "RadioSetupExternel868M":{
+        "message": "<strong>外置ELRS</strong>正在运行中，工作频段：<strong>868MHz</strong>。"
+    },
+    "RadioSetupExternel915M":{
+        "message": "<strong>外置ELRS</strong>正在运行中，工作频段：<strong>915MHz</strong>。"
+    },
+    "RadioSetupExternel2_4G":{
+        "message": "<strong>外置ELRS</strong>正在运行中，工作频段：<strong>2.4GHz</strong>。"
+    },
+    
+    "RadioSetupMIXSText":{
+        "message": "通道混控说明文本"
+    },
+    "RadioSetupFactoryReset":{
+        "message":"恢复出厂设置"
+    },
+    "RadioSetupEnterBinding":{
+        "message":"绑定接收机"
+    },
+    "RadioSetupEnterWIFIUpdate":{
+        "message":"进入WIFI更新"
+    },
+    "RadioSetupfactoryResetAlert":{
+        "message":"通道设置已恢复默认值，点击'保存并重启'将保存此设置"
+    },
+    "HIDPowerOffDialogLabel":{
+        "message":"请确保您的遥控器处于关机状态。"
+    },
+    "HIDPowerOffDialogTitle":{
+        "message":"提示"
+    },
+    "HIDPowerOffConfirm":{
+        "message":"确认"
+    },
+    "CloseInternalRadioDialogTitle":{
+        "message":"提示"
+    },
+    "CloseExternalRadioDialogLabel":{
+        "message":"在开启外置射频模块之前，您需要确保内置射频模块处于关闭状态。"
+    },
+    "CloseExternalRadioConfirm":{
+        "message":"确认"
+    },
+    "CloseExternalRadioDialogTitle":{
+        "message":"提示"
+    },
+    "CloseInternalRadioDialogLabel":{
+        "message":"在开启内置射频模块之前，您需要确保外置射频模块处于关闭状态。"
+    },
+    "CloseInternalRadioConfirm":{
+        "message":"确认"
+    },
+    "ConfirmTheLengthOfBindPhraseDialogTitle":{
+        "message":"提示"
+    },
+    "ConfirmTheLengthOfBindPhraseDialogLabel":{
+        "message":"绑定密语的长度不能少于6个字母或数字。"
+    },
+    "ConfirmTheLengthOfBindPhrase":{
+        "message":"确认"
+    },
+    "HIDisDisconnectDialogTitle":{
+        "message":"提示"
+    },
+    "HIDisDisconnectDialogLabel":{
+        "message":"遥控器已断开连接。"
+    },
+    "HIDisDisconnect":{
+        "message":"确认"
+    },
+    "SelectAtLeastOneProtocolDialogTitle":{
+        "message":"提示"
+    },
+    "SelectAtLeastOneProtocolDialogLabel":{
+        "message":"您至少需要选择一种遥控射频协议。"
+    },
+    "ConfirmSelectAtLeastOneProtocol":{
+        "message":"确认"
+    },
+    "factoryResetDialogTitle":{
+        "message":"提示"
+    },
+    "factoryResetDialogLabel":{
+        "message":"通道配置已经恢复为出厂设置状态，点击‘保存并重启’遥控器将保存此配置。"
+    },
+    "ConfirmfactoryReset":{
+        "message":"确认"
+    },
+    "DialogTitle":{
+        "message":"提示"
+    },
+    "Confirm":{
+        "message":"确认"
+    },
+    "literadio_type":{
+        "message":"遥控器型号:"
+    },
+    "literadio_build_in_radio":{
+        "message":"内置射频模块:"
+    },
+    "literadio_hardwareVersion":{
+        "message":"硬件版本:"
+    },
+    "literadio_firmwareVersion":{
+        "message":"固件版本:"
+    },
+    "bindPhraseprompttext":{
+        "message":"如果使用spi ELRS接收机，需要将飞控在Betaflight CLI 中输入以下命令。"
+    },
+    "Bind_phrase_setup":{
+        "message":"使用绑定密语"
+    },
+    "input_your_custom_binding_phrase_here":{
+        "message":"请输入自定义绑定短语"
+    },
+    "bind_phrase_must_be_more_then_6_characters":{
+        "message":"绑定密语不能少于6个字母或数字"
+    },
+    "upgrade_the_firmware_of_liteRadio":{
+        "message":"您的遥控器固件有最新版本可用，可在“固件烧写工具”进行升级"
+    },
+    "upgrade_version_of_configurator":{
+        "message":"您需要使用更高版本的上位机以确保功能正常使用"
+    },
+    "write_file_failed":{
+        "message":"保存遥控器固件信息失败，请以管理员身份运行软件."
+    },
+    "dialogCalibrateAcclerometerOK":{
+        "message":"加速度计校准成功"
+    },
+    "dialogCalibrateAcclerometerFailed":{
+        "message":"加速度计校准失败"
+    },
+    "dialogFactoryResetOK":{
+        "message":"恢复出厂设置成功"
+    },
+    "dialogFactoryResetfailed":{
+        "message":"恢复出厂设置失败"
+    },
+    "dialogPidSaveOK":{
+        "message":"PID设置成功"
+    },
+    "dialogPidSavefailed":{
+        "message":"PID设置失败，请检查连接并重试"
+    },
+    "dialogRatesSaveOK":{
+        "message":"Rates值设置成功"
+    },
+    "dialogRatesSavefailed":{
+        "message":"Rates值保存失败，请检查连接并重试"
+    },
+    "Connect_Serial_Port_Firstlt":{
+        "message":"请选择正确的串口并先连接它"
+    },
+    "Flash_failed":{
+        "message":"刷写失败!"
+    },
+    "Check_Serial_Port_and_enter_bootloader":{
+        "message":"请检查串口是否选择正确，且飞控处于bootloader状态."
+    },
+    "DeviceOpenFail": {
+        "message": "打开 USB 设备失败！"
+    },
+    "NoConfigurationReceived": {
+        "message": "没有接收到配置信息，飞控通信失败"
+    },
+    "NoValidPort": {
+        "message": "1.请选择有效的串口号.\n2.若串口号正确，请更新您的飞控固件后再尝试连接"
+    },
+    "FailedToLoadFile":{
+        "message":"固件加载失败！"
+    },
+    "InvalidNetwork":{
+        "message":"请检查您的网络是否可用。"
+    },
+    "flightControl":{
+        "message": "飞控固件"
+    },
+    "Sensors":{
+        "message": "传感器固件"
+    },
+    "OSD":{
+        "message": "OSD固件"
+    },
+    "cetus_pro_hardware_gte_1_2":{
+        "message": "Cetus Pro 硬件版本号为1.2或以上"
+    },
+    "cetus_pro_hardware_lt_1_2":{
+        "message": "Cetus Pro 硬件版本号为1.0/1.1"
+    },
+    "Unable_to_find_serial_port":{
+        "message":"无法识别到串口？"
+    },
+    "UniqueDeviceId":{
+        "message":"飞控序列号"
+    },
+    "updateFCfirmware":
+    {
+        "message":"请更新固件后显示"
+    },
+    "JoystickDeadZone":
+    {
+        "message":"摇杆中间死区"
+    },
+    "BuzzerSwitch":
+    {
+        "message":"蜂鸣器提示音开关"
+    },
+    "extra_custom_config":
+    {
+        "message":"其他设置"
     }
+    
 }

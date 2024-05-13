@@ -37,13 +37,12 @@
     margin-right: auto;
     margin-top: 5px;
     width: 800px;
-    color: var(--defaultText);
+    color: #3a3a3a;
     font-size: 14px;
     font-weight: 300;
 }
 
 .tab-landing .logowrapper img {
-    width: 600px;
     margin: 5px;
 }
 
@@ -132,6 +131,39 @@
 .tab-landing .languageSwitcher a:not(:last-child):after {
     content: ", ";
     font-weight: normal;
+}
+
+.tab-landing .regular-button {
+    -webkit-user-drag: none;
+    margin-left: 82%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    width: auto;
+    background-color: var(--accent);
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.25);;
+    color: #000;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+    display: inline-block;
+    cursor: pointer;
+    transition: all ease 0.1s;
+    padding: 0 9px;
+    line-height: 28px;
+    user-select: none;
+}
+
+.tab-landing .regular-button:hover {
+    background-color: #ffcc3e;
+    transition: all ease 0.2s;
+}
+
+.tab-landing .regular-button.pushed {
+    background-color: var(--pushedButton-background);
+    color: var(--pushedButton-fontColor);
+    border-radius: 3px;
 }
 
 /** (phones) **/

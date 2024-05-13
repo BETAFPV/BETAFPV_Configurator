@@ -227,6 +227,11 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-left: 15px;
 }
 
+#logo img {
+  height: 60px;
+  position: relative;
+}
+
 #port-picker {
     display: flex;
     align-items: center;
@@ -234,8 +239,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #portsinput {
-    width: 180px;
-    margin-right: 15px;
+    width: auto;
 }
 
 #portsinput .dropdown {
@@ -257,7 +261,7 @@ input[type="number"]::-webkit-inner-spin-button {
 #baudselect {
     width: 80px;
     float: right;
-    margin-right: 2px;
+    margin-left: 20px;
 }
 
 #port-picker .auto_connect, .gray {
@@ -301,30 +305,30 @@ input[type="number"]::-webkit-inner-spin-button {
     align-items: center;
 }
 
-.open_firmware_flasher, .connect_controls {
+.open_hid_device, .connect_controls {
     position: relative;
     width: 80px;
     text-align: center;
     height: 84px;
 }
 
-.firmware_b, .connect_b {
+.hid_btn, .connect_b {
     width: 52px;
     margin: 0 14px;
     height: 52px;
 }
 
 @media all and (min-width: 1125px) {
-    .open_firmware_flasher, .connect_controls {
+    .open_hid_device, .connect_controls {
         width: 100px;
     }
 
-    .firmware_b, .connect_b {
+    .hid_btn, .connect_b {
         margin: 0 24px;
     }
 }
 
-.firmware_b a.flash, .connect_b a.connect {
+.hid_btn a.connect, .connect_b a.connect {
     background-color: var(--accent);
     border: 1px solid #dba718;
     background-repeat: no-repeat;
@@ -336,7 +340,7 @@ input[type="number"]::-webkit-inner-spin-button {
     transition: none;
 }
 
-.firmware_b a.flash {
+.hid_btn a.connect {
     background-image: url(../images/icons/cf_icon_flasher_white.svg);
     background-size: 30px;
     background-position: center 10px;
@@ -348,23 +352,23 @@ input[type="number"]::-webkit-inner-spin-button {
     background-position: center 6px;
 }
 
-.firmware_b a.flash.disabled, .connect_b a.connect.disabled {
+.hid_btn a.connect.disabled, .connect_b a.connect.disabled {
     background-color: #808080;
     pointer-events: none;
     cursor: default;
 }
 
-.firmware_b a.flash:hover, .connect_b a.connect:hover {
+.hid_btn a.connect:hover, .connect_b a.connect:hover {
     background-color: #00C0FF;
 }
 
-.firmware_b a.flash.active, .connect_b a.connect.active {
+.hid_btn a.connect.active, .connect_b a.connect.active {
     background-color: #e60000;
     border: 1px solid #fe0000;
     transition: none;
 }
 
-.firmware_b a.flash.active {
+.hid_btn a.connect.active {
     background-image: url(../images/icons/cf_icon_flasher_white.svg);
 }
 
@@ -372,7 +376,7 @@ input[type="number"]::-webkit-inner-spin-button {
     background-image: url(../images/icons/cf_icon_usb1_white.svg);
 }
 
-.firmware_b a.flash.active:hover, .connect_b a.connect.active:hover {
+.hid_btn a.connect.active:hover, .connect_b a.connect.active:hover {
     background-color: #f21212;
 }
 
@@ -775,13 +779,13 @@ input[type="number"]::-webkit-inner-spin-button {
         order: 3;
     }
 
-    .open_firmware_flasher, .connect_controls {
+    .open_hid_device, .connect_controls {
         width: 31px;
         height: 31px;
         margin-left: 15px;
     }
 
-    .firmware_b, .connect_b {
+    .hid_btn, .connect_b {
         margin: 0;
         zoom: 0.6;
     }
@@ -1509,7 +1513,7 @@ dialog {
     height: fit-content;
     margin: auto auto;
     position: absolute;
-    width: 50%;
+    width: 25%;
     border-radius: 3px;
     border: 1px solid silver;
 }
@@ -1652,6 +1656,69 @@ dialog .dialog_toolbar .btn a.disabled {
     text-shadow: none;
     opacity: 0.5;
 }
+
+
+
+.content_toolbar_switch {
+    /*  content toolbar panel */
+    width: 100%;
+    height: 20px;
+    background-color: #2E2E2E;
+    box-shadow: rgba(0, 0, 0, 0.10) 0 -3px 8px;
+    padding: 10px 0;
+    overflow: hidden;
+    border-top: 1px solid var(--subtleAccent);
+}
+
+
+
+.content_toolbar_switch .btn a {
+    /*  common styles for content toolbar buttons */
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: calc(36%);
+    margin-right: calc(36%);
+    background-color: #f5ab0b;
+    border-radius: 3px;
+    border: 1px solid #dba718;
+    color: #000;
+    float: center;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    transition: all ease 0.2s;
+    padding: 0 9px;
+    line-height: 28px;
+    user-select: none;
+}
+
+.content_toolbar_switch .btn a:hover {
+    background-color: var(--hoverButton-background);
+    transition: all ease 0.2s;
+}
+
+.content_toolbar_switch .btn a:active {
+    background-color: var(--accent);
+    transition: all ease 0.0s;
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.35);
+}
+
+.content_toolbar_switch .btn a.disabled {
+    cursor: default;
+    color: #fff;
+    background-color: #AFAFAF;
+    border: 1px solid #AFAFAF;
+    pointer-events: none;
+    text-shadow: none;
+    opacity: 0.5;
+}
+
+
+
+
 
 .toolbar_scroll_bottom .content_wrapper {
     /*  content wrapper in view with toolbar in scroll bottom
@@ -1809,7 +1876,7 @@ dialog .dialog_toolbar .btn a.disabled {
 
 /* Standard GUI BOX */
 .gui_box {
-    border: 1px solid #ccc;
+    border: 3px solid #ccc;
     border-radius: 4px;
     background-color: #FFFFFF;
     float: left;
@@ -1977,12 +2044,14 @@ dialog .dialog_toolbar .btn a.disabled {
 
 .regular-button {
     -webkit-user-drag: none;
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-left: 82%;
+    margin-top: 15px;
+    margin-bottom: 5px;
     margin-right: 10px;
+    width: 30px;
     background-color: var(--accent);
     border-radius: 3px;
-    border: 1px solid #dba718;
+    border: 1px solid rgba(255, 255, 255, 0.25);;
     color: #000;
     font-weight: bold;
     font-size: 12px;
