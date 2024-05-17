@@ -18,6 +18,8 @@ const show = {
     ch6_data_source:null,
     ch7_data_source:null,
     ch8_data_source:null,
+    ch9_data_source:null,
+    ch10_data_source:null,
 
     //通道缩放比例
     ch1_scale:null,
@@ -28,6 +30,8 @@ const show = {
     ch6_scale:null,
     ch7_scale:null,
     ch8_scale:null,
+    ch9_scale:null,
+    ch10_scale:null,
 
     //通道偏移补偿
     ch1_offset:null,
@@ -38,6 +42,9 @@ const show = {
     ch6_offset:null,
     ch7_offset:null,
     ch8_offset:null,
+    ch9_offset:null,
+    ch10_offset:null,
+
 
     //通道值反转
     ch1_reverse:null,
@@ -48,6 +55,8 @@ const show = {
     ch6_reverse:null,
     ch7_reverse:null,
     ch8_reverse:null,
+    ch9_reverse:null,
+    ch10_reverse:null,
 
     //内外置射频模块开关
     Internal_radio_module_switch:null,
@@ -131,6 +140,8 @@ show.getElementIndex = function(){
     show.ch6_data_source = $('select[name="ch6_data_source"]');
     show.ch7_data_source = $('select[name="ch7_data_source"]');
     show.ch8_data_source = $('select[name="ch8_data_source"]');
+    show.ch9_data_source = $('select[name="ch9_data_source"]');
+    show.ch10_data_source = $('select[name="ch10_data_source"]');
 
     show.ch1_scale=$('input[name="ch1_scale"]');
     show.ch2_scale=$('input[name="ch2_scale"]');
@@ -140,6 +151,8 @@ show.getElementIndex = function(){
     show.ch6_scale=$('input[name="ch6_scale"]');
     show.ch7_scale=$('input[name="ch7_scale"]');
     show.ch8_scale=$('input[name="ch8_scale"]');
+    show.ch9_scale=$('input[name="ch9_scale"]');
+    show.ch10_scale=$('input[name="ch10_scale"]');
 
     show.ch1_offset=$('input[name="ch1_offset"]');
     show.ch2_offset=$('input[name="ch2_offset"]');
@@ -149,6 +162,8 @@ show.getElementIndex = function(){
     show.ch6_offset=$('input[name="ch6_offset"]');
     show.ch7_offset=$('input[name="ch7_offset"]');
     show.ch8_offset=$('input[name="ch8_offset"]');
+    show.ch9_offset=$('input[name="ch9_offset"]');
+    show.ch10_offset=$('input[name="ch10_offset"]');
 
     show.ch1_reverse=$('input[id="ch1_check"]');
     show.ch2_reverse=$('input[id="ch2_check"]');
@@ -158,6 +173,8 @@ show.getElementIndex = function(){
     show.ch6_reverse=$('input[id="ch6_check"]');
     show.ch7_reverse=$('input[id="ch7_check"]');
     show.ch8_reverse=$('input[id="ch8_check"]');
+    show.ch9_reverse=$('input[id="ch9_check"]');
+    show.ch10_reverse=$('input[id="ch10_check"]');
 
 
     show.internal_radio_protocol = $('select[id="internal_radio_protocol"]');
@@ -188,6 +205,8 @@ show.refreshUI = function()
         show.ch6_data_source.val(HidConfig.ch6_input_source_display);
         show.ch7_data_source.val(HidConfig.ch7_input_source_display);
         show.ch8_data_source.val(HidConfig.ch8_input_source_display);
+        show.ch9_data_source.val(HidConfig.ch9_input_source_display);
+        show.ch10_data_source.val(HidConfig.ch10_input_source_display);
     
     
         document.getElementById('ch1_check').checked = HidConfig.ch1_reverse_display;
@@ -198,6 +217,8 @@ show.refreshUI = function()
         document.getElementById('ch6_check').checked = HidConfig.ch6_reverse_display;
         document.getElementById('ch7_check').checked = HidConfig.ch7_reverse_display;
         document.getElementById('ch8_check').checked = HidConfig.ch8_reverse_display;
+        document.getElementById('ch9_check').checked = HidConfig.ch9_reverse_display;
+        document.getElementById('ch10_check').checked = HidConfig.ch10_reverse_display;
         
         show.ch1_scale.val(HidConfig.ch1_scale_display);
         show.ch2_scale.val(HidConfig.ch2_scale_display);
@@ -207,6 +228,9 @@ show.refreshUI = function()
         show.ch6_scale.val(HidConfig.ch6_scale_display);
         show.ch7_scale.val(HidConfig.ch7_scale_display);
         show.ch8_scale.val(HidConfig.ch8_scale_display);
+        show.ch9_scale.val(HidConfig.ch9_scale_display);
+        show.ch10_scale.val(HidConfig.ch10_scale_display);
+        
     
         show.ch1_offset.val(HidConfig.ch1_offset_display);
         show.ch2_offset.val(HidConfig.ch2_offset_display);
@@ -216,6 +240,8 @@ show.refreshUI = function()
         show.ch6_offset.val(HidConfig.ch6_offset_display);
         show.ch7_offset.val(HidConfig.ch7_offset_display);
         show.ch8_offset.val(HidConfig.ch8_offset_display);
+        show.ch9_offset.val(HidConfig.ch9_offset_display);
+        show.ch10_offset.val(HidConfig.ch10_offset_display);
 
         //bind phrase 功能只有在1.0.1版本之后的SX1280固件才支持，该版本上位机暂不支持向前支持，先直接注释掉
         //  if(semver.gte(HidConfig.lite_Radio_version, "1.0.1")){
@@ -288,9 +314,11 @@ show.initialize = function (callback) {
             "CH5",
             "CH6",
             "CH7",
-            "CH8"
+            "CH8",
+            "CH9",
+            "CH10",
         ];
-        const numBars = 8;
+        const numBars = 10;
         const barContainer = $('.tab-show .bars');
     
         for (let i = 0; i < numBars; i++) {
@@ -300,7 +328,7 @@ show.initialize = function (callback) {
             } 
     
             barContainer.append('\
-                <ul>\
+                <ul id = ch' + (i+1) + '_mixes_bar>\
                     <li class="name">' + name + '</li>\
                     <li class="meter">\
                         <div class="meter-bar">\
@@ -363,7 +391,7 @@ show.initialize = function (callback) {
 
         function update_ui() {
             // update bars with latest data
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 10; i++) {
                 
                 meterFillArray[i].css('width', (HidConfig.channel_data_dispaly[i] - meterScale.min) / (meterScale.max - meterScale.min)*100+'%');
                 meterLabelArray[i].text(HidConfig.channel_data_dispaly[i]);
@@ -537,6 +565,14 @@ show.initialize = function (callback) {
             HidConfig.ch8_input_source_display = parseInt($(this).val(), 10);
             send_ch8_config();
         });
+        show.ch9_data_source.change(function () {
+            HidConfig.ch9_input_source_display = parseInt($(this).val(), 10);
+            send_ch9_config();
+        });
+        show.ch10_data_source.change(function () {
+            HidConfig.ch10_input_source_display = parseInt($(this).val(), 10);
+            send_ch10_config();
+        });
         show.ch1_reverse.change(function () {
             HidConfig.ch1_reverse_display = $(this).is(':checked')?1:0;
             send_ch1_config();
@@ -569,6 +605,14 @@ show.initialize = function (callback) {
             HidConfig.ch8_reverse_display = $(this).is(':checked')?1:0;
             send_ch8_config();
         }); 
+        show.ch9_reverse.change(function () {
+            HidConfig.ch9_reverse_display = $(this).is(':checked')?1:0;
+            send_ch9_config();
+        });
+        show.ch10_reverse.change(function () {
+            HidConfig.ch10_reverse_display = $(this).is(':checked')?1:0;
+            send_ch10_config();
+        });
         show.ch1_scale.change(function () {
             HidConfig.ch1_scale_display = parseInt($(this).val(), 10);
             send_ch1_config();
@@ -601,6 +645,14 @@ show.initialize = function (callback) {
             HidConfig.ch8_scale_display = parseInt($(this).val(), 10);
             send_ch8_config();
         });       
+        show.ch9_scale.change(function () {
+            HidConfig.ch9_scale_display = parseInt($(this).val(), 10);
+            send_ch9_config();
+        });
+        show.ch10_scale.change(function () {
+            HidConfig.ch10_scale_display = parseInt($(this).val(), 10);
+            send_ch10_config();
+        });
         show.ch1_offset.change(function () {
             HidConfig.ch1_offset_display = parseInt($(this).val(), 10);
             send_ch1_config();
@@ -632,6 +684,14 @@ show.initialize = function (callback) {
         show.ch8_offset.change(function () {
             HidConfig.ch8_offset_display = parseInt($(this).val(), 10);
             send_ch8_config();
+        });
+        show.ch9_offset.change(function () {
+            HidConfig.ch9_offset_display = parseInt($(this).val(), 10);
+            send_ch9_config();
+        });
+        show.ch10_offset.change(function () {
+            HidConfig.ch10_offset_display = parseInt($(this).val(), 10);
+            send_ch10_config();
         });
         show.rocker_mode.change(function () {
             HidConfig.rocker_mode = parseInt($(this).val(), 10);
@@ -793,6 +853,26 @@ show.initialize = function (callback) {
             configBuff[6] = 0;
             usbSendData(configBuff);
         }
+        function send_ch9_config(){
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x08;
+            configBuff[2] = HidConfig.ch9_input_source_display;
+            configBuff[3] = HidConfig.ch9_reverse_display;
+            configBuff[4] = HidConfig.ch9_scale_display;
+            configBuff[5] = HidConfig.ch9_offset_display+100;
+            configBuff[6] = 0;
+            port.write(configBuff);
+        }
+        function send_ch10_config(){
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x09;
+            configBuff[2] = HidConfig.ch10_input_source_display;
+            configBuff[3] = HidConfig.ch10_reverse_display;
+            configBuff[4] = HidConfig.ch10_scale_display;
+            configBuff[5] = HidConfig.ch10_offset_display+100;
+            configBuff[6] = 0;
+            port.write(configBuff);
+        }
 
         function send_internal_radio_config(){
             configBuff[0] = 0x06;
@@ -936,6 +1016,8 @@ show.initialize = function (callback) {
             HidConfig.ch6_input_source_display = 5;
             HidConfig.ch7_input_source_display = 6;
             HidConfig.ch8_input_source_display = 7;
+            HidConfig.ch9_input_source_display = 8;
+            HidConfig.ch10_input_source_display = 9;
 
             HidConfig.ch1_reverse_display = 0;
             HidConfig.ch2_reverse_display = 0;
@@ -945,6 +1027,8 @@ show.initialize = function (callback) {
             HidConfig.ch6_reverse_display = 0;
             HidConfig.ch7_reverse_display = 0;
             HidConfig.ch8_reverse_display = 0;
+            HidConfig.ch9_reverse_display = 0;
+            HidConfig.ch10_reverse_display = 0;
 
             HidConfig.ch1_scale_display = 100;
             HidConfig.ch2_scale_display = 100;
@@ -954,6 +1038,8 @@ show.initialize = function (callback) {
             HidConfig.ch6_scale_display = 100;
             HidConfig.ch7_scale_display = 100;
             HidConfig.ch8_scale_display = 100;
+            HidConfig.ch9_scale_display = 100;
+            HidConfig.ch10_scale_display = 100;
 
             HidConfig.ch1_offset_display = 0;
             HidConfig.ch2_offset_display = 0;
@@ -963,6 +1049,8 @@ show.initialize = function (callback) {
             HidConfig.ch6_offset_display = 0;
             HidConfig.ch7_offset_display = 0;
             HidConfig.ch8_offset_display = 0;
+            HidConfig.ch9_offset_display = 0;
+            HidConfig.ch10_offset_display = 0;
 
             send_ch1_config();
             send_ch2_config();
@@ -972,6 +1060,10 @@ show.initialize = function (callback) {
             send_ch6_config();
             send_ch7_config();
             send_ch8_config();
+            if(getLiteRadioUnitType() >= liteRadioUnitType.LiteRadio_4_SE_SX1280){
+                send_ch9_config();
+                send_ch10_config();
+            }
             
             show.refreshUI();
             const dialogfactoryReset = $('.dialogfactoryReset')[0];

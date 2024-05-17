@@ -245,7 +245,7 @@
                                 <th i18n = "RadioSetupOffset">Offset</th>
                                 <th i18n = "RadioSetupReverse">Reverse</th>
                             </tr>
-                            <tr>
+                            <tr id="ch1_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH1</label>
@@ -262,6 +262,8 @@
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -282,7 +284,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch2_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH2</label>
@@ -299,6 +301,8 @@
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -319,7 +323,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch3_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH3</label>
@@ -336,6 +340,8 @@
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -356,7 +362,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch4_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH4</label>
@@ -373,6 +379,8 @@
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -393,7 +401,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch5_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH5</label>
@@ -410,6 +418,8 @@
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -430,7 +440,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch6_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH6</label>
@@ -447,6 +457,8 @@
                                             <option value="5" selected="selected">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -467,7 +479,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch7_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH7</label>
@@ -484,6 +496,8 @@
                                             <option value="5">SB</option>
                                             <option value="6" selected="selected">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -504,7 +518,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch8_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH8</label>
@@ -521,6 +535,8 @@
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7" selected="selected">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -540,6 +556,85 @@
                                     </div>
                                 </td>
                             </tr>
+
+                            <tr id="ch9_mixes">
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <label style="width:100%;">CH9</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <select name="ch9_data_source" style="width:100%;">
+                                            <option value="0">Roll(A)</option>
+                                            <option value="1">Pitch(E)</option>
+                                            <option value="2">Throttle(T)</option>
+                                            <option value="3">Yaw(R)</option>
+                                            <option value="4">SA</option>
+                                            <option value="5">SB</option>
+                                            <option value="6">SC</option>
+                                            <option value="7">SD</option>
+                                            <option value="8" selected="selected">SE</option>
+                                            <option value="9">SF</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch9_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch9_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input calss="condition" type="checkbox" width:100%; id='ch9_check'>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr id="ch10_mixes">
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <label style="width:100%;">CH10</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <select name="ch10_data_source" style="width:100%;">
+                                            <option value="0">Roll(A)</option>
+                                            <option value="1">Pitch(E)</option>
+                                            <option value="2">Throttle(T)</option>
+                                            <option value="3">Yaw(R)</option>
+                                            <option value="4">SA</option>
+                                            <option value="5">SB</option>
+                                            <option value="6">SC</option>
+                                            <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9" selected="selected">SF</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch10_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch10_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input calss="condition" type="checkbox" width:100%; id='ch10_check'>
+                                    </div>
+                                </td>
+                            </tr>
+                            
                         </table>
                     </div> 
                 </div>

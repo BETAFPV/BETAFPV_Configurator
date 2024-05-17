@@ -32,6 +32,8 @@ var liteRadioUnitType = {
     LiteRadio_2_SE_V2_CC2500:0x03,
     LiteRadio_3_SX1280:0x04,
     LiteRadio_3_CC2500:0x05,
+    LiteRadio_1_CC2500:0x06,
+    LiteRadio_4_SE_SX1280:0x07,
 }
 
 var internalRadioType = {
@@ -48,6 +50,8 @@ var Channel = {
     CHANNEL6:0x05,
     CHANNEL7:0x06,
     CHANNEL8:0x07,
+    CHANNEL9:0x08,
+    CHANNEL10:0x09,
 };
 
 var HidConnectStatus = {
@@ -109,7 +113,7 @@ HidConfig = {
     //固件版本号
     lite_Radio_version:'0.0.0',
 
-    //美国手、日本手模式
+    //0美国手、1日本手模式
     rocker_mode:0,
 
     //Trainer 口开关
@@ -128,6 +132,8 @@ HidConfig = {
     ch6_input_source_display:5,
     ch7_input_source_display:6,
     ch8_input_source_display:7,
+    ch9_input_source_display:8,
+    ch10_input_source_display:9,
 
     //通道缩放比例（0-100对应0%-100%）
     ch1_scale_display:100,
@@ -138,6 +144,8 @@ HidConfig = {
     ch6_scale_display:100,
     ch7_scale_display:100,
     ch8_scale_display:100,
+    ch9_scale_display:100,
+    ch10_scale_display:100,
 
     //通道偏移补偿
     ch1_offset_display:0,
@@ -148,6 +156,8 @@ HidConfig = {
     ch6_offset_display:0,
     ch7_offset_display:0,
     ch8_offset_display:0,
+    ch9_offset_display:0,
+    ch10_offset_display:0,
 
     //通道值反转
     ch1_reverse_display:0,
@@ -158,6 +168,8 @@ HidConfig = {
     ch6_reverse_display:0,
     ch7_reverse_display:0,
     ch8_reverse_display:0,
+    ch9_reverse_display:0,
+    ch10_reverse_display:0,
 
     //内外置射频模块开关
     Internal_radio_module_switch:0,
@@ -197,8 +209,11 @@ HidConfig = {
 
     usedUSBProtocol:0,  //0,HID设备    1,VCOM（虚拟串口）设备
 };
+
+/*固件版本检查*/
 HidConfig.compareFirmwareVersion = function(){
-    if(HidConfig.internal_radio == RFmodule.SX1280){//若为 SX1280 1.0.0版本固件：提示客户更新固件以使用新功能bind phrase
+    if(HidConfig.internal_radio == RFmodule.SX1280 
+    && getLiteRadioUnitType() < liteRadioUnitType.LiteRadio_4_SE_SX1280){//若为 SX1280 1.0.0版本固件：提示客户更新固件以使用新功能bind phrase
         if(semver.eq(HidConfig.lite_Radio_version, '1.0.0')){
             const dialogVersionNotMatched = $('.dialogVersionNotMatched')[0];
             let labeText = i18n.getMessage("upgrade_the_firmware_of_liteRadio");
@@ -209,13 +224,17 @@ HidConfig.compareFirmwareVersion = function(){
             });
         }
     }
-
-    
 }
 
 //获取当前使用的USB协议
 function getUsedUSBProtocol() {
     return HidConfig.usedUSBProtocol;
+}
+
+
+//获取当前遥控器型号（序列号）
+function getLiteRadioUnitType() {
+    return HidConfig.lite_radio_device;
 }
 
 //USB选择对应的协议发送打包好的数据给遥控器
@@ -407,7 +426,8 @@ window.onload = function() {
                 port.on('open', () =>{
                     
                 });
-                port.on('data', function(data) {//解析遥控器发送过来的信息 
+                //data事件监听，解析遥控器发送过来的信息
+                port.on('data', function(data) {
                     let rquestBuffer = new Buffer.alloc(8);
                     HidConfig.Have_Receive_HID_Data = true;
                     if(data[0] == Command_ID.CHANNELS_INFO_ID && HidConfig.LiteRadio_power == false)//通道配置信息
@@ -524,19 +544,61 @@ window.onload = function() {
                                     HidConfig.ch8_reverse_display = data[3];
                                     HidConfig.ch8_scale_display = data[4];
                                     HidConfig.ch8_offset_display = data[5]-100;
+
+                                    if(getLiteRadioUnitType() >= liteRadioUnitType.LiteRadio_4_SE_SX1280){//LR4之后的遥控器要继续请求2个通道
+                                        if(ch_receive_step==7){
+                                            ch_receive_step=8;
+                                            HIDRequestChannelConfig(9);
+                                        }
+                                    }else{
+                                        //结束请求的处理
+                                        HIDRequestExtraCustomConfig();
+                                        setTimeout(() => {
+                                            //全部通道配置信息获取完毕，发送停止命令
+                                            HIDStopSendingConfig();
+                                            HidConfig.HID_Connect_State = HidConnectStatus.connected;
+                                            $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
+                                            if(ch_receive_step==7){
+                                                HidConfig.compareFirmwareVersion();
+                                                ch_receive_step = 0;
+                                            }
+                                            show.refreshUI();
+                                        }, 500);
+                                    }
+                                    break;
+                                
+                                case Channel.CHANNEL9:
+                                    console.log("receive ch9 config");
+                                    HidConfig.ch9_input_source_display = data[2];
+                                    HidConfig.ch9_reverse_display = data[3];
+                                    HidConfig.ch9_scale_display = data[4];
+                                    HidConfig.ch9_offset_display = data[5]-100;
+                                    
+                                    //请求通道10配置
+                                    if(ch_receive_step==8){
+                                        ch_receive_step=9;
+                                        HIDRequestChannelConfig(10);
+                                    }
+                                    break;
+    
+                                case Channel.CHANNEL10:
+                                    console.log("receive ch10 config");
+                                    HidConfig.ch10_input_source_display = data[2];
+                                    HidConfig.ch10_reverse_display = data[3];
+                                    HidConfig.ch10_scale_display = data[4];
+                                    HidConfig.ch10_offset_display = data[5]-100;
                                     HIDRequestExtraCustomConfig();
                                     setTimeout(() => {
                                         //全部通道配置信息获取完毕，发送停止命令
                                         HIDStopSendingConfig();
                                         HidConfig.HID_Connect_State = HidConnectStatus.connected;
                                         $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
-                                        if(ch_receive_step==7){
+                                        if(ch_receive_step==9){
                                             HidConfig.compareFirmwareVersion();
                                             ch_receive_step = 0;
                                         }
                                         show.refreshUI();
                                     }, 500);
-                                    
                                     break;
                             }
                             
@@ -895,6 +957,12 @@ window.onload = function() {
                                     case liteRadioUnitType.LiteRadio_3_CC2500:
                                         document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 3 CC2500";
                                         break;
+                                    case liteRadioUnitType.LiteRadio_1_CC2500:
+                                        document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 1 CC2500";
+                                        break;
+                                    case liteRadioUnitType.LiteRadio_4_SE_SX1280:
+                                        document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 4 SE SX1280";
+                                        break;
                                     default:
                                         console.log("The unit type of lite_radio cannot be identified");
                                         break;
@@ -920,6 +988,13 @@ window.onload = function() {
                                 document.getElementById("liteRadioInfoFirmwareVersion").innerHTML = firmware_version;
 
                             }
+                        }
+                        if(getLiteRadioUnitType() < liteRadioUnitType.LiteRadio_4_SE_SX1280){//LR4之前的遥控器关闭9、10通道
+                            //关闭CH9、CH10相关显示
+                            document.getElementById("ch9_mixes").style.display="none";
+                            document.getElementById("ch10_mixes").style.display="none";
+                            document.getElementById("ch9_mixes_bar").style.display="none";
+                            document.getElementById("ch10_mixes_bar").style.display="none";
                         }
 
                     }else if(data[0] == Command_ID.EXTRA_CUSTOM_CONFIG_ID && HidConfig.LiteRadio_power == false)
@@ -953,6 +1028,8 @@ window.onload = function() {
                         HidConfig.channel_data[5] = (data[11]<<8 | data[10]);
                         HidConfig.channel_data[6] = (data[13]<<8 | data[12]);
                         HidConfig.channel_data[7] = (data[15]<<8 | data[14]);
+                        HidConfig.channel_data[8] = (data[17]<<8 | data[16]);
+                        HidConfig.channel_data[9] = (data[19]<<8 | data[18]);
                         HidConfig.channel_data_dispaly[0] = channel_data_map(HidConfig.channel_data[0],0,2047,-100,100);
                         HidConfig.channel_data_dispaly[1] = channel_data_map(HidConfig.channel_data[1],0,2047,-100,100);
                         HidConfig.channel_data_dispaly[2] = channel_data_map(HidConfig.channel_data[2],0,2047,-100,100);
@@ -961,7 +1038,8 @@ window.onload = function() {
                         HidConfig.channel_data_dispaly[5] = channel_data_map(HidConfig.channel_data[5],0,2047,-100,100);
                         HidConfig.channel_data_dispaly[6] = channel_data_map(HidConfig.channel_data[6],0,2047,-100,100);
                         HidConfig.channel_data_dispaly[7] = channel_data_map(HidConfig.channel_data[7],0,2047,-100,100);
-                    
+                        HidConfig.channel_data_dispaly[8] = channel_data_map(HidConfig.channel_data[8],0,2047,-100,100);
+                        HidConfig.channel_data_dispaly[9] = channel_data_map(HidConfig.channel_data[9],0,2047,-100,100);
                         //console.log(HidConfig.channel_data[0],HidConfig.channel_data[1],HidConfig.channel_data[2],HidConfig.channel_data[3]);
                     }
                 });
@@ -1143,7 +1221,7 @@ window.onload = function() {
                                         HidConfig.ch8_reverse_display = data[3];
                                         HidConfig.ch8_scale_display = data[4];
                                         HidConfig.ch8_offset_display = data[5]-100;
-                                        
+
                                         //全部通道配置信息获取完毕，发送停止命令
                                         HIDStopSendingConfig();
                                         HidConfig.HID_Connect_State = HidConnectStatus.connected;
@@ -1473,6 +1551,7 @@ window.onload = function() {
                         else if(data[0] == Command_ID.DEVICE_INFO_ID && HidConfig.LiteRadio_power == false){
                             var checkSum=0;
                             var checkSum2=0;
+
                             for(i=0;i<7;i++)
                             {
                                 checkSum +=data[2*i] & 0x00ff;
@@ -1481,6 +1560,12 @@ window.onload = function() {
         
                             if(checkSum == checkSum2)
                             {
+                                //关闭CH9、CH10相关显示，老版本HID的遥控器不支持这两个通道
+                                document.getElementById("ch9_mixes").style.display="none";
+                                document.getElementById("ch10_mixes").style.display="none";
+                                document.getElementById("ch9_mixes_bar").style.display="none";
+                                document.getElementById("ch10_mixes_bar").style.display="none";
+
                                 console.log("DEVICE_INFO_ID");
                                 console.log(data);
                                 HidConfig.lite_radio_device = data[2];
@@ -1516,6 +1601,9 @@ window.onload = function() {
                                             break;
                                         case liteRadioUnitType.LiteRadio_3_CC2500:
                                             document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 3 CC2500";
+                                            break;
+                                        case liteRadioUnitType.LiteRadio_1_CC2500:
+                                            document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 1 CC2500";
                                             break;
                                         default:
                                             console.log("The unit type of lite_radio cannot be identified");

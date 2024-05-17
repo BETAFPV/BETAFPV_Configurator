@@ -312,7 +312,7 @@ firmware_flasher_LiteRadio.connect_init = function(){
                         var bufName = new Buffer(133);
 
                         bufName[0] = 0x01;
-                        bufName[1] = 00;
+                        bufName[1] = 0x00;
                         bufName[2] = 0xFF;
                         bufName[3] = 0x42;
                         bufName[4] = 0x6f;
