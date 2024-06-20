@@ -712,8 +712,8 @@ window.onload = function() {
 
                             HidConfig.Internal_radio_module_switch = true;
                             HidConfig.External_radio_module_switch = false;
-                            document.getElementById('internal_radio_module_switch').checked = true;
-                            document.getElementById('external_radio_module_switch').checked = false;
+                            document.getElementById('internal_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
+                            document.getElementById('external_radio_module_switch').checked = HidConfig.External_radio_module_switch;
                             //外部射频模块供电开关失能
                             document.getElementById("External_radio_module_power_switch").disabled = true; 
                             //ExpressLRS系统可设置
@@ -743,8 +743,8 @@ window.onload = function() {
                             console.log("receive external radio config");
                             HidConfig.Internal_radio_module_switch = false;
                             HidConfig.External_radio_module_switch = true;
-                            document.getElementById('internal_radio_module_switch').checked = false;
-                            document.getElementById('external_radio_module_switch').checked = true;
+                            document.getElementById('internal_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
+                            document.getElementById('external_radio_module_switch').checked = HidConfig.External_radio_module_switch;
                             if(data[5] == 0x02){//需要根据外部射频模块硬件型号设置组件可选包率
                                 //外部射频模块可选包率：
                                 //200hz 100hz 50hz 25hz
@@ -1260,8 +1260,8 @@ window.onload = function() {
 
                                 HidConfig.Internal_radio_module_switch = true;
                                 HidConfig.External_radio_module_switch = false;
-                                document.getElementById('internal_radio_module_switch').checked = true;
-                                document.getElementById('external_radio_module_switch').checked = false;
+                                document.getElementById('internal_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
+                                document.getElementById('external_radio_module_switch').checked = HidConfig.External_radio_module_switch;
                                 //外部射频模块供电开关失能
                                 document.getElementById("External_radio_module_power_switch").disabled = true;
                                 //ExpressLRS系统可设置
@@ -1290,8 +1290,8 @@ window.onload = function() {
                                 console.log("receive external radio config");
                                 HidConfig.Internal_radio_module_switch = false;
                                 HidConfig.External_radio_module_switch = true;
-                                document.getElementById('internal_radio_module_switch').checked = false;
-                                document.getElementById('external_radio_module_switch').checked = true;
+                                document.getElementById('internal_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
+                                document.getElementById('external_radio_module_switch').checked = HidConfig.External_radio_module_switch;
                                 if(data[5] == 0x02){//需要根据外部射频模块硬件型号设置组件可选包率
                                     //外部射频模块可选包率：
                                     //200hz 100hz 50hz 25hz
