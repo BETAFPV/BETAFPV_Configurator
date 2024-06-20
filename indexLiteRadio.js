@@ -648,10 +648,13 @@ window.onload = function() {
                                     },300);
                                 }
                             }else if(HidConfig.internal_radio==RFmodule.SX1280){//硬件型号为：sx1280
-                                $("#internal_radio_protocol_elrs_2.4G").css({display: 'block'});
-                                $("#internal_radio_protocol_Frsky_F8").css({display: 'none'});
-                                $("#internal_radio_protocol_Frsky_F16_FCC").css({display: 'none'});
-                                $("#internal_radio_protocol_Frsky_F16_LBT").css({display: 'none'});
+                                $('#internal_radio_protocol').empty();
+                                addOptionValue('internal_radio_protocol',0,"ELRS3 2.4G");//目前通过CDC通信的遥控器都是ELRS3.0
+                                // $("#internal_radio_protocol_elrs_2.4G").css({display: 'none'});
+                                // $("#internal_radio_protocol_Frsky_F8").css({display: 'none'});
+                                // $("#internal_radio_protocol_Frsky_F16_FCC").css({display: 'none'});
+                                // $("#internal_radio_protocol_Frsky_F16_LBT").css({display: 'none'});
+                                // $("#internal_radio_protocol_elrs3_2.4G").css({display: 'block'});
                                 if(HidConfig.current_protocol==0){//当前协议为：内置elrs协议
                                     document.getElementById("internal_radio_protocol").disabled = false;
                                     show.internal_radio_protocol.value = 0;
@@ -663,7 +666,13 @@ window.onload = function() {
                                     usbSendData(rquestBuffer);
                                 }else if(HidConfig.current_protocol==1){//当前协议为：外置crsf射频模块
                                     console.log("external crsf is runing");
-                                    document.getElementById("external_radio_protocol").disabled = false;
+                                    if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_4_SE_SX1280){
+                                        document.getElementById("external_radio_protocol").disabled = true;
+                                        document.getElementById("internal_radio_protocol").disabled = false;
+                                    }else{
+                                        document.getElementById("external_radio_protocol").disabled = false;
+                                        document.getElementById("internal_radio_protocol").disabled = true;
+                                    }
                                     HidConfig.external_radio_protocol = 1;
                                     show.external_radio_protocol.val(HidConfig.current_protocol);
                                     //开启外部ExpressLRS
@@ -743,8 +752,14 @@ window.onload = function() {
                             console.log("receive external radio config");
                             HidConfig.Internal_radio_module_switch = false;
                             HidConfig.External_radio_module_switch = true;
-                            document.getElementById('internal_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
-                            document.getElementById('external_radio_module_switch').checked = HidConfig.External_radio_module_switch;
+                            //把LR4 SE的高频头本质上也是个外置高频头，所以只是界面显示是内置，但上位机和遥控器之间的通信方式还是用的外置
+                            if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_4_SE_SX1280){
+                                document.getElementById('internal_radio_module_switch').checked = HidConfig.External_radio_module_switch;
+                                document.getElementById('external_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
+                            }else{
+                                document.getElementById('internal_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
+                                document.getElementById('external_radio_module_switch').checked = HidConfig.External_radio_module_switch;
+                            }
                             if(data[5] == 0x02){//需要根据外部射频模块硬件型号设置组件可选包率
                                 //外部射频模块可选包率：
                                 //200hz 100hz 50hz 25hz
@@ -1194,10 +1209,13 @@ window.onload = function() {
                                         },300);
                                     }
                                 }else if(HidConfig.internal_radio==RFmodule.SX1280){//硬件型号为：sx1280
-                                    $("#internal_radio_protocol_elrs_2.4G").css({display: 'block'});
-                                    $("#internal_radio_protocol_Frsky_F8").css({display: 'none'});
-                                    $("#internal_radio_protocol_Frsky_F16_FCC").css({display: 'none'});
-                                    $("#internal_radio_protocol_Frsky_F16_LBT").css({display: 'none'});
+                                    $('#internal_radio_protocol').empty();
+                                    addOptionValue('internal_radio_protocol',0,"ELRS2 2.4G");
+                                    // $("#internal_radio_protocol_elrs_2.4G").css({display: 'block'});
+                                    // $("#internal_radio_protocol_Frsky_F8").css({display: 'none'});
+                                    // $("#internal_radio_protocol_Frsky_F16_FCC").css({display: 'none'});
+                                    // $("#internal_radio_protocol_Frsky_F16_LBT").css({display: 'none'});
+                                    // $("#internal_radio_protocol_elrs3_2.4G").css({display: 'none'});
                                     if(HidConfig.current_protocol==0){//当前协议为：内置elrs协议
                                         document.getElementById("internal_radio_protocol").disabled = false;
                                         show.internal_radio_protocol.value = 0;
