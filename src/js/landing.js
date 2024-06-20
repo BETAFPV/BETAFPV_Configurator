@@ -64,14 +64,26 @@ landing.initialize = function (callback) {
         shell.openExternal(this.getAttribute('href'));
       }
 
-      let LiteRadio_2_SE_href = document.getElementById("LiteRadio_2_SE_href");
-      LiteRadio_2_SE_href.onclick = function(e){
+      let LiteRadio_1_href = document.getElementById("LiteRadio_1_href");
+      LiteRadio_1_href.onclick = function(e){
+        e.preventDefault();
+        shell.openExternal(this.getAttribute('href'));
+      }
+
+      let LiteRadio_2_SE_V2_href = document.getElementById("LiteRadio_2_SE_V2_href");
+      LiteRadio_2_SE_V2_href.onclick = function(e){
         e.preventDefault();
         shell.openExternal(this.getAttribute('href'));
       }
 
       let LiteRadio_3_href = document.getElementById("LiteRadio_3_href");
       LiteRadio_3_href.onclick = function(e){
+        e.preventDefault();
+        shell.openExternal(this.getAttribute('href'));
+      }
+
+      let LiteRadio_4_SE_href = document.getElementById("LiteRadio_4_SE_href");
+      LiteRadio_4_SE_href.onclick = function(e){
         e.preventDefault();
         shell.openExternal(this.getAttribute('href'));
       }

@@ -635,13 +635,13 @@
         "message": "本应用只支持下面罗列的遥控器。"
     },
     "promptOfUseRadioConfigurator":{
-        "message": "<br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br /><br />点击下面黄色按钮切换到遥控器配置程序。"
+        "message": "<br />1. LiteRadio 2 SE的PCB版本如果是V1，无法使用本应用配置相关的功能。<br />2. LiteRadio 2使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br />3. LiteRadio 3 Pro使用EdgeTX固件，请使用自带的屏幕进行配置。<br /><br />点击下面黄色按钮切换到遥控器配置程序。"
     },
     "defaultContributingText_radio": {
-        "message": "本应用为V2.0-RC1版本，只支持下面罗列的遥控器的ELRS 3协议版本（3.0-3.3）。"
+        "message": "本应用只支持下面罗列的遥控器。"
     },
     "promptOfUseRadioConfigurator_radio":{
-        "message":"<br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />请点击左侧“固件烧写工具”，将遥控器升级到支持ELRS 3协议。固件下载地址：<br /><br /><a href=\"https://www.jianguoyun.com/p/DYhoOIUQ_afyCRi8wLYEIAA#dir=%2FLiteradio2%20se%E9%81%A5%E6%8E%A7%E5%99%A8%E7%9B%B8%E5%85%B3%2FLite%20Radio2%20se%E5%9B%BA%E4%BB%B6::mode=0\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE固件</a><br /><a href=\"https://www.jianguoyun.com/p/DYhoOIUQ_afyCRi8wLYEIAA#dir=%2FLiteRadio%203%2F%E5%9B%BA%E4%BB%B6::mode=0\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3固件</a><br /><br />遥控器参数配置界面连接基本步骤如下：<br />1. 首先将遥控器关机<br />2. 用USB数据线连接遥控器到电脑，遥控器红色或者绿色灯逐渐闪烁<br />3. 右上角选择对应的串口，波特率使用默认115200即可，点击右上角“连接遥控器”按钮进入配置界面。<br /><br /><strong>注意：</strong><br />1. LiteRadio 2 SE和LiteRadio 3的ELRS 2协议版本，请使用上位机V1.1.1-RC1版本；<br />2. LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。<br />3. LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br />"
+        "message":"<br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />遥控器参数配置界面连接基本步骤如下：<br />1. 首先将遥控器关机<br />2. 用USB数据线连接遥控器到电脑，遥控器红色或者绿色灯呼吸<br />3. 右上角选择对应的串口，波特率使用默认115200即可，点击右上角“连接遥控器”按钮进入配置界面<br /><br /><strong>若要刷写固件，点击左侧“固件烧写工具”。</strong><br /><br /><strong>注意：</strong><br />1. LiteRadio 2 SE的PCB版本如果是V1，无法使用本应用配置相关的功能<br />2. LiteRadio 2使用OpenTX固件，请使用OpenTX Companion上位机进行配置<br />3. LiteRadio 3 Pro使用EdgeTX固件，请使用自带的屏幕进行配置<br />"
     },
     "defaultFacebookText": {
         "message": "我们还有一个 <a href=\"https://mp.weixin.qq.com/s/3fxc5h2dheOTfRshuTv9qw\" target=\"_blank\" rel=\"noopener noreferrer\">微信公众号</a>。<br />关注我们获取最新动态，寻求技术支持，或者只是和小伙伴们闲聊。"
@@ -2974,8 +2974,16 @@
     "firmwareFlasherRecoveryText": {
         "message": "你可以按照以下的几个步骤来重刷固件，包括飞控固件，OSD固件或者传感器固件。<ul><li>飞控断电；</li><li>按住飞控底部的按键；</li><li>上电（通过电池或者USB上电都可以），如果操作正确，飞控底部LED灯白色常亮，表示已经处于固件烧写状态；</li><li>松开飞控底部按键，将飞控通过USB数据线连接电脑；</li><li>飞控将会被识别为COM口，在右上角选择其对应的COM口和波特率（默认使用115200），再点击“连接”按钮，按钮变为红色且显示“更新固件”则表示连接成功；如果未被正确识别为COM口，请检查驱动是否安装正确。(参阅链接：<a href=\"https://github.com/BETAFPV/BETAFPV_Configurator/blob/3d91a106fb9f8dc863cd80cc85afa5c0b9b194c8/docs/UpdateFirmwareProcedure_CN.md\"target=\"_blank\" rel=\"noopener noreferrer\">如何更新飞控固件</a> ).</li><li>在本页面顶部下拉框中，选择对应的飞控硬件型号和固件版本，点击从网络加载固件（或者从本地电脑加载固件）。上位机能够自动识别加载的固件类型（飞控固件、OSD固件或者传感器固件），并且点亮右下角对应的“烧写xxx”按钮，点击该按钮开始烧写；</li><li>等待烧写进度条提示烧写完成，飞控将可以自动重启。</li></ul>"
     },
+    "firmwareFlasherDownloadTitle_radio": {
+        "message": "<strong> 固件下载地址</strong>"
+    },
+    
+    "firmwareFlasherDownload_radio": 
+    {
+        "message": "<strong><a href=\"https://www.jianguoyun.com/p/DYhoOIUQ_afyCRi8wLYEIAA#file=%2FLiteRadio%202%20SE%E9%81%A5%E6%8E%A7%E5%99%A8%2FLiteRadio_2_SE_V2_CC2500_2.0.2.bin::size=45804\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 1 (Frsky) </a><br /><a href=\"https://www.jianguoyun.com/p/DYhoOIUQ_afyCRi8wLYEIAA#dir=%2FLiteRadio%202%20SE%E9%81%A5%E6%8E%A7%E5%99%A8%2FLiteRadio%202%20SE%E5%9B%BA%E4%BB%B6%EF%BC%88V1%E7%89%88%E6%9C%AC%EF%BC%89::mode=0\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE V1 (ELRS2) </a><br /><a href=\"https://www.jianguoyun.com/p/DYhoOIUQ_afyCRi8wLYEIAA#file=%2FLiteRadio%202%20SE%E9%81%A5%E6%8E%A7%E5%99%A8%2FLiteRadio_2_SE_V2_CC2500_2.0.2.bin::size=45804\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE V2 (Frsky) </a><br /><a href=\"https://www.jianguoyun.com/p/DYhoOIUQ_afyCRi8wLYEIAA#file=%2FLiteRadio%202%20SE%E9%81%A5%E6%8E%A7%E5%99%A8%2FLiteRadio_2_SE_V2_SX1280_2.0.1.bin::size=46816\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE V2 (ELRS2) </a><br /><a href=\"https://www.jianguoyun.com/p/DYhoOIUQ_afyCRi8wLYEIAA#file=%2FLiteRadio%202%20SE%E9%81%A5%E6%8E%A7%E5%99%A8%EF%BC%88ELRS%20V3.0.0%EF%BC%89%2FLiteRadio_2_SE_V2_SX1280_3.0.0_2023_11_07.bin::size=48160\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE V2 (ELRS3) </a><br /><a href=\"https://www.jianguoyun.com/p/DYhoOIUQ_afyCRi8wLYEIAA#file=%2FLiteRadio%203%E9%81%A5%E6%8E%A7%E5%99%A8%2F%E5%9B%BA%E4%BB%B6%2FLiteRadio_3_CC2500_2.0.2.bin::size=45804\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3 (Frsky) </a><br /><a href=\"https://www.jianguoyun.com/p/DYhoOIUQ_afyCRi8wLYEIAA#file=%2FLiteRadio%203%E9%81%A5%E6%8E%A7%E5%99%A8%2F%E5%9B%BA%E4%BB%B6%2FLiteRadio_3_SX1280_2.0.1.bin::size=46816\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3 (ELRS2) </a><br /><a href=\"https://www.jianguoyun.com/p/DYhoOIUQ_afyCRi8wLYEIAA#file=%2FLiteRadio%203%E9%81%A5%E6%8E%A7%E5%99%A8%2F%E5%9B%BA%E4%BB%B6%2FLiteRadio_3_SX1280_3.0.0_2023_11_07.bin::size=48160\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3 (ELRS3) </a><br /><a href=\"https://www.jianguoyun.com/p/DYhoOIUQ_afyCRi8wLYEIAA#\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 4 SE (ELRS3) </a><strong>"
+    },
     "firmwareFlasherRecoveryText_radio": {
-        "message": "遥控器固件烧写步骤如下：<ul><li>遥控器关机；</li><li>按住遥控器SETUP按键，开机，遥控器蓝灯常亮，在“滴滴滴”三声之后，表示已经处于固件烧写状态；</li><li>松开SETUP按键，将遥控器通过USB数据线连接电脑；</li><li>遥控器将会被识别为COM口，在右上角选择其对应的COM口和波特率，再点击“连接”按钮，按钮变为红色则表示连接成功；</li><li>选择对应的固件，点击从网络加载固件。若网络无法连接则需要在本地导入固件。点击右下角“烧写固件”按钮</li><li>等待烧写进度条提示烧写完成，断开USB连接并重启遥控器</li></ul>"
+        "message": "遥控器固件烧写步骤如下：<ul><li>遥控器关机；</li><li>按住遥控器SETUP按键，开机，遥控器蓝灯常亮，在“Do Re Mi”三声之后，表示已经处于固件烧写状态；</li><li>松开SETUP按键，将遥控器通过USB数据线连接电脑；</li><li>遥控器将会被识别为COM口，在右上角选择其对应的COM口和波特率，再点击“连接”按钮，按钮变为红色则表示连接成功；</li><li>从上面“固件下载地址”的链接中选择相应型号的遥控器固件并下载，点击右下角“从本地电脑加载固件”按钮选择固件，点击“烧写固件”开始烧写；</li><li>等待烧写进度条提示烧写完成，断开USB连接并重启遥控器。</li><br /><br />LiteRadio4 SE遥控器支持烧写高频头固件，步骤如下：<li>先按上面步骤执行到“将遥控器通过USB数据线连接电脑”；</li><li>此时短按SETUP按键可以切换指示灯颜色，蓝色表示当前是固件烧写模式，红色表示当前是高频头烧写模式，其他颜色暂无功能；</li><li>打开ExpressLRS Configurator官方烧写软件，选择正确的高频头固件以及串口，点击刷写；</li><li>等待提示刷写完成，断开USB。</li></ul>"
     },
     "firmwareFlasherButtonLeave": {
         "message": "关闭固件烧写"

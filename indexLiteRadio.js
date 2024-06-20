@@ -618,7 +618,7 @@ window.onload = function() {
                                     show.internal_radio_protocol.val(HidConfig.current_protocol);
                                     document.getElementById("external_radio_protocol").disabled = true;
                                     document.getElementById("internal_radio_protocol").disabled = false;
-                                        //接着请求遥控器通道配置信息
+                                    //接着请求遥控器通道配置信息
                                     rquestBuffer[0] = 0x11;
                                     rquestBuffer[1] = 0x01;
                                     rquestBuffer[2] = 0x01;
@@ -826,14 +826,11 @@ window.onload = function() {
                     }else if(data[0] == Command_ID.DEVICE_INFO_ID && HidConfig.LiteRadio_power == false){
                         var checkSum=0;
                         var checkSum2=0;
-                        for(i=0;i<7;i++)
-                        {
+                        for(i=0;i<7;i++){
                             checkSum +=data[2*i] & 0x00ff;
-                        }                   
-                        checkSum2 = data[15]<<8 | data[14] ;
-
-                        if(checkSum == checkSum2)
-                        {
+                        }
+                        checkSum2 = data[15]<<8 | data[14];
+                        if(checkSum == checkSum2){
                             console.log("DEVICE_INFO_ID");
                             console.log(data);
                             HidConfig.lite_radio_device = data[2];
@@ -859,7 +856,6 @@ window.onload = function() {
                                         break;
                                     case liteRadioUnitType.LiteRadio_2_SE_V2_SX1280:
                                         document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 2 SE V2 SX1280";
-                                        console.log("LiteRadio 2 SE V2 SX1280");
                                         break;
                                     case liteRadioUnitType.LiteRadio_2_SE_V2_CC2500:
                                         document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 2 SE V2 CC2500";
@@ -899,17 +895,15 @@ window.onload = function() {
                                 console.log("HidConfig.lite_Radio_version:"+HidConfig.lite_Radio_version);
                                 document.getElementById("liteRadioInfoBoardVersion").innerHTML = board_version;
                                 document.getElementById("liteRadioInfoFirmwareVersion").innerHTML = firmware_version;
-
                             }
                         }
-                        if(getLiteRadioUnitType() < liteRadioUnitType.LiteRadio_4_SE_SX1280){//LR4之前的遥控器关闭9、10通道
+                        if(getLiteRadioUnitType() < liteRadioUnitType.LiteRadio_4_SE_SX1280){//LR4 SE以前的遥控器关闭9、10通道的配置
                             //关闭CH9、CH10相关显示
                             document.getElementById("ch9_mixes").style.display="none";
                             document.getElementById("ch10_mixes").style.display="none";
                             document.getElementById("ch9_mixes_bar").style.display="none";
                             document.getElementById("ch10_mixes_bar").style.display="none";
                         }
-
                     }else if(data[0] == Command_ID.EXTRA_CUSTOM_CONFIG_ID && HidConfig.LiteRadio_power == false){
                         var checkSum=0;
                         var checkSum2=0;
