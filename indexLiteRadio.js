@@ -637,7 +637,7 @@ window.onload = function() {
                                     rquestBuffer[1] = 0x01;
                                     rquestBuffer[2] = 0x00;
                                     usbSendData(rquestBuffer);
-                                    document.getElementById("External_radio_module_power_switch").checked = true;
+                                    //document.getElementById("External_radio_module_power_switch").checked = true;
                                     //延时一小段时间等待外部ExpressLRS启动后再取获取配置信息
                                     setTimeout(function loadLanguage() {
                                         //获取外置射频模块配置信息
@@ -680,7 +680,7 @@ window.onload = function() {
                                     rquestBuffer[1] = 0x01;
                                     rquestBuffer[2] = 0x00;
                                     usbSendData(rquestBuffer);
-                                    document.getElementById("External_radio_module_power_switch").checked = true;
+                                    //document.getElementById("External_radio_module_power_switch").checked = true;
                                     //延时一小段时间等待外部ExpressLRS启动后再取获取配置信息
                                     setTimeout(function loadLanguage() {
                                         //获取外置射频模块配置信息
@@ -724,7 +724,7 @@ window.onload = function() {
                             document.getElementById('internal_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
                             document.getElementById('external_radio_module_switch').checked = HidConfig.External_radio_module_switch;
                             //外部射频模块供电开关失能
-                            document.getElementById("External_radio_module_power_switch").disabled = true; 
+                            //document.getElementById("External_radio_module_power_switch").disabled = true; 
                             //ExpressLRS系统可设置
                             document.getElementById("ExpressLRS_power_option_box").disabled = false;
                             document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
@@ -822,7 +822,7 @@ window.onload = function() {
                                 show.ExpressLRS_pkt_rate_option_box.val(HidConfig.ExpressLRS_pkt_rate_option_value);
                                 show.ExpressLRS_tlm_option_box.val(HidConfig.ExpressLRS_tlm_option_value);
                                 //外部射频模块供电开关使能
-                                document.getElementById("External_radio_module_power_switch").disabled = false; 
+                                //document.getElementById("External_radio_module_power_switch").disabled = false; 
                                 //ExpressLRS系统可设置
                                 document.getElementById("ExpressLRS_power_option_box").disabled = false;
                                 document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
@@ -1198,7 +1198,7 @@ window.onload = function() {
                                         rquestBuffer[2] = 0x01;
                                         rquestBuffer[3] = 0x00;
                                         usbSendData(rquestBuffer);
-                                        document.getElementById("External_radio_module_power_switch").checked = true;
+                                        //document.getElementById("External_radio_module_power_switch").checked = true;
                                         //延时一小段时间等待外部ExpressLRS启动后再取获取配置信息
                                         setTimeout(function loadLanguage() {
                                             rquestBuffer[0] = 0x00;//获取外置射频模块配置信息
@@ -1237,7 +1237,7 @@ window.onload = function() {
                                         rquestBuffer[2] = 0x01;
                                         rquestBuffer[3] = 0x00;
                                         usbSendData(rquestBuffer);
-                                        document.getElementById("External_radio_module_power_switch").checked = true;
+                                        //document.getElementById("External_radio_module_power_switch").checked = true;
                                         //延时一小段时间等待外部ExpressLRS启动后再取获取配置信息
                                         setTimeout(function loadLanguage() {
                                             rquestBuffer[0] = 0x00;//获取外置射频模块配置信息
@@ -1281,7 +1281,7 @@ window.onload = function() {
                                 document.getElementById('internal_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
                                 document.getElementById('external_radio_module_switch').checked = HidConfig.External_radio_module_switch;
                                 //外部射频模块供电开关失能
-                                document.getElementById("External_radio_module_power_switch").disabled = true;
+                                //document.getElementById("External_radio_module_power_switch").disabled = true;
                                 //ExpressLRS系统可设置
                                 document.getElementById("ExpressLRS_power_option_box").disabled = false;
                                 document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
@@ -1372,7 +1372,7 @@ window.onload = function() {
                                     show.ExpressLRS_pkt_rate_option_box.val(HidConfig.ExpressLRS_pkt_rate_option_value);
                                     show.ExpressLRS_tlm_option_box.val(HidConfig.ExpressLRS_tlm_option_value);
                                     //外部射频模块供电开关使能
-                                    document.getElementById("External_radio_module_power_switch").disabled = false;
+                                    //document.getElementById("External_radio_module_power_switch").disabled = false;
                                     //ExpressLRS系统可设置
                                     document.getElementById("ExpressLRS_power_option_box").disabled = false;
                                     document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
