@@ -106,6 +106,9 @@ setup.initialize = function (callback) {
             case 8:
                 target_id_e.text('Aquila16');
                 break;
+            case 9:
+                target_id_e.text('PavoPocket');
+                break;
             default:
                 target_id_e.text('Unknow');
                 break;
