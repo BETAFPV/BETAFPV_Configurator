@@ -1,6 +1,6 @@
 const serialport = require('serialport');
 const semver = require('semver');
-var liteRadio_configurator_version ="v2.0-RC2";
+var liteRadio_configurator_version ="v2.0-RC3";
 var {shell} = require('electron');
 var HID = require('node-hid');
 
