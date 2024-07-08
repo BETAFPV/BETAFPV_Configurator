@@ -793,12 +793,21 @@ window.onload = function() {
                                 //工作频段2.4GHz ISM
                                 //支持功率档位：10 25 50 100 250 500mw
                                 $('#ExpressLRS_power_option_box').empty();
-                                addOptionValue('ExpressLRS_power_option_box',0,"10mw");
-                                addOptionValue('ExpressLRS_power_option_box',1,"25mw");
-                                addOptionValue('ExpressLRS_power_option_box',2,"50mw");
-                                addOptionValue('ExpressLRS_power_option_box',3,"100mw");
-                                addOptionValue('ExpressLRS_power_option_box',4,"250mw");
-                                addOptionValue('ExpressLRS_power_option_box',5,"500mw");
+                                if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_4_SE_SX1280){
+                                    //addOptionValue('ExpressLRS_power_option_box',0,"10mw");
+                                    addOptionValue('ExpressLRS_power_option_box',1,"25mw");
+                                    addOptionValue('ExpressLRS_power_option_box',2,"50mw");
+                                    addOptionValue('ExpressLRS_power_option_box',3,"100mw");
+                                    //addOptionValue('ExpressLRS_power_option_box',4,"250mw");
+                                    //addOptionValue('ExpressLRS_power_option_box',5,"500mw");
+                                }else{
+                                    addOptionValue('ExpressLRS_power_option_box',0,"10mw");
+                                    addOptionValue('ExpressLRS_power_option_box',1,"25mw");
+                                    addOptionValue('ExpressLRS_power_option_box',2,"50mw");
+                                    addOptionValue('ExpressLRS_power_option_box',3,"100mw");
+                                    addOptionValue('ExpressLRS_power_option_box',4,"250mw");
+                                    addOptionValue('ExpressLRS_power_option_box',5,"500mw");
+                                }
                                 $("#ExpressLRS_power_10mw").css({display: 'none'});
                                 $("#ExpressLRS_power_25mw").css({display: 'none'});
                                 $("#ExpressLRS_power_50mw").css({display: 'none'});
