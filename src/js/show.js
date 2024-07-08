@@ -695,6 +695,15 @@ show.initialize = function (callback) {
         });
         show.rocker_mode.change(function () {
             HidConfig.rocker_mode = parseInt($(this).val(), 10);
+            //如果是LR4 SE接入，则发送油门摇杆模式的信息
+            if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_4_SE_SX1280){
+                console.log("Rocker mode change:");
+                console.log(HidConfig.rocker_mode);
+                configBuff[0] = 0x05;
+                configBuff[1] = 0x01;
+                configBuff[2] = HidConfig.rocker_mode;//油门摇杆模式
+                usbSendData(configBuff);
+            }
         });
         show.trainer_port.change(function () {
             HidConfig.trainer_port = parseInt($(this).val(), 10)
