@@ -89,8 +89,8 @@ const show = {
 
     BuzzerSwitch:null,
     JoystickDeadZonePercent:null,
-    
-
+    switchLockMode_SE:null,          //SE锁定模式，仅LR4 SE可见
+    switchLockMode_SF:null,          //SF锁定模式，仅LR4 SE可见
 };
 
 
@@ -188,6 +188,8 @@ show.getElementIndex = function(){
 
     show.BuzzerSwitch = $('input[id="BuzzerSwitch"]');
     show.JoystickDeadZonePercent = $('select[id="JoystickDeadZonePercent"]');
+    show.switchLockMode_SE = $('input[id="switchLockMode_SE"]');
+    show.switchLockMode_SF = $('input[id="switchLockMode_SF"]');
 }
 
 show.refreshUI = function()
@@ -735,7 +737,24 @@ show.initialize = function (callback) {
             configBuff[2] = HidConfig.JoystickDeadZonePercent;
             usbSendData(configBuff);
         });
-
+        show.switchLockMode_SE.change(function(){
+            HidConfig.switchLockMode_SE= $(this).is(':checked')?true:0x0F;
+            console.log("switchLockMode_SE change:");
+            console.log(HidConfig.switchLockMode_SE);
+            configBuff[0] = 0x08;
+            configBuff[1] = 0x03;
+            configBuff[2] = HidConfig.switchLockMode_SE;//0x0F:SE自锁模式关闭 其他值：开启;
+            usbSendData(configBuff);
+        });
+        show.switchLockMode_SF.change(function(){
+            HidConfig.switchLockMode_SF= $(this).is(':checked')?true:0x0F;
+            console.log("switchLockMode_SF change:");
+            console.log(HidConfig.switchLockMode_SF);
+            configBuff[0] = 0x08;
+            configBuff[1] = 0x04;
+            configBuff[2] = HidConfig.switchLockMode_SF;//0x0F:SF自锁模式关闭 其他值：开启;
+            usbSendData(configBuff);
+        });
         show.bind_phrase_switch.change(function () {
             HidConfig.bind_phrase_switch= $(this).is(':checked')?true:false;
             if(HidConfig.bind_phrase_switch){

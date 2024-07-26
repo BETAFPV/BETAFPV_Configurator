@@ -192,6 +192,8 @@ HidConfig = {
     //蜂鸣器和死区
     BuzzerSwitch:0,
     JoystickDeadZonePercent:0,
+    switchLockMode_SE:0,          //SE锁定模式，仅LR4 SE可见
+    switchLockMode_SF:0,          //SF锁定模式，仅LR4 SE可见
 
     //USB协议
     usedUSBProtocol:0,  //0,HID设备    1,VCOM（虚拟串口）设备
@@ -939,10 +941,18 @@ window.onload = function() {
                             console.log("EXTRA_CUSTOM_CONFIG_ID:");
                             console.log(data);
                             HidConfig.JoystickDeadZonePercent = data[2];
+                            show.JoystickDeadZonePercent.val(HidConfig.JoystickDeadZonePercent);
                             HidConfig.BuzzerSwitch = (data[3] == 0x0f)?false:true;
                             document.getElementById("BuzzerSwitch").checked = HidConfig.BuzzerSwitch;
-                            show.JoystickDeadZonePercent.val(HidConfig.JoystickDeadZonePercent);
                             $("#extra_custom_config").css({display: 'block'});
+                            //LR4 SE才显示的内容
+                            if((getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_4_SE_SX1280) && (data[7] == 0x0f)){
+                                HidConfig.switchLockMode_SE = (data[4] == 0x0f)?false:true;
+                                document.getElementById("switchLockMode_SE").checked = HidConfig.switchLockMode_SE;
+                                HidConfig.switchLockMode_SF = (data[5] == 0x0f)?false:true;
+                                document.getElementById("switchLockMode_SF").checked = HidConfig.switchLockMode_SF;
+                                $("#extra_custom_config_switch_lock_mode").css({display: 'block'});
+                            }
                         }
                     }else{
                         HidConfig.Have_Receive_HID_Data = true;

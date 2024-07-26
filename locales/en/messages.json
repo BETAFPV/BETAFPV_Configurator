@@ -6579,6 +6579,14 @@
     {
         "message":"Buzzer Switch"
     },
+    "switchLockMode_SE":
+    {
+        "message":"SE Lock Mode"
+    },
+    "switchLockMode_SF":
+    {
+        "message":"SF Lock Mode"
+    },
     "extra_custom_config":
     {
         "message":"Other Setting"

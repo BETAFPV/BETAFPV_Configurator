@@ -6191,6 +6191,14 @@
     {
         "message":"蜂鸣器提示音开关"
     },
+    "switchLockMode_SE":
+    {
+        "message":"SE自锁模式"
+    },
+    "switchLockMode_SF":
+    {
+        "message":"SF自锁模式"
+    },
     "extra_custom_config":
     {
         "message":"其他设置"
