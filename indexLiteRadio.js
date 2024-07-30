@@ -164,7 +164,7 @@ HidConfig = {
     //内外置射频模块开关
     Internal_radio_module_switch:0,
     External_radio_module_switch:0,
-    
+
     //ExpressLRS系统参数配置
     ExpressLRS_power_option_value:null,
     ExpressLRS_pkt_rate_option_value:null,
@@ -604,7 +604,11 @@ window.onload = function() {
                             show.rocker_mode = $('select[name="radiomode"]');
                             show.rocker_mode.val(HidConfig.rocker_mode);
                             document.getElementById("rocker_mode").disabled = false;   /* 打开rocker_mode 下拉列表 */
-                            
+                            //LR3 SX1280 解锁内外置射频模块切换功能
+                            if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_3_SX1280){
+                                document.getElementById('internal_radio_module_switch').disabled = false;
+                                document.getElementById('external_radio_module_switch').disabled = false;
+                            }
                             if(HidConfig.internal_radio==RFmodule.CC2500){//内置射频模块型号为：cc2500
                                 console.log("HidConfig.current_protocol:"+HidConfig.current_protocol);
                                 $('#internal_radio_protocol').empty();
@@ -727,7 +731,7 @@ window.onload = function() {
                             document.getElementById('external_radio_module_switch').checked = HidConfig.External_radio_module_switch;
                             //外部射频模块供电开关失能
                             //document.getElementById("External_radio_module_power_switch").disabled = true; 
-                            //ExpressLRS系统可设置
+                            //内置高频头ExpressLRS系统可设置的选项
                             document.getElementById("ExpressLRS_power_option_box").disabled = false;
                             document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
                             document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
@@ -754,7 +758,7 @@ window.onload = function() {
                             console.log("receive external radio config");
                             HidConfig.Internal_radio_module_switch = false;
                             HidConfig.External_radio_module_switch = true;
-                            //把LR4 SE的高频头本质上也是个外置高频头，所以只是界面显示是内置，但上位机和遥控器之间的通信方式还是用的外置
+                            //LR4 SE的高频头本质上也是个外置高频头，所以只是界面显示是内置，但上位机和遥控器之间的通信方式还是用的外置
                             if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_4_SE_SX1280){
                                 document.getElementById('internal_radio_module_switch').checked = HidConfig.External_radio_module_switch;
                                 document.getElementById('external_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
@@ -834,11 +838,13 @@ window.onload = function() {
                                 show.ExpressLRS_tlm_option_box.val(HidConfig.ExpressLRS_tlm_option_value);
                                 //外部射频模块供电开关使能
                                 //document.getElementById("External_radio_module_power_switch").disabled = false; 
-                                //ExpressLRS系统可设置
-                                document.getElementById("ExpressLRS_power_option_box").disabled = false;
-                                document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
-                                document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
-                                document.getElementById("content_EspressLRS_btn").style.display="block";
+                                //外置高频头ExpressLRS系统可设置选项
+                                if(getLiteRadioUnitType() != liteRadioUnitType.LiteRadio_3_SX1280){//LR3的ELRS版本还不支持设置外置高频头参数
+                                    document.getElementById("ExpressLRS_power_option_box").disabled = false;
+                                    document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
+                                    document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
+                                    document.getElementById("content_EspressLRS_btn").style.display="block";
+                                }
                             }else{
                             }
                             //请求遥控器通道配置信息
@@ -1181,6 +1187,11 @@ window.onload = function() {
                                 show.rocker_mode = $('select[name="radiomode"]');
                                 show.rocker_mode.val(HidConfig.rocker_mode);
                                 document.getElementById("rocker_mode").disabled = false;
+                                //LR3 SX1280 解锁内外置射频模块切换功能
+                                if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_3_SX1280){
+                                    document.getElementById('internal_radio_module_switch').disabled = false;
+                                    document.getElementById('external_radio_module_switch').disabled = false;
+                                }
                                 if(HidConfig.internal_radio==RFmodule.CC2500){//内置射频模块型号为：cc2500
                                     console.log("HidConfig.current_protocol:"+HidConfig.current_protocol);
                                     $('#internal_radio_protocol').empty();
@@ -1301,7 +1312,7 @@ window.onload = function() {
                                 document.getElementById('external_radio_module_switch').checked = HidConfig.External_radio_module_switch;
                                 //外部射频模块供电开关失能
                                 //document.getElementById("External_radio_module_power_switch").disabled = true;
-                                //ExpressLRS系统可设置
+                                //内置高频头ExpressLRS系统可设置选项
                                 document.getElementById("ExpressLRS_power_option_box").disabled = false;
                                 document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
                                 document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
@@ -1392,11 +1403,13 @@ window.onload = function() {
                                     show.ExpressLRS_tlm_option_box.val(HidConfig.ExpressLRS_tlm_option_value);
                                     //外部射频模块供电开关使能
                                     //document.getElementById("External_radio_module_power_switch").disabled = false;
-                                    //ExpressLRS系统可设置
-                                    document.getElementById("ExpressLRS_power_option_box").disabled = false;
-                                    document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
-                                    document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
-                                    document.getElementById("content_EspressLRS_btn").style.display="block";
+                                    //外置高频头ExpressLRS系统可设置选项
+                                    if(getLiteRadioUnitType() != liteRadioUnitType.LiteRadio_3_SX1280){//LR3的ELRS版本还不支持设置外置高频头参数
+                                        document.getElementById("ExpressLRS_power_option_box").disabled = false;
+                                        document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
+                                        document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
+                                        document.getElementById("content_EspressLRS_btn").style.display="block";
+                                    }
                                 }else{
                                 }
                                 //请求遥控器通道配置信息

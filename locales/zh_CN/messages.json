@@ -5963,7 +5963,7 @@
         "message": "如果内置射频模块或者外置高频头为ELRS系统，则可通过本模块配置其参数。程序能够自动检测ELRS系统是否存在。如果本模块为灰色不可配置，请确保ELRS系统存在，并且连接供电正确。同时，请在左侧“射频模块配置”中配置正确，<span class=\"message-negative\">保存并重启</span>。"
     },
     "RadioSetupRadioModuleDetect":{
-        "message": "未检测到LERS系统"
+        "message": "未检测到ELRS系统"
     },
     "RadioSetupInternel868M":{
         "message": "<strong>内置ELRS</strong>正在运行中，工作频段：<strong>868MHz</strong>。"
