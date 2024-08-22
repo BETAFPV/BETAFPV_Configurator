@@ -839,7 +839,7 @@ window.onload = function() {
                                 //外部射频模块供电开关使能
                                 //document.getElementById("External_radio_module_power_switch").disabled = false; 
                                 //外置高频头ExpressLRS系统可设置选项
-                                if(getLiteRadioUnitType() != liteRadioUnitType.LiteRadio_3_SX1280){//LR3的ELRS版本还不支持设置外置高频头参数
+                                if(getLiteRadioUnitType() != liteRadioUnitType.LiteRadio_3_SX1280){//LR3的ELRS版本还不支持设置外置高频头参数，下列代码是允许更改配置的参数
                                     document.getElementById("ExpressLRS_power_option_box").disabled = false;
                                     document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
                                     document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
@@ -1187,8 +1187,8 @@ window.onload = function() {
                                 show.rocker_mode = $('select[name="radiomode"]');
                                 show.rocker_mode.val(HidConfig.rocker_mode);
                                 document.getElementById("rocker_mode").disabled = false;
-                                //LR3 SX1280 解锁内外置射频模块切换功能
-                                if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_3_SX1280){
+                                //LR3 CC2500 解锁内外置射频模块切换功能
+                                if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_3_CC2500){
                                     document.getElementById('internal_radio_module_switch').disabled = false;
                                     document.getElementById('external_radio_module_switch').disabled = false;
                                 }
@@ -1404,7 +1404,7 @@ window.onload = function() {
                                     //外部射频模块供电开关使能
                                     //document.getElementById("External_radio_module_power_switch").disabled = false;
                                     //外置高频头ExpressLRS系统可设置选项
-                                    if(getLiteRadioUnitType() != liteRadioUnitType.LiteRadio_3_SX1280){//LR3的ELRS版本还不支持设置外置高频头参数
+                                    if(getLiteRadioUnitType() != liteRadioUnitType.LiteRadio_3_CC2500){//LR3的Frsky版本还不支持设置外置高频头参数，下列代码是允许更改配置的参数
                                         document.getElementById("ExpressLRS_power_option_box").disabled = false;
                                         document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
                                         document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
