@@ -16,7 +16,14 @@
 .tab-landing .content_top {
     height: 100px;
     padding: 20px;
-    background: #fff url(../images/pattern.png);
+    background: #fff url(../images/landing_fc_plus_icon.png);
+    background-size: 300px;
+}
+
+.tab-landing .content_top_rc {
+    height: 100px;
+    padding: 20px;
+    background: #fff url(../images/landing_radio_plus_icon.png);
     background-size: 300px;
 }
 
