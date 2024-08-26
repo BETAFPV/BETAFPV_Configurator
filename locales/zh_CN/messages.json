@@ -5960,7 +5960,7 @@
         "message": "可以选择遥控器内置射频模块，也可以选择启用外置高频头。两者不可同时启用。<br /><br />"
     },
     "RadioSetupExpressLRSText":{
-        "message": "如果内置射频模块或者外置高频头为ELRS系统，则可通过本模块配置其参数。程序能够自动检测ELRS系统是否存在。如果本模块为灰色不可配置，请确保ELRS系统存在，并且连接供电正确。同时，请在左侧“射频模块配置”中配置正确，<span class=\"message-negative\">保存并重启</span>。"
+        "message": "如果内置射频模块或者外置高频头为ELRS系统，则可通过本模块配置其参数，如果本模块为灰色表示不可配置。若想查看是否配置成功，请点击<span class=\"message-negative\">保存并重启</span>并重新连接遥控器。"
     },
     "RadioSetupRadioModuleDetect":{
         "message": "未检测到ELRS系统"
