@@ -49,15 +49,6 @@ setTimeout(function listPorts() {
     setTimeout(listPorts, 500);
   }, 500);
 
-setTimeout(function loadLanguage() {
-    i18next.changeLanguage(i18n.Storage_language);
-    if(i18n.Storage_language == 'en'){
-    document.getElementById("wechat_facebook_logo_src_switch").src = "./src/images/flogo_RGB_HEX-1024.svg";
-    }else if(i18n.Storage_language == "zh_CN"){
-    document.getElementById("wechat_facebook_logo_src_switch").src = "./src/images/wechat_icon.png";
-    }
-    
-}, 500);
 
   mavlinkSend = function(writedata){
     port.write(writedata, function (err) {
@@ -291,6 +282,15 @@ window.onload=function(){
         }
     });
     i18n.init();
-    
     $('#tabs ul.mode-disconnected li a:first').click();
+
+    //i18n初始化结束后延时一小会儿加载本地json语言包
+    setTimeout(function loadLanguage() {
+        i18next.changeLanguage(i18n.Storage_language);
+        if(i18n.Storage_language == 'en'){
+            document.getElementById("wechat_facebook_logo_src_switch").src = "./src/images/flogo_RGB_HEX-1024.svg";
+        }else if(i18n.Storage_language == "zh_CN"){
+            document.getElementById("wechat_facebook_logo_src_switch").src = "./src/images/wechat_icon.png";
+        }
+    }, 10);
 }
