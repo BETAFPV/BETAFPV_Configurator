@@ -271,6 +271,22 @@ function checkVCOMConnected() {
     return foundDongle;
 }
 
+//让LR4 SE关闭高频头电源
+function HIDNotice_LiteRadio4SE_DisableRF(){
+    let sendBuffer = new Buffer.alloc(8);
+    sendBuffer[0] = Command_ID.REQUEST_INFO_ID;
+    sendBuffer[1] = 0x00;
+    sendBuffer[2] = 0x04;
+    usbSendData(sendBuffer);
+}
+//让LR4 SE打开高频头电源
+function HIDNotice_LiteRadio4SE_EnableRF(){
+    let sendBuffer = new Buffer.alloc(8);
+    sendBuffer[0] = Command_ID.REQUEST_INFO_ID;
+    sendBuffer[1] = 0x00;
+    sendBuffer[2] = 0x03;
+    usbSendData(sendBuffer);
+}
 //让遥控器停止发送配置信息
 function HIDStopSendingConfig(){
     let sendBuffer = new Buffer.alloc(8);
@@ -940,6 +956,9 @@ window.onload = function() {
                             HidConfig.BuzzerSwitch = (data[3] == 0x0f)?false:true;
                             document.getElementById("BuzzerSwitch").checked = HidConfig.BuzzerSwitch;
                             $("#extra_custom_config").css({display: 'block'});
+                            //开启LR4 SE高频头电源，使其正常工作，这样才能读取高频头功率等配置参数
+                            HIDNotice_LiteRadio4SE_EnableRF();
+                            console.log("==========Open TX==========");
                             //LR4 SE才显示的内容
                             if((getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_4_SE_SX1280) && (data[7] == 0x0f)){
                                 HidConfig.switchLockMode_SE = (data[4] == 0x0f)?false:true;
@@ -999,7 +1018,13 @@ window.onload = function() {
                 });
             }
             else{
-                port.close();
+                //关闭LR4 SE高频头电源
+                HIDNotice_LiteRadio4SE_DisableRF();
+                console.log("==========Close TX==========");
+                //关闭串口
+                setTimeout(() => {
+                    port.close();
+                }, 100);
             }
         }else{
             if(checkHIDConnected(VENDOR_ID, PRODUCT_ID)){
