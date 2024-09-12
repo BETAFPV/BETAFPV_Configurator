@@ -6,7 +6,8 @@
     "start": "electron .",
     "package-win": "electron-packager . BETAFPV_Configurator --platform=win32 --arch=x64  --out=./Windows --app-version=2.0.0 --overwrite --icon=./BETAFPV_ICO.ico",
     "package-linux": "electron-packager . BETAFPV_Configurator --platform=linux  --arch=x64 --out=./Linux   --app-version=2.0.0 --overwrite --icon=./BETAFPV_ICO.ico",
-    "package-mac": "electron-packager . BETAFPV_Configurator --platform=darwin  --arch=x64 --out=./Mac   --app-version=2.0.0 --overwrite --icon=./BETAFPV_LOGO.icns"
+    "package-mac-x64": "electron-packager . BETAFPV_Configurator --platform=darwin  --arch=x64 --out=./Mac   --app-version=2.0.0 --overwrite --icon=./BETAFPV_LOGO.icns",
+    "package-mac-arm64": "electron-packager . BETAFPV_Configurator --platform=darwin  --arch=arm64 --out=./Mac   --app-version=2.0.0 --overwrite --icon=./BETAFPV_LOGO.icns"
   },
   "window": {
     "icon": "images/logo/BETAFPV_logo_blue.png",
