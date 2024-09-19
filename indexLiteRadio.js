@@ -244,7 +244,7 @@ function usbSendData(data) {
             hidDevice.write(hidBuffer);
         }
     }
-    console.log(data);
+    console.log("Send data to RC:", data);
 }
 
 //检查特定HID设备是否存在
@@ -355,10 +355,21 @@ async function listSerialPorts() {
     })
 }
 
+let isUsbDetectEnable = true;
 setTimeout(function listPorts() {
-    listSerialPorts();
+    // 在执行serialport.list()函数的时候，如果中途拔掉USB电缆，有概率导致能够正确读取到path，但VID和PID=undefined。这种情况下serialport.list()无法继续正常工作，
+    // 但此时点击切换为飞控配置程序按钮切换到飞控配置界面，serialport.list()恢复正常工作。推测试因为执行serialport.list()的过程中拔掉USB导致了一些错误的状态，切换
+    // 飞控界面则是复位了这些状态，所以才恢复正常工作。目前还没搞清楚如何不切换页面的前提下进行串口的复位。
+
+    // 原本的程序是每隔500ms就会执行一次serialport.list()来刷新usb下拉框选项，但是遥控器因为有保存并重启这个功能，这相当于拔出了USB电缆。也就是说需要确保在执行
+    // serialport.list()的时候避免点击保存并重启。根据这个原理，设计了一个开关变量控制这两个互斥的逻辑：
+    // usbConnected     true        false
+    // detectEnabled    false       true
+    if(isUsbDetectEnable){
+        listSerialPorts();
+    }
     setTimeout(listPorts, 500);
-  }, 500);
+}, 500);
 
 window.onload = function() {
     let Unable_to_find_serial_port = document.getElementById("Unable_to_find_serial_port");
@@ -419,6 +430,8 @@ window.onload = function() {
 
                 //open事件监听
                 port.on('open', () =>{
+                    console.log("Disable usb detect");
+                    isUsbDetectEnable = false;
                 });
                 //data事件监听，解析遥控器发送过来的信息
                 port.on('data', function(data) {
@@ -962,7 +975,7 @@ window.onload = function() {
                             $("#extra_custom_config").css({display: 'block'});
                             //开启LR4 SE高频头电源，使其正常工作，这样才能读取高频头功率等配置参数
                             HIDNotice_LiteRadio4SE_EnableRF();
-                            console.log("==========Open TX==========");
+                            console.log("Open RF");
                             //LR4 SE才显示的内容
                             if((getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_4_SE_SX1280) && (data[7] == 0x0f)){
                                 HidConfig.switchLockMode_SE = (data[4] == 0x0f)?false:true;
@@ -1004,6 +1017,8 @@ window.onload = function() {
                     $('#tabs ul.mode-disconnected').show();
                     $('#tabs ul.mode-disconnected li a:first').click();
                     $('div#hidbutton a.connect').removeClass('active');
+                    console.log("Enable usb detect");
+                    isUsbDetectEnable = true;
                 });
                 port.on("error", function(err) {
                     port.close();
@@ -1024,11 +1039,9 @@ window.onload = function() {
             else{
                 //关闭LR4 SE高频头电源
                 HIDNotice_LiteRadio4SE_DisableRF();
-                console.log("==========Close TX==========");
+                console.log("Close RF");
                 //关闭串口
-                setTimeout(() => {
-                    port.close();
-                }, 100);
+                port.close();
             }
         }else{
             if(checkHIDConnected(VENDOR_ID, PRODUCT_ID)){
