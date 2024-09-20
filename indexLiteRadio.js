@@ -977,12 +977,17 @@ window.onload = function() {
                             HIDNotice_LiteRadio4SE_EnableRF();
                             console.log("Open RF");
                             //LR4 SE才显示的内容
-                            if((getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_4_SE_SX1280) && (data[7] == 0x0f)){
-                                HidConfig.switchLockMode_SE = (data[4] == 0x0f)?false:true;
-                                document.getElementById("switchLockMode_SE").checked = HidConfig.switchLockMode_SE;
-                                HidConfig.switchLockMode_SF = (data[5] == 0x0f)?false:true;
-                                document.getElementById("switchLockMode_SF").checked = HidConfig.switchLockMode_SF;
-                                $("#extra_custom_config_switch_lock_mode").css({display: 'block'});
+                            if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_4_SE_SX1280) {
+                                if(data[7] == 0x0f){
+                                    HidConfig.switchLockMode_SE = (data[4] == 0x0f)?false:true;
+                                    document.getElementById("switchLockMode_SE").checked = HidConfig.switchLockMode_SE;
+                                    HidConfig.switchLockMode_SF = (data[5] == 0x0f)?false:true;
+                                    document.getElementById("switchLockMode_SF").checked = HidConfig.switchLockMode_SF;
+                                    $("#extra_custom_config_switch_lock_mode").css({display: 'block'});
+                                }else{
+                                }
+                            }else{
+                                $("#JoystickDeadZonePercent_0").css({display: 'none'});
                             }
                         }
                     }else{
