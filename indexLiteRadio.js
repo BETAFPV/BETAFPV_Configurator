@@ -865,7 +865,7 @@ window.onload = function() {
                                     document.getElementById("ExpressLRS_power_option_box").disabled = false;
                                     document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
                                     document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
-                                    document.getElementById("content_EspressLRS_btn").style.display="block";
+                                    //document.getElementById("content_EspressLRS_btn").style.display="block";
                                 }
                             }else{
                             }
@@ -1439,7 +1439,7 @@ window.onload = function() {
                                         document.getElementById("ExpressLRS_power_option_box").disabled = false;
                                         document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = false;
                                         document.getElementById("ExpressLRS_tlm_option_box").disabled = false;
-                                        document.getElementById("content_EspressLRS_btn").style.display="block";
+                                        //document.getElementById("content_EspressLRS_btn").style.display="block";
                                     }
                                 }else{
                                 }
