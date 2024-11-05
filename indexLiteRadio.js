@@ -1191,15 +1191,18 @@ window.onload = function() {
                                         HidConfig.ch8_reverse_display = data[3];
                                         HidConfig.ch8_scale_display = data[4];
                                         HidConfig.ch8_offset_display = data[5]-100;
+                                        HIDRequestExtraCustomConfig();
                                         //全部通道配置信息获取完毕，发送停止命令
-                                        HIDStopSendingConfig();
-                                        HidConfig.HID_Connect_State = HidConnectStatus.connected;
-                                        $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
-                                        if(ch_receive_step==7){
-                                            HidConfig.compareFirmwareVersion();
-                                            ch_receive_step = 0;
-                                        }
-                                        show.refreshUI();
+                                        setTimeout(() => {
+                                            HIDStopSendingConfig();
+                                            HidConfig.HID_Connect_State = HidConnectStatus.connected;
+                                            $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
+                                            if(ch_receive_step==7){
+                                                HidConfig.compareFirmwareVersion();
+                                                ch_receive_step = 0;
+                                            }
+                                            show.refreshUI();
+                                        }, 500);
                                         break;
                                 }
                             }
@@ -1534,6 +1537,23 @@ window.onload = function() {
                                     document.getElementById("liteRadioInfoBoardVersion").innerHTML = board_version;
                                     document.getElementById("liteRadioInfoFirmwareVersion").innerHTML = firmware_version;
                                 }
+                            }
+                        }else if(data[0] == Command_ID.EXTRA_CUSTOM_CONFIG_ID && HidConfig.LiteRadio_power == false){
+                            console.log("get custom config==========================================");
+                            var checkSum=0;
+                            var checkSum2=0;
+                            for(i=0;i<7;i++){
+                                checkSum +=data[2*i] & 0x00ff;
+                            }                   
+                            checkSum2 = data[15]<<8 | data[14] ;
+                            if(checkSum == checkSum2){
+                                console.log("EXTRA_CUSTOM_CONFIG_ID:");
+                                console.log(data);
+                                HidConfig.JoystickDeadZonePercent = data[2];
+                                HidConfig.BuzzerSwitch = (data[3] == 0x0f)?false:true;
+                                document.getElementById("BuzzerSwitch").checked = HidConfig.BuzzerSwitch;
+                                show.JoystickDeadZonePercent.val(HidConfig.JoystickDeadZonePercent);
+                                $("#extra_custom_config").css({display: 'block'});
                             }
                         }else{
                             HidConfig.Have_Receive_HID_Data = true;
