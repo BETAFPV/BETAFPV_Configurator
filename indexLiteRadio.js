@@ -1026,7 +1026,8 @@ window.onload = function() {
                     isUsbDetectEnable = true;
                 });
                 port.on("error", function(err) {
-                    port.close();
+                    console.log("============================== usb cdc error ==============================");
+                    //port.close();//发生错误以后port=null，此时调用close会死机
                     HidConfig.HID_Connect_State = HidConnectStatus.disConnect;
                     $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
                     const dialogHIDisDisconnect = $('.dialogHIDisDisconnect')[0];
@@ -1539,7 +1540,6 @@ window.onload = function() {
                                 }
                             }
                         }else if(data[0] == Command_ID.EXTRA_CUSTOM_CONFIG_ID && HidConfig.LiteRadio_power == false){
-                            console.log("get custom config==========================================");
                             var checkSum=0;
                             var checkSum2=0;
                             for(i=0;i<7;i++){
