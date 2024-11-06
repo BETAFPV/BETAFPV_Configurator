@@ -641,7 +641,7 @@
         "message": "本应用只支持下面罗列的遥控器。"
     },
     "promptOfUseRadioConfigurator_radio":{
-        "message":"<br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />遥控器参数配置界面连接基本步骤如下：<br />1. 首先将遥控器关机<br />2. 用USB数据线连接遥控器到电脑，遥控器红色或者绿色灯呼吸<br />3. 如果有识别到串口，请选择正确的串口，波特率使用默认115200即可，如果没有识别到串口，跳到下一步<br />4. 点击右上角“连接遥控器”按钮进入配置界面<br /><br /><strong>若要刷写固件，点击左侧“固件烧写工具”。</strong><br /><br /><strong>注意：</strong><br />1. LiteRadio 2 SE的PCB版本如果是V1，无法使用本应用配置相关的功能<br />2. LiteRadio 2使用OpenTX固件，请使用OpenTX Companion上位机进行配置<br />3. LiteRadio 3 Pro使用EdgeTX固件，请使用自带的屏幕进行配置<br />"
+        "message":"<br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />遥控器参数配置界面连接基本步骤如下：<br />1. 首先将遥控器关机<br />2. 用USB数据线连接遥控器到电脑，遥控器红色或者绿色灯呼吸<br />3. 在右上角的下拉框中选择检测到的手柄<br />4. 若为HID Handset，跳至第5步；若为COM Handset，选择波特率为115200<br />5. 点击右上角“连接遥控器”按钮进入配置界面<br /><br /><strong>若要刷写固件，点击左侧“固件烧写工具”。</strong><br /><br /><strong>注意：</strong><br />1. LiteRadio 2 SE的PCB版本如果是V1，无法使用本应用配置相关的功能<br />2. LiteRadio 2使用OpenTX固件，请使用OpenTX Companion上位机进行配置<br />3. LiteRadio 3 Pro使用EdgeTX固件，请使用自带的屏幕进行配置<br />"
     },
     "defaultFacebookText": {
         "message": "我们还有一个 <a href=\"https://mp.weixin.qq.com/s/3fxc5h2dheOTfRshuTv9qw\" target=\"_blank\" rel=\"noopener noreferrer\">微信公众号</a>。<br />关注我们获取最新动态，寻求技术支持，或者只是和小伙伴们闲聊。"
