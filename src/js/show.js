@@ -70,7 +70,7 @@ const show = {
 
 
     //外置射频模块供电开关
-    External_radio_module_power_switch:null,
+    //External_radio_module_power_switch:null,
     
     //内部射频模块配置信息
     internal_radio_protocol:null,
@@ -126,7 +126,7 @@ show.getElementIndex = function(){
     show.Internal_radio_module_switch = $('input[id="internal_radio_module_switch"]');
     show.External_radio_module_switch = $('input[id="external_radio_module_switch"]');
 
-    show.External_radio_module_power_switch = $('input[id="External_radio_module_power_switch"]');
+    //show.External_radio_module_power_switch = $('input[id="External_radio_module_power_switch"]');
 
     show.ExpressLRS_power_option_box = $('select[id="ExpressLRS_power_option_box"]');
     show.ExpressLRS_pkt_rate_option_box = $('select[id="ExpressLRS_pkt_rate_option_box"]');
@@ -438,7 +438,7 @@ show.initialize = function (callback) {
                     document.getElementById('external_radio_protocol').disabled = false;
                 }else{
                     document.getElementById('external_radio_protocol').disabled = true;
-                    document.getElementById('External_radio_module_power_switch').disabled = true;
+                    //document.getElementById('External_radio_module_power_switch').disabled = true;
                     // document.getElementById('ExpressLRS_power_option_box').disabled = true;
                     // document.getElementById('ExpressLRS_pkt_rate_option_box').disabled = true;
                     // document.getElementById('ExpressLRS_tlm_option_box').disabled = true;
@@ -447,32 +447,32 @@ show.initialize = function (callback) {
             }
         });
 
-        show.External_radio_module_power_switch.change(function () {
-            HidConfig.External_radio_module_power_switch = $(this).is(':checked')?1:0;
-            if(HidConfig.External_radio_module_power_switch){
-                console.log("elrs power on");
-                let  buffer= new Buffer.alloc(8);//开始外置射频模块电源
-                buffer[0] = 0x07;
-                buffer[1] = 0x01;
-                usbSendData(buffer); 
+        // show.External_radio_module_power_switch.change(function () {
+        //     HidConfig.External_radio_module_power_switch = $(this).is(':checked')?1:0;
+        //     if(HidConfig.External_radio_module_power_switch){
+        //         console.log("elrs power on");
+        //         let  buffer= new Buffer.alloc(8);//开始外置射频模块电源
+        //         buffer[0] = 0x07;
+        //         buffer[1] = 0x01;
+        //         usbSendData(buffer); 
 
-                 //获取外置ExpressLRS模块配置信息
-                buffer[0] = 0x11;
-                buffer[1] = 0x02;
-                buffer[2] = 0x02;
-                usbSendData(buffer);
+        //          //获取外置ExpressLRS模块配置信息
+        //         buffer[0] = 0x11;
+        //         buffer[1] = 0x02;
+        //         buffer[2] = 0x02;
+        //         usbSendData(buffer);
 
-            }else{
-                console.log("elrs power off");
-                let  buffer= new Buffer.alloc(8);
-                buffer[0] = 0x07; 
-                buffer[1] = 0x00;
-                usbSendData(buffer);
-                document.getElementById("ExpressLRS_power_option_box").disabled = true;
-                document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = true;
-                document.getElementById("ExpressLRS_tlm_option_box").disabled = true;
-            }
-        });
+        //     }else{
+        //         console.log("elrs power off");
+        //         let  buffer= new Buffer.alloc(8);
+        //         buffer[0] = 0x07; 
+        //         buffer[1] = 0x00;
+        //         usbSendData(buffer);
+        //         document.getElementById("ExpressLRS_power_option_box").disabled = true;
+        //         document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = true;
+        //         document.getElementById("ExpressLRS_tlm_option_box").disabled = true;
+        //     }
+        // });
         show.ExpressLRS_power_option_box.change(function () {
             HidConfig.ExpressLRS_power_option_value = parseInt($(this).val(), 10);
             //判断当前使用的是内部射频模块还是外部射频模块
