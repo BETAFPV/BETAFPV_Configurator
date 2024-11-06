@@ -5984,7 +5984,7 @@
     },
     
     "RadioSetupMIXSText":{
-        "message": "通道混控说明文本"
+        "message": "混控用于为翻滚、俯仰、偏航和油门车辆控制分配通道，以及确定它们是否反转。"
     },
     "RadioSetupFactoryReset":{
         "message":"恢复出厂设置"
