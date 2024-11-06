@@ -1743,6 +1743,8 @@ window.onload = function() {
            
                 switch (tab) {
                     case 'landing':
+                        document.getElementById("hidbutton").style.display = "block";
+                        document.getElementById("connectbutton").style.display = "none";
                         rcCurrentScreen = literadioScreenIndex.LITERADIO_SCREEN_WELCOME;
                         landing.initialize(content_ready);
                         break;
@@ -1750,6 +1752,8 @@ window.onload = function() {
                         $('div#connectbutton a.connect').removeClass('disabled');
                         $('div#hidbutton a.connect').addClass('disabled');
                         firmware_flasher_LiteRadio.initialize(content_ready);
+                        document.getElementById("hidbutton").style.display = "none";
+                        document.getElementById("connectbutton").style.display = "block";
                         rcCurrentScreen = literadioScreenIndex.LITERADIO_SCREEN_FLASH;
                         break;
                     case 'show':
