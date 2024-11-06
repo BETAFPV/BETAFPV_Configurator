@@ -64,7 +64,10 @@ var rcUsbProtocol = {
     HID_USB_PROTOCOL:0x01,
     CDC_USB_PROTOCOL:0x02,
 }
-
+var literadioScreenIndex = {
+    LITERADIO_SCREEN_WELCOME:0x00,
+    LITERADIO_SCREEN_FLASH:0x01,
+}
 var hidDevice = null;
 var ch_receive_step  = 0;
 HidConfig = {
@@ -250,7 +253,7 @@ function usbSendData(data) {
     console.log("Send data to RC:", data);
 }
 
-//检查特定HID设备是否存在
+//检查特定USB设备是否存在
 function checkUsbConnected() {
     let usbPathText = ($('div#port-picker #port option:selected').text());  //获取当前下拉框选中的串口号文本内容
     if(usbPathText.indexOf('HID') != -1){
@@ -325,48 +328,103 @@ function addOptionValue(id,value,text) {
 
 var listHidDev = NaN;
 var listCdcDev = NaN;
+var rcCurrentScreen = literadioScreenIndex.LITERADIO_SCREEN_WELCOME;
 async function listUsbDevice() {
     await serialport.list().then((ports, err) => {
-        listHidDev = HID.devices();
-        listCdcDev = ports;
-        let numOfHidAndCdc = listCdcDev.length + listHidDev.length;
+        if(rcCurrentScreen == literadioScreenIndex.LITERADIO_SCREEN_WELCOME){
+            listHidDev = HID.devices();
+            listCdcDev = ports;
+            let numOfHidAndCdc = listCdcDev.length + listHidDev.length;
 
-        // Detect changes in the number of HID devices and CDC devices
-        if(numOfHidAndCdc !== lastUsbCount){
-            // Remove all option
-            $('#port option').each(function(){ 
-                $(this).remove(); 
-            });
-        }
-        lastUsbCount = numOfHidAndCdc;
-
-        let optionLength = 0;
-        let decVID = 0;
-        let decPID = 0;
-
-        // Find HID RC
-        for (let i = 0; i < listHidDev.length; i++) {
-            decVID = parseInt(listHidDev[i].vendorId, 10);
-            decPID = parseInt(listHidDev[i].productId, 10);
-            if(decVID == 1155 && decPID == 22352) {
-                addOptionValue('port', optionLength, "HID Handset "+i);     //格式化遥控器设备的显示
-                optionLength++;
+            // Detect changes in the number of HID devices and CDC devices
+            if(numOfHidAndCdc !== lastUsbCount){
+                // Remove all option
+                $('#port option').each(function(){ 
+                    $(this).remove(); 
+                });
             }
-        }
+            lastUsbCount = numOfHidAndCdc;
 
-        // Find CDC RC
-        for (let i = 0; i < listCdcDev.length; i++) {
-            decVID = parseInt(listCdcDev[i].vendorId, 16);
-            decPID = parseInt(listCdcDev[i].productId, 16);
-            if(decVID == 1155 && listCdcDev[i].serialNumber.indexOf('0x800') == -1) {
-                if(decPID == 22315 || decPID == 22336 || decPID == 22352) {
-                    addOptionValue('port', optionLength, "COM Handset "+i); //格式化遥控器设备的显示
+            let optionLength = 0;
+            let decVID = 0;
+            let decPID = 0;
+
+            // Find HID RC
+            for (let i = 0; i < listHidDev.length; i++) {
+                decVID = parseInt(listHidDev[i].vendorId, 10);
+                decPID = parseInt(listHidDev[i].productId, 10);
+                if(decVID == 1155 && decPID == 22352) {
+                    addOptionValue('port', optionLength, "HID Handset "+i);     //格式化遥控器设备的显示
                     optionLength++;
+                }
+            }
+
+            // Find CDC RC
+            for (let i = 0; i < listCdcDev.length; i++) {
+                decVID = parseInt(listCdcDev[i].vendorId, 16);
+                decPID = parseInt(listCdcDev[i].productId, 16);
+                if(decVID == 1155 && listCdcDev[i].serialNumber.indexOf('0x800') == -1) {
+                    if(decPID == 22315 || decPID == 22336 || decPID == 22352) {
+                        addOptionValue('port', optionLength, "COM Handset "+i); //格式化遥控器设备的显示
+                        optionLength++;
+                    }
+                }
+            }
+        }else if(rcCurrentScreen == literadioScreenIndex.LITERADIO_SCREEN_FLASH){
+            listHidDev = NaN;
+            listCdcDev = ports;
+            let numOfCdc = listCdcDev.length;
+
+            // Detect changes in the number of CDC devices
+            if(numOfCdc !== lastUsbCount){
+                // Remove all option
+                $('#port option').each(function(){ 
+                    $(this).remove(); 
+                });
+            }
+            lastUsbCount = numOfCdc;
+
+            let optionLength = 0;
+            let decVID = 0;
+            let decPID = 0;
+
+            // Find CDC RC
+            for (let i = 0; i < listCdcDev.length; i++) {
+                decVID = parseInt(listCdcDev[i].vendorId, 16);
+                decPID = parseInt(listCdcDev[i].productId, 16);
+                if(decVID == 1155 && listCdcDev[i].serialNumber.indexOf('0x800') == -1) {
+                    if(decPID == 22315 || decPID == 22336 || decPID == 22352) {
+                        addOptionValue('port', optionLength, "COM Handset "+i); //格式化遥控器设备的显示
+                        optionLength++;
+                    }
                 }
             }
         }
     })
 }
+
+//获取当前HID路径
+function getCurrentHidPath(){
+    let path = NaN;
+    let text = ($('div#port-picker #port option:selected').text());
+    let id = text.replace(/[^\d]/g, "");   //提取HID设备数组下标
+    if(text.indexOf("HID") != -1){
+        path = listHidDev[id].path;
+    }
+    return path;
+}
+
+//获取当前CDC路径
+function getCurrentCdcPath(){
+    let path = NaN;
+    let text = ($('div#port-picker #port option:selected').text());
+    let id = text.replace(/[^\d]/g, "");   //提取HID设备数组下标
+    if(text.indexOf("COM") != -1){
+        path = listCdcDev[id].path;
+    }
+    return path;
+}
+
 
 let isUsbDetectEnable = true;
 setTimeout(function listPorts() {
@@ -406,10 +464,9 @@ window.onload = function() {
                 HidConfig.HID_Connect_State = HidConnectStatus.connecting;
                 $('div.open_hid_device div.connect_hid').text(i18n.getMessage('HID_Connecting'));
                 
-                let cdcDevId = ($('div#port-picker #port option:selected').text()).replace(/[^\d]/g, "");   //提取HID设备数组下标
                 const selected_baud = parseInt($('div#port-picker #baud').val());
 
-                port = new serialport(listCdcDev[cdcDevId].path, {
+                port = new serialport(getCurrentCdcPath(), {
                     baudRate: parseInt(selected_baud),
                     dataBits: 8,
                     parity: 'none',
@@ -1069,8 +1126,7 @@ window.onload = function() {
                 HidConfig.HID_Connect_State = HidConnectStatus.connecting;
                 $('div.open_hid_device div.connect_hid').text(i18n.getMessage('HID_Connecting'));
 
-                let hidDevId = ($('div#port-picker #port option:selected').text()).replace(/[^\d]/g, "");   //提取HID设备数组下标
-                hidDevice = new HID.HID(listHidDev[hidDevId].path);
+                hidDevice = new HID.HID(getCurrentHidPath());
 
                 setTimeout(() => {
                     if(HidConfig.Have_Receive_HID_Data){//先判断遥控器有数据发送过来
@@ -1687,12 +1743,14 @@ window.onload = function() {
            
                 switch (tab) {
                     case 'landing':
+                        rcCurrentScreen = literadioScreenIndex.LITERADIO_SCREEN_WELCOME;
                         landing.initialize(content_ready);
                         break;
                     case 'firmware_flasher_LiteRadio':
                         $('div#connectbutton a.connect').removeClass('disabled');
                         $('div#hidbutton a.connect').addClass('disabled');
                         firmware_flasher_LiteRadio.initialize(content_ready);
+                        rcCurrentScreen = literadioScreenIndex.LITERADIO_SCREEN_FLASH;
                         break;
                     case 'show':
                         show.initialize(content_ready);

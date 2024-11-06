@@ -276,9 +276,9 @@ firmware_flasher_LiteRadio.connect_init = function(){
 
             const selected_baud = parseInt($('div#port-picker #baud').val());
 
-            let COM = ($('div#port-picker #port option:selected').text());
+            //let COM = ($('div#port-picker #port option:selected').text());
 
-            port = new serialport(COM, {
+            port = new serialport(getCurrentCdcPath(), {
                 baudRate: parseInt(selected_baud),
                 dataBits: 8,
                 parity: 'none',
