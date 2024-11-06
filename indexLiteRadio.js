@@ -1297,7 +1297,8 @@ window.onload = function() {
                             show.rocker_mode.val(HidConfig.rocker_mode);
                             document.getElementById("rocker_mode").disabled = false;
                             //LR3 CC2500 解锁内外置射频模块切换功能
-                            if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_3_CC2500){
+                            if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_3_CC2500 
+                            || getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_3_SX1280){
                                 document.getElementById('internal_radio_module_switch').disabled = false;
                                 document.getElementById('external_radio_module_switch').disabled = false;
                             }
