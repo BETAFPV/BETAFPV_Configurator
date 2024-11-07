@@ -1056,9 +1056,9 @@ show.initialize = function (callback) {
 
         function factory_reset(){
 
-            HidConfig.ch1_input_source_display = 2;
-            HidConfig.ch2_input_source_display = 0;
-            HidConfig.ch3_input_source_display = 1;
+            HidConfig.ch1_input_source_display = 0;
+            HidConfig.ch2_input_source_display = 1;
+            HidConfig.ch3_input_source_display = 2;
             HidConfig.ch4_input_source_display = 3;
             HidConfig.ch5_input_source_display = 4;
             HidConfig.ch6_input_source_display = 5;
