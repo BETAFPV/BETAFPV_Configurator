@@ -250,7 +250,7 @@ function usbSendData(data) {
             hidDevice.write(hidBuffer);
         }
     }
-    console.log("Send data to RC:", data);
+    //console.log("Send data to RC:", data);
 }
 
 //检查特定USB设备是否存在
@@ -272,6 +272,7 @@ function HIDNotice_LiteRadio4SE_DisableRF(){
     sendBuffer[1] = 0x00;
     sendBuffer[2] = 0x04;
     usbSendData(sendBuffer);
+    console.log("Send disable RF:",sendBuffer);
 }
 //让LR4 SE打开高频头电源
 function HIDNotice_LiteRadio4SE_EnableRF(){
@@ -280,6 +281,7 @@ function HIDNotice_LiteRadio4SE_EnableRF(){
     sendBuffer[1] = 0x00;
     sendBuffer[2] = 0x03;
     usbSendData(sendBuffer);
+    console.log("Send enable RF:",sendBuffer);
 }
 //让遥控器停止发送配置信息
 function HIDStopSendingConfig(){
@@ -288,6 +290,7 @@ function HIDStopSendingConfig(){
     sendBuffer[1] = 0x00;
     sendBuffer[2] = 0x01;
     usbSendData(sendBuffer);
+    console.log("Send stop sending RF:",sendBuffer);
 }
 function HIDRequestChannelConfig(channel_num){
     let sendBuffer = new Buffer.alloc(8);
@@ -295,12 +298,14 @@ function HIDRequestChannelConfig(channel_num){
     sendBuffer[1] = CommandType.requestChannelConfig;
     sendBuffer[2] = channel_num;
     usbSendData(sendBuffer);
+    console.log("Send request ch:",sendBuffer);
 }
 function HIDRequestExtraCustomConfig(){
     let sendBuffer = new Buffer.alloc(8);
     sendBuffer[0] = Command_ID.REQUEST_INFO_ID;
     sendBuffer[1] = CommandType.request_extra_config;
     usbSendData(sendBuffer);
+    console.log("Send extra custom:",sendBuffer);
 }
 
 function channel_data_map(input,Omin,Omax,Nmin,Nmax){
@@ -517,7 +522,7 @@ window.onload = function() {
                         if(checkSum == checkSum2){
                             switch(data[1]){//判断是哪个通道
                                 case Channel.CHANNEL1:
-                                    console.log("receive ch1 config");
+                                    console.log("receive ch1 config:",data);
                                     HidConfig.ch1_input_source_display = data[2];
                                     HidConfig.ch1_reverse_display = data[3];
                                     HidConfig.ch1_scale_display = data[4];
@@ -530,7 +535,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL2:
-                                    console.log("receive ch2 config");
+                                    console.log("receive ch2 config:",data);
                                     HidConfig.ch2_input_source_display = data[2];
                                     HidConfig.ch2_reverse_display = data[3];
                                     HidConfig.ch2_scale_display = data[4];
@@ -543,7 +548,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL3:
-                                    console.log("receive ch3 config");
+                                    console.log("receive ch3 config:",data);
                                     HidConfig.ch3_input_source_display = data[2];
                                     HidConfig.ch3_reverse_display = data[3];
                                     HidConfig.ch3_scale_display = data[4];
@@ -557,7 +562,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL4:
-                                    console.log("receive ch4 config");
+                                    console.log("receive ch4 config:",data);
                                     HidConfig.ch4_input_source_display = data[2];
                                     HidConfig.ch4_reverse_display = data[3];
                                     HidConfig.ch4_scale_display = data[4];
@@ -571,7 +576,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL5:
-                                    console.log("receive ch5 config");
+                                    console.log("receive ch5 config:",data);
                                     HidConfig.ch5_input_source_display = data[2];
                                     HidConfig.ch5_reverse_display = data[3];
                                     HidConfig.ch5_scale_display = data[4];
@@ -585,7 +590,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL6:
-                                    console.log("receive ch6 config");
+                                    console.log("receive ch6 config:",data);
                                     HidConfig.ch6_input_source_display = data[2];
                                     HidConfig.ch6_reverse_display = data[3];
                                     HidConfig.ch6_scale_display = data[4];
@@ -599,7 +604,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL7:
-                                    console.log("receive ch7 config");
+                                    console.log("receive ch7 config:",data);
                                     HidConfig.ch7_input_source_display = data[2];
                                     HidConfig.ch7_reverse_display = data[3];
                                     HidConfig.ch7_scale_display = data[4];
@@ -613,7 +618,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL8:
-                                    console.log("receive ch8 config");
+                                    console.log("receive ch8 config:",data);
                                     HidConfig.ch8_input_source_display = data[2];
                                     HidConfig.ch8_reverse_display = data[3];
                                     HidConfig.ch8_scale_display = data[4];
@@ -642,7 +647,7 @@ window.onload = function() {
                                     break;
                                 
                                 case Channel.CHANNEL9:
-                                    console.log("receive ch9 config");
+                                    console.log("receive ch9 config:",data);
                                     HidConfig.ch9_input_source_display = data[2];
                                     HidConfig.ch9_reverse_display = data[3];
                                     HidConfig.ch9_scale_display = data[4];
@@ -655,7 +660,7 @@ window.onload = function() {
                                     break;
     
                                 case Channel.CHANNEL10:
-                                    console.log("receive ch10 config");
+                                    console.log("receive ch10 config:",data);
                                     HidConfig.ch10_input_source_display = data[2];
                                     HidConfig.ch10_reverse_display = data[3];
                                     HidConfig.ch10_scale_display = data[4];
@@ -684,7 +689,7 @@ window.onload = function() {
                         }
                         checkSum2 = data[15]<<8 | data[14] ;
                         if(checkSum == checkSum2){//校验通过
-                            console.log("receive lite radio config");
+                            console.log("receive lite radio config",data);
                             HidConfig.internal_radio = data[1];
                             HidConfig.current_protocol = data[2];
                             HidConfig.internal_radio_protocol = data[2];
@@ -692,7 +697,6 @@ window.onload = function() {
                             HidConfig.rocker_mode = data[4];
                             //HidConfig.support_power =data[4];
                             //遥控器硬件信息获取完毕后，需要在这里根据硬件信息修改对应组件的可选元素
-                            console.log(data);
                             show.rocker_mode = $('select[name="radiomode"]');
                             show.rocker_mode.val(HidConfig.rocker_mode);
                             document.getElementById("rocker_mode").disabled = false;   /* 打开rocker_mode 下拉列表 */
@@ -721,6 +725,7 @@ window.onload = function() {
                                     rquestBuffer[1] = 0x01;
                                     rquestBuffer[2] = 0x01;
                                     usbSendData(rquestBuffer);
+                                    console.log("Send request ch:",rquestBuffer);
                                     ch_receive_step = 0;
                                 }else{//cc2500 使用外置射频模块
                                     HidConfig.Internal_radio_module_switch = false;
@@ -735,6 +740,7 @@ window.onload = function() {
                                     rquestBuffer[1] = 0x01;
                                     rquestBuffer[2] = 0x00;
                                     usbSendData(rquestBuffer);
+                                    console.log("Send cmd open external RF:",rquestBuffer);
                                     //document.getElementById("External_radio_module_power_switch").checked = true;
                                     //延时一小段时间等待外部ExpressLRS启动后再取获取配置信息
                                     setTimeout(function loadLanguage() {
@@ -743,6 +749,7 @@ window.onload = function() {
                                         rquestBuffer[1] = 0x02;
                                         rquestBuffer[2] = 0x02;
                                         usbSendData(rquestBuffer);
+                                        console.log("Send request external RF config:",rquestBuffer);
                                     },300);
                                 }
                             }else if(HidConfig.internal_radio==RFmodule.SX1280){//硬件型号为：sx1280
@@ -762,6 +769,7 @@ window.onload = function() {
                                     rquestBuffer[1] = 0x02;
                                     rquestBuffer[2] = 0x01;
                                     usbSendData(rquestBuffer);
+                                    console.log("Send request internal RF:",rquestBuffer);
                                 }else if(HidConfig.current_protocol==1){//当前协议为：外置crsf射频模块
                                     console.log("external crsf is runing");
                                     if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_4_SE_SX1280){
@@ -778,6 +786,7 @@ window.onload = function() {
                                     rquestBuffer[1] = 0x01;
                                     rquestBuffer[2] = 0x00;
                                     usbSendData(rquestBuffer);
+                                    console.log("Send cmd open external RF:",rquestBuffer);
                                     //document.getElementById("External_radio_module_power_switch").checked = true;
                                     //延时一小段时间等待外部ExpressLRS启动后再取获取配置信息
                                     setTimeout(function loadLanguage() {
@@ -786,6 +795,7 @@ window.onload = function() {
                                         rquestBuffer[1] = 0x02;
                                         rquestBuffer[2] = 0x02;
                                         usbSendData(rquestBuffer);
+                                        console.log("Send request external RF config:",rquestBuffer);
                                     },300);
                                 }
                             }else if(HidConfig.internal_radio==RFmodule.SX1276){//硬件型号为：sx1276
@@ -799,7 +809,7 @@ window.onload = function() {
                         }                   
                         checkSum2 = data[15]<<8 | data[14] ;
                         if(checkSum == checkSum2){
-                            console.log("receive internal radio config");
+                            console.log("receive internal radio config",data);
                             document.getElementById("RadioSetupELRSRuningStatus").innerHTML =  i18n.getMessage('RadioSetupInternel2_4G');
                             //功率档位只支持：25 50 100mw档位
                             $('#ExpressLRS_power_option_box').empty();
@@ -837,6 +847,7 @@ window.onload = function() {
                             rquestBuffer[1] = 0x01;
                             rquestBuffer[2] = 0x01;
                             usbSendData(rquestBuffer);
+                            console.log("Send request ch config:",rquestBuffer);
                             ch_receive_step = 0;
                         }                
                     }else if(data[0] == Command_ID.EXTERNAL_CONFIGER_INFO_ID && HidConfig.LiteRadio_power == false){
@@ -847,7 +858,7 @@ window.onload = function() {
                         }                   
                         checkSum2 = data[15]<<8 | data[14];
                         if(checkSum == checkSum2){
-                            console.log("receive external radio config");
+                            console.log("receive external radio config", data);
                             HidConfig.Internal_radio_module_switch = false;
                             HidConfig.External_radio_module_switch = true;
                             //LR4 SE的高频头本质上也是个外置高频头，所以只是界面显示是内置，但上位机和遥控器之间的通信方式还是用的外置
@@ -944,6 +955,7 @@ window.onload = function() {
                             rquestBuffer[1] = 0x01;
                             rquestBuffer[2] = 0x01;
                             usbSendData(rquestBuffer);
+                            console.log("Send request ch config:",rquestBuffer);
                             ch_receive_step = 0;
                         }else{
                         }
@@ -955,8 +967,7 @@ window.onload = function() {
                         }
                         checkSum2 = data[15]<<8 | data[14];
                         if(checkSum == checkSum2){
-                            console.log("DEVICE_INFO_ID");
-                            console.log(data);
+                            console.log("receive device info id:",data);
                             HidConfig.lite_radio_device = data[2];
                             HidConfig.internal_radio = data[3];
                             HidConfig.throttle_rocker_position = data[4];
@@ -967,8 +978,6 @@ window.onload = function() {
                             HidConfig.firmware_minor_version = data[9];
                             HidConfig.firmware_pitch_version = data[10];
                             HidConfig.Hardware_info_storage_mark = (data[13]<<8|data[12]);
-                            console.log(HidConfig.Hardware_info_storage_mark);
-                            console.log(HidConfig.lite_radio_device);
                             if(HidConfig.Hardware_info_storage_mark == 0xa55a){
                                 $("#content_literadio_device_info").css({display: 'block'});
                                 switch(HidConfig.lite_radio_device){
@@ -1036,8 +1045,7 @@ window.onload = function() {
                         }                   
                         checkSum2 = data[15]<<8 | data[14] ;
                         if(checkSum == checkSum2){
-                            console.log("EXTRA_CUSTOM_CONFIG_ID:");
-                            console.log(data);
+                            console.log("receive extra custom config:",data);
                             HidConfig.JoystickDeadZonePercent = data[2];
                             show.JoystickDeadZonePercent.val(HidConfig.JoystickDeadZonePercent);
                             HidConfig.BuzzerSwitch = (data[3] == 0x0f)?false:true;
@@ -1165,7 +1173,7 @@ window.onload = function() {
                         if(checkSum == checkSum2){
                             switch(data[1]){//判断是哪个通道
                                 case Channel.CHANNEL1:
-                                    console.log("receive ch1 config");
+                                    console.log("receive ch1 config hid",data);
                                     HidConfig.ch1_input_source_display = data[2];
                                     HidConfig.ch1_reverse_display = data[3];
                                     HidConfig.ch1_scale_display = data[4];
@@ -1178,7 +1186,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL2:
-                                    console.log("receive ch2 config");
+                                    console.log("receive ch2 config hid",data);
                                     HidConfig.ch2_input_source_display = data[2];
                                     HidConfig.ch2_reverse_display = data[3];
                                     HidConfig.ch2_scale_display = data[4];
@@ -1191,7 +1199,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL3:
-                                    console.log("receive ch3 config");
+                                    console.log("receive ch3 config hid",data);
                                     HidConfig.ch3_input_source_display = data[2];
                                     HidConfig.ch3_reverse_display = data[3];
                                     HidConfig.ch3_scale_display = data[4];
@@ -1204,7 +1212,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL4:
-                                    console.log("receive ch4 config");
+                                    console.log("receive ch4 config hid",data);
                                     HidConfig.ch4_input_source_display = data[2];
                                     HidConfig.ch4_reverse_display = data[3];
                                     HidConfig.ch4_scale_display = data[4];
@@ -1217,7 +1225,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL5:
-                                    console.log("receive ch5 config");
+                                    console.log("receive ch5 config hid",data);
                                     HidConfig.ch5_input_source_display = data[2];
                                     HidConfig.ch5_reverse_display = data[3];
                                     HidConfig.ch5_scale_display = data[4];
@@ -1230,7 +1238,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL6:
-                                    console.log("receive ch6 config");
+                                    console.log("receive ch6 config hid",data);
                                     HidConfig.ch6_input_source_display = data[2];
                                     HidConfig.ch6_reverse_display = data[3];
                                     HidConfig.ch6_scale_display = data[4];
@@ -1243,7 +1251,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL7:
-                                    console.log("receive ch7 config");
+                                    console.log("receive ch7 config hid",data);
                                     HidConfig.ch7_input_source_display = data[2];
                                     HidConfig.ch7_reverse_display = data[3];
                                     HidConfig.ch7_scale_display = data[4];
@@ -1256,7 +1264,7 @@ window.onload = function() {
                                     break;
 
                                 case Channel.CHANNEL8:
-                                    console.log("receive ch8 config");
+                                    console.log("receive ch8 config hid",data);
                                     HidConfig.ch8_input_source_display = data[2];
                                     HidConfig.ch8_reverse_display = data[3];
                                     HidConfig.ch8_scale_display = data[4];
@@ -1284,7 +1292,7 @@ window.onload = function() {
                         }                   
                         checkSum2 = data[15]<<8 | data[14];
                         if(checkSum == checkSum2){//校验通过
-                            console.log("receive lite radio config");
+                            console.log("receive lite radio config hid",data);
                             HidConfig.internal_radio = data[1];
                             HidConfig.current_protocol = data[2];
                             HidConfig.internal_radio_protocol = data[2];
@@ -1323,6 +1331,7 @@ window.onload = function() {
                                     rquestBuffer[2] = 0x01;
                                     rquestBuffer[3] = 0x01;
                                     usbSendData(rquestBuffer);
+                                    console.log("Send request ch config:",rquestBuffer);
                                     ch_receive_step = 0;
                                 }else{//cc2500 使用外置射频模块
                                     HidConfig.Internal_radio_module_switch = false;
@@ -1338,6 +1347,7 @@ window.onload = function() {
                                     rquestBuffer[2] = 0x01;
                                     rquestBuffer[3] = 0x00;
                                     usbSendData(rquestBuffer);
+                                    console.log("Send cmd open external RF:",rquestBuffer);
                                     //document.getElementById("External_radio_module_power_switch").checked = true;
                                     //延时一小段时间等待外部ExpressLRS启动后再取获取配置信息
                                     setTimeout(function loadLanguage() {
@@ -1346,6 +1356,7 @@ window.onload = function() {
                                         rquestBuffer[2] = 0x02;
                                         rquestBuffer[3] = 0x02;
                                         usbSendData(rquestBuffer);
+                                        console.log("Send request external RF config:",rquestBuffer);
                                     },300);
                                 }
                             }else if(HidConfig.internal_radio==RFmodule.SX1280){//硬件型号为：sx1280
@@ -1366,6 +1377,7 @@ window.onload = function() {
                                     rquestBuffer[2] = 0x02;
                                     rquestBuffer[3] = 0x01;
                                     usbSendData(rquestBuffer);
+                                    console.log("Send request internal RF config:",rquestBuffer);
                                 }else if(HidConfig.current_protocol==1){//当前协议为：外置crsf射频模块
                                     console.log("external crsf is runing");
                                     document.getElementById("external_radio_protocol").disabled = false;
@@ -1377,6 +1389,7 @@ window.onload = function() {
                                     rquestBuffer[2] = 0x01;
                                     rquestBuffer[3] = 0x00;
                                     usbSendData(rquestBuffer);
+                                    console.log("Send cmd open external RF:",rquestBuffer);
                                     //document.getElementById("External_radio_module_power_switch").checked = true;
                                     //延时一小段时间等待外部ExpressLRS启动后再取获取配置信息
                                     setTimeout(function loadLanguage() {
@@ -1385,6 +1398,7 @@ window.onload = function() {
                                         rquestBuffer[2] = 0x02;
                                         rquestBuffer[3] = 0x02;
                                         usbSendData(rquestBuffer);
+                                        console.log("Send request external RF config:",rquestBuffer);
                                     },300);
                                 }
                             }else if(HidConfig.internal_radio==RFmodule.SX1276){//硬件型号为：sx1276
@@ -1398,7 +1412,7 @@ window.onload = function() {
                         }                   
                         checkSum2 = data[15]<<8 | data[14] ;
                         if(checkSum == checkSum2){
-                            console.log("receive internal radio config");
+                            console.log("receive internal radio config hid",data);
                             document.getElementById("RadioSetupELRSRuningStatus").innerHTML =  i18n.getMessage('RadioSetupInternel2_4G');
                             //功率档位只支持：25 50 100mw档位
                             $('#ExpressLRS_power_option_box').empty();
@@ -1435,6 +1449,7 @@ window.onload = function() {
                             rquestBuffer[2] = 0x01;
                             rquestBuffer[3] = 0x01;
                             usbSendData(rquestBuffer);
+                            console.log("Send request ch config:",rquestBuffer);
                             ch_receive_step = 0;
                         }                
                     }else if(data[0] == Command_ID.EXTERNAL_CONFIGER_INFO_ID && HidConfig.LiteRadio_power == false){
@@ -1445,7 +1460,7 @@ window.onload = function() {
                         }                   
                         checkSum2 = data[15]<<8 | data[14];
                         if(checkSum == checkSum2){
-                            console.log("receive external radio config");
+                            console.log("receive external radio config hid",data);
                             HidConfig.Internal_radio_module_switch = false;
                             HidConfig.External_radio_module_switch = true;
                             document.getElementById('internal_radio_module_switch').checked = HidConfig.Internal_radio_module_switch;
@@ -1528,6 +1543,7 @@ window.onload = function() {
                             rquestBuffer[2] = 0x01;
                             rquestBuffer[3] = 0x01;
                             usbSendData(rquestBuffer);
+                            console.log("Send request ch config:",rquestBuffer);
                             ch_receive_step = 0;
                         }else{
                         }
