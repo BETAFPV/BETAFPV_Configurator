@@ -989,12 +989,14 @@ window.onload = function() {
                                         break;
                                     case liteRadioUnitType.LiteRadio_2_SE_V2_SX1280:
                                         document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 2 SE V2 SX1280";
+                                        document.getElementById("FactoryReset").style.display = "none";
                                         break;
                                     case liteRadioUnitType.LiteRadio_2_SE_V2_CC2500:
                                         document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 2 SE V2 CC2500";
                                         break;
                                     case liteRadioUnitType.LiteRadio_3_SX1280:
                                         document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 3 SX1280";
+                                        document.getElementById("FactoryReset").style.display = "none";
                                         break;
                                     case liteRadioUnitType.LiteRadio_3_CC2500:
                                         document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 3 CC2500";
@@ -1004,6 +1006,7 @@ window.onload = function() {
                                         break;
                                     case liteRadioUnitType.LiteRadio_4_SE_SX1280:
                                         document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 4 SE SX1280";
+                                        document.getElementById("FactoryReset").style.display = "none";
                                         break;
                                     default:
                                         console.log("The unit type of lite_radio cannot be identified");
@@ -1586,7 +1589,6 @@ window.onload = function() {
                                         break;
                                     case liteRadioUnitType.LiteRadio_2_SE_V2_SX1280:
                                         document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 2 SE V2 SX1280";
-                                        console.log("LiteRadio 2 SE V2 SX1280");
                                         break;
                                     case liteRadioUnitType.LiteRadio_2_SE_V2_CC2500:
                                         document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 2 SE V2 CC2500";
