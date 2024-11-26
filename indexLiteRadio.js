@@ -70,6 +70,7 @@ var literadioScreenIndex = {
 }
 var hidDevice = null;
 var ch_receive_step  = 0;
+var requestTimeout = 0;
 HidConfig = {
     /**************HidConfig中定义的变量保存当前界面组件的数值*******************/
 
@@ -230,10 +231,35 @@ function getLiteRadioUnitType() {
     return HidConfig.lite_radio_device;
 }
 
+//VCOM发送数据
+function usbVcomSendData(buf) {
+    port.write(buf);
+}
+
+//HID发送数据，带错误检测和处理
+function usbHidSendData(buf) {
+    if(hidDevice.write !== undefined){
+        hidDevice.write(buf);
+    }else{
+        HidConfig.HID_Connect_State = HidConnectStatus.disConnect;
+        $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
+        const dialogHIDisDisconnect = $('.dialogHIDisDisconnect')[0];
+        dialogHIDisDisconnect.showModal();
+        $('.HIDisDisconnect-confirmbtn').click(function() {
+            dialogHIDisDisconnect.close();
+        });
+        $('#tabs ul.mode-connected').hide();
+        $('#tabs ul.mode-disconnected').show();
+        $('#tabs ul.mode-disconnected li a:first').click();
+        $('div#hidbutton a.connect').removeClass('active');
+    }
+}
+
+
 //USB选择对应的协议发送打包好的数据给遥控器
 function usbSendData(data) {
     if(HidConfig.usedUSBProtocol) {
-        port.write(data);
+        usbVcomSendData(data);
     }else{
         let hidBuffer= new Buffer.alloc(64);
         if(data[0] != 0x00) {   //和串口不同，hid的数据要在第一个字节写个0x00，后面内容都一样。
@@ -242,12 +268,12 @@ function usbSendData(data) {
             for(let i=1; i<8; i++) {
                 hidBuffer[i] = data[i-1];
             }
-            hidDevice.write(hidBuffer);
+            usbHidSendData(hidBuffer);
         }else{
             for(let i=0; i<8; i++) {
                 hidBuffer[i] = data[i];
             }
-            hidDevice.write(hidBuffer);
+            usbHidSendData(hidBuffer);
         }
     }
     //console.log("Send data to RC:", data);
@@ -1151,6 +1177,7 @@ window.onload = function() {
                         HidConfig.LiteRadio_power = true;
                         HidConfig.HID_Connect_State = HidConnectStatus.disConnect;
                         hidDevice.close();
+                        isUsbDetectEnable = false;
                         $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
                         $('#tabs ul.mode-connected').hide();
                         $('#tabs ul.mode-disconnected').show();
@@ -1165,6 +1192,7 @@ window.onload = function() {
                 }, 1500);
 
                 hidDevice.on('data', function(data) {//解析遥控器发送过来的信息 
+                    isUsbDetectEnable = false;
                     let rquestBuffer = new Buffer.alloc(64);
                     if(data[0] == Command_ID.CHANNELS_INFO_ID && HidConfig.LiteRadio_power == false){//通道配置信息
                         var checkSum=0;
@@ -1303,7 +1331,6 @@ window.onload = function() {
                             HidConfig.rocker_mode = data[3];
                             HidConfig.support_power =data[4];
                             //遥控器硬件信息获取完毕后，需要在这里根据硬件信息修改对应组件的可选元素
-                            console.log(data);
                             show.rocker_mode = $('select[name="radiomode"]');
                             show.rocker_mode.val(HidConfig.rocker_mode);
                             document.getElementById("rocker_mode").disabled = false;
@@ -1391,18 +1418,31 @@ window.onload = function() {
                                     rquestBuffer[1] = 0x07;
                                     rquestBuffer[2] = 0x01;
                                     rquestBuffer[3] = 0x00;
-                                    usbSendData(rquestBuffer);
-                                    console.log("Send cmd open external RF:",rquestBuffer);
-                                    //document.getElementById("External_radio_module_power_switch").checked = true;
-                                    //延时一小段时间等待外部ExpressLRS启动后再取获取配置信息
-                                    setTimeout(function loadLanguage() {
-                                        rquestBuffer[0] = 0x00;//获取外置射频模块配置信息
+                                    if(requestTimeout == 0){
+                                        requestTimeout = Date.now()+1000;
+                                    }else if(requestTimeout < Date.now()){
+                                        //接着请求遥控器通道配置信息
+                                        rquestBuffer[0] = 0x00;
                                         rquestBuffer[1] = 0x11;
-                                        rquestBuffer[2] = 0x02;
-                                        rquestBuffer[3] = 0x02;
+                                        rquestBuffer[2] = 0x01;
+                                        rquestBuffer[3] = 0x01;
                                         usbSendData(rquestBuffer);
-                                        console.log("Send request external RF config:",rquestBuffer);
-                                    },300);
+                                        console.log("Send request ch config:",rquestBuffer);
+                                        ch_receive_step = 0;
+                                    }else{
+                                        usbSendData(rquestBuffer);
+                                        console.log("Send cmd open external RF:",rquestBuffer);
+                                        //document.getElementById("External_radio_module_power_switch").checked = true;
+                                        //延时一小段时间等待外部ExpressLRS启动后再取获取配置信息
+                                        setTimeout(function loadLanguage() {
+                                            rquestBuffer[0] = 0x00;//获取外置射频模块配置信息
+                                            rquestBuffer[1] = 0x11;
+                                            rquestBuffer[2] = 0x02;
+                                            rquestBuffer[3] = 0x02;
+                                            usbSendData(rquestBuffer);
+                                            console.log("Send request external RF config:",rquestBuffer);
+                                        },300);
+                                    }
                                 }
                             }else if(HidConfig.internal_radio==RFmodule.SX1276){//硬件型号为：sx1276
                             }
@@ -1664,7 +1704,8 @@ window.onload = function() {
                     }               
                 });
                 hidDevice.on("error", function(err) {
-                    hidDevice.close();
+                    isUsbDetectEnable = true;
+                    //hidDevice.close();
                     HidConfig.HID_Connect_State = HidConnectStatus.disConnect;
                     $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
                     const dialogHIDisDisconnect = $('.dialogHIDisDisconnect')[0];
@@ -1697,6 +1738,7 @@ window.onload = function() {
                 }, 300);
                 setTimeout(() => {
                     hidDevice.close();
+                    isUsbDetectEnable = true;
                     HidConfig.HID_Connect_State = HidConnectStatus.disConnect;
                     $('div.open_hid_device div.connect_hid').text(i18n.getMessage('Connect_HID'));
                     $('#tabs ul.mode-connected').hide();
@@ -1705,7 +1747,10 @@ window.onload = function() {
                     $('div#hidbutton a.connect').removeClass('active');
                 }, 1000);
             }else{
-                hidDevice.close();
+                if(hidDevice != undefined){
+                    hidDevice.close();
+                }
+                isUsbDetectEnable = true;
             }
         }else if(checkUsbConnected() == rcUsbProtocol.UNKNOW_USB_PROTOCOL){
             //提示用户没接遥控器
