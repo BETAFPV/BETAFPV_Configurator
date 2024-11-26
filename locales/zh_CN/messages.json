@@ -6086,7 +6086,7 @@
         "message":"硬件版本:"
     },
     "literadio_firmwareVersion":{
-        "message":"固件版本:"
+        "message":"固件版本（即固件发布日期）:"
     },
     "bindPhraseprompttext":{
         "message":"如果使用spi ELRS接收机，需要将飞控在Betaflight CLI 中输入以下命令。"

@@ -6482,7 +6482,7 @@
         "message":"Hardware version:"
     },
     "literadio_firmwareVersion":{
-        "message":"Firmware version:"
+        "message":"Firmware version(Firmware release date):"
     },
     "bindPhraseprompttext":{
         "message":"If use spi ELRS Receiver,Go to Betaflight CLI and enter the following commands."

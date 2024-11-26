@@ -1000,7 +1000,11 @@ window.onload = function() {
                             HidConfig.hardware_major_version = data[5];
                             HidConfig.hardware_minor_version = data[6];
                             HidConfig.hardware_pitch_version = data[7];
-                            HidConfig.firmware_major_version = data[8];
+                            if(data[8] >= 24){
+                                HidConfig.firmware_major_version = data[8]+2000;
+                            }else{
+                                HidConfig.firmware_major_version = data[8];
+                            }
                             HidConfig.firmware_minor_version = data[9];
                             HidConfig.firmware_pitch_version = data[10];
                             HidConfig.Hardware_info_storage_mark = (data[13]<<8|data[12]);
@@ -1051,8 +1055,15 @@ window.onload = function() {
                                         console.log("The type of internal radio cannot be identified");
                                         break;
                                 }
-                                var board_version = HidConfig.hardware_major_version+'.'+HidConfig.hardware_minor_version+'.'+HidConfig.hardware_pitch_version;
-                                var firmware_version = HidConfig.firmware_major_version+'.'+HidConfig.firmware_minor_version+'.'+HidConfig.firmware_pitch_version;
+                                let board_version = HidConfig.hardware_major_version+'.'+HidConfig.hardware_minor_version+'.'+HidConfig.hardware_pitch_version;
+                                let firmware_version;
+                                if(HidConfig.firmware_pitch_version < 10 && HidConfig.firmware_major_version >= 24){
+                                    firmware_version = HidConfig.firmware_major_version+'.'+HidConfig.firmware_minor_version+'.0'+HidConfig.firmware_pitch_version;
+                                }else{
+                                    firmware_version = HidConfig.firmware_major_version+'.'+HidConfig.firmware_minor_version+'.'+HidConfig.firmware_pitch_version;
+                                }
+                                // var board_version = HidConfig.hardware_major_version+'.'+HidConfig.hardware_minor_version+'.'+HidConfig.hardware_pitch_version;
+                                // var firmware_version = HidConfig.firmware_major_version+'.'+HidConfig.firmware_minor_version+'.'+HidConfig.firmware_pitch_version;
                                 HidConfig.lite_Radio_version = firmware_version;
                                 console.log("HidConfig.lite_Radio_version:"+HidConfig.lite_Radio_version);
                                 document.getElementById("liteRadioInfoBoardVersion").innerHTML = board_version;
@@ -1612,7 +1623,11 @@ window.onload = function() {
                             HidConfig.hardware_major_version = data[5];
                             HidConfig.hardware_minor_version = data[6];
                             HidConfig.hardware_pitch_version = data[7];
-                            HidConfig.firmware_major_version = data[8];
+                            if(data[8] >= 24){
+                                HidConfig.firmware_major_version = data[8]+2000;
+                            }else{
+                                HidConfig.firmware_major_version = data[8];
+                            }
                             HidConfig.firmware_minor_version = data[9];
                             HidConfig.firmware_pitch_version = data[10];
                             HidConfig.Hardware_info_storage_mark = (data[13]<<8|data[12]);
@@ -1659,8 +1674,14 @@ window.onload = function() {
                                         console.log("The type of internal radio cannot be identified");
                                         break;
                                 }
-                                var board_version = HidConfig.hardware_major_version+'.'+HidConfig.hardware_minor_version+'.'+HidConfig.hardware_pitch_version;
-                                var firmware_version = HidConfig.firmware_major_version+'.'+HidConfig.firmware_minor_version+'.'+HidConfig.firmware_pitch_version;
+                                let board_version = HidConfig.hardware_major_version+'.'+HidConfig.hardware_minor_version+'.'+HidConfig.hardware_pitch_version;
+                                let firmware_version;
+                                if(HidConfig.firmware_pitch_version < 10 && HidConfig.firmware_major_version >= 24){
+                                    firmware_version = HidConfig.firmware_major_version+'.'+HidConfig.firmware_minor_version+'.0'+HidConfig.firmware_pitch_version;
+                                }else{
+                                    firmware_version = HidConfig.firmware_major_version+'.'+HidConfig.firmware_minor_version+'.'+HidConfig.firmware_pitch_version;
+                                }
+                                
                                 HidConfig.lite_Radio_version = firmware_version;
                                 console.log("HidConfig.lite_Radio_version:"+HidConfig.lite_Radio_version);
                                 document.getElementById("liteRadioInfoBoardVersion").innerHTML = board_version;
