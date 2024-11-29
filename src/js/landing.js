@@ -64,14 +64,44 @@ landing.initialize = function (callback) {
         shell.openExternal(this.getAttribute('href'));
       }
 
-      let LiteRadio_2_SE_href = document.getElementById("LiteRadio_2_SE_href");
-      LiteRadio_2_SE_href.onclick = function(e){
+      let Cetus_X_FPV_Kit_href = document.getElementById("Cetus_X_FPV_Kit_href");
+      Cetus_X_FPV_Kit_href.onclick = function(e){
+        e.preventDefault();
+        shell.openExternal(this.getAttribute('href'));
+      }
+
+      let Cetus_Lite_FPV_Kit_href = document.getElementById("Cetus_Lite_FPV_Kit_href");
+      Cetus_Lite_FPV_Kit_href.onclick = function(e){
+        e.preventDefault();
+        shell.openExternal(this.getAttribute('href'));
+      }
+
+      let Aquila16_FPV_Kit_href = document.getElementById("Aquila16_FPV_Kit_href");
+      Aquila16_FPV_Kit_href.onclick = function(e){
+        e.preventDefault();
+        shell.openExternal(this.getAttribute('href'));
+      }
+
+      let LiteRadio_1_href = document.getElementById("LiteRadio_1_href");
+      LiteRadio_1_href.onclick = function(e){
+        e.preventDefault();
+        shell.openExternal(this.getAttribute('href'));
+      }
+
+      let LiteRadio_2_SE_V2_href = document.getElementById("LiteRadio_2_SE_V2_href");
+      LiteRadio_2_SE_V2_href.onclick = function(e){
         e.preventDefault();
         shell.openExternal(this.getAttribute('href'));
       }
 
       let LiteRadio_3_href = document.getElementById("LiteRadio_3_href");
       LiteRadio_3_href.onclick = function(e){
+        e.preventDefault();
+        shell.openExternal(this.getAttribute('href'));
+      }
+
+      let LiteRadio_4_SE_href = document.getElementById("LiteRadio_4_SE_href");
+      LiteRadio_4_SE_href.onclick = function(e){
         e.preventDefault();
         shell.openExternal(this.getAttribute('href'));
       }

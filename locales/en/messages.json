@@ -700,7 +700,7 @@
         "message": "The application supports flight controller that can run LiteSilver firmeware."
     },
     "promptOfUseRadioConfigurator_radio":{
-        "message":"<br />The LiteRadio 2 SE Frsky or Bayang version is not supported. LiteRadio 2 and LiteRadio 3 Pro is powered by OpenTX system, please use the OpenTX Companion.<br /><br /><strong>Now configurator for radio controller is active. Basic user manual:</strong><br />Click the \"Firmware Flasher\" tab on the left for firmware update.<br />For configuration, turn off the radio controller first. Then connect it to the computer via USB data cable. Wait for the LED ring breathes in red or green. Then click the \"Connect RC\" button on the top right."
+        "message":"<br /><strong>The current program is for configuring the remote control. The basic instructions are as follows:</strong><br />The basic steps for connecting the remote control parameter configuration interface are as follows:<br />1. Turn off the remote control.<br />2. Use a USB data cable to connect the remote control to the computer, and the red or green light on the remote control will breathe.<br />3. Select Handset from the drop-down box in the upper right corner.<br />4. If it is HID Handset you can skip to step 5, if it is COM Handset then select the baud rate as 115200.<br />5. Click the \"Connect RC\" button in the upper right corner to enter the configuration interface.<br /><br /><strong>To flash the firmware, click \"Firmware Flashing Tool\" on the left.</strong><br /><br /><strong>Notice:</strong><br />1. If the PCB version of LiteRadio 2 SE is V1, you cannot use the functions related to this application configuration.<br />2. LiteRadio 2 uses OpenTX firmware, please use OpenTX Companion host computer for configuration.<br />3. LiteRadio 3 Pro uses EdgeTX firmware, please use the built-in screen for configuration.<br />"
     },
     "FCConfiguratorChoosed":{
         "message": "Configurator for FC Board is Active"
@@ -718,7 +718,7 @@
         "message": "<br /><br />The LiteRadio 2 SE Frsky or Bayang version is not supported. LiteRadio 2 and LiteRadio 3 Pro is powered by OpenTX system, please use the OpenTX Companion.<br /><br />Click the yellow button below to active configurator for radio controller."
     },
     "defaultContributingText_radio": {
-        "message": "Support the radio controller come with BETAFPV LiteRadio Firmware 2.0 Version. "
+        "message": "This app only supports the remote controls listed below"
     },
     "defaultFacebookText": {
         "message": "We also have a <a href=\"https://www.facebook.com/groups/betafpv/\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a>.<br />Join us to get a place to talk about FPV items, ask configuration questions, or just hang out with fellow pilots."
@@ -3196,6 +3196,13 @@
     "firmwareFlasherWarningText_radio": {
         "message": "Please do <span class=\"message-negative\">not</span> try to flash <strong>non-listed</strong> radio controller with this firmware flasher.<br />Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>Bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your radio controller</strong> first, try rebooting, upgrade drivers.<br />"
     },
+    "firmwareFlasherDownloadTitle_radio": {
+        "message": "<strong> Firmware download website </strong>"
+    },
+    
+    "firmwareFlasherDownload_radio": {
+        "message": "We recommend Chinese customers to download the firmware from Nut Cloud, and customers from other countries to download the firmware from the BETAFPV official website.<br /><br />Nut Cloud firmware download website:<br /><strong><a href=\"https://www.jianguoyun.com/p/DdseyOkQ_afyCRiindMFIAA\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 1 (Frsky)</a><br /><a href=\"https://www.jianguoyun.com/p/DVATQIMQ_afyCRi4ndMFIAA\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE V2 (Frsky/ELRS)</a><br /><a href=\"https://www.jianguoyun.com/p/DSSu4BkQ_afyCRi5ndMFIAA\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3 (Frsky/ELRS)</a><br /><a href=\"https://www.jianguoyun.com/p/DX5MOO8Q_afyCRi6ndMFIAA\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 4 SE (ELRS)</a><br /></strong><br />BETAFPV official website download firmware URL:<br /><strong><a href=\"https://support.betafpv.com/hc/en-us/articles/36862673656601-Lite-Radio-1\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 1 (Frsky)</a><br /><a href=\"https://support.betafpv.com/hc/en-us/articles/4414348908057-Lite-Radio-2-SE\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE V2 (Frsky/ELRS)</a><br /><a href=\"https://support.betafpv.com/hc/en-us/articles/4414348993177-Lite-Radio-3\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3 (Frsky/ELRS)</a><br /><a href=\"https://support.betafpv.com/hc/en-us/articles/36869017436953-Lite-Radio-4-SE\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 4 SE (ELRS)</a><br /></strong>"
+    },
     "firmwareFlasherRecoveryHead": {
         "message": "<strong>Recovery / Lost communication</strong>"
     },
@@ -3206,7 +3213,7 @@
         "message": "Follow these steps to update the firmware of the FC board, include FC firmware, OSD firmware or Sensor firmware: <ul><li>Power off</li><li>Hold the button on the FC board.</li><li>Power on the FC board (via battery or USB), LED will be solid white if done correctly.</li><li>Release the button now. Connect the FC to the computer via USB data cable.</li><li>Select the correct COM port and click the \"Connect\" button on the top right of this page. Make sure the button change to red and text is \"Update Firmware\".If you are having trouble connecting to your flight controller,Click <a href=\"https://github.com/BETAFPV/BETAFPV_Configurator/blob/f8081ee8cfe1d636979aa5ec3e6427bb3e589ceb/docs/UpdateFirmwareProcedure.md\"target=\"_blank\" rel=\"noopener noreferrer\">How to update the firmware</a> ).</li><li>Select the correct firmware and version at the top of this page and click the button \"Load Firmware [Online]\" (load the firmware local from your computer would also be okay). The Configurator will recognise the firmware type automatically. Click the button \"Flash xxx\" to start flashing.</li><li>When flashing successfully, the FC wil re-start automatically.</li></ul>"
     },
     "firmwareFlasherRecoveryText_radio": {
-        "message": "Here is the step by step manual to update the firmware of the radio controller. <ul><li>Power off the radio controller.</li><li>Hold SETUP button and then Power on (LED ring will be solid blue and NOT red if done correctly).</li><li>Install all STM32 drivers and Zadig in your computer if required</li><li>Release SETUP button and connect it to the computer via USB data cable.</li><li>Select the correct COM port and click the \"Connect\" button on the top right of this page.</li><li>Flash with correct firmware.</li><li>Power off.</li></ul>"
+        "message": "Here is the step by step manual to update the firmware of the radio controller. <ul><li>Power off the radio controller.</li><li>Hold SETUP button and then Power on (LED ring will be solid blue and NOT red if done correctly).</li><li>Install all STM32 drivers and Zadig in your computer if required.</li><li>Release SETUP button and connect it to the computer via USB data cable.</li><li>Select the correct COM port and click the \"Connect\" button on the top right of this page.</li><li>Flash with correct firmware.</li><li>Power off.</li></ul>"
     },
     "firmwareFlasherButtonLeave": {
         "message": "Leave Firmware Flasher"
@@ -6396,6 +6403,15 @@
     "HIDPowerOffConfirm":{
         "message":"OK"
     },
+    "JoystickExistDialogLabel":{
+        "message":"Remote control not detected."
+    },
+    "JoystickExistDialogTitle":{
+        "message":"Prompt"
+    },
+    "JoystickExistConfirm":{
+        "message":"OK"
+    },
     "CloseInternalRadioDialogTitle":{
         "message":"Prompt"
     },
@@ -6466,7 +6482,7 @@
         "message":"Hardware version:"
     },
     "literadio_firmwareVersion":{
-        "message":"Firmware version:"
+        "message":"Firmware version(Firmware release date):"
     },
     "bindPhraseprompttext":{
         "message":"If use spi ELRS Receiver,Go to Betaflight CLI and enter the following commands."
@@ -6569,6 +6585,14 @@
     "BuzzerSwitch":
     {
         "message":"Buzzer Switch"
+    },
+    "switchLockMode_SE":
+    {
+        "message":"SE Lock Mode"
+    },
+    "switchLockMode_SF":
+    {
+        "message":"SF Lock Mode"
     },
     "extra_custom_config":
     {

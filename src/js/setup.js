@@ -97,6 +97,18 @@ setup.initialize = function (callback) {
             case 3:
                 target_id_e.text('Lite brush v3');
                 break;
+			case 6:
+                target_id_e.text('Cetus X');
+                break;
+            case 7:
+                target_id_e.text('Cetus X HD');
+                break;
+            case 8:
+                target_id_e.text('Aquila16');
+                break;
+            case 9:
+                target_id_e.text('PavoPocket');
+                break;
             default:
                 target_id_e.text('Unknow');
                 break;

@@ -64,14 +64,44 @@ landing.initialize = function (callback) {
           shell.openExternal(this.getAttribute('href'));
         }
   
-        let LiteRadio_2_SE_href_radio = document.getElementById("LiteRadio_2_SE_href_radio");
-        LiteRadio_2_SE_href_radio.onclick = function(e){
+        let Cetus_X_FPV_Kit_href_radio = document.getElementById("Cetus_X_FPV_Kit_href_radio");
+        Cetus_X_FPV_Kit_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
+
+        let Cetus_Lite_FPV_Kit_href_radio = document.getElementById("Cetus_Lite_FPV_Kit_href_radio");
+        Cetus_Lite_FPV_Kit_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
+
+        let Aquila16_FPV_Kit_href_radio = document.getElementById("Aquila16_FPV_Kit_href_radio");
+        Aquila16_FPV_Kit_href_radio.onclick = function(e){
           e.preventDefault();
           shell.openExternal(this.getAttribute('href'));
         }
   
+        let LiteRadio_1_href_radio = document.getElementById("LiteRadio_1_href_radio");
+        LiteRadio_1_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
+  
+        let LiteRadio_2_SE_V2_href_radio = document.getElementById("LiteRadio_2_SE_V2_href_radio");
+        LiteRadio_2_SE_V2_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
+
         let LiteRadio_3_href_radio = document.getElementById("LiteRadio_3_href_radio");
         LiteRadio_3_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
+  
+        let LiteRadio_4_SE_href_radio = document.getElementById("LiteRadio_4_SE_href_radio");
+        LiteRadio_4_SE_href_radio.onclick = function(e){
           e.preventDefault();
           shell.openExternal(this.getAttribute('href'));
         }

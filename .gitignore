@@ -12,6 +12,8 @@ dist/
 dist_cordova/
 debug/
 release/
+Windows/
+Mac/
 testresults/
 .eslintcache
 

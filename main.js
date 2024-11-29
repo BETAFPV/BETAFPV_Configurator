@@ -9,6 +9,9 @@ var mainWindow = null
 
 app.allowRendererProcessReuse = false
 
+const reloader = require('electron-reloader');
+reloader(module);
+
 app.on('ready',()=>{
     mainWindow = new BrowserWindow({
         minWidth: 1024,
@@ -32,7 +35,6 @@ app.on('ready',()=>{
 
     mainWindow.on('closed',()=>{
         mainWindow = null;
-
         app.quit();
     });
 })

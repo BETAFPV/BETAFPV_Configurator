@@ -18,6 +18,8 @@ const show = {
     ch6_data_source:null,
     ch7_data_source:null,
     ch8_data_source:null,
+    ch9_data_source:null,
+    ch10_data_source:null,
 
     //通道缩放比例
     ch1_scale:null,
@@ -28,6 +30,8 @@ const show = {
     ch6_scale:null,
     ch7_scale:null,
     ch8_scale:null,
+    ch9_scale:null,
+    ch10_scale:null,
 
     //通道偏移补偿
     ch1_offset:null,
@@ -38,6 +42,9 @@ const show = {
     ch6_offset:null,
     ch7_offset:null,
     ch8_offset:null,
+    ch9_offset:null,
+    ch10_offset:null,
+
 
     //通道值反转
     ch1_reverse:null,
@@ -48,6 +55,8 @@ const show = {
     ch6_reverse:null,
     ch7_reverse:null,
     ch8_reverse:null,
+    ch9_reverse:null,
+    ch10_reverse:null,
 
     //内外置射频模块开关
     Internal_radio_module_switch:null,
@@ -61,7 +70,7 @@ const show = {
 
 
     //外置射频模块供电开关
-    External_radio_module_power_switch:null,
+    //External_radio_module_power_switch:null,
     
     //内部射频模块配置信息
     internal_radio_protocol:null,
@@ -80,8 +89,8 @@ const show = {
 
     BuzzerSwitch:null,
     JoystickDeadZonePercent:null,
-    
-
+    switchLockMode_SE:null,          //SE锁定模式，仅LR4 SE可见
+    switchLockMode_SF:null,          //SF锁定模式，仅LR4 SE可见
 };
 
 
@@ -117,7 +126,7 @@ show.getElementIndex = function(){
     show.Internal_radio_module_switch = $('input[id="internal_radio_module_switch"]');
     show.External_radio_module_switch = $('input[id="external_radio_module_switch"]');
 
-    show.External_radio_module_power_switch = $('input[id="External_radio_module_power_switch"]');
+    //show.External_radio_module_power_switch = $('input[id="External_radio_module_power_switch"]');
 
     show.ExpressLRS_power_option_box = $('select[id="ExpressLRS_power_option_box"]');
     show.ExpressLRS_pkt_rate_option_box = $('select[id="ExpressLRS_pkt_rate_option_box"]');
@@ -131,6 +140,8 @@ show.getElementIndex = function(){
     show.ch6_data_source = $('select[name="ch6_data_source"]');
     show.ch7_data_source = $('select[name="ch7_data_source"]');
     show.ch8_data_source = $('select[name="ch8_data_source"]');
+    show.ch9_data_source = $('select[name="ch9_data_source"]');
+    show.ch10_data_source = $('select[name="ch10_data_source"]');
 
     show.ch1_scale=$('input[name="ch1_scale"]');
     show.ch2_scale=$('input[name="ch2_scale"]');
@@ -140,6 +151,8 @@ show.getElementIndex = function(){
     show.ch6_scale=$('input[name="ch6_scale"]');
     show.ch7_scale=$('input[name="ch7_scale"]');
     show.ch8_scale=$('input[name="ch8_scale"]');
+    show.ch9_scale=$('input[name="ch9_scale"]');
+    show.ch10_scale=$('input[name="ch10_scale"]');
 
     show.ch1_offset=$('input[name="ch1_offset"]');
     show.ch2_offset=$('input[name="ch2_offset"]');
@@ -149,6 +162,8 @@ show.getElementIndex = function(){
     show.ch6_offset=$('input[name="ch6_offset"]');
     show.ch7_offset=$('input[name="ch7_offset"]');
     show.ch8_offset=$('input[name="ch8_offset"]');
+    show.ch9_offset=$('input[name="ch9_offset"]');
+    show.ch10_offset=$('input[name="ch10_offset"]');
 
     show.ch1_reverse=$('input[id="ch1_check"]');
     show.ch2_reverse=$('input[id="ch2_check"]');
@@ -158,6 +173,8 @@ show.getElementIndex = function(){
     show.ch6_reverse=$('input[id="ch6_check"]');
     show.ch7_reverse=$('input[id="ch7_check"]');
     show.ch8_reverse=$('input[id="ch8_check"]');
+    show.ch9_reverse=$('input[id="ch9_check"]');
+    show.ch10_reverse=$('input[id="ch10_check"]');
 
 
     show.internal_radio_protocol = $('select[id="internal_radio_protocol"]');
@@ -171,6 +188,8 @@ show.getElementIndex = function(){
 
     show.BuzzerSwitch = $('input[id="BuzzerSwitch"]');
     show.JoystickDeadZonePercent = $('select[id="JoystickDeadZonePercent"]');
+    show.switchLockMode_SE = $('input[id="switchLockMode_SE"]');
+    show.switchLockMode_SF = $('input[id="switchLockMode_SF"]');
 }
 
 show.refreshUI = function()
@@ -188,6 +207,8 @@ show.refreshUI = function()
         show.ch6_data_source.val(HidConfig.ch6_input_source_display);
         show.ch7_data_source.val(HidConfig.ch7_input_source_display);
         show.ch8_data_source.val(HidConfig.ch8_input_source_display);
+        show.ch9_data_source.val(HidConfig.ch9_input_source_display);
+        show.ch10_data_source.val(HidConfig.ch10_input_source_display);
     
     
         document.getElementById('ch1_check').checked = HidConfig.ch1_reverse_display;
@@ -198,6 +219,8 @@ show.refreshUI = function()
         document.getElementById('ch6_check').checked = HidConfig.ch6_reverse_display;
         document.getElementById('ch7_check').checked = HidConfig.ch7_reverse_display;
         document.getElementById('ch8_check').checked = HidConfig.ch8_reverse_display;
+        document.getElementById('ch9_check').checked = HidConfig.ch9_reverse_display;
+        document.getElementById('ch10_check').checked = HidConfig.ch10_reverse_display;
         
         show.ch1_scale.val(HidConfig.ch1_scale_display);
         show.ch2_scale.val(HidConfig.ch2_scale_display);
@@ -207,6 +230,9 @@ show.refreshUI = function()
         show.ch6_scale.val(HidConfig.ch6_scale_display);
         show.ch7_scale.val(HidConfig.ch7_scale_display);
         show.ch8_scale.val(HidConfig.ch8_scale_display);
+        show.ch9_scale.val(HidConfig.ch9_scale_display);
+        show.ch10_scale.val(HidConfig.ch10_scale_display);
+        
     
         show.ch1_offset.val(HidConfig.ch1_offset_display);
         show.ch2_offset.val(HidConfig.ch2_offset_display);
@@ -216,10 +242,11 @@ show.refreshUI = function()
         show.ch6_offset.val(HidConfig.ch6_offset_display);
         show.ch7_offset.val(HidConfig.ch7_offset_display);
         show.ch8_offset.val(HidConfig.ch8_offset_display);
+        show.ch9_offset.val(HidConfig.ch9_offset_display);
+        show.ch10_offset.val(HidConfig.ch10_offset_display);
 
-
-        //bind phrase 功能只有在1.0.1版本之后的SX1280固件才支持
-        if(semver.gte(HidConfig.lite_Radio_version, "1.0.1")){
+        //bind phrase 功能只有在1.0.1版本之后的SX1280固件才支持，该版本上位机暂不支持向前支持，先直接注释掉
+        //  if(semver.gte(HidConfig.lite_Radio_version, "1.0.1")){
             if(HidConfig.internal_radio == RFmodule.SX1280){
                 document.getElementById('bindPhraseSwitch').disabled = false;
                 ConfigStorage.get('USE_BIND_PHRASE', function (data) {//获取上次打开地面站是否使用bind phrase
@@ -259,12 +286,12 @@ show.refreshUI = function()
                 document.getElementById("set_expresslrs_uid").style.display="none";
                 document.getElementById("bindPhrase").style.display="none";
             }
-        }
-        else{
-            document.getElementById('bindPhraseSwitch').disabled = true;
-            document.getElementById("set_expresslrs_uid").style.display="none";
-            document.getElementById("bindPhrase").style.display="none";
-        }
+        //}
+        // else{
+        //    document.getElementById('bindPhraseSwitch').disabled = true;
+        //    document.getElementById("set_expresslrs_uid").style.display="none";
+        //    document.getElementById("bindPhrase").style.display="none";
+        // }
 
         $('a.save').removeClass('disabled');
        
@@ -276,7 +303,7 @@ show.refreshUI = function()
 
 
 show.initialize = function (callback) {
-    let configBuff = new Buffer.alloc(64);
+    let configBuff = new Buffer.alloc(8);
     $('#content').load("./src/html/show.html", function () {
 
         
@@ -289,9 +316,11 @@ show.initialize = function (callback) {
             "CH5",
             "CH6",
             "CH7",
-            "CH8"
+            "CH8",
+            "CH9",
+            "CH10",
         ];
-        const numBars = 8;
+        const numBars = 10;
         const barContainer = $('.tab-show .bars');
     
         for (let i = 0; i < numBars; i++) {
@@ -301,7 +330,7 @@ show.initialize = function (callback) {
             } 
     
             barContainer.append('\
-                <ul>\
+                <ul id = ch' + (i+1) + '_mixes_bar>\
                     <li class="name">' + name + '</li>\
                     <li class="meter">\
                         <div class="meter-bar">\
@@ -364,7 +393,7 @@ show.initialize = function (callback) {
 
         function update_ui() {
             // update bars with latest data
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 10; i++) {
                 
                 meterFillArray[i].css('width', (HidConfig.channel_data_dispaly[i] - meterScale.min) / (meterScale.max - meterScale.min)*100+'%');
                 meterLabelArray[i].text(HidConfig.channel_data_dispaly[i]);
@@ -409,7 +438,7 @@ show.initialize = function (callback) {
                     document.getElementById('external_radio_protocol').disabled = false;
                 }else{
                     document.getElementById('external_radio_protocol').disabled = true;
-                    document.getElementById('External_radio_module_power_switch').disabled = true;
+                    //document.getElementById('External_radio_module_power_switch').disabled = true;
                     // document.getElementById('ExpressLRS_power_option_box').disabled = true;
                     // document.getElementById('ExpressLRS_pkt_rate_option_box').disabled = true;
                     // document.getElementById('ExpressLRS_tlm_option_box').disabled = true;
@@ -418,34 +447,32 @@ show.initialize = function (callback) {
             }
         });
 
-        show.External_radio_module_power_switch.change(function () {
-            HidConfig.External_radio_module_power_switch = $(this).is(':checked')?1:0;
-            if(HidConfig.External_radio_module_power_switch){
-                console.log("elrs power on");
-                let  buffer= new Buffer.alloc(64);//开始外置射频模块电源
-                buffer[0] = 0x00;
-                buffer[1] = 0x07;
-                buffer[2] = 0x01;
-                hidDevice.write(buffer);
+        // show.External_radio_module_power_switch.change(function () {
+        //     HidConfig.External_radio_module_power_switch = $(this).is(':checked')?1:0;
+        //     if(HidConfig.External_radio_module_power_switch){
+        //         console.log("elrs power on");
+        //         let  buffer= new Buffer.alloc(8);//开始外置射频模块电源
+        //         buffer[0] = 0x07;
+        //         buffer[1] = 0x01;
+        //         usbSendData(buffer); 
 
-                buffer[0] = 0x00;//获取外置ExpressLRS模块配置信息
-                buffer[1] = 0x11;
-                buffer[2] = 0x02;
-                buffer[3] = 0x02;
-                hidDevice.write(buffer);
+        //          //获取外置ExpressLRS模块配置信息
+        //         buffer[0] = 0x11;
+        //         buffer[1] = 0x02;
+        //         buffer[2] = 0x02;
+        //         usbSendData(buffer);
 
-            }else{
-                console.log("elrs power off");
-                let  buffer= new Buffer.alloc(64);
-                buffer[0] = 0x00; 
-                buffer[1] = 0x07;
-                buffer[2] = 0x00;
-                hidDevice.write(buffer);
-                document.getElementById("ExpressLRS_power_option_box").disabled = true;
-                document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = true;
-                document.getElementById("ExpressLRS_tlm_option_box").disabled = true;
-            }
-        });
+        //     }else{
+        //         console.log("elrs power off");
+        //         let  buffer= new Buffer.alloc(8);
+        //         buffer[0] = 0x07; 
+        //         buffer[1] = 0x00;
+        //         usbSendData(buffer);
+        //         document.getElementById("ExpressLRS_power_option_box").disabled = true;
+        //         document.getElementById("ExpressLRS_pkt_rate_option_box").disabled = true;
+        //         document.getElementById("ExpressLRS_tlm_option_box").disabled = true;
+        //     }
+        // });
         show.ExpressLRS_power_option_box.change(function () {
             HidConfig.ExpressLRS_power_option_value = parseInt($(this).val(), 10);
             //判断当前使用的是内部射频模块还是外部射频模块
@@ -540,6 +567,14 @@ show.initialize = function (callback) {
             HidConfig.ch8_input_source_display = parseInt($(this).val(), 10);
             send_ch8_config();
         });
+        show.ch9_data_source.change(function () {
+            HidConfig.ch9_input_source_display = parseInt($(this).val(), 10);
+            send_ch9_config();
+        });
+        show.ch10_data_source.change(function () {
+            HidConfig.ch10_input_source_display = parseInt($(this).val(), 10);
+            send_ch10_config();
+        });
         show.ch1_reverse.change(function () {
             HidConfig.ch1_reverse_display = $(this).is(':checked')?1:0;
             send_ch1_config();
@@ -572,6 +607,14 @@ show.initialize = function (callback) {
             HidConfig.ch8_reverse_display = $(this).is(':checked')?1:0;
             send_ch8_config();
         }); 
+        show.ch9_reverse.change(function () {
+            HidConfig.ch9_reverse_display = $(this).is(':checked')?1:0;
+            send_ch9_config();
+        });
+        show.ch10_reverse.change(function () {
+            HidConfig.ch10_reverse_display = $(this).is(':checked')?1:0;
+            send_ch10_config();
+        });
         show.ch1_scale.change(function () {
             HidConfig.ch1_scale_display = parseInt($(this).val(), 10);
             send_ch1_config();
@@ -604,6 +647,14 @@ show.initialize = function (callback) {
             HidConfig.ch8_scale_display = parseInt($(this).val(), 10);
             send_ch8_config();
         });       
+        show.ch9_scale.change(function () {
+            HidConfig.ch9_scale_display = parseInt($(this).val(), 10);
+            send_ch9_config();
+        });
+        show.ch10_scale.change(function () {
+            HidConfig.ch10_scale_display = parseInt($(this).val(), 10);
+            send_ch10_config();
+        });
         show.ch1_offset.change(function () {
             HidConfig.ch1_offset_display = parseInt($(this).val(), 10);
             send_ch1_config();
@@ -636,8 +687,26 @@ show.initialize = function (callback) {
             HidConfig.ch8_offset_display = parseInt($(this).val(), 10);
             send_ch8_config();
         });
+        show.ch9_offset.change(function () {
+            HidConfig.ch9_offset_display = parseInt($(this).val(), 10);
+            send_ch9_config();
+        });
+        show.ch10_offset.change(function () {
+            HidConfig.ch10_offset_display = parseInt($(this).val(), 10);
+            send_ch10_config();
+        });
         show.rocker_mode.change(function () {
             HidConfig.rocker_mode = parseInt($(this).val(), 10);
+            //如果是LR4 SE接入，则发送油门摇杆模式的信息
+            if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_4_SE_SX1280){
+                console.log("Rocker mode change:");
+                console.log(HidConfig.rocker_mode);
+                configBuff[0] = 0x05;
+                configBuff[1] = 0x01;
+                configBuff[2] = HidConfig.rocker_mode;//油门摇杆模式
+                usbSendData(configBuff);
+                console.log("Send rocker mode:",configBuff);
+            }
         });
         show.trainer_port.change(function () {
             HidConfig.trainer_port = parseInt($(this).val(), 10)
@@ -654,24 +723,43 @@ show.initialize = function (callback) {
             HidConfig.BuzzerSwitch= $(this).is(':checked')?true:0x0F;
             console.log("BuzzerSwitch change:");
             console.log(HidConfig.BuzzerSwitch);
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x08;
-            configBuff[2] = 0x01;
-            configBuff[3] = HidConfig.BuzzerSwitch;//0x0F:蜂鸣器关闭 其他值：蜂鸣器开启
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x08;
+            configBuff[1] = 0x01;
+            configBuff[2] = HidConfig.BuzzerSwitch;//0x0F:蜂鸣器关闭 其他值：蜂鸣器开启;
+            usbSendData(configBuff);
+            console.log("Send buzzer:",configBuff);
         });
         show.JoystickDeadZonePercent.change(function()
         {
             HidConfig.JoystickDeadZonePercent = parseInt($(this).val(), 10);
             console.log("JoystickDeadZonePercent change:");
             console.log(HidConfig.JoystickDeadZonePercent);
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x08;
-            configBuff[2] = 0x02;
-            configBuff[3] = HidConfig.JoystickDeadZonePercent;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x08;
+            configBuff[1] = 0x02;
+            configBuff[2] = HidConfig.JoystickDeadZonePercent;
+            usbSendData(configBuff);
+            console.log("Send deadzone:",configBuff);
         });
-
+        show.switchLockMode_SE.change(function(){
+            HidConfig.switchLockMode_SE= $(this).is(':checked')?true:0x0F;
+            console.log("switchLockMode_SE change:");
+            console.log(HidConfig.switchLockMode_SE);
+            configBuff[0] = 0x08;
+            configBuff[1] = 0x03;
+            configBuff[2] = HidConfig.switchLockMode_SE;//0x0F:SE自锁模式关闭 其他值：开启;
+            usbSendData(configBuff);
+            console.log("Send SE lock mode:",configBuff);
+        });
+        show.switchLockMode_SF.change(function(){
+            HidConfig.switchLockMode_SF= $(this).is(':checked')?true:0x0F;
+            console.log("switchLockMode_SF change:");
+            console.log(HidConfig.switchLockMode_SF);
+            configBuff[0] = 0x08;
+            configBuff[1] = 0x04;
+            configBuff[2] = HidConfig.switchLockMode_SF;//0x0F:SF自锁模式关闭 其他值：开启;
+            usbSendData(configBuff);
+            console.log("Send SF lock mode:",configBuff);
+        });
         show.bind_phrase_switch.change(function () {
             HidConfig.bind_phrase_switch= $(this).is(':checked')?true:false;
             if(HidConfig.bind_phrase_switch){
@@ -719,156 +807,168 @@ show.initialize = function (callback) {
 
 
         function send_ch1_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x00;
-            configBuff[3] = HidConfig.ch1_input_source_display;
-            configBuff[4] = HidConfig.ch1_reverse_display;
-            configBuff[5] = HidConfig.ch1_scale_display;
-            configBuff[6] = HidConfig.ch1_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x00;
+            configBuff[2] = HidConfig.ch1_input_source_display;
+            configBuff[3] = HidConfig.ch1_reverse_display;
+            configBuff[4] = HidConfig.ch1_scale_display;
+            configBuff[5] = HidConfig.ch1_offset_display+100;
+            configBuff[6] = 0;
+            usbSendData(configBuff);
+            console.log("Send ch1 config:",configBuff);
         }
         function send_ch2_config(){
-            configBuff[0] = 0x00;
+            configBuff[0] = 0x01;
             configBuff[1] = 0x01;
-            configBuff[2] = 0x01;
-            configBuff[3] = HidConfig.ch2_input_source_display;
-            configBuff[4] = HidConfig.ch2_reverse_display;
-            configBuff[5] = HidConfig.ch2_scale_display;
-            configBuff[6] = HidConfig.ch2_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[2] = HidConfig.ch2_input_source_display;
+            configBuff[3] = HidConfig.ch2_reverse_display;
+            configBuff[4] = HidConfig.ch2_scale_display;
+            configBuff[5] = HidConfig.ch2_offset_display+100;
+            configBuff[6] = 0;
+            usbSendData(configBuff);
+            console.log("Send ch2 config:",configBuff);
         }
         function send_ch3_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x02;
-            configBuff[3] = HidConfig.ch3_input_source_display;
-            configBuff[4] = HidConfig.ch3_reverse_display;
-            configBuff[5] = HidConfig.ch3_scale_display;
-            configBuff[6] = HidConfig.ch3_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x02;
+            configBuff[2] = HidConfig.ch3_input_source_display;
+            configBuff[3] = HidConfig.ch3_reverse_display;
+            configBuff[4] = HidConfig.ch3_scale_display;
+            configBuff[5] = HidConfig.ch3_offset_display+100;
+            configBuff[6] = 0;
+            usbSendData(configBuff);
+            console.log("Send ch3 config:",configBuff);
         }
         function send_ch4_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x03;
-            configBuff[3] = HidConfig.ch4_input_source_display;
-            configBuff[4] = HidConfig.ch4_reverse_display;
-            configBuff[5] = HidConfig.ch4_scale_display;
-            configBuff[6] = HidConfig.ch4_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x03;
+            configBuff[2] = HidConfig.ch4_input_source_display;
+            configBuff[3] = HidConfig.ch4_reverse_display;
+            configBuff[4] = HidConfig.ch4_scale_display;
+            configBuff[5] = HidConfig.ch4_offset_display+100;
+            configBuff[6] = 0;
+            usbSendData(configBuff);
+            console.log("Send ch4 config:",configBuff);
         }
         function send_ch5_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x04;
-            configBuff[3] = HidConfig.ch5_input_source_display;
-            configBuff[4] = HidConfig.ch5_reverse_display;
-            configBuff[5] = HidConfig.ch5_scale_display;
-            configBuff[6] = HidConfig.ch5_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x04;
+            configBuff[2] = HidConfig.ch5_input_source_display;
+            configBuff[3] = HidConfig.ch5_reverse_display;
+            configBuff[4] = HidConfig.ch5_scale_display;
+            configBuff[5] = HidConfig.ch5_offset_display+100;
+            configBuff[6] = 0;
+            usbSendData(configBuff);
+            console.log("Send ch5 config:",configBuff);
         }
         function send_ch6_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x05;
-            configBuff[3] = HidConfig.ch6_input_source_display;
-            configBuff[4] = HidConfig.ch6_reverse_display;
-            configBuff[5] = HidConfig.ch6_scale_display;
-            configBuff[6] = HidConfig.ch6_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x05;
+            configBuff[2] = HidConfig.ch6_input_source_display;
+            configBuff[3] = HidConfig.ch6_reverse_display;
+            configBuff[4] = HidConfig.ch6_scale_display;
+            configBuff[5] = HidConfig.ch6_offset_display+100;
+            configBuff[6] = 0;
+            usbSendData(configBuff);
+            console.log("Send ch6 config:",configBuff);
         }
         function send_ch7_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x06;
-            configBuff[3] = HidConfig.ch7_input_source_display;
-            configBuff[4] = HidConfig.ch7_reverse_display;
-            configBuff[5] = HidConfig.ch7_scale_display;
-            configBuff[6] = HidConfig.ch7_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x06;
+            configBuff[2] = HidConfig.ch7_input_source_display;
+            configBuff[3] = HidConfig.ch7_reverse_display;
+            configBuff[4] = HidConfig.ch7_scale_display;
+            configBuff[5] = HidConfig.ch7_offset_display+100;
+            configBuff[6] = 0;
+            usbSendData(configBuff);
+            console.log("Send ch7 config:",configBuff);
         }
         function send_ch8_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x01;
-            configBuff[2] = 0x07;
-            configBuff[3] = HidConfig.ch8_input_source_display;
-            configBuff[4] = HidConfig.ch8_reverse_display;
-            configBuff[5] = HidConfig.ch8_scale_display;
-            configBuff[6] = HidConfig.ch8_offset_display+100;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x07;
+            configBuff[2] = HidConfig.ch8_input_source_display;
+            configBuff[3] = HidConfig.ch8_reverse_display;
+            configBuff[4] = HidConfig.ch8_scale_display;
+            configBuff[5] = HidConfig.ch8_offset_display+100;
+            configBuff[6] = 0;
+            usbSendData(configBuff);
+            console.log("Send ch8 config:",configBuff);
+        }
+        function send_ch9_config(){
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x08;
+            configBuff[2] = HidConfig.ch9_input_source_display;
+            configBuff[3] = HidConfig.ch9_reverse_display;
+            configBuff[4] = HidConfig.ch9_scale_display;
+            configBuff[5] = HidConfig.ch9_offset_display+100;
+            configBuff[6] = 0;
+            usbSendData(configBuff);
+            console.log("Send ch9 config:",configBuff);
+        }
+        function send_ch10_config(){
+            configBuff[0] = 0x01;
+            configBuff[1] = 0x09;
+            configBuff[2] = HidConfig.ch10_input_source_display;
+            configBuff[3] = HidConfig.ch10_reverse_display;
+            configBuff[4] = HidConfig.ch10_scale_display;
+            configBuff[5] = HidConfig.ch10_offset_display+100;
+            configBuff[6] = 0;
+            usbSendData(configBuff);
+            console.log("Send ch10 config:",configBuff);
         }
 
         function send_internal_radio_config(){
-            configBuff[0] = 0x00;
-            configBuff[1] = 0x06;
-            configBuff[2] = 0x02;
-            configBuff[3] = HidConfig.ExpressLRS_power_option_value;
-            configBuff[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
-            configBuff[5] = HidConfig.ExpressLRS_tlm_option_value;
+            configBuff[0] = 0x06;
+            configBuff[1] = 0x02;
+            configBuff[2] = HidConfig.ExpressLRS_power_option_value;
+            configBuff[3] = HidConfig.ExpressLRS_pkt_rate_option_value;
+            configBuff[4] = HidConfig.ExpressLRS_tlm_option_value;
+            configBuff[5] = 0;
             configBuff[6] = 0;
-            configBuff[7] = 0;
-            configBuff[8] = 0;
-            hidDevice.write(configBuff);
+            usbSendData(configBuff);
+            console.log("Send internal RF config:",configBuff);
         }
         function send_external_exrs_radio_config(){
-            let  buffer= new Buffer.alloc(64);
-            buffer[0] = 0x00;
-            buffer[1] = 0x07;
-            buffer[2] = 0x02;
-            buffer[3] = HidConfig.ExpressLRS_power_option_value;
-            buffer[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
-            buffer[5] = HidConfig.ExpressLRS_tlm_option_value;
-            buffer[6] = HidConfig.ExpressLRS_RF_freq_value;//RF Freq
-            hidDevice.write(buffer);
+            let  buffer= new Buffer.alloc(8);
+            buffer[0] = 0x07;
+            buffer[1] = 0x02;
+            buffer[2] = HidConfig.ExpressLRS_power_option_value;
+            buffer[3] = HidConfig.ExpressLRS_pkt_rate_option_value;
+            buffer[4] = HidConfig.ExpressLRS_tlm_option_value;
+            buffer[5] = HidConfig.ExpressLRS_RF_freq_value;//RF Freq
+            configBuff[6] = 0;
+            usbSendData(buffer);
+            console.log("Send external RF config:",configBuff);
         }
 
        
 
         $('a.binding').click(function () {   
-        let bufBind= new Buffer.alloc(64);
-        bufBind[0] = 0x00;
-        bufBind[1] = 0x07;
-        bufBind[2] = 0x02;
-        bufBind[3] = HidConfig.ExpressLRS_power_option_value;
-        bufBind[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
-        bufBind[5] = HidConfig.ExpressLRS_tlm_option_value;
-        bufBind[6] = 0x06;
-        bufBind[7] = 0x01;
-        bufBind[8] = 0x00;
-        hidDevice.write(bufBind);
-            console.log("ExpressLRS enter to binding");
+        let bufBind= new Buffer.alloc(8);
+        bufBind[0] = 0x07;
+        bufBind[1] = 0x02;
+        bufBind[2] = HidConfig.ExpressLRS_power_option_value;
+        bufBind[3] = HidConfig.ExpressLRS_pkt_rate_option_value;
+        bufBind[4] = HidConfig.ExpressLRS_tlm_option_value;
+        bufBind[5] = 0x06;
+        bufBind[6] = 0x01;
+        bufBind[7] = 0x00;
+        usbSendData(bufBind);
+            console.log("Send cmd ExpressLRS enter to binding:",bufBind);
         });
        
         $('a.wifi_update').click(function () {   
-            let  bufwifiUpdate= new Buffer.alloc(64);
-            bufwifiUpdate[0] = 0x00;
-            bufwifiUpdate[1] = 0x07;
-            bufwifiUpdate[2] = 0x02;
-            bufwifiUpdate[3] = HidConfig.ExpressLRS_power_option_value;
-            bufwifiUpdate[4] = HidConfig.ExpressLRS_pkt_rate_option_value;
-            bufwifiUpdate[5] = HidConfig.ExpressLRS_tlm_option_value;
-            bufwifiUpdate[6] = 0x06;
-            bufwifiUpdate[7] = 0x00;
-            bufwifiUpdate[8] = 0x01;
-            hidDevice.write(bufwifiUpdate);
-            console.log("ExpressLRS enter to wifi update");
+            let  bufwifiUpdate= new Buffer.alloc(8);
+            bufwifiUpdate[0] = 0x07;
+            bufwifiUpdate[1] = 0x02;
+            bufwifiUpdate[2] = HidConfig.ExpressLRS_power_option_value;
+            bufwifiUpdate[3] = HidConfig.ExpressLRS_pkt_rate_option_value;
+            bufwifiUpdate[4] = HidConfig.ExpressLRS_tlm_option_value;
+            bufwifiUpdate[5] = 0x06;
+            bufwifiUpdate[6] = 0x00;
+            bufwifiUpdate[7] = 0x01;
+            usbSendData(bufwifiUpdate);
+            console.log("Send cmd ExpressLRS enter to wifi update:",bufwifiUpdate);
 
         });
 
@@ -895,52 +995,51 @@ show.initialize = function (callback) {
                
             }else{
                 if(HidConfig.Internal_radio_module_switch==true&&HidConfig.bind_phrase_switch == true &&show.bind_phrase_input.val().length>=6){
-                    let buffer = new Buffer.alloc(64);
-                    buffer[0] = 0x00;
-                    buffer[1] = 0x22;
-                    buffer[2] = HidConfig.uid_bytes[0];
-                    buffer[3] = HidConfig.uid_bytes[1];
-                    buffer[4] = HidConfig.uid_bytes[2];
-                    buffer[5] = HidConfig.uid_bytes[3];
-                    buffer[6] = HidConfig.uid_bytes[4];
-                    buffer[7] = HidConfig.uid_bytes[5];
-                    hidDevice.write(buffer);
-                    console.log("send binding phrase");
+                    let buffer = new Buffer.alloc(8);
+                    buffer[0] = 0x22;
+                    buffer[1] = HidConfig.uid_bytes[0];
+                    buffer[2] = HidConfig.uid_bytes[1];
+                    buffer[3] = HidConfig.uid_bytes[2];
+                    buffer[4] = HidConfig.uid_bytes[3];
+                    buffer[5] = HidConfig.uid_bytes[4];
+                    buffer[6] = HidConfig.uid_bytes[5];
+                    usbSendData(buffer);
+                    console.log("Send internal RF binding phrase:",buffer);
                 }else if(HidConfig.bind_phrase_switch == false){
-                    let buffer = new Buffer.alloc(64);
-                    buffer[0] = 0x00;
-                    buffer[1] = 0x22;
+                    let buffer = new Buffer.alloc(8);
+                    buffer[0] = 0x22;
+                    buffer[1] = 0;
                     buffer[2] = 0;
                     buffer[3] = 0;
                     buffer[4] = 0;
                     buffer[5] = 0;
                     buffer[6] = 0;
-                    buffer[7] = 0;
-                    hidDevice.write(buffer);
+                    usbSendData(buffer);
+                    console.log("Send external RF binding phrase:",buffer);
                 }
 
-                var bufName = new Buffer.alloc(64);
+                var bufName = new Buffer.alloc(8);
                 console.log("HidConfig.internal_radio_protocol:"+HidConfig.internal_radio_protocol);
                 console.log("HidConfig.Internal_radio_module_switch:"+HidConfig.Internal_radio_module_switch);
                 if(HidConfig.Internal_radio_module_switch){
-                    bufName[0] = 0x00;
-                    bufName[1] = 0x05;
-                    bufName[2] = HidConfig.internal_radio_protocol;
-                    bufName[3] = HidConfig.rocker_mode;
-                    bufName[4] = 0x02;
-                    hidDevice.write(bufName);
+                    bufName[0] = 0x05;
+                    bufName[1] = HidConfig.internal_radio_protocol;
+                    bufName[2] = HidConfig.rocker_mode;
+                    bufName[3] = 0x02;
+                    usbSendData(bufName);
+                    console.log("Send internal RF module switch:",bufName);
                 }else if(HidConfig.External_radio_module_switch){
-                    bufName[0] = 0x00;
-                    bufName[1] = 0x05;
+                    bufName[0] = 0x05;
                     if(HidConfig.internal_radio==RFmodule.CC2500) {
-                        bufName[2] = 0x04;//cc2500 外置射频模块为第五个协议
+                        bufName[1] = 0x04;//cc2500 外置射频模块为第五个协议
                     }else{
-                        bufName[2] = 0x01;//sx1280 外置射频模块为第二个协议
+                        bufName[1] = 0x01;//sx1280 外置射频模块为第二个协议
                     }
                     
-                    bufName[3] = HidConfig.rocker_mode;
-                    bufName[4] = 0x02;
-                    hidDevice.write(bufName);
+                    bufName[2] = HidConfig.rocker_mode;
+                    bufName[3] = 0x02;
+                    usbSendData(bufName);
+                    console.log("Send external RF module switch:",bufName);
                 }else{
                     // alert("save failed!  you need to select at least one protocol");
                     const dialogSelectAtLeastOneProtocol = $('.dialogSelectAtLeastOneProtocol')[0];
@@ -957,14 +1056,16 @@ show.initialize = function (callback) {
 
         function factory_reset(){
 
-            HidConfig.ch1_input_source_display = 2;
-            HidConfig.ch2_input_source_display = 0;
-            HidConfig.ch3_input_source_display = 1;
+            HidConfig.ch1_input_source_display = 0;
+            HidConfig.ch2_input_source_display = 1;
+            HidConfig.ch3_input_source_display = 2;
             HidConfig.ch4_input_source_display = 3;
             HidConfig.ch5_input_source_display = 4;
             HidConfig.ch6_input_source_display = 5;
             HidConfig.ch7_input_source_display = 6;
             HidConfig.ch8_input_source_display = 7;
+            HidConfig.ch9_input_source_display = 8;
+            HidConfig.ch10_input_source_display = 9;
 
             HidConfig.ch1_reverse_display = 0;
             HidConfig.ch2_reverse_display = 0;
@@ -974,6 +1075,8 @@ show.initialize = function (callback) {
             HidConfig.ch6_reverse_display = 0;
             HidConfig.ch7_reverse_display = 0;
             HidConfig.ch8_reverse_display = 0;
+            HidConfig.ch9_reverse_display = 0;
+            HidConfig.ch10_reverse_display = 0;
 
             HidConfig.ch1_scale_display = 100;
             HidConfig.ch2_scale_display = 100;
@@ -983,6 +1086,8 @@ show.initialize = function (callback) {
             HidConfig.ch6_scale_display = 100;
             HidConfig.ch7_scale_display = 100;
             HidConfig.ch8_scale_display = 100;
+            HidConfig.ch9_scale_display = 100;
+            HidConfig.ch10_scale_display = 100;
 
             HidConfig.ch1_offset_display = 0;
             HidConfig.ch2_offset_display = 0;
@@ -992,6 +1097,8 @@ show.initialize = function (callback) {
             HidConfig.ch6_offset_display = 0;
             HidConfig.ch7_offset_display = 0;
             HidConfig.ch8_offset_display = 0;
+            HidConfig.ch9_offset_display = 0;
+            HidConfig.ch10_offset_display = 0;
 
             send_ch1_config();
             send_ch2_config();
@@ -1001,6 +1108,10 @@ show.initialize = function (callback) {
             send_ch6_config();
             send_ch7_config();
             send_ch8_config();
+            if(getLiteRadioUnitType() >= liteRadioUnitType.LiteRadio_4_SE_SX1280){
+                send_ch9_config();
+                send_ch10_config();
+            }
             
             show.refreshUI();
             const dialogfactoryReset = $('.dialogfactoryReset')[0];
@@ -1016,38 +1127,44 @@ show.initialize = function (callback) {
         }
 
         //请求遥控器参数，使上位机显示的配置与其同步
-        function sync_config(){
+        function sync_config() {
             //请求遥控器信息（遥控器类型、内置射频模块类型、硬件油门杆位置、硬件版本号、软件版本号）
-            let requirebuff= new Buffer.alloc(64);
-            requirebuff[0] = 0x00;
-            requirebuff[1] = 0x11;
-            requirebuff[2] = 0x03;
+            let requirebuff= new Buffer.alloc(8);
+            requirebuff[0] = 0x11;
+            requirebuff[1] = 0x03;
+            requirebuff[2] = 0x00;
             requirebuff[3] = 0x00;
             requirebuff[4] = 0x00;
             requirebuff[5] = 0x00;
             requirebuff[6] = 0x00;
-            requirebuff[7] = 0x00;
-            hidDevice.write(requirebuff);
-            hidDevice.write(requirebuff);
-            hidDevice.write(requirebuff);
-            
+            console.log(requirebuff);
+            if(getUsedUSBProtocol()) {
+                usbSendData(requirebuff);   //串口只需要发一次
+            }else{
+                usbSendData(requirebuff);   //HID发3次
+                usbSendData(requirebuff);
+                usbSendData(requirebuff);
+            }
+            console.log("Send request device info",requirebuff);
 
-             //请求遥控器信息（硬件版本、支持协议、左右手油门、功率）
-            let bufName = new Buffer.alloc(64);
-            bufName[0] = 0x0;
-            bufName[1] = 0x11;
-            bufName[2] = 0x02;
-            bufName[3] = 0x00;
-            bufName[4] = 0x00;
-            bufName[5] = 0x00;
-            console.log(bufName);
-            hidDevice.write(bufName);
-            console.log("get sync config from radio");
+            function temp_getLiteInfo() {
+                //请求遥控器信息（硬件版本、支持协议、左右手油门、功率）
+                let bufName = new Buffer.alloc(8);
+                bufName[0] = 0x11;
+                bufName[1] = 0x02;
+                bufName[2] = 0x00;
+                bufName[3] = 0x00;
+                bufName[4] = 0x00;
+                usbSendData(bufName);
+                console.log("Send request lite info",bufName);
+            }
+            //比上面requirebuff的数据微延迟一下再发送这一帧，不然使用串口进行通信的遥控器处理速度跟不上
+            setTimeout(temp_getLiteInfo, 50);
         }
-        sync_config();
+
+        setTimeout(sync_config, 100);
         
         callback();
-
     });
 };
 

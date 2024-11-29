@@ -635,13 +635,13 @@
         "message": "本应用只支持下面罗列的遥控器。"
     },
     "promptOfUseRadioConfigurator":{
-        "message": "<br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br /><br />点击下面黄色按钮切换到遥控器配置程序。"
+        "message": "<br />1. LiteRadio 2 SE的PCB版本如果是V1，无法使用本应用配置相关的功能。<br />2. LiteRadio 2使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br />3. LiteRadio 3 Pro使用EdgeTX固件，请使用自带的屏幕进行配置。<br /><br />点击下面黄色按钮切换到遥控器配置程序。"
     },
     "defaultContributingText_radio": {
         "message": "本应用只支持下面罗列的遥控器。"
     },
     "promptOfUseRadioConfigurator_radio":{
-        "message":"<br />LiteRadio 2 SE的Frsky或者Bayang协议版本并不支持本应用。LiteRadio 2和LiteRadio 3 Pro是使用OpenTX固件，请使用OpenTX Companion上位机进行配置。<br /><br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />遥控器固件烧写请点击左侧“固件烧写工具”；<br />遥控器参数配置，首先将遥控器关机，用USB数据线连接遥控器到电脑，遥控器红色或者绿色灯逐渐闪烁，点击右上角“连接遥控器”按钮进入配置界面。"
+        "message":"<br /><strong>当前为遥控器配置程序，基本使用说明如下：</strong><br />遥控器参数配置界面连接基本步骤如下：<br />1. 首先将遥控器关机<br />2. 用USB数据线连接遥控器到电脑，遥控器红色或者绿色灯呼吸<br />3. 在右上角的下拉框中选择检测到的手柄<br />4. 若为HID Handset，跳至第5步；若为COM Handset，选择波特率为115200<br />5. 点击右上角“连接遥控器”按钮进入配置界面<br /><br /><strong>若要刷写固件，点击左侧“固件烧写工具”。</strong><br /><br /><strong>注意：</strong><br />1. LiteRadio 2 SE的PCB版本如果是V1，无法使用本应用配置相关的功能<br />2. LiteRadio 2使用OpenTX固件，请使用OpenTX Companion上位机进行配置<br />3. LiteRadio 3 Pro使用EdgeTX固件，请使用自带的屏幕进行配置<br />"
     },
     "defaultFacebookText": {
         "message": "我们还有一个 <a href=\"https://mp.weixin.qq.com/s/3fxc5h2dheOTfRshuTv9qw\" target=\"_blank\" rel=\"noopener noreferrer\">微信公众号</a>。<br />关注我们获取最新动态，寻求技术支持，或者只是和小伙伴们闲聊。"
@@ -2974,8 +2974,15 @@
     "firmwareFlasherRecoveryText": {
         "message": "你可以按照以下的几个步骤来重刷固件，包括飞控固件，OSD固件或者传感器固件。<ul><li>飞控断电；</li><li>按住飞控底部的按键；</li><li>上电（通过电池或者USB上电都可以），如果操作正确，飞控底部LED灯白色常亮，表示已经处于固件烧写状态；</li><li>松开飞控底部按键，将飞控通过USB数据线连接电脑；</li><li>飞控将会被识别为COM口，在右上角选择其对应的COM口和波特率（默认使用115200），再点击“连接”按钮，按钮变为红色且显示“更新固件”则表示连接成功；如果未被正确识别为COM口，请检查驱动是否安装正确。(参阅链接：<a href=\"https://github.com/BETAFPV/BETAFPV_Configurator/blob/3d91a106fb9f8dc863cd80cc85afa5c0b9b194c8/docs/UpdateFirmwareProcedure_CN.md\"target=\"_blank\" rel=\"noopener noreferrer\">如何更新飞控固件</a> ).</li><li>在本页面顶部下拉框中，选择对应的飞控硬件型号和固件版本，点击从网络加载固件（或者从本地电脑加载固件）。上位机能够自动识别加载的固件类型（飞控固件、OSD固件或者传感器固件），并且点亮右下角对应的“烧写xxx”按钮，点击该按钮开始烧写；</li><li>等待烧写进度条提示烧写完成，飞控将可以自动重启。</li></ul>"
     },
+    "firmwareFlasherDownloadTitle_radio": {
+        "message": "<strong> 固件下载地址 </strong>"
+    },
+    
+    "firmwareFlasherDownload_radio": {
+        "message": "国内客户建议从坚果云下载固件，海外客户建议从BETAFPV官网下载固件。<br /><br />坚果云下载固件网址：<br /><strong><a href=\"https://www.jianguoyun.com/p/DdseyOkQ_afyCRiindMFIAA\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 1 (Frsky)</a><br /><a href=\"https://www.jianguoyun.com/p/DVATQIMQ_afyCRi4ndMFIAA\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE V2 (Frsky/ELRS)</a><br /><a href=\"https://www.jianguoyun.com/p/DSSu4BkQ_afyCRi5ndMFIAA\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3 (Frsky/ELRS)</a><br /><a href=\"https://www.jianguoyun.com/p/DX5MOO8Q_afyCRi6ndMFIAA\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 4 SE (ELRS)</a><br /></strong><br />BETAFPV官网下载固件网址：<br /><strong><a href=\"https://support.betafpv.com/hc/en-us/articles/36862673656601-Lite-Radio-1\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 1 (Frsky)</a><br /><a href=\"https://support.betafpv.com/hc/en-us/articles/4414348908057-Lite-Radio-2-SE\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 2 SE V2 (Frsky/ELRS)</a><br /><a href=\"https://support.betafpv.com/hc/en-us/articles/4414348993177-Lite-Radio-3\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 3 (Frsky/ELRS)</a><br /><a href=\"https://support.betafpv.com/hc/en-us/articles/36869017436953-Lite-Radio-4-SE\" target=\"_blank\" rel=\"noopener noreferrer\">LiteRadio 4 SE (ELRS)</a><br /></strong>"
+    },
     "firmwareFlasherRecoveryText_radio": {
-        "message": "遥控器固件烧写步骤如下：<ul><li>遥控器关机；</li><li>按住遥控器SETUP按键，开机，遥控器蓝灯常亮，在“滴滴滴”三声之后，表示已经处于固件烧写状态；</li><li>松开SETUP按键，将遥控器通过USB数据线连接电脑；</li><li>遥控器将会被识别为COM口，在右上角选择其对应的COM口和波特率，再点击“连接”按钮，按钮变为红色则表示连接成功；</li><li>选择对应的固件，点击从网络加载固件。若网络无法连接则需要在本地导入固件。点击右下角“烧写固件”按钮</li><li>等待烧写进度条提示烧写完成，断开USB连接并重启遥控器</li></ul>"
+        "message": "遥控器固件烧写步骤如下：<ul><li>遥控器关机；</li><li>按住遥控器SETUP按键，短按开机键，遥控器蓝灯常亮，在“Do Re Mi”三声之后，表示已经处于固件烧写状态；</li><li>松开SETUP按键，将遥控器通过USB数据线连接电脑；</li><li>遥控器将会被识别为COM口，在右上角选择其对应的COM口和波特率，再点击“连接”按钮，按钮变为红色则表示连接成功；</li><li>从上面“固件下载地址”的链接中选择相应型号的遥控器固件并下载，点击右下角“从本地电脑加载固件”按钮选择固件，点击“烧写固件”开始烧写；</li><li>等待烧写进度条提示烧写完成，断开USB连接或者短按电源键关机。</li></ul>"
     },
     "firmwareFlasherButtonLeave": {
         "message": "关闭固件烧写"
@@ -5952,10 +5959,10 @@
         "message": "可以选择遥控器内置射频模块，也可以选择启用外置高频头。两者不可同时启用。<br /><br />"
     },
     "RadioSetupExpressLRSText":{
-        "message": "如果内置射频模块或者外置高频头为ELRS系统，则可通过本模块配置其参数。程序能够自动检测ELRS系统是否存在。如果本模块为灰色不可配置，请确保ELRS系统存在，并且连接供电正确。同时，请在左侧“射频模块配置”中配置正确，<span class=\"message-negative\">保存并重启</span>。"
+        "message": "如果内置射频模块或者外置高频头为ELRS系统，则可通过本模块配置其参数，如果本模块为灰色表示不可配置。若想查看是否配置成功，请点击<span class=\"message-negative\">保存并重启</span>并重新连接遥控器。"
     },
     "RadioSetupRadioModuleDetect":{
-        "message": "未检测到LERS系统"
+        "message": "未检测到ELRS系统"
     },
     "RadioSetupInternel868M":{
         "message": "<strong>内置ELRS</strong>正在运行中，工作频段：<strong>868MHz</strong>。"
@@ -5977,7 +5984,7 @@
     },
     
     "RadioSetupMIXSText":{
-        "message": "通道混控说明文本"
+        "message": "混控用于为翻滚、俯仰、偏航和油门车辆控制分配通道，以及确定它们是否反转。"
     },
     "RadioSetupFactoryReset":{
         "message":"恢复出厂设置"
@@ -5998,6 +6005,15 @@
         "message":"提示"
     },
     "HIDPowerOffConfirm":{
+        "message":"确认"
+    },
+    "JoystickExistDialogLabel":{
+        "message":"未检测到遥控器。"
+    },
+    "JoystickExistDialogTitle":{
+        "message":"提示"
+    },
+    "JoystickExistConfirm":{
         "message":"确认"
     },
     "CloseInternalRadioDialogTitle":{
@@ -6070,7 +6086,7 @@
         "message":"硬件版本:"
     },
     "literadio_firmwareVersion":{
-        "message":"固件版本:"
+        "message":"固件版本（即固件发布日期）:"
     },
     "bindPhraseprompttext":{
         "message":"如果使用spi ELRS接收机，需要将飞控在Betaflight CLI 中输入以下命令。"
@@ -6173,6 +6189,14 @@
     "BuzzerSwitch":
     {
         "message":"蜂鸣器提示音开关"
+    },
+    "switchLockMode_SE":
+    {
+        "message":"SE自锁模式"
+    },
+    "switchLockMode_SF":
+    {
+        "message":"SF自锁模式"
     },
     "extra_custom_config":
     {

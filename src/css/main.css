@@ -1884,12 +1884,27 @@ dialog .dialog_toolbar .btn a.disabled {
     margin-bottom: 10px;
 }
 
+.gui_note_download {
+    background: #ffdddd;
+}
+
 .gui_warning {
     background: #ffdddd;
 }
 
 .gui_note {
     background: #fff6de;
+}
+
+.gui_note_download .gui_box_titlebar {
+    background-color: #ffbb00;
+    background-image: linear-gradient(-45deg, rgba(255, 255, 255, .3) 10%, transparent 10%, transparent 20%,
+        rgba(255, 255, 255, .3) 20%, rgba(255, 255, 255, .3) 30%, transparent 30%, transparent 40%,
+        rgba(255, 255, 255, .3) 40%, rgba(255, 255, 255, .3) 50%, transparent 50%, transparent 60%,
+        rgba(255, 255, 255, .3) 60%, rgba(255, 255, 255, .3) 70%, transparent 70%, transparent 80%,
+        rgba(255, 255, 255, .3) 80%, rgba(255, 255, 255, .3) 90%, transparent 90%, transparent 100%,
+        rgba(255, 255, 255, .4) 100%, transparent);
+    color: white;
 }
 
 .gui_warning .gui_box_titlebar {

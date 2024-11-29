@@ -68,7 +68,7 @@
                                 <td>
                                  <div class="input-helpicon-flex">
                                     <label class="switch">
-                                        <input id = "internal_radio_module_switch"class="switch-input" type="checkbox" />
+                                        <input id = "internal_radio_module_switch"class="switch-input" type="checkbox" disabled = "disabled"/>
                                         <span class="switch-label" data-on="On" data-off="Off"></span> 
                                         <span class="switch-handle"></span> 
                                     </label>
@@ -80,10 +80,11 @@
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <select id="internal_radio_protocol" style="width:30%; margin-top: 12px;" disabled = "disabled" >
-                                            <option id = "internal_radio_protocol_elrs_2.4G" value="0"  >ELRS 2.4G</option>
+                                            <option id = "internal_radio_protocol_elrs_2.4G" value="0"  >ELRS2 2.4G</option>
                                             <option id = "internal_radio_protocol_Frsky_F8" value="1" >Frsky D8</option>
                                             <option id = "internal_radio_protocol_Frsky_F16_FCC" value="2" >Frsky D16 FCC</option>
                                             <option id = "internal_radio_protocol_Frsky_F16_LBT" value="3" >Frsky D16 LBT</option>
+                                            <option id = "internal_radio_protocol_elrs3_2.4G" value="4"  >ELRS3 2.4G</option>
                                         </select>
                                         <label i18n = "RadioSetupIRSystemProtocol" style="width:100%; margin-top: 12px;" ></label>
                                     </div>
@@ -91,9 +92,9 @@
                             </tr>
                             <tr>
                                 <td>
-                                 <div class="input-helpicon-flex">
+                                <div class="input-helpicon-flex">
                                     <label class="switch">
-                                        <input id = "external_radio_module_switch"class="switch-input" type="checkbox" />
+                                        <input id = "external_radio_module_switch"class="switch-input" type="checkbox" disabled = "disabled"/>
                                         <span class="switch-label" data-on="On" data-off="Off"></span> 
                                         <span class="switch-handle"></span> 
                                     </label>
@@ -111,14 +112,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>   
-                                <td>
-                                    <div  class="input-helpicon-flex" style=" margin-top: 12px;">
-                                        <input type="checkbox" id="External_radio_module_power_switch" disabled = "disabled"/>
-                                        <label style = "width:100%;margin-top: 6px;" i18n = "RadioSetupERSystemPowerSwitch"></label>
-                                    </div>
-                                </td>
-                            </tr>
+                            
                         </table>
                     </div>
                     <div class="grid-col col6">
@@ -135,7 +129,7 @@
                             <tr >
                                 <td  id="exELRSpowerID" disabled = "disabled">
                                     <div class="input-helpicon-flex" >
-                                        <select id="ExpressLRS_power_option_box" style="width:15%; margin-top: 12px;" disabled = "disabled">
+                                        <select id="ExpressLRS_power_option_box" style="width:25%; margin-top: 12px;" disabled = "disabled">
                                             <option id = "ExpressLRS_power_10mw" value="0" selected="selected">10mw</option>
                                             <option id = "ExpressLRS_power_25mw" value="1">25mw</option>
                                             <option id = "ExpressLRS_power_50mw" value="2">50mw</option>
@@ -150,21 +144,27 @@
                             <tr>
                                 <td   id="exELRSpktRateID" disabled = "disabled">
                                     <div class="input-helpicon-flex" >
-                                        <select id="ExpressLRS_pkt_rate_option_box" style="width:15%; margin-top: 12px;" disabled = "disabled">
-                                            <option id="ExpressLRS_pkt_rate_500Hz" value="0" selected="selected">500Hz</option>
-                                            <option id="ExpressLRS_pkt_rate_250Hz" value="1">250Hz</option>
-                                            <option id="ExpressLRS_pkt_rate_100Hz" value="2">150Hz</option>
-                                            <option id="ExpressLRS_pkt_rate_50Hz" value="3">50Hz</option>
+                                        <select id="ExpressLRS_pkt_rate_option_box" style="width:25%; margin-top: 12px;" disabled = "disabled">
+                                            <option id="ExpressLRS_pkt_rate_FLRC_1000HZ" value="0">FLRC_1000HZ</option>
+                                            <option id="ExpressLRS_pkt_rate_FLRC_500HZ" value="1">FLRC_500HZ</option>
+                                            <option id="ExpressLRS_pkt_rate_DVDA_500HZ" value="2">DVDA_500HZ</option>
+                                            <option id="ExpressLRS_pkt_rate_DVDA_250HZ" value="3">DVDA_250HZ</option>
+                                            <option id="ExpressLRS_pkt_rate_LORA_500HZ" value="4"  selected="selected">LORA_500HZ</option>
+                                            <option id="ExpressLRS_pkt_rate_LORA_333HZ_8CH" value="5">LORA_333HZ_8CH</option>
+                                            <option id="ExpressLRS_pkt_rate_LORA_250HZ" value="6">LORA_250HZ</option>
+                                            <option id="ExpressLRS_pkt_rate_LORA_150HZ" value="7">LORA_150HZ</option>
+                                            <option id="ExpressLRS_pkt_rate_LORA_100HZ_8CH" value="8">LORA_100HZ_8CH</option>
+                                            <option id="ExpressLRS_pkt_rate_LORA_50HZ" value="9">LORA_50HZ</option>
                                          
                                         </select>
                                         <label i18n = "RadioSetupexELRSPktRate" style="width:50%; margin-top: 12px;" ></label>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> 
                             <tr  >     
                                 <td id="exELRSTLMRadioID">
                                     <div class="input-helpicon-flex" >
-                                        <select id="ExpressLRS_tlm_option_box" style="width:15%; margin-top: 12px;" disabled = "disabled">
+                                        <select id="ExpressLRS_tlm_option_box" style="width:25%; margin-top: 12px;" disabled = "disabled">
                                             <option id="ExpressLRS_tlm_OFF" value="0" selected="selected">OFF</option>
                                             <option id="ExpressLRS_tlm_128" value="1">1:128</option>
                                             <option id="ExpressLRS_tlm_64" value="2">1:64</option>
@@ -181,7 +181,7 @@
 
                             <tr>
                                 <td>
-                                    <div id = "content_EspressLRS_btn"class="content_EspressLRS_btn">
+                                    <div id = "content_EspressLRS_btn"class="content_EspressLRS_btn" disabled = "disabled">
                                         <div class="btn bind_btn">
                                             <a id = "externalRadioBinding"class="binding" href="#" i18n="RadioSetupEnterBinding"  >Enter Binding</a>
                                         </div>
@@ -224,7 +224,6 @@
             <div class="spacer_box_title" i18n = "RadioSetupMIXS" >MIXS</div>
         </div>
         <div class="gui_box">
-            <p i18n = "RadioSetupMIXSText">  </p>
             <p><br/> </p>
             <div class="grid-row">
                 <div class="grid-col col6 bars"></div>
@@ -239,7 +238,7 @@
                                 <th i18n = "RadioSetupOffset">Offset</th>
                                 <th i18n = "RadioSetupReverse">Reverse</th>
                             </tr>
-                            <tr>
+                            <tr id="ch1_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH1</label>
@@ -256,6 +255,8 @@
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -276,7 +277,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch2_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH2</label>
@@ -293,6 +294,8 @@
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -313,7 +316,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch3_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH3</label>
@@ -330,6 +333,8 @@
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -350,7 +355,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch4_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH4</label>
@@ -367,6 +372,8 @@
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -387,7 +394,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch5_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH5</label>
@@ -404,6 +411,8 @@
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -424,7 +433,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch6_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH6</label>
@@ -441,6 +450,8 @@
                                             <option value="5" selected="selected">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -461,7 +472,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch7_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH7</label>
@@ -478,6 +489,8 @@
                                             <option value="5">SB</option>
                                             <option value="6" selected="selected">SC</option>
                                             <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -498,7 +511,7 @@
                                 </td>
                             </tr>
         
-                            <tr>
+                            <tr id="ch8_mixes">
                                 <td>
                                     <div class="input-helpicon-flex">
                                         <label style="width:100%;">CH8</label>
@@ -515,6 +528,8 @@
                                             <option value="5">SB</option>
                                             <option value="6">SC</option>
                                             <option value="7" selected="selected">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9">SF</option>
                                         </select>
                                     </div>
                                 </td>
@@ -534,6 +549,85 @@
                                     </div>
                                 </td>
                             </tr>
+
+                            <tr id="ch9_mixes">
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <label style="width:100%;">CH9</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <select name="ch9_data_source" style="width:100%;">
+                                            <option value="0">Roll(A)</option>
+                                            <option value="1">Pitch(E)</option>
+                                            <option value="2">Throttle(T)</option>
+                                            <option value="3">Yaw(R)</option>
+                                            <option value="4">SA</option>
+                                            <option value="5">SB</option>
+                                            <option value="6">SC</option>
+                                            <option value="7">SD</option>
+                                            <option value="8" selected="selected">SE</option>
+                                            <option value="9">SF</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch9_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch9_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input calss="condition" type="checkbox" width:100%; id='ch9_check'>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr id="ch10_mixes">
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <label style="width:100%;">CH10</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <select name="ch10_data_source" style="width:100%;">
+                                            <option value="0">Roll(A)</option>
+                                            <option value="1">Pitch(E)</option>
+                                            <option value="2">Throttle(T)</option>
+                                            <option value="3">Yaw(R)</option>
+                                            <option value="4">SA</option>
+                                            <option value="5">SB</option>
+                                            <option value="6">SC</option>
+                                            <option value="7">SD</option>
+                                            <option value="8">SE</option>
+                                            <option value="9" selected="selected">SF</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch10_scale' step="1" min="1" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="100">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input type="number" name='ch10_offset' step="1" min="-100" max="100" style="background-color:rgba(255, 255, 255, 0); width:100%; border:1px solid;" value="0">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-helpicon-flex">
+                                        <input calss="condition" type="checkbox" width:100%; id='ch10_check'>
+                                    </div>
+                                </td>
+                            </tr>
+                            
                         </table>
                     </div> 
                 </div>
@@ -560,16 +654,17 @@
                 <td>
                     <div class="input-helpicon-flex">
                         <select id="JoystickDeadZonePercent" style="width:15%; margin-top: 12px; " >
-                            <option value="1">1%</option>
-                            <option value="2">2%</option>
-                            <option value="3">3%</option>
-                            <option value="4">4%</option>
-                            <option value="5">5%</option>
-                            <option value="6">6%</option>
-                            <option value="7">7%</option>
-                            <option value="8">8%</option>
-                            <option value="9">9%</option>
-                            <option value="10">10%</option>
+                            <option id="JoystickDeadZonePercent_0" value="0">0%</option>
+                            <option id="JoystickDeadZonePercent_1" value="1" selected="selected">1%</option>
+                            <option id="JoystickDeadZonePercent_2" value="2">2%</option>
+                            <option id="JoystickDeadZonePercent_3" value="3">3%</option>
+                            <option id="JoystickDeadZonePercent_4" value="4">4%</option>
+                            <option id="JoystickDeadZonePercent_5" value="5">5%</option>
+                            <option id="JoystickDeadZonePercent_6" value="6">6%</option>
+                            <option id="JoystickDeadZonePercent_7" value="7">7%</option>
+                            <option id="JoystickDeadZonePercent_8" value="8">8%</option>
+                            <option id="JoystickDeadZonePercent_9" value="9">9%</option>
+                            <option id="JoystickDeadZonePercent_10" value="10">10%</option>
                         </select>
                         <label  style="width:100%; margin-top: 12px;" i18n = "JoystickDeadZone" >摇杆死区</label>
                     </div>
@@ -578,9 +673,38 @@
         
         </table>
     </div>
+    <div class="gui_box" id="extra_custom_config_switch_lock_mode" style="width:100%; display:none ">
+        <table style="width:100%; margin-left: 6px; margin-top: 8px;"> 
+            <tr>
+                <td>
+                    <div class="input-helpicon-flex">
+                        <label class="switch">
+                            <input id="switchLockMode_SE" class="switch-input" type="checkbox"  />
+                            <span class="switch-label" data-on="On" data-off="Off"></span> 
+                            <span class="switch-handle"></span> 
+                        </label>
+                        <label  style="width:100%; margin-left:6px; margin-top:8px;" i18n="switchLockMode_SE"> SE自锁模式 </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-helpicon-flex">
+                        <label class="switch">
+                            <input id="switchLockMode_SF"class="switch-input" type="checkbox"  />
+                            <span class="switch-label" data-on="On" data-off="Off"></span> 
+                            <span class="switch-handle"></span> 
+                        </label>
+                        <label  style="width:100%; margin-left:6px; margin-top:8px;" i18n="switchLockMode_SF"> SF自锁模式 </label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
     <div class="content_toolbar">
         <div class="btn reset_btn">
-            <a class="factory_reset " href="#" i18n = "RadioSetupFactoryReset">Factory reset</a>
+            <a class="factory_reset" id="FactoryReset" href="#" i18n = "RadioSetupFactoryReset">Factory reset</a>
         </div>
         <div class="btn refresh_btn">
             <a class="refresh" href="#" i18n = "RadioSetupRefresh">Refresh </a>
