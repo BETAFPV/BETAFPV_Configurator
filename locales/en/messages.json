@@ -3050,7 +3050,7 @@
         "message": "Warning"
     }, 
     "firmwareFlasherSteps": {
-        "message": "Stpes of how to flasher"
+        "message": "Steps of how to flash"
     },
     "firmwareInfo": {
         "message": "Firmware Info"
