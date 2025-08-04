@@ -1035,7 +1035,7 @@ window.onload = function() {
                                         document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 1 CC2500";
                                         break;
                                     case liteRadioUnitType.LiteRadio_4_SE_SX1280:
-                                        document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 4 SE SX1280";
+                                        document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 4/4 SE SX1280";
                                         document.getElementById("FactoryReset").style.display = "none";
                                         break;
                                     default:
