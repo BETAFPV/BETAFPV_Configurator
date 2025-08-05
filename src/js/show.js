@@ -95,6 +95,19 @@ const show = {
 
 
 
+var show_liteRadioUnitType = {
+    UNKNOW:0x00,
+    LiteRadio_2_SE:0x01,
+    LiteRadio_2_SE_V2_SX1280:0x02,
+    LiteRadio_2_SE_V2_CC2500:0x03,
+    LiteRadio_3_SX1280:0x04,
+    LiteRadio_3_CC2500:0x05,
+    LiteRadio_1_CC2500:0x06,
+    LiteRadio_4_SE_SX1280:0x07,
+    LiteRadio_2_SIM:0x08,
+}
+
+
 function getBytesFromWordArray(wordArray) {
     const result = [];
     result.push(wordArray.words[0] >>> 24);
@@ -1021,7 +1034,14 @@ show.initialize = function (callback) {
                 var bufName = new Buffer.alloc(8);
                 console.log("HidConfig.internal_radio_protocol:"+HidConfig.internal_radio_protocol);
                 console.log("HidConfig.Internal_radio_module_switch:"+HidConfig.Internal_radio_module_switch);
-                if(HidConfig.Internal_radio_module_switch){
+                if(getLiteRadioUnitType() == show_liteRadioUnitType.LiteRadio_2_SIM){
+                    bufName[0] = 0x05;
+                    bufName[1] = HidConfig.internal_radio_protocol;
+                    bufName[2] = HidConfig.rocker_mode;
+                    bufName[3] = 0x02;
+                    usbSendData(bufName);
+                    console.log("Send internal RF module switch:",bufName);
+                }else if(HidConfig.Internal_radio_module_switch){
                     bufName[0] = 0x05;
                     bufName[1] = HidConfig.internal_radio_protocol;
                     bufName[2] = HidConfig.rocker_mode;
