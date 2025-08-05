@@ -106,6 +106,11 @@ landing.initialize = function (callback) {
           shell.openExternal(this.getAttribute('href'));
         }
     
+        let LiteRadio_2_SIM_href_radio = document.getElementById("LiteRadio_2_SIM_href_radio");
+        LiteRadio_2_SIM_href_radio.onclick = function(e){
+          e.preventDefault();
+          shell.openExternal(this.getAttribute('href'));
+        }
     callback();
   });
 
