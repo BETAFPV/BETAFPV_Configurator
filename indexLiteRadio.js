@@ -1174,7 +1174,8 @@ window.onload = function() {
                 HidConfig.HID_Connect_State = HidConnectStatus.connecting;
                 $('div.open_hid_device div.connect_hid').text(i18n.getMessage('HID_Connecting'));
 
-                hidDevice = new HID.HID(getCurrentHidPath());
+                //hidDevice = new HID.HID(getCurrentHidPath());//mac列出的hid设备无固定下标，但hid设备数组的总数量保持不变导致了下拉框中的内容不会被刷新，所以依赖于hid设备数组下标获取path/pid/vid等参数都变得不可靠。
+                hidDevice = new HID.HID(1155, 22352);//mac只能连接固定的vid，pid，缺点是无法同时接入多个hid设备进行识别，不会影响单个hid遥控器的使用
 
                 setTimeout(() => {
                     if(HidConfig.Have_Receive_HID_Data){//先判断遥控器有数据发送过来
