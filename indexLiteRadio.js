@@ -30,11 +30,13 @@ var liteRadioUnitType = {
     LiteRadio_3_CC2500:0x05,
     LiteRadio_1_CC2500:0x06,
     LiteRadio_4_SE_SX1280:0x07,
+    LiteRadio_2_SIM:0x08,
 }
 var internalRadioType = {
     UNKNOW:0x00,
     CC2500:0x01,
     SX1280:0x02,
+    NO_RF:0x03,
 }
 var Channel = {
     CHANNEL1:0x00,
@@ -1352,7 +1354,19 @@ window.onload = function() {
                                 document.getElementById('internal_radio_module_switch').disabled = false;
                                 document.getElementById('external_radio_module_switch').disabled = false;
                             }
-                            if(HidConfig.internal_radio==RFmodule.CC2500){//内置射频模块型号为：cc2500
+                            /* 如果是LR2 SIM，关闭所有射频选项 */
+                            if(getLiteRadioUnitType() == liteRadioUnitType.LiteRadio_2_SIM){
+                                document.getElementById('internal_radio_module_switch').disabled = true;
+                                document.getElementById('external_radio_module_switch').disabled = true;
+                                //接着请求遥控器通道配置信息
+                                rquestBuffer[0] = 0x00;
+                                rquestBuffer[1] = 0x11;
+                                rquestBuffer[2] = 0x01;
+                                rquestBuffer[3] = 0x01;
+                                usbSendData(rquestBuffer);
+                                console.log("Send request ch config:",rquestBuffer);
+                                ch_receive_step = 0;
+                            }else if(HidConfig.internal_radio==RFmodule.CC2500){//内置射频模块型号为：cc2500
                                 console.log("HidConfig.current_protocol:"+HidConfig.current_protocol);
                                 $('#internal_radio_protocol').empty();
                                 addOptionValue('internal_radio_protocol',0,"Frsky_D16_FCC");
@@ -1658,6 +1672,9 @@ window.onload = function() {
                                     case liteRadioUnitType.LiteRadio_1_CC2500:
                                         document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 1 CC2500";
                                         break;
+                                    case liteRadioUnitType.LiteRadio_2_SIM:
+                                            document.getElementById("liteRadioInfoDevice").innerHTML = "LiteRadio 2 SIM";
+                                            break;
                                     default:
                                         console.log("The unit type of lite_radio cannot be identified");
                                         break;
@@ -1670,6 +1687,9 @@ window.onload = function() {
                                         break;
                                     case internalRadioType.SX1280:
                                         document.getElementById("liteRadioInfoInternalRadio").innerHTML = "SX1280";
+                                        break;
+                                    case internalRadioType.NO_RF:
+                                        document.getElementById("liteRadioInfoInternalRadio").innerHTML = "None";
                                         break;
                                     default:
                                         console.log("The type of internal radio cannot be identified");
