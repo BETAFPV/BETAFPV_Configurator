@@ -206,20 +206,20 @@ HidConfig = {
 };
 
 /*固件版本检查*/
-HidConfig.compareFirmwareVersion = function(){
-    if(HidConfig.internal_radio == RFmodule.SX1280 
-    && getLiteRadioUnitType() < liteRadioUnitType.LiteRadio_4_SE_SX1280){//若为 SX1280 1.0.0版本固件：提示客户更新固件以使用新功能bind phrase
-        if(semver.eq(HidConfig.lite_Radio_version, '1.0.0')){
-            const dialogVersionNotMatched = $('.dialogVersionNotMatched')[0];
-            let labeText = i18n.getMessage("upgrade_the_firmware_of_liteRadio");
-            $('label[id="VersionNotMatchedDialogLabel"]').text(labeText);
-            dialogVersionNotMatched.showModal();
-            $('.VersionNotMatched-confirmbtn').click(function() {
-                dialogVersionNotMatched.close();
-            });
-        }
-    }
-}
+// HidConfig.compareFirmwareVersion = function(){
+//     if(HidConfig.internal_radio == RFmodule.SX1280 
+//     && getLiteRadioUnitType() < liteRadioUnitType.LiteRadio_4_SE_SX1280){//若为 SX1280 1.0.0版本固件：提示客户更新固件以使用新功能bind phrase
+//         if(semver.eq(HidConfig.lite_Radio_version, '1.0.0')){
+//             const dialogVersionNotMatched = $('.dialogVersionNotMatched')[0];
+//             let labeText = i18n.getMessage("upgrade_the_firmware_of_liteRadio");
+//             $('label[id="VersionNotMatchedDialogLabel"]').text(labeText);
+//             dialogVersionNotMatched.showModal();
+//             $('.VersionNotMatched-confirmbtn').click(function() {
+//                 dialogVersionNotMatched.close();
+//             });
+//         }
+//     }
+// }
 
 //获取当前使用的USB协议
 function getUsedUSBProtocol() {
@@ -664,7 +664,7 @@ window.onload = function() {
                                             HidConfig.HID_Connect_State = HidConnectStatus.connected;
                                             $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
                                             if(ch_receive_step==7){
-                                                HidConfig.compareFirmwareVersion();
+                                                //HidConfig.compareFirmwareVersion();
                                                 ch_receive_step = 0;
                                             }
                                             show.refreshUI();
@@ -698,7 +698,7 @@ window.onload = function() {
                                         HidConfig.HID_Connect_State = HidConnectStatus.connected;
                                         $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
                                         if(ch_receive_step==9){
-                                            HidConfig.compareFirmwareVersion();
+                                            //HidConfig.compareFirmwareVersion();
                                             ch_receive_step = 0;
                                         }
                                         show.refreshUI();
@@ -1318,7 +1318,7 @@ window.onload = function() {
                                         HidConfig.HID_Connect_State = HidConnectStatus.connected;
                                         $('div.open_hid_device div.connect_hid').text(i18n.getMessage('disConnect_HID'));
                                         if(ch_receive_step==7){
-                                            HidConfig.compareFirmwareVersion();
+                                            //HidConfig.compareFirmwareVersion();
                                             ch_receive_step = 0;
                                         }
                                         show.refreshUI();
