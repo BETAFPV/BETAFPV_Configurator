@@ -61,6 +61,7 @@ var flashBoard = {
     Cetus_X_HD:7,
     Aquila16:8,
     PavoPocket:9,
+    Aquila20:10,
 }
 firmware_flasher.flashingMessage = function(message, type) {
     let self = this;
@@ -297,6 +298,7 @@ function readJsonFile(fileName){
             addOptionValue2('boardTarget',5,"Cetus X HD");
             addOptionValue2('boardTarget',6,"Aquila16");
             addOptionValue2('boardTarget',7,"PavoPocket");
+            addOptionValue2('boardTarget',8,"Aquila20");
 
             $('#boardVersion').empty();
             for(let i=0;i<jsonData.Cetus.length;i++){
@@ -491,7 +493,10 @@ firmware_flasher.initialize = function (callback) {
                             {
                                 $('#BoardID').text("   PavoPocket");
                             }
-
+                            else if(boardID == flashBoard.Aquila20)
+                            {
+                                $('#BoardID').text("   Aquila20");
+                            }
                             var versionID = "  v" + binFile[binSizeTemp-9] + "." +binFile[binSizeTemp-8] +"." +binFile[binSizeTemp-7];
                             $('#VersionID').text(versionID);
 
