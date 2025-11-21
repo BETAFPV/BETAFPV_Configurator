@@ -10,7 +10,7 @@ var mainWindow = null
 app.allowRendererProcessReuse = false
 
 const reloader = require('electron-reloader');
-reloader(module);
+reloader(module, {ignore: [/.*\.json$/, /.*\.bin$/]});
 
 app.on('ready',()=>{
     mainWindow = new BrowserWindow({
