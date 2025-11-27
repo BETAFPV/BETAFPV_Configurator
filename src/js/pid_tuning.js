@@ -3,6 +3,7 @@
 const pid_tuning = {
     rate_saving_ack :0,
     pid_saving_ack :0,
+    refreshTimer: null // 添加刷新定时器属性
 };
 pid_tuning.initialize = function (callback) {
     const self = this;
@@ -508,6 +509,12 @@ pid_tuning.checkThrottle = function() {
   activateSubtab(self.activeSubtab);
   readPidFromFC();
   readRateFromFC();
+  // 添加自动刷新定时器
+    self.refreshTimer = setInterval(function() {
+        if (self.activeSubtab === 'rates') {
+            readRateFromFC();
+        }
+    }, 500);
 };
 
 
@@ -705,6 +712,11 @@ pid_tuning.cleanup = function (callback) {
     const self = this;
 
     self.keepRendering = false;
+    // 清理自动刷新定时器
+    if (self.refreshTimer) {
+        clearInterval(self.refreshTimer);
+        self.refreshTimer = null;
+    }
     if (callback) callback();
 };
 
