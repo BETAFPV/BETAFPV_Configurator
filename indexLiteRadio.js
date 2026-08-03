@@ -263,10 +263,11 @@ function checkHIDConnected(VID, PID) {
 function checkVCOMConnected() {
     let foundDongle = undefined;
     let VCOM = ($('div#port-picker #port option:selected').text());//获取当前下拉框选中的串口号文本内容
-    if(VCOM.indexOf('COM') == -1) {
-        foundDongle = false;    //当前没检测到串口，返回false
+    if((VCOM.indexOf('COM') != -1)
+    || (VCOM.indexOf('usbmodem') != -1)) {
+        foundDongle = true;    //当前没检测到串口，返回false
     }else{
-        foundDongle = true;
+        foundDongle = false;
     }
     return foundDongle;
 }
@@ -340,12 +341,15 @@ async function listSerialPorts() {
             } );
         }
 
-        for (let i = 0; i < ports.length; i++) {            
-            if((ports[i].productId == "572B" || (ports[i].productId == "5740")) && ((ports[i].vendorId == "0483") || (ports[i].vendorId == "0493")))
-            {
-                addOptionValue('port',i,ports[i].path);
+        for (let i = 0; i < ports.length; i++) {
+            if((ports[i].productId == "572b") 
+            || (ports[i].productId == "572B") 
+            || (ports[i].productId == "5740") 
+            || (ports[i].productId == "5750")) {
+                if(ports[i].vendorId  == "0483") {
+                    addOptionValue('port',i,ports[i].path);
+                }
             }
-                
         }
         lastPortCount = ports.length;
     })

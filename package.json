@@ -21,6 +21,7 @@
     "blueimp-md5": "^2.19.0",
     "crypto-js": "^4.1.1",
     "electron-packager": "^15.4.0",
+    "electron-reloader": "^1.2.3",
     "i18next": "^19.0.0",
     "i18next-xhr-backend": "^3.2.2",
     "jquery": "^3.6.0",
@@ -33,8 +34,7 @@
     "switchery-latest": "^0.8.2",
     "three": "~0.97.0",
     "underscore": "^1.13.1",
-    "usb": "^1.7.1",
-    "electron-reloader": "^1.2.3"
+    "usb": "^1.7.1"
   },
   "devDependencies": {
     "electron": "^13.1.7",
