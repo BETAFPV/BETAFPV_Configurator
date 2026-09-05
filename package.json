@@ -17,29 +17,29 @@
     "title": "BETAFPV Configurator"
   },
   "author": "",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "dependencies": {
+    "@electron/remote": "^2.1.3",
     "blueimp-md5": "^2.19.0",
     "crypto-js": "^4.1.1",
-    "electron-packager": "^15.4.0",
+    "electron-packager": "^17.1.2",
     "i18next": "^19.0.0",
     "i18next-xhr-backend": "^3.2.2",
     "jquery": "^3.6.0",
     "jsonfile": "^6.1.0",
     "jspack": "^0.0.4",
     "md5": "^2.3.0",
-    "node-hid": "^2.1.1",
+    "node-hid": "^3.4.0",
     "semver": "^7.3.5",
-    "serialport": "^9.2.0",
+    "serialport": "^13.0.0",
     "switchery-latest": "^0.8.2",
     "three": "~0.97.0",
     "underscore": "^1.13.1",
-    "usb": "^1.7.1",
+    "usb": "^3.1.0",
     "electron-reloader": "^1.2.3"
   },
   "devDependencies": {
-    "electron": "^13.1.7",
-    "electron-rebuild": "^3.2.9"
+    "electron": "^44.0.0"
   },
   "repository": {
     "type": "git",

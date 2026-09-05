@@ -1,7 +1,7 @@
-const {dialog}=require('electron').remote;
+const remote = require('@electron/remote');
+const {dialog} = remote;
 const os = require('os')
 const path = require('path')
-const {remote} = require('electron')
 
 var jsonFile = require('jsonfile')
 
