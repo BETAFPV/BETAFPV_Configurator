@@ -1,4 +1,4 @@
-const serialport = require('serialport')
+const { SerialPort } = require('serialport')
 var {shell} = require('electron')
 
 var flightcontrol_configurator_version ='v2.0.1';
@@ -26,21 +26,23 @@ function addOptionValue(id,value,text) {
 } 
 
 async function listSerialPorts() {
-    await serialport.list().then((ports, err) => {
+    await SerialPort.list().then((ports, err) => {
         if(ports.length!==lastPortCount){
-            $('#port option').each(function(){ 
-                $(this).remove(); 
+            $('#port option').each(function(){
+                $(this).remove();
             } );
         }
 
-        for (let i = 0; i < ports.length; i++) {            
+        for (let i = 0; i < ports.length; i++) {
             if(ports[i].productId == "5740" && ((ports[i].vendorId == "0483") || (ports[i].vendorId == "0493")))
             {
                 addOptionValue('port',i,ports[i].path);
             }
-                
+
         }
         lastPortCount = ports.length;
+    }).catch((err) => {
+        console.error("SerialPort.list() failed - the native serialport binding may not be loaded correctly:", err);
     })
 }
 
@@ -89,7 +91,8 @@ window.onload=function(){
             let COM = ($('div#port-picker #port option:selected').text());
 
 
-            port = new serialport(COM, {
+            port = new SerialPort({
+                path: COM,
                 baudRate: parseInt(selected_baud),
                 dataBits: 8,
                 parity: 'none',

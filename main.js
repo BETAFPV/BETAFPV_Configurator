@@ -1,5 +1,6 @@
 const { TouchBarColorPicker } = require('electron');
 var electron = require('electron')
+require('@electron/remote/main').initialize();
 
 
 var app = electron.app;
@@ -21,9 +22,9 @@ app.on('ready',()=>{
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
-            enableRemoteModule: true,
           },
     });
+    require('@electron/remote/main').enable(mainWindow.webContents);
     //   mainWindow.webContents.openDevTools({
     //       mode:'bottom'
     //   });

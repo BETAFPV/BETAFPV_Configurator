@@ -487,7 +487,7 @@ firmware_flasher_LiteRadio.initialize = function (callback) {
         i18n.localizePage();
         $('a.load_file').click(function () {
             
-            const { dialog } = require('electron').remote;
+            const { dialog } = require('@electron/remote');
             dialog.showOpenDialog({
                 title: "openFile",
                 defaultPath: "",

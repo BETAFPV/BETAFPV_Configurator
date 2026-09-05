@@ -8,19 +8,25 @@
 - 通过VS Code打开项目文件夹，在VS Code的菜单栏的Terminal新建终端并输入以下命令：
 ```
 #安装Node虚拟机
-nvm install 16.20.0     
-nvm use 16.20.0 
+nvm install 20
+nvm use 20
 #加载所有的关联包
 npm install
-npm install --save-dev electron-rebuild
-./node_modules/.bin/electron-rebuild
-
-# If you have trouble on Windows, try:
-.\node_modules\.bin\electron-rebuild.cmd
-
 
 #启动electron程序
 electron .
+```
+
+`serialport` and `node-hid` now ship prebuilt native binaries (N-API, ABI-stable) for
+Windows/macOS/Linux, so **no rebuild step is required** after `npm install` — do not run
+`electron-rebuild`. That tool predates these packages' current prebuild mechanism and will
+force an unnecessary from-source `node-gyp` recompile, which can fail (missing a full native
+toolchain) or silently produce a broken/mismatched binary, causing serial/USB device detection
+to stop working with no visible error. If you ever hit an actual `NODE_MODULE_VERSION mismatch`
+error (which means no prebuild matched your platform), use the maintained replacement instead:
+```
+npx @electron/rebuild
+
 
 
 若在VS Code输入命令时出现以下错误：无法加载文件xxx.ps1，因为在此系统中禁止脚本。 解决方案如下：

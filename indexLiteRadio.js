@@ -1,4 +1,4 @@
-const serialport = require('serialport');
+const { SerialPort } = require('serialport');
 const semver = require('semver');
 var liteRadio_configurator_version ="v2.0.1";
 var {shell} = require('electron');
@@ -363,7 +363,7 @@ var listHidDev = NaN;
 var listCdcDev = NaN;
 var rcCurrentScreen = literadioScreenIndex.LITERADIO_SCREEN_WELCOME;
 async function listUsbDevice() {
-    await serialport.list().then((ports, err) => {
+    await SerialPort.list().then((ports, err) => {
         if(rcCurrentScreen == literadioScreenIndex.LITERADIO_SCREEN_WELCOME){
             listHidDev = HID.devices();
             listCdcDev = ports;
@@ -433,6 +433,8 @@ async function listUsbDevice() {
                 }
             }
         }
+    }).catch((err) => {
+        console.error("SerialPort.list() failed - the native serialport/node-hid bindings may not be loaded correctly:", err);
     })
 }
 
@@ -499,7 +501,8 @@ window.onload = function() {
                 
                 const selected_baud = parseInt($('div#port-picker #baud').val());
 
-                port = new serialport(getCurrentCdcPath(), {
+                port = new SerialPort({
+                    path: getCurrentCdcPath(),
                     baudRate: parseInt(selected_baud),
                     dataBits: 8,
                     parity: 'none',
